@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html><head><title>Neon Glow Comparison</title>
+<style>
+  body { background: #111; color: #eee; font-family: system-ui; margin: 20px; }
+  h1 { font-size: 1.2em; border-bottom: 1px solid #333; padding-bottom: 8px; }
+  .row { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+  .card { text-align: center; }
+  .card img { width: 200px; height: auto; border-radius: 4px; border: 1px solid #333; }
+  .card p { font-size: 11px; margin: 4px 0; opacity: 0.7; }
+  .label { font-size: 10px; background: #333; padding: 2px 6px; border-radius: 3px; display: inline-block; margin-top: 2px; }
+  .fail { background: #6b2020; }
+  .pass { background: #1a5c2a; }
+  .section { margin-bottom: 40px; }
+</style></head><body>
+
+<h1>Style References (neon_glow)</h1>
+<div class="row">
+  <div class="card"><img src="https://static.gamma.app/images/style-references/server--LzEfEK9ENsKDK3r1MfScf-4bd59f58.jpg"><p>ref 1</p></div>
+  <div class="card"><img src="https://static.gamma.app/images/style-references/server--ChatGPT-Image-Dec-4-2025-10_09_46-PM-e0c3e977.jpg"><p>ref 2</p></div>
+  <div class="card"><img src="https://static.gamma.app/images/style-references/server--ChatGPT-Image-Dec-4-2025-10_09_47-PM-f65bfbd2.jpg"><p>ref 3</p></div>
+</div>
+
+<div class="section">
+<h1>Original (EDI-3210 deck) — Consistency: FAIL</h1>
+<div class="row">
+  <div class="card"><img src="https://cdn-staging.gamma.app/QWjS6fBfpt/generated-images/pGs_NHXUy9sNIdgR9xr7p.png"><p>stage spotlight</p><span class="label pass">adherence: pass 0.95</span></div>
+  <div class="card"><img src="https://cdn-staging.gamma.app/QWjS6fBfpt/generated-images/fK6QeK-SdSa1Fmiun068X.png"><p>handshake trust</p><span class="label fail">adherence: fail (outlier)</span><br><span class="label pass">⭐ Kelly's favorite</span></div>
+  <div class="card"><img src="https://cdn-staging.gamma.app/QWjS6fBfpt/generated-images/Jp72eyvsLXD3bAsuBDflX.png"><p>evidence data</p><span class="label pass">adherence: pass 0.95</span></div>
+  <div class="card"><img src="https://cdn-staging.gamma.app/QWjS6fBfpt/generated-images/LgXHIw0sbPhmAhYiC1Od1.png"><p>empathy connection</p><span class="label pass">adherence: pass 0.95</span></div>
+  <div class="card"><img src="https://cdn-staging.gamma.app/QWjS6fBfpt/generated-images/q7IenpBpftakD70P1Pjbj.png"><p>tangled knot</p><span class="label pass">adherence: pass</span></div>
+  <div class="card"><img src="https://cdn-staging.gamma.app/QWjS6fBfpt/generated-images/C9AJA2Y87UE7oDqSL7GuV.png"><p>neat bow ribbon</p><span class="label pass">adherence: pass</span></div>
+  <div class="card"><img src="https://cdn-staging.gamma.app/QWjS6fBfpt/generated-images/IVLGwRF6vGTKwewYU58Hh.png"><p>inspiring crowd applause</p><span class="label pass">adherence: pass</span></div>
+</div>
+</div>
+
+<div class="section">
+<h1>New Batch (baseline, Pearl theme white bg) — Consistency: 0.4 FAIL (color temp split)</h1>
+<div class="row">
+  <div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/AiLCOG-8FknQO2GnOHcRV.png"><p>stage spotlight</p></div>
+  <div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/caD2NOji7k0LdaDDY30hP.png"><p>handshake trust</p></div>
+  <div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/lncvajMsW7rTuvXjq5ik8.png"><p>evidence data</p></div>
+  <div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/9UF_jjkV08saTAAi059C7.png"><p>empathy connection</p></div>
+  <div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/Bgn9Ct9vptb_9bJcGCMPe.png"><p>tangled knot</p></div>
+  <div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/JKLxDyhvRDD0vczOmNxCc.png"><p>neat bow ribbon</p></div>
+  <div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/zqbvYzKNyo-OIScDin4va.png"><p>inspiring crowd applause</p></div>
+</div>
+</div>
+
+<div class="section">
+<h1>V9: Blunt color rules (accent brightened to #3030e8, solid #FFFFFF bg enforced) — Consistency: 0.95 PASS</h1>
+<p style="font-size:11px;opacity:0.6">Prompt: "...The subject must be rendered in #3030e8 only. The background must be solid #FFFFFF with no gradients or patterns."</p>
+<div class="row">
+  <div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/EdIKGZS2ToC0NZntNyaYm.png"><p>stage spotlight</p></div>
+  <div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/PGw5xurLYonPf0n2C56Ox.png"><p>handshake trust</p></div>
+  <div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/osjE8YhHSBEp3eo0kwEXk.png"><p>evidence data</p></div>
+  <div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/k6JNmEWHUVnfVD_rtQQg2.png"><p>empathy connection</p></div>
+  <div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/Qn3feJWdi34GdZXVvVqKE.png"><p>tangled knot</p></div>
+  <div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/wx8De8apBr0bFDEt6gN_g.png"><p>neat bow ribbon</p></div>
+  <div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/WkAxGEbTG0D1MJHqdUwUJ.png"><p>inspiring crowd applause</p></div>
+</div>
+</div>
+
+<div class="section">
+<h1>V8: Brightened accent (softer phrasing) — Consistency: 0.9 PASS (but Kelly says not consistent enough)</h1>
+<div class="row">
+  <div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/e7VsfniOcCJj_vIJQEoeU.png"><p>stage spotlight</p></div>
+  <div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/ZQ7fAOssa55zhYaor9-ON.png"><p>handshake trust</p></div>
+  <div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/ObuXJ3JjOfxK4RtY9r3HF.png"><p>evidence data</p></div>
+  <div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/T_n7c4L-X6Tu_82H6uDry.png"><p>empathy connection</p></div>
+  <div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/Uv7hSeNFYCHRCYcQ2P8je.png"><p>tangled knot</p></div>
+  <div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/atskdXmB5i1PkxRtqS_Oq.png"><p>neat bow ribbon</p></div>
+  <div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/JBZZAPBtKoOQ5ypOcbVC3.png"><p>inspiring crowd applause</p></div>
+</div>
+</div>
+
+</body></html>
