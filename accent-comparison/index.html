@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Accent Image Transparency Comparison - EDI-3201</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #111; color: #fff; font-family: system-ui, -apple-system, sans-serif; padding: 24px; max-width: 1800px; margin: 0 auto; }
+h1 { text-align: center; margin-bottom: 8px; font-size: 28px; }
+.subtitle { text-align: center; color: #888; margin-bottom: 12px; font-size: 14px; }
+h2 { margin: 32px 0 12px; border-bottom: 1px solid #333; padding-bottom: 8px; font-size: 20px; }
+h3 { margin: 12px 0 6px; color: #666; font-size: 13px; }
+.comparison {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  margin: 6px 0 20px;
+}
+.variant img {
+  width: 100%;
+  border-radius: 4px;
+  display: block;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.variant img:hover { transform: scale(1.02); outline: 2px solid #6C63FF; }
+.variant-label {
+  font-size: 10px;
+  color: #888;
+  text-align: center;
+  margin-bottom: 3px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.theme-section { margin-bottom: 40px; }
+.nav {
+  position: sticky; top: 0; background: #111; padding: 10px 0; z-index: 10;
+  display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+  border-bottom: 1px solid #333; margin-bottom: 20px;
+}
+.nav a { color: #6C63FF; text-decoration: none; font-size: 13px; padding: 4px 8px; border-radius: 4px; background: #222; }
+.nav a:hover { background: #333; }
+.legend {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px;
+  margin-bottom: 20px; padding: 12px; background: #1a1a1a; border-radius: 8px;
+}
+.legend-item { font-size: 11px; color: #aaa; text-align: center; }
+.legend-item strong { display: block; color: #fff; margin-bottom: 2px; }
+.fullscreen-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9);
+  z-index: 100; cursor: pointer; padding: 20px;
+  justify-content: center; align-items: center;
+}
+.fullscreen-overlay img { max-width: 95vw; max-height: 95vh; object-fit: contain; }
+.fullscreen-overlay.active { display: flex; }
+</style>
+</head>
+<body>
+
+<h1>Accent Image Transparency Comparison</h1>
+<p class="subtitle">EDI-3201 — Images have has_transparency:true injected to simulate illustration fit mode</p>
+
+<div class="legend">
+  <div class="legend-item"><strong>Baseline</strong>Opaque fill mode (no transparency flag)</div>
+  <div class="legend-item"><strong>Current Behavior</strong>Fit mode + 1.25em padding, no background</div>
+  <div class="legend-item"><strong>Tight Padding</strong>Fit mode + 0.5em padding, no background</div>
+  <div class="legend-item"><strong>Neutral Tint</strong>Fit mode + rgba(128,128,128, 0.08) bg</div>
+  <div class="legend-item"><strong>Accent Tint</strong>Fit mode + color-mix(accentColor 12%) bg</div>
+</div>
+
+<nav class="nav">
+  <a href="#default-light">Default Light</a>
+  <a href="#seafoam">Seafoam</a>
+  <a href="#dark-modern">Dark Modern</a>
+  <a href="#wine">Wine</a>
+  <a href="#verdigris">Verdigris</a>
+</nav>
+
+<div id="fullscreen" class="fullscreen-overlay" onclick="this.classList.remove('active')">
+  <img id="fullscreen-img" src="">
+</div>
+
+<script>
+function showFull(src) {
+  document.getElementById('fullscreen-img').src = src;
+  document.getElementById('fullscreen').classList.add('active');
+}
+
+const themes = [
+  { id: 'default-light', label: 'Default Light (light)' },
+  { id: 'seafoam', label: 'Seafoam (light)' },
+  { id: 'dark-modern', label: 'Dark Modern (dark)' },
+  { id: 'wine', label: 'Wine (dark)' },
+  { id: 'verdigris', label: 'Verdigris (dark)' },
+];
+const variants = [
+  { id: 'baseline', label: 'Baseline' },
+  { id: 'transparent-current', label: 'Current' },
+  { id: 'padding', label: 'Tight Padding' },
+  { id: 'tint-neutral', label: 'Neutral Tint' },
+  { id: 'tint-accent', label: 'Accent Tint' },
+];
+const cards = [
+  { idx: '01', label: 'Card 1 — right accent layout' },
+  { idx: '02', label: 'Card 2 — left accent layout' },
+  { idx: '03', label: 'Card 3 — left accent layout' },
+];
+
+const container = document.createElement('div');
+
+themes.forEach(theme => {
+  const section = document.createElement('div');
+  section.className = 'theme-section';
+  section.id = theme.id;
+  section.innerHTML = '<h2>' + theme.label + '</h2>';
+
+  cards.forEach(card => {
+    const row = document.createElement('div');
+    row.innerHTML = '<h3>' + card.label + '</h3><div class="comparison"></div>';
+    const grid = row.querySelector('.comparison');
+
+    variants.forEach(v => {
+      const div = document.createElement('div');
+      div.className = 'variant';
+      const src = 'screenshots/' + v.id + '_' + theme.id + '_card-' + card.idx + '.png';
+      div.innerHTML = '<div class="variant-label">' + v.label + '</div>' +
+        '<img src="' + src + '" loading="lazy" onclick="showFull(this.src)" ' +
+        'onerror="this.style.opacity=\'0.2\';this.style.border=\'1px dashed #555\'">';
+      grid.appendChild(div);
+    });
+
+    section.appendChild(row);
+  });
+
+  container.appendChild(section);
+});
+
+document.body.appendChild(container);
+</script>
+
+</body>
+</html>
