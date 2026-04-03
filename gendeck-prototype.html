@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GenDeck 3.5 Prototype — Overnight Results</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2129;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --accent: #58a6ff;
+    --green: #3fb950;
+    --red: #f85149;
+    --orange: #d29922;
+    --purple: #bc8cff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  h1 { font-size: 2rem; margin-bottom: 0.25rem; }
+  h2 { font-size: 1.4rem; margin-top: 2.5rem; margin-bottom: 1rem; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+  h3 { font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text); }
+  .subtitle { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; }
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+  }
+  .card-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem; }
+  .card-value { font-size: 1.8rem; font-weight: 700; }
+  .card-detail { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem; }
+  .green { color: var(--green); }
+  .red { color: var(--red); }
+  .orange { color: var(--orange); }
+  .purple { color: var(--purple); }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+  th, td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid var(--border); }
+  th { color: var(--text-muted); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  tr:hover { background: var(--surface2); }
+  .badge {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .badge-pass { background: rgba(63, 185, 80, 0.15); color: var(--green); }
+  .badge-fail { background: rgba(248, 81, 73, 0.15); color: var(--red); }
+  .badge-fixed { background: rgba(88, 166, 255, 0.15); color: var(--accent); }
+  .progress-bar { background: var(--surface2); border-radius: 4px; height: 8px; overflow: hidden; margin-top: 0.5rem; }
+  .progress-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
+  .section-detail {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin: 1rem 0;
+  }
+  .change-list { list-style: none; padding: 0; }
+  .change-list li { padding: 0.4rem 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+  .change-list li:last-child { border-bottom: none; }
+  .change-list .num { color: var(--accent); font-weight: 700; margin-right: 0.5rem; }
+  code { background: var(--surface2); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.85rem; }
+  .arch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  .arch-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; }
+  .arch-card h4 { color: var(--purple); margin-bottom: 0.5rem; font-size: 0.95rem; }
+  .arch-card p { font-size: 0.85rem; color: var(--text-muted); }
+  .bug-item { display: flex; gap: 1rem; margin: 0.75rem 0; }
+  .bug-label { flex-shrink: 0; }
+  .bug-detail { font-size: 0.9rem; }
+  .bug-detail strong { color: var(--text); }
+  .footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem; }
+  .pipeline-diagram {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.8rem;
+    line-height: 1.8;
+    overflow-x: auto;
+    color: var(--text-muted);
+  }
+  .pipeline-diagram .highlight { color: var(--accent); font-weight: 600; }
+  .pipeline-diagram .new { color: var(--green); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<h1>GenDeck 3.5 Prototype</h1>
+<div class="subtitle">Overnight results &mdash; April 2-3, 2026 &mdash; Branch: kw/gamma2-84o</div>
+
+<div class="summary-grid">
+  <div class="card">
+    <div class="card-label">Cards Generated</div>
+    <div class="card-value">154+</div>
+    <div class="card-detail">Across 21 initial decks + iteration runs</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Swiss Grid Pass Rate</div>
+    <div class="card-value green">87.5%</div>
+    <div class="card-detail">Up from 25% baseline (high density)</div>
+    <div class="progress-bar"><div class="progress-fill" style="width:87.5%;background:var(--green)"></div></div>
+  </div>
+  <div class="card">
+    <div class="card-label">Consultant Pass Rate</div>
+    <div class="card-value green">87-100%</div>
+    <div class="card-detail">Up from 0-75% baseline</div>
+    <div class="progress-bar"><div class="progress-fill" style="width:95%;background:var(--green)"></div></div>
+  </div>
+  <div class="card">
+    <div class="card-label">Bugs Fixed</div>
+    <div class="card-value">3</div>
+    <div class="card-detail">Chart rendering, label text, planner hallucination</div>
+  </div>
+</div>
+
+<h2>Pipeline Architecture</h2>
+
+<div class="pipeline-diagram">
+<span class="highlight">Outline YAML</span> &rarr; <span class="highlight">Plan</span> (LLM: deck-level rhythm &amp; pacing)
+    &rarr; <span class="new">style.yaml</span> (deterministic: variant preferences per guide)
+    &rarr; <span class="highlight">Structure</span> (LLM: spatial composition per card + <span class="new">spatial advisor</span>)
+    &rarr; <span class="highlight">Resolve</span> (LLM: spatial description &rarr; GML)
+    &rarr; <span class="highlight">deck.gml</span> &rarr; Screenshots
+
+Each guide = a design system:
+  <span class="new">density.yaml</span>  &mdash; word count targets
+  <span class="new">planning.md</span>   &mdash; narrative arc, rhythm (tag-free)
+  <span class="new">structure.md</span>  &mdash; spatial composition patterns (tag-free)
+  <span class="new">blocks.ts</span>    &mdash; what's allowed (capabilities)
+  <span class="new">style.yaml</span>   &mdash; visual vocabulary preferences
+  <span class="new">examples.md</span>  &mdash; reference GML (show don't tell)
+</div>
+
+<h2>Swiss Grid &mdash; Dense Content Iteration</h2>
+
+<p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1rem;">
+  Testing whether Swiss International Typographic Style holds up at high text density.
+  Evaluated with a vision-model grader checking: modular grid structure, asymmetric composition,
+  whitespace as active structure, typographic hierarchy, and modularity/restraint.
+</p>
+
+<table>
+  <thead><tr><th>Outline</th><th>Density</th><th>Baseline</th><th>Final</th><th>Iterations</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td>swiss-variance-03</td><td>High</td><td><span class="red">25%</span></td><td><span class="green">87.5%</span></td><td>5</td><td><span class="badge badge-pass">TARGET MET</span></td></tr>
+    <tr><td>swiss-variance-04</td><td>Extra-high</td><td><span class="red">25%</span></td><td><span class="green">87.5%</span></td><td>1</td><td><span class="badge badge-pass">TARGET MET</span></td></tr>
+    <tr><td>swiss-variance-05</td><td>Mixed</td><td><span class="orange">63%</span></td><td><span class="green">87.5%</span></td><td>2</td><td><span class="badge badge-pass">TARGET MET</span></td></tr>
+  </tbody>
+</table>
+
+<h3>Top Changes (Guide-Only, No Code Changes)</h3>
+<ul class="change-list">
+  <li><span class="num">1.</span> <strong>Dense GML examples</strong> in examples.md &mdash; showed the LLM how to keep stats/outlineBoxes inside columns instead of going full-width (+25% pass rate)</li>
+  <li><span class="num">2.</span> <strong>"Heading in one column, data in the other"</strong> guidance in structure.md &mdash; the single most reliable Swiss pattern for dense data cards (scores 0.70-0.80 consistently)</li>
+  <li><span class="num">3.</span> <strong>Outline content calibration</strong> &mdash; max 3 items per smart-layout, one paragraph per block, <code>instructions</code> fields to guide splits</li>
+</ul>
+
+<div class="section-detail" style="margin-top:1rem;">
+  <strong>Stress test:</strong> 10 new outlines (quantum computing, biodiversity, typography, fundraising, urban planning, data literacy, energy, CBT, transit, art market). 12/12 sampled cards pass &mdash; guides generalize well beyond the training outlines.
+</div>
+
+<h2>Consultant &mdash; Iteration Results</h2>
+
+<p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1rem;">
+  Targeting McKinsey/BCG-style analytical decks. Grader checks: action titles (claims not labels),
+  structured evidence layout, diagram/data as visual language, information density within grid,
+  repeatable templates, and rendering quality penalties for broken elements.
+</p>
+
+<table>
+  <thead><tr><th>Outline</th><th>Topic</th><th>Baseline</th><th>Final</th><th>Key Change</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td>consultant-01</td><td>Cybersecurity IR</td><td><span class="orange">75%</span></td><td><span class="green">100%</span></td><td>Action titles + scale contrast</td><td><span class="badge badge-pass">TARGET MET</span></td></tr>
+    <tr><td>consultant-02</td><td>SaaS Comparison</td><td><span class="red">0%</span></td><td><span class="green">100%</span></td><td>Action titles (20% of score)</td><td><span class="badge badge-pass">TARGET MET</span></td></tr>
+    <tr><td>consultant-03</td><td>Healthcare Analytics</td><td><span class="red">12.5%</span></td><td><span class="green">87.5%</span></td><td>Action titles + evidence variety</td><td><span class="badge badge-pass">TARGET MET</span></td></tr>
+  </tbody>
+</table>
+
+<h3>Top Changes</h3>
+<ul class="change-list">
+  <li><span class="num">1.</span> <strong>Action titles</strong> &mdash; rewriting topic labels ("Market Context") as full-sentence claims ("The $56B Market Is Consolidating &mdash; Three Platforms Control 62%"). This alone took consultant-02 from 0% to 100%.</li>
+  <li><span class="num">2.</span> <strong>Guide examples updated</strong> &mdash; the LLM was copying topic-label titles from examples.md. Updated all examples to use action titles.</li>
+  <li><span class="num">3.</span> <strong>Scale contrast guidance</strong> &mdash; ONE dominant DISPLAY hero number per data card. The "277" effect from golden examples.</li>
+</ul>
+
+<div class="section-detail" style="margin-top:1rem;">
+  <strong>Stress test:</strong> 10 new outlines across finance, healthcare, manufacturing, energy, retail, government, telecom, education, logistics, workforce. 95% sample pass rate (20/21 cards).
+</div>
+
+<h2>Architecture &mdash; Design System Compiler</h2>
+
+<p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1rem;">
+  Each guide is a declarative design system. The pipeline compiles these constraints into GML.
+</p>
+
+<div class="arch-grid">
+  <div class="arch-card">
+    <h4>style.yaml &mdash; Visual Vocabulary</h4>
+    <p>Deterministic variant preferences per guide. Swiss: 1 family, geometric only. Consultant: unlimited, full analytical palette. Replaces LLM call with config read.</p>
+  </div>
+  <div class="arch-card">
+    <h4>Spatial Advisor</h4>
+    <p>11,343 real Storybook measurements. Structure step sees cell dimensions before composing. "solidBoxes x4 in full: 18.5em &times; 12.2em, max ~222 chars. FITS."</p>
+  </div>
+  <div class="arch-card">
+    <h4>Vision-Model Graders</h4>
+    <p>Swiss card, Swiss deck, Consultant card. Score 0.0&ndash;1.0 on design principles. Catch broken renders, weak grid structure, missing evidence zones. Ignore renderer-level styling.</p>
+  </div>
+  <div class="arch-card">
+    <h4>Guide Decomposition</h4>
+    <p>density &rarr; planning &rarr; structure &rarr; style &rarr; examples. Each file owns one concern. Guides are composable and independently testable.</p>
+  </div>
+</div>
+
+<h2>Bugs Fixed</h2>
+
+<div class="bug-item">
+  <div class="bug-label"><span class="badge badge-fixed">FIXED</span></div>
+  <div class="bug-detail"><strong>Label rendering (empty blue rectangles)</strong> &mdash; Self-closing <code>&lt;ICON/&gt;</code> is not valid HTML. Parser treats it as opening tag, swallows label text. Fixed in dom-prep.ts.</div>
+</div>
+<div class="bug-item">
+  <div class="bug-label"><span class="badge badge-fixed">FIXED</span></div>
+  <div class="bug-detail"><strong>Chart edit dialog in screenshots</strong> &mdash; Two bugs: gml-parser didn't extract chart TABLE data, and <code>null === null</code> ID collision opened ChartEditor. Fixed in gml-parser + ChartView.tsx.</div>
+</div>
+<div class="bug-item">
+  <div class="bug-label"><span class="badge badge-fixed">FIXED</span></div>
+  <div class="bug-detail"><strong>Planner card-count hallucination</strong> &mdash; Planner generated extra "section break" cards beyond outline count. Fixed with clamp in cli.ts.</div>
+</div>
+<div class="bug-item">
+  <div class="bug-label"><span class="badge badge-fixed">FIXED</span></div>
+  <div class="bug-detail"><strong>Image layout passthrough</strong> &mdash; Plan correctly specified image layouts but structure/resolve steps never received them. Fixed in both pipeline steps.</div>
+</div>
+
+<h2>New Assets</h2>
+
+<table>
+  <thead><tr><th>Category</th><th>Count</th><th>Details</th></tr></thead>
+  <tbody>
+    <tr><td>Outlines</td><td>30+</td><td>Swiss variance (5), Swiss stress (10), Consultant (3), Consultant stress (10), Minimal (3), Classic comparison (5)</td></tr>
+    <tr><td>Guides</td><td>4</td><td>Swiss, Classic, Consultant, Minimal &mdash; each with style.yaml</td></tr>
+    <tr><td>Graders</td><td>3</td><td>swiss-grid-card, swiss-grid-deck, consultant-card</td></tr>
+    <tr><td>Tools</td><td>2</td><td>layout-spatial-analysis.ts, run-spatial-check.ts</td></tr>
+  </tbody>
+</table>
+
+<h2>Remaining Work</h2>
+
+<table>
+  <thead><tr><th>Issue</th><th>Impact</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td>Label fix needs client rebuild</td><td>-0.05/card penalty on consultant grader</td><td><span class="badge" style="background:rgba(210,153,34,0.15);color:var(--orange)">NEEDS DEPLOY</span></td></tr>
+    <tr><td><code>COLUMNS colWidths="[100]"</code> runtime error</td><td>Resolver sometimes emits invalid single-column</td><td><span class="badge" style="background:rgba(248,81,73,0.15);color:var(--red)">OPEN</span></td></tr>
+    <tr><td>Spatial CSV gaps</td><td>Only cellSize 15; arrows/cycle variants missing</td><td><span class="badge" style="background:rgba(210,153,34,0.15);color:var(--orange)">KNOWN</span></td></tr>
+    <tr><td>Minimal grader</td><td>Can't evaluate minimal guide output yet</td><td><span class="badge" style="background:rgba(139,148,158,0.15);color:var(--text-muted)">DEPRIORITIZED</span></td></tr>
+  </tbody>
+</table>
+
+<div class="footer">
+  GenDeck 3.5 Prototype &mdash; kw/gamma2-84o &mdash; Generated by Claude Code overnight session, April 2-3 2026
+</div>
+
+</body>
+</html>
