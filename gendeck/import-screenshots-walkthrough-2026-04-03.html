@@ -647,6 +647,28 @@
   <span style="color:var(--text-dim); margin-left: 0.75rem; font-size: 0.85rem;">Source: Meridian Strategy Group (dense consultant deck)</span>
 </div>
 
+<!-- ===== WHAT IS A DESIGN GUIDE? ===== -->
+<div style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem;">
+  <div style="font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; margin-bottom: 0.5rem;">What is a Design Guide?</div>
+  <p style="color: var(--text-dim); font-size: 0.85rem; margin-bottom: 0.75rem;">Each guide is a declarative design system &mdash; 6 files that shape every pipeline step.</p>
+  <table style="width: 100%; border-collapse: collapse; font-size: 0.8rem; line-height: 1.4;">
+    <thead><tr style="border-bottom: 1px solid var(--border);">
+      <th style="text-align: left; padding: 0.3rem 0.75rem 0.3rem 0; color: var(--text-dim); font-weight: 600;">File</th>
+      <th style="text-align: left; padding: 0.3rem 0.75rem; color: var(--text-dim); font-weight: 600;">Concern</th>
+      <th style="text-align: left; padding: 0.3rem 0 0.3rem 0.75rem; color: var(--text-dim); font-weight: 600;">Who reads it</th>
+    </tr></thead>
+    <tbody>
+      <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);"><td style="padding:0.3rem 0.75rem 0.3rem 0;font-family:'SF Mono','Fira Code',Consolas,monospace;color:var(--text);">density.yaml</td><td style="padding:0.3rem 0.75rem;color:var(--text-dim);">How much content</td><td style="padding:0.3rem 0 0.3rem 0.75rem;color:#f59e0b;">Outliner</td></tr>
+      <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);"><td style="padding:0.3rem 0.75rem 0.3rem 0;font-family:'SF Mono','Fira Code',Consolas,monospace;color:var(--text);">writing.md</td><td style="padding:0.3rem 0.75rem;color:var(--text-dim);">How the words sound</td><td style="padding:0.3rem 0 0.3rem 0.75rem;color:#f59e0b;">Outliner</td></tr>
+      <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);"><td style="padding:0.3rem 0.75rem 0.3rem 0;font-family:'SF Mono','Fira Code',Consolas,monospace;color:var(--text);">planning.md</td><td style="padding:0.3rem 0.75rem;color:var(--text-dim);">Narrative arc, rhythm</td><td style="padding:0.3rem 0 0.3rem 0.75rem;color:#a78bfa;">Planner</td></tr>
+      <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);"><td style="padding:0.3rem 0.75rem 0.3rem 0;font-family:'SF Mono','Fira Code',Consolas,monospace;color:var(--text);">structure.md</td><td style="padding:0.3rem 0.75rem;color:var(--text-dim);">Spatial composition</td><td style="padding:0.3rem 0 0.3rem 0.75rem;color:#3b82f6;">Structurer</td></tr>
+      <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);"><td style="padding:0.3rem 0.75rem 0.3rem 0;font-family:'SF Mono','Fira Code',Consolas,monospace;color:var(--text);">blocks.ts</td><td style="padding:0.3rem 0.75rem;color:var(--text-dim);">Allowed GML constructs + variant preference order by family + maxFamiliesPerDeck</td><td style="padding:0.3rem 0 0.3rem 0.75rem;color:#22c55e;">Style resolver + Card resolver</td></tr>
+      <tr><td style="padding:0.3rem 0.75rem 0.3rem 0;font-family:'SF Mono','Fira Code',Consolas,monospace;color:var(--text);">examples.md</td><td style="padding:0.3rem 0.75rem;color:var(--text-dim);">Reference GML cards</td><td style="padding:0.3rem 0 0.3rem 0.75rem;color:#22c55e;">Card resolver</td></tr>
+    </tbody>
+  </table>
+  <p style="color: var(--skipped, #555); font-size: 0.8rem; font-style: italic; margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid rgba(255,255,255,0.06);">In import as-is, no guide is needed &mdash; the screenshots ARE the design system.</p>
+</div>
+
 <!-- ===== MODE TOGGLE ===== -->
 <div class="mode-toggle">
   <button class="mode-btn active" onclick="switchMode('asis')">Import As-Is</button>
