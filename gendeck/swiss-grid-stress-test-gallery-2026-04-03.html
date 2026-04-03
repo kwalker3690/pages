@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>GenDeck — Pipeline Comparison Gallery</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #e0e0e0; padding: 24px; }
+  h1 { font-size: 28px; margin-bottom: 8px; }
+  .subtitle { color: #888; margin-bottom: 32px; font-size: 14px; }
+  .header-row { display: grid; gap: 12px; margin-bottom: 12px; }
+  .header-cell { text-align: center; font-weight: 700; font-size: 15px; color: #aaa; padding: 10px; background: #1a1a1a; border-radius: 6px; }
+  .header-cell .count { font-weight: 400; color: #666; }
+  .card-row { display: grid; gap: 12px; margin-bottom: 12px; }
+  .card-cell { position: relative; background: #1a1a1a; border-radius: 8px; overflow: hidden; border: 1px solid #222; }
+  .card-cell img { width: 100%; height: auto; display: block; cursor: zoom-in; }
+  .card-cell img.zoomed { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: contain; z-index: 1000; background: rgba(0,0,0,0.9); cursor: zoom-out; border-radius: 0; }
+  .card-label { position: absolute; bottom: 4px; right: 8px; font-size: 11px; color: #666; }
+  .card-cell.empty { display: flex; align-items: center; justify-content: center; min-height: 100px; color: #444; }
+</style>
+</head>
+<body>
+<h1>GenDeck — Pipeline Comparison</h1>
+<p class="subtitle">v1 (single render-card) vs v2 (structure → resolve). Click any image to zoom.</p>
+<div class="header-row" style="grid-template-columns: repeat(10, 1fr)">
+<div class="header-cell">Stress01-Quantum <span class="count">(5 cards)</span></div>
+<div class="header-cell">Stress02-Biodiversity <span class="count">(6 cards)</span></div>
+<div class="header-cell">Stress03-Typography <span class="count">(7 cards)</span></div>
+<div class="header-cell">Stress04-Fundraising <span class="count">(6 cards)</span></div>
+<div class="header-cell">Stress05-UrbanPlanning <span class="count">(7 cards)</span></div>
+<div class="header-cell">Stress06-DataLiteracy <span class="count">(5 cards)</span></div>
+<div class="header-cell">Stress07-Energy <span class="count">(7 cards)</span></div>
+<div class="header-cell">Stress08-CBT <span class="count">(6 cards)</span></div>
+<div class="header-cell">Stress09-Transit <span class="count">(6 cards)</span></div>
+<div class="header-cell">Stress10-ArtMarket <span class="count">(6 cards)</span></div>
+</div>
+<div class="card-row" style="grid-template-columns: repeat(10, 1fr)">
+<div class="card-cell">
+          <img src="swiss-stress-01/screenshots/card-00.png" alt="Stress01-Quantum card 0" loading="lazy" />
+          <span class="card-label">Card 1</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-02/screenshots/card-00.png" alt="Stress02-Biodiversity card 0" loading="lazy" />
+          <span class="card-label">Card 1</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-03/screenshots/card-00.png" alt="Stress03-Typography card 0" loading="lazy" />
+          <span class="card-label">Card 1</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-04/screenshots/card-00.png" alt="Stress04-Fundraising card 0" loading="lazy" />
+          <span class="card-label">Card 1</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-05/screenshots/card-00.png" alt="Stress05-UrbanPlanning card 0" loading="lazy" />
+          <span class="card-label">Card 1</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-06/screenshots/card-00.png" alt="Stress06-DataLiteracy card 0" loading="lazy" />
+          <span class="card-label">Card 1</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-07/screenshots/card-00.png" alt="Stress07-Energy card 0" loading="lazy" />
+          <span class="card-label">Card 1</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-08/screenshots/card-00.png" alt="Stress08-CBT card 0" loading="lazy" />
+          <span class="card-label">Card 1</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-09/screenshots/card-00.png" alt="Stress09-Transit card 0" loading="lazy" />
+          <span class="card-label">Card 1</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-10/screenshots/card-00.png" alt="Stress10-ArtMarket card 0" loading="lazy" />
+          <span class="card-label">Card 1</span>
+        </div>
+</div>
+<div class="card-row" style="grid-template-columns: repeat(10, 1fr)">
+<div class="card-cell">
+          <img src="swiss-stress-01/screenshots/card-01.png" alt="Stress01-Quantum card 1" loading="lazy" />
+          <span class="card-label">Card 2</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-02/screenshots/card-01.png" alt="Stress02-Biodiversity card 1" loading="lazy" />
+          <span class="card-label">Card 2</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-03/screenshots/card-01.png" alt="Stress03-Typography card 1" loading="lazy" />
+          <span class="card-label">Card 2</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-04/screenshots/card-01.png" alt="Stress04-Fundraising card 1" loading="lazy" />
+          <span class="card-label">Card 2</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-05/screenshots/card-01.png" alt="Stress05-UrbanPlanning card 1" loading="lazy" />
+          <span class="card-label">Card 2</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-06/screenshots/card-01.png" alt="Stress06-DataLiteracy card 1" loading="lazy" />
+          <span class="card-label">Card 2</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-07/screenshots/card-01.png" alt="Stress07-Energy card 1" loading="lazy" />
+          <span class="card-label">Card 2</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-08/screenshots/card-01.png" alt="Stress08-CBT card 1" loading="lazy" />
+          <span class="card-label">Card 2</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-09/screenshots/card-01.png" alt="Stress09-Transit card 1" loading="lazy" />
+          <span class="card-label">Card 2</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-10/screenshots/card-01.png" alt="Stress10-ArtMarket card 1" loading="lazy" />
+          <span class="card-label">Card 2</span>
+        </div>
+</div>
+<div class="card-row" style="grid-template-columns: repeat(10, 1fr)">
+<div class="card-cell">
+          <img src="swiss-stress-01/screenshots/card-02.png" alt="Stress01-Quantum card 2" loading="lazy" />
+          <span class="card-label">Card 3</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-02/screenshots/card-02.png" alt="Stress02-Biodiversity card 2" loading="lazy" />
+          <span class="card-label">Card 3</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-03/screenshots/card-02.png" alt="Stress03-Typography card 2" loading="lazy" />
+          <span class="card-label">Card 3</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-04/screenshots/card-02.png" alt="Stress04-Fundraising card 2" loading="lazy" />
+          <span class="card-label">Card 3</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-05/screenshots/card-02.png" alt="Stress05-UrbanPlanning card 2" loading="lazy" />
+          <span class="card-label">Card 3</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-06/screenshots/card-02.png" alt="Stress06-DataLiteracy card 2" loading="lazy" />
+          <span class="card-label">Card 3</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-07/screenshots/card-02.png" alt="Stress07-Energy card 2" loading="lazy" />
+          <span class="card-label">Card 3</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-08/screenshots/card-02.png" alt="Stress08-CBT card 2" loading="lazy" />
+          <span class="card-label">Card 3</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-09/screenshots/card-02.png" alt="Stress09-Transit card 2" loading="lazy" />
+          <span class="card-label">Card 3</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-10/screenshots/card-02.png" alt="Stress10-ArtMarket card 2" loading="lazy" />
+          <span class="card-label">Card 3</span>
+        </div>
+</div>
+<div class="card-row" style="grid-template-columns: repeat(10, 1fr)">
+<div class="card-cell">
+          <img src="swiss-stress-01/screenshots/card-03.png" alt="Stress01-Quantum card 3" loading="lazy" />
+          <span class="card-label">Card 4</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-02/screenshots/card-03.png" alt="Stress02-Biodiversity card 3" loading="lazy" />
+          <span class="card-label">Card 4</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-03/screenshots/card-03.png" alt="Stress03-Typography card 3" loading="lazy" />
+          <span class="card-label">Card 4</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-04/screenshots/card-03.png" alt="Stress04-Fundraising card 3" loading="lazy" />
+          <span class="card-label">Card 4</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-05/screenshots/card-03.png" alt="Stress05-UrbanPlanning card 3" loading="lazy" />
+          <span class="card-label">Card 4</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-06/screenshots/card-03.png" alt="Stress06-DataLiteracy card 3" loading="lazy" />
+          <span class="card-label">Card 4</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-07/screenshots/card-03.png" alt="Stress07-Energy card 3" loading="lazy" />
+          <span class="card-label">Card 4</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-08/screenshots/card-03.png" alt="Stress08-CBT card 3" loading="lazy" />
+          <span class="card-label">Card 4</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-09/screenshots/card-03.png" alt="Stress09-Transit card 3" loading="lazy" />
+          <span class="card-label">Card 4</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-10/screenshots/card-03.png" alt="Stress10-ArtMarket card 3" loading="lazy" />
+          <span class="card-label">Card 4</span>
+        </div>
+</div>
+<div class="card-row" style="grid-template-columns: repeat(10, 1fr)">
+<div class="card-cell">
+          <img src="swiss-stress-01/screenshots/card-04.png" alt="Stress01-Quantum card 4" loading="lazy" />
+          <span class="card-label">Card 5</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-02/screenshots/card-04.png" alt="Stress02-Biodiversity card 4" loading="lazy" />
+          <span class="card-label">Card 5</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-03/screenshots/card-04.png" alt="Stress03-Typography card 4" loading="lazy" />
+          <span class="card-label">Card 5</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-04/screenshots/card-04.png" alt="Stress04-Fundraising card 4" loading="lazy" />
+          <span class="card-label">Card 5</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-05/screenshots/card-04.png" alt="Stress05-UrbanPlanning card 4" loading="lazy" />
+          <span class="card-label">Card 5</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-06/screenshots/card-04.png" alt="Stress06-DataLiteracy card 4" loading="lazy" />
+          <span class="card-label">Card 5</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-07/screenshots/card-04.png" alt="Stress07-Energy card 4" loading="lazy" />
+          <span class="card-label">Card 5</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-08/screenshots/card-04.png" alt="Stress08-CBT card 4" loading="lazy" />
+          <span class="card-label">Card 5</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-09/screenshots/card-04.png" alt="Stress09-Transit card 4" loading="lazy" />
+          <span class="card-label">Card 5</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-10/screenshots/card-04.png" alt="Stress10-ArtMarket card 4" loading="lazy" />
+          <span class="card-label">Card 5</span>
+        </div>
+</div>
+<div class="card-row" style="grid-template-columns: repeat(10, 1fr)">
+<div class="card-cell empty">—</div>
+<div class="card-cell">
+          <img src="swiss-stress-02/screenshots/card-05.png" alt="Stress02-Biodiversity card 5" loading="lazy" />
+          <span class="card-label">Card 6</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-03/screenshots/card-05.png" alt="Stress03-Typography card 5" loading="lazy" />
+          <span class="card-label">Card 6</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-04/screenshots/card-05.png" alt="Stress04-Fundraising card 5" loading="lazy" />
+          <span class="card-label">Card 6</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-05/screenshots/card-05.png" alt="Stress05-UrbanPlanning card 5" loading="lazy" />
+          <span class="card-label">Card 6</span>
+        </div>
+<div class="card-cell empty">—</div>
+<div class="card-cell">
+          <img src="swiss-stress-07/screenshots/card-05.png" alt="Stress07-Energy card 5" loading="lazy" />
+          <span class="card-label">Card 6</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-08/screenshots/card-05.png" alt="Stress08-CBT card 5" loading="lazy" />
+          <span class="card-label">Card 6</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-09/screenshots/card-05.png" alt="Stress09-Transit card 5" loading="lazy" />
+          <span class="card-label">Card 6</span>
+        </div>
+<div class="card-cell">
+          <img src="swiss-stress-10/screenshots/card-05.png" alt="Stress10-ArtMarket card 5" loading="lazy" />
+          <span class="card-label">Card 6</span>
+        </div>
+</div>
+<div class="card-row" style="grid-template-columns: repeat(10, 1fr)">
+<div class="card-cell empty">—</div>
+<div class="card-cell empty">—</div>
+<div class="card-cell">
+          <img src="swiss-stress-03/screenshots/card-06.png" alt="Stress03-Typography card 6" loading="lazy" />
+          <span class="card-label">Card 7</span>
+        </div>
+<div class="card-cell empty">—</div>
+<div class="card-cell">
+          <img src="swiss-stress-05/screenshots/card-06.png" alt="Stress05-UrbanPlanning card 6" loading="lazy" />
+          <span class="card-label">Card 7</span>
+        </div>
+<div class="card-cell empty">—</div>
+<div class="card-cell">
+          <img src="swiss-stress-07/screenshots/card-06.png" alt="Stress07-Energy card 6" loading="lazy" />
+          <span class="card-label">Card 7</span>
+        </div>
+<div class="card-cell empty">—</div>
+<div class="card-cell empty">—</div>
+<div class="card-cell empty">—</div>
+</div>
+<script>
+  document.querySelectorAll('.card-cell img').forEach(img => {
+    img.addEventListener('click', () => img.classList.toggle('zoomed'));
+  });
+</script>
+</body>
+</html>
