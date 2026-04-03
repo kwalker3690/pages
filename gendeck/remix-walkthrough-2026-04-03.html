@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Template Remix Pipeline Walkthrough — Climate Tech Investment</title>
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --surface2: #1a1a1a;
+    --border: #2a2a2a;
+    --text: #e0e0e0;
+    --text-dim: #888;
+    --input: #3b82f6;
+    --input-bg: rgba(59, 130, 246, 0.08);
+    --input-border: rgba(59, 130, 246, 0.25);
+    --output: #22c55e;
+    --output-bg: rgba(34, 197, 94, 0.08);
+    --output-border: rgba(34, 197, 94, 0.25);
+    --decision: #f59e0b;
+    --decision-bg: rgba(245, 158, 11, 0.08);
+    --decision-border: rgba(245, 158, 11, 0.25);
+    --tool: #e879f9;
+    --tool-bg: rgba(232, 121, 249, 0.08);
+    --tool-border: rgba(232, 121, 249, 0.25);
+    --accent: #a78bfa;
+    --code-bg: #0d1117;
+    --code-border: #21262d;
+    --arrow: #555;
+    --skipped: #555;
+    --skipped-bg: rgba(255,255,255,0.03);
+    --skipped-border: rgba(255,255,255,0.08);
+    --template: #06b6d4;
+    --template-bg: rgba(6, 182, 212, 0.08);
+    --template-border: rgba(6, 182, 212, 0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    padding: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.25rem; }
+  h2 { font-size: 1.3rem; font-weight: 600; }
+  h3 { font-size: 1.1rem; font-weight: 600; }
+
+  code, pre {
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+  }
+
+  code {
+    background: rgba(255,255,255,0.06);
+    padding: 0.1em 0.35em;
+    border-radius: 3px;
+    font-size: 0.85em;
+  }
+
+  /* ===== BANNER ===== */
+  .banner {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem 2rem 1.5rem;
+    margin-bottom: 2.5rem;
+    overflow: visible;
+  }
+
+  .banner-title {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.25rem;
+  }
+
+  .pipeline-flow {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    min-width: 1050px;
+    justify-content: center;
+    padding-top: 0.5rem;
+  }
+
+  .pipeline-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .pipeline-pill {
+    padding: 0.45rem 0.85rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    border: 1px solid;
+  }
+
+  .pill-prompt { background: rgba(167,139,250,0.15); border-color: rgba(167,139,250,0.4); color: #c4b5fd; }
+  .pill-plan { background: rgba(251,146,60,0.15); border-color: rgba(251,146,60,0.4); color: #fdba74; }
+  .pill-outline { background: rgba(56,189,248,0.15); border-color: rgba(56,189,248,0.4); color: #7dd3fc; }
+  .pill-template { background: rgba(6,182,212,0.15); border-color: rgba(6,182,212,0.4); color: #67e8f9; }
+  .pill-renderer { background: rgba(99,102,241,0.15); border-color: rgba(99,102,241,0.4); color: #a5b4fc; }
+  .pill-reviewer { background: rgba(244,63,94,0.15); border-color: rgba(244,63,94,0.4); color: #fda4af; }
+
+  .pill-skipped {
+    background: var(--skipped-bg);
+    border-color: var(--skipped-border);
+    color: var(--skipped);
+    text-decoration: line-through;
+    opacity: 0.5;
+  }
+
+  .pipeline-arrow {
+    display: flex;
+    align-items: center;
+    padding: 0 0.25rem;
+    color: var(--arrow);
+    font-size: 1.1rem;
+    margin-top: 0.35rem;
+    flex-shrink: 0;
+  }
+
+  .guide-feeds {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-top: 8px;
+    align-items: center;
+  }
+
+  .guide-tag {
+    font-size: 0.6rem;
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-dim);
+    white-space: nowrap;
+    font-family: 'SF Mono', monospace;
+  }
+
+  .system-bracket {
+    border: 1px solid rgba(251,146,60,0.35);
+    border-radius: 12px;
+    padding: 0.8rem 0.6rem 0.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    position: relative;
+  }
+
+  .system-label {
+    position: absolute;
+    top: -10px;
+    left: 14px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    background: var(--surface);
+    padding: 0 8px;
+  }
+
+  .system-label.buddy { color: #fdba74; }
+
+  .skipped-bracket {
+    border: 1px dashed rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 0.8rem 0.6rem 0.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    position: relative;
+    opacity: 0.45;
+  }
+
+  .skipped-label {
+    position: absolute;
+    top: -10px;
+    left: 14px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    background: var(--surface);
+    padding: 0 8px;
+    color: #666;
+    text-transform: uppercase;
+  }
+
+  .tool-feeds {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 6px;
+    align-items: center;
+  }
+
+  .tool-tag {
+    font-size: 0.55rem;
+    padding: 1px 4px;
+    border-radius: 3px;
+    background: rgba(232,121,249,0.1);
+    border: 1px solid rgba(232,121,249,0.2);
+    color: #e879f9;
+    white-space: nowrap;
+    font-family: 'SF Mono', monospace;
+  }
+
+  /* ===== SUBTITLE ===== */
+  .page-subtitle {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+
+  .prompt-box {
+    display: inline-block;
+    background: rgba(167,139,250,0.12);
+    border: 1px solid rgba(167,139,250,0.3);
+    border-radius: 6px;
+    padding: 0.3rem 0.8rem;
+    font-family: monospace;
+    color: #c4b5fd;
+    margin-top: 0.5rem;
+  }
+
+  /* ===== STEP CONNECTOR ===== */
+  .step-connector {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 0;
+  }
+
+  .step-connector svg {
+    width: 24px;
+    height: 32px;
+  }
+
+  /* ===== COLLAPSIBLE STEPS ===== */
+  .step {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 0;
+    background: var(--surface);
+    overflow: hidden;
+  }
+
+  .step.skipped {
+    opacity: 0.4;
+    border-style: dashed;
+  }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+
+  .step-header:hover { background: var(--surface2); }
+
+  .step-number {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+  }
+
+  .sn-plan { background: rgba(251,146,60,0.2); color: #fdba74; }
+  .sn-outline { background: rgba(56,189,248,0.2); color: #7dd3fc; }
+  .sn-template { background: rgba(6,182,212,0.2); color: #67e8f9; }
+  .sn-style { background: rgba(232,121,249,0.2); color: #f0abfc; }
+  .sn-structure { background: rgba(245,158,11,0.2); color: #fcd34d; }
+  .sn-resolve { background: rgba(34,197,94,0.2); color: #86efac; }
+  .sn-renderer { background: rgba(99,102,241,0.2); color: #a5b4fc; }
+  .sn-reviewer { background: rgba(244,63,94,0.2); color: #fda4af; }
+  .sn-skipped { background: rgba(255,255,255,0.06); color: #555; }
+
+  .step-title { font-weight: 600; font-size: 1rem; flex: 1; }
+  .step-system-tag { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 2px 7px; border-radius: 4px; margin-right: 0.5rem; vertical-align: middle; }
+  .step-system-tag.buddy { background: rgba(251,146,60,0.15); color: #fdba74; }
+  .step-system-tag.skipped-tag { background: rgba(255,255,255,0.05); color: #555; }
+  .step-subtitle { color: var(--text-dim); font-weight: 400; font-size: 0.85rem; }
+
+  .step-chevron {
+    transition: transform 0.2s;
+    color: var(--text-dim);
+    font-size: 1.2rem;
+  }
+
+  .step.open .step-chevron { transform: rotate(90deg); }
+
+  .step-body {
+    display: none;
+    padding: 0 1.25rem 1.25rem;
+  }
+
+  .step.open .step-body { display: block; }
+
+  /* ===== LABELED BOXES ===== */
+  .box {
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 0.75rem 0;
+    border: 1px solid;
+  }
+
+  .box-input { background: var(--input-bg); border-color: var(--input-border); }
+  .box-output { background: var(--output-bg); border-color: var(--output-border); }
+  .box-decision { background: var(--decision-bg); border-color: var(--decision-border); }
+  .box-tool { background: var(--tool-bg); border-color: var(--tool-border); }
+  .box-template { background: var(--template-bg); border-color: var(--template-border); }
+
+  .box-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .box-input .box-label { color: var(--input); }
+  .box-output .box-label { color: var(--output); }
+  .box-decision .box-label { color: var(--decision); }
+  .box-tool .box-label { color: var(--tool); }
+  .box-template .box-label { color: var(--template); }
+
+  .box p, .box li { font-size: 0.9rem; color: var(--text); line-height: 1.5; }
+  .box ul { padding-left: 1.2rem; margin-top: 0.3rem; }
+  .box li { margin-bottom: 0.15rem; }
+
+  /* ===== CODE BLOCKS ===== */
+  pre.code-block {
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    margin: 0.5rem 0;
+    color: #c9d1d9;
+  }
+
+  .code-lang {
+    display: inline-block;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+    background: rgba(255,255,255,0.05);
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-bottom: 0.4rem;
+    font-family: monospace;
+  }
+
+  .syn-key { color: #7ee787; }
+  .syn-str { color: #a5d6ff; }
+  .syn-num { color: #79c0ff; }
+  .syn-tag { color: #ff7b72; }
+  .syn-attr { color: #d2a8ff; }
+  .syn-val { color: #a5d6ff; }
+  .syn-comment { color: #8b949e; font-style: italic; }
+
+  blockquote {
+    border-left: 3px solid var(--decision);
+    padding: 0.75rem 1rem;
+    margin: 0.5rem 0;
+    background: rgba(245,158,11,0.05);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    color: #ddd;
+    font-style: italic;
+  }
+
+  .prose { font-size: 0.9rem; color: var(--text); margin: 0.5rem 0; }
+  .prose strong { color: #fff; }
+
+  /* ===== CARD GROUP HIGHLIGHT ===== */
+  .card-group {
+    border: 1px solid rgba(6,182,212,0.25);
+    border-radius: 8px;
+    padding: 0.75rem;
+    margin: 0.75rem 0;
+    background: rgba(6,182,212,0.04);
+  }
+
+  .card-group-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--template);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-group-items {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .card-group-item {
+    background: rgba(6,182,212,0.1);
+    border: 1px solid rgba(6,182,212,0.2);
+    border-radius: 6px;
+    padding: 0.4rem 0.7rem;
+    font-size: 0.8rem;
+    font-family: monospace;
+  }
+
+  .card-group-item .card-idx {
+    color: var(--template);
+    font-weight: 700;
+  }
+
+  .card-group-item .card-desc {
+    color: var(--text-dim);
+    margin-left: 0.3rem;
+  }
+
+  /* ===== TOOLS GRID ===== */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.5rem;
+    margin: 0.75rem 0;
+  }
+
+  .tool-card {
+    background: var(--tool-bg);
+    border: 1px solid var(--tool-border);
+    border-radius: 8px;
+    padding: 0.75rem;
+  }
+
+  .tool-card-name {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--tool);
+    font-family: monospace;
+    margin-bottom: 0.25rem;
+  }
+
+  .tool-card p { font-size: 0.8rem; color: var(--text-dim); line-height: 1.4; }
+
+  /* ===== COMPARISON TABLE ===== */
+  .comparison-section {
+    margin-top: 2.5rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    padding: 1.5rem;
+  }
+
+  .comparison-section h2 { margin-bottom: 1rem; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+
+  thead th {
+    text-align: left;
+    padding: 0.6rem 0.75rem;
+    border-bottom: 2px solid var(--border);
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+  }
+
+  tbody td {
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: rgba(255,255,255,0.02); }
+  td:first-child { font-weight: 600; white-space: nowrap; }
+
+  .td-skipped {
+    color: var(--skipped);
+    text-decoration: line-through;
+    font-style: italic;
+  }
+
+  .td-active { color: var(--output); }
+
+  /* ===== STATS ROW ===== */
+  .stats-row {
+    display: flex;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+  }
+
+  .stat-card {
+    flex: 1;
+    min-width: 160px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    padding: 1.25rem;
+    text-align: center;
+  }
+
+  .stat-card .stat-number {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-card .stat-label {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+
+  .stat-remix .stat-number { color: var(--template); }
+  .stat-scratch .stat-number { color: var(--decision); }
+
+  /* ===== OPEN QUESTIONS ===== */
+  .questions-section {
+    margin-top: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    padding: 1.5rem;
+  }
+
+  .questions-section h2 { margin-bottom: 0.75rem; }
+
+  .question-item { margin-bottom: 0.6rem; font-size: 0.9rem; }
+  .question-item strong { color: var(--decision); }
+
+  @media (max-width: 700px) {
+    body { padding: 1rem; }
+    .pipeline-flow { min-width: 0; flex-wrap: wrap; gap: 0.5rem; }
+    .pipeline-arrow { display: none; }
+    .tools-grid { grid-template-columns: 1fr; }
+    .stats-row { flex-direction: column; }
+    .card-group-items { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<h1>Template Remix Pipeline Walkthrough</h1>
+<p class="page-subtitle">
+  Same scenario as the from-scratch walkthrough, but using a template library. 2 LLM calls instead of 5+.
+</p>
+<div style="margin-bottom: 2rem;">
+  <div class="prompt-box">"Using cards from my template library, make a deck about climate tech investment"</div>
+</div>
+
+<!-- ===== STATS ===== -->
+<div class="stats-row">
+  <div class="stat-card stat-remix">
+    <div class="stat-number">2</div>
+    <div class="stat-label">LLM calls (Remix)</div>
+  </div>
+  <div class="stat-card stat-scratch">
+    <div class="stat-number">5+</div>
+    <div class="stat-label">LLM calls (From-Scratch)</div>
+  </div>
+  <div class="stat-card" style="border-color: rgba(34,197,94,0.3);">
+    <div class="stat-number" style="color: var(--output);">3</div>
+    <div class="stat-label">Pipeline steps skipped</div>
+  </div>
+</div>
+
+<!-- ===== ARCHITECTURE BANNER ===== -->
+<div class="banner">
+  <div class="banner-title">Remix Pipeline Architecture</div>
+  <div class="pipeline-flow">
+    <div class="pipeline-node">
+      <div class="pipeline-pill pill-prompt">User Prompt</div>
+    </div>
+    <div class="pipeline-arrow">&#8594;</div>
+    <div class="pipeline-node">
+      <div class="pipeline-pill pill-template">Template Library</div>
+      <div class="guide-feeds">
+        <span class="guide-tag">title-dark.gml</span>
+        <span class="guide-tag">hero-stat.gml</span>
+        <span class="guide-tag">chart-analysis.gml</span>
+        <span class="guide-tag">...</span>
+      </div>
+    </div>
+    <div class="pipeline-arrow">&#8594;</div>
+    <div class="system-bracket">
+      <span class="system-label buddy">Buddy G</span>
+      <div class="pipeline-node">
+        <div class="pipeline-pill pill-plan">Plan</div>
+        <div class="guide-feeds">
+          <span class="guide-tag">template catalog</span>
+        </div>
+      </div>
+      <div class="pipeline-arrow">&#8594;</div>
+      <div class="pipeline-node">
+        <div class="pipeline-pill pill-outline">Outline</div>
+        <div class="guide-feeds">
+          <span class="guide-tag">plan + templates</span>
+          <span class="guide-tag">density + writing</span>
+        </div>
+        <div class="tool-feeds">
+          <span class="tool-tag">image-query-author</span>
+          <span class="tool-tag">chart-creator</span>
+        </div>
+      </div>
+    </div>
+    <div class="pipeline-arrow">&#8594;</div>
+
+    <!-- SKIPPED STEPS -->
+    <div class="skipped-bracket">
+      <span class="skipped-label">Skipped</span>
+      <div class="pipeline-node">
+        <div class="pipeline-pill pill-skipped">Style Resolve</div>
+      </div>
+      <div class="pipeline-arrow" style="opacity:0.3;">&#8594;</div>
+      <div class="pipeline-node">
+        <div class="pipeline-pill pill-skipped">Structure</div>
+      </div>
+      <div class="pipeline-arrow" style="opacity:0.3;">&#8594;</div>
+      <div class="pipeline-node">
+        <div class="pipeline-pill pill-skipped">Layout Resolver</div>
+      </div>
+    </div>
+
+    <div class="pipeline-arrow">&#8594;</div>
+    <div class="pipeline-node">
+      <div class="pipeline-pill pill-renderer">Renderer</div>
+    </div>
+    <div class="pipeline-arrow">&#8594;</div>
+    <div class="pipeline-node">
+      <div class="pipeline-pill pill-reviewer">Reviewer</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TEMPLATE LIBRARY (context) ===== -->
+<div class="step open" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-template" style="font-size:0.7rem;">&#9638;</div>
+    <div class="step-title">Template Library <span class="step-subtitle"> &mdash; pre-designed card templates with defined slots</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <p class="prose">Each template is a complete GML SECTION with layout, variant choices, image placement, and placeholder content. The templates <strong>are</strong> the style brief, structure, and blocks decisions &mdash; pre-baked into GML.</p>
+
+    <div class="box box-template">
+      <div class="box-label">&#9679; Template Catalog</div>
+      <pre class="code-block"><span class="syn-key">title-dark</span>      dark background, bottom-left title, maximum whitespace
+<span class="syn-key">hero-stat</span>      single large number + one sentence, split columns
+<span class="syn-key">three-column-data</span>  3 parallel items as solidBoxes, full-width
+<span class="syn-key">split-narrative</span>    heading left, paragraph right, 50/50 columns
+<span class="syn-key">chart-analysis</span>     chart area + analysis panel in columns
+<span class="syn-key">stat-grid</span>      3-4 stats with labels, centered
+<span class="syn-key">closing-cta</span>    single statement, bottom-right, mirrors title
+<span class="syn-key">section-divider</span>    sparse statement card, background color</pre>
+    </div>
+
+    <div class="box box-decision">
+      <div class="box-label">&#9679; What Each Template Needs</div>
+      <ul>
+        <li><strong>The GML</strong> &mdash; actual card layout, ready to render</li>
+        <li><strong>Slot definitions</strong> &mdash; what content goes where (which H2, which P, chart data)</li>
+        <li><strong>A role tag</strong> &mdash; title, hero-stat, data-grid, narrative, chart, closing</li>
+        <li><strong>Capacity metadata</strong> &mdash; max chars for heading slot, max items for layout</li>
+      </ul>
+    </div>
+
+    <p class="prose">Example template GML (<code>hero-stat.gml</code>):</p>
+    <div class="code-lang">gml</div>
+    <pre class="code-block"><span class="syn-tag">&lt;SECTION</span> <span class="syn-attr">image-layout</span>=<span class="syn-val">"blank"</span> <span class="syn-attr">vertical-align</span>=<span class="syn-val">"end"</span><span class="syn-tag">&gt;</span>
+  <span class="syn-tag">&lt;DIV</span> <span class="syn-attr">class</span>=<span class="syn-val">"body"</span><span class="syn-tag">&gt;</span>
+    <span class="syn-tag">&lt;COLUMNS&gt;</span>
+      <span class="syn-tag">&lt;DIV&gt;&lt;/DIV&gt;</span>
+      <span class="syn-tag">&lt;DIV&gt;</span>
+        <span class="syn-tag">&lt;H2</span> <span class="syn-attr">style</span>=<span class="syn-val">"text-align: left"</span><span class="syn-tag">&gt;</span><span class="syn-comment">{HERO_NUMBER}</span><span class="syn-tag">&lt;/H2&gt;</span>
+        <span class="syn-tag">&lt;P</span> <span class="syn-attr">style</span>=<span class="syn-val">"text-align: left"</span><span class="syn-tag">&gt;</span><span class="syn-comment">{SUPPORTING_TEXT}</span><span class="syn-tag">&lt;/P&gt;</span>
+      <span class="syn-tag">&lt;/DIV&gt;</span>
+    <span class="syn-tag">&lt;/COLUMNS&gt;</span>
+  <span class="syn-tag">&lt;/DIV&gt;</span>
+<span class="syn-tag">&lt;/SECTION&gt;</span></pre>
+  </div>
+</div>
+
+<!-- CONNECTOR -->
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 24 M6 18 L12 26 L18 18" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- ===== STEP 1: PLAN ===== -->
+<div class="step open" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-plan">1</div>
+    <div class="step-title"><span class="step-system-tag buddy">Buddy G</span>Plan <span class="step-subtitle"> &mdash; reads template catalog, not planning.md</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <div class="box box-input">
+      <div class="box-label">&#9679; Inputs</div>
+      <ul>
+        <li><strong>User prompt:</strong> "Using cards from my template library, make a deck about climate tech investment"</li>
+        <li><strong>Template catalog</strong> &mdash; summary of available templates with roles and capabilities (NOT planning.md or writing.md)</li>
+      </ul>
+    </div>
+
+    <div class="box box-decision">
+      <div class="box-label">&#9679; What It Decides</div>
+      <p>Narrative arc, card roles, AND <strong>which template to use for each card</strong>. The plan now includes a <code>template</code> field. Cards sharing a template form implicit <strong>card groups</strong>.</p>
+    </div>
+
+    <div class="box box-output">
+      <div class="box-label">&#9679; Output &mdash; Plan JSON (with template selection)</div>
+      <div class="code-lang">json</div>
+      <pre class="code-block">{
+  <span class="syn-key">"deckIntent"</span>: <span class="syn-str">"Climate tech investment sweep: scale &rarr; sectors &rarr; geography &rarr; tension &rarr; forward."</span>,
+  <span class="syn-key">"cards"</span>: [
+    {
+      <span class="syn-key">"cardIndex"</span>: <span class="syn-num">0</span>,
+      <span class="syn-key">"template"</span>: <span class="syn-str">"title-dark"</span>,
+      <span class="syn-key">"cardInstructions"</span>: <span class="syn-str">"Title: Climate Tech Investment"</span>,
+      <span class="syn-key">"imageLayout"</span>: <span class="syn-str">"blank"</span>
+    },
+    {
+      <span class="syn-key">"cardIndex"</span>: <span class="syn-num">1</span>,
+      <span class="syn-key">"template"</span>: <span class="syn-str">"hero-stat"</span>,
+      <span class="syn-key">"cardInstructions"</span>: <span class="syn-str">"Hero: $2.2T total clean energy investment. The wow number."</span>,
+      <span class="syn-key">"imageLayout"</span>: <span class="syn-str">"blank"</span>
+    },
+    {
+      <span class="syn-key">"cardIndex"</span>: <span class="syn-num">2</span>,
+      <span class="syn-key">"template"</span>: <span class="syn-str">"hero-stat"</span>,
+      <span class="syn-key">"cardInstructions"</span>: <span class="syn-str">"Solar: $450B, largest single item in global energy spending."</span>,
+      <span class="syn-key">"imageLayout"</span>: <span class="syn-str">"blank"</span>
+    },
+    {
+      <span class="syn-key">"cardIndex"</span>: <span class="syn-num">3</span>,
+      <span class="syn-key">"template"</span>: <span class="syn-str">"hero-stat"</span>,
+      <span class="syn-key">"cardInstructions"</span>: <span class="syn-str">"Storage: 5x growth, $66B up from $12B."</span>,
+      <span class="syn-key">"imageLayout"</span>: <span class="syn-str">"blank"</span>
+    },
+    {
+      <span class="syn-key">"cardIndex"</span>: <span class="syn-num">4</span>,
+      <span class="syn-key">"template"</span>: <span class="syn-str">"three-column-data"</span>,
+      <span class="syn-key">"cardInstructions"</span>: <span class="syn-str">"Regional breakdown: China, Europe, US with key figures."</span>,
+      <span class="syn-key">"imageLayout"</span>: <span class="syn-str">"blank"</span>
+    },
+    {
+      <span class="syn-key">"cardIndex"</span>: <span class="syn-num">5</span>,
+      <span class="syn-key">"template"</span>: <span class="syn-str">"chart-analysis"</span>,
+      <span class="syn-key">"cardInstructions"</span>: <span class="syn-str">"Grid vs generation spending gap. Bar chart + analysis."</span>,
+      <span class="syn-key">"imageLayout"</span>: <span class="syn-str">"blank"</span>
+    },
+    {
+      <span class="syn-key">"cardIndex"</span>: <span class="syn-num">6</span>,
+      <span class="syn-key">"template"</span>: <span class="syn-str">"split-narrative"</span>,
+      <span class="syn-key">"cardInstructions"</span>: <span class="syn-str">"Forward: grid modernization, storage, electrification."</span>,
+      <span class="syn-key">"imageLayout"</span>: <span class="syn-str">"blank"</span>
+    },
+    {
+      <span class="syn-key">"cardIndex"</span>: <span class="syn-num">7</span>,
+      <span class="syn-key">"template"</span>: <span class="syn-str">"closing-cta"</span>,
+      <span class="syn-key">"cardInstructions"</span>: <span class="syn-str">"Closing: the largest reallocation of capital in history."</span>,
+      <span class="syn-key">"imageLayout"</span>: <span class="syn-str">"blank"</span>
+    }
+  ]
+}</pre>
+    </div>
+
+    <!-- Card Groups -->
+    <div class="card-group">
+      <div class="card-group-label">&#9679; Implicit Card Group &mdash; hero-stat template</div>
+      <div class="card-group-items">
+        <div class="card-group-item"><span class="card-idx">Card 1</span><span class="card-desc">$2.2T total</span></div>
+        <div class="card-group-item"><span class="card-idx">Card 2</span><span class="card-desc">$450B solar</span></div>
+        <div class="card-group-item"><span class="card-idx">Card 3</span><span class="card-desc">5x storage</span></div>
+      </div>
+      <p class="prose" style="margin-top:0.5rem;">Same template, different content. For simple templates with clear slots, this could be <strong>deterministic string replacement</strong> rather than an LLM call.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CONNECTOR -->
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 24 M6 18 L12 26 L18 18" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- ===== STEP 2: OUTLINE ===== -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-outline">2</div>
+    <div class="step-title"><span class="step-system-tag buddy">Buddy G</span>Outline <span class="step-subtitle"> &mdash; writes content DIRECTLY into template GML</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <div class="box box-input">
+      <div class="box-label">&#9679; Inputs</div>
+      <ul>
+        <li><strong>Plan JSON</strong> from Step 1 (with template selections)</li>
+        <li><strong>Template GML</strong> for each selected template &mdash; the actual card layouts</li>
+        <li><strong>density.yaml</strong> + <strong>writing.md</strong></li>
+        <li><strong>Web research results</strong> &mdash; IEA data: $2.2T clean energy, solar $450B, storage $66B, grid $400B vs $1T generation</li>
+      </ul>
+    </div>
+
+    <div class="box box-decision">
+      <div class="box-label">&#9679; What It Decides</div>
+      <p>Fills each template slot with actual content. The template IS the constraint AND the output format. The outliner writes content directly into the GML &mdash; no separate layout resolver needed.</p>
+    </div>
+
+    <p class="prose">The source GML is attached to each card. The outline includes both the content AND the template it fills:</p>
+
+    <div class="box box-output">
+      <div class="box-label">&#9679; Output &mdash; Card 1 (hero-stat template)</div>
+      <div class="code-lang">html</div>
+      <pre class="code-block"><span class="syn-tag">&lt;section</span> <span class="syn-attr">imageLayout</span>=<span class="syn-val">"blank"</span> <span class="syn-attr">template</span>=<span class="syn-val">"hero-stat"</span><span class="syn-tag">&gt;</span>
+  <span class="syn-tag">&lt;instructions&gt;</span>Hero: $2.2T total clean energy investment.<span class="syn-tag">&lt;/instructions&gt;</span>
+  <span class="syn-tag">&lt;source-gml&gt;&lt;![CDATA[</span>
+    <span class="syn-tag">&lt;SECTION</span> <span class="syn-attr">image-layout</span>=<span class="syn-val">"blank"</span> <span class="syn-attr">vertical-align</span>=<span class="syn-val">"end"</span><span class="syn-tag">&gt;</span>
+      <span class="syn-tag">&lt;DIV</span> <span class="syn-attr">class</span>=<span class="syn-val">"body"</span><span class="syn-tag">&gt;</span>
+        <span class="syn-tag">&lt;COLUMNS&gt;</span>
+          <span class="syn-tag">&lt;DIV&gt;&lt;/DIV&gt;</span>
+          <span class="syn-tag">&lt;DIV&gt;</span>
+            <span class="syn-tag">&lt;H2&gt;</span>{HERO_NUMBER}<span class="syn-tag">&lt;/H2&gt;</span>
+            <span class="syn-tag">&lt;P&gt;</span>{SUPPORTING_TEXT}<span class="syn-tag">&lt;/P&gt;</span>
+          <span class="syn-tag">&lt;/DIV&gt;</span>
+        <span class="syn-tag">&lt;/COLUMNS&gt;</span>
+      <span class="syn-tag">&lt;/DIV&gt;</span>
+    <span class="syn-tag">&lt;/SECTION&gt;</span>
+  <span class="syn-tag">]]&gt;&lt;/source-gml&gt;</span>
+  <span class="syn-tag">&lt;h2&gt;</span>$2.2T<span class="syn-tag">&lt;/h2&gt;</span>
+  <span class="syn-tag">&lt;p&gt;</span>Clean energy investment in 2025. Twice what goes to fossil fuels.<span class="syn-tag">&lt;/p&gt;</span>
+<span class="syn-tag">&lt;/section&gt;</span></pre>
+    </div>
+
+    <div class="box box-output">
+      <div class="box-label">&#9679; Output &mdash; Card 5 (chart-analysis template, with tool call)</div>
+      <div class="code-lang">html</div>
+      <pre class="code-block"><span class="syn-tag">&lt;section</span> <span class="syn-attr">imageLayout</span>=<span class="syn-val">"blank"</span> <span class="syn-attr">template</span>=<span class="syn-val">"chart-analysis"</span><span class="syn-tag">&gt;</span>
+  <span class="syn-tag">&lt;instructions&gt;</span>Grid vs generation spend. Bar chart + analysis panel.<span class="syn-tag">&lt;/instructions&gt;</span>
+  <span class="syn-tag">&lt;source-gml&gt;&lt;![CDATA[</span>
+    <span class="syn-tag">&lt;SECTION</span> <span class="syn-attr">image-layout</span>=<span class="syn-val">"blank"</span><span class="syn-tag">&gt;</span>
+      <span class="syn-tag">&lt;DIV</span> <span class="syn-attr">class</span>=<span class="syn-val">"body"</span><span class="syn-tag">&gt;</span>
+        <span class="syn-tag">&lt;COLUMNS&gt;</span>
+          <span class="syn-tag">&lt;DIV&gt;</span>
+            <span class="syn-tag">&lt;CHART</span> <span class="syn-attr">type</span>=<span class="syn-val">"bar"</span><span class="syn-tag">&gt;</span>{CHART_DATA}<span class="syn-tag">&lt;/CHART&gt;</span>
+          <span class="syn-tag">&lt;/DIV&gt;</span>
+          <span class="syn-tag">&lt;DIV</span> <span class="syn-attr">data-background-color</span>=<span class="syn-val">"#f0f0f0"</span><span class="syn-tag">&gt;</span>
+            <span class="syn-tag">&lt;H3&gt;</span>{ANALYSIS_HEADING}<span class="syn-tag">&lt;/H3&gt;</span>
+            <span class="syn-tag">&lt;P&gt;</span>{ANALYSIS_TEXT}<span class="syn-tag">&lt;/P&gt;</span>
+          <span class="syn-tag">&lt;/DIV&gt;</span>
+        <span class="syn-tag">&lt;/COLUMNS&gt;</span>
+      <span class="syn-tag">&lt;/DIV&gt;</span>
+    <span class="syn-tag">&lt;/SECTION&gt;</span>
+  <span class="syn-tag">]]&gt;&lt;/source-gml&gt;</span>
+  <span class="syn-tag">&lt;h2&gt;</span>The Infrastructure Gap<span class="syn-tag">&lt;/h2&gt;</span>
+  <span class="syn-tag">&lt;p&gt;</span>Grid investment: $400B/year. Generation: $1T. The gap is widening.<span class="syn-tag">&lt;/p&gt;</span>
+  <span class="syn-comment">&lt;!-- tool call: chart-creator --&gt;</span>
+  <span class="syn-tag">&lt;table&gt;</span>
+    <span class="syn-tag">&lt;caption&gt;</span>Grid vs Generation Investment ($B), IEA 2025<span class="syn-tag">&lt;/caption&gt;</span>
+    <span class="syn-tag">&lt;colgroup&gt;</span>
+      <span class="syn-tag">&lt;col</span> <span class="syn-attr">name</span>=<span class="syn-val">"Year"</span>/&gt;
+      <span class="syn-tag">&lt;col</span> <span class="syn-attr">name</span>=<span class="syn-val">"Grid"</span>/&gt;
+      <span class="syn-tag">&lt;col</span> <span class="syn-attr">name</span>=<span class="syn-val">"Generation"</span>/&gt;
+    <span class="syn-tag">&lt;/colgroup&gt;</span>
+    <span class="syn-tag">&lt;tbody&gt;</span>
+      <span class="syn-tag">&lt;tr&gt;&lt;td&gt;</span>2020<span class="syn-tag">&lt;/td&gt;&lt;td&gt;</span>280<span class="syn-tag">&lt;/td&gt;&lt;td&gt;</span>650<span class="syn-tag">&lt;/td&gt;&lt;/tr&gt;</span>
+      <span class="syn-tag">&lt;tr&gt;&lt;td&gt;</span>2022<span class="syn-tag">&lt;/td&gt;&lt;td&gt;</span>330<span class="syn-tag">&lt;/td&gt;&lt;td&gt;</span>810<span class="syn-tag">&lt;/td&gt;&lt;/tr&gt;</span>
+      <span class="syn-tag">&lt;tr&gt;&lt;td&gt;</span>2024<span class="syn-tag">&lt;/td&gt;&lt;td&gt;</span>400<span class="syn-tag">&lt;/td&gt;&lt;td&gt;</span>1020<span class="syn-tag">&lt;/td&gt;&lt;/tr&gt;</span>
+    <span class="syn-tag">&lt;/tbody&gt;</span>
+  <span class="syn-tag">&lt;/table&gt;</span>
+<span class="syn-tag">&lt;/section&gt;</span></pre>
+    </div>
+
+    <!-- Inline Tools -->
+    <p class="prose" style="margin-top:1rem;"><strong>Tools are called inline during outlining</strong>, not as a separate pipeline stage:</p>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="tool-card-name">image-query-author</div>
+        <p>Outliner sees an <code>&lt;IMG&gt;</code> slot in template, authors the image query as part of writing the card.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-card-name">chart-creator</div>
+        <p>Outliner sees a <code>&lt;CHART&gt;</code> slot + has table data from research, creates the chart inline.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-card-name">spatial-analysis</div>
+        <p>Could check whether content fits the template's slots before committing. Optional guardrail.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONNECTOR -->
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 24 M6 18 L12 26 L18 18" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- ===== SKIPPED: STYLE RESOLVE ===== -->
+<div class="step skipped" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-skipped" style="text-decoration: line-through;">3</div>
+    <div class="step-title"><span class="step-system-tag skipped-tag">Skipped</span><span style="text-decoration: line-through; color: var(--skipped);">Style Resolve</span> <span class="step-subtitle"> &mdash; templates ARE the style</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <p class="prose">Not needed. The templates embody all style decisions: register, variants, color strategy, composition. There is no separate "style brief" to generate &mdash; the templates <strong>are</strong> the style brief.</p>
+    <blockquote>In from-scratch, the Style Resolver reads blocks.ts + planning.md and outputs a prose style brief. With templates, those decisions are pre-baked in the GML.</blockquote>
+  </div>
+</div>
+
+<!-- CONNECTOR -->
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 24 M6 18 L12 26 L18 18" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- ===== SKIPPED: STRUCTURE ===== -->
+<div class="step skipped" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-skipped" style="text-decoration: line-through;">4</div>
+    <div class="step-title"><span class="step-system-tag skipped-tag">Skipped</span><span style="text-decoration: line-through; color: var(--skipped);">Structure</span> <span class="step-subtitle"> &mdash; templates ARE the structure</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <p class="prose">Not needed. The source GML already defines the spatial composition &mdash; columns, anchoring, variant choices. No per-card spatial description needed.</p>
+    <blockquote>In from-scratch, the Structurer reads structure.md and outputs a spatial description per card. With templates, the GML itself is that description.</blockquote>
+  </div>
+</div>
+
+<!-- CONNECTOR -->
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 24 M6 18 L12 26 L18 18" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- ===== SKIPPED: LAYOUT RESOLVER ===== -->
+<div class="step skipped" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-skipped" style="text-decoration: line-through;">5</div>
+    <div class="step-title"><span class="step-system-tag skipped-tag">Skipped</span><span style="text-decoration: line-through; color: var(--skipped);">Layout Resolver</span> <span class="step-subtitle"> &mdash; outliner already produced final GML</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <p class="prose">Not needed. The outliner already wrote content directly into the template GML. There is no prose-to-GML conversion &mdash; the template IS the GML, and the outliner fitted content into it.</p>
+    <blockquote>In from-scratch, the Layout Resolver reads blocks.ts + examples.md + gml-schema and generates GML from scratch for each card. This is the most expensive step. Templates eliminate it entirely.</blockquote>
+  </div>
+</div>
+
+<!-- CONNECTOR -->
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 24 M6 18 L12 26 L18 18" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- ===== RENDERER ===== -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-renderer">6</div>
+    <div class="step-title">Renderer <span class="step-subtitle"> &mdash; same as from-scratch</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <p class="prose">GML goes to the renderer. Same as from-scratch &mdash; the renderer doesn't care how the GML was produced.</p>
+  </div>
+</div>
+
+<!-- CONNECTOR -->
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 24 M6 18 L12 26 L18 18" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- ===== REVIEWER ===== -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-reviewer">7</div>
+    <div class="step-title">Reviewer <span class="step-subtitle"> &mdash; graders evaluate quality</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <p class="prose">Graders evaluate rendered output. Same as from-scratch. Quality bar is identical regardless of pipeline path.</p>
+  </div>
+</div>
+
+<!-- ===== COMPARISON TABLE ===== -->
+<div class="comparison-section" style="margin-top: 2.5rem;">
+  <h2>Template Remix vs From-Scratch</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Step</th>
+        <th>From-Scratch</th>
+        <th>Template Remix</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Plan</td>
+        <td>LLM reads planning.md + writing.md &rarr; narrative arc + card roles</td>
+        <td class="td-active">LLM reads <strong>template catalog</strong> &rarr; narrative arc + card roles + <strong>template selection</strong></td>
+      </tr>
+      <tr>
+        <td>Outline</td>
+        <td>LLM reads density + writing + plan &rarr; content (semantic HTML)</td>
+        <td class="td-active">LLM reads plan + templates + density + writing &rarr; <strong>writes content directly into template GML</strong></td>
+      </tr>
+      <tr>
+        <td style="white-space:normal;">Style Resolve</td>
+        <td>LLM reads blocks.ts + planning.md &rarr; prose style brief</td>
+        <td class="td-skipped">SKIPPED &mdash; templates ARE the style</td>
+      </tr>
+      <tr>
+        <td>Structure</td>
+        <td>LLM reads structure.md &rarr; spatial description per card</td>
+        <td class="td-skipped">SKIPPED &mdash; templates ARE the structure</td>
+      </tr>
+      <tr>
+        <td style="white-space:normal;">Layout Resolver</td>
+        <td>LLM reads blocks.ts + examples.md + gml-schema &rarr; GML from scratch</td>
+        <td class="td-skipped">SKIPPED &mdash; outliner already produced final GML</td>
+      </tr>
+      <tr>
+        <td>Tools</td>
+        <td>Called by layout resolver (image-query, chart-creator, spatial)</td>
+        <td class="td-active">Called <strong>inline by outliner</strong> during content writing</td>
+      </tr>
+      <tr>
+        <td>Renderer</td>
+        <td>GML &rarr; visual</td>
+        <td>Same</td>
+      </tr>
+      <tr>
+        <td>Reviewer</td>
+        <td>Graders evaluate</td>
+        <td>Same</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== TWO MODES SUMMARY ===== -->
+<div class="comparison-section">
+  <h2>The Two Modes</h2>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Template Remix</th>
+        <th>From-Scratch</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Layout decisions</td>
+        <td>Pre-made (templates)</td>
+        <td>Generated (guide system)</td>
+      </tr>
+      <tr>
+        <td>Pipeline</td>
+        <td>Plan &rarr; Outline (with templates + tools) &rarr; Render</td>
+        <td>Plan &rarr; Outline &rarr; Style Resolve &rarr; Structure &rarr; Layout Resolver &rarr; Tools &rarr; Render</td>
+      </tr>
+      <tr>
+        <td>GenDeck needed?</td>
+        <td>No &mdash; Buddy G handles it</td>
+        <td>Yes &mdash; the full pipeline</td>
+      </tr>
+      <tr>
+        <td>LLM calls</td>
+        <td><strong>2</strong> (plan + outline)</td>
+        <td><strong>5+</strong></td>
+      </tr>
+      <tr>
+        <td>Card groups</td>
+        <td>Implicit from template selection</td>
+        <td>Explicit &mdash; exemplar resolved, then cloned</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== OPEN QUESTIONS ===== -->
+<div class="questions-section">
+  <h2>Open Questions</h2>
+  <p style="color:var(--text-dim); font-size:0.85rem; margin-bottom:0.75rem;">Design decisions not yet resolved.</p>
+  <div class="question-item">
+    <strong>Template authoring:</strong> Manually by designers? Extracted from high-quality existing decks? Generated by GenDeck's from-scratch pipeline and then curated?
+  </div>
+  <div class="question-item">
+    <strong>Library size:</strong> 20 templates? 200? Does each guide have its own library, or one library with style variants?
+  </div>
+  <div class="question-item">
+    <strong>No template fits:</strong> Fall back to from-scratch pipeline for that card? Or is the library designed to cover all cases?
+  </div>
+  <div class="question-item">
+    <strong>Content overflow:</strong> If outline content is too long for the template's slots, does it truncate, summarize, or flag for a different template?
+  </div>
+  <div class="question-item">
+    <strong>User-authored templates:</strong> "Save this card as a template" flow?
+  </div>
+  <div class="question-item">
+    <strong>Mixing styles:</strong> Can the planner mix templates from different guides/libraries in one deck?
+  </div>
+</div>
+
+<div style="text-align:center; color:var(--text-dim); font-size:0.75rem; margin-top:2rem; padding-bottom:2rem;">
+  Template Remix Pipeline Walkthrough &mdash; Climate Tech Investment
+</div>
+
+</body>
+</html>

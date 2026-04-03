@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Import from Screenshots — Pipeline Walkthrough</title>
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --surface2: #1a1a1a;
+    --border: #2a2a2a;
+    --text: #e0e0e0;
+    --text-dim: #888;
+    --input: #3b82f6;
+    --input-bg: rgba(59, 130, 246, 0.08);
+    --input-border: rgba(59, 130, 246, 0.25);
+    --output: #22c55e;
+    --output-bg: rgba(34, 197, 94, 0.08);
+    --output-border: rgba(34, 197, 94, 0.25);
+    --decision: #f59e0b;
+    --decision-bg: rgba(245, 158, 11, 0.08);
+    --decision-border: rgba(245, 158, 11, 0.25);
+    --tool: #e879f9;
+    --tool-bg: rgba(232, 121, 249, 0.08);
+    --tool-border: rgba(232, 121, 249, 0.25);
+    --parser: #f472b6;
+    --parser-bg: rgba(244, 114, 182, 0.08);
+    --parser-border: rgba(244, 114, 182, 0.25);
+    --accent: #a78bfa;
+    --code-bg: #0d1117;
+    --code-border: #21262d;
+    --arrow: #555;
+    --skipped: #555;
+    --skipped-bg: rgba(255,255,255,0.02);
+    --skipped-border: rgba(255,255,255,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    padding: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.25rem; }
+  h2 { font-size: 1.3rem; font-weight: 600; }
+  h3 { font-size: 1.1rem; font-weight: 600; }
+
+  code, pre {
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+  }
+
+  code {
+    background: rgba(255,255,255,0.06);
+    padding: 0.1em 0.35em;
+    border-radius: 3px;
+    font-size: 0.85em;
+  }
+
+  /* ===== BANNER ===== */
+  .banner {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem 2rem 1.5rem;
+    margin-bottom: 2.5rem;
+    overflow-x: auto;
+  }
+
+  .banner-title {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.25rem;
+  }
+
+  .pipeline-flow {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    min-width: 1050px;
+    justify-content: center;
+  }
+
+  .pipeline-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .pipeline-pill {
+    padding: 0.45rem 0.85rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    border: 1px solid;
+  }
+
+  .pill-screenshots { background: rgba(167,139,250,0.15); border-color: rgba(167,139,250,0.4); color: #c4b5fd; }
+  .pill-parser { background: rgba(244,114,182,0.15); border-color: rgba(244,114,182,0.4); color: #f9a8d4; }
+  .pill-plan { background: rgba(251,146,60,0.15); border-color: rgba(251,146,60,0.4); color: #fdba74; }
+  .pill-outline { background: rgba(56,189,248,0.15); border-color: rgba(56,189,248,0.4); color: #7dd3fc; }
+  .pill-style { background: rgba(232,121,249,0.15); border-color: rgba(232,121,249,0.4); color: #f0abfc; }
+  .pill-structure { background: rgba(245,158,11,0.15); border-color: rgba(245,158,11,0.4); color: #fcd34d; }
+  .pill-resolve { background: rgba(34,197,94,0.15); border-color: rgba(34,197,94,0.4); color: #86efac; }
+  .pill-renderer { background: rgba(99,102,241,0.15); border-color: rgba(99,102,241,0.4); color: #a5b4fc; }
+  .pill-reviewer { background: rgba(244,63,94,0.15); border-color: rgba(244,63,94,0.4); color: #fda4af; }
+
+  .pipeline-arrow {
+    display: flex;
+    align-items: center;
+    padding: 0 0.25rem;
+    color: var(--arrow);
+    font-size: 1.1rem;
+    margin-top: 0.35rem;
+    flex-shrink: 0;
+  }
+
+  .guide-feeds {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-top: 8px;
+    align-items: center;
+  }
+
+  .guide-tag {
+    font-size: 0.6rem;
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-dim);
+    white-space: nowrap;
+    font-family: 'SF Mono', monospace;
+  }
+
+  .per-card-bracket {
+    border: 1px dashed rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 0.6rem 0.5rem 0.4rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    position: relative;
+  }
+
+  .per-card-label {
+    position: absolute;
+    top: -9px;
+    left: 12px;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    background: var(--surface);
+    padding: 0 6px;
+  }
+
+  .system-bracket {
+    border: 1px solid rgba(244,114,182,0.35);
+    border-radius: 12px;
+    padding: 0.8rem 0.6rem 0.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    position: relative;
+  }
+
+  .system-bracket.gendeck {
+    border-color: rgba(34,197,94,0.35);
+  }
+
+  .system-label {
+    position: absolute;
+    top: -10px;
+    left: 14px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    background: var(--surface);
+    padding: 0 8px;
+  }
+
+  .system-label.parser { color: #f9a8d4; }
+  .system-label.gendeck { color: #86efac; }
+
+  .tool-feeds {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 6px;
+    align-items: center;
+  }
+
+  .tool-tag {
+    font-size: 0.55rem;
+    padding: 1px 4px;
+    border-radius: 3px;
+    background: rgba(232,121,249,0.1);
+    border: 1px solid rgba(232,121,249,0.2);
+    color: #e879f9;
+    white-space: nowrap;
+    font-family: 'SF Mono', monospace;
+  }
+
+  .new-badge {
+    font-size: 0.55rem;
+    padding: 1px 5px;
+    border-radius: 3px;
+    background: rgba(244,114,182,0.2);
+    border: 1px solid rgba(244,114,182,0.4);
+    color: #f9a8d4;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+  }
+
+  /* ===== SUBTITLE ===== */
+  .page-subtitle {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+
+  .prompt-box {
+    display: inline-block;
+    background: rgba(167,139,250,0.12);
+    border: 1px solid rgba(167,139,250,0.3);
+    border-radius: 6px;
+    padding: 0.3rem 0.8rem;
+    font-family: monospace;
+    color: #c4b5fd;
+    margin-top: 0.5rem;
+  }
+
+  /* ===== STEP CONNECTOR ===== */
+  .step-connector {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 0;
+  }
+
+  .step-connector svg {
+    width: 24px;
+    height: 32px;
+  }
+
+  /* ===== MODE TOGGLE ===== */
+  .mode-toggle {
+    display: flex;
+    gap: 0;
+    margin: 1.5rem 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    width: fit-content;
+  }
+
+  .mode-btn {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    background: var(--surface);
+    border: none;
+    color: var(--text-dim);
+    transition: all 0.15s;
+    border-right: 1px solid var(--border);
+  }
+
+  .mode-btn:last-child { border-right: none; }
+
+  .mode-btn.active {
+    background: rgba(244,114,182,0.15);
+    color: #f9a8d4;
+  }
+
+  .mode-btn:hover:not(.active) {
+    background: var(--surface2);
+  }
+
+  .mode-section { display: none; }
+  .mode-section.active { display: block; }
+
+  /* ===== COLLAPSIBLE STEPS ===== */
+  .step {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 0;
+    background: var(--surface);
+    overflow: hidden;
+  }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+
+  .step-header:hover { background: var(--surface2); }
+
+  .step-number {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+  }
+
+  .sn-parser { background: rgba(244,114,182,0.2); color: #f9a8d4; }
+  .sn-plan { background: rgba(251,146,60,0.2); color: #fdba74; }
+  .sn-outline { background: rgba(56,189,248,0.2); color: #7dd3fc; }
+  .sn-style { background: rgba(232,121,249,0.2); color: #f0abfc; }
+  .sn-structure { background: rgba(245,158,11,0.2); color: #fcd34d; }
+  .sn-resolve { background: rgba(34,197,94,0.2); color: #86efac; }
+  .sn-renderer { background: rgba(99,102,241,0.2); color: #a5b4fc; }
+  .sn-reviewer { background: rgba(244,63,94,0.2); color: #fda4af; }
+
+  .step-title { font-weight: 600; font-size: 1rem; flex: 1; }
+  .step-system-tag { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 2px 7px; border-radius: 4px; margin-right: 0.5rem; vertical-align: middle; }
+  .step-system-tag.parser { background: rgba(244,114,182,0.15); color: #f9a8d4; }
+  .step-system-tag.gendeck { background: rgba(34,197,94,0.15); color: #86efac; }
+  .step-system-tag.modified { background: rgba(245,158,11,0.15); color: #fcd34d; }
+  .step-subtitle { color: var(--text-dim); font-weight: 400; font-size: 0.85rem; }
+
+  .step-chevron {
+    transition: transform 0.2s;
+    color: var(--text-dim);
+    font-size: 1.2rem;
+  }
+
+  .step.open .step-chevron { transform: rotate(90deg); }
+
+  .step-body {
+    display: none;
+    padding: 0 1.25rem 1.25rem;
+  }
+
+  .step.open .step-body { display: block; }
+
+  /* ===== LABELED BOXES ===== */
+  .box {
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 0.75rem 0;
+    border: 1px solid;
+  }
+
+  .box-input { background: var(--input-bg); border-color: var(--input-border); }
+  .box-output { background: var(--output-bg); border-color: var(--output-border); }
+  .box-decision { background: var(--decision-bg); border-color: var(--decision-border); }
+  .box-tool { background: var(--tool-bg); border-color: var(--tool-border); }
+  .box-parser { background: var(--parser-bg); border-color: var(--parser-border); }
+
+  .box-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .box-input .box-label { color: var(--input); }
+  .box-output .box-label { color: var(--output); }
+  .box-decision .box-label { color: var(--decision); }
+  .box-tool .box-label { color: var(--tool); }
+  .box-parser .box-label { color: var(--parser); }
+
+  .box p, .box li { font-size: 0.9rem; color: var(--text); line-height: 1.5; }
+  .box ul { padding-left: 1.2rem; margin-top: 0.3rem; }
+  .box li { margin-bottom: 0.15rem; }
+
+  /* ===== CODE BLOCKS ===== */
+  pre.code-block {
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    margin: 0.5rem 0;
+    color: #c9d1d9;
+  }
+
+  .code-lang {
+    display: inline-block;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+    background: rgba(255,255,255,0.05);
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-bottom: 0.4rem;
+    font-family: monospace;
+  }
+
+  .syn-key { color: #7ee787; }
+  .syn-str { color: #a5d6ff; }
+  .syn-num { color: #79c0ff; }
+  .syn-tag { color: #ff7b72; }
+  .syn-attr { color: #d2a8ff; }
+  .syn-val { color: #a5d6ff; }
+  .syn-comment { color: #6e7681; font-style: italic; }
+
+  blockquote {
+    border-left: 3px solid var(--decision);
+    padding: 0.75rem 1rem;
+    margin: 0.5rem 0;
+    background: rgba(245,158,11,0.05);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    color: #ddd;
+    font-style: italic;
+  }
+
+  .prose { font-size: 0.9rem; color: var(--text); margin: 0.5rem 0; }
+  .prose strong { color: #fff; }
+
+  /* ===== SCREENSHOT GALLERY ===== */
+  .screenshot-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+    margin: 1rem 0;
+  }
+
+  .screenshot-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem;
+    cursor: pointer;
+    transition: border-color 0.15s, transform 0.1s;
+  }
+
+  .screenshot-card:hover {
+    border-color: rgba(244,114,182,0.5);
+    transform: translateY(-1px);
+  }
+
+  .screenshot-card.active {
+    border-color: var(--parser);
+  }
+
+  .screenshot-thumb {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .screenshot-thumb-content {
+    padding: 0.4rem;
+    font-size: 0.55rem;
+    line-height: 1.3;
+    color: var(--text-dim);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .screenshot-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+
+  .screenshot-role {
+    font-size: 0.65rem;
+    color: var(--parser);
+    font-family: monospace;
+  }
+
+  .screenshot-detail {
+    display: none;
+    background: var(--surface2);
+    border: 1px solid var(--parser-border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin: 0.75rem 0;
+  }
+
+  .screenshot-detail.active {
+    display: block;
+  }
+
+  .screenshot-detail h4 {
+    color: var(--parser);
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .extract-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .extract-col h5 {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    margin-bottom: 0.4rem;
+  }
+
+  .extract-col ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .extract-col li {
+    font-size: 0.78rem;
+    color: var(--text);
+    padding: 2px 0;
+    line-height: 1.4;
+  }
+
+  .extract-col li::before {
+    content: "\2022 ";
+    color: var(--parser);
+  }
+
+  /* ===== COMPARISON TABLE ===== */
+  .summary-section {
+    margin-top: 2.5rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    padding: 1.5rem;
+  }
+
+  .summary-section h2 { margin-bottom: 1rem; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+  }
+
+  thead th {
+    text-align: left;
+    padding: 0.6rem 0.75rem;
+    border-bottom: 2px solid var(--border);
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.72rem;
+  }
+
+  tbody td {
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: rgba(255,255,255,0.02); }
+  td:first-child { font-weight: 600; white-space: nowrap; }
+
+  .cell-skip { color: var(--text-dim); font-style: italic; }
+  .cell-new { color: var(--parser); font-weight: 600; }
+  .cell-modified { color: var(--decision); }
+
+  /* ===== OPEN QUESTIONS ===== */
+  .questions-section {
+    margin-top: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    padding: 1.5rem;
+  }
+
+  .questions-section h2 { margin-bottom: 0.75rem; }
+
+  .question-item { margin-bottom: 0.6rem; font-size: 0.9rem; }
+  .question-item strong { color: var(--decision); }
+
+  /* ===== GROUPS SECTION ===== */
+  .group-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-right: 0.3rem;
+  }
+
+  .group-metrics { background: rgba(56,189,248,0.15); color: #7dd3fc; }
+  .group-process { background: rgba(245,158,11,0.15); color: #fcd34d; }
+  .group-columns { background: rgba(34,197,94,0.15); color: #86efac; }
+  .group-unique { background: rgba(255,255,255,0.08); color: var(--text-dim); }
+
+  @media (max-width: 700px) {
+    body { padding: 1rem; }
+    .pipeline-flow { min-width: 0; flex-wrap: wrap; gap: 0.5rem; }
+    .pipeline-arrow { display: none; }
+    .per-card-bracket { flex-wrap: wrap; }
+    .screenshot-gallery { grid-template-columns: repeat(2, 1fr); }
+    .extract-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<h1>Import from Screenshots <span class="new-badge">NEW PIPELINE</span></h1>
+<p class="page-subtitle">
+  8 consultant-deck screenshots in, Gamma cards out. A third pipeline mode alongside from-scratch and remix.
+</p>
+<div style="margin-bottom: 2rem;">
+  <div class="prompt-box">"Import this into Gamma" + 8 uploaded screenshots</div>
+  <span style="color:var(--text-dim); margin-left: 0.75rem; font-size: 0.85rem;">Source: Meridian Strategy Group (dense consultant deck)</span>
+</div>
+
+<!-- ===== MODE TOGGLE ===== -->
+<div class="mode-toggle">
+  <button class="mode-btn active" onclick="switchMode('asis')">Import As-Is</button>
+  <button class="mode-btn" onclick="switchMode('restyle')">Import + Re-Style</button>
+</div>
+
+<!-- ===== ARCHITECTURE BANNER: AS-IS ===== -->
+<div class="mode-section active" id="mode-asis">
+<div class="banner">
+  <div class="banner-title">Import As-Is Pipeline</div>
+  <div class="pipeline-flow">
+    <div class="pipeline-node">
+      <div class="pipeline-pill pill-screenshots">8 Screenshots</div>
+    </div>
+    <div class="pipeline-arrow">&#8594;</div>
+    <div class="system-bracket">
+      <span class="system-label parser">New Step</span>
+      <div class="pipeline-node">
+        <div class="pipeline-pill pill-parser">Screenshot Parser</div>
+        <div class="guide-feeds">
+          <span class="guide-tag">vision model</span>
+          <span class="guide-tag">per card</span>
+        </div>
+      </div>
+    </div>
+    <div class="pipeline-arrow">&#8594;</div>
+    <div class="per-card-bracket">
+      <span class="per-card-label">per card</span>
+      <div class="pipeline-node">
+        <div class="pipeline-pill pill-resolve">Layout Resolver</div>
+        <div class="guide-feeds">
+          <span class="guide-tag">extracted layout</span>
+          <span class="guide-tag">extracted content</span>
+          <span class="guide-tag" style="border-color:rgba(255,255,255,0.2); color:#aaa; font-style:italic;">gml-schema</span>
+        </div>
+      </div>
+      <div class="pipeline-arrow">&#8594;</div>
+      <div class="pipeline-node">
+        <div class="pipeline-pill pill-renderer">Renderer</div>
+      </div>
+    </div>
+    <div style="margin-top:0.5rem; padding:0.3rem 0.8rem; font-size:0.7rem; color:var(--text-dim); text-align:center;">
+      No guide needed &mdash; screenshots ARE the design system. Style Resolve and Structure are skipped.
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== ARCHITECTURE BANNER: RE-STYLE ===== -->
+<div class="mode-section" id="mode-restyle">
+<div class="banner">
+  <div class="banner-title">Import + Re-Style (e.g. "Import as Swiss") &mdash; extract content, then from-scratch pipeline with target guide</div>
+  <div class="pipeline-flow">
+    <div class="pipeline-node">
+      <div class="pipeline-pill pill-screenshots">8 Screenshots</div>
+    </div>
+    <div class="pipeline-arrow">&#8594;</div>
+    <div class="system-bracket">
+      <span class="system-label parser">New Step</span>
+      <div class="pipeline-node">
+        <div class="pipeline-pill pill-parser">Screenshot Parser</div>
+        <div class="guide-feeds">
+          <span class="guide-tag">vision model</span>
+          <span class="guide-tag">content only</span>
+        </div>
+      </div>
+    </div>
+    <div class="pipeline-arrow">&#8594;</div>
+    <div class="system-bracket gendeck">
+      <span class="system-label gendeck">GenDeck (standard)</span>
+      <div class="pipeline-node">
+        <div class="pipeline-pill pill-plan">Re-Plan</div>
+        <div class="guide-feeds">
+          <span class="guide-tag">planning.md</span>
+          <span class="guide-tag">may change card count</span>
+        </div>
+      </div>
+      <div class="pipeline-arrow">&#8594;</div>
+      <div class="pipeline-node">
+        <div class="pipeline-pill pill-style">Style Resolve</div>
+        <div class="guide-feeds">
+          <span class="guide-tag">target guide</span>
+        </div>
+      </div>
+      <div class="pipeline-arrow">&#8594;</div>
+      <div class="per-card-bracket">
+        <span class="per-card-label">per card</span>
+        <div class="pipeline-node">
+          <div class="pipeline-pill pill-structure">Structure</div>
+          <div class="guide-feeds">
+            <span class="guide-tag">target structure.md</span>
+          </div>
+        </div>
+        <div class="pipeline-arrow">&#8594;</div>
+        <div class="pipeline-node">
+          <div class="pipeline-pill pill-resolve">Layout Resolver</div>
+          <div class="guide-feeds">
+            <span class="guide-tag">target blocks.ts</span>
+          </div>
+        </div>
+      </div>
+      <div class="pipeline-arrow">&#8594;</div>
+      <div class="pipeline-node">
+        <div class="pipeline-pill pill-renderer">Renderer</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== THE INPUT: 8 SCREENSHOTS ===== -->
+<h2 style="margin: 2rem 0 0.75rem;">The Input: 8 Screenshots</h2>
+<p class="prose">Click any card to see what the Screenshot Parser extracts.</p>
+
+<div class="screenshot-gallery">
+  <div class="screenshot-card active" onclick="showDetail(0)">
+    <div class="screenshot-thumb" style="background: linear-gradient(135deg, #38bdf8, #1e3a8a, #000);">
+      <span style="color:#fff; font-weight:700; font-size:0.9rem; text-align:right; padding:0.5rem;">Meridian<br>Strategy<br>Group</span>
+    </div>
+    <div class="screenshot-label">Card 1: Title</div>
+    <div class="screenshot-role">title-card</div>
+  </div>
+  <div class="screenshot-card" onclick="showDetail(1)">
+    <div class="screenshot-thumb" style="background: #fff;">
+      <div class="screenshot-thumb-content" style="color:#333;">
+        <strong style="font-size:0.65rem;">Who We Are</strong><br>
+        <span style="font-size:0.45rem;">B2B SaaS consultancy... [bar chart] [4-column grid] [callout box]</span>
+      </div>
+    </div>
+    <div class="screenshot-label">Card 2: Who We Are</div>
+    <div class="screenshot-role">overview-dense</div>
+  </div>
+  <div class="screenshot-card" onclick="showDetail(2)">
+    <div class="screenshot-thumb" style="background: #fff;">
+      <div class="screenshot-thumb-content" style="color:#333;">
+        <strong style="font-size:0.65rem;">Our Track Record</strong><br>
+        <span style="font-size:0.45rem;">3.2x &bull; 68% &bull; 94% [3 donut charts] [2-col prose]</span>
+      </div>
+    </div>
+    <div class="screenshot-label">Card 3: Track Record</div>
+    <div class="screenshot-role">metrics-showcase</div>
+  </div>
+  <div class="screenshot-card" onclick="showDetail(3)">
+    <div class="screenshot-thumb" style="background: #fff;">
+      <div class="screenshot-thumb-content" style="color:#333;">
+        <strong style="font-size:0.65rem;">Engagement Model</strong><br>
+        <span style="font-size:0.45rem;">[3D block diagram] [timeline] [text columns]</span>
+      </div>
+    </div>
+    <div class="screenshot-label">Card 4: Engagement Model</div>
+    <div class="screenshot-role">process-framework</div>
+  </div>
+  <div class="screenshot-card" onclick="showDetail(4)">
+    <div class="screenshot-thumb" style="background: #fff;">
+      <div class="screenshot-thumb-content" style="color:#333;">
+        <strong style="font-size:0.65rem;">Core Service Areas</strong><br>
+        <span style="font-size:0.45rem;">[grouped bar chart] [callout box] [results text]</span>
+      </div>
+    </div>
+    <div class="screenshot-label">Card 5: Service Areas</div>
+    <div class="screenshot-role">data-analysis</div>
+  </div>
+  <div class="screenshot-card" onclick="showDetail(5)">
+    <div class="screenshot-thumb" style="background: #fff;">
+      <div class="screenshot-thumb-content" style="color:#333;">
+        <strong style="font-size:0.65rem;">How We Work</strong><br>
+        <span style="font-size:0.45rem;">[process diagram] [donut chart] [text columns]</span>
+      </div>
+    </div>
+    <div class="screenshot-label">Card 6: How We Work</div>
+    <div class="screenshot-role">process-framework</div>
+  </div>
+  <div class="screenshot-card" onclick="showDetail(6)">
+    <div class="screenshot-thumb" style="background: #fff;">
+      <div class="screenshot-thumb-content" style="color:#333;">
+        <strong style="font-size:0.65rem;">Who We Work With</strong><br>
+        <span style="font-size:0.45rem;">[3-column personas] [callout box] [footer text]</span>
+      </div>
+    </div>
+    <div class="screenshot-label">Card 7: Audience</div>
+    <div class="screenshot-role">audience-personas</div>
+  </div>
+  <div class="screenshot-card" onclick="showDetail(7)">
+    <div class="screenshot-thumb" style="background: #fff;">
+      <div class="screenshot-thumb-content" style="color:#333;">
+        <strong style="font-size:0.65rem;">What Our Clients Say</strong><br>
+        <span style="font-size:0.45rem;">[testimonial] [line chart] [CTA blocks]</span>
+      </div>
+    </div>
+    <div class="screenshot-label">Card 8: Testimonials</div>
+    <div class="screenshot-role">testimonial-cta</div>
+  </div>
+</div>
+
+<!-- Screenshot detail panels -->
+<div class="screenshot-detail active" id="detail-0">
+  <h4>Card 1: Meridian Strategy Group &mdash; Title Card</h4>
+  <div class="extract-grid">
+    <div class="extract-col">
+      <h5>Content Extracted</h5>
+      <ul>
+        <li>Company name: "Meridian Strategy Group"</li>
+        <li>No body text</li>
+        <li>No data elements</li>
+      </ul>
+    </div>
+    <div class="extract-col">
+      <h5>Layout Described</h5>
+      <ul>
+        <li>Full-bleed gradient background (cyan &rarr; navy &rarr; black)</li>
+        <li>Text anchored bottom-right</li>
+        <li>Extreme whitespace &mdash; 80%+ empty</li>
+        <li>No columns, no containers</li>
+      </ul>
+    </div>
+    <div class="extract-col">
+      <h5>Card Role</h5>
+      <ul>
+        <li>Role: <code>title-card</code></li>
+        <li>Density: minimal</li>
+        <li>Bookend: opener</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="screenshot-detail" id="detail-1">
+  <h4>Card 2: Who We Are &mdash; Dense Overview</h4>
+  <div class="extract-grid">
+    <div class="extract-col">
+      <h5>Content Extracted</h5>
+      <ul>
+        <li>2 body paragraphs (firm description, bold inline phrases)</li>
+        <li>Bar chart: Enterprise ARR ($M) &mdash; Seed, Series A, B, C, D</li>
+        <li>4 service boxes: Enterprise GTM Design, Revenue Acceleration, ICP &amp; Persona Design, Enterprise Messaging</li>
+        <li>Callout: "Our approach is built on four principles..."</li>
+      </ul>
+    </div>
+    <div class="extract-col">
+      <h5>Layout Described</h5>
+      <ul>
+        <li>Header zone: 2-col (prose left, bar chart right)</li>
+        <li>Horizontal divider with nav dots</li>
+        <li>Middle zone: 4-column grid of bordered boxes</li>
+        <li>Footer: full-width callout box with blue accent</li>
+        <li>Density: EXTREME</li>
+      </ul>
+    </div>
+    <div class="extract-col">
+      <h5>Card Role</h5>
+      <ul>
+        <li>Role: <code>overview-dense</code></li>
+        <li>Density: maximum</li>
+        <li>May need splitting for Gamma</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="screenshot-detail" id="detail-2">
+  <h4>Card 3: Our Track Record &mdash; Metrics Showcase</h4>
+  <div class="extract-grid">
+    <div class="extract-col">
+      <h5>Content Extracted</h5>
+      <ul>
+        <li>Title + subtitle</li>
+        <li>3 hero stats: 3.2x (Pipeline Acceleration), 68% (Enterprise Win Rate), 94% (Client Trust)</li>
+        <li>3 donut/ring chart visualizations</li>
+        <li>3 description paragraphs per metric</li>
+        <li>2 dense body paragraphs (methodology, outcomes)</li>
+      </ul>
+    </div>
+    <div class="extract-col">
+      <h5>Layout Described</h5>
+      <ul>
+        <li>Top: title bar</li>
+        <li>Middle: 3-column metrics row (donut + stat + desc each)</li>
+        <li>Bottom: 2-column dense prose</li>
+        <li>Density: very high</li>
+      </ul>
+    </div>
+    <div class="extract-col">
+      <h5>Card Role</h5>
+      <ul>
+        <li>Role: <code>metrics-showcase</code></li>
+        <li>Group candidate: shares pattern with parts of card 5, 8</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="screenshot-detail" id="detail-3">
+  <h4>Card 4: Our Engagement Model &mdash; Process Framework</h4>
+  <div class="extract-grid">
+    <div class="extract-col">
+      <h5>Content Extracted</h5>
+      <ul>
+        <li>Title + subtitle</li>
+        <li>5 process phases: Discovery &amp; AutoDeep, Enablement Build, GTM Blueprint, Pipeline Activation, Handoff &amp; Scale</li>
+        <li>"Why Meridian Outperforms" prose section</li>
+        <li>"Typical Engagement Timeline: 90-180 Days" prose section</li>
+        <li>5-phase timeline: Days 1-30, 31-90, 91-180, 181-270, 271-365</li>
+      </ul>
+    </div>
+    <div class="extract-col">
+      <h5>Layout Described</h5>
+      <ul>
+        <li>Top-left: 3D stacked block illustration (non-reproducible as GML)</li>
+        <li>Top-right: 2 prose text sections</li>
+        <li>Bottom: full-width 5-phase horizontal timeline</li>
+        <li>Mixed: illustration + columns + timeline</li>
+      </ul>
+    </div>
+    <div class="extract-col">
+      <h5>Card Role</h5>
+      <ul>
+        <li>Role: <code>process-framework</code></li>
+        <li>Group: shares role with card 6</li>
+        <li>Contains non-reproducible illustration</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="screenshot-detail" id="detail-4">
+  <h4>Card 5: Core Service Areas &mdash; Data Analysis</h4>
+  <div class="extract-grid">
+    <div class="extract-col">
+      <h5>Content Extracted</h5>
+      <ul>
+        <li>Title, subtitle, description paragraph</li>
+        <li>"Enterprise Sales Motion Design" callout</li>
+        <li>Grouped bar chart: 3 series x 5 categories</li>
+        <li>"Results our clients see within 6 months" prose</li>
+        <li>Bordered callout: "4 months faster... 2.1x avg contract"</li>
+      </ul>
+    </div>
+    <div class="extract-col">
+      <h5>Layout Described</h5>
+      <ul>
+        <li>Top: title + description (full-width)</li>
+        <li>Bottom-left: grouped bar chart (~60% width)</li>
+        <li>Bottom-right: text + bordered callout (~40% width)</li>
+        <li>Density: high</li>
+      </ul>
+    </div>
+    <div class="extract-col">
+      <h5>Card Role</h5>
+      <ul>
+        <li>Role: <code>data-analysis</code></li>
+        <li>Chart: grouped bar (3 series)</li>
+        <li>Pattern: chart-left, analysis-right</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="screenshot-detail" id="detail-5">
+  <h4>Card 6: How We Work &mdash; Methodology</h4>
+  <div class="extract-grid">
+    <div class="extract-col">
+      <h5>Content Extracted</h5>
+      <ul>
+        <li>Title + subtitle</li>
+        <li>Intro paragraph</li>
+        <li>3-phase process: Diagnose, Design, Execute</li>
+        <li>Review methodology paragraph</li>
+        <li>Donut chart: time allocation (5 categories, percentages)</li>
+        <li>"How Meridian allocates engagement time" description</li>
+      </ul>
+    </div>
+    <div class="extract-col">
+      <h5>Layout Described</h5>
+      <ul>
+        <li>2-column split</li>
+        <li>Left: bordered box with process flow diagram + prose</li>
+        <li>Right: donut chart + heading + prose</li>
+        <li>Density: medium-high</li>
+      </ul>
+    </div>
+    <div class="extract-col">
+      <h5>Card Role</h5>
+      <ul>
+        <li>Role: <code>process-framework</code></li>
+        <li>Group: shares role with card 4</li>
+        <li>Contains flowing path illustration</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="screenshot-detail" id="detail-6">
+  <h4>Card 7: Who We Work With &mdash; Audience</h4>
+  <div class="extract-grid">
+    <div class="extract-col">
+      <h5>Content Extracted</h5>
+      <ul>
+        <li>Title + subtitle + intro paragraph</li>
+        <li>3 persona segments: Series A Founders, Revenue Leaders, Series B/C Teams</li>
+        <li>Each: icon + heading + description paragraph</li>
+        <li>Callout: "The ideal Meridian client has a strong product..."</li>
+        <li>Footer: verticals list (fintech, HR tech, security...)</li>
+      </ul>
+    </div>
+    <div class="extract-col">
+      <h5>Layout Described</h5>
+      <ul>
+        <li>Top: title + prose (full-width)</li>
+        <li>Middle: 3-column persona cards (icon + heading + text each)</li>
+        <li>Callout: bordered box with checkbox icon, full-width</li>
+        <li>Footer: full-width text</li>
+      </ul>
+    </div>
+    <div class="extract-col">
+      <h5>Card Role</h5>
+      <ul>
+        <li>Role: <code>audience-personas</code></li>
+        <li>3-column card pattern similar to card 2 bottom</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="screenshot-detail" id="detail-7">
+  <h4>Card 8: What Our Clients Say &mdash; Testimonial + CTA</h4>
+  <div class="extract-grid">
+    <div class="extract-col">
+      <h5>Content Extracted</h5>
+      <ul>
+        <li>Block quote: Sarah Chen, CRO, Vantage Data (Series B, $18M ARR)</li>
+        <li>Line chart: Enterprise ARR Growth (Meridian vs. Peers, 6 quarters)</li>
+        <li>NPS Score: 72</li>
+        <li>3 CTA items: GTM Audit, Opportunity Sizing, Engagement Roadmap</li>
+      </ul>
+    </div>
+    <div class="extract-col">
+      <h5>Layout Described</h5>
+      <ul>
+        <li>Top: full-width testimonial block quote</li>
+        <li>Bottom-left: line chart (~50%)</li>
+        <li>Bottom-right: NPS callout + 3 stacked CTA blocks (~50%)</li>
+        <li>Density: high</li>
+      </ul>
+    </div>
+    <div class="extract-col">
+      <h5>Card Role</h5>
+      <ul>
+        <li>Role: <code>testimonial-cta</code></li>
+        <li>Dual purpose: social proof + call to action</li>
+        <li>Bookend: closer</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== STEP-BY-STEP ===== -->
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 28 M6 22 L12 28 L18 22" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- STEP 0: SCREENSHOT PARSER -->
+<div class="step open" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-parser">0</div>
+    <div class="step-title"><span class="step-system-tag parser">NEW</span>Screenshot Parser <span class="step-subtitle"> &mdash; Vision model, per card</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <p class="prose"><strong>This step doesn't exist in from-scratch or remix.</strong> A vision model reads each screenshot and extracts content, layout, and card role simultaneously. It's the "content kernel" concept — but extracted from images instead of authored by an outliner.</p>
+
+    <div class="box box-input">
+      <div class="box-label">&#9679; Input</div>
+      <ul>
+        <li><strong>8 screenshot images</strong> from the uploaded presentation</li>
+        <li>Each processed independently (parallelizable)</li>
+      </ul>
+    </div>
+
+    <div class="box box-decision">
+      <div class="box-label">&#9679; What It Decides</div>
+      <ul>
+        <li><strong>Content extraction:</strong> all text, data values, chart descriptions, stats, quotes</li>
+        <li><strong>Layout description:</strong> column structure, content zones, visual weight, whitespace, chart positions</li>
+        <li><strong>Card role:</strong> title, overview, metrics, process, data-analysis, audience, testimonial</li>
+        <li><strong>Group hints:</strong> identifies cards with similar structural patterns (cards 4 &amp; 6 = process-framework)</li>
+        <li><strong>Confidence flags:</strong> marks uncertain extractions (chart values from visual estimation, small text)</li>
+      </ul>
+    </div>
+
+    <div class="box box-output">
+      <div class="box-label">&#9679; Output &mdash; Parser Result (per card)</div>
+      <div class="code-lang">yaml</div>
+      <pre class="code-block"><span class="syn-key">card</span>: <span class="syn-num">3</span>
+<span class="syn-key">role</span>: <span class="syn-str">metrics-showcase</span>
+<span class="syn-key">source_file</span>: <span class="syn-str">3_Our-Track-Record.png</span>
+
+<span class="syn-key">content</span>:
+  <span class="syn-key">title</span>: <span class="syn-str">"Our Track Record"</span>
+  <span class="syn-key">subtitle</span>: <span class="syn-str">"Measurable Results Across 60+ B2B SaaS Engagements"</span>
+  <span class="syn-key">metrics</span>:
+    - <span class="syn-key">value</span>: <span class="syn-str">"3.2x"</span>
+      <span class="syn-key">label</span>: <span class="syn-str">"Pipeline Acceleration"</span>
+      <span class="syn-key">visualization</span>: <span class="syn-str">donut-chart</span>
+    - <span class="syn-key">value</span>: <span class="syn-str">"68%"</span>
+      <span class="syn-key">label</span>: <span class="syn-str">"Enterprise Win Rate"</span>
+      <span class="syn-key">visualization</span>: <span class="syn-str">donut-chart</span>
+    - <span class="syn-key">value</span>: <span class="syn-str">"94%"</span>
+      <span class="syn-key">label</span>: <span class="syn-str">"Client Trust &amp; Extension"</span>
+      <span class="syn-key">visualization</span>: <span class="syn-str">donut-chart</span>
+
+<span class="syn-key">layout</span>:
+  <span class="syn-key">composition</span>: <span class="syn-str">"header, 3-col metrics, 2-col prose"</span>
+  <span class="syn-key">density</span>: <span class="syn-str">very-high</span>
+  <span class="syn-key">zones</span>:
+    - <span class="syn-str">title-bar (full-width)</span>
+    - <span class="syn-str">3-column metrics (donut + stat + heading + desc each)</span>
+    - <span class="syn-str">2-column dense body prose</span></pre>
+    </div>
+
+    <blockquote>Key difference from from-scratch: the parser extracts BOTH content (what the outliner produces) AND layout intent (what the structurer produces). A single vision call replaces two pipeline stages' worth of information.</blockquote>
+  </div>
+</div>
+
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 28 M6 22 L12 28 L18 22" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- STEP 1: STYLE RESOLVE (MODIFIED) -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-style">1</div>
+    <div class="step-title"><span class="step-system-tag modified">Modified</span>Style Resolve <span class="step-subtitle"> &mdash; infer source aesthetic OR apply target guide</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <div class="box box-input">
+      <div class="box-label">&#9679; Inputs</div>
+      <ul>
+        <li><strong>Parser outputs</strong> for all 8 cards (content + layout + roles)</li>
+        <li><strong>blocks.ts</strong> from nearest matching guide</li>
+        <li><strong>Mode flag:</strong> as-is vs. re-style (+ target guide if re-styling)</li>
+      </ul>
+    </div>
+
+    <div class="box box-decision" style="border-color: rgba(34,197,94,0.25); background: rgba(34,197,94,0.05);">
+      <div class="box-label" style="color: #86efac;">&#9679; As-Is: SKIPPED</div>
+      <p><strong>No guide needed.</strong> The screenshots ARE the design system. The parser already extracted layout descriptions per card — those go directly to the Layout Resolver. No style to infer, no guide to apply. This is the same principle as template remix: when the source contains the design decisions, the pipeline doesn't re-derive them.</p>
+    </div>
+
+    <div class="box box-decision" style="border-color: rgba(56,189,248,0.25); background: rgba(56,189,248,0.05);">
+      <div class="box-label" style="color: #7dd3fc;">&#9679; Re-Style: Standard from-scratch pipeline with target guide</div>
+      <p>The parser extracts <strong>content only</strong> (ignoring source layouts). This content feeds into the normal from-scratch pipeline: Plan → Style Resolve → Structure → Layout Resolver, all driven by the <strong>target guide</strong>. The source deck's design decisions are thrown away; the target guide makes fresh ones.</p>
+      <p style="margin-top:0.5rem;">Example: importing into Swiss would plan a new narrative arc, resolve with Swiss style brief, compose with Swiss spatial patterns. Only the text/data content survives from the original.</p>
+    </div>
+  </div>
+</div>
+
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 28 M6 22 L12 28 L18 22" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- STEP 2: STRUCTURE (MODIFIED) -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-structure">2</div>
+    <div class="step-title"><span class="step-system-tag modified">Modified</span>Structure Card <span class="step-subtitle"> &mdash; per card, guided by source layout</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <div class="box box-input">
+      <div class="box-label">&#9679; Inputs</div>
+      <ul>
+        <li><strong>Parser layout description</strong> for this card (spatial arrangement, column structure, content zones)</li>
+        <li><strong>structure.md</strong> from guide</li>
+        <li><strong>Style brief</strong> from step 1</li>
+        <li><strong>Spatial advisor</strong> &mdash; same 11k measurements</li>
+      </ul>
+    </div>
+
+    <div class="box box-decision">
+      <div class="box-label">&#9679; What Changes vs. From-Scratch</div>
+      <p><strong>As-is:</strong> The parser's layout description IS a proto-structure. The structurer validates it against the spatial advisor (does the content fit?) and translates it into the standard spatial description format. Less creative freedom, more faithfulness.</p>
+      <p style="margin-top:0.5rem;"><strong>Re-style:</strong> Parser layout description is discarded. Standard from-scratch structuring against the target guide's structure.md.</p>
+    </div>
+
+    <div class="box box-output">
+      <div class="box-label">&#9679; Output &mdash; Spatial Description (Card 3 example)</div>
+      <pre class="code-block"><span class="syn-comment">// As-is: closely mirrors what the parser described</span>
+<span class="syn-str">"Title anchored top-left. Three equal columns below title, each containing:
+centered donut chart visualization, hero stat number (display scale), bold
+label, and one description paragraph. Below the three columns: two equal
+columns of body prose. Very high density &mdash; minimal whitespace between zones."</span>
+
+<span class="syn-comment">// Re-style (Swiss): radically different</span>
+<span class="syn-str">"Three hero stats only. Each stat as display-scale number with one-line
+label. No body prose (moved to separate cards). Full-width, generous
+vertical spacing. Donut charts replaced with plain numbers."</span></pre>
+    </div>
+
+    <blockquote>In re-style mode, the planner may have split card 3 into two cards: one for the three hero stats, one for the methodology prose. The structurer only sees the re-planned content.</blockquote>
+  </div>
+</div>
+
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 28 M6 22 L12 28 L18 22" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- STEP 3: LAYOUT RESOLVER -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-resolve">3</div>
+    <div class="step-title"><span class="step-system-tag gendeck">GenDeck</span>Layout Resolver <span class="step-subtitle"> &mdash; per card, GML output</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <div class="box box-input">
+      <div class="box-label">&#9679; Inputs</div>
+      <ul>
+        <li><strong>Spatial description</strong> from step 2</li>
+        <li><strong>Parsed content</strong> (the actual text, stats, chart data)</li>
+        <li><strong>Style brief</strong> from step 1</li>
+        <li><strong>blocks.ts + examples.md</strong> from guide</li>
+      </ul>
+    </div>
+
+    <div class="box box-decision">
+      <div class="box-label">&#9679; What the Resolver Sees &mdash; Comparison</div>
+      <p><strong>From-scratch:</strong> Outline content (semantic HTML) + invented spatial description + style brief. Resolver must <em>design</em> the GML.</p>
+      <p style="margin-top:0.5rem;"><strong>Import as-is:</strong> Extracted content + source-derived spatial description + style brief matching source. Resolver's job shifts from <em>design</em> to <em>faithful reconstruction</em>. Much more constrained.</p>
+      <p style="margin-top:0.5rem;"><strong>Import re-style:</strong> Same as from-scratch. Extracted content has been reshaped by the outliner into target guide density/voice. Resolver designs fresh layout per target guide.</p>
+    </div>
+
+    <div class="box box-output">
+      <div class="box-label">&#9679; Output &mdash; GML (Card 7 excerpt)</div>
+      <pre class="code-block"><span class="syn-tag">&lt;SECTION</span> <span class="syn-attr">image-layout</span>=<span class="syn-val">"blank"</span><span class="syn-tag">&gt;</span>
+  <span class="syn-tag">&lt;DIV</span> <span class="syn-attr">class</span>=<span class="syn-val">"body"</span><span class="syn-tag">&gt;</span>
+    <span class="syn-tag">&lt;H1&gt;</span>Who We Work With<span class="syn-tag">&lt;/H1&gt;</span>
+    <span class="syn-tag">&lt;H3&gt;</span>Built for B2B SaaS Companies Ready to Win in the Enterprise<span class="syn-tag">&lt;/H3&gt;</span>
+    <span class="syn-tag">&lt;P&gt;</span>Meridian's clients are B2B SaaS companies at an inflection point...<span class="syn-tag">&lt;/P&gt;</span>
+    <span class="syn-tag">&lt;SMART-LAYOUT</span> <span class="syn-attr">variant</span>=<span class="syn-val">"outlineBoxes"</span><span class="syn-tag">&gt;</span>
+      <span class="syn-tag">&lt;SMART-LAYOUT-ITEM&gt;</span>
+        <span class="syn-tag">&lt;H3&gt;</span>Series A Founders<span class="syn-tag">&lt;/H3&gt;</span>
+        <span class="syn-tag">&lt;P&gt;</span>You've found product-market fit and closed your first 20-30 customers...<span class="syn-tag">&lt;/P&gt;</span>
+      <span class="syn-tag">&lt;/SMART-LAYOUT-ITEM&gt;</span>
+      <span class="syn-tag">&lt;SMART-LAYOUT-ITEM&gt;</span>
+        <span class="syn-tag">&lt;H3&gt;</span>Revenue Leaders<span class="syn-tag">&lt;/H3&gt;</span>
+        <span class="syn-tag">&lt;P&gt;</span>You're a CRO or VP of Sales who's been hired to build...<span class="syn-tag">&lt;/P&gt;</span>
+      <span class="syn-tag">&lt;/SMART-LAYOUT-ITEM&gt;</span>
+      <span class="syn-tag">&lt;SMART-LAYOUT-ITEM&gt;</span>
+        <span class="syn-tag">&lt;H3&gt;</span>Series B/C Teams<span class="syn-tag">&lt;/H3&gt;</span>
+        <span class="syn-tag">&lt;P&gt;</span>You've proven enterprise is possible but the motion isn't consistent...<span class="syn-tag">&lt;/P&gt;</span>
+      <span class="syn-tag">&lt;/SMART-LAYOUT-ITEM&gt;</span>
+    <span class="syn-tag">&lt;/SMART-LAYOUT&gt;</span>
+  <span class="syn-tag">&lt;/DIV&gt;</span>
+<span class="syn-tag">&lt;/SECTION&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 28 M6 22 L12 28 L18 22" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- STEP 4: RENDERER + REVIEWER -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-renderer">4</div>
+    <div class="step-title"><span class="step-system-tag gendeck">GenDeck</span>Renderer + Reviewer <span class="step-subtitle"> &mdash; standard, same as from-scratch</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <p class="prose">Standard. GML concatenated into deck.gml, screenshots taken, graders score. No changes from from-scratch pipeline.</p>
+    <div class="box box-output">
+      <div class="box-label">&#9679; Grading Focus for Import</div>
+      <ul>
+        <li><strong>As-is:</strong> Fidelity grader needed &mdash; how close does the output match the source screenshot? New grader type.</li>
+        <li><strong>Re-style:</strong> Standard guide graders (swiss-grid-card, consultant-card, etc.) &mdash; does the output match the target guide?</li>
+        <li><strong>Both:</strong> Content completeness &mdash; did any information from the source get lost?</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CARD GROUPS ===== -->
+<div class="summary-section" style="margin-top: 2rem;">
+  <h2>Card Groups Detected by Parser</h2>
+  <p class="prose" style="margin-bottom: 1rem;">The parser identifies repeating structural patterns across screenshots. These map to card groups for the pipeline.</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Group</th>
+        <th>Cards</th>
+        <th>Shared Pattern</th>
+        <th>Pipeline Implication</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="group-badge group-process">process</span> Process Framework</td>
+        <td>4, 6</td>
+        <td>Visual diagram + text columns, methodology content</td>
+        <td>Card 4 = exemplar, card 6 clones structure with different content</td>
+      </tr>
+      <tr>
+        <td><span class="group-badge group-columns">columns</span> Column Grid</td>
+        <td>2 (bottom), 7</td>
+        <td>3-4 equal columns with bordered items (heading + description each)</td>
+        <td>Shared SMART-LAYOUT variant, exemplar cloned</td>
+      </tr>
+      <tr>
+        <td><span class="group-badge group-metrics">metrics</span> Data + Chart</td>
+        <td>5, 8</td>
+        <td>Chart on one side, analysis text + callout on the other</td>
+        <td>Chart-left / text-right split column pattern</td>
+      </tr>
+      <tr>
+        <td><span class="group-badge group-unique">unique</span> Title</td>
+        <td>1</td>
+        <td>Sparse, gradient background, name only</td>
+        <td>One-off, full pipeline</td>
+      </tr>
+      <tr>
+        <td><span class="group-badge group-unique">unique</span> Metrics Showcase</td>
+        <td>3</td>
+        <td>3-column hero stats with donut charts</td>
+        <td>One-off, full pipeline</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== PIPELINE COMPARISON ===== -->
+<div class="summary-section">
+  <h2>Pipeline Comparison: All Four Modes</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Step</th>
+        <th>From-Scratch</th>
+        <th>Remix</th>
+        <th>Import As-Is</th>
+        <th>Import Re-Style</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Input</td>
+        <td>User prompt</td>
+        <td>Source deck GML</td>
+        <td class="cell-new">Screenshots</td>
+        <td class="cell-new">Screenshots</td>
+      </tr>
+      <tr>
+        <td>Screenshot Parser</td>
+        <td class="cell-skip">&mdash;</td>
+        <td class="cell-skip">&mdash;</td>
+        <td class="cell-new">Vision model: content + layout + role</td>
+        <td class="cell-new">Vision model: content only used</td>
+      </tr>
+      <tr>
+        <td>Plan</td>
+        <td>LLM invents arc</td>
+        <td class="cell-skip">Source IS the plan</td>
+        <td class="cell-modified">Describes existing arc</td>
+        <td class="cell-modified">Re-plans for target guide</td>
+      </tr>
+      <tr>
+        <td>Outline</td>
+        <td>LLM writes content</td>
+        <td>LLM adapts content</td>
+        <td class="cell-modified">Reformats parsed content</td>
+        <td class="cell-modified">Rewrites for target voice</td>
+      </tr>
+      <tr>
+        <td>Style Resolve</td>
+        <td>Creative choices</td>
+        <td class="cell-skip">SKIPPED</td>
+        <td class="cell-modified">Infers source aesthetic</td>
+        <td>Standard (target guide)</td>
+      </tr>
+      <tr>
+        <td>Structure</td>
+        <td>LLM invents layout</td>
+        <td class="cell-skip">SKIPPED</td>
+        <td class="cell-modified">Guided by source layout</td>
+        <td>Standard (target guide)</td>
+      </tr>
+      <tr>
+        <td>Layout Resolver</td>
+        <td>GML from scratch</td>
+        <td>Single LLM rewrite</td>
+        <td class="cell-modified">GML with strong hints</td>
+        <td>Standard</td>
+      </tr>
+      <tr>
+        <td>LLM Calls</td>
+        <td>5+</td>
+        <td>1</td>
+        <td>1 (parser) + 4-5</td>
+        <td>1 (parser) + 5+</td>
+      </tr>
+      <tr>
+        <td>Card Count</td>
+        <td>From plan</td>
+        <td>Matches source</td>
+        <td>Matches source (8)</td>
+        <td class="cell-modified">May differ (re-planned)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== OPEN QUESTIONS ===== -->
+<div class="questions-section">
+  <h2>Open Questions</h2>
+  <div class="question-item"><strong>OCR accuracy:</strong> Dense cards (2, 5) have small text. Vision model extraction degrades with font size and resolution. Confidence scoring needed for low-certainty extractions.</div>
+  <div class="question-item"><strong>Chart data extraction:</strong> 5 of 8 cards contain charts. Can the vision model extract actual data values from bar/line charts, or only approximate from visual position? Donut chart percentages (displayed as text) are reliable; bar chart values without labels are not.</div>
+  <div class="question-item"><strong>Non-reproducible elements:</strong> Card 4's 3D stacked blocks and card 6's flowing path diagram can't be recreated as GML. Parser must recognize decorative illustrations vs. structural layout and suggest alternatives (timeline smart-layout instead of 3D blocks).</div>
+  <div class="question-item"><strong>Density mismatch:</strong> Card 2 has more content than any single Gamma card should hold. Even in as-is mode, should the parser flag cards exceeding density limits? Should the pipeline auto-split?</div>
+  <div class="question-item"><strong>Style inference quality:</strong> How accurately can a vision model reverse-engineer a design system (color palette, typography, container style, whitespace philosophy) from screenshots alone?</div>
+  <div class="question-item"><strong>Chart recreation vs. image:</strong> Should charts be recreated as interactive Gamma CHART elements (requires accurate data extraction) or imported as static images (preserves fidelity, loses interactivity)?</div>
+  <div class="question-item"><strong>Fidelity grader:</strong> As-is import needs a new grader type: does the output visually match the source screenshot? This doesn't exist in the current grader suite.</div>
+  <div class="question-item"><strong>Re-style card count:</strong> The Meridian deck is 8 dense cards. Swiss import might produce 14 sparse cards. How does the planner decide where to split? Does the user get a say?</div>
+</div>
+
+<script>
+function switchMode(mode) {
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.mode-section').forEach(s => s.classList.remove('active'));
+  if (mode === 'asis') {
+    document.querySelectorAll('.mode-btn')[0].classList.add('active');
+    document.getElementById('mode-asis').classList.add('active');
+  } else {
+    document.querySelectorAll('.mode-btn')[1].classList.add('active');
+    document.getElementById('mode-restyle').classList.add('active');
+  }
+}
+
+function showDetail(idx) {
+  document.querySelectorAll('.screenshot-card').forEach((c, i) => {
+    c.classList.toggle('active', i === idx);
+  });
+  document.querySelectorAll('.screenshot-detail').forEach((d, i) => {
+    d.classList.toggle('active', i === idx);
+  });
+}
+</script>
+
+</body>
+</html>

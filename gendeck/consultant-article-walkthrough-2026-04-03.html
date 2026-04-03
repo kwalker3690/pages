@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GenDeck Pipeline Walkthrough — Consultant Article Flow</title>
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --surface2: #1a1a1a;
+    --border: #2a2a2a;
+    --text: #e0e0e0;
+    --text-dim: #888;
+    --input: #3b82f6;
+    --input-bg: rgba(59, 130, 246, 0.08);
+    --input-border: rgba(59, 130, 246, 0.25);
+    --output: #22c55e;
+    --output-bg: rgba(34, 197, 94, 0.08);
+    --output-border: rgba(34, 197, 94, 0.25);
+    --decision: #f59e0b;
+    --decision-bg: rgba(245, 158, 11, 0.08);
+    --decision-border: rgba(245, 158, 11, 0.25);
+    --tool: #e879f9;
+    --tool-bg: rgba(232, 121, 249, 0.08);
+    --tool-border: rgba(232, 121, 249, 0.25);
+    --accent: #a78bfa;
+    --group-a: #f97316;
+    --group-a-bg: rgba(249, 115, 22, 0.08);
+    --group-a-border: rgba(249, 115, 22, 0.3);
+    --group-b: #06b6d4;
+    --group-b-bg: rgba(6, 182, 212, 0.08);
+    --group-b-border: rgba(6, 182, 212, 0.3);
+    --code-bg: #0d1117;
+    --code-border: #21262d;
+    --arrow: #555;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    padding: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.25rem; }
+  h2 { font-size: 1.3rem; font-weight: 600; }
+  h3 { font-size: 1.1rem; font-weight: 600; }
+
+  code, pre { font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace; }
+  code { background: rgba(255,255,255,0.06); padding: 0.1em 0.35em; border-radius: 3px; font-size: 0.85em; }
+
+  /* ===== BANNER ===== */
+  .banner {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem 2rem 1.5rem;
+    margin-bottom: 2.5rem;
+    overflow-x: auto;
+  }
+
+  .banner-title {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.25rem;
+  }
+
+  .pipeline-flow {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    min-width: 1000px;
+    justify-content: center;
+  }
+
+  .pipeline-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .pipeline-pill {
+    padding: 0.45rem 0.85rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    border: 1px solid;
+  }
+
+  .pill-article { background: rgba(167,139,250,0.15); border-color: rgba(167,139,250,0.4); color: #c4b5fd; }
+  .pill-plan { background: rgba(251,146,60,0.15); border-color: rgba(251,146,60,0.4); color: #fdba74; }
+  .pill-outline { background: rgba(56,189,248,0.15); border-color: rgba(56,189,248,0.4); color: #7dd3fc; }
+  .pill-style { background: rgba(232,121,249,0.15); border-color: rgba(232,121,249,0.4); color: #f0abfc; }
+  .pill-structure { background: rgba(245,158,11,0.15); border-color: rgba(245,158,11,0.4); color: #fcd34d; }
+  .pill-resolve { background: rgba(34,197,94,0.15); border-color: rgba(34,197,94,0.4); color: #86efac; }
+  .pill-renderer { background: rgba(99,102,241,0.15); border-color: rgba(99,102,241,0.4); color: #a5b4fc; }
+  .pill-reviewer { background: rgba(244,63,94,0.15); border-color: rgba(244,63,94,0.4); color: #fda4af; }
+
+  .pipeline-arrow {
+    display: flex;
+    align-items: center;
+    padding: 0 0.25rem;
+    color: var(--arrow);
+    font-size: 1.1rem;
+    margin-top: 0.35rem;
+    flex-shrink: 0;
+  }
+
+  .guide-feeds {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-top: 8px;
+    align-items: center;
+  }
+
+  .guide-tag {
+    font-size: 0.6rem;
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-dim);
+    white-space: nowrap;
+    font-family: 'SF Mono', monospace;
+  }
+
+  .per-card-bracket {
+    border: 1px dashed rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 0.6rem 0.5rem 0.4rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    position: relative;
+  }
+
+  .per-card-label {
+    position: absolute;
+    top: -9px;
+    left: 12px;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    background: var(--surface);
+    padding: 0 6px;
+  }
+
+  .system-bracket {
+    border: 1px solid rgba(251,146,60,0.35);
+    border-radius: 12px;
+    padding: 0.8rem 0.6rem 0.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    position: relative;
+  }
+
+  .system-bracket.gendeck { border-color: rgba(34,197,94,0.35); }
+
+  .system-label {
+    position: absolute;
+    top: -10px;
+    left: 14px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    background: var(--surface);
+    padding: 0 8px;
+  }
+
+  .system-label.buddy { color: #fdba74; }
+  .system-label.gendeck { color: #86efac; }
+
+  .tool-feeds {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 6px;
+    align-items: center;
+  }
+
+  .tool-tag {
+    font-size: 0.55rem;
+    padding: 1px 4px;
+    border-radius: 3px;
+    background: rgba(232,121,249,0.1);
+    border: 1px solid rgba(232,121,249,0.2);
+    color: #e879f9;
+    white-space: nowrap;
+    font-family: 'SF Mono', monospace;
+  }
+
+  /* ===== SUBTITLE ===== */
+  .page-subtitle {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+
+  .prompt-box {
+    display: inline-block;
+    background: rgba(167,139,250,0.12);
+    border: 1px solid rgba(167,139,250,0.3);
+    border-radius: 6px;
+    padding: 0.3rem 0.8rem;
+    font-family: monospace;
+    color: #c4b5fd;
+    margin-top: 0.5rem;
+  }
+
+  /* ===== STEP CONNECTOR ===== */
+  .step-connector {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 0;
+  }
+
+  .step-connector svg { width: 24px; height: 32px; }
+
+  /* ===== COLLAPSIBLE STEPS ===== */
+  .step {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 0;
+    background: var(--surface);
+    overflow: hidden;
+  }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+
+  .step-header:hover { background: var(--surface2); }
+
+  .step-number {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+  }
+
+  .sn-article { background: rgba(167,139,250,0.2); color: #c4b5fd; }
+  .sn-plan { background: rgba(251,146,60,0.2); color: #fdba74; }
+  .sn-outline { background: rgba(56,189,248,0.2); color: #7dd3fc; }
+  .sn-style { background: rgba(232,121,249,0.2); color: #f0abfc; }
+  .sn-structure { background: rgba(245,158,11,0.2); color: #fcd34d; }
+  .sn-resolve { background: rgba(34,197,94,0.2); color: #86efac; }
+  .sn-renderer { background: rgba(99,102,241,0.2); color: #a5b4fc; }
+  .sn-reviewer { background: rgba(244,63,94,0.2); color: #fda4af; }
+  .sn-final { background: rgba(34,197,94,0.3); color: #4ade80; }
+
+  .step-title { font-weight: 600; font-size: 1rem; flex: 1; }
+  .step-system-tag { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 2px 7px; border-radius: 4px; margin-right: 0.5rem; vertical-align: middle; }
+  .step-system-tag.buddy { background: rgba(251,146,60,0.15); color: #fdba74; }
+  .step-system-tag.gendeck { background: rgba(34,197,94,0.15); color: #86efac; }
+  .step-subtitle { color: var(--text-dim); font-weight: 400; font-size: 0.85rem; }
+
+  .step-chevron {
+    transition: transform 0.2s;
+    color: var(--text-dim);
+    font-size: 1.2rem;
+  }
+
+  .step.open .step-chevron { transform: rotate(90deg); }
+  .step-body { display: none; padding: 0 1.25rem 1.25rem; }
+  .step.open .step-body { display: block; }
+
+  /* ===== LABELED BOXES ===== */
+  .box {
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 0.75rem 0;
+    border: 1px solid;
+  }
+
+  .box-input { background: var(--input-bg); border-color: var(--input-border); }
+  .box-output { background: var(--output-bg); border-color: var(--output-border); }
+  .box-decision { background: var(--decision-bg); border-color: var(--decision-border); }
+  .box-tool { background: var(--tool-bg); border-color: var(--tool-border); }
+  .box-group-a { background: var(--group-a-bg); border-color: var(--group-a-border); }
+  .box-group-b { background: var(--group-b-bg); border-color: var(--group-b-border); }
+
+  .box-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .box-input .box-label { color: var(--input); }
+  .box-output .box-label { color: var(--output); }
+  .box-decision .box-label { color: var(--decision); }
+  .box-tool .box-label { color: var(--tool); }
+  .box-group-a .box-label { color: var(--group-a); }
+  .box-group-b .box-label { color: var(--group-b); }
+
+  .box p, .box li { font-size: 0.9rem; color: var(--text); line-height: 1.5; }
+  .box ul { padding-left: 1.2rem; margin-top: 0.3rem; }
+  .box li { margin-bottom: 0.15rem; }
+
+  /* ===== CODE BLOCKS ===== */
+  pre.code-block {
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    margin: 0.5rem 0;
+    color: #c9d1d9;
+  }
+
+  .code-lang {
+    display: inline-block;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+    background: rgba(255,255,255,0.05);
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-bottom: 0.4rem;
+    font-family: monospace;
+  }
+
+  .syn-key { color: #7ee787; }
+  .syn-str { color: #a5d6ff; }
+  .syn-num { color: #79c0ff; }
+  .syn-tag { color: #ff7b72; }
+  .syn-attr { color: #d2a8ff; }
+  .syn-val { color: #a5d6ff; }
+  .syn-comment { color: #8b949e; font-style: italic; }
+
+  blockquote {
+    border-left: 3px solid var(--decision);
+    padding: 0.75rem 1rem;
+    margin: 0.5rem 0;
+    background: rgba(245,158,11,0.05);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    color: #ddd;
+    font-style: italic;
+  }
+
+  .prose { font-size: 0.9rem; color: var(--text); margin: 0.5rem 0; }
+  .prose strong { color: #fff; }
+
+  /* ===== CARD GROUP INDICATORS ===== */
+  .group-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+  }
+
+  .group-badge.root-causes {
+    background: rgba(249, 115, 22, 0.15);
+    color: #fb923c;
+    border: 1px solid rgba(249, 115, 22, 0.3);
+  }
+
+  .group-badge.sector-comp {
+    background: rgba(6, 182, 212, 0.15);
+    color: #22d3ee;
+    border: 1px solid rgba(6, 182, 212, 0.3);
+  }
+
+  .group-badge.clone {
+    font-style: italic;
+    opacity: 0.8;
+  }
+
+  /* ===== CARD MAP ===== */
+  .card-map {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    gap: 4px;
+    margin: 1rem 0;
+  }
+
+  .card-chip {
+    padding: 0.4rem 0.2rem;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 0.65rem;
+    font-weight: 600;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    color: var(--text-dim);
+    line-height: 1.3;
+  }
+
+  .card-chip.group-a {
+    border-color: var(--group-a-border);
+    background: var(--group-a-bg);
+    color: #fb923c;
+  }
+
+  .card-chip.group-b {
+    border-color: var(--group-b-border);
+    background: var(--group-b-bg);
+    color: #22d3ee;
+  }
+
+  .card-chip .chip-num { font-size: 0.9rem; display: block; }
+  .card-chip .chip-label { font-size: 0.55rem; display: block; margin-top: 2px; opacity: 0.7; }
+
+  /* ===== TOOLS GRID ===== */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.5rem;
+    margin: 0.75rem 0;
+  }
+
+  .tool-card {
+    background: var(--tool-bg);
+    border: 1px solid var(--tool-border);
+    border-radius: 8px;
+    padding: 0.75rem;
+  }
+
+  .tool-card-name {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--tool);
+    font-family: monospace;
+    margin-bottom: 0.25rem;
+  }
+
+  .tool-card p { font-size: 0.8rem; color: var(--text-dim); line-height: 1.4; }
+
+  /* ===== ARTICLE SECTION ===== */
+  .article-text {
+    background: rgba(167,139,250,0.05);
+    border: 1px solid rgba(167,139,250,0.2);
+    border-radius: 8px;
+    padding: 1.25rem;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: #ccc;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  .article-text strong { color: #e0e0e0; }
+
+  /* ===== SUMMARY TABLE ===== */
+  .summary-section {
+    margin-top: 2.5rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    padding: 1.5rem;
+  }
+
+  .summary-section h2 { margin-bottom: 1rem; }
+
+  table.summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+
+  .summary-table thead th {
+    text-align: left;
+    padding: 0.6rem 0.75rem;
+    border-bottom: 2px solid var(--border);
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+  }
+
+  .summary-table tbody td {
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .summary-table tbody tr:last-child td { border-bottom: none; }
+  .summary-table tbody tr:hover { background: rgba(255,255,255,0.02); }
+  .summary-table td:first-child { font-weight: 600; white-space: nowrap; }
+
+  @media (max-width: 700px) {
+    body { padding: 1rem; }
+    .pipeline-flow { min-width: 0; flex-wrap: wrap; gap: 0.5rem; }
+    .pipeline-arrow { display: none; }
+    .per-card-bracket { flex-wrap: wrap; }
+    .tools-grid { grid-template-columns: 1fr; }
+    .card-map { grid-template-columns: repeat(4, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<h1>GenDeck Pipeline Walkthrough</h1>
+<p class="page-subtitle">
+  Article input, consultant guide, full from-scratch pipeline. Every step with actual inputs and outputs.
+</p>
+<div style="margin-bottom: 1.25rem;">
+  <div class="prompt-box">"Turn this into a consultant-style deck."</div>
+  <span style="color:var(--text-dim); margin-left: 0.75rem; font-size: 0.85rem;">Guide: Consultant &nbsp;|&nbsp; Source: pasted article</span>
+</div>
+
+<!-- ===== CARD MAP ===== -->
+<div style="margin-bottom: 2rem;">
+  <div style="font-size:0.75rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;">11 Cards &mdash; 2 Groups</div>
+  <div class="card-map">
+    <div class="card-chip"><span class="chip-num">0</span><span class="chip-label">Title</span></div>
+    <div class="card-chip"><span class="chip-num">1</span><span class="chip-label">Scale</span></div>
+    <div class="card-chip"><span class="chip-num">2</span><span class="chip-label">Waste</span></div>
+    <div class="card-chip group-a"><span class="chip-num">3</span><span class="chip-label">Integ.</span></div>
+    <div class="card-chip group-a"><span class="chip-num">4</span><span class="chip-label">Change</span></div>
+    <div class="card-chip group-a"><span class="chip-num">5</span><span class="chip-label">MLOps</span></div>
+    <div class="card-chip"><span class="chip-num">6</span><span class="chip-label">Budget</span></div>
+    <div class="card-chip group-b"><span class="chip-num">7</span><span class="chip-label">FinSvc</span></div>
+    <div class="card-chip group-b"><span class="chip-num">8</span><span class="chip-label">Health</span></div>
+    <div class="card-chip group-b"><span class="chip-num">9</span><span class="chip-label">Mfg</span></div>
+    <div class="card-chip"><span class="chip-num">10</span><span class="chip-label">Close</span></div>
+  </div>
+  <div style="display:flex; gap:1.5rem; margin-top:0.5rem; font-size:0.7rem;">
+    <span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--group-a-bg);border:1px solid var(--group-a-border);vertical-align:middle;margin-right:4px;"></span><span style="color:#fb923c;">root-causes</span> (3, 4, 5)</span>
+    <span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--group-b-bg);border:1px solid var(--group-b-border);vertical-align:middle;margin-right:4px;"></span><span style="color:#22d3ee;">sector-comparison</span> (7, 8, 9)</span>
+  </div>
+</div>
+
+<!-- ===== ARCHITECTURE BANNER ===== -->
+<div class="banner">
+  <div class="banner-title">Pipeline Architecture &mdash; Full From-Scratch Flow</div>
+  <div class="pipeline-flow">
+    <div class="pipeline-node">
+      <div class="pipeline-pill pill-article">User Article</div>
+    </div>
+    <div class="pipeline-arrow">&#8594;</div>
+    <div class="system-bracket">
+      <span class="system-label buddy">Buddy G</span>
+      <div class="pipeline-node">
+        <div class="pipeline-pill pill-plan">Plan</div>
+        <div class="guide-feeds">
+          <span class="guide-tag">planning.md</span>
+          <span class="guide-tag">writing.md</span>
+        </div>
+      </div>
+      <div class="pipeline-arrow">&#8594;</div>
+      <div class="pipeline-node">
+        <div class="pipeline-pill pill-outline">Outline</div>
+        <div class="guide-feeds">
+          <span class="guide-tag">density.yaml</span>
+          <span class="guide-tag">writing.md</span>
+        </div>
+      </div>
+    </div>
+    <div class="pipeline-arrow">&#8594;</div>
+    <div class="system-bracket gendeck">
+      <span class="system-label gendeck">GenDeck</span>
+      <div class="pipeline-node">
+        <div class="pipeline-pill pill-style">Style Resolve</div>
+        <div class="guide-feeds">
+          <span class="guide-tag">blocks.ts</span>
+          <span class="guide-tag">planning.md</span>
+        </div>
+      </div>
+      <div class="pipeline-arrow">&#8594;</div>
+      <div class="per-card-bracket">
+        <span class="per-card-label">per card (or clone)</span>
+        <div class="pipeline-node">
+          <div class="pipeline-pill pill-structure">Structure</div>
+          <div class="guide-feeds">
+            <span class="guide-tag">structure.md</span>
+          </div>
+        </div>
+        <div class="pipeline-arrow">&#8594;</div>
+        <div class="pipeline-node">
+          <div class="pipeline-pill pill-resolve">Layout Resolver</div>
+          <div class="guide-feeds">
+            <span class="guide-tag">blocks.ts</span>
+            <span class="guide-tag">examples.md</span>
+          </div>
+          <div class="tool-feeds">
+            <span class="tool-tag">spatial-analysis</span>
+            <span class="tool-tag">chart-creator</span>
+          </div>
+        </div>
+        <div class="pipeline-arrow">&#8594;</div>
+        <div class="pipeline-node">
+          <div class="pipeline-pill pill-renderer">Renderer</div>
+        </div>
+        <div class="pipeline-arrow">&#8594;</div>
+        <div class="pipeline-node">
+          <div class="pipeline-pill pill-reviewer">Reviewer</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== STEP 0: ARTICLE INPUT ===== -->
+<div class="step open" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-article">0</div>
+    <div class="step-title">Article Input <span class="step-subtitle"> &mdash; readSource extracts claims</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <div class="article-text">
+      <strong>"Enterprise AI Adoption Is Stalling at the Implementation Layer"</strong><br><br>
+      Despite record investment in AI capabilities, most enterprise deployments are failing to move beyond pilot stage. A Meridian Strategy Group analysis of 340 enterprise AI programs across financial services, healthcare, and manufacturing reveals a consistent pattern: organizations are investing heavily in model development and data infrastructure, but systematically underinvesting in the implementation layer &mdash; the integration, change management, and operational tooling required to move from proof-of-concept to production value.<br><br>
+      The numbers are stark. Average enterprise AI spending reached $14.2M in 2025, up 38% year-over-year. Yet only 22% of AI pilots successfully transition to production deployment. The remaining 78% stall in what we call the "implementation valley" &mdash; technically functional but operationally stranded.<br><br>
+      Three factors drive the gap. First, integration debt: 67% of AI programs report that connecting models to existing enterprise systems takes 3-5x longer than model development itself. Second, change resistance: 54% of programs cite organizational resistance as the primary blocker. Third, operational tooling gaps: only 31% of enterprises have dedicated MLOps teams, and fewer than 15% have established model monitoring and retraining pipelines.<br><br>
+      The financial impact is measurable. Organizations stuck in the implementation valley spend an average of $3.8M annually maintaining stalled pilots. Across the 340 programs studied, this represents approximately $1.3B in aggregate waste.<br><br>
+      The path forward requires a fundamental reallocation of AI budgets. Our analysis suggests a 40/30/30 split. Organizations that adopted this balanced approach showed a 3.4x improvement in pilot-to-production conversion rates.<br><br>
+      Three sectors show divergent patterns. Financial services leads in AI spending ($18.7M average) but has the lowest conversion rate (18%). Healthcare shows the highest conversion rate (29%) despite lower spending ($11.3M). Manufacturing occupies the middle ground ($12.8M, 23%) but shows the fastest improvement trajectory.<br><br>
+      The implementation valley is not a technology problem. It is an organizational design problem disguised as a technology problem.
+    </div>
+
+    <div class="box box-output" style="margin-top:1rem;">
+      <div class="box-label">&#9679; Extracted Claims (readSource)</div>
+      <ul>
+        <li><strong>$14.2M</strong> average enterprise AI spending (up 38% YoY)</li>
+        <li><strong>22%</strong> pilot-to-production conversion rate (78% stall)</li>
+        <li><strong>Three root causes:</strong> integration debt (67%), change resistance (54%), operational tooling (31% / &lt;15%)</li>
+        <li><strong>$3.8M</strong> annual waste per stalled pilot, <strong>$1.3B</strong> aggregate</li>
+        <li><strong>40/30/30</strong> recommended budget split vs current 65/15/20 &rarr; <strong>3.4x</strong> improvement</li>
+        <li><strong>Sector divergence:</strong> FinSvc ($18.7M, 18%), Healthcare ($11.3M, 29%), Manufacturing ($12.8M, 23%)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 24 M6 18 L12 26 L18 18" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- ===== STEP 1: PLAN ===== -->
+<div class="step open" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-plan">1</div>
+    <div class="step-title"><span class="step-system-tag buddy">Buddy G</span>Plan <span class="step-subtitle"> &mdash; Gen3 &rarr; planLayout tool</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <div class="box box-input">
+      <div class="box-label">&#9679; Inputs</div>
+      <ul>
+        <li><strong>Extracted claims</strong> from the article</li>
+        <li><strong>planning.md</strong> &mdash; every card is a mini-dashboard, 3-4 content zones, section markers mandatory, dark backgrounds, situation &rarr; complication &rarr; resolution arc</li>
+        <li><strong>writing.md</strong> &mdash; action titles (full-sentence claims), bolded lead-in bullets, specific numbers, evidence types named in instructions</li>
+      </ul>
+    </div>
+
+    <div class="box box-decision">
+      <div class="box-label">&#9679; What It Decides</div>
+      <p>Narrative arc (situation &rarr; complication &rarr; resolution), card roles, <strong>card groups</strong> (root-causes x3, sector-comparison x3), evidence types per card. Consultant arc maps directly to article structure.</p>
+    </div>
+
+    <div class="box box-output">
+      <div class="box-label">&#9679; Output &mdash; Plan JSON (abridged, showing groups)</div>
+      <div class="code-lang">json</div>
+      <pre class="code-block">{
+  <span class="syn-key">"deckIntent"</span>: <span class="syn-str">"Consultant diagnostic arc: open with thesis (implementation
+  valley), size the problem, break into three root causes (grouped),
+  show financial impact, present reallocation framework, compare
+  three sectors (grouped), close with organizational design reframe.
+  Dark theme. Action titles throughout. Data density maximum."</span>,
+  <span class="syn-key">"cards"</span>: [
+    { <span class="syn-key">"cardIndex"</span>: <span class="syn-num">0</span>, <span class="syn-key">"cardInstructions"</span>: <span class="syn-str">"Title splash. Full background color.
+      DISPLAY title. Dense thesis paragraph."</span>, <span class="syn-key">"imageLayout"</span>: <span class="syn-str">"blank"</span> },
+    { <span class="syn-key">"cardIndex"</span>: <span class="syn-num">1</span>, <span class="syn-key">"cardInstructions"</span>: <span class="syn-str">"Scale card. The biggest numbers
+      establishing the problem. Stats hero. Arc: situation."</span>, <span class="syn-key">"imageLayout"</span>: <span class="syn-str">"blank"</span> },
+    { <span class="syn-key">"cardIndex"</span>: <span class="syn-num">2</span>, <span class="syn-key">"cardInstructions"</span>: <span class="syn-str">"Financial impact. The waste number.
+      Stats + metric table. Arc: complication."</span>, <span class="syn-key">"imageLayout"</span>: <span class="syn-str">"blank"</span> },
+    { <span class="syn-key">"cardIndex"</span>: <span class="syn-num">3</span>, <span class="syn-key">"cardInstructions"</span>: <span class="syn-str">"Root cause 1 &mdash; integration debt.
+      Hero stat + analysis + proof stats."</span>, <span class="syn-key">"imageLayout"</span>: <span class="syn-str">"blank"</span>, <span class="syn-key" style="color:#fb923c">"group"</span>: <span class="syn-str" style="color:#fb923c">"root-causes"</span> },
+    { <span class="syn-key">"cardIndex"</span>: <span class="syn-num">4</span>, <span class="syn-key">"cardInstructions"</span>: <span class="syn-str">"Root cause 2 &mdash; change resistance.
+      Hero stat + analysis + proof stats."</span>, <span class="syn-key">"imageLayout"</span>: <span class="syn-str">"blank"</span>, <span class="syn-key" style="color:#fb923c">"group"</span>: <span class="syn-str" style="color:#fb923c">"root-causes"</span> },
+    { <span class="syn-key">"cardIndex"</span>: <span class="syn-num">5</span>, <span class="syn-key">"cardInstructions"</span>: <span class="syn-str">"Root cause 3 &mdash; operational tooling.
+      Hero stat + analysis + proof stats."</span>, <span class="syn-key">"imageLayout"</span>: <span class="syn-str">"blank"</span>, <span class="syn-key" style="color:#fb923c">"group"</span>: <span class="syn-str" style="color:#fb923c">"root-causes"</span> },
+    { <span class="syn-key">"cardIndex"</span>: <span class="syn-num">6</span>, <span class="syn-key">"cardInstructions"</span>: <span class="syn-str">"Reallocation framework. 40/30/30 split.
+      THE ONE CHART. Arc: resolution."</span>, <span class="syn-key">"imageLayout"</span>: <span class="syn-str">"blank"</span> },
+    { <span class="syn-key">"cardIndex"</span>: <span class="syn-num">7</span>, <span class="syn-key">"cardInstructions"</span>: <span class="syn-str">"Sector profile &mdash; financial services.
+      Spending + conversion rate + key driver."</span>, <span class="syn-key">"imageLayout"</span>: <span class="syn-str">"blank"</span>, <span class="syn-key" style="color:#22d3ee">"group"</span>: <span class="syn-str" style="color:#22d3ee">"sector-comparison"</span> },
+    { <span class="syn-key">"cardIndex"</span>: <span class="syn-num">8</span>, <span class="syn-key">"cardInstructions"</span>: <span class="syn-str">"Sector profile &mdash; healthcare.
+      Spending + conversion rate + key driver."</span>, <span class="syn-key">"imageLayout"</span>: <span class="syn-str">"blank"</span>, <span class="syn-key" style="color:#22d3ee">"group"</span>: <span class="syn-str" style="color:#22d3ee">"sector-comparison"</span> },
+    { <span class="syn-key">"cardIndex"</span>: <span class="syn-num">9</span>, <span class="syn-key">"cardInstructions"</span>: <span class="syn-str">"Sector profile &mdash; manufacturing.
+      Spending + conversion rate + key driver."</span>, <span class="syn-key">"imageLayout"</span>: <span class="syn-str">"blank"</span>, <span class="syn-key" style="color:#22d3ee">"group"</span>: <span class="syn-str" style="color:#22d3ee">"sector-comparison"</span> },
+    { <span class="syn-key">"cardIndex"</span>: <span class="syn-num">10</span>, <span class="syn-key">"cardInstructions"</span>: <span class="syn-str">"Dense closer. Blockquote + three-column
+      panel (actions, metrics, outcomes)."</span>, <span class="syn-key">"imageLayout"</span>: <span class="syn-str">"blank"</span> }
+  ]
+}</pre>
+    </div>
+
+    <div class="box box-decision" style="margin-top:0.5rem;">
+      <div class="box-label">&#9679; Article &rarr; Consultant Arc Mapping</div>
+      <div style="display:grid; grid-template-columns: auto 1fr; gap: 0.25rem 1rem; font-size:0.85rem;">
+        <span style="color:var(--decision); font-weight:600;">Cards 0-1</span><span>Situation &mdash; scale of investment + conversion gap</span>
+        <span style="color:var(--decision); font-weight:600;">Card 2</span><span>Complication &mdash; financial cost of stalling</span>
+        <span style="color:#fb923c; font-weight:600;">Cards 3-5</span><span>Complication deep-dive &mdash; three root causes (grouped)</span>
+        <span style="color:var(--decision); font-weight:600;">Card 6</span><span>Resolution &mdash; the reallocation framework</span>
+        <span style="color:#22d3ee; font-weight:600;">Cards 7-9</span><span>Evidence &mdash; sector-level proof points (grouped)</span>
+        <span style="color:var(--decision); font-weight:600;">Card 10</span><span>Resolution close &mdash; the reframe</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 24 M6 18 L12 26 L18 18" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- ===== STEP 2: OUTLINE ===== -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-outline">2</div>
+    <div class="step-title"><span class="step-system-tag buddy">Buddy G</span>Outline <span class="step-subtitle"> &mdash; Gen3 &rarr; writeOutline</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <div class="box box-input">
+      <div class="box-label">&#9679; Inputs</div>
+      <ul>
+        <li><strong>Plan JSON</strong> from Step 1</li>
+        <li><strong>density.yaml</strong> &mdash; content cards 150-300 words, total 800-2000</li>
+        <li><strong>writing.md</strong> &mdash; action titles, bolded lead-in bullets, consultant voice</li>
+        <li><strong>Article claims</strong> from readSource</li>
+      </ul>
+    </div>
+
+    <div class="box box-decision">
+      <div class="box-label">&#9679; What It Decides</div>
+      <p>Fills each plan slot with article content in consultant voice. Action titles as full-sentence claims. Card groups get consistent content shapes. Chart data carried as inline <code>&lt;table&gt;</code>.</p>
+    </div>
+
+    <div class="box box-output">
+      <div class="box-label">&#9679; Output &mdash; Outline HTML (showing key cards)</div>
+      <div class="code-lang">html</div>
+      <pre class="code-block"><span class="syn-tag">&lt;outline&gt;</span>
+  <span class="syn-tag">&lt;deckIntent&gt;</span>Consultant diagnostic arc: open with thesis, size the
+  problem, three root causes (grouped), reallocation framework,
+  three sectors (grouped), close with reframe.<span class="syn-tag">&lt;/deckIntent&gt;</span>
+
+  <span class="syn-comment">&lt;!-- Card 0: Title --&gt;</span>
+  <span class="syn-tag">&lt;section</span> <span class="syn-attr">imageLayout</span>=<span class="syn-val">"blank"</span><span class="syn-tag">&gt;</span>
+    <span class="syn-tag">&lt;instructions&gt;</span>Title splash. Full background color. DISPLAY title.
+    Dense thesis paragraph.<span class="syn-tag">&lt;/instructions&gt;</span>
+    <span class="syn-tag">&lt;h1&gt;</span>The Implementation Valley<span class="syn-tag">&lt;/h1&gt;</span>
+    <span class="syn-tag">&lt;p&gt;</span>Despite record investment in AI capabilities, most enterprise
+    deployments are failing to move beyond pilot stage...<span class="syn-tag">&lt;/p&gt;</span>
+  <span class="syn-tag">&lt;/section&gt;</span>
+
+  <span class="syn-comment">&lt;!-- Card 3: ROOT-CAUSES exemplar --&gt;</span>
+  <span class="syn-tag">&lt;section</span> <span class="syn-attr">imageLayout</span>=<span class="syn-val">"blank"</span> <span class="syn-attr" style="color:#fb923c">group</span>=<span class="syn-val" style="color:#fb923c">"root-causes"</span><span class="syn-tag">&gt;</span>
+    <span class="syn-tag">&lt;instructions&gt;</span>Root cause 1 &mdash; integration debt.
+    Hero stat: 67%.<span class="syn-tag">&lt;/instructions&gt;</span>
+    <span class="syn-tag">&lt;h2&gt;</span>Integration Debt Consumes 3-5x More Resources
+    Than Model Development Itself<span class="syn-tag">&lt;/h2&gt;</span>
+    <span class="syn-tag">&lt;p&gt;</span><span class="syn-tag">&lt;b&gt;</span>Legacy system friction.<span class="syn-tag">&lt;/b&gt;</span> 67% of AI programs report
+    that connecting models to existing enterprise systems takes
+    3-5x longer than model development itself...<span class="syn-tag">&lt;/p&gt;</span>
+    <span class="syn-tag">&lt;p&gt;</span><span class="syn-tag">&lt;b&gt;</span>The compounding effect.<span class="syn-tag">&lt;/b&gt;</span> Each new integration inherits
+    the debt of every previous one...<span class="syn-tag">&lt;/p&gt;</span>
+  <span class="syn-tag">&lt;/section&gt;</span>
+
+  <span class="syn-comment">&lt;!-- Card 6: Budget reallocation (has chart data) --&gt;</span>
+  <span class="syn-tag">&lt;section</span> <span class="syn-attr">imageLayout</span>=<span class="syn-val">"blank"</span><span class="syn-tag">&gt;</span>
+    <span class="syn-tag">&lt;instructions&gt;</span>Reallocation framework. THE ONE CHART.
+    Bar chart: current vs recommended.<span class="syn-tag">&lt;/instructions&gt;</span>
+    <span class="syn-tag">&lt;h2&gt;</span>A 40/30/30 Budget Split Delivers 3.4x Improvement
+    in Pilot-to-Production Conversion<span class="syn-tag">&lt;/h2&gt;</span>
+    <span class="syn-tag">&lt;p&gt;</span>The current average allocation &mdash; 65% to model and data
+    infrastructure, 15% to integration...<span class="syn-tag">&lt;/p&gt;</span>
+    <span class="syn-tag">&lt;table&gt;</span>
+      <span class="syn-tag">&lt;tr&gt;&lt;th&gt;</span>Category<span class="syn-tag">&lt;/th&gt;&lt;th&gt;</span>Current<span class="syn-tag">&lt;/th&gt;&lt;th&gt;</span>Recommended<span class="syn-tag">&lt;/th&gt;&lt;/tr&gt;</span>
+      <span class="syn-tag">&lt;tr&gt;&lt;td&gt;</span>Model &amp; Data<span class="syn-tag">&lt;/td&gt;&lt;td&gt;</span>65%<span class="syn-tag">&lt;/td&gt;&lt;td&gt;</span>40%<span class="syn-tag">&lt;/td&gt;&lt;/tr&gt;</span>
+      <span class="syn-tag">&lt;tr&gt;&lt;td&gt;</span>Integration &amp; Ops<span class="syn-tag">&lt;/td&gt;&lt;td&gt;</span>15%<span class="syn-tag">&lt;/td&gt;&lt;td&gt;</span>30%<span class="syn-tag">&lt;/td&gt;&lt;/tr&gt;</span>
+      <span class="syn-tag">&lt;tr&gt;&lt;td&gt;</span>Change Mgmt<span class="syn-tag">&lt;/td&gt;&lt;td&gt;</span>20%<span class="syn-tag">&lt;/td&gt;&lt;td&gt;</span>30%<span class="syn-tag">&lt;/td&gt;&lt;/tr&gt;</span>
+    <span class="syn-tag">&lt;/table&gt;</span>
+  <span class="syn-tag">&lt;/section&gt;</span>
+
+  <span class="syn-comment">&lt;!-- Card 7: SECTOR-COMPARISON exemplar --&gt;</span>
+  <span class="syn-tag">&lt;section</span> <span class="syn-attr">imageLayout</span>=<span class="syn-val">"blank"</span> <span class="syn-attr" style="color:#22d3ee">group</span>=<span class="syn-val" style="color:#22d3ee">"sector-comparison"</span><span class="syn-tag">&gt;</span>
+    <span class="syn-tag">&lt;instructions&gt;</span>Sector &mdash; financial services.
+    Spending + conversion rate + key driver.<span class="syn-tag">&lt;/instructions&gt;</span>
+    <span class="syn-tag">&lt;h2&gt;</span>Financial Services Leads AI Spending at $18.7M but
+    Posts the Lowest Conversion Rate at 18%<span class="syn-tag">&lt;/h2&gt;</span>
+    <span class="syn-tag">&lt;p&gt;</span><span class="syn-tag">&lt;b&gt;</span>Regulatory drag.<span class="syn-tag">&lt;/b&gt;</span> Financial services organizations
+    spend the most on AI ($18.7M average) but convert at the
+    lowest rate (18%)...<span class="syn-tag">&lt;/p&gt;</span>
+  <span class="syn-tag">&lt;/section&gt;</span>
+<span class="syn-tag">&lt;/outline&gt;</span></pre>
+    </div>
+
+    <div class="box box-group-a" style="margin-top:0.5rem;">
+      <div class="box-label">&#9679; Group: root-causes &mdash; Consistent Content Shape</div>
+      <p>Cards 3, 4, 5 all have <code>group="root-causes"</code>. All share: <strong>action title with % stat</strong> + <strong>two paragraphs with bolded lead-ins</strong>. Card 3 is the exemplar (first in group). Cards 4 and 5 clone its GML.</p>
+    </div>
+
+    <div class="box box-group-b" style="margin-top:0.25rem;">
+      <div class="box-label">&#9679; Group: sector-comparison &mdash; Consistent Content Shape</div>
+      <p>Cards 7, 8, 9 all have <code>group="sector-comparison"</code>. All share: <strong>action title with $spending / conversion%</strong> + <strong>one paragraph with bolded lead-in</strong>. Card 7 is the exemplar. Cards 8 and 9 clone its GML.</p>
+    </div>
+  </div>
+</div>
+
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 24 M6 18 L12 26 L18 18" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- ===== STEP 3: STYLE RESOLVE ===== -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-style">3</div>
+    <div class="step-title"><span class="step-system-tag gendeck">GenDeck</span>Style Resolve <span class="step-subtitle"> &mdash; LLM art director</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <div class="box box-input">
+      <div class="box-label">&#9679; Inputs</div>
+      <ul>
+        <li><strong>blocks.ts</strong> &mdash; solidBoxes/solidLeafBoxes/solidJoinedBoxes preferred, stats/starStats for numbers, topLineText for lists, unlimited families, columns heavy, background colors encouraged</li>
+        <li><strong>planning.md</strong> &mdash; design philosophy (dense dashboards, dark theme, colored panels)</li>
+        <li><strong>deckIntent</strong> from plan</li>
+        <li><strong>Outline content summary</strong></li>
+      </ul>
+    </div>
+
+    <div class="box box-decision">
+      <div class="box-label">&#9679; What It Decides</div>
+      <p>Visual register (corporate diagnostic), accent color (#4338CA indigo), variant strategy (stats for hero numbers, solidBoxes only for the closer), label strategy (ANALYSIS / STRATEGY / EVIDENCE / CONCLUSION), ONE chart on card 6, and <strong>group-level templates</strong> for both card groups.</p>
+    </div>
+
+    <div class="box box-output">
+      <div class="box-label">&#9679; Output &mdash; Prose Style Brief</div>
+      <blockquote>
+        Corporate diagnostic register &mdash; this deck dissects enterprise AI implementation failure with Meridian Strategy Group data. Dark charcoal (#1C1917) base throughout. One accent: deep indigo (#4338CA) for emphasis panels and the title card background. solidBoxes only if a card has 3+ parallel items (the closing card). stats variant for all hero number displays. topLineText where bullet-style items appear. No images. No decorative elements. Labels are mandatory &mdash; ANALYSIS for diagnostic cards, STRATEGY for reallocation, EVIDENCE for sector cards, CONCLUSION for the closer. ONE chart only on card 6. DISPLAY:md for title card only. Every other heading is H1 with full action title text &mdash; never truncate.
+      </blockquote>
+    </div>
+
+    <div class="box box-group-a" style="margin-top:0.5rem;">
+      <div class="box-label">&#9679; Group Template: root-causes (cards 3-5)</div>
+      <p>ANALYSIS label + H1 action title + DISPLAY hero stat (67% / 54% / 31%) + two-column layout (narrative left, colored accent panel right) + stats row at bottom with 2 proof stats. Clone from card 3.</p>
+    </div>
+
+    <div class="box box-group-b" style="margin-top:0.25rem;">
+      <div class="box-label">&#9679; Group Template: sector-comparison (cards 7-9)</div>
+      <p>EVIDENCE label + H1 action title + two-column layout (stats display left with spending + conversion, colored analysis panel right) + single proof stat row. Clone from card 7.</p>
+    </div>
+
+    <div class="box box-output" style="margin-top:0.5rem;">
+      <div class="box-label">&#9679; Structured Variant Preferences</div>
+      <pre class="code-block">variantPreferences: { boxes: [solidBoxes, solidJoinedBoxes, solidLeafBoxes], stats: [stats, starStats], text: [topLineText] }
+maxFamilies: unlimited</pre>
+    </div>
+  </div>
+</div>
+
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 24 M6 18 L12 26 L18 18" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- PER-CARD LABEL -->
+<div style="text-align:center; margin-bottom: 0.75rem;">
+  <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-dim); background: var(--surface2); padding: 0.25rem 0.75rem; border-radius: 4px; border: 1px dashed rgba(255,255,255,0.15);">Per card from here &mdash; exemplars resolve, clones copy</span>
+</div>
+
+<!-- ===== STEP 4: STRUCTURE (Card 3 exemplar) ===== -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-structure">4a</div>
+    <div class="step-title"><span class="step-system-tag gendeck">GenDeck</span>Structure &mdash; Card 3 <span class="step-subtitle"> &mdash; root-causes exemplar</span></div>
+    <span class="group-badge root-causes">root-causes</span>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <div class="box box-input">
+      <div class="box-label">&#9679; Inputs</div>
+      <ul>
+        <li><strong>structure.md</strong> &mdash; multi-zone stacking, content types (metrics display, analysis panel, proof stats), composition patterns</li>
+        <li><strong>Instructions:</strong> "Root cause 1 &mdash; integration debt. GROUP: root-causes. Hero: 67%."</li>
+        <li><strong>Style brief directive:</strong> "ANALYSIS marker + H1 action title + DISPLAY hero stat + two columns (narrative left, colored panel right) + stats row"</li>
+      </ul>
+    </div>
+
+    <div class="box box-tool">
+      <div class="box-label">&#9679; Spatial Advisor Check</div>
+      <pre class="code-block">stats x2 in fullWidth: 18.4em x 5.2em per cell. Max ~60 chars. <span style="color:#4ade80;">FITS.</span></pre>
+    </div>
+
+    <div class="box box-output">
+      <div class="box-label">&#9679; Output &mdash; Spatial Description</div>
+      <blockquote>
+        Four stacked zones, full width. Zone 1: ANALYSIS label marker + H1 action title. Zone 2: DISPLAY "67%" as hero stat, left-aligned. Zone 3: two columns 50/50 &mdash; left: two paragraphs with bolded lead-ins; right: colored accent panel with key insight callout. Zone 4: stats row with 2 proof stats. This is the GROUP EXEMPLAR for root-causes &mdash; cards 4 and 5 clone this template.
+      </blockquote>
+    </div>
+  </div>
+</div>
+
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 24 M6 18 L12 26 L18 18" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- ===== STEP 4b: STRUCTURE (Card 6 unique) ===== -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-structure">4b</div>
+    <div class="step-title"><span class="step-system-tag gendeck">GenDeck</span>Structure &mdash; Card 6 <span class="step-subtitle"> &mdash; budget reallocation (unique, has chart)</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <div class="box box-input">
+      <div class="box-label">&#9679; Inputs</div>
+      <ul>
+        <li><strong>Instructions:</strong> "The ONE chart in this deck. Bar chart: current vs recommended allocation."</li>
+        <li><strong>Card content</strong> includes a <code>&lt;table&gt;</code> with budget data &mdash; this feeds the chart-creator tool</li>
+      </ul>
+    </div>
+
+    <div class="box box-output">
+      <div class="box-label">&#9679; Output &mdash; Spatial Description</div>
+      <blockquote>
+        Four stacked zones. Zone 1: STRATEGY label + H1 action title. Zone 2: introductory paragraph. Zone 3: two columns 50/50 &mdash; left: bar chart (3 categories, current vs recommended); right: colored accent panel with analysis + 3.4x stat. Zone 4: aside note. Chart data from outline's &lt;table&gt; element.
+      </blockquote>
+    </div>
+  </div>
+</div>
+
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 24 M6 18 L12 26 L18 18" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- ===== STEP 5: RESOLVE (Card 3 exemplar) ===== -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-resolve">5a</div>
+    <div class="step-title"><span class="step-system-tag gendeck">GenDeck</span>Layout Resolver &mdash; Card 3 <span class="step-subtitle"> &mdash; root-causes exemplar &rarr; GML</span></div>
+    <span class="group-badge root-causes">root-causes</span>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <div class="box box-input">
+      <div class="box-label">&#9679; Inputs</div>
+      <ul>
+        <li><strong>blocks.ts</strong> + <strong>examples.md</strong> &mdash; GML reference cards, allowed constructs</li>
+        <li><strong>Spatial description</strong> from Step 4a</li>
+        <li><strong>Card content</strong> + <strong>style brief</strong></li>
+        <li><strong>Allowed variants:</strong> <code>boxes: solidBoxes | stats: stats, starStats | text: topLineText</code></li>
+      </ul>
+    </div>
+
+    <div class="box box-output">
+      <div class="box-label">&#9679; Output &mdash; Card GML</div>
+      <div class="code-lang">gml</div>
+      <pre class="code-block"><span class="syn-tag">&lt;SECTION</span> <span class="syn-attr">image-layout</span>=<span class="syn-val">"blank"</span><span class="syn-tag">&gt;</span>
+  <span class="syn-tag">&lt;DIV</span> <span class="syn-attr">class</span>=<span class="syn-val">"body"</span><span class="syn-tag">&gt;</span>
+    <span class="syn-tag">&lt;LABELS&gt;&lt;LABEL</span> <span class="syn-attr">variant</span>=<span class="syn-val">"solid"</span><span class="syn-tag">&gt;&lt;ICON</span> <span class="syn-attr">name</span>=<span class="syn-val">"alert-triangle"</span> <span class="syn-tag">/&gt;</span> ANALYSIS<span class="syn-tag">&lt;/LABEL&gt;&lt;/LABELS&gt;</span>
+    <span class="syn-tag">&lt;H1&gt;</span>Integration Debt Consumes 3-5x More Resources
+    Than Model Development Itself<span class="syn-tag">&lt;/H1&gt;</span>
+    <span class="syn-tag">&lt;DISPLAY</span> <span class="syn-attr">size</span>=<span class="syn-val">"md"</span><span class="syn-tag">&gt;</span>67%<span class="syn-tag">&lt;/DISPLAY&gt;</span>
+    <span class="syn-tag">&lt;P&gt;</span>of AI programs report integration takes 3-5x longer
+    than model development<span class="syn-tag">&lt;/P&gt;</span>
+    <span class="syn-tag">&lt;COLUMNS</span> <span class="syn-attr">colWidths</span>=<span class="syn-val">"[50,50]"</span><span class="syn-tag">&gt;</span>
+      <span class="syn-tag">&lt;DIV&gt;</span>
+        <span class="syn-tag">&lt;P&gt;&lt;B&gt;</span>Legacy system friction.<span class="syn-tag">&lt;/B&gt;</span> 67% of AI programs
+        report that connecting models to existing enterprise
+        systems takes 3-5x longer...<span class="syn-tag">&lt;/P&gt;</span>
+        <span class="syn-tag">&lt;P&gt;&lt;B&gt;</span>The compounding effect.<span class="syn-tag">&lt;/B&gt;</span> Each new integration
+        inherits the debt of every previous one...<span class="syn-tag">&lt;/P&gt;</span>
+      <span class="syn-tag">&lt;/DIV&gt;</span>
+      <span class="syn-tag">&lt;DIV</span> <span class="syn-attr">data-background-color</span>=<span class="syn-val">"#4338CA"</span><span class="syn-tag">&gt;</span>
+        <span class="syn-tag">&lt;H4&gt;&lt;SPAN</span> <span class="syn-attr">text-color</span>=<span class="syn-val">"#FFFFFF"</span><span class="syn-tag">&gt;</span>The Integration Tax<span class="syn-tag">&lt;/SPAN&gt;&lt;/H4&gt;</span>
+        <span class="syn-tag">&lt;P&gt;&lt;SPAN</span> <span class="syn-attr">text-color</span>=<span class="syn-val">"#FFFFFF"</span><span class="syn-tag">&gt;</span>For every dollar spent on model
+        development, organizations spend $3-5 on integration...<span class="syn-tag">&lt;/SPAN&gt;&lt;/P&gt;</span>
+      <span class="syn-tag">&lt;/DIV&gt;</span>
+    <span class="syn-tag">&lt;/COLUMNS&gt;</span>
+    <span class="syn-tag">&lt;SMART-LAYOUT</span> <span class="syn-attr">variant</span>=<span class="syn-val">"stats"</span> <span class="syn-attr">cellSize</span>=<span class="syn-val">"15"</span><span class="syn-tag">&gt;</span>
+      <span class="syn-tag">&lt;SMART-LAYOUT-ITEM</span> <span class="syn-attr">number</span>=<span class="syn-val">"3-5x"</span><span class="syn-tag">&gt;</span>
+        <span class="syn-tag">&lt;P&gt;</span>Integration cost multiplier vs model dev<span class="syn-tag">&lt;/P&gt;</span>
+      <span class="syn-tag">&lt;/SMART-LAYOUT-ITEM&gt;</span>
+      <span class="syn-tag">&lt;SMART-LAYOUT-ITEM</span> <span class="syn-attr">number</span>=<span class="syn-val">"67%"</span><span class="syn-tag">&gt;</span>
+        <span class="syn-tag">&lt;P&gt;</span>Programs reporting integration as primary time sink<span class="syn-tag">&lt;/P&gt;</span>
+      <span class="syn-tag">&lt;/SMART-LAYOUT-ITEM&gt;</span>
+    <span class="syn-tag">&lt;/SMART-LAYOUT&gt;</span>
+  <span class="syn-tag">&lt;/DIV&gt;</span>
+<span class="syn-tag">&lt;/SECTION&gt;</span></pre>
+      <p style="margin-top:0.5rem; font-size:0.85rem; color:var(--text-dim);"><strong>Post-generation spatial check:</strong> stats x 2 fullWidth &mdash; fits. No overflow warnings.</p>
+    </div>
+  </div>
+</div>
+
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 24 M6 18 L12 26 L18 18" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- ===== STEP 5b: CLONE for root-causes ===== -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-resolve" style="font-size:0.65rem;">5b</div>
+    <div class="step-title"><span class="step-system-tag gendeck">GenDeck</span>Clone &mdash; Cards 4, 5 <span class="step-subtitle"> &mdash; root-causes group clones from card 3</span></div>
+    <span class="group-badge root-causes clone">clone</span>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <p class="prose">The resolver <strong>clones card 3's GML structure</strong> and swaps content. No independent design decisions for these cards.</p>
+
+    <div class="box box-group-a">
+      <div class="box-label">&#9679; Card 4 (Change Resistance) &mdash; Content Swap</div>
+      <ul>
+        <li>ANALYSIS label (same)</li>
+        <li>H1: "54% of Programs Cite Organizational Resistance as Primary Blocker &mdash; Not Technical Limitations"</li>
+        <li>DISPLAY: <strong>54%</strong></li>
+        <li>Columns: narrative "Friction over function" + "The adoption paradox" left; colored panel "The Adoption Paradox" right</li>
+        <li>Stats row: 54% resistance stat + bypass rate stat</li>
+      </ul>
+    </div>
+
+    <div class="box box-group-a" style="margin-top:0.25rem;">
+      <div class="box-label">&#9679; Card 5 (Operational Tooling) &mdash; Content Swap</div>
+      <ul>
+        <li>ANALYSIS label (same)</li>
+        <li>H1: "Only 31% of Enterprises Have Dedicated MLOps Teams &mdash; Fewer Than 15% Monitor Model Drift"</li>
+        <li>DISPLAY: <strong>31%</strong></li>
+        <li>Columns: narrative "The ops gap" + "Invisible degradation" left; colored panel right</li>
+        <li>Stats row: 31% MLOps + &lt;15% monitoring stats</li>
+      </ul>
+    </div>
+
+    <p class="prose" style="margin-top:0.75rem; font-size:0.85rem; color:var(--text-dim);">The clone step is the "slide master" in action: one creative decision on card 3, replicated with content substitution for cards 4 and 5.</p>
+  </div>
+</div>
+
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 24 M6 18 L12 26 L18 18" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- ===== STEP 5c: RESOLVE (Card 6 with chart) ===== -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-resolve" style="font-size:0.65rem;">5c</div>
+    <div class="step-title"><span class="step-system-tag gendeck">GenDeck</span>Layout Resolver &mdash; Card 6 <span class="step-subtitle"> &mdash; budget reallocation + chart-creator tool call</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <div class="box box-tool">
+      <div class="box-label">&#9679; Tool Call: chart-creator</div>
+      <p>The outline's <code>&lt;table&gt;</code> data feeds the chart-creator tool, which produces a grouped bar chart: 3 categories (Model &amp; Data, Integration &amp; Ops, Change Mgmt), 2 series (Current %, Recommended %).</p>
+    </div>
+
+    <div class="box box-output">
+      <div class="box-label">&#9679; Output &mdash; Card GML (with CHART element)</div>
+      <div class="code-lang">gml</div>
+      <pre class="code-block"><span class="syn-tag">&lt;SECTION</span> <span class="syn-attr">image-layout</span>=<span class="syn-val">"blank"</span><span class="syn-tag">&gt;</span>
+  <span class="syn-tag">&lt;DIV</span> <span class="syn-attr">class</span>=<span class="syn-val">"body"</span><span class="syn-tag">&gt;</span>
+    <span class="syn-tag">&lt;LABELS&gt;&lt;LABEL</span> <span class="syn-attr">variant</span>=<span class="syn-val">"solid"</span><span class="syn-tag">&gt;&lt;ICON</span> <span class="syn-attr">name</span>=<span class="syn-val">"target"</span> <span class="syn-tag">/&gt;</span> STRATEGY<span class="syn-tag">&lt;/LABEL&gt;&lt;/LABELS&gt;</span>
+    <span class="syn-tag">&lt;H1&gt;</span>A 40/30/30 Budget Split Delivers 3.4x Improvement
+    in Pilot-to-Production Conversion<span class="syn-tag">&lt;/H1&gt;</span>
+    <span class="syn-tag">&lt;P&gt;</span>The current average allocation &mdash; 65% to model and data
+    infrastructure, 15% to integration...<span class="syn-tag">&lt;/P&gt;</span>
+    <span class="syn-tag">&lt;COLUMNS</span> <span class="syn-attr">colWidths</span>=<span class="syn-val">"[50,50]"</span><span class="syn-tag">&gt;</span>
+      <span class="syn-tag">&lt;DIV&gt;</span>
+        <span class="syn-tag">&lt;CHART</span> <span class="syn-attr">charttype</span>=<span class="syn-val">"bar"</span><span class="syn-tag">&gt;</span>
+          <span class="syn-tag">&lt;TABLE&gt;</span>
+            <span class="syn-tag">&lt;COLGROUP&gt;</span>
+              <span class="syn-tag">&lt;COL</span> <span class="syn-attr">type</span>=<span class="syn-val">"label"</span> <span class="syn-attr">label</span>=<span class="syn-val">"Category"</span> <span class="syn-tag">/&gt;</span>
+              <span class="syn-tag">&lt;COL</span> <span class="syn-attr">type</span>=<span class="syn-val">"data"</span> <span class="syn-attr">label</span>=<span class="syn-val">"Current %"</span> <span class="syn-tag">/&gt;</span>
+              <span class="syn-tag">&lt;COL</span> <span class="syn-attr">type</span>=<span class="syn-val">"data"</span> <span class="syn-attr">label</span>=<span class="syn-val">"Recommended %"</span> <span class="syn-tag">/&gt;</span>
+            <span class="syn-tag">&lt;/COLGROUP&gt;</span>
+            <span class="syn-tag">&lt;TBODY&gt;</span>
+              <span class="syn-tag">&lt;TR&gt;&lt;TD&gt;&lt;VALUE&gt;</span>Model &amp; Data<span class="syn-tag">&lt;/VALUE&gt;&lt;/TD&gt;</span>
+                  <span class="syn-tag">&lt;TD&gt;&lt;VALUE&gt;</span>65<span class="syn-tag">&lt;/VALUE&gt;&lt;/TD&gt;</span>
+                  <span class="syn-tag">&lt;TD&gt;&lt;VALUE&gt;</span>40<span class="syn-tag">&lt;/VALUE&gt;&lt;/TD&gt;&lt;/TR&gt;</span>
+              <span class="syn-tag">&lt;TR&gt;&lt;TD&gt;&lt;VALUE&gt;</span>Integration<span class="syn-tag">&lt;/VALUE&gt;&lt;/TD&gt;</span>
+                  <span class="syn-tag">&lt;TD&gt;&lt;VALUE&gt;</span>15<span class="syn-tag">&lt;/VALUE&gt;&lt;/TD&gt;</span>
+                  <span class="syn-tag">&lt;TD&gt;&lt;VALUE&gt;</span>30<span class="syn-tag">&lt;/VALUE&gt;&lt;/TD&gt;&lt;/TR&gt;</span>
+              <span class="syn-tag">&lt;TR&gt;&lt;TD&gt;&lt;VALUE&gt;</span>Change Mgmt<span class="syn-tag">&lt;/VALUE&gt;&lt;/TD&gt;</span>
+                  <span class="syn-tag">&lt;TD&gt;&lt;VALUE&gt;</span>20<span class="syn-tag">&lt;/VALUE&gt;&lt;/TD&gt;</span>
+                  <span class="syn-tag">&lt;TD&gt;&lt;VALUE&gt;</span>30<span class="syn-tag">&lt;/VALUE&gt;&lt;/TD&gt;&lt;/TR&gt;</span>
+            <span class="syn-tag">&lt;/TBODY&gt;</span>
+          <span class="syn-tag">&lt;/TABLE&gt;</span>
+        <span class="syn-tag">&lt;/CHART&gt;</span>
+      <span class="syn-tag">&lt;/DIV&gt;</span>
+      <span class="syn-tag">&lt;DIV</span> <span class="syn-attr">data-background-color</span>=<span class="syn-val">"#4338CA"</span><span class="syn-tag">&gt;</span>
+        <span class="syn-tag">&lt;H4&gt;&lt;SPAN</span> <span class="syn-attr">text-color</span>=<span class="syn-val">"#FFFFFF"</span><span class="syn-tag">&gt;</span>Why Rebalancing Works<span class="syn-tag">&lt;/SPAN&gt;&lt;/H4&gt;</span>
+        <span class="syn-tag">&lt;P&gt;&lt;SPAN</span> <span class="syn-attr">text-color</span>=<span class="syn-val">"#FFFFFF"</span><span class="syn-tag">&gt;</span>Organizations that shifted budget toward
+        integration and change management showed a 3.4x improvement...<span class="syn-tag">&lt;/SPAN&gt;&lt;/P&gt;</span>
+        <span class="syn-tag">&lt;SMART-LAYOUT</span> <span class="syn-attr">variant</span>=<span class="syn-val">"stats"</span> <span class="syn-attr">cellSize</span>=<span class="syn-val">"15"</span><span class="syn-tag">&gt;</span>
+          <span class="syn-tag">&lt;SMART-LAYOUT-ITEM</span> <span class="syn-attr">number</span>=<span class="syn-val">"3.4x"</span><span class="syn-tag">&gt;</span>
+            <span class="syn-tag">&lt;P&gt;&lt;SPAN</span> <span class="syn-attr">text-color</span>=<span class="syn-val">"#FFFFFF"</span><span class="syn-tag">&gt;</span>Conversion improvement<span class="syn-tag">&lt;/SPAN&gt;&lt;/P&gt;</span>
+          <span class="syn-tag">&lt;/SMART-LAYOUT-ITEM&gt;</span>
+        <span class="syn-tag">&lt;/SMART-LAYOUT&gt;</span>
+      <span class="syn-tag">&lt;/DIV&gt;</span>
+    <span class="syn-tag">&lt;/COLUMNS&gt;</span>
+    <span class="syn-tag">&lt;ASIDE</span> <span class="syn-attr">variant</span>=<span class="syn-val">"note"</span><span class="syn-tag">&gt;</span>
+      <span class="syn-tag">&lt;P&gt;</span>Organizations adopting balanced allocation showed improvement
+      within 12-18 months of budget restructuring.<span class="syn-tag">&lt;/P&gt;</span>
+    <span class="syn-tag">&lt;/ASIDE&gt;</span>
+  <span class="syn-tag">&lt;/DIV&gt;</span>
+<span class="syn-tag">&lt;/SECTION&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 24 M6 18 L12 26 L18 18" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- ===== STEP 5d: RESOLVE (Card 7 sector exemplar) ===== -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-resolve" style="font-size:0.65rem;">5d</div>
+    <div class="step-title"><span class="step-system-tag gendeck">GenDeck</span>Layout Resolver &mdash; Card 7 <span class="step-subtitle"> &mdash; sector-comparison exemplar</span></div>
+    <span class="group-badge sector-comp">sector</span>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <div class="box box-output">
+      <div class="box-label">&#9679; Output &mdash; Card GML</div>
+      <div class="code-lang">gml</div>
+      <pre class="code-block"><span class="syn-tag">&lt;SECTION</span> <span class="syn-attr">image-layout</span>=<span class="syn-val">"blank"</span><span class="syn-tag">&gt;</span>
+  <span class="syn-tag">&lt;DIV</span> <span class="syn-attr">class</span>=<span class="syn-val">"body"</span><span class="syn-tag">&gt;</span>
+    <span class="syn-tag">&lt;LABELS&gt;&lt;LABEL</span> <span class="syn-attr">variant</span>=<span class="syn-val">"solid"</span><span class="syn-tag">&gt;&lt;ICON</span> <span class="syn-attr">name</span>=<span class="syn-val">"building"</span> <span class="syn-tag">/&gt;</span> EVIDENCE<span class="syn-tag">&lt;/LABEL&gt;&lt;/LABELS&gt;</span>
+    <span class="syn-tag">&lt;H1&gt;</span>Financial Services Leads AI Spending at $18.7M but
+    Posts the Lowest Conversion Rate at 18%<span class="syn-tag">&lt;/H1&gt;</span>
+    <span class="syn-tag">&lt;COLUMNS</span> <span class="syn-attr">colWidths</span>=<span class="syn-val">"[50,50]"</span><span class="syn-tag">&gt;</span>
+      <span class="syn-tag">&lt;DIV&gt;</span>
+        <span class="syn-tag">&lt;SMART-LAYOUT</span> <span class="syn-attr">variant</span>=<span class="syn-val">"stats"</span> <span class="syn-attr">cellSize</span>=<span class="syn-val">"15"</span><span class="syn-tag">&gt;</span>
+          <span class="syn-tag">&lt;SMART-LAYOUT-ITEM</span> <span class="syn-attr">number</span>=<span class="syn-val">"$18.7M"</span><span class="syn-tag">&gt;</span>
+            <span class="syn-tag">&lt;P&gt;</span>Average AI spending<span class="syn-tag">&lt;/P&gt;</span>
+          <span class="syn-tag">&lt;/SMART-LAYOUT-ITEM&gt;</span>
+          <span class="syn-tag">&lt;SMART-LAYOUT-ITEM</span> <span class="syn-attr">number</span>=<span class="syn-val">"18%"</span><span class="syn-tag">&gt;</span>
+            <span class="syn-tag">&lt;P&gt;</span>Pilot-to-production conversion<span class="syn-tag">&lt;/P&gt;</span>
+          <span class="syn-tag">&lt;/SMART-LAYOUT-ITEM&gt;</span>
+        <span class="syn-tag">&lt;/SMART-LAYOUT&gt;</span>
+      <span class="syn-tag">&lt;/DIV&gt;</span>
+      <span class="syn-tag">&lt;DIV</span> <span class="syn-attr">data-background-color</span>=<span class="syn-val">"#4338CA"</span><span class="syn-tag">&gt;</span>
+        <span class="syn-tag">&lt;H4&gt;&lt;SPAN</span> <span class="syn-attr">text-color</span>=<span class="syn-val">"#FFFFFF"</span><span class="syn-tag">&gt;</span>Regulatory Drag<span class="syn-tag">&lt;/SPAN&gt;&lt;/H4&gt;</span>
+        <span class="syn-tag">&lt;P&gt;&lt;SPAN</span> <span class="syn-attr">text-color</span>=<span class="syn-val">"#FFFFFF"</span><span class="syn-tag">&gt;</span>Regulatory complexity and integration
+        debt with legacy core banking systems...<span class="syn-tag">&lt;/SPAN&gt;&lt;/P&gt;</span>
+      <span class="syn-tag">&lt;/DIV&gt;</span>
+    <span class="syn-tag">&lt;/COLUMNS&gt;</span>
+    <span class="syn-tag">&lt;SMART-LAYOUT</span> <span class="syn-attr">variant</span>=<span class="syn-val">"stats"</span> <span class="syn-attr">cellSize</span>=<span class="syn-val">"15"</span><span class="syn-tag">&gt;</span>
+      <span class="syn-tag">&lt;SMART-LAYOUT-ITEM</span> <span class="syn-attr">number</span>=<span class="syn-val">"38%"</span><span class="syn-tag">&gt;</span>
+        <span class="syn-tag">&lt;P&gt;</span>YoY spending increase<span class="syn-tag">&lt;/P&gt;</span>
+      <span class="syn-tag">&lt;/SMART-LAYOUT-ITEM&gt;</span>
+    <span class="syn-tag">&lt;/SMART-LAYOUT&gt;</span>
+  <span class="syn-tag">&lt;/DIV&gt;</span>
+<span class="syn-tag">&lt;/SECTION&gt;</span></pre>
+    </div>
+
+    <div class="box box-group-b" style="margin-top:0.5rem;">
+      <div class="box-label">&#9679; Cards 8, 9 Clone from This Template</div>
+      <ul>
+        <li><strong>Card 8 (Healthcare):</strong> stats $11.3M / 29%, panel "Clear Use Cases Win"</li>
+        <li><strong>Card 9 (Manufacturing):</strong> stats $12.8M / 23%, panel "The Ops-First Approach Works"</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 24 M6 18 L12 26 L18 18" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- ===== STEP 6: RENDERER + REVIEWER ===== -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-renderer">6</div>
+    <div class="step-title"><span class="step-system-tag gendeck">GenDeck</span>Renderer + Reviewer <span class="step-subtitle"> &mdash; concatenate, screenshot, grade</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <p class="prose">All 11 SECTION elements concatenated into <code>deck.gml</code>. Theme applied (dark charcoal base, indigo accent). Screenshots via gml-cli.</p>
+
+    <div class="box box-output">
+      <div class="box-label">&#9679; Consultant-Card Grader Checks</div>
+      <ul>
+        <li><strong>Action title present and falsifiable?</strong> All 11 cards pass.</li>
+        <li><strong>Section marker present?</strong> Cards 1-10 pass (card 0 title card is exempt).</li>
+        <li><strong>Data density sufficient?</strong> All content cards have multi-zone stacking (3-4 zones).</li>
+        <li><strong>Card groups consistent?</strong> root-causes (3, 4, 5) share template. sector-comparison (7, 8, 9) share template.</li>
+      </ul>
+    </div>
+
+    <p class="prose" style="margin-top:0.5rem; font-size:0.85rem; color:var(--text-dim);">Pipeline complete: 5 exemplar cards resolved independently, 6 cards cloned from group templates. 1 chart-creator tool call (card 6). 11 cards total.</p>
+  </div>
+</div>
+
+<!-- ===== SUMMARY TABLE ===== -->
+<div class="summary-section">
+  <h2>What Each Step Contributed</h2>
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>Step</th>
+        <th>Input</th>
+        <th>Decision Made</th>
+        <th>Output</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Plan</td>
+        <td>Article claims + planning.md + writing.md</td>
+        <td>Narrative arc, card roles, card groups, evidence types</td>
+        <td>Plan JSON (deckIntent + cards + cardGroups)</td>
+      </tr>
+      <tr>
+        <td>Outline</td>
+        <td>Plan + density.yaml + writing.md + article</td>
+        <td>Actual content, action titles, chart data in &lt;table&gt;</td>
+        <td>Outline HTML (11 sections)</td>
+      </tr>
+      <tr>
+        <td>Style Resolve</td>
+        <td>blocks.ts + planning.md + deckIntent + outline</td>
+        <td>Register, accent (#4338CA), variants, group templates</td>
+        <td>Prose brief + variant preferences</td>
+      </tr>
+      <tr>
+        <td>Structure</td>
+        <td>structure.md + instructions + style brief</td>
+        <td>Spatial composition per card (zones, columns, chart)</td>
+        <td>Spatial descriptions (exemplars only)</td>
+      </tr>
+      <tr>
+        <td>Resolve</td>
+        <td>blocks.ts + examples.md + structure + brief</td>
+        <td>Valid GML, chart-creator call, group cloning</td>
+        <td>GML SECTION per card (5 resolved + 6 cloned)</td>
+      </tr>
+      <tr>
+        <td>Render + Review</td>
+        <td>deck.gml</td>
+        <td>Theme application, grading</td>
+        <td>Screenshots + score report</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== PIPELINE COMPARISON ===== -->
+<div class="summary-section" style="margin-top:1.5rem;">
+  <h2>Pipeline Comparison: Consultant vs Swiss</h2>
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>Dimension</th>
+        <th>Swiss Grid</th>
+        <th>Consultant</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Density</td>
+        <td>Sparse. Whitespace as design element.</td>
+        <td>Dense. Every card is a mini-dashboard.</td>
+      </tr>
+      <tr>
+        <td>Titles</td>
+        <td>Short declarative (1-4 words)</td>
+        <td>Full-sentence action titles (claims)</td>
+      </tr>
+      <tr>
+        <td>Variant families</td>
+        <td>Max 1 family per deck</td>
+        <td>Unlimited &mdash; semantic matching per card</td>
+      </tr>
+      <tr>
+        <td>Color strategy</td>
+        <td>Monochromatic, dark bookends only</td>
+        <td>Dark base + accent panels on every card</td>
+      </tr>
+      <tr>
+        <td>Card groups</td>
+        <td>Not used (8 cards, each unique)</td>
+        <td>2 groups (root-causes x3, sectors x3)</td>
+      </tr>
+      <tr>
+        <td>Charts</td>
+        <td>None</td>
+        <td>Max 1, paired with analysis panel</td>
+      </tr>
+      <tr>
+        <td>Labels</td>
+        <td>Not used</td>
+        <td>Mandatory on every card (ANALYSIS, etc.)</td>
+      </tr>
+      <tr>
+        <td>Pipeline calls</td>
+        <td>8 independent resolve calls</td>
+        <td>5 exemplar resolves + 6 clones</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div style="text-align:center; margin-top:2rem; padding:1rem; color:var(--text-dim); font-size:0.8rem;">
+  Full from-scratch pipeline &mdash; all steps active &mdash; 11 cards &mdash; 2 card groups &mdash; 1 chart
+</div>
+
+</body>
+</html>

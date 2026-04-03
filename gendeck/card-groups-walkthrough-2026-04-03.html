@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Card Groups — GenDeck From-Scratch Pipeline</title>
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --surface2: #1a1a1a;
+    --border: #2a2a2a;
+    --text: #e0e0e0;
+    --text-dim: #888;
+    --input: #3b82f6;
+    --input-bg: rgba(59, 130, 246, 0.08);
+    --input-border: rgba(59, 130, 246, 0.25);
+    --output: #22c55e;
+    --output-bg: rgba(34, 197, 94, 0.08);
+    --output-border: rgba(34, 197, 94, 0.25);
+    --decision: #f59e0b;
+    --decision-bg: rgba(245, 158, 11, 0.08);
+    --decision-border: rgba(245, 158, 11, 0.25);
+    --critical: #ef4444;
+    --critical-bg: rgba(239, 68, 68, 0.08);
+    --critical-border: rgba(239, 68, 68, 0.3);
+    --accent: #a78bfa;
+    --code-bg: #0d1117;
+    --code-border: #21262d;
+    --arrow: #555;
+    --clone: #e879f9;
+    --clone-bg: rgba(232, 121, 249, 0.08);
+    --clone-border: rgba(232, 121, 249, 0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    padding: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.25rem; }
+  h2 { font-size: 1.3rem; font-weight: 600; }
+  h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+
+  code, pre {
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+  }
+
+  code {
+    background: rgba(255,255,255,0.06);
+    padding: 0.1em 0.35em;
+    border-radius: 3px;
+    font-size: 0.85em;
+  }
+
+  .page-subtitle {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+
+  /* ===== BANNER ===== */
+  .banner {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem 2rem 1.5rem;
+    margin-bottom: 2.5rem;
+    overflow-x: auto;
+  }
+
+  .banner-title {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.25rem;
+  }
+
+  .pipeline-flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    min-width: 900px;
+    justify-content: center;
+  }
+
+  .pipeline-pill {
+    padding: 0.5rem 0.9rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.78rem;
+    white-space: nowrap;
+    border: 1px solid;
+    text-align: center;
+  }
+
+  .pipeline-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .pipeline-sub {
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    text-align: center;
+    max-width: 120px;
+    line-height: 1.3;
+  }
+
+  .pill-plan { background: rgba(56,189,248,0.15); border-color: rgba(56,189,248,0.4); color: #7dd3fc; }
+  .pill-outline { background: rgba(59,130,246,0.15); border-color: rgba(59,130,246,0.4); color: #93c5fd; }
+  .pill-exemplar { background: rgba(245,158,11,0.15); border-color: rgba(245,158,11,0.4); color: #fcd34d; }
+  .pill-clone { background: rgba(232,121,249,0.15); border-color: rgba(232,121,249,0.4); color: #f0abfc; }
+  .pill-render { background: rgba(34,197,94,0.15); border-color: rgba(34,197,94,0.4); color: #86efac; }
+
+  .pipeline-arrow {
+    color: var(--arrow);
+    font-size: 1.2rem;
+    padding: 0 0.4rem;
+    flex-shrink: 0;
+  }
+
+  .exemplar-bracket {
+    border: 1px dashed rgba(245,158,11,0.4);
+    border-radius: 10px;
+    padding: 0.6rem 0.6rem 0.4rem;
+    position: relative;
+  }
+
+  .bracket-label {
+    position: absolute;
+    top: -9px;
+    left: 12px;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #fcd34d;
+    background: var(--surface);
+    padding: 0 6px;
+    font-weight: 600;
+  }
+
+  .bracket-inner {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .pill-structure { background: rgba(245,158,11,0.12); border-color: rgba(245,158,11,0.3); color: #fcd34d; font-size: 0.7rem; padding: 0.35rem 0.6rem; }
+  .pill-resolver { background: rgba(34,197,94,0.12); border-color: rgba(34,197,94,0.3); color: #86efac; font-size: 0.7rem; padding: 0.35rem 0.6rem; }
+
+  .small-arrow {
+    color: var(--arrow);
+    font-size: 0.9rem;
+    padding: 0 0.2rem;
+  }
+
+  /* ===== COLLAPSIBLE STEPS ===== */
+  .step-connector {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 0;
+  }
+
+  .step-connector svg {
+    width: 24px;
+    height: 32px;
+  }
+
+  .step {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 0;
+    background: var(--surface);
+    overflow: hidden;
+  }
+
+  .step.critical-step {
+    border-color: var(--critical-border);
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.08);
+  }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+
+  .step-header:hover { background: var(--surface2); }
+
+  .step-number {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+  }
+
+  .sn-input { background: rgba(59, 130, 246, 0.2); color: #93c5fd; }
+  .sn-critical { background: rgba(239, 68, 68, 0.25); color: #fca5a5; }
+  .sn-decision { background: rgba(245, 158, 11, 0.2); color: #fcd34d; }
+  .sn-clone { background: rgba(232, 121, 249, 0.2); color: #f0abfc; }
+  .sn-output { background: rgba(34, 197, 94, 0.2); color: #86efac; }
+  .sn-cost { background: rgba(99, 102, 241, 0.2); color: #a5b4fc; }
+
+  .step-title { font-weight: 600; font-size: 1rem; flex: 1; }
+
+  .step-badge {
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-right: 0.25rem;
+  }
+
+  .badge-critical { background: rgba(239,68,68,0.2); color: #fca5a5; }
+
+  .step-chevron {
+    transition: transform 0.2s;
+    color: var(--text-dim);
+    font-size: 1.2rem;
+  }
+
+  .step.open .step-chevron { transform: rotate(90deg); }
+
+  .step-body {
+    display: none;
+    padding: 0 1.25rem 1.25rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .step.open .step-body { display: block; }
+
+  /* ===== CONTENT BOXES ===== */
+  .box {
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 0.75rem 0;
+    border: 1px solid;
+  }
+
+  .box-input { background: var(--input-bg); border-color: var(--input-border); }
+  .box-output { background: var(--output-bg); border-color: var(--output-border); }
+  .box-decision { background: var(--decision-bg); border-color: var(--decision-border); }
+  .box-critical { background: var(--critical-bg); border-color: var(--critical-border); }
+  .box-clone { background: var(--clone-bg); border-color: var(--clone-border); }
+
+  .box-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.5rem;
+  }
+
+  .label-input { color: var(--input); }
+  .label-output { color: var(--output); }
+  .label-decision { color: var(--decision); }
+  .label-critical { color: var(--critical); }
+  .label-clone { color: var(--clone); }
+
+  pre.code-block {
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: 6px;
+    padding: 0.85rem 1rem;
+    overflow-x: auto;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: #c9d1d9;
+  }
+
+  .highlight-line {
+    background: rgba(245, 158, 11, 0.12);
+    display: block;
+    margin: 0 -1rem;
+    padding: 0 1rem;
+  }
+
+  .highlight-green {
+    background: rgba(34, 197, 94, 0.12);
+    display: block;
+    margin: 0 -1rem;
+    padding: 0 1rem;
+  }
+
+  .highlight-red {
+    background: rgba(239, 68, 68, 0.1);
+    display: block;
+    margin: 0 -1rem;
+    padding: 0 1rem;
+  }
+
+  .highlight-purple {
+    background: rgba(232, 121, 249, 0.1);
+    display: block;
+    margin: 0 -1rem;
+    padding: 0 1rem;
+  }
+
+  /* ===== SIDE BY SIDE ===== */
+  .side-by-side {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.75rem;
+    margin: 0.75rem 0;
+  }
+
+  .side-by-side-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin: 0.75rem 0;
+  }
+
+  .sbs-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem;
+    background: var(--surface2);
+  }
+
+  .sbs-card.card-good {
+    border-color: rgba(34, 197, 94, 0.3);
+  }
+
+  .sbs-card.card-bad {
+    border-color: rgba(239, 68, 68, 0.3);
+  }
+
+  .sbs-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.5rem;
+  }
+
+  .sbs-label-good { color: var(--output); }
+  .sbs-label-bad { color: var(--critical); }
+  .sbs-label-neutral { color: var(--text-dim); }
+
+  /* ===== WARNING CALLOUT ===== */
+  .callout-critical {
+    background: rgba(239, 68, 68, 0.06);
+    border: 2px solid rgba(239, 68, 68, 0.4);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+  }
+
+  .callout-critical .callout-title {
+    color: #fca5a5;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .callout-critical p {
+    color: var(--text);
+    font-size: 0.88rem;
+  }
+
+  /* ===== COST COMPARISON ===== */
+  .cost-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 0.75rem 0;
+  }
+
+  .cost-card {
+    border-radius: 10px;
+    padding: 1.25rem;
+    border: 1px solid;
+  }
+
+  .cost-without {
+    background: rgba(239, 68, 68, 0.05);
+    border-color: rgba(239, 68, 68, 0.25);
+  }
+
+  .cost-with {
+    background: rgba(34, 197, 94, 0.05);
+    border-color: rgba(34, 197, 94, 0.25);
+  }
+
+  .cost-title {
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .cost-without .cost-title { color: #fca5a5; }
+  .cost-with .cost-title { color: #86efac; }
+
+  .cost-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.3rem 0;
+    font-size: 0.85rem;
+  }
+
+  .cost-count {
+    font-weight: 600;
+    font-family: 'SF Mono', monospace;
+    font-size: 0.85rem;
+  }
+
+  .cost-total {
+    border-top: 1px solid var(--border);
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  .savings-badge {
+    display: inline-block;
+    background: rgba(34, 197, 94, 0.15);
+    border: 1px solid rgba(34, 197, 94, 0.35);
+    border-radius: 6px;
+    padding: 0.3rem 0.7rem;
+    color: #86efac;
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-top: 0.75rem;
+  }
+
+  /* ===== DIFF HIGHLIGHT ===== */
+  .diff-changed {
+    color: #f0abfc;
+    font-weight: 600;
+  }
+
+  .diff-same {
+    color: #555;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    margin-top: 2rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+  }
+
+  .footer strong { color: var(--accent); }
+
+  p { margin-bottom: 0.5rem; }
+  p:last-child { margin-bottom: 0; }
+
+  .dim { color: var(--text-dim); }
+  .mb { margin-bottom: 0.75rem; }
+</style>
+</head>
+<body>
+
+<h1>Card Groups</h1>
+<p class="page-subtitle">How GenDeck produces visually consistent card sets without redundant LLM calls. <br>Example: Climate Tech Investment deck, "hero-stat" group.</p>
+
+<!-- ===== BANNER ===== -->
+<div class="banner">
+  <div class="banner-title">Card Group Pipeline</div>
+  <div class="pipeline-flow">
+    <div class="pipeline-node">
+      <div class="pipeline-pill pill-plan">Planner</div>
+      <div class="pipeline-sub">Tags cards into groups</div>
+    </div>
+    <div class="pipeline-arrow">&rarr;</div>
+    <div class="pipeline-node">
+      <div class="pipeline-pill pill-outline">Outliner</div>
+      <div class="pipeline-sub">Writes consistent content shapes</div>
+    </div>
+    <div class="pipeline-arrow">&rarr;</div>
+    <div class="exemplar-bracket">
+      <div class="bracket-label">Exemplar (card 1 only)</div>
+      <div class="bracket-inner">
+        <div class="pipeline-pill pill-structure">Structure</div>
+        <div class="small-arrow">&rarr;</div>
+        <div class="pipeline-pill pill-resolver">Layout Resolver</div>
+      </div>
+    </div>
+    <div class="pipeline-arrow">&rarr;</div>
+    <div class="pipeline-node">
+      <div class="pipeline-pill pill-clone">Clone</div>
+      <div class="pipeline-sub">Swap content into exemplar GML</div>
+    </div>
+    <div class="pipeline-arrow">&rarr;</div>
+    <div class="pipeline-node">
+      <div class="pipeline-pill pill-render">Render</div>
+      <div class="pipeline-sub">All 3 cards identical in layout</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== STEP 1: THE PLAN ===== -->
+<div class="step open" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-input">1</div>
+    <div class="step-title">The Plan <span class="dim" style="font-weight:400; font-size:0.85rem;">&#8212; Planner tags groups</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <p class="mb">The planner decides which cards should look identical and assigns them a shared <code>group</code> tag. The first card in the group is the <strong>exemplar</strong>; the rest are <strong>clones</strong>.</p>
+
+    <div class="box box-input">
+      <div class="box-label label-input">Plan JSON (excerpt)</div>
+      <pre class="code-block">{
+  "cards": [
+    {
+      "cardIndex": 1,
+      "title": "Clean Energy Investment Surge",
+      "intent": "hero-stat",
+<span class="highlight-line">      "group": "hero-stat",</span>
+      "content_guidance": "Big number: $2.2T total clean energy investment"
+    },
+    {
+      "cardIndex": 2,
+      "title": "Solar & Wind Dominance",
+      "intent": "hero-stat",
+<span class="highlight-line">      "group": "hero-stat",</span>
+      "content_guidance": "Big number: $450B in solar/wind alone"
+    },
+    {
+      "cardIndex": 3,
+      "title": "Return Multiplier",
+      "intent": "hero-stat",
+<span class="highlight-line">      "group": "hero-stat",</span>
+      "content_guidance": "Big number: 5x ROI vs fossil fuels"
+    }
+  ]
+}</pre>
+    </div>
+
+    <p class="dim" style="font-size:0.85rem;">Card 1 is the exemplar. Cards 2 and 3 will clone its resolved layout.</p>
+  </div>
+</div>
+
+<div class="step-connector"><svg viewBox="0 0 24 32"><line x1="12" y1="0" x2="12" y2="28" stroke="#333" stroke-width="2"/><polygon points="7,24 12,32 17,24" fill="#333"/></svg></div>
+
+<!-- ===== STEP 2: THE OUTLINE (CRITICAL) ===== -->
+<div class="step open critical-step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-critical">2</div>
+    <span class="step-badge badge-critical">Critical</span>
+    <div class="step-title">The Outline <span class="dim" style="font-weight:400; font-size:0.85rem;">&#8212; Consistent content shapes</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+
+    <div class="callout-critical">
+      <div class="callout-title">Content shapes within a group MUST be identical</div>
+      <p>Every card in a group must have the same number and type of elements. The clone step does a 1:1 content swap. If shapes differ, the clone either breaks or produces a card where text overflows / underflows the layout.</p>
+    </div>
+
+    <h3>Good: Consistent shapes</h3>
+    <div class="side-by-side">
+      <div class="sbs-card card-good">
+        <div class="sbs-label sbs-label-good">Card 1 (exemplar)</div>
+        <pre class="code-block">&lt;h2&gt;$2.2T&lt;/h2&gt;
+&lt;p&gt;Total clean energy investment in 2023&lt;/p&gt;</pre>
+      </div>
+      <div class="sbs-card card-good">
+        <div class="sbs-label sbs-label-good">Card 2 (clone)</div>
+        <pre class="code-block">&lt;h2&gt;$450B&lt;/h2&gt;
+&lt;p&gt;Invested in solar and wind alone&lt;/p&gt;</pre>
+      </div>
+      <div class="sbs-card card-good">
+        <div class="sbs-label sbs-label-good">Card 3 (clone)</div>
+        <pre class="code-block">&lt;h2&gt;5&times;&lt;/h2&gt;
+&lt;p&gt;Return on investment vs fossil fuels&lt;/p&gt;</pre>
+      </div>
+    </div>
+    <p class="dim mb" style="font-size:0.85rem;">All three: one <code>&lt;h2&gt;</code>, one <code>&lt;p&gt;</code>. Same shape. Clone will work perfectly.</p>
+
+    <h3>Bad: Inconsistent shapes</h3>
+    <div class="side-by-side">
+      <div class="sbs-card card-good">
+        <div class="sbs-label sbs-label-neutral">Card 1</div>
+        <pre class="code-block">&lt;h2&gt;$2.2T&lt;/h2&gt;
+&lt;p&gt;Total clean energy investment in 2023&lt;/p&gt;</pre>
+      </div>
+      <div class="sbs-card card-good">
+        <div class="sbs-label sbs-label-neutral">Card 2</div>
+        <pre class="code-block">&lt;h2&gt;$450B&lt;/h2&gt;
+&lt;p&gt;Invested in solar and wind alone&lt;/p&gt;</pre>
+      </div>
+      <div class="sbs-card card-bad">
+        <div class="sbs-label sbs-label-bad">Card 3 &#x2717; breaks clone</div>
+        <pre class="code-block">&lt;h2&gt;5&times;&lt;/h2&gt;
+&lt;p&gt;Return on investment vs fossil fuels&lt;/p&gt;
+<span class="highlight-red">&lt;p&gt;Based on 10-year projections from IRENA&lt;/p&gt;</span>
+<span class="highlight-red">&lt;ul&gt;&lt;li&gt;Wind: 6.2x&lt;/li&gt;&lt;li&gt;Solar: 4.8x&lt;/li&gt;&lt;/ul&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="callout-critical" style="margin-top: 0.75rem;">
+      <div class="callout-title">What happens with mismatched shapes</div>
+      <p>Card 3 has extra <code>&lt;p&gt;</code> and <code>&lt;ul&gt;</code> elements. The clone step maps content by position &mdash; extra elements have no slot in the exemplar GML. They either get dropped (losing content) or overflow the layout bounds.</p>
+    </div>
+  </div>
+</div>
+
+<div class="step-connector"><svg viewBox="0 0 24 32"><line x1="12" y1="0" x2="12" y2="28" stroke="#333" stroke-width="2"/><polygon points="7,24 12,32 17,24" fill="#333"/></svg></div>
+
+<!-- ===== STEP 3: EXEMPLAR RESOLUTION ===== -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-decision">3</div>
+    <div class="step-title">Exemplar Resolution <span class="dim" style="font-weight:400; font-size:0.85rem;">&#8212; Full pipeline for card 1</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <p class="mb">Only card 1 (the exemplar) goes through the full Structure &rarr; Layout Resolver pipeline. This is the same per-card pipeline every non-grouped card uses.</p>
+
+    <div class="box box-decision">
+      <div class="box-label label-decision">Structure (LLM call)</div>
+      <p style="font-size:0.85rem; margin-bottom:0.5rem;">The structurer picks a layout variant and produces semantic GML for card 1's content.</p>
+      <pre class="code-block">&lt;CARD&gt;
+  &lt;COLUMNS layout="halves"&gt;
+    &lt;COLUMN&gt;
+      &lt;H2&gt;$2.2T&lt;/H2&gt;
+      &lt;P&gt;Total clean energy investment in 2023&lt;/P&gt;
+    &lt;/COLUMN&gt;
+    &lt;COLUMN&gt;
+      &lt;IMAGE query="clean energy solar panels" /&gt;
+    &lt;/COLUMN&gt;
+  &lt;/COLUMNS&gt;
+&lt;/CARD&gt;</pre>
+    </div>
+
+    <div class="box box-output">
+      <div class="box-label label-output">Layout Resolver (LLM call)</div>
+      <p style="font-size:0.85rem; margin-bottom:0.5rem;">The resolver adds precise spatial attributes &mdash; font sizes, alignment, padding, vertical-align.</p>
+      <pre class="code-block">&lt;CARD padding="40"&gt;
+  &lt;COLUMNS layout="halves" vertical-align="center"&gt;
+    &lt;COLUMN&gt;
+      &lt;H2 font-size="72" font-weight="800"
+          color="accent"&gt;$2.2T&lt;/H2&gt;
+      &lt;P font-size="18" color="muted"
+         margin-top="8"&gt;Total clean energy
+         investment in 2023&lt;/P&gt;
+    &lt;/COLUMN&gt;
+    &lt;COLUMN&gt;
+      &lt;IMAGE query="clean energy solar panels"
+             aspect-ratio="1" border-radius="12" /&gt;
+    &lt;/COLUMN&gt;
+  &lt;/COLUMNS&gt;
+&lt;/CARD&gt;</pre>
+    </div>
+
+    <p class="dim" style="font-size:0.85rem;">This resolved GML becomes the <strong>template</strong> that cards 2 and 3 clone from.</p>
+  </div>
+</div>
+
+<div class="step-connector"><svg viewBox="0 0 24 32"><line x1="12" y1="0" x2="12" y2="28" stroke="#333" stroke-width="2"/><polygon points="7,24 12,32 17,24" fill="#333"/></svg></div>
+
+<!-- ===== STEP 4: CLONE STEP ===== -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-clone">4</div>
+    <div class="step-title">Clone Step <span class="dim" style="font-weight:400; font-size:0.85rem;">&#8212; Content swap, no LLM</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <p class="mb">Cards 2 and 3 take the exemplar's resolved GML and swap in their own content. The entire structural skeleton &mdash; layout, alignment, font sizes, padding &mdash; is preserved exactly.</p>
+
+    <div class="side-by-side">
+      <div class="sbs-card" style="border-color: rgba(245,158,11,0.3);">
+        <div class="sbs-label" style="color: #fcd34d;">Card 1 (exemplar GML)</div>
+        <pre class="code-block">&lt;CARD padding="40"&gt;
+  &lt;COLUMNS layout="halves"
+           vertical-align="center"&gt;
+    &lt;COLUMN&gt;
+      &lt;H2 font-size="72"
+          font-weight="800"
+          color="accent"&gt;
+        <span class="diff-changed">$2.2T</span>
+      &lt;/H2&gt;
+      &lt;P font-size="18"
+         color="muted"
+         margin-top="8"&gt;
+        <span class="diff-changed">Total clean energy
+        investment in 2023</span>
+      &lt;/P&gt;
+    &lt;/COLUMN&gt;
+    &lt;COLUMN&gt;
+      &lt;IMAGE
+        query="<span class="diff-changed">clean energy
+        solar panels</span>"
+        aspect-ratio="1"
+        border-radius="12" /&gt;
+    &lt;/COLUMN&gt;
+  &lt;/COLUMNS&gt;
+&lt;/CARD&gt;</pre>
+      </div>
+
+      <div class="sbs-card" style="border-color: rgba(232,121,249,0.3);">
+        <div class="sbs-label" style="color: #f0abfc;">Card 2 (cloned)</div>
+        <pre class="code-block">&lt;CARD padding="40"&gt;
+  &lt;COLUMNS layout="halves"
+           vertical-align="center"&gt;
+    &lt;COLUMN&gt;
+      &lt;H2 font-size="72"
+          font-weight="800"
+          color="accent"&gt;
+        <span class="diff-changed">$450B</span>
+      &lt;/H2&gt;
+      &lt;P font-size="18"
+         color="muted"
+         margin-top="8"&gt;
+        <span class="diff-changed">Invested in solar
+        and wind alone</span>
+      &lt;/P&gt;
+    &lt;/COLUMN&gt;
+    &lt;COLUMN&gt;
+      &lt;IMAGE
+        query="<span class="diff-changed">solar wind
+        turbines farm</span>"
+        aspect-ratio="1"
+        border-radius="12" /&gt;
+    &lt;/COLUMN&gt;
+  &lt;/COLUMNS&gt;
+&lt;/CARD&gt;</pre>
+      </div>
+
+      <div class="sbs-card" style="border-color: rgba(232,121,249,0.3);">
+        <div class="sbs-label" style="color: #f0abfc;">Card 3 (cloned)</div>
+        <pre class="code-block">&lt;CARD padding="40"&gt;
+  &lt;COLUMNS layout="halves"
+           vertical-align="center"&gt;
+    &lt;COLUMN&gt;
+      &lt;H2 font-size="72"
+          font-weight="800"
+          color="accent"&gt;
+        <span class="diff-changed">5&times;</span>
+      &lt;/H2&gt;
+      &lt;P font-size="18"
+         color="muted"
+         margin-top="8"&gt;
+        <span class="diff-changed">Return on investment
+        vs fossil fuels</span>
+      &lt;/P&gt;
+    &lt;/COLUMN&gt;
+    &lt;COLUMN&gt;
+      &lt;IMAGE
+        query="<span class="diff-changed">investment returns
+        growth chart</span>"
+        aspect-ratio="1"
+        border-radius="12" /&gt;
+    &lt;/COLUMN&gt;
+  &lt;/COLUMNS&gt;
+&lt;/CARD&gt;</pre>
+      </div>
+    </div>
+
+    <div class="box box-clone">
+      <div class="box-label label-clone">What changed vs what stayed</div>
+      <p style="font-size: 0.85rem;"><strong style="color:#f0abfc;">Changed (purple text):</strong> Text content inside H2, P, and IMAGE query &mdash; the actual data.</p>
+      <p style="font-size: 0.85rem;"><strong style="color: var(--text-dim);">Unchanged:</strong> COLUMNS layout, vertical-align, font-size, font-weight, color, padding, margin-top, aspect-ratio, border-radius &mdash; everything structural.</p>
+    </div>
+  </div>
+</div>
+
+<div class="step-connector"><svg viewBox="0 0 24 32"><line x1="12" y1="0" x2="12" y2="28" stroke="#333" stroke-width="2"/><polygon points="7,24 12,32 17,24" fill="#333"/></svg></div>
+
+<!-- ===== STEP 5: THE RESULT ===== -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-output">5</div>
+    <div class="step-title">The Result <span class="dim" style="font-weight:400; font-size:0.85rem;">&#8212; Guaranteed consistency</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <p class="mb">All three cards share the exact same GML skeleton. They render with identical layouts &mdash; same column widths, same font hierarchy, same spacing.</p>
+
+    <div class="side-by-side">
+      <div class="sbs-card card-good">
+        <div class="sbs-label sbs-label-good">Card 1</div>
+        <pre class="code-block" style="font-size:0.72rem;">COLUMNS halves | v-align center
+  COL: H2 72px "$2.2T"
+       P  18px "Total clean energy..."
+  COL: IMAGE 1:1 r12</pre>
+      </div>
+      <div class="sbs-card card-good">
+        <div class="sbs-label sbs-label-good">Card 2</div>
+        <pre class="code-block" style="font-size:0.72rem;">COLUMNS halves | v-align center
+  COL: H2 72px "$450B"
+       P  18px "Invested in solar..."
+  COL: IMAGE 1:1 r12</pre>
+      </div>
+      <div class="sbs-card card-good">
+        <div class="sbs-label sbs-label-good">Card 3</div>
+        <pre class="code-block" style="font-size:0.72rem;">COLUMNS halves | v-align center
+  COL: H2 72px "5&times;"
+       P  18px "Return on investment..."
+  COL: IMAGE 1:1 r12</pre>
+      </div>
+    </div>
+
+    <div class="box box-output">
+      <div class="box-label label-output">Guarantee</div>
+      <p style="font-size: 0.88rem;">These cards are <strong>guaranteed consistent</strong> because they share the same GML skeleton. No variance from independent LLM calls. No risk of one card picking a different layout variant, font size, or alignment strategy.</p>
+    </div>
+  </div>
+</div>
+
+<div class="step-connector"><svg viewBox="0 0 24 32"><line x1="12" y1="0" x2="12" y2="28" stroke="#333" stroke-width="2"/><polygon points="7,24 12,32 17,24" fill="#333"/></svg></div>
+
+<!-- ===== STEP 6: COST COMPARISON ===== -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-cost">6</div>
+    <div class="step-title">Cost Comparison</div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <div class="cost-grid">
+      <div class="cost-card cost-without">
+        <div class="cost-title">Without Groups</div>
+        <div class="cost-row"><span>Structure calls</span> <span class="cost-count">3</span></div>
+        <div class="cost-row"><span>Resolver calls</span> <span class="cost-count">3</span></div>
+        <div class="cost-row"><span>Clone operations</span> <span class="cost-count">0</span></div>
+        <div class="cost-row cost-total"><span>Total LLM calls</span> <span class="cost-count">6</span></div>
+        <p class="dim" style="font-size:0.8rem; margin-top:0.5rem;">Each card resolved independently. No consistency guarantee &mdash; each LLM call may pick different layout variants.</p>
+      </div>
+      <div class="cost-card cost-with">
+        <div class="cost-title">With Groups</div>
+        <div class="cost-row"><span>Structure calls</span> <span class="cost-count">1</span></div>
+        <div class="cost-row"><span>Resolver calls</span> <span class="cost-count">1</span></div>
+        <div class="cost-row"><span>Clone operations</span> <span class="cost-count" style="color: #f0abfc;">2 (cheap)</span></div>
+        <div class="cost-row cost-total"><span>Total LLM calls</span> <span class="cost-count">2</span></div>
+        <p class="dim" style="font-size:0.8rem; margin-top:0.5rem;">One exemplar through the full pipeline, clones are pure string operations. Consistent by construction.</p>
+      </div>
+    </div>
+    <div class="savings-badge">67% fewer LLM calls + guaranteed visual consistency</div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<div class="footer">
+  <strong>Connection to template remix:</strong> Card groups produce templates <em>on the fly</em> &mdash; the exemplar's resolved GML acts as a one-off template. Template remix starts with <em>pre-made</em> templates. Same mechanism: take a GML skeleton, swap content in, skip structure + resolver.
+</div>
+
+<script>
+  // All steps with class "open" start expanded; the rest start collapsed
+  document.querySelectorAll('.step').forEach(step => {
+    // Ensure click on header toggles (handled by onclick on .step)
+    // Stop body clicks from toggling
+  });
+</script>
+
+</body>
+</html>
