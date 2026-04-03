@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GenDeck 3.5 — Architecture & Pipeline Walkthroughs</title>
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --surface2: #1a1a1a;
+    --border: #2a2a2a;
+    --border-hover: #444;
+    --text: #e6edf3;
+    --text-dim: #8b949e;
+    --accent: #a78bfa;
+    --green: #4ade80;
+    --blue: #58a6ff;
+    --orange: #fb923c;
+    --cyan: #22d3ee;
+    --pink: #f472b6;
+    --red: #f87171;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 2.5rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.25rem; }
+  h2 { font-size: 1.2rem; margin-top: 2.5rem; margin-bottom: 1rem; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+  .subtitle { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 1.5rem; max-width: 680px; }
+
+  /* ===== TLDR BOX ===== */
+  .tldr {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .tldr-title { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; margin-bottom: 0.75rem; }
+  .tldr p { font-size: 0.9rem; color: var(--text-dim); margin-bottom: 0.5rem; }
+  .tldr strong { color: var(--text); }
+
+  /* ===== GUIDE TABLE ===== */
+  .guide-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .guide-box-title { font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; margin-bottom: 0.75rem; }
+  .guide-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  .guide-table th { text-align: left; padding: 0.35rem 0.75rem; color: var(--text-dim); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 1px solid var(--border); }
+  .guide-table td { padding: 0.35rem 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .guide-table .file { font-family: 'SF Mono','Fira Code',Consolas,monospace; color: var(--text); }
+  .guide-table .concern { color: var(--text-dim); }
+
+  /* ===== PIPELINE MINI ===== */
+  .pipeline-mini {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 1.5rem 0;
+    padding: 1rem 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow-x: auto;
+    justify-content: center;
+  }
+  .pm-pill {
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    white-space: nowrap;
+    border: 1px solid;
+  }
+  .pm-arrow { color: #555; font-size: 0.9rem; margin: 0 0.2rem; }
+  .pm-bracket {
+    border: 1px dashed rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 0.35rem 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    position: relative;
+  }
+  .pm-bracket-label {
+    position: absolute;
+    top: -8px;
+    left: 8px;
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    background: var(--surface);
+    padding: 0 4px;
+  }
+  .pm-buddy { border-color: rgba(251,146,60,0.4); }
+  .pm-buddy-label { color: var(--orange); }
+  .pm-gendeck { border-color: rgba(34,197,94,0.4); }
+  .pm-gendeck-label { color: var(--green); }
+
+  .pill-prompt { background: rgba(167,139,250,0.15); border-color: rgba(167,139,250,0.4); color: #c4b5fd; }
+  .pill-plan { background: rgba(251,146,60,0.15); border-color: rgba(251,146,60,0.4); color: #fdba74; }
+  .pill-outline { background: rgba(56,189,248,0.15); border-color: rgba(56,189,248,0.4); color: #7dd3fc; }
+  .pill-style { background: rgba(232,121,249,0.15); border-color: rgba(232,121,249,0.4); color: #f0abfc; }
+  .pill-structure { background: rgba(245,158,11,0.15); border-color: rgba(245,158,11,0.4); color: #fcd34d; }
+  .pill-resolve { background: rgba(34,197,94,0.15); border-color: rgba(34,197,94,0.4); color: #86efac; }
+  .pill-render { background: rgba(99,102,241,0.15); border-color: rgba(99,102,241,0.4); color: #a5b4fc; }
+  .pill-review { background: rgba(244,63,94,0.15); border-color: rgba(244,63,94,0.4); color: #fda4af; }
+  .pill-template { background: rgba(22,211,238,0.15); border-color: rgba(22,211,238,0.4); color: #67e8f9; }
+  .pill-parser { background: rgba(244,114,182,0.15); border-color: rgba(244,114,182,0.4); color: #f9a8d4; }
+  .pill-skipped { background: transparent; border-color: rgba(255,255,255,0.1); color: #555; text-decoration: line-through; }
+
+  /* ===== CARDS ===== */
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  a.card-link {
+    display: block;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  a.card-link:hover {
+    border-color: var(--border-hover);
+    background: var(--surface2);
+  }
+  .card-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.4rem; }
+  .card-badge {
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 2px 7px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .badge-from-scratch { background: rgba(34,197,94,0.15); color: var(--green); }
+  .badge-remix { background: rgba(22,211,238,0.15); color: var(--cyan); }
+  .badge-import { background: rgba(244,114,182,0.15); color: var(--pink); }
+  .badge-mechanism { background: rgba(167,139,250,0.15); color: var(--accent); }
+  .badge-results { background: rgba(245,158,11,0.15); color: var(--orange); }
+  .card-title { font-weight: 600; font-size: 0.95rem; }
+  .card-desc { font-size: 0.85rem; color: var(--text-dim); }
+  .card-meta { font-size: 0.75rem; color: #555; margin-top: 0.4rem; }
+
+  /* ===== KEY CONCEPTS ===== */
+  .concepts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 0.75rem;
+    margin: 1rem 0;
+  }
+  .concept {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+  }
+  .concept-title { font-weight: 600; font-size: 0.85rem; margin-bottom: 0.25rem; }
+  .concept p { font-size: 0.8rem; color: var(--text-dim); }
+
+  .footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); color: #555; font-size: 0.8rem; }
+</style>
+</head>
+<body>
+
+<h1>GenDeck 3.5</h1>
+<p class="subtitle">A guide-driven deck generation pipeline. The core idea: channel LLM creativity through declarative design systems so output is stylistically consistent and spatially sound. These walkthroughs show how different input types flow through the pipeline.</p>
+
+<div class="tldr">
+  <div class="tldr-title">TL;DR</div>
+  <p>Every deck starts with a <strong>design guide</strong> — 6 files that define how a deck should look and feel. The pipeline decomposes generation into focused steps: <strong>Plan</strong> the narrative arc, <strong>Outline</strong> the content, <strong>Style Resolve</strong> the visual register, <strong>Structure</strong> the spatial composition, <strong>Layout Resolve</strong> into valid GML. Each step reads only what it needs from the guide.</p>
+  <p>The key insight from designer review: <strong>"consistency IS the design."</strong> The style resolver commits deck-wide to a register, variant family, and color strategy in one call — so every card follows the same art direction. Card groups enforce this further: one exemplar card is fully resolved, then cloned for structurally identical cards.</p>
+  <p>Not every flow needs the full pipeline. <strong>Template remix</strong> skips style/structure/resolver entirely — templates pre-bake the design. <strong>Import as-is</strong> skips guides entirely — the source screenshots ARE the design system.</p>
+</div>
+
+<!-- ===== DESIGN GUIDE ===== -->
+<div class="guide-box">
+  <div class="guide-box-title">What is a Design Guide?</div>
+  <p style="color:var(--text-dim); font-size:0.85rem; margin-bottom:0.75rem;">Each guide is a declarative design system — 6 files that shape every pipeline step. Our first production guide will be <strong>Gamma Classic</strong>, representing our current stylistic approach. Prototype guides: Swiss Grid, Classic, Consultant, Minimal.</p>
+  <table class="guide-table">
+    <thead><tr><th>File</th><th>Concern</th><th>Who reads it</th></tr></thead>
+    <tbody>
+      <tr><td class="file">density.yaml</td><td class="concern">How much content</td><td style="color:var(--orange)">Outliner</td></tr>
+      <tr><td class="file">writing.md</td><td class="concern">How the words sound</td><td style="color:var(--orange)">Outliner</td></tr>
+      <tr><td class="file">planning.md</td><td class="concern">Narrative arc, rhythm</td><td style="color:var(--accent)">Planner</td></tr>
+      <tr><td class="file">structure.md</td><td class="concern">Spatial composition</td><td style="color:var(--blue)">Structurer</td></tr>
+      <tr><td class="file">blocks.ts</td><td class="concern">Allowed GML constructs + variant preferences + maxFamiliesPerDeck</td><td style="color:var(--green)">Style resolver + Card resolver</td></tr>
+      <tr><td class="file">examples.md</td><td class="concern">Reference GML cards</td><td style="color:var(--green)">Card resolver</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== FROM-SCRATCH PIPELINE ===== -->
+<h2>From-Scratch Pipeline</h2>
+
+<div class="pipeline-mini">
+  <span class="pm-pill pill-prompt">Prompt</span>
+  <span class="pm-arrow">&rarr;</span>
+  <div class="pm-bracket pm-buddy">
+    <span class="pm-bracket-label pm-buddy-label">Buddy G</span>
+    <span class="pm-pill pill-plan">Plan</span>
+    <span class="pm-arrow">&rarr;</span>
+    <span class="pm-pill pill-outline">Outline</span>
+  </div>
+  <span class="pm-arrow">&rarr;</span>
+  <div class="pm-bracket pm-gendeck">
+    <span class="pm-bracket-label pm-gendeck-label">GenDeck</span>
+    <span class="pm-pill pill-style">Style</span>
+    <span class="pm-arrow">&rarr;</span>
+    <div class="pm-bracket" style="border-color:rgba(255,255,255,0.1);">
+      <span class="pm-bracket-label" style="color:#666">per card</span>
+      <span class="pm-pill pill-structure">Structure</span>
+      <span class="pm-arrow">&rarr;</span>
+      <span class="pm-pill pill-resolve">Resolver</span>
+    </div>
+    <span class="pm-arrow">&rarr;</span>
+    <span class="pm-pill pill-render">Render</span>
+    <span class="pm-arrow">&rarr;</span>
+    <span class="pm-pill pill-review">Review</span>
+  </div>
+</div>
+
+<div class="card-grid">
+  <a class="card-link" href="from-scratch-walkthrough-2026-04-03.html">
+    <div class="card-header">
+      <span class="card-badge badge-from-scratch">From Scratch</span>
+      <span class="card-title">Swiss Grid — Single Prompt</span>
+    </div>
+    <div class="card-desc">"8 card deck on climate tech investment" → full pipeline with Swiss Grid guide. Shows every step with actual inputs and outputs. Includes spatial advisor, GML knowledge stack, and two card examples (simple + dense).</div>
+    <div class="card-meta">Swiss Grid guide &bull; 8 cards &bull; Hero stats, outlineBoxes, 50/50 columns</div>
+  </a>
+
+  <a class="card-link" href="consultant-article-walkthrough-2026-04-03.html">
+    <div class="card-header">
+      <span class="card-badge badge-from-scratch">From Scratch</span>
+      <span class="card-title">Consultant — Article Input</span>
+    </div>
+    <div class="card-desc">User pastes an article about enterprise AI adoption. Full pipeline with Consultant guide. Demonstrates card groups (root-causes ×3, sector-comparison ×3), action titles, chart data as inline tables, and the clone mechanism.</div>
+    <div class="card-meta">Consultant guide &bull; 11 cards &bull; 2 card groups &bull; solidBoxes, stats, chart-creator</div>
+  </a>
+</div>
+
+<!-- ===== MECHANISMS ===== -->
+<h2>Mechanisms</h2>
+
+<div class="card-grid">
+  <a class="card-link" href="card-groups-walkthrough-2026-04-03.html">
+    <div class="card-header">
+      <span class="card-badge badge-mechanism">Mechanism</span>
+      <span class="card-title">Card Groups</span>
+    </div>
+    <div class="card-desc">How cards that share the same structural role get grouped. One exemplar goes through the full pipeline; the rest clone its GML and swap content. Shows the planner tagging groups, the outliner writing consistent shapes, and the clone step. Includes good vs bad outline examples.</div>
+    <div class="card-meta">Exemplar → Clone &bull; 67% fewer LLM calls &bull; Guaranteed consistency</div>
+  </a>
+</div>
+
+<!-- ===== ALTERNATIVE FLOWS ===== -->
+<h2>Alternative Flows</h2>
+
+<div class="pipeline-mini">
+  <span class="pm-pill pill-prompt">Prompt</span>
+  <span class="pm-arrow">&rarr;</span>
+  <span class="pm-pill pill-template">Templates</span>
+  <span class="pm-arrow">&rarr;</span>
+  <div class="pm-bracket pm-buddy">
+    <span class="pm-bracket-label pm-buddy-label">Buddy G</span>
+    <span class="pm-pill pill-plan">Plan</span>
+    <span class="pm-arrow">&rarr;</span>
+    <span class="pm-pill pill-outline">Outline</span>
+  </div>
+  <span class="pm-arrow">&rarr;</span>
+  <span class="pm-pill pill-render">Render</span>
+  <span style="margin-left:1rem; font-size:0.7rem; color:#555;">Style / Structure / Resolver skipped</span>
+</div>
+
+<div class="card-grid">
+  <a class="card-link" href="remix-walkthrough-2026-04-03.html">
+    <div class="card-header">
+      <span class="card-badge badge-remix">Remix</span>
+      <span class="card-title">Template Library Remix</span>
+    </div>
+    <div class="card-desc">User selects cards from a pre-designed template library. The outliner writes content directly into template GML — no style resolve, no structure, no layout resolver. Templates pre-bake all design decisions. Shows how this collapses the pipeline from 5+ LLM calls to 2.</div>
+    <div class="card-meta">No guide needed &bull; 2 LLM calls &bull; Templates ARE the design system</div>
+  </a>
+
+  <a class="card-link" href="import-screenshots-walkthrough-2026-04-03.html">
+    <div class="card-header">
+      <span class="card-badge badge-import">Import</span>
+      <span class="card-title">Import from Screenshots</span>
+    </div>
+    <div class="card-desc">User uploads 8 screenshots of an existing deck. A vision-model parser extracts content + layout simultaneously. Two modes: as-is (no guide, screenshots ARE the design) or re-style (extract content, apply a different guide). Uses the Meridian Strategy Group deck as example.</div>
+    <div class="card-meta">Screenshot parser (new step) &bull; As-is: guideless &bull; Re-style: full pipeline</div>
+  </a>
+</div>
+
+<!-- ===== OVERNIGHT RESULTS ===== -->
+<h2>Overnight Test Results</h2>
+
+<div class="card-grid">
+  <a class="card-link" href="swiss-grid-dense-gallery-2026-04-03.html">
+    <div class="card-header">
+      <span class="card-badge badge-results">Gallery</span>
+      <span class="card-title">Swiss Grid — Dense Iteration (Baseline vs Best)</span>
+    </div>
+    <div class="card-desc">Side-by-side comparison of Swiss Grid cards before and after 8 iterations on dense content. Baseline 25% pass rate → 87.5%. Shows high, extra-high, and mixed density outlines.</div>
+  </a>
+
+  <a class="card-link" href="swiss-grid-stress-test-gallery-2026-04-03.html">
+    <div class="card-header">
+      <span class="card-badge badge-results">Gallery</span>
+      <span class="card-title">Swiss Grid — 10 Stress Test Outlines</span>
+    </div>
+    <div class="card-desc">10 new outlines across diverse topics (quantum computing, biodiversity, typography, fundraising, etc.) generated with the improved Swiss guide. 100% pass rate on sampled cards — guides generalize.</div>
+  </a>
+
+  <a class="card-link" href="swiss-grid-dense-report-2026-04-03.html">
+    <div class="card-header">
+      <span class="card-badge badge-results">Report</span>
+      <span class="card-title">Swiss Grid — Dense Iteration Report</span>
+    </div>
+    <div class="card-desc">Full report: top 3 changes, patterns that work vs fail, score progression, stress test results. All improvements were guide-level — no pipeline code changes needed.</div>
+  </a>
+</div>
+
+<!-- ===== KEY CONCEPTS ===== -->
+<h2>Key Concepts</h2>
+
+<div class="concepts">
+  <div class="concept">
+    <div class="concept-title" style="color:var(--accent);">Style Resolver</div>
+    <p>LLM "art director" that commits deck-wide to a register (outline vs filled), specific variants, color strategy, and prohibitions in a single prose brief. Every downstream card follows this brief.</p>
+  </div>
+  <div class="concept">
+    <div class="concept-title" style="color:var(--green);">Card Groups</div>
+    <p>Cards sharing the same structural role. Planner tags them, style resolver defines the group's look, one exemplar is fully resolved, the rest clone its GML. Consistency by construction.</p>
+  </div>
+  <div class="concept">
+    <div class="concept-title" style="color:var(--blue);">Spatial Advisor</div>
+    <p>Real measurements from 11K+ Storybook renders. Tells the structurer whether content fits in a given layout variant before the resolver commits. "solidBoxes ×3: fits. stats ×3: too long."</p>
+  </div>
+  <div class="concept">
+    <div class="concept-title" style="color:var(--orange);">gml-schema</div>
+    <p>Infrastructure layer (proposed). Single source of truth for all GML block definitions — tags, attributes, nesting rules. blocks.ts overlays guide preferences on top. Replaces hand-maintained tag specs.</p>
+  </div>
+  <div class="concept">
+    <div class="concept-title" style="color:var(--pink);">Outline Format</div>
+    <p>HTML matching Gen3's output. Each &lt;section&gt; has <code>imageLayout</code> and <code>group</code> attributes, an &lt;instructions&gt; element with creative direction, and semantic content.</p>
+  </div>
+  <div class="concept">
+    <div class="concept-title" style="color:var(--cyan);">Vision-Model Graders</div>
+    <p>Swiss card, Swiss deck, Consultant card. Score 0.0–1.0 on design principles from screenshots. Catch broken renders, weak grid structure, missing evidence zones. Ignore renderer-level styling.</p>
+  </div>
+</div>
+
+<div class="footer">
+  GenDeck 3.5 — kw/gamma2-84o — April 3, 2026
+</div>
+
+</body>
+</html>
