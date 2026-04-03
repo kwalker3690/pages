@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GenDeck Pipeline Walkthrough — Climate Tech Investment</title>
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --surface2: #1a1a1a;
+    --border: #2a2a2a;
+    --text: #e0e0e0;
+    --text-dim: #888;
+    --input: #3b82f6;
+    --input-bg: rgba(59, 130, 246, 0.08);
+    --input-border: rgba(59, 130, 246, 0.25);
+    --output: #22c55e;
+    --output-bg: rgba(34, 197, 94, 0.08);
+    --output-border: rgba(34, 197, 94, 0.25);
+    --decision: #f59e0b;
+    --decision-bg: rgba(245, 158, 11, 0.08);
+    --decision-border: rgba(245, 158, 11, 0.25);
+    --tool: #e879f9;
+    --tool-bg: rgba(232, 121, 249, 0.08);
+    --tool-border: rgba(232, 121, 249, 0.25);
+    --accent: #a78bfa;
+    --code-bg: #0d1117;
+    --code-border: #21262d;
+    --arrow: #555;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    padding: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.25rem; }
+  h2 { font-size: 1.3rem; font-weight: 600; }
+  h3 { font-size: 1.1rem; font-weight: 600; }
+
+  code, pre {
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+  }
+
+  code {
+    background: rgba(255,255,255,0.06);
+    padding: 0.1em 0.35em;
+    border-radius: 3px;
+    font-size: 0.85em;
+  }
+
+  /* ===== BANNER ===== */
+  .banner {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem 2rem 1.5rem;
+    margin-bottom: 2.5rem;
+    overflow-x: auto;
+  }
+
+  .banner-title {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.25rem;
+  }
+
+  .pipeline-flow {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    min-width: 950px;
+    justify-content: center;
+  }
+
+  .pipeline-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .pipeline-pill {
+    padding: 0.45rem 0.85rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    border: 1px solid;
+  }
+
+  .pill-prompt { background: rgba(167,139,250,0.15); border-color: rgba(167,139,250,0.4); color: #c4b5fd; }
+  .pill-plan { background: rgba(251,146,60,0.15); border-color: rgba(251,146,60,0.4); color: #fdba74; }
+  .pill-outline { background: rgba(56,189,248,0.15); border-color: rgba(56,189,248,0.4); color: #7dd3fc; }
+  .pill-style { background: rgba(232,121,249,0.15); border-color: rgba(232,121,249,0.4); color: #f0abfc; }
+  .pill-structure { background: rgba(245,158,11,0.15); border-color: rgba(245,158,11,0.4); color: #fcd34d; }
+  .pill-resolve { background: rgba(34,197,94,0.15); border-color: rgba(34,197,94,0.4); color: #86efac; }
+  .pill-renderer { background: rgba(99,102,241,0.15); border-color: rgba(99,102,241,0.4); color: #a5b4fc; }
+  .pill-reviewer { background: rgba(244,63,94,0.15); border-color: rgba(244,63,94,0.4); color: #fda4af; }
+  .pill-gml { background: rgba(34,197,94,0.25); border-color: rgba(34,197,94,0.6); color: #4ade80; }
+
+  .pipeline-arrow {
+    display: flex;
+    align-items: center;
+    padding: 0 0.25rem;
+    color: var(--arrow);
+    font-size: 1.1rem;
+    margin-top: 0.35rem;
+    flex-shrink: 0;
+  }
+
+  .guide-feeds {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-top: 8px;
+    align-items: center;
+  }
+
+  .guide-tag {
+    font-size: 0.6rem;
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-dim);
+    white-space: nowrap;
+    font-family: 'SF Mono', monospace;
+  }
+
+  .per-card-bracket {
+    border: 1px dashed rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 0.6rem 0.5rem 0.4rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    position: relative;
+  }
+
+  .per-card-label {
+    position: absolute;
+    top: -9px;
+    left: 12px;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    background: var(--surface);
+    padding: 0 6px;
+  }
+
+  .system-bracket {
+    border: 1px solid rgba(251,146,60,0.35);
+    border-radius: 12px;
+    padding: 0.8rem 0.6rem 0.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    position: relative;
+  }
+
+  .system-bracket.gendeck {
+    border-color: rgba(34,197,94,0.35);
+  }
+
+  .system-label {
+    position: absolute;
+    top: -10px;
+    left: 14px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    background: var(--surface);
+    padding: 0 8px;
+  }
+
+  .system-label.buddy { color: #fdba74; }
+  .system-label.gendeck { color: #86efac; }
+
+  .tool-feeds {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 6px;
+    align-items: center;
+  }
+
+  .tool-tag {
+    font-size: 0.55rem;
+    padding: 1px 4px;
+    border-radius: 3px;
+    background: rgba(232,121,249,0.1);
+    border: 1px solid rgba(232,121,249,0.2);
+    color: #e879f9;
+    white-space: nowrap;
+    font-family: 'SF Mono', monospace;
+  }
+
+  /* ===== SUBTITLE ===== */
+  .page-subtitle {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+
+  .prompt-box {
+    display: inline-block;
+    background: rgba(167,139,250,0.12);
+    border: 1px solid rgba(167,139,250,0.3);
+    border-radius: 6px;
+    padding: 0.3rem 0.8rem;
+    font-family: monospace;
+    color: #c4b5fd;
+    margin-top: 0.5rem;
+  }
+
+  /* ===== STEP CONNECTOR ===== */
+  .step-connector {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 0;
+  }
+
+  .step-connector svg {
+    width: 24px;
+    height: 32px;
+  }
+
+  /* ===== COLLAPSIBLE STEPS ===== */
+  .step {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 0;
+    background: var(--surface);
+    overflow: hidden;
+  }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+
+  .step-header:hover { background: var(--surface2); }
+
+  .step-number {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+  }
+
+  .sn-plan { background: rgba(251,146,60,0.2); color: #fdba74; }
+  .sn-outline { background: rgba(56,189,248,0.2); color: #7dd3fc; }
+  .sn-style { background: rgba(232,121,249,0.2); color: #f0abfc; }
+  .sn-structure { background: rgba(245,158,11,0.2); color: #fcd34d; }
+  .sn-resolve { background: rgba(34,197,94,0.2); color: #86efac; }
+  .sn-renderer { background: rgba(99,102,241,0.2); color: #a5b4fc; }
+  .sn-reviewer { background: rgba(244,63,94,0.2); color: #fda4af; }
+  .sn-final { background: rgba(34,197,94,0.3); color: #4ade80; }
+
+  .step-title { font-weight: 600; font-size: 1rem; flex: 1; }
+  .step-system-tag { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 2px 7px; border-radius: 4px; margin-right: 0.5rem; vertical-align: middle; }
+  .step-system-tag.buddy { background: rgba(251,146,60,0.15); color: #fdba74; }
+  .step-system-tag.gendeck { background: rgba(34,197,94,0.15); color: #86efac; }
+  .step-subtitle { color: var(--text-dim); font-weight: 400; font-size: 0.85rem; }
+
+  .step-chevron {
+    transition: transform 0.2s;
+    color: var(--text-dim);
+    font-size: 1.2rem;
+  }
+
+  .step.open .step-chevron { transform: rotate(90deg); }
+
+  .step-body {
+    display: none;
+    padding: 0 1.25rem 1.25rem;
+  }
+
+  .step.open .step-body { display: block; }
+
+  /* ===== LABELED BOXES ===== */
+  .box {
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 0.75rem 0;
+    border: 1px solid;
+  }
+
+  .box-input { background: var(--input-bg); border-color: var(--input-border); }
+  .box-output { background: var(--output-bg); border-color: var(--output-border); }
+  .box-decision { background: var(--decision-bg); border-color: var(--decision-border); }
+  .box-tool { background: var(--tool-bg); border-color: var(--tool-border); }
+
+  .box-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .box-input .box-label { color: var(--input); }
+  .box-output .box-label { color: var(--output); }
+  .box-decision .box-label { color: var(--decision); }
+  .box-tool .box-label { color: var(--tool); }
+
+  .box p, .box li { font-size: 0.9rem; color: var(--text); line-height: 1.5; }
+  .box ul { padding-left: 1.2rem; margin-top: 0.3rem; }
+  .box li { margin-bottom: 0.15rem; }
+
+  /* ===== CODE BLOCKS ===== */
+  pre.code-block {
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    margin: 0.5rem 0;
+    color: #c9d1d9;
+  }
+
+  .code-lang {
+    display: inline-block;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+    background: rgba(255,255,255,0.05);
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-bottom: 0.4rem;
+    font-family: monospace;
+  }
+
+  .syn-key { color: #7ee787; }
+  .syn-str { color: #a5d6ff; }
+  .syn-num { color: #79c0ff; }
+  .syn-tag { color: #ff7b72; }
+  .syn-attr { color: #d2a8ff; }
+  .syn-val { color: #a5d6ff; }
+
+  blockquote {
+    border-left: 3px solid var(--decision);
+    padding: 0.75rem 1rem;
+    margin: 0.5rem 0;
+    background: rgba(245,158,11,0.05);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    color: #ddd;
+    font-style: italic;
+  }
+
+  .prose { font-size: 0.9rem; color: var(--text); margin: 0.5rem 0; }
+  .prose strong { color: #fff; }
+
+  /* ===== TOOLS GRID ===== */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.5rem;
+    margin: 0.75rem 0;
+  }
+
+  .tool-card {
+    background: var(--tool-bg);
+    border: 1px solid var(--tool-border);
+    border-radius: 8px;
+    padding: 0.75rem;
+  }
+
+  .tool-card-name {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--tool);
+    font-family: monospace;
+    margin-bottom: 0.25rem;
+  }
+
+  .tool-card p { font-size: 0.8rem; color: var(--text-dim); line-height: 1.4; }
+
+  /* ===== SUMMARY TABLE ===== */
+  .summary-section {
+    margin-top: 2.5rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    padding: 1.5rem;
+  }
+
+  .summary-section h2 { margin-bottom: 1rem; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+
+  thead th {
+    text-align: left;
+    padding: 0.6rem 0.75rem;
+    border-bottom: 2px solid var(--border);
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+  }
+
+  tbody td {
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: rgba(255,255,255,0.02); }
+  td:first-child { font-weight: 600; white-space: nowrap; }
+
+  /* ===== OPEN QUESTIONS ===== */
+  .questions-section {
+    margin-top: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    padding: 1.5rem;
+  }
+
+  .questions-section h2 { margin-bottom: 0.75rem; }
+
+  .question-item { margin-bottom: 0.6rem; font-size: 0.9rem; }
+  .question-item strong { color: var(--decision); }
+
+  @media (max-width: 700px) {
+    body { padding: 1rem; }
+    .pipeline-flow { min-width: 0; flex-wrap: wrap; gap: 0.5rem; }
+    .pipeline-arrow { display: none; }
+    .per-card-bracket { flex-wrap: wrap; }
+    .tools-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<h1>GenDeck Pipeline Walkthrough</h1>
+<p class="page-subtitle">
+  One deck, single prompt, Swiss Grid guide. Every pipeline step with actual inputs and outputs.
+</p>
+<div style="margin-bottom: 2rem;">
+  <div class="prompt-box">"8 card deck on climate tech investment"</div>
+  <span style="color:var(--text-dim); margin-left: 0.75rem; font-size: 0.85rem;">Guide: Swiss Grid</span>
+</div>
+
+<!-- ===== ARCHITECTURE BANNER ===== -->
+<div class="banner">
+  <div class="banner-title">Pipeline Architecture</div>
+  <div class="pipeline-flow">
+    <div class="pipeline-node">
+      <div class="pipeline-pill pill-prompt">User Prompt</div>
+    </div>
+    <div class="pipeline-arrow">&#8594;</div>
+    <div class="system-bracket">
+      <span class="system-label buddy">Buddy G</span>
+      <div class="pipeline-node">
+        <div class="pipeline-pill pill-plan">Plan</div>
+        <div class="guide-feeds">
+          <span class="guide-tag">planning.md</span>
+          <span class="guide-tag">writing.md</span>
+        </div>
+      </div>
+      <div class="pipeline-arrow">&#8594;</div>
+      <div class="pipeline-node">
+        <div class="pipeline-pill pill-outline">Outline</div>
+        <div class="guide-feeds">
+          <span class="guide-tag">density.yaml</span>
+          <span class="guide-tag">writing.md</span>
+        </div>
+      </div>
+    </div>
+    <div class="pipeline-arrow">&#8594;</div>
+    <div class="system-bracket gendeck">
+      <span class="system-label gendeck">GenDeck</span>
+      <div class="pipeline-node">
+        <div class="pipeline-pill pill-style">Style Resolve</div>
+        <div class="guide-feeds">
+          <span class="guide-tag">blocks.ts</span>
+          <span class="guide-tag">planning.md</span>
+        </div>
+      </div>
+      <div class="pipeline-arrow">&#8594;</div>
+      <div class="per-card-bracket">
+        <span class="per-card-label">per card</span>
+      <div class="pipeline-node">
+        <div class="pipeline-pill pill-structure">Structure</div>
+        <div class="guide-feeds">
+          <span class="guide-tag">structure.md</span>
+        </div>
+      </div>
+      <div class="pipeline-arrow">&#8594;</div>
+      <div class="pipeline-node">
+        <div class="pipeline-pill pill-resolve">Layout Resolver</div>
+        <div class="guide-feeds">
+          <span class="guide-tag">blocks.ts</span>
+          <span class="guide-tag">examples.md</span>
+          <span class="guide-tag" style="border-color:rgba(255,255,255,0.2); color:#aaa; font-style:italic;">gml-schema</span>
+        </div>
+        <div class="tool-feeds">
+          <span class="tool-tag">spatial-analysis</span>
+          <span class="tool-tag">image-query-author</span>
+          <span class="tool-tag">chart-creator</span>
+        </div>
+      </div>
+      <div class="pipeline-arrow">&#8594;</div>
+      <div class="pipeline-node">
+        <div class="pipeline-pill pill-renderer">Renderer</div>
+      </div>
+      <div class="pipeline-arrow">&#8594;</div>
+      <div class="pipeline-node">
+        <div class="pipeline-pill pill-reviewer">Reviewer</div>
+      </div>
+    </div>
+    </div><!-- close gendeck bracket -->
+  </div>
+</div>
+
+<!-- ===== STEP 1: PLAN ===== -->
+<div class="step open" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-plan">1</div>
+    <div class="step-title"><span class="step-system-tag buddy">Buddy G</span>Plan <span class="step-subtitle"> &mdash; Gen3 &rarr; planLayout tool</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <div class="box box-input">
+      <div class="box-label">&#9679; Inputs</div>
+      <ul>
+        <li><strong>User prompt:</strong> "8 card deck on climate tech investment"</li>
+        <li><strong>planning.md</strong> &mdash; grid is primary, whitespace is active, alternate left-right, alternate dense and sparse, bookend diagonal, 2-3 sparse cards, monochromatic</li>
+        <li><strong>writing.md</strong> &mdash; short declarative titles (1-4 words), hero numbers as display elements, max 3 items per list</li>
+      </ul>
+    </div>
+
+    <div class="box box-decision">
+      <div class="box-label">&#9679; What It Decides</div>
+      <p>Narrative arc, card roles, rhythm (dense vs sparse), left-right alternation pattern. No content yet &mdash; roles and shapes only.</p>
+    </div>
+
+    <div class="box box-output">
+      <div class="box-label">&#9679; Output &mdash; Plan JSON</div>
+      <div class="code-lang">json</div>
+      <pre class="code-block">{
+  <span class="syn-key">"deckIntent"</span>: <span class="syn-str">"Data-forward sweep: establish total scale, zoom into sectors, show
+  geographic picture, name the infrastructure tension, resolve forward.
+  Left-right alternation. Hero numbers on data cards. Two sparse cards
+  for rhythm."</span>,
+  <span class="syn-key">"cards"</span>: [
+    {
+      <span class="syn-key">"cardIndex"</span>: <span class="syn-num">0</span>,
+      <span class="syn-key">"cardInstructions"</span>: <span class="syn-str">"Title card. Bottom-left anchor. Dark background.
+      Maximum whitespace. Bookend start."</span>,
+      <span class="syn-key">"imageLayout"</span>: <span class="syn-str">"blank"</span>
+    },
+    {
+      <span class="syn-key">"cardIndex"</span>: <span class="syn-num">1</span>,
+      <span class="syn-key">"cardInstructions"</span>: <span class="syn-str">"Scale/hook. One hero number -- the total global
+      investment figure. Right column, left empty. This number earns
+      attention for the rest of the deck."</span>,
+      <span class="syn-key">"imageLayout"</span>: <span class="syn-str">"blank"</span>
+    },
+    {
+      <span class="syn-key">"cardIndex"</span>: <span class="syn-num">2</span>,
+      <span class="syn-key">"cardInstructions"</span>: <span class="syn-str">"Sector spotlight -- the dominant sector. One metric
+      + one sentence. Left column (mirror). Sparse."</span>,
+      <span class="syn-key">"imageLayout"</span>: <span class="syn-str">"blank"</span>
+    },
+    {
+      <span class="syn-key">"cardIndex"</span>: <span class="syn-num">3</span>,
+      <span class="syn-key">"cardInstructions"</span>: <span class="syn-str">"Second sector or emerging trend. One metric + context.
+      Right column."</span>,
+      <span class="syn-key">"imageLayout"</span>: <span class="syn-str">"blank"</span>
+    },
+    {
+      <span class="syn-key">"cardIndex"</span>: <span class="syn-num">4</span>,
+      <span class="syn-key">"cardInstructions"</span>: <span class="syn-str">"Geographic or comparative breakdown. 3 parallel items
+      as structured data -- each with a figure and one fact. Heading left
+      column, data right. The dense card."</span>,
+      <span class="syn-key">"imageLayout"</span>: <span class="syn-str">"blank"</span>
+    },
+    {
+      <span class="syn-key">"cardIndex"</span>: <span class="syn-num">5</span>,
+      <span class="syn-key">"cardInstructions"</span>: <span class="syn-str">"Tension/complication. Name a bottleneck or gap. Hero
+      number if available. Left column. Statement energy -- disrupts the
+      optimism arc."</span>,
+      <span class="syn-key">"imageLayout"</span>: <span class="syn-str">"blank"</span>
+    },
+    {
+      <span class="syn-key">"cardIndex"</span>: <span class="syn-num">6</span>,
+      <span class="syn-key">"cardInstructions"</span>: <span class="syn-str">"Forward look. What's needed, what's coming. Right
+      column. Sparse fragments, not paragraphs. Resolution beat."</span>,
+      <span class="syn-key">"imageLayout"</span>: <span class="syn-str">"blank"</span>
+    },
+    {
+      <span class="syn-key">"cardIndex"</span>: <span class="syn-num">7</span>,
+      <span class="syn-key">"cardInstructions"</span>: <span class="syn-str">"Closing. Single statement, bottom-right corner. Mirrors
+      title diagonal. Maximum whitespace. Bookend end."</span>,
+      <span class="syn-key">"imageLayout"</span>: <span class="syn-str">"blank"</span>
+    }
+  ]
+}</pre>
+    </div>
+  </div>
+</div>
+
+<!-- CONNECTOR -->
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 24 M6 18 L12 26 L18 18" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- ===== STEP 2: OUTLINE ===== -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-outline">2</div>
+    <div class="step-title"><span class="step-system-tag buddy">Buddy G</span>Outline <span class="step-subtitle"> &mdash; Gen3 &rarr; writeOutline</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <div class="box box-input">
+      <div class="box-label">&#9679; Inputs</div>
+      <ul>
+        <li><strong>Plan JSON</strong> from Step 1</li>
+        <li><strong>density.yaml</strong> + <strong>writing.md</strong></li>
+        <li><strong>Web research results</strong> &mdash; IEA data: $2.2T clean energy investment, solar $450B, battery storage $66B (up from $12B), grid spending $400B vs $1T generation</li>
+      </ul>
+    </div>
+
+    <div class="box box-decision">
+      <div class="box-label">&#9679; What It Decides</div>
+      <p>Fills each plan slot with actual content. Chooses hero numbers, data points, and Swiss voice. This is the single artifact that enters the gendeck pipeline.</p>
+    </div>
+
+    <div class="box box-output">
+      <div class="box-label">&#9679; Output &mdash; Outline HTML</div>
+      <div class="code-lang">html</div>
+      <pre class="code-block"><span class="syn-tag">&lt;outline&gt;</span>
+  <span class="syn-tag">&lt;deckIntent&gt;</span>Data-forward sweep: establish total scale, zoom into sectors, show
+  geographic picture, name the infrastructure tension, resolve forward. Left-right
+  alternation. Hero numbers on data cards. Two sparse cards for rhythm.<span class="syn-tag">&lt;/deckIntent&gt;</span>
+
+  <span class="syn-tag">&lt;section</span> <span class="syn-attr">imageLayout</span>=<span class="syn-val">"blank"</span><span class="syn-tag">&gt;</span>
+    <span class="syn-tag">&lt;instructions&gt;</span>Title card. Bottom-left anchor. Dark background. Maximum whitespace.
+    Bookend start.<span class="syn-tag">&lt;/instructions&gt;</span>
+    <span class="syn-tag">&lt;h1&gt;</span>Climate Tech Investment<span class="syn-tag">&lt;/h1&gt;</span>
+  <span class="syn-tag">&lt;/section&gt;</span>
+
+  <span class="syn-tag">&lt;section</span> <span class="syn-attr">imageLayout</span>=<span class="syn-val">"blank"</span><span class="syn-tag">&gt;</span>
+    <span class="syn-tag">&lt;instructions&gt;</span>Scale/hook. Hero number dominates. The 2x comparison is the hook.
+    Right column, left empty.<span class="syn-tag">&lt;/instructions&gt;</span>
+    <span class="syn-tag">&lt;h2&gt;</span>$2.2T<span class="syn-tag">&lt;/h2&gt;</span>
+    <span class="syn-tag">&lt;p&gt;</span>Clean energy investment in 2025. Twice what goes to oil, gas, and coal combined.<span class="syn-tag">&lt;/p&gt;</span>
+  <span class="syn-tag">&lt;/section&gt;</span>
+
+  <span class="syn-tag">&lt;section</span> <span class="syn-attr">imageLayout</span>=<span class="syn-val">"blank"</span><span class="syn-tag">&gt;</span>
+    <span class="syn-tag">&lt;instructions&gt;</span>Sector spotlight. Hero number + one sentence. Left column, right empty.
+    Mirror from previous card.<span class="syn-tag">&lt;/instructions&gt;</span>
+    <span class="syn-tag">&lt;h2&gt;</span>$450B<span class="syn-tag">&lt;/h2&gt;</span>
+    <span class="syn-tag">&lt;p&gt;</span>Solar investment in 2025. The largest single item in global energy spending.<span class="syn-tag">&lt;/p&gt;</span>
+  <span class="syn-tag">&lt;/section&gt;</span>
+
+  <span class="syn-tag">&lt;section</span> <span class="syn-attr">imageLayout</span>=<span class="syn-val">"blank"</span><span class="syn-tag">&gt;</span>
+    <span class="syn-tag">&lt;instructions&gt;</span>Second sector. Growth multiple as hero -- more dramatic than absolute
+    number. Right column.<span class="syn-tag">&lt;/instructions&gt;</span>
+    <span class="syn-tag">&lt;h2&gt;</span>5x<span class="syn-tag">&lt;/h2&gt;</span>
+    <span class="syn-tag">&lt;p&gt;</span>Battery storage spending: $66B, up from $12B three years ago. Renewables are
+    becoming dispatchable.<span class="syn-tag">&lt;/p&gt;</span>
+  <span class="syn-tag">&lt;/section&gt;</span>
+
+  <span class="syn-tag">&lt;section</span> <span class="syn-attr">imageLayout</span>=<span class="syn-val">"blank"</span><span class="syn-tag">&gt;</span>
+    <span class="syn-tag">&lt;instructions&gt;</span>Geographic breakdown. 3 structured items. Heading left column, data
+    right. The dense card.<span class="syn-tag">&lt;/instructions&gt;</span>
+    <span class="syn-tag">&lt;h2&gt;</span>By Region<span class="syn-tag">&lt;/h2&gt;</span>
+    <span class="syn-tag">&lt;h3&gt;</span>China<span class="syn-tag">&lt;/h3&gt;</span>
+    <span class="syn-tag">&lt;p&gt;</span>Dominates manufacturing. Solar panel prices down 60% since 2022.<span class="syn-tag">&lt;/p&gt;</span>
+    <span class="syn-tag">&lt;h3&gt;</span>Europe<span class="syn-tag">&lt;/h3&gt;</span>
+    <span class="syn-tag">&lt;p&gt;</span>Leads offshore wind and regulatory frameworks.<span class="syn-tag">&lt;/p&gt;</span>
+    <span class="syn-tag">&lt;h3&gt;</span>United States<span class="syn-tag">&lt;/h3&gt;</span>
+    <span class="syn-tag">&lt;p&gt;</span>IRA-driven domestic manufacturing surge.<span class="syn-tag">&lt;/p&gt;</span>
+  <span class="syn-tag">&lt;/section&gt;</span>
+
+  <span class="syn-tag">&lt;section</span> <span class="syn-attr">imageLayout</span>=<span class="syn-val">"blank"</span><span class="syn-tag">&gt;</span>
+    <span class="syn-tag">&lt;instructions&gt;</span>Tension card. Comparative hero stat. Left column. Statement energy --
+    disrupts the optimism.<span class="syn-tag">&lt;/instructions&gt;</span>
+    <span class="syn-tag">&lt;h2&gt;</span>$400B vs $1T<span class="syn-tag">&lt;/h2&gt;</span>
+    <span class="syn-tag">&lt;p&gt;</span>Grid spending versus generation spending. Transmission is the bottleneck.<span class="syn-tag">&lt;/p&gt;</span>
+  <span class="syn-tag">&lt;/section&gt;</span>
+
+  <span class="syn-tag">&lt;section</span> <span class="syn-attr">imageLayout</span>=<span class="syn-val">"blank"</span><span class="syn-tag">&gt;</span>
+    <span class="syn-tag">&lt;instructions&gt;</span>Forward look. Sparse fragments, not paragraphs. Right column.
+    Resolution beat.<span class="syn-tag">&lt;/instructions&gt;</span>
+    <span class="syn-tag">&lt;h2&gt;</span>Forward<span class="syn-tag">&lt;/h2&gt;</span>
+    <span class="syn-tag">&lt;p&gt;</span>Grid modernization. Long-duration storage. Industrial electrification.<span class="syn-tag">&lt;/p&gt;</span>
+  <span class="syn-tag">&lt;/section&gt;</span>
+
+  <span class="syn-tag">&lt;section</span> <span class="syn-attr">imageLayout</span>=<span class="syn-val">"blank"</span><span class="syn-tag">&gt;</span>
+    <span class="syn-tag">&lt;instructions&gt;</span>Closing. Single statement, bottom-right corner. Mirrors title diagonal.
+    Maximum whitespace.<span class="syn-tag">&lt;/instructions&gt;</span>
+    <span class="syn-tag">&lt;h3&gt;</span>The Transition<span class="syn-tag">&lt;/h3&gt;</span>
+    <span class="syn-tag">&lt;p&gt;</span>The largest reallocation of capital in history.<span class="syn-tag">&lt;/p&gt;</span>
+  <span class="syn-tag">&lt;/section&gt;</span>
+<span class="syn-tag">&lt;/outline&gt;</span></pre>
+    </div>
+  </div>
+</div>
+
+<!-- CONNECTOR -->
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 24 M6 18 L12 26 L18 18" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- ===== STEP 3: STYLE RESOLVE ===== -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-style">3</div>
+    <div class="step-title"><span class="step-system-tag gendeck">GenDeck</span>Style Resolve <span class="step-subtitle"> &mdash; LLM art director</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <div class="box box-input">
+      <div class="box-label">&#9679; Inputs</div>
+      <ul>
+        <li><strong>blocks.ts</strong> &mdash; allowed variants + variantPreferenceOrder</li>
+        <li><strong>planning.md</strong> &mdash; design philosophy</li>
+        <li><strong>deckIntent</strong> from plan</li>
+        <li><strong>Outline content summary</strong></li>
+      </ul>
+    </div>
+
+    <div class="box box-decision">
+      <div class="box-label">&#9679; What It Decides</div>
+      <p>Visual register (outline), variant selections (outlineBoxes + stats), color palette (#1a1a1a bookends), and prohibitions (no images, no gradients, no filled variants).</p>
+    </div>
+
+    <div class="box box-output">
+      <div class="box-label">&#9679; Output &mdash; Prose Style Brief</div>
+      <blockquote>
+        Outline register throughout &mdash; this deck about clean energy investment should feel like data etched into a grid, not decorated. outlineBoxes for any parallel content (the regional breakdown, if forward-looking items are structured). stats for hero numbers: $2.2T, $450B, 5x, $400B vs $1T &mdash; these are the visual anchors, left-aligned within their column, never centered. Dark charcoal (#1a1a1a) on the title and closing cards only, white everywhere else. The dark-light-dark bookend frames the deck. No accent color on content cards &mdash; the numbers ARE the color. No images. No gradients. No filled variants. If emphasis is needed, use background color swap, not a variant change. topLineText only if a card needs a lightweight list that outlineBoxes would overwhelm. The grid does the work.
+      </blockquote>
+    </div>
+
+    <div class="box box-output" style="margin-top: 0.5rem;">
+      <div class="box-label">&#9679; Output &mdash; Structured Variant Preferences</div>
+      <div class="code-lang">text</div>
+      <pre class="code-block">variantPreferences: { text: [topLineText, sideLineText], boxes: [outlineBoxes], stats: [stats] }
+maxFamilies: 1</pre>
+    </div>
+  </div>
+</div>
+
+<!-- CONNECTOR -->
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 24 M6 18 L12 26 L18 18" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- PER-CARD LABEL -->
+<div style="text-align:center; margin-bottom: 0.75rem;">
+  <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-dim); background: var(--surface2); padding: 0.25rem 0.75rem; border-radius: 4px; border: 1px dashed rgba(255,255,255,0.15);">Per card from here</span>
+</div>
+
+<!-- ===== STEP 4: STRUCTURE ===== -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-structure">4</div>
+    <div class="step-title"><span class="step-system-tag gendeck">GenDeck</span>Structure <span class="step-subtitle"> &mdash; Card 4 (the dense card)</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <p class="prose">Showing the most interesting card. The structurer composes spatial arrangements &mdash; could experiment with loose GML templates here, or output prose spatial descriptions.</p>
+
+    <div class="box box-input">
+      <div class="box-label">&#9679; Inputs</div>
+      <ul>
+        <li><strong>structure.md</strong></li>
+        <li><strong>Card content</strong> from outline</li>
+        <li><strong>&lt;instructions&gt;</strong> &mdash; "Geographic breakdown. 3 structured items. Heading left column, data right. The dense card."</li>
+        <li><strong>Style brief</strong> from Step 3 &mdash; "outlineBoxes for any parallel content... outline register throughout... left-aligned within their column"</li>
+      </ul>
+    </div>
+
+    <div class="box box-input" style="margin-top: 0.25rem;">
+      <div class="box-label">&#9679; Card Content from Outline</div>
+      <div class="code-lang">html</div>
+      <pre class="code-block"><span class="syn-tag">&lt;h2&gt;</span>By Region<span class="syn-tag">&lt;/h2&gt;</span>
+<span class="syn-tag">&lt;h3&gt;</span>China<span class="syn-tag">&lt;/h3&gt;</span>
+<span class="syn-tag">&lt;p&gt;</span>Dominates manufacturing. Solar panel prices down 60% since 2022.<span class="syn-tag">&lt;/p&gt;</span>
+<span class="syn-tag">&lt;h3&gt;</span>Europe<span class="syn-tag">&lt;/h3&gt;</span>
+<span class="syn-tag">&lt;p&gt;</span>Leads offshore wind and regulatory frameworks.<span class="syn-tag">&lt;/p&gt;</span>
+<span class="syn-tag">&lt;h3&gt;</span>United States<span class="syn-tag">&lt;/h3&gt;</span>
+<span class="syn-tag">&lt;p&gt;</span>IRA-driven domestic manufacturing surge.<span class="syn-tag">&lt;/p&gt;</span></pre>
+    </div>
+
+    <div class="box box-decision">
+      <div class="box-label">&#9679; What It Decides</div>
+      <p>Spatial composition: columns, anchoring, positioning, which variant to use, where whitespace goes.</p>
+    </div>
+
+    <div class="box box-output">
+      <div class="box-label">&#9679; Output &mdash; High-Level GML Structure or Prose Spatial Description</div>
+      <blockquote>
+        Two equal columns, bottom-anchored. Left column: heading "By Region" left-aligned at the bottom of the column. Right column: three outlineBoxes items (China, Europe, United States), each with a bold heading and one-line description. outlineBoxes left-aligned within the right column. Top 30% of card is open whitespace. The heading in the left column creates asymmetric tension with the data grid on the right.
+      </blockquote>
+    </div>
+  </div>
+</div>
+
+<!-- CONNECTOR -->
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 24 M6 18 L12 26 L18 18" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- ===== STEP 5: LAYOUT RESOLVER (Card 4) ===== -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-resolve">5</div>
+    <div class="step-title"><span class="step-system-tag gendeck">GenDeck</span>Layout Resolver &mdash; Card 4 <span class="step-subtitle"> &mdash; converts prose to GML, constrained by guide blocks</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <div class="box box-input">
+      <div class="box-label">&#9679; Inputs</div>
+      <p style="font-size:0.85rem; color:var(--text-dim); margin-bottom:0.5rem;">The resolver assembles its GML knowledge from two complementary layers:</p>
+      <ul>
+        <li><strong>gml-schema</strong> (tag spec) &mdash; valid tags, attributes, nesting rules. Auto-generated from node definitions. Tells the resolver <em>what tags ARE</em> and how to write them correctly.</li>
+        <li><strong>blocks.ts</strong> (guide overlay) &mdash; which tags this guide allows/prefers/avoids, variant preferences, guidance prose. Tells the resolver <em>how this guide USES</em> the tags.</li>
+        <li><strong>examples.md</strong> &mdash; reference GML cards showing the tags in use for this guide's aesthetic.</li>
+        <li><strong>Spatial description</strong> from Step 4</li>
+        <li><strong>Card content</strong> from outline</li>
+        <li><strong>Style brief</strong> from Step 3</li>
+        <li><strong>Allowed variants:</strong> <code>boxes: outlineBoxes | stats: stats | text: topLineText, sideLineText</code></li>
+      </ul>
+    </div>
+
+    <h3 style="margin: 1rem 0 0.5rem; font-size: 0.9rem; color: var(--tool);">Available Tools</h3>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="tool-card-name">layout-spatial-analysis</div>
+        <p>Checks whether content fits the chosen layout based on block rules or text length constraints. Optional &mdash; resolver can call it to validate before emitting GML.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-card-name">image-query-author</div>
+        <p>Authors image search queries for accent images when the card needs visual assets.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-card-name">chart-creator</div>
+        <p>Picks chart type and sets specific chart parameters when the card contains data worth visualizing.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:0.75rem; padding:0.75rem 1rem; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:8px; font-size:0.82rem;">
+      <strong style="color:var(--text-dim);">GML Knowledge Stack</strong>
+      <div style="margin-top:0.4rem; color:var(--text-dim); line-height:1.7; font-family:'SF Mono',monospace; font-size:0.75rem;">
+        <span style="color:#86efac;">gml-schema</span> (infrastructure) &mdash; source of truth for all block definitions<br>
+        &nbsp;&nbsp;&darr; defines what tags ARE: attributes, nesting rules, valid children<br>
+        &nbsp;&nbsp;&darr; auto-generates: valid tag list, reference docs, variant definitions<br>
+        <span style="color:#fcd34d;">blocks.ts</span> (guide overlay) &mdash; imports types from gml-schema<br>
+        &nbsp;&nbsp;&darr; adds: allowed/avoided/preferred per guide + variantPreferenceOrder<br>
+        <span style="color:#7dd3fc;">resolver prompt</span> (assembled at runtime)<br>
+        &nbsp;&nbsp;&larr; from gml-schema: tag spec (replaces hardcoded rules)<br>
+        &nbsp;&nbsp;&larr; from blocks.ts: guide constraints<br>
+        &nbsp;&nbsp;&larr; from examples.md: tags in use
+      </div>
+    </div>
+
+    <div class="box box-tool" style="margin-top: 0.5rem;">
+      <div class="box-label">&#9679; Spatial Analysis Check (optional tool call)</div>
+      <pre class="code-block">3 H3 items detected (China, Europe, US)
+- outlineBoxes x3: body text fits within typical limits. <span style="color:#4ade80;">FITS.</span>
+- stats x3: body text too long for stat cells. <span style="color:#f87171;">WON'T FIT.</span>
+- topLineText x3: fits. <span style="color:#4ade80;">FITS.</span></pre>
+    </div>
+
+    <div class="box box-decision">
+      <div class="box-label">&#9679; What It Decides</div>
+      <p>Valid GML that faithfully implements all upstream decisions &mdash; the spatial description, style brief, and content. Constrained by blocks available in the guide.</p>
+    </div>
+
+    <div class="box box-output">
+      <div class="box-label">&#9679; Output &mdash; Card GML</div>
+      <div class="code-lang">gml</div>
+      <pre class="code-block"><span class="syn-tag">&lt;SECTION</span> <span class="syn-attr">image-layout</span>=<span class="syn-val">"blank"</span> <span class="syn-attr">vertical-align</span>=<span class="syn-val">"end"</span><span class="syn-tag">&gt;</span>
+  <span class="syn-tag">&lt;DIV</span> <span class="syn-attr">class</span>=<span class="syn-val">"body"</span><span class="syn-tag">&gt;</span>
+    <span class="syn-tag">&lt;COLUMNS&gt;</span>
+      <span class="syn-tag">&lt;DIV&gt;</span>
+        <span class="syn-tag">&lt;H2</span> <span class="syn-attr">style</span>=<span class="syn-val">"text-align: left"</span><span class="syn-tag">&gt;</span>By Region<span class="syn-tag">&lt;/H2&gt;</span>
+      <span class="syn-tag">&lt;/DIV&gt;</span>
+      <span class="syn-tag">&lt;DIV&gt;</span>
+        <span class="syn-tag">&lt;SMART-LAYOUT</span> <span class="syn-attr">variant</span>=<span class="syn-val">"outlineBoxes"</span> <span class="syn-attr">horizontalAlign</span>=<span class="syn-val">"left"</span><span class="syn-tag">&gt;</span>
+          <span class="syn-tag">&lt;SMART-LAYOUT-ITEM&gt;</span>
+            <span class="syn-tag">&lt;H4&gt;</span>China<span class="syn-tag">&lt;/H4&gt;</span>
+            <span class="syn-tag">&lt;P&gt;</span>Dominates manufacturing. Solar panel prices down 60% since 2022.<span class="syn-tag">&lt;/P&gt;</span>
+          <span class="syn-tag">&lt;/SMART-LAYOUT-ITEM&gt;</span>
+          <span class="syn-tag">&lt;SMART-LAYOUT-ITEM&gt;</span>
+            <span class="syn-tag">&lt;H4&gt;</span>Europe<span class="syn-tag">&lt;/H4&gt;</span>
+            <span class="syn-tag">&lt;P&gt;</span>Leads offshore wind and regulatory frameworks.<span class="syn-tag">&lt;/P&gt;</span>
+          <span class="syn-tag">&lt;/SMART-LAYOUT-ITEM&gt;</span>
+          <span class="syn-tag">&lt;SMART-LAYOUT-ITEM&gt;</span>
+            <span class="syn-tag">&lt;H4&gt;</span>United States<span class="syn-tag">&lt;/H4&gt;</span>
+            <span class="syn-tag">&lt;P&gt;</span>IRA-driven domestic manufacturing surge.<span class="syn-tag">&lt;/P&gt;</span>
+          <span class="syn-tag">&lt;/SMART-LAYOUT-ITEM&gt;</span>
+        <span class="syn-tag">&lt;/SMART-LAYOUT&gt;</span>
+      <span class="syn-tag">&lt;/DIV&gt;</span>
+    <span class="syn-tag">&lt;/COLUMNS&gt;</span>
+  <span class="syn-tag">&lt;/DIV&gt;</span>
+<span class="syn-tag">&lt;/SECTION&gt;</span></pre>
+      <p style="margin-top:0.5rem; font-size:0.85rem; color:var(--text-dim);"><strong>Post-generation spatial check:</strong> outlineBoxes x 3 in halfColumn &mdash; all items fit. No warnings.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CONNECTOR -->
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 24 M6 18 L12 26 L18 18" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- ===== STEP 5b: LAYOUT RESOLVER (Card 1) ===== -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-resolve">5b</div>
+    <div class="step-title"><span class="step-system-tag gendeck">GenDeck</span>Layout Resolver &mdash; Card 1 <span class="step-subtitle"> &mdash; a simpler card for contrast</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <div class="box box-input">
+      <div class="box-label">&#9679; Card Content</div>
+      <div class="code-lang">html</div>
+      <pre class="code-block"><span class="syn-tag">&lt;h2&gt;</span>$2.2T<span class="syn-tag">&lt;/h2&gt;</span>
+<span class="syn-tag">&lt;p&gt;</span>Clean energy investment in 2025. Twice what goes to oil, gas, and coal combined.<span class="syn-tag">&lt;/p&gt;</span></pre>
+    </div>
+
+    <div class="box box-input" style="margin-top:0.25rem;">
+      <div class="box-label">&#9679; Instructions</div>
+      <p>"Scale/hook. Hero number dominates. Right column, left empty."</p>
+    </div>
+
+    <div class="box box-decision">
+      <div class="box-label">&#9679; Structure Output</div>
+      <blockquote>
+        Two equal columns, bottom-anchored. Left column: empty (active negative space). Right column: large heading "$2.2T" at bottom-right, supporting paragraph below. Text left-aligned within the right column.
+      </blockquote>
+    </div>
+
+    <div class="box box-output">
+      <div class="box-label">&#9679; Output &mdash; Card GML</div>
+      <div class="code-lang">gml</div>
+      <pre class="code-block"><span class="syn-tag">&lt;SECTION</span> <span class="syn-attr">image-layout</span>=<span class="syn-val">"blank"</span> <span class="syn-attr">vertical-align</span>=<span class="syn-val">"end"</span><span class="syn-tag">&gt;</span>
+  <span class="syn-tag">&lt;DIV</span> <span class="syn-attr">class</span>=<span class="syn-val">"body"</span><span class="syn-tag">&gt;</span>
+    <span class="syn-tag">&lt;COLUMNS&gt;</span>
+      <span class="syn-tag">&lt;DIV&gt;&lt;/DIV&gt;</span>
+      <span class="syn-tag">&lt;DIV&gt;</span>
+        <span class="syn-tag">&lt;H2</span> <span class="syn-attr">style</span>=<span class="syn-val">"text-align: left"</span><span class="syn-tag">&gt;</span>$2.2T<span class="syn-tag">&lt;/H2&gt;</span>
+        <span class="syn-tag">&lt;P</span> <span class="syn-attr">style</span>=<span class="syn-val">"text-align: left"</span><span class="syn-tag">&gt;</span>Clean energy investment in 2025. Twice what goes
+        to oil, gas, and coal combined.<span class="syn-tag">&lt;/P&gt;</span>
+      <span class="syn-tag">&lt;/DIV&gt;</span>
+    <span class="syn-tag">&lt;/COLUMNS&gt;</span>
+  <span class="syn-tag">&lt;/DIV&gt;</span>
+<span class="syn-tag">&lt;/SECTION&gt;</span></pre>
+      <p style="margin-top:0.5rem; font-size:0.85rem; color:var(--text-dim);">No smart layout, no spatial check needed. The empty <code>&lt;DIV&gt;&lt;/DIV&gt;</code> is intentional Swiss negative space.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CONNECTOR -->
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 24 M6 18 L12 26 L18 18" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- ===== STEP 6: RENDERER ===== -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-renderer">6</div>
+    <div class="step-title"><span class="step-system-tag gendeck">GenDeck</span>Renderer <span class="step-subtitle"> &mdash; GML &rarr; visual output</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <div class="box box-input">
+      <div class="box-label">&#9679; Input</div>
+      <p>Card GML from the Layout Resolver</p>
+    </div>
+    <div class="box box-decision">
+      <div class="box-label">&#9679; What It Does</div>
+      <p>Renders the GML markup into visual card output &mdash; the actual pixels the user sees.</p>
+    </div>
+    <div class="box box-output">
+      <div class="box-label">&#9679; Output</div>
+      <p>Rendered card (screenshot-ready visual output)</p>
+    </div>
+  </div>
+</div>
+
+<!-- CONNECTOR -->
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 24 M6 18 L12 26 L18 18" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- ===== STEP 7: REVIEWER ===== -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-reviewer">7</div>
+    <div class="step-title"><span class="step-system-tag gendeck">GenDeck</span>Reviewer <span class="step-subtitle"> &mdash; evaluates rendered output (graders)</span></div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <div class="box box-input">
+      <div class="box-label">&#9679; Input</div>
+      <p>Rendered card screenshots from the Renderer</p>
+    </div>
+    <div class="box box-decision">
+      <div class="box-label">&#9679; What It Does</div>
+      <p>Evaluates the rendered output against quality criteria. Runs graders to score layout fidelity, spatial correctness, content completeness, and guide adherence.</p>
+    </div>
+    <div class="box box-output">
+      <div class="box-label">&#9679; Output</div>
+      <p>Grader scores and feedback &mdash; pass/fail signals that can trigger re-generation if quality thresholds are not met.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CONNECTOR -->
+<div class="step-connector">
+  <svg viewBox="0 0 24 32"><path d="M12 0 L12 24 M6 18 L12 26 L18 18" stroke="#555" stroke-width="2" fill="none"/></svg>
+</div>
+
+<!-- ===== FINAL: deck.gml ===== -->
+<div class="step" onclick="this.classList.toggle('open')">
+  <div class="step-header">
+    <div class="step-number sn-final" style="font-size:0.7rem;">&#10003;</div>
+    <div class="step-title">Final: deck.gml</div>
+    <div class="step-chevron">&#9656;</div>
+  </div>
+  <div class="step-body" onclick="event.stopPropagation()">
+    <p class="prose">All 8 card GML sections concatenated. Ready for screenshots and graders.</p>
+  </div>
+</div>
+
+<!-- ===== SUMMARY TABLE ===== -->
+<div class="summary-section">
+  <h2>What Each Step Contributed</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Step</th>
+        <th>Input</th>
+        <th>Decision Made</th>
+        <th>Output</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Plan</td>
+        <td>User prompt + planning.md + writing.md</td>
+        <td>Narrative arc, card roles, rhythm, L-R pattern</td>
+        <td>Plan JSON (deckIntent + per-card instructions + imageLayout)</td>
+      </tr>
+      <tr>
+        <td>Outline</td>
+        <td>Plan + density.yaml + writing.md + research</td>
+        <td>Actual content, hero numbers, data points, Swiss voice</td>
+        <td>Outline HTML (content + instructions + imageLayout per section)</td>
+      </tr>
+      <tr>
+        <td>Style Resolve</td>
+        <td>blocks.ts + planning.md + deckIntent + outline summary</td>
+        <td>Register (outline), variants (outlineBoxes + stats), color (#1a1a1a bookends), prohibitions</td>
+        <td>Prose style brief + structured variant preferences</td>
+      </tr>
+      <tr>
+        <td>Structure</td>
+        <td>structure.md + instructions + style brief</td>
+        <td>Spatial composition per card (columns, anchoring, positioning)</td>
+        <td>High-level GML structure or prose spatial description per card</td>
+      </tr>
+      <tr>
+        <td style="white-space:normal;">Layout Resolver</td>
+        <td>blocks.ts + examples.md + structure + style brief + content</td>
+        <td>Valid GML that follows all upstream decisions</td>
+        <td>GML SECTION per card</td>
+      </tr>
+      <tr>
+        <td>Renderer</td>
+        <td>Card GML</td>
+        <td>Visual rendering of markup</td>
+        <td>Rendered card output (screenshots)</td>
+      </tr>
+      <tr>
+        <td>Reviewer</td>
+        <td>Rendered screenshots</td>
+        <td>Quality evaluation against grader criteria</td>
+        <td>Scores + pass/fail signals</td>
+      </tr>
+      <tr>
+        <td style="white-space:normal;">Spatial Analysis</td>
+        <td>Content + chosen variant/container</td>
+        <td>Whether content fits the chosen layout based on block rules or text length constraints</td>
+        <td>Fit/no-fit + alternatives (tool available to Layout Resolver)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== OPEN QUESTIONS ===== -->
+<div class="questions-section">
+  <h2>Open Questions</h2>
+  <p style="color:var(--text-dim); font-size:0.85rem; margin-bottom:0.75rem;">Not addressed in this walkthrough.</p>
+  <div class="question-item">
+    <strong>Chart data:</strong> If a card needs a chart, how does the outline carry the data? Inline <code>&lt;table&gt;</code> inside the section?
+  </div>
+  <div class="question-item">
+    <strong>Images:</strong> For guides that use images (minimal, classic), when does the image query get authored? In instructions? In a separate pass?
+  </div>
+  <div class="question-item">
+    <strong>Guide swapping:</strong> If the user says "make this consultant-style" after seeing the Swiss output, the outline content is Swiss-sparse. Need to re-outline from the content kernel (the research data + plan structure).
+  </div>
+</div>
+
+<div style="text-align:center; color:var(--text-dim); font-size:0.75rem; margin-top:2rem; padding-bottom:2rem;">
+  GenDeck Pipeline Walkthrough &mdash; Swiss Grid &mdash; Climate Tech Investment
+</div>
+
+</body>
+</html>
