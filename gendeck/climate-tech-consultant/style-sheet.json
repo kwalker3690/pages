@@ -1,0 +1,26 @@
+{
+  "styleBrief": "This climate tech investment deck demands a sophisticated corporate aesthetic that positions complex financial data as authoritative investment intelligence. Deploy the filled register with geometric precision — use solidBoxes and solidJoinedBoxes as the primary visual vocabulary to create structured analytical frameworks that mirror the systematic approach of institutional investment analysis. Every smart layout variant should feel like a Bloomberg terminal or McKinsey framework: clean edges, purposeful containment, and data-driven hierarchy.\n\nCommit to a dark navy or charcoal background throughout with a single electric accent color — either bright green (climate connection) or electric blue (tech/finance signal) — used exclusively for colored panel backgrounds, label highlights, and statistical emphasis. Alternate the accent color strategically: use it for one column in two-column layouts to create analytical callout zones, apply it to stats displays that showcase headline numbers like \"$2.8T\" or \"23% CAGR,\" and reserve it for the most critical smart layout items in comparative frameworks. The accent color becomes your emphasis tool — when something is colored, it's the card's primary insight.\n\nStructure every content card with mathematical precision: mandatory section labels at the top using solid variants with chart-bar or trending-up icons, followed by bold H1 action titles that make specific investment claims, then dense multi-zone content stacking that pairs statistical displays with analytical prose. Use stats and starStats layouts heavily for IRR percentages, funding amounts, and performance metrics — these should feel like financial dashboard elements. Deploy three-column solidBoxes for the investment tier comparisons and sector breakdowns, ensuring each column carries substantial bullet-point analysis, not just labels.\n\nProhibit any decorative elements, rounded variants, or breathing room that might soften the corporate authority. No organic shapes, no flower or cycle layouts, no empty columns. Every text block should contain specific dollar amounts, percentages, and timeframes. The maximum chart allowance of one per deck should be reserved for the most critical comparative data — likely the sector performance or funding stage analysis — and must be paired with dense analytical text that interprets every data point. This deck sells a $50-200M investment thesis through visual authority and analytical density, not charm or accessibility.",
+  "maxFamilies": "unlimited",
+  "variantPreferences": {
+    "boxes": [
+      "solidBoxes",
+      "solidJoinedBoxes",
+      "solidLeafBoxes"
+    ],
+    "stats": [
+      "stats",
+      "starStats",
+      "circleStats"
+    ],
+    "steps": [
+      "processSteps",
+      "stepsWithArrow"
+    ],
+    "text": [
+      "topLineText"
+    ],
+    "circles": [
+      "cycle"
+    ]
+  }
+}
