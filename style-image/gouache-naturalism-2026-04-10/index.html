@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html><head><title>Gouache Color Naturalism — Before / After</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: system-ui, -apple-system, sans-serif; background: #1a1a2e; color: #e0e0e0; padding: 2rem; }
+h1 { font-size: 1.8rem; margin-bottom: 0.25rem; }
+.subtitle { color: #888; margin-bottom: 0.5rem; }
+.stats { background: #16213e; border-radius: 8px; padding: 1rem 1.5rem; margin-bottom: 2rem; display: flex; gap: 2rem; flex-wrap: wrap; }
+.stat { text-align: center; }
+.stat .value { font-size: 2rem; font-weight: 700; color: #4cc9f0; }
+.stat .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #888; }
+.comparison { margin-bottom: 3rem; }
+.comparison h2 { font-size: 1rem; color: #ccc; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid #333; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 0.5rem; }
+.pair img { width: 100%; border-radius: 8px; aspect-ratio: 1; object-fit: cover; }
+.pair .label { text-align: center; font-size: 0.8rem; padding: 0.5rem; }
+.before .label { color: #ff6b6b; }
+.after .label { color: #51cf66; }
+.verdict { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+.verdict.pass { background: #1b4332; color: #51cf66; }
+.verdict.fail { background: #4a1a1a; color: #ff6b6b; }
+.score { font-weight: 700; }
+.notes { background: #16213e; border-radius: 8px; padding: 1.5rem; margin-top: 2rem; }
+.notes h3 { margin-bottom: 0.75rem; }
+.notes ul { padding-left: 1.5rem; }
+.notes li { margin-bottom: 0.5rem; color: #aaa; }
+</style></head><body>
+
+<h1>Gouache Color Naturalism</h1>
+<p class="subtitle">Theme: Consultant (#2150FE blue) | Style: gouache_paint | Model: gpt-image-1-medium</p>
+
+<div class="stats">
+  <div class="stat"><div class="value">0/7</div><div class="label">Before (pass)</div></div>
+  <div class="stat"><div class="value">7/7</div><div class="label">After (pass)</div></div>
+  <div class="stat"><div class="value">1.0</div><div class="label">Avg Score (after)</div></div>
+  <div class="stat"><div class="value">v3</div><div class="label">Prompt iteration</div></div>
+</div>
+
+<div class="comparison">
+  <h2>1. sushi rolls arranged on a wooden board</h2>
+  <div class="pair">
+    <div class="before"><img src="old/images/sushi-0-gouache_paint.png"><div class="label">BEFORE — <span class="verdict fail">fail</span> monochrome blue nori, blue board</div></div>
+    <div class="after"><img src="v3/images/1-sushi-rolls-arranged-on-a-wooden-board.png"><div class="label">AFTER — <span class="verdict pass">pass</span> <span class="score">1.0</span> natural green nori, blue placemat accent</div></div>
+  </div>
+</div>
+
+<div class="comparison">
+  <h2>2. sushi making tools bamboo mat knife</h2>
+  <div class="pair">
+    <div class="before"><img src="old/images/sushi-1-gouache_paint.png"><div class="label">BEFORE — <span class="verdict fail">fail</span> blue knife blade, blue mat ties</div></div>
+    <div class="after"><img src="v3/images/2-sushi-making-tools-bamboo-mat-knife.png"><div class="label">AFTER — <span class="verdict pass">pass</span> <span class="score">1.0</span> silver blade, wood handle, blue bowl accent</div></div>
+  </div>
+</div>
+
+<div class="comparison">
+  <h2>3. sliced vegetables and fish fillings on a cutting board</h2>
+  <div class="pair">
+    <div class="before"><img src="old/images/sushi-2-gouache_paint.png"><div class="label">BEFORE — <span class="verdict fail">fail</span> blue board edge, cucumbers/fish tinted blue</div></div>
+    <div class="after"><img src="v3/images/3-sliced-vegetables-and-fish-fillings-on-a-cutting-board.png"><div class="label">AFTER — <span class="verdict pass">pass</span> <span class="score">1.0</span> natural food colors, blue shadow accent</div></div>
+  </div>
+</div>
+
+<div class="comparison">
+  <h2>4. maki sushi roll being rolled with bamboo mat</h2>
+  <div class="pair">
+    <div class="before"><img src="old/images/sushi-3-gouache_paint.png"><div class="label">BEFORE — <span class="verdict fail">fail</span> blue hands, blue cloth</div></div>
+    <div class="after"><img src="v3/images/4-maki-sushi-roll-being-rolled-with-bamboo-mat.png"><div class="label">AFTER — <span class="verdict pass">pass</span> <span class="score">1.0</span> natural skin, nori, bamboo; blue plate</div></div>
+  </div>
+</div>
+
+<div class="comparison">
+  <h2>5. uramaki inside out sushi roll</h2>
+  <div class="pair">
+    <div class="before"><img src="old/images/sushi-4-gouache_paint.png"><div class="label">BEFORE — <span class="verdict fail">fail</span> entire roll is blue</div></div>
+    <div class="after"><img src="v3/images/5-uramaki-inside-out-sushi-roll.png"><div class="label">AFTER — <span class="verdict pass">pass</span> <span class="score">1.0</span> white rice, green nori, blue shadow</div></div>
+  </div>
+</div>
+
+<div class="comparison">
+  <h2>6. nigiri sushi hand pressed rice</h2>
+  <div class="pair">
+    <div class="before"><img src="old/images/sushi-5-gouache_paint.png"><div class="label">BEFORE — <span class="verdict fail">fail</span> blue-tinted overall, plate is blue</div></div>
+    <div class="after"><img src="v3/images/6-nigiri-sushi-hand-pressed-rice.png"><div class="label">AFTER — <span class="verdict pass">pass</span> <span class="score">1.0</span> natural salmon + rice, blue plate accent</div></div>
+  </div>
+</div>
+
+<div class="comparison">
+  <h2>7. creative colorful sushi platter presentation</h2>
+  <div class="pair">
+    <div class="before"><img src="old/images/sushi-6-gouache_paint.png"><div class="label">BEFORE — <span class="verdict fail">fail</span> blue plate, blue nori, blue soy sauce</div></div>
+    <div class="after"><img src="v3/images/7-creative-colorful-sushi-platter-presentation.png"><div class="label">AFTER — <span class="verdict pass">pass</span> <span class="score">1.0</span> natural food, blue plate + dish as accent</div></div>
+  </div>
+</div>
+
+<div class="notes">
+  <h3>Changes Made</h3>
+  <ul>
+    <li><b>Style registry</b>: Added <code>colorInfluence: { type: 'mood' }</code> + custom <code>buildColorHint</code> to <code>gouache_paint</code> — prevents exact hex injection via model API and prompts for natural subject colors with theme accents on decorative elements</li>
+    <li><b>New grader</b>: <code>illustration-color-naturalism</code> — vision grader evaluating two axes: natural color fidelity (60%) and theme accent integration (40%)</li>
+    <li><b>Suite updated</b>: Added grader to <code>style-image-illustration.yml</code></li>
+    <li><b>3 prompt iterations</b>: v1 (mood hint) → v2 (explicit NATURAL colors rule) → v3 (ensure theme visible somewhere)</li>
+  </ul>
+</div>
+
+</body></html>
