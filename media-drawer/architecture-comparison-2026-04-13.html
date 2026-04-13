@@ -1,0 +1,1995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Media Drawer Architecture Alternatives</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2129;
+    --border: #30363d;
+    --border-accent: #58a6ff;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --accent: #58a6ff;
+    --green: #3fb950;
+    --red: #f85149;
+    --yellow: #d29922;
+    --purple: #bc8cff;
+    --orange: #f0883e;
+    --cyan: #39d353;
+    --radius: 12px;
+    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .header {
+    padding: 40px 32px 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .header p {
+    color: var(--text-muted);
+    font-size: 15px;
+    max-width: 720px;
+  }
+
+  /* Tab Navigation */
+  .tab-nav {
+    display: flex;
+    gap: 4px;
+    padding: 0 32px;
+    max-width: 1400px;
+    margin: 24px auto 0;
+    overflow-x: auto;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    padding: 10px 20px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-muted);
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: var(--transition);
+    white-space: nowrap;
+    position: relative;
+  }
+
+  .tab-btn:hover { color: var(--text); background: var(--surface2); }
+
+  .tab-btn.active {
+    color: var(--accent);
+    border-color: var(--accent);
+    border-bottom-color: var(--bg);
+    background: var(--bg);
+    z-index: 2;
+  }
+
+  .tab-btn .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    margin-left: 8px;
+    font-weight: 600;
+  }
+
+  .badge-current { background: var(--green); color: #000; }
+  .badge-alt { background: var(--purple); color: #000; }
+
+  /* Main Content Area */
+  .content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 32px 60px;
+  }
+
+  .tab-panel {
+    display: none;
+    border: 1px solid var(--border);
+    border-radius: 0 var(--radius) var(--radius) var(--radius);
+    background: var(--surface);
+    padding: 32px;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .tab-panel.active { display: block; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Architecture Card Layout */
+  .arch-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .arch-header h2 { font-size: 22px; font-weight: 700; }
+
+  .arch-tag {
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .tag-current { background: rgba(63, 185, 80, 0.15); color: var(--green); border: 1px solid rgba(63, 185, 80, 0.3); }
+  .tag-alternative { background: rgba(188, 140, 255, 0.15); color: var(--purple); border: 1px solid rgba(188, 140, 255, 0.3); }
+
+  /* Two Column Layout */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+
+  @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* Diagram */
+  .diagram {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 12px;
+    line-height: 1.5;
+    white-space: pre;
+    overflow-x: auto;
+    color: var(--text-muted);
+  }
+
+  .diagram .layer { color: var(--accent); }
+  .diagram .arrow { color: var(--yellow); }
+  .diagram .label { color: var(--text); }
+  .diagram .note { color: var(--green); font-style: italic; }
+
+  /* Code Block */
+  .code-block {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    overflow-x: auto;
+  }
+
+  .code-block pre {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+
+  .code-block .comment { color: var(--text-muted); }
+  .code-block .keyword { color: var(--purple); }
+  .code-block .string { color: var(--green); }
+  .code-block .type { color: var(--yellow); }
+  .code-block .fn { color: var(--accent); }
+
+  /* Expandable Sections */
+  .expandable {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+
+  .expandable-header {
+    padding: 14px 20px;
+    background: var(--surface2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+    transition: var(--transition);
+  }
+
+  .expandable-header:hover { background: #252c35; }
+
+  .expandable-header h3 {
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .expandable-arrow {
+    transition: transform 0.2s;
+    color: var(--text-muted);
+    font-size: 12px;
+  }
+
+  .expandable.open .expandable-arrow { transform: rotate(90deg); }
+
+  .expandable-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .expandable.open .expandable-content { max-height: 5000px; }
+
+  .expandable-body {
+    padding: 20px;
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+
+  .expandable-body ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .expandable-body li {
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .expandable-body li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 14px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .pros li::before { background: var(--green); }
+  .cons li::before { background: var(--red); }
+
+  /* Scores */
+  .scores-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 16px 0;
+  }
+
+  .score-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    text-align: center;
+  }
+
+  .score-card .label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .score-card .score {
+    font-size: 32px;
+    font-weight: 700;
+  }
+
+  .score-card .max {
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .score-5 { color: var(--green); }
+  .score-4 { color: #7ee787; }
+  .score-3 { color: var(--yellow); }
+  .score-2 { color: var(--orange); }
+  .score-1 { color: var(--red); }
+
+  /* Migration Effort */
+  .effort-bar {
+    height: 8px;
+    background: var(--bg);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+
+  .effort-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+  }
+
+  .effort-low { background: var(--green); }
+  .effort-med { background: var(--yellow); }
+  .effort-high { background: var(--orange); }
+  .effort-extreme { background: var(--red); }
+
+  /* Comparison Matrix Tab */
+  .matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .matrix-table th, .matrix-table td {
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .matrix-table th {
+    background: var(--surface2);
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .matrix-table th:first-child { min-width: 160px; }
+
+  .matrix-table td { background: var(--bg); }
+
+  .matrix-table tr:hover td { background: var(--surface2); }
+
+  .cell-score {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 600;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .dot-green { background: var(--green); }
+  .dot-yellow { background: var(--yellow); }
+  .dot-red { background: var(--red); }
+
+  /* Radar Chart */
+  .radar-section {
+    margin: 32px 0;
+  }
+
+  .radar-section h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .radar-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+  }
+
+  .radar-wrapper {
+    position: relative;
+    width: 500px;
+    height: 500px;
+  }
+
+  .radar-canvas {
+    width: 100%;
+    height: 100%;
+  }
+
+  .radar-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .legend-color {
+    width: 16px;
+    height: 4px;
+    border-radius: 2px;
+  }
+
+  /* Recommendation */
+  .recommendation {
+    background: linear-gradient(135deg, rgba(88, 166, 255, 0.08), rgba(188, 140, 255, 0.08));
+    border: 1px solid rgba(88, 166, 255, 0.2);
+    border-radius: var(--radius);
+    padding: 32px;
+    margin-top: 32px;
+  }
+
+  .recommendation h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .recommendation p {
+    color: var(--text-muted);
+    font-size: 15px;
+    margin-bottom: 12px;
+    max-width: 800px;
+  }
+
+  .recommendation strong { color: var(--text); }
+
+  .verdict {
+    padding: 16px 20px;
+    background: rgba(63, 185, 80, 0.1);
+    border: 1px solid rgba(63, 185, 80, 0.3);
+    border-radius: 8px;
+    margin-top: 16px;
+    color: var(--green);
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .section-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 24px 0 12px;
+    color: var(--text);
+  }
+
+  .code-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Legacy tab styles */
+  .badge-legacy { background: var(--red); color: #fff; }
+  .tag-legacy { background: rgba(248, 81, 73, 0.15); color: var(--red); border: 1px solid rgba(248, 81, 73, 0.3); }
+
+  .problem-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 12px;
+  }
+
+  .problem-card h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--red);
+  }
+
+  .problem-card p, .problem-card li {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+
+  .stat-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    text-align: center;
+  }
+
+  .stat-card .stat-num {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--red);
+  }
+
+  .stat-card .stat-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  .code-annotation {
+    color: var(--red);
+    font-weight: 600;
+    font-style: italic;
+  }
+
+  .bug-walkthrough {
+    background: rgba(248, 81, 73, 0.05);
+    border: 1px solid rgba(248, 81, 73, 0.2);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin: 16px 0;
+  }
+
+  .bug-walkthrough h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--red);
+    margin-bottom: 12px;
+  }
+
+  .bug-step {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+    align-items: flex-start;
+  }
+
+  .bug-step-num {
+    background: var(--red);
+    color: #fff;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .bug-step p {
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+
+  .state-locations {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 12px 0;
+  }
+
+  @media (max-width: 700px) { .state-locations { grid-template-columns: 1fr; } }
+
+  .state-loc {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+
+  .state-loc .loc-name {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .state-loc .loc-desc {
+    color: var(--text-muted);
+    font-size: 12px;
+  }
+
+  .file-trace {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+    margin: 12px 0;
+  }
+
+  .file-trace .trace-file {
+    background: rgba(88, 166, 255, 0.1);
+    border: 1px solid rgba(88, 166, 255, 0.2);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    color: var(--accent);
+  }
+
+  .file-trace .trace-arrow {
+    color: var(--yellow);
+    font-size: 14px;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Media Drawer Architecture: Trade-off Analysis</h1>
+  <p>Comparing the current pure state machines approach against 4 alternative architectures. Click tabs to explore each, expand sections for details, and see the scoring comparison at the bottom.</p>
+</div>
+
+<div class="tab-nav" id="tabNav">
+  <button class="tab-btn active" data-tab="legacy">Legacy (Pre-Refactor) <span class="badge badge-legacy">PROBLEM</span></button>
+  <button class="tab-btn" data-tab="current">Refactored <span class="badge badge-current">SHIPPED</span></button>
+  <button class="tab-btn" data-tab="xstate">Alt 1: XState v5 <span class="badge badge-alt">ALT</span></button>
+  <button class="tab-btn" data-tab="zustand">Alt 2: RSC + Zustand <span class="badge badge-alt">ALT</span></button>
+  <button class="tab-btn" data-tab="microfrontend">Alt 3: Micro-frontends <span class="badge badge-alt">ALT</span></button>
+  <button class="tab-btn" data-tab="eventsourcing">Alt 4: Event Sourcing <span class="badge badge-alt">ALT</span></button>
+  <button class="tab-btn" data-tab="matrix">Comparison Matrix</button>
+  <button class="tab-btn" data-tab="radar">Radar Chart</button>
+</div>
+
+<div class="content">
+
+<!-- ============== LEGACY (PRE-REFACTOR) ============== -->
+<div class="tab-panel active" id="panel-legacy">
+  <div class="arch-header">
+    <h2>Legacy Media Drawer Architecture</h2>
+    <span class="arch-tag tag-legacy">Pre-Refactor</span>
+  </div>
+
+  <p style="color: var(--text-muted); font-size: 15px; margin-bottom: 24px; max-width: 800px;">
+    The media drawer before refactoring: a tangle of useEffects, god components, scattered state, and implicit contracts
+    that made it fragile, untestable, and nearly impossible for AI coding agents to navigate.
+  </p>
+
+  <!-- By the numbers -->
+  <div class="section-title">By the Numbers</div>
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="stat-num">1206</div>
+      <div class="stat-label">Lines in AIGeneratedImagesPanel</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">23+</div>
+      <div class="stat-label">useState calls (panel + hooks)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">5</div>
+      <div class="stat-label">useEffects in MediaDrawer.tsx</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">170</div>
+      <div class="stat-label">Lines in updateSelectedMedia</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">0</div>
+      <div class="stat-label">Unit tests</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">9</div>
+      <div class="stat-label">State locations</div>
+    </div>
+  </div>
+
+  <!-- Architecture diagram -->
+  <div class="two-col">
+    <div>
+      <div class="code-label">Architecture Diagram</div>
+      <div class="diagram"><span class="layer">MediaDrawer.tsx</span> <span class="note">(5 useEffects, implicit orchestration)</span>
+  <span class="arrow">|</span> reads Redux: isEditingMedia, currentSourceKey
+  <span class="arrow">|</span> reads ProseMirror: selection -> getSelectedMedia()
+  <span class="arrow">|</span> manages: mediaSearchQuery useState
+  <span class="arrow">|</span> passes down: editor, updateAttributes, currentAttributes
+  <span class="arrow">v</span>
+<span class="layer">MediaPanelsMap[sourceKey]</span> <span class="note">(flat array, .key lookup)</span>
+  <span class="arrow">|</span> 40+ panels registered via implicit convention
+  <span class="arrow">v</span>
+<span class="layer">AIGeneratedImagesPanel</span> <span class="note">(1206 lines, god component)</span>
+  <span class="arrow">|</span> useImageGenerateConfig <span class="note">(11 useState)</span>
+  <span class="arrow">|</span> useImageGenerate <span class="note">(6 useState, 3 API paths)</span>
+  <span class="arrow">|</span> useStyleReferenceUpload <span class="note">(3 useState, returns null!)</span>
+  <span class="arrow">|</span> useAIImageHistory, useStyledImageMode, useAsStyleReference...
+  <span class="arrow">|</span>
+  <span class="arrow">|</span> prop-drills ~20 values to:
+  <span class="arrow">v</span>
+<span class="layer">SwitchingArtStyleSection</span> <span class="note">(flag + null guard = UI gate)</span>
+  <span class="arrow">|</span> <span class="label">if (showNewArtStyleUI && styleReferenceUpload)</span>
+  <span class="arrow">|</span>   <span class="arrow">-></span> DeckStyledArtStyleControls
+  <span class="arrow">|</span> else
+  <span class="arrow">|</span>   <span class="arrow">-></span> ArtStyleControls <span class="note">(legacy)</span>
+  <span class="arrow">v</span>
+<span class="layer">updateSelectedMedia()</span> <span class="note">(170 lines, 6 responsibilities)</span>
+  <span class="arrow">|</span> getSelectedMedia <span class="note">(TWO implementations!)</span>
+  <span class="arrow">|</span> node position recovery, type switching,
+  <span class="arrow">|</span> mark handling, diagram handling,
+  <span class="arrow">|</span> accessory keypath handling, image extraction
+  <span class="arrow">v</span>
+<span class="layer">ProseMirror Transaction</span></div>
+    </div>
+    <div>
+      <div class="code-label">State Scattered Across 9 Locations</div>
+      <div class="state-locations">
+        <div class="state-loc">
+          <div class="loc-name">Redux (tiptap_editor)</div>
+          <div class="loc-desc">isEditingMedia, isEditable</div>
+        </div>
+        <div class="state-loc">
+          <div class="loc-name">Redux (MediaDrawer)</div>
+          <div class="loc-desc">currentSourceKey, overrideDefault</div>
+        </div>
+        <div class="state-loc">
+          <div class="loc-name">ProseMirror selection</div>
+          <div class="loc-desc">selectedMedia (derived, 2 impls)</div>
+        </div>
+        <div class="state-loc">
+          <div class="loc-name">useState x 23+</div>
+          <div class="loc-desc">prompt, model, style, aspect, count, errors...</div>
+        </div>
+        <div class="state-loc">
+          <div class="loc-name">Apollo cache</div>
+          <div class="loc-desc">image history, saved media</div>
+        </div>
+        <div class="state-loc">
+          <div class="loc-name">localStorage</div>
+          <div class="loc-desc">preferredAiImageModel</div>
+        </div>
+        <div class="state-loc">
+          <div class="loc-name">Doc attrs</div>
+          <div class="loc-desc">aiOptions.imageOptions (last-used settings)</div>
+        </div>
+        <div class="state-loc">
+          <div class="loc-name">Node attrs</div>
+          <div class="loc-desc">aiParams, savedCustomArtStyle, query</div>
+        </div>
+        <div class="state-loc">
+          <div class="loc-name">useRef</div>
+          <div class="loc-desc">savedCustomArtStyleRef, cancelFnsRef</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Why this is brittle -->
+  <div class="expandable open">
+    <div class="expandable-header" onclick="toggleExpand(this)">
+      <h3><span style="color: var(--red);">!</span> Why This Is Brittle</h3>
+      <span class="expandable-arrow">&#9654;</span>
+    </div>
+    <div class="expandable-content">
+      <div class="expandable-body">
+        <div class="problem-card">
+          <h4>5 useEffects in MediaDrawer.tsx that interact non-obviously</h4>
+          <p>Each effect handles a separate concern, but they share closure state and trigger each other through Redux dispatches and state changes:</p>
+          <div class="code-block" style="margin-top: 12px;"><pre><span class="comment">// Effect 1: Auto-close when selection changes</span>
+<span class="fn">useEffect</span>(() => {
+  <span class="keyword">if</span> (!isMediaSelected) <span class="fn">toggleMediaDrawer</span>({ isOpen: <span class="keyword">false</span> })
+}, [isMediaSelected]) <span class="code-annotation">// fires on ANY selection change</span>
+
+<span class="comment">// Effect 2: Auto-focus first interactive element</span>
+<span class="fn">useEffect</span>(() => {
+  <span class="keyword">if</span> (!isOpen) <span class="keyword">return</span>
+  <span class="fn">setTimeout</span>(() => { ... <span class="fn">requestAnimationFrame</span>(() => firstFocusable?.focus()) }, 100)
+}, [isOpen]) <span class="code-annotation">// nested setTimeout + rAF = timing fragility</span>
+
+<span class="comment">// Effect 3: Source key sync from selected media attrs</span>
+<span class="fn">useEffect</span>(() => {
+  <span class="keyword">if</span> (!selectedMedia) <span class="keyword">return</span>
+  <span class="keyword">const</span> sourceKey = <span class="comment">/* 4-way conditional logic */</span>
+  <span class="fn">setCurrentSourceKey</span>(sourceKey)
+}, [selectedMedia, ...]) <span class="code-annotation">// can fight with Effect 1</span>
+
+<span class="comment">// Effect 4: Initialize media search query from selection</span>
+<span class="fn">useEffect</span>(() => {
+  <span class="keyword">if</span> (selectedMedia?.attrs?.query) <span class="fn">setMediaSearchQuery</span>(...)
+  <span class="keyword">else</span> <span class="fn">setMediaSearchQuery</span>(<span class="string">''</span>)
+}, [selectedMedia?.attrs?.query]) <span class="code-annotation">// can reset mid-search</span>
+
+<span class="comment">// Effect 5: Upload on unmount (useUploadOnUnmount hook)</span>
+<span class="code-annotation">// Fires cleanup when isOpen changes - side effect on lifecycle!</span></pre></div>
+        </div>
+
+        <div class="problem-card">
+          <h4>1206-line god component with 23+ useState calls across hooks</h4>
+          <p>AIGeneratedImagesPanel.tsx plus its hooks manage: prompt, model, stylePreset, stylePrompt, aspectRatio, count, artStylePreset, artStylePrompt, styleReferenceImages, modelAutoselect, shouldUseThemeColors, isGenerating, hasError, errorMessage, fallbackInfo, lastSearchedQuery, allowRegenerateForEditedImage, scope, entries (upload), isDragging, and more. Each useState is an independent source of truth with no formal coordination.</p>
+        </div>
+
+        <div class="problem-card">
+          <h4>Two parallel getSelectedMedia implementations</h4>
+          <p>The legacy <code>utils.ts</code> has <code>getSelectedMedia()</code> that wraps the newer <code>selectedMedia.ts</code> version, adding fallback paths for TextSelection, link marks, and NodeSelection. The wrapper adds SmartLayout source defaulting and editType derivation. These two can diverge when one is updated without the other.</p>
+          <div class="code-block" style="margin-top: 12px;"><pre><span class="comment">// utils.ts - wraps new implementation, adds fallbacks</span>
+<span class="keyword">export const</span> <span class="fn">getSelectedMedia</span> = (editor, selection, freshNode) => {
+  <span class="keyword">const</span> selectedMedia = <span class="fn">newGetSelectedMedia</span>({ editor, selection, freshNode })
+  <span class="keyword">if</span> (selectedMedia) {
+    <span class="comment">// adds SmartLayout defaulting, editType, accesoryKeyPath</span>
+    <span class="keyword">return</span> { ...selectedMedia, type: selectedMedia.node.type, ... }
+  }
+  <span class="comment">// Fallback for cases "not handled" by new getSelectedMedia</span>
+  <span class="keyword">if</span> (selection <span class="keyword">instanceof</span> <span class="type">NodeSelection</span>) { ... }
+  <span class="keyword">if</span> (selection <span class="keyword">instanceof</span> <span class="type">TextSelection</span>) { ... } <span class="code-annotation">// dead code?</span>
+}</pre></div>
+        </div>
+
+        <div class="problem-card">
+          <h4>170-line updateSelectedMedia with 6 responsibilities</h4>
+          <p>A single function handles: (1) fetching fresh node state, (2) position recovery via ID search, (3) attribute merging with Record&lt;string, any&gt;, (4) link mark updates, (5) smart diagram updates, (6) accessory image keypath updates, (7) node type switching, (8) extraction data to positioned textbox conversion, and (9) analytics tracking. No type safety on attrs -- it's <code>Record&lt;string, any&gt;</code> throughout.</p>
+        </div>
+
+        <div class="problem-card">
+          <h4>Feature flag -> hook nullability -> UI gate pattern</h4>
+          <p>This is the pattern that caused PR #18923. A feature flag controls whether a hook returns data or null. The null return is then used as a truthiness gate to decide which UI to render. When the flag is OFF, the hook returns null, and any component checking that value as a boolean hides its entire UI -- even the parts unrelated to the flag.</p>
+          <div class="code-block" style="margin-top: 12px;"><pre><span class="comment">// useStyleReferenceUpload.ts -- returns null when flag is OFF</span>
+<span class="keyword">return</span> styleReferenceUploadEnabled
+  ? { entries, canAddMore, isDragging, ... }
+  : <span class="code-annotation">null</span>  <span class="code-annotation">// &lt;-- entire object or nothing</span>
+
+<span class="comment">// SwitchingArtStyleSection.tsx -- uses it as UI gate</span>
+<span class="keyword">if</span> (showNewArtStyleUI <span class="keyword">&&</span> <span class="code-annotation">styleReferenceUpload</span>) {
+  <span class="keyword">return</span> &lt;<span class="type">DeckStyledArtStyleControls</span> .../&gt;
+}
+<span class="comment">// When flag OFF: styleReferenceUpload is null</span>
+<span class="comment">// -> condition is false -> falls through to legacy UI</span>
+<span class="code-annotation">// -> deck-styled art style controls DISAPPEAR entirely</span></pre></div>
+        </div>
+
+        <div class="problem-card">
+          <h4>Implicit panel registration via flat array</h4>
+          <p>40+ media panels are registered in MediaProviderPanels.ts as a flat array, turned into a Map by <code>.key</code> property. No type contract for what a panel must provide. No validation. Adding a new panel means adding an import to a flat list and hoping the <code>.key</code> doesn't collide.</p>
+          <div class="code-block" style="margin-top: 12px;"><pre><span class="comment">// MediaProviderPanels.ts</span>
+<span class="keyword">const</span> Panels = [
+  BingImagePanel, GiphyPanel, GoogleImagePanel, WebImagePanel,
+  LexicaPanel, UnsplashPanel, PexelsPanel, YoutubePanel,
+  <span class="comment">// ... 30+ more imports ...</span>
+  PictographicPanel, PictographicIconsPanel,
+]
+
+<span class="keyword">export const</span> MediaPanelsMap = <span class="type">Object</span>.fromEntries(
+  <span class="type">Object</span>.values(Panels).flat().map(panel => [panel.key, panel])
+) <span class="code-annotation">// no type safety, no collision detection</span></pre></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Why agents can't navigate this -->
+  <div class="expandable open">
+    <div class="expandable-header" onclick="toggleExpand(this)">
+      <h3><span style="color: var(--yellow);">&#9888;</span> Why AI Coding Agents Can't Navigate This</h3>
+      <span class="expandable-arrow">&#9654;</span>
+    </div>
+    <div class="expandable-content">
+      <div class="expandable-body">
+        <div class="problem-card">
+          <h4>Understanding "Generate" requires 8+ files with no contract</h4>
+          <p>To understand what happens when a user clicks "Generate", an agent must trace through all of these files in sequence:</p>
+          <div class="file-trace">
+            <span class="trace-file">onClick handler</span>
+            <span class="trace-arrow">-></span>
+            <span class="trace-file">useAllowOrUpsell wrapper</span>
+            <span class="trace-arrow">-></span>
+            <span class="trace-file">generateImage callback (60 lines)</span>
+            <span class="trace-arrow">-></span>
+            <span class="trace-file">getEffectiveStyleConfig</span>
+            <span class="trace-arrow">-></span>
+            <span class="trace-file">useImageGenerate.generate()</span>
+            <span class="trace-arrow">-></span>
+            <span class="trace-file">3 API fetch functions</span>
+            <span class="trace-arrow">-></span>
+            <span class="trace-file">selectImage callback</span>
+            <span class="trace-arrow">-></span>
+            <span class="trace-file">updateAttributes</span>
+            <span class="trace-arrow">-></span>
+            <span class="trace-file">updateSelectedMedia (170 lines)</span>
+            <span class="trace-arrow">-></span>
+            <span class="trace-file">syncLatestAiImageSettingsToDocAttrs</span>
+          </div>
+          <p style="margin-top: 8px;">There is no interface, no type contract, and no documentation connecting these. An agent must read each file, understand the closure variables, and mentally reconstruct the sequence.</p>
+        </div>
+
+        <div class="problem-card">
+          <h4>Zero unit tests to read for expected behavior</h4>
+          <p>There are zero unit tests for the media drawer, the AI panel, the hooks, or updateSelectedMedia. An AI agent has no spec to reference -- it must infer behavior from implementation. When making changes, there's no way to verify correctness without running the full app in a browser.</p>
+        </div>
+
+        <div class="problem-card">
+          <h4>Side effects embedded in component lifecycle</h4>
+          <p>Effects are not extractable functions. They live inside useEffect closures with captured variables from component scope. An agent can't reason about "what happens when the user selects media" without understanding React's effect timing, the 5 effects' interaction, and the Redux dispatch cycle.</p>
+        </div>
+
+        <div class="problem-card">
+          <h4>State derived from multiple sources with undocumented priority</h4>
+          <p>For example, the AI image prompt comes from: (1) user input via useState, (2) currentAttributes.aiParams.prompt, (3) currentAttributes.query (deck-styled mode), (4) auto-enhanced prompt from runEnhanceImagePrompt. The priority rules are scattered across useEffectWhen, useEffect, and the generateImage callback with no single source of truth.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- The Bug That Proved It -->
+  <div class="expandable open">
+    <div class="expandable-header" onclick="toggleExpand(this)">
+      <h3><span style="color: var(--red);">&#128027;</span> The Bug That Proved It: PR #18923</h3>
+      <span class="expandable-arrow">&#9654;</span>
+    </div>
+    <div class="expandable-content">
+      <div class="expandable-body">
+        <div class="bug-walkthrough">
+          <h3>How a feature flag silently broke the deck-styled art style UI</h3>
+
+          <div class="bug-step">
+            <div class="bug-step-num">1</div>
+            <p><strong>Feature flag <code>aiStyleReferenceUpload</code> is OFF</strong> for some users / environments.</p>
+          </div>
+
+          <div class="bug-step">
+            <div class="bug-step-num">2</div>
+            <p><strong><code>useStyleReferenceUpload</code> returns <code>null</code></strong> because the hook checks the flag internally and returns null when disabled. This is the hook's contract: "feature off = nothing".</p>
+          </div>
+
+          <div class="bug-step">
+            <div class="bug-step-num">3</div>
+            <p><strong>AIGeneratedImagesPanel passes <code>styleReferenceUpload</code> (null) as a prop</strong> to SwitchingArtStyleSection.</p>
+          </div>
+
+          <div class="bug-step">
+            <div class="bug-step-num">4</div>
+            <p><strong>SwitchingArtStyleSection checks <code>if (showNewArtStyleUI && styleReferenceUpload)</code></strong> to decide which UI to show. Since styleReferenceUpload is null, the condition fails.</p>
+          </div>
+
+          <div class="bug-step">
+            <div class="bug-step-num">5</div>
+            <p><strong>Falls through to legacy ArtStyleControls</strong>, which doesn't support the deck-styled presets, the style reference gallery, or the new custom prompt UX. Users see the wrong UI -- not a missing feature, but a complete regression to old behavior.</p>
+          </div>
+
+          <div class="code-block" style="margin-top: 16px;"><pre><span class="comment">// The exact line that caused the regression:</span>
+<span class="comment">// SwitchingArtStyleSection.tsx, line 77</span>
+<span class="keyword">if</span> (showNewArtStyleUI <span class="keyword">&&</span> <span class="code-annotation">styleReferenceUpload</span>) {
+  <span class="keyword">return</span> &lt;<span class="type">DeckStyledArtStyleControls</span> .../&gt;  <span class="comment">// deck-styled UI</span>
+}
+<span class="comment">// Falls through to:</span>
+<span class="keyword">return</span> (
+  &lt;<span class="type">VStack</span>&gt;
+    &lt;<span class="type">ArtStyleControls</span> .../&gt;  <span class="comment">// legacy grid UI</span>
+  &lt;/<span class="type">VStack</span>&gt;
+) <span class="code-annotation">// entire new UI path disappeared</span></pre></div>
+
+          <h3 style="margin-top: 20px;">Why no test could have caught it</h3>
+          <p style="color: var(--text-muted); font-size: 14px;">The visibility decision ("show deck-styled UI or legacy UI?") was entangled with hook nullability, which was entangled with feature flags, which were entangled with component props. Testing this requires rendering the full component tree with all providers, flags, and mock hooks. There's no seam where you could test "given these flags + this state, which UI variant should appear?" as a pure function.</p>
+
+          <h3 style="margin-top: 20px;">How the visibility function approach prevents it</h3>
+          <p style="color: var(--text-muted); font-size: 14px;">In the refactored architecture, visibility is a pure function: <code>getArtStyleVisibility(flags, attrs, context) => { showDeckStyledUI: boolean }</code>. The decision doesn't depend on hook return values. You can test every flag combination in a unit test without rendering React. The hook returning null is irrelevant to the UI decision.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Code examples -->
+  <div class="expandable">
+    <div class="expandable-header" onclick="toggleExpand(this)">
+      <h3><span style="color: var(--purple);">{ }</span> Code Deep Dive: The generateImage Callback</h3>
+      <span class="expandable-arrow">&#9654;</span>
+    </div>
+    <div class="expandable-content">
+      <div class="expandable-body">
+        <p>The <code>generateImage</code> callback in AIGeneratedImagesPanel is 60+ lines of interleaved concerns. Here's a condensed view with annotations:</p>
+        <div class="code-block" style="margin-top: 12px;"><pre><span class="keyword">const</span> <span class="fn">generateImage</span> = <span class="fn">useCallback</span>(<span class="keyword">async</span> () => {
+  <span class="keyword">if</span> (isEnhancing || isGenerating || isUploadingStyleRef) <span class="keyword">return</span>
+  <span class="keyword">try</span> {
+    <span class="comment">// 1. Build config from 20+ closure variables</span>
+    <span class="keyword">const</span> config = { ...imageGenerateConfig, prompt }
+
+    <span class="comment">// 2. Resolve style (4 code paths: named ref, custom, legacy, abstract)</span>
+    <span class="keyword">const</span> effective = <span class="fn">getEffectiveStyleConfig</span>({
+      showNewArtStyleUI, selectedStyleKey, artStylePreset, ...
+    })
+    config.artStylePreset = effective.artStylePreset
+    <span class="comment">// ... 4 more config overrides</span>
+
+    <span class="comment">// 3. Image card special case</span>
+    <span class="keyword">if</span> (isImageCard && shouldUseThemeColors && currentAttributes?.aiParams?.themeId)
+      config.themeId = currentAttributes.aiParams.themeId
+
+    <span class="comment">// 4. Model autoselect resolution</span>
+    <span class="keyword">if</span> (modelAutoselect) config.model = <span class="fn">getAutoselectImageModel</span>(...)
+
+    <span class="comment">// 5. Empty prompt -> auto-enhance</span>
+    <span class="keyword">if</span> (prompt.trim().length === 0 && !isAbstractStyle) {
+      <span class="keyword">const</span> newPrompt = <span class="keyword">await</span> <span class="fn">runEnhanceImagePrompt</span>()
+      <span class="keyword">if</span> (newPrompt) config.prompt = newPrompt
+    }
+
+    <span class="comment">// 6. Start interaction tracking</span>
+    generateImageInteraction.current.<span class="fn">start</span>({ input: { ... } })
+
+    <span class="comment">// 7. Save custom art style to node attrs (conditional)</span>
+    <span class="keyword">if</span> (config.artStylePreset === <span class="string">'custom'</span> || selectedStyleKey === CUSTOM_KEY) {
+      <span class="fn">updateAttributes</span>({ savedCustomArtStyle: newCustomStyle })
+      savedCustomArtStyleRef.current = newCustomStyle  <span class="code-annotation">// ref for stale closure</span>
+    }
+
+    <span class="comment">// 8. Actually call the API</span>
+    <span class="keyword">await</span> <span class="fn">generate</span>(config)
+
+    <span class="comment">// 9. Sync settings to doc attrs</span>
+    <span class="fn">syncLatestAiImageSettingsToDocAttrs</span>()
+  } <span class="keyword">finally</span> {
+    <span class="comment">// 10. Refetch Apollo queries</span>
+    client.<span class="fn">refetchQueries</span>({ include: [<span class="string">'GetSavedMedia'</span>, ...] })
+    <span class="fn">setIsEnhancing</span>(<span class="keyword">false</span>)
+  }
+}, [<span class="code-annotation">/* 17 dependencies */</span>])</pre></div>
+        <p style="margin-top: 12px;">This single callback touches: generation config, style resolution, image card logic, model autoselection, prompt enhancement, interaction tracking, node attribute persistence, API calls, doc-level settings sync, Apollo cache invalidation, and UI state cleanup. All in one closure with 17 dependencies.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Testability scores (all low) -->
+  <div class="section-title">Testability Scores</div>
+  <div class="scores-grid">
+    <div class="score-card">
+      <div class="label">Unit Testability</div>
+      <div class="score score-1">1<span class="max">/5</span></div>
+    </div>
+    <div class="score-card">
+      <div class="label">Integration Testability</div>
+      <div class="score score-1">1<span class="max">/5</span></div>
+    </div>
+    <div class="score-card">
+      <div class="label">AI Agent Usability</div>
+      <div class="score score-1">1<span class="max">/5</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============== CURRENT ============== -->
+<div class="tab-panel" id="panel-current">
+  <div class="arch-header">
+    <h2>Pure State Machines + Visibility + Effect Bridge</h2>
+    <span class="arch-tag tag-current">Current Approach</span>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <div class="code-label">Architecture Diagram</div>
+      <div class="diagram"><span class="layer">Layer 4: React Components</span> <span class="note">(thin, render-only)</span>
+  <span class="arrow">|</span> reads state + dispatches events
+  <span class="arrow">v</span>
+<span class="layer">Layer 3: Visibility Functions</span> <span class="note">(pure, synchronous)</span>
+  <span class="arrow">|</span> (flags, attrs, context, plan, machine state)
+  <span class="arrow">|</span> => { showX: bool, enableY: bool, ... }
+  <span class="arrow">v</span>
+<span class="layer">Layer 2: State Machines</span> <span class="note">(8 custom reducers)</span>
+  <span class="arrow">|</span> (state, event) => { state, effects[] }
+  <span class="arrow">|</span> <span class="label">drawerLifecycle | aiGeneration | styleConfig</span>
+  <span class="arrow">|</span> <span class="label">carousel | creditsGating | mediaSelection</span>
+  <span class="arrow">|</span> <span class="label">promptHistory | styleReferenceUpload</span>
+  <span class="arrow">v</span>
+<span class="layer">Layer 1: Effect Bridge</span> <span class="note">(interface + impl)</span>
+  <span class="arrow">|</span> descriptors => API calls, editor cmds, storage
+  <span class="arrow">v</span>
+<span class="layer">Layer 0: Types & Constants</span></div>
+    </div>
+    <div>
+      <div class="code-label">Key Interaction: "Generate Image"</div>
+      <div class="code-block"><pre><span class="comment">// 1. Component dispatches event</span>
+<span class="fn">aiGenMachine</span>.<span class="fn">send</span>({ <span class="type">type</span>: <span class="string">'GENERATE'</span>, config })
+
+<span class="comment">// 2. Machine transitions, emits effect descriptor</span>
+<span class="comment">// (state, event) => { state, effects }</span>
+<span class="keyword">return</span> {
+  <span class="type">state</span>: { status: <span class="string">'generating'</span>, config },
+  <span class="type">effects</span>: [{
+    <span class="type">type</span>: <span class="string">'API_GENERATE_IMAGE'</span>,
+    <span class="type">payload</span>: { prompt, model, style }
+  }]
+}
+
+<span class="comment">// 3. Effect bridge executes the descriptor</span>
+<span class="fn">bridge</span>.<span class="fn">execute</span>(effect) <span class="comment">// actual fetch()</span>
+
+<span class="comment">// 4. Bridge dispatches result back to machine</span>
+<span class="fn">aiGenMachine</span>.<span class="fn">send</span>({
+  <span class="type">type</span>: <span class="string">'GENERATION_COMPLETE'</span>,
+  images
+})
+
+<span class="comment">// 5. Visibility derives UI state</span>
+<span class="keyword">const</span> vis = <span class="fn">getAiPanelVisibility</span>(state, ctx)
+<span class="comment">// => { showSpinner: false, showCarousel: true }</span></pre></div>
+    </div>
+  </div>
+
+  <div class="expandable open">
+    <div class="expandable-header" onclick="toggleExpand(this)">
+      <h3><span style="color: var(--green);">+</span> Pros</h3>
+      <span class="expandable-arrow">&#9654;</span>
+    </div>
+    <div class="expandable-content">
+      <div class="expandable-body pros">
+        <ul>
+          <li><strong>363 unit tests, zero React dependency for testing.</strong> Machines and visibility functions are plain TS. Tests run in &lt;2s with no jsdom.</li>
+          <li><strong>AI agent friendly.</strong> Agents can read machine definitions and visibility functions without understanding React rendering or component trees.</li>
+          <li><strong>Zero external dependencies.</strong> No XState, no Zustand, no additional bundle cost. Custom reducers are ~200 lines total.</li>
+          <li><strong>Effect bridge is swappable.</strong> Mock in tests, real in prod, different impl for SSR if needed. Clean dependency inversion.</li>
+          <li><strong>Panel archetype system.</strong> Adding a new media source is declarative: define a PanelDefinition with an archetype, wire it in.</li>
+          <li><strong>Deterministic state transitions.</strong> Given (state, event), outcome is always the same. No race conditions from useState.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="expandable open">
+    <div class="expandable-header" onclick="toggleExpand(this)">
+      <h3><span style="color: var(--red);">-</span> Cons</h3>
+      <span class="expandable-arrow">&#9654;</span>
+    </div>
+    <div class="expandable-content">
+      <div class="expandable-body cons">
+        <ul>
+          <li><strong>Custom infrastructure.</strong> Every new engineer must learn the bespoke machine/visibility/bridge pattern. No Google-able docs.</li>
+          <li><strong>No devtools.</strong> No visual state inspector, no event log, no time-travel debugging out of the box.</li>
+          <li><strong>Verbose effect bridging.</strong> Every new side effect requires: define descriptor type, add bridge interface method, implement in prod + mock.</li>
+          <li><strong>Machine coordination is manual.</strong> When aiGeneration needs to tell carousel to update, that wiring is explicit and handwritten.</li>
+          <li><strong>Visibility functions can proliferate.</strong> As features grow, the number of boolean fields in visibility objects may balloon.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Testability Scores</div>
+  <div class="scores-grid">
+    <div class="score-card">
+      <div class="label">Unit Testability</div>
+      <div class="score score-5">5<span class="max">/5</span></div>
+    </div>
+    <div class="score-card">
+      <div class="label">Integration Testability</div>
+      <div class="score score-4">4<span class="max">/5</span></div>
+    </div>
+    <div class="score-card">
+      <div class="label">AI Agent Usability</div>
+      <div class="score score-5">5<span class="max">/5</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============== XSTATE ============== -->
+<div class="tab-panel" id="panel-xstate">
+  <div class="arch-header">
+    <h2>XState v5 Actor Model</h2>
+    <span class="arch-tag tag-alternative">Alternative 1</span>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <div class="code-label">Architecture Diagram</div>
+      <div class="diagram"><span class="layer">React Components</span>
+  <span class="arrow">|</span> useActor(machine) / useSelector()
+  <span class="arrow">v</span>
+<span class="layer">XState Actors</span> <span class="note">(composable, spawnable)</span>
+  <span class="label">drawerActor</span> <span class="arrow">--spawn--></span> <span class="label">generationActor</span>
+  <span class="label">        </span> <span class="arrow">--spawn--></span> <span class="label">carouselActor</span>
+  <span class="label">        </span> <span class="arrow">--spawn--></span> <span class="label">creditsActor</span>
+  <span class="arrow">|</span>
+  <span class="arrow">|</span> invoke / spawn for effects
+  <span class="arrow">v</span>
+<span class="layer">XState Services</span> <span class="note">(actors for async)</span>
+  <span class="arrow">|</span> Promise actors, callback actors
+  <span class="arrow">v</span>
+<span class="layer">API / Editor / Storage</span>
+
+<span class="note">XState Inspector</span> <span class="arrow">---></span> <span class="label">@statelyai/inspect</span>
+  <span class="label">Visual state chart</span>
+  <span class="label">Event log + time travel</span></div>
+    </div>
+    <div>
+      <div class="code-label">Key Interaction: "Generate Image"</div>
+      <div class="code-block"><pre><span class="comment">// Machine definition (XState v5)</span>
+<span class="keyword">const</span> aiGenMachine = <span class="fn">createMachine</span>({
+  <span class="type">id</span>: <span class="string">'aiGeneration'</span>,
+  <span class="type">initial</span>: <span class="string">'idle'</span>,
+  <span class="type">states</span>: {
+    <span class="type">idle</span>: {
+      <span class="type">on</span>: { <span class="type">GENERATE</span>: <span class="string">'generating'</span> }
+    },
+    <span class="type">generating</span>: {
+      <span class="comment">// XState handles the effect natively</span>
+      <span class="type">invoke</span>: {
+        <span class="type">src</span>: <span class="string">'generateImage'</span>,
+        <span class="type">input</span>: ({ event }) => event.config,
+        <span class="type">onDone</span>: {
+          <span class="type">target</span>: <span class="string">'complete'</span>,
+          <span class="type">actions</span>: <span class="fn">assign</span>({
+            images: ({ event }) => event.output
+          })
+        },
+        <span class="type">onError</span>: <span class="string">'error'</span>
+      }
+    },
+    <span class="type">complete</span>: { <span class="comment">/* ... */</span> },
+    <span class="type">error</span>: { <span class="comment">/* ... */</span> }
+  }
+})
+
+<span class="comment">// In component</span>
+<span class="keyword">const</span> [state, send] = <span class="fn">useActor</span>(aiGenMachine)
+<span class="fn">send</span>({ <span class="type">type</span>: <span class="string">'GENERATE'</span>, config })</pre></div>
+    </div>
+  </div>
+
+  <div class="expandable">
+    <div class="expandable-header" onclick="toggleExpand(this)">
+      <h3><span style="color: var(--green);">+</span> Pros</h3>
+      <span class="expandable-arrow">&#9654;</span>
+    </div>
+    <div class="expandable-content">
+      <div class="expandable-body pros">
+        <ul>
+          <li><strong>Built-in devtools and inspector.</strong> @statelyai/inspect gives visual state charts, event logs, and time-travel debugging out of the box.</li>
+          <li><strong>Actor model for composition.</strong> Parent machines spawn child actors. No manual wiring for cross-machine communication.</li>
+          <li><strong>Parallel and history states.</strong> Can model concurrent states (generating + browsing history) natively.</li>
+          <li><strong>Mature ecosystem.</strong> Well-documented, large community, TypeScript-first in v5. Googleable patterns.</li>
+          <li><strong>Built-in effect management.</strong> invoke/spawn replaces the entire effect bridge pattern. Less boilerplate per effect.</li>
+          <li><strong>Serializable state.</strong> Snapshot/restore for SSR, persistence, or debugging.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="expandable">
+    <div class="expandable-header" onclick="toggleExpand(this)">
+      <h3><span style="color: var(--red);">-</span> Cons</h3>
+      <span class="expandable-arrow">&#9654;</span>
+    </div>
+    <div class="expandable-content">
+      <div class="expandable-body cons">
+        <ul>
+          <li><strong>~10kb bundle addition.</strong> XState v5 is tree-shakeable but still adds meaningful weight vs zero-dep custom reducers.</li>
+          <li><strong>Opinionated about effects.</strong> invoke/spawn couples effect execution into the machine. Harder to swap mock implementations vs the bridge pattern.</li>
+          <li><strong>Learning curve.</strong> Actor model, guards, parallel states, invoke semantics: non-trivial for engineers new to XState.</li>
+          <li><strong>Testing requires XState test utilities.</strong> @xstate/test or createActor() setup. Not as simple as calling a pure function.</li>
+          <li><strong>Visibility functions still needed.</strong> XState doesn't solve the UI conditional derivation problem. You'd still write selectors/derived state.</li>
+          <li><strong>Migration cost.</strong> Rewriting 8 machines + wiring. The current tests won't transfer directly.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="expandable">
+    <div class="expandable-header" onclick="toggleExpand(this)">
+      <h3>Migration Effort</h3>
+      <span class="expandable-arrow">&#9654;</span>
+    </div>
+    <div class="expandable-content">
+      <div class="expandable-body">
+        <p><strong>Effort: Medium-High</strong> -- Rewrite all 8 machines in XState syntax. Rewrite effect bridge as invoke/spawn actors. Rewrite 363 tests to use XState test utilities. Visibility functions can remain mostly unchanged.</p>
+        <p style="margin-top: 8px;">Estimated: 2-3 weeks for a senior engineer familiar with XState.</p>
+        <div class="effort-bar"><div class="effort-fill effort-high" style="width: 65%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Testability Scores</div>
+  <div class="scores-grid">
+    <div class="score-card">
+      <div class="label">Unit Testability</div>
+      <div class="score score-4">4<span class="max">/5</span></div>
+    </div>
+    <div class="score-card">
+      <div class="label">Integration Testability</div>
+      <div class="score score-4">4<span class="max">/5</span></div>
+    </div>
+    <div class="score-card">
+      <div class="label">AI Agent Usability</div>
+      <div class="score score-3">3<span class="max">/5</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============== ZUSTAND ============== -->
+<div class="tab-panel" id="panel-zustand">
+  <div class="arch-header">
+    <h2>React Server Components + Zustand</h2>
+    <span class="arch-tag tag-alternative">Alternative 2</span>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <div class="code-label">Architecture Diagram</div>
+      <div class="diagram"><span class="layer">Server Components</span> <span class="note">(data fetching, layout)</span>
+  <span class="arrow">|</span> props down (credits, history, config)
+  <span class="arrow">v</span>
+<span class="layer">Client Components</span> <span class="note">('use client' boundary)</span>
+  <span class="arrow">|</span> useStore(drawerStore)
+  <span class="arrow">v</span>
+<span class="layer">Zustand Stores</span> <span class="note">(mutable, subscriptions)</span>
+  <span class="label">drawerStore</span>    <span class="note">{ isOpen, sourceKey, ... }</span>
+  <span class="label">generationStore</span> <span class="note">{ status, prompt, images }</span>
+  <span class="label">styleStore</span>      <span class="note">{ preset, references }</span>
+  <span class="label">creditsStore</span>    <span class="note">{ remaining, warning }</span>
+  <span class="arrow">|</span>
+  <span class="arrow">|</span> actions call APIs directly
+  <span class="arrow">v</span>
+<span class="layer">API Layer</span> <span class="note">(fetch, editor commands)</span>
+
+<span class="note">Zustand Devtools</span> <span class="arrow">---></span> <span class="label">Redux DevTools ext</span></div>
+    </div>
+    <div>
+      <div class="code-label">Key Interaction: "Generate Image"</div>
+      <div class="code-block"><pre><span class="comment">// Zustand store</span>
+<span class="keyword">const</span> useGenerationStore = <span class="fn">create</span>&lt;<span class="type">GenState</span>&gt;(
+  (set, get) => ({
+    <span class="type">status</span>: <span class="string">'idle'</span>,
+    <span class="type">images</span>: [],
+
+    <span class="fn">generate</span>: <span class="keyword">async</span> (config) => {
+      <span class="fn">set</span>({ status: <span class="string">'generating'</span> })
+      <span class="keyword">try</span> {
+        <span class="keyword">const</span> images = <span class="keyword">await</span> <span class="fn">generateImageApi</span>(config)
+        <span class="fn">set</span>({ status: <span class="string">'complete'</span>, images })
+      } <span class="keyword">catch</span> (e) {
+        <span class="fn">set</span>({ status: <span class="string">'error'</span>, error: e })
+      }
+    }
+  })
+)
+
+<span class="comment">// In component</span>
+<span class="keyword">const</span> { status, generate } =
+  <span class="fn">useGenerationStore</span>()
+
+<span class="comment">// RSC fetches initial data server-side</span>
+<span class="keyword">export default async function</span> <span class="fn">MediaDrawer</span>() {
+  <span class="keyword">const</span> credits = <span class="keyword">await</span> <span class="fn">getCredits</span>()
+  <span class="keyword">return</span> &lt;<span class="type">DrawerClient</span>
+    credits={credits} /&gt;
+}</pre></div>
+    </div>
+  </div>
+
+  <div class="expandable">
+    <div class="expandable-header" onclick="toggleExpand(this)">
+      <h3><span style="color: var(--green);">+</span> Pros</h3>
+      <span class="expandable-arrow">&#9654;</span>
+    </div>
+    <div class="expandable-content">
+      <div class="expandable-body pros">
+        <ul>
+          <li><strong>Familiar to React developers.</strong> Zustand is the most popular React state library. Small API surface, minimal learning curve.</li>
+          <li><strong>Simple mental model.</strong> Stores are just objects with methods. No state charts, no transitions, no effect descriptors.</li>
+          <li><strong>Redux DevTools compatible.</strong> Time-travel, state diff, action log via browser extension. Zero setup.</li>
+          <li><strong>RSC for data fetching.</strong> Credits, history, feature flags fetched server-side. Reduces client JS and waterfall.</li>
+          <li><strong>Tiny bundle.</strong> Zustand is ~1kb. Combined with RSC moving logic server-side, net bundle could decrease.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="expandable">
+    <div class="expandable-header" onclick="toggleExpand(this)">
+      <h3><span style="color: var(--red);">-</span> Cons</h3>
+      <span class="expandable-arrow">&#9654;</span>
+    </div>
+    <div class="expandable-content">
+      <div class="expandable-body cons">
+        <ul>
+          <li><strong>Mutable state, no formal guarantees.</strong> Any store method can set() anything. No guard preventing invalid state transitions.</li>
+          <li><strong>Effects embedded in actions.</strong> generate() calls the API directly. No clean seam for mocking without dependency injection.</li>
+          <li><strong>Testing requires React or store extraction.</strong> Testing a Zustand store in isolation is possible but awkward (act(), store reset between tests).</li>
+          <li><strong>RSC incompatible with current stack.</strong> Gamma's client is a Next.js pages-router app. RSC would require App Router migration.</li>
+          <li><strong>No state machine formalism.</strong> Can't statically verify that "generate" is only callable from "idle". Business rules live in if-statements.</li>
+          <li><strong>AI agents struggle with mutable stores.</strong> Harder to reason about state when any action can mutate anything. No declarative state chart to read.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="expandable">
+    <div class="expandable-header" onclick="toggleExpand(this)">
+      <h3>Migration Effort</h3>
+      <span class="expandable-arrow">&#9654;</span>
+    </div>
+    <div class="expandable-content">
+      <div class="expandable-body">
+        <p><strong>Effort: High</strong> -- RSC requires App Router migration (major lift for entire client, not just media drawer). Zustand store rewrite is medium effort but loses all formal state machine properties. Tests would need complete rewrite.</p>
+        <p style="margin-top: 8px;">Estimated: 4-6 weeks including App Router migration. 1-2 weeks for Zustand-only (no RSC).</p>
+        <div class="effort-bar"><div class="effort-fill effort-high" style="width: 75%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Testability Scores</div>
+  <div class="scores-grid">
+    <div class="score-card">
+      <div class="label">Unit Testability</div>
+      <div class="score score-3">3<span class="max">/5</span></div>
+    </div>
+    <div class="score-card">
+      <div class="label">Integration Testability</div>
+      <div class="score score-3">3<span class="max">/5</span></div>
+    </div>
+    <div class="score-card">
+      <div class="label">AI Agent Usability</div>
+      <div class="score score-2">2<span class="max">/5</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============== MICRO-FRONTENDS ============== -->
+<div class="tab-panel" id="panel-microfrontend">
+  <div class="arch-header">
+    <h2>Module Federation / Micro-frontends</h2>
+    <span class="arch-tag tag-alternative">Alternative 3</span>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <div class="code-label">Architecture Diagram</div>
+      <div class="diagram"><span class="layer">Shell Application</span> <span class="note">(media drawer host)</span>
+  <span class="arrow">|</span> typed event bus (CustomEvent / postMessage)
+  <span class="arrow">|</span>
+  <span class="arrow">+--------+--------+--------+</span>
+  <span class="arrow">|</span>        <span class="arrow">|</span>        <span class="arrow">|</span>        <span class="arrow">|</span>
+  <span class="arrow">v</span>        <span class="arrow">v</span>        <span class="arrow">v</span>        <span class="arrow">v</span>
+<span class="label">AI Gen</span>   <span class="label">Web Img</span>  <span class="label">Upload</span>   <span class="label">Embed</span>
+<span class="label">Module</span>   <span class="label">Module</span>   <span class="label">Module</span>   <span class="label">Module</span>
+<span class="note">(deploy</span>  <span class="note">(deploy</span>  <span class="note">(deploy</span>  <span class="note">(deploy</span>
+<span class="note"> indep)</span>  <span class="note"> indep)</span>  <span class="note"> indep)</span>  <span class="note"> indep)</span>
+  <span class="arrow">|</span>        <span class="arrow">|</span>        <span class="arrow">|</span>        <span class="arrow">|</span>
+  <span class="arrow">v</span>        <span class="arrow">v</span>        <span class="arrow">v</span>        <span class="arrow">v</span>
+<span class="layer">Shared Contract Layer</span>
+  <span class="label">MediaEvent</span> | <span class="label">MediaResult</span> | <span class="label">PanelContract</span>
+
+<span class="note">Module Federation / importmap</span>
+  <span class="label">Runtime remote loading</span>
+  <span class="label">Shared deps (React, Chakra)</span></div>
+    </div>
+    <div>
+      <div class="code-label">Key Interaction: "Generate Image"</div>
+      <div class="code-block"><pre><span class="comment">// Shell dispatches to AI Gen module</span>
+<span class="fn">eventBus</span>.<span class="fn">emit</span>&lt;<span class="type">GenerateRequest</span>&gt;({
+  <span class="type">type</span>: <span class="string">'media:generate'</span>,
+  <span class="type">source</span>: <span class="string">'ai-gen-module'</span>,
+  <span class="type">payload</span>: { prompt, model, style }
+})
+
+<span class="comment">// AI Gen module (independently deployed)</span>
+<span class="fn">eventBus</span>.<span class="fn">on</span>(<span class="string">'media:generate'</span>, <span class="keyword">async</span> (e) => {
+  <span class="fn">eventBus</span>.<span class="fn">emit</span>({
+    <span class="type">type</span>: <span class="string">'media:status'</span>,
+    status: <span class="string">'generating'</span>
+  })
+  <span class="keyword">const</span> images = <span class="keyword">await</span> <span class="fn">api</span>.<span class="fn">generate</span>(e.payload)
+  <span class="fn">eventBus</span>.<span class="fn">emit</span>({
+    <span class="type">type</span>: <span class="string">'media:result'</span>,
+    images
+  })
+})
+
+<span class="comment">// Shell receives and updates drawer state</span>
+<span class="fn">eventBus</span>.<span class="fn">on</span>(<span class="string">'media:result'</span>, (e) => {
+  <span class="fn">drawerState</span>.<span class="fn">setImages</span>(e.images)
+})</pre></div>
+    </div>
+  </div>
+
+  <div class="expandable">
+    <div class="expandable-header" onclick="toggleExpand(this)">
+      <h3><span style="color: var(--green);">+</span> Pros</h3>
+      <span class="expandable-arrow">&#9654;</span>
+    </div>
+    <div class="expandable-content">
+      <div class="expandable-body pros">
+        <ul>
+          <li><strong>Independent deployability.</strong> Ship AI generation panel updates without touching web image or upload panels.</li>
+          <li><strong>Team scaling.</strong> Different teams own different panels. Clear ownership boundaries.</li>
+          <li><strong>Isolated testing.</strong> Each module has its own test suite, build, and CI pipeline.</li>
+          <li><strong>Technology flexibility.</strong> Panels could theoretically use different frameworks (though likely all React).</li>
+          <li><strong>Typed event contract.</strong> Shared types ensure modules communicate correctly without tight coupling.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="expandable">
+    <div class="expandable-header" onclick="toggleExpand(this)">
+      <h3><span style="color: var(--red);">-</span> Cons</h3>
+      <span class="expandable-arrow">&#9654;</span>
+    </div>
+    <div class="expandable-content">
+      <div class="expandable-body cons">
+        <ul>
+          <li><strong>Massive infrastructure overhead.</strong> Module federation config, shared dependency management, runtime loading, version alignment.</li>
+          <li><strong>Shared state is hard.</strong> Credits, selection context, and drawer lifecycle state need to be shared across modules. Event bus coordination is complex.</li>
+          <li><strong>Overkill for the problem.</strong> Media drawer is one feature area within one app. Micro-frontends solve organizational scaling, not architectural testability.</li>
+          <li><strong>Runtime integration failures.</strong> Version mismatches, loading failures, and CSS conflicts between modules.</li>
+          <li><strong>Debugging across modules is painful.</strong> Tracing an event through shell + module + shared state requires understanding the whole bus.</li>
+          <li><strong>CI/CD complexity explosion.</strong> Each module needs its own build pipeline, versioning strategy, and deployment coordination.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="expandable">
+    <div class="expandable-header" onclick="toggleExpand(this)">
+      <h3>Migration Effort</h3>
+      <span class="expandable-arrow">&#9654;</span>
+    </div>
+    <div class="expandable-content">
+      <div class="expandable-body">
+        <p><strong>Effort: Extreme</strong> -- Requires webpack Module Federation or importmap setup, build pipeline per module, shared dependency resolution, event bus implementation, shell application scaffold. Far exceeds the scope of the media drawer refactor.</p>
+        <p style="margin-top: 8px;">Estimated: 6-10 weeks, plus ongoing infrastructure maintenance.</p>
+        <div class="effort-bar"><div class="effort-fill effort-extreme" style="width: 90%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Testability Scores</div>
+  <div class="scores-grid">
+    <div class="score-card">
+      <div class="label">Unit Testability</div>
+      <div class="score score-4">4<span class="max">/5</span></div>
+    </div>
+    <div class="score-card">
+      <div class="label">Integration Testability</div>
+      <div class="score score-2">2<span class="max">/5</span></div>
+    </div>
+    <div class="score-card">
+      <div class="label">AI Agent Usability</div>
+      <div class="score score-2">2<span class="max">/5</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============== EVENT SOURCING ============== -->
+<div class="tab-panel" id="panel-eventsourcing">
+  <div class="arch-header">
+    <h2>Event Sourcing / CQRS</h2>
+    <span class="arch-tag tag-alternative">Alternative 4</span>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <div class="code-label">Architecture Diagram</div>
+      <div class="diagram"><span class="layer">React Components</span> <span class="note">(read from projections)</span>
+  <span class="arrow">|</span> dispatch commands
+  <span class="arrow">v</span>
+<span class="layer">Command Handlers</span> <span class="note">(validate + emit events)</span>
+  <span class="arrow">|</span> append to event log
+  <span class="arrow">v</span>
+<span class="layer">Event Store</span> <span class="note">(append-only log)</span>
+  <span class="label">[DRAWER_OPENED, SOURCE_SELECTED, GENERATE_STARTED,</span>
+  <span class="label"> GENERATE_COMPLETED, IMAGE_SELECTED, DRAWER_CLOSED]</span>
+  <span class="arrow">|</span>
+  <span class="arrow">+------+------+</span>
+  <span class="arrow">|</span>      <span class="arrow">|</span>      <span class="arrow">|</span>
+  <span class="arrow">v</span>      <span class="arrow">v</span>      <span class="arrow">v</span>
+<span class="label">UI Proj</span> <span class="label">Hist</span>   <span class="label">Analytics</span>
+<span class="note">(current</span> <span class="note">(undo/</span>  <span class="note">(event</span>
+<span class="note"> state)</span>  <span class="note"> redo)</span>   <span class="note"> stream)</span>
+
+<span class="layer">Projections</span> <span class="note">(derive state from events)</span>
+  <span class="label">fold(events) => currentState</span></div>
+    </div>
+    <div>
+      <div class="code-label">Key Interaction: "Generate Image"</div>
+      <div class="code-block"><pre><span class="comment">// Command</span>
+<span class="fn">dispatch</span>({
+  <span class="type">type</span>: <span class="string">'GenerateImage'</span>,
+  prompt, model, style
+})
+
+<span class="comment">// Command handler validates + emits events</span>
+<span class="keyword">function</span> <span class="fn">handleGenerateImage</span>(cmd, state) {
+  <span class="keyword">if</span> (state.credits &lt;= 0) <span class="keyword">throw</span> <span class="string">'NO_CREDITS'</span>
+  <span class="keyword">return</span> [
+    { <span class="type">type</span>: <span class="string">'GenerationStarted'</span>, prompt },
+    <span class="comment">// ...after async...</span>
+    { <span class="type">type</span>: <span class="string">'GenerationCompleted'</span>, images }
+  ]
+}
+
+<span class="comment">// Projection builds current state</span>
+<span class="keyword">function</span> <span class="fn">projectUI</span>(events: <span class="type">Event</span>[]) {
+  <span class="keyword">return</span> events.<span class="fn">reduce</span>((state, e) => {
+    <span class="keyword">switch</span> (e.type) {
+      <span class="keyword">case</span> <span class="string">'GenerationStarted'</span>:
+        <span class="keyword">return</span> { ...state, generating: <span class="keyword">true</span> }
+      <span class="keyword">case</span> <span class="string">'GenerationCompleted'</span>:
+        <span class="keyword">return</span> { ...state,
+          generating: <span class="keyword">false</span>,
+          images: e.images }
+    }
+  }, <span class="type">INITIAL</span>)
+}
+
+<span class="comment">// Undo = replay events[0..n-1]</span>
+<span class="comment">// Time travel = replay events[0..k]</span></pre></div>
+    </div>
+  </div>
+
+  <div class="expandable">
+    <div class="expandable-header" onclick="toggleExpand(this)">
+      <h3><span style="color: var(--green);">+</span> Pros</h3>
+      <span class="expandable-arrow">&#9654;</span>
+    </div>
+    <div class="expandable-content">
+      <div class="expandable-body pros">
+        <ul>
+          <li><strong>Perfect audit trail.</strong> Every user action is recorded. Reproduce any bug by replaying the event sequence.</li>
+          <li><strong>Time-travel debugging for free.</strong> Undo/redo is just replaying events up to a point. No separate undo stack needed.</li>
+          <li><strong>Excellent testability.</strong> Tests are: given these events, assert this projection. Pure function over an array.</li>
+          <li><strong>Multiple projections from same events.</strong> UI state, analytics, undo history, and debugging views all derive from the same event log.</li>
+          <li><strong>Natural fit for AI agent comprehension.</strong> Agents can read the event log as a sequence of actions and understand the full flow.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="expandable">
+    <div class="expandable-header" onclick="toggleExpand(this)">
+      <h3><span style="color: var(--red);">-</span> Cons</h3>
+      <span class="expandable-arrow">&#9654;</span>
+    </div>
+    <div class="expandable-content">
+      <div class="expandable-body cons">
+        <ul>
+          <li><strong>Event schema evolution is hard.</strong> Renaming or restructuring events requires migration logic. Old events must still replay correctly.</li>
+          <li><strong>Unfamiliar pattern for React devs.</strong> CQRS/ES is common in backend systems but rare in frontend. Steep conceptual learning curve.</li>
+          <li><strong>Projection performance.</strong> Replaying all events on every render is O(n). Needs snapshotting optimization for long sessions.</li>
+          <li><strong>Async events are awkward.</strong> "GenerationStarted" and "GenerationCompleted" are separate events. The "in-between" state requires careful handling.</li>
+          <li><strong>Overkill for ephemeral UI state.</strong> Media drawer state doesn't persist across sessions. The audit trail provides limited real value.</li>
+          <li><strong>Storage overhead.</strong> Keeping the full event log in memory for a UI component is wasteful compared to just keeping current state.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="expandable">
+    <div class="expandable-header" onclick="toggleExpand(this)">
+      <h3>Migration Effort</h3>
+      <span class="expandable-arrow">&#9654;</span>
+    </div>
+    <div class="expandable-content">
+      <div class="expandable-body">
+        <p><strong>Effort: Medium-High</strong> -- The current machines already emit events/effects, so the conceptual bridge is shorter. Main work: define event schema, write projections, handle async event gaps, build snapshotting. Tests translate more naturally since projections are pure reducers.</p>
+        <p style="margin-top: 8px;">Estimated: 3-4 weeks. Event schema design is the bottleneck.</p>
+        <div class="effort-bar"><div class="effort-fill effort-high" style="width: 70%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Testability Scores</div>
+  <div class="scores-grid">
+    <div class="score-card">
+      <div class="label">Unit Testability</div>
+      <div class="score score-5">5<span class="max">/5</span></div>
+    </div>
+    <div class="score-card">
+      <div class="label">Integration Testability</div>
+      <div class="score score-3">3<span class="max">/5</span></div>
+    </div>
+    <div class="score-card">
+      <div class="label">AI Agent Usability</div>
+      <div class="score score-4">4<span class="max">/5</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============== COMPARISON MATRIX ============== -->
+<div class="tab-panel" id="panel-matrix">
+  <div class="arch-header">
+    <h2>Side-by-Side Comparison Matrix</h2>
+  </div>
+
+  <div style="overflow-x: auto;">
+    <table class="matrix-table">
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>Legacy<br><small style="color:var(--red)">Pre-Refactor</small></th>
+          <th>Refactored<br><small style="color:var(--green)">Machines + Visibility</small></th>
+          <th>XState v5<br><small style="color:var(--purple)">Actor Model</small></th>
+          <th>RSC + Zustand<br><small style="color:var(--purple)">Stores</small></th>
+          <th>Micro-frontends<br><small style="color:var(--purple)">Module Fed</small></th>
+          <th>Event Sourcing<br><small style="color:var(--purple)">CQRS</small></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Unit Testability</strong></td>
+          <td><span class="cell-score"><span class="dot dot-red"></span> 1/5</span></td>
+          <td><span class="cell-score"><span class="dot dot-green"></span> 5/5</span></td>
+          <td><span class="cell-score"><span class="dot dot-green"></span> 4/5</span></td>
+          <td><span class="cell-score"><span class="dot dot-yellow"></span> 3/5</span></td>
+          <td><span class="cell-score"><span class="dot dot-green"></span> 4/5</span></td>
+          <td><span class="cell-score"><span class="dot dot-green"></span> 5/5</span></td>
+        </tr>
+        <tr>
+          <td><strong>Integration Testability</strong></td>
+          <td><span class="cell-score"><span class="dot dot-red"></span> 1/5</span></td>
+          <td><span class="cell-score"><span class="dot dot-green"></span> 4/5</span></td>
+          <td><span class="cell-score"><span class="dot dot-green"></span> 4/5</span></td>
+          <td><span class="cell-score"><span class="dot dot-yellow"></span> 3/5</span></td>
+          <td><span class="cell-score"><span class="dot dot-red"></span> 2/5</span></td>
+          <td><span class="cell-score"><span class="dot dot-yellow"></span> 3/5</span></td>
+        </tr>
+        <tr>
+          <td><strong>AI Agent Usability</strong></td>
+          <td><span class="cell-score"><span class="dot dot-red"></span> 1/5</span></td>
+          <td><span class="cell-score"><span class="dot dot-green"></span> 5/5</span></td>
+          <td><span class="cell-score"><span class="dot dot-yellow"></span> 3/5</span></td>
+          <td><span class="cell-score"><span class="dot dot-red"></span> 2/5</span></td>
+          <td><span class="cell-score"><span class="dot dot-red"></span> 2/5</span></td>
+          <td><span class="cell-score"><span class="dot dot-green"></span> 4/5</span></td>
+        </tr>
+        <tr>
+          <td><strong>Bundle Impact</strong></td>
+          <td><span class="cell-score"><span class="dot dot-yellow"></span> Baseline</span></td>
+          <td><span class="cell-score"><span class="dot dot-green"></span> 0kb added</span></td>
+          <td><span class="cell-score"><span class="dot dot-yellow"></span> ~10kb</span></td>
+          <td><span class="cell-score"><span class="dot dot-green"></span> ~1kb</span></td>
+          <td><span class="cell-score"><span class="dot dot-red"></span> ~20kb+ runtime</span></td>
+          <td><span class="cell-score"><span class="dot dot-green"></span> ~0kb</span></td>
+        </tr>
+        <tr>
+          <td><strong>Devtools</strong></td>
+          <td><span class="cell-score"><span class="dot dot-red"></span> None</span></td>
+          <td><span class="cell-score"><span class="dot dot-red"></span> None built-in</span></td>
+          <td><span class="cell-score"><span class="dot dot-green"></span> Inspector, Stately</span></td>
+          <td><span class="cell-score"><span class="dot dot-green"></span> Redux DevTools</span></td>
+          <td><span class="cell-score"><span class="dot dot-yellow"></span> Per-module only</span></td>
+          <td><span class="cell-score"><span class="dot dot-green"></span> Event log viewer</span></td>
+        </tr>
+        <tr>
+          <td><strong>Learning Curve</strong></td>
+          <td><span class="cell-score"><span class="dot dot-red"></span> Tribal knowledge</span></td>
+          <td><span class="cell-score"><span class="dot dot-yellow"></span> Custom patterns</span></td>
+          <td><span class="cell-score"><span class="dot dot-yellow"></span> Actor model concepts</span></td>
+          <td><span class="cell-score"><span class="dot dot-green"></span> Very familiar</span></td>
+          <td><span class="cell-score"><span class="dot dot-red"></span> Infra + arch patterns</span></td>
+          <td><span class="cell-score"><span class="dot dot-red"></span> ES/CQRS concepts</span></td>
+        </tr>
+        <tr>
+          <td><strong>State Safety</strong></td>
+          <td><span class="cell-score"><span class="dot dot-red"></span> Record&lt;string, any&gt;</span></td>
+          <td><span class="cell-score"><span class="dot dot-green"></span> Formal machines</span></td>
+          <td><span class="cell-score"><span class="dot dot-green"></span> Formal + guards</span></td>
+          <td><span class="cell-score"><span class="dot dot-red"></span> No guarantees</span></td>
+          <td><span class="cell-score"><span class="dot dot-yellow"></span> Per-module</span></td>
+          <td><span class="cell-score"><span class="dot dot-green"></span> Event replay</span></td>
+        </tr>
+        <tr>
+          <td><strong>Effect Management</strong></td>
+          <td><span class="cell-score"><span class="dot dot-red"></span> useEffect spaghetti</span></td>
+          <td><span class="cell-score"><span class="dot dot-green"></span> Bridge (swappable)</span></td>
+          <td><span class="cell-score"><span class="dot dot-yellow"></span> invoke/spawn (coupled)</span></td>
+          <td><span class="cell-score"><span class="dot dot-red"></span> In-action (coupled)</span></td>
+          <td><span class="cell-score"><span class="dot dot-yellow"></span> Event bus</span></td>
+          <td><span class="cell-score"><span class="dot dot-yellow"></span> Command handlers</span></td>
+        </tr>
+        <tr>
+          <td><strong>Migration Effort</strong></td>
+          <td><span class="cell-score"><span class="dot dot-green"></span> N/A (baseline)</span></td>
+          <td><span class="cell-score"><span class="dot dot-green"></span> N/A (current)</span></td>
+          <td><span class="cell-score"><span class="dot dot-yellow"></span> 2-3 weeks</span></td>
+          <td><span class="cell-score"><span class="dot dot-red"></span> 4-6 weeks</span></td>
+          <td><span class="cell-score"><span class="dot dot-red"></span> 6-10 weeks</span></td>
+          <td><span class="cell-score"><span class="dot dot-yellow"></span> 3-4 weeks</span></td>
+        </tr>
+        <tr>
+          <td><strong>Team Familiarity</strong></td>
+          <td><span class="cell-score"><span class="dot dot-yellow"></span> "Familiar" but fragile</span></td>
+          <td><span class="cell-score"><span class="dot dot-yellow"></span> Must learn pattern</span></td>
+          <td><span class="cell-score"><span class="dot dot-yellow"></span> Some XState exp</span></td>
+          <td><span class="cell-score"><span class="dot dot-green"></span> Very high</span></td>
+          <td><span class="cell-score"><span class="dot dot-red"></span> Low</span></td>
+          <td><span class="cell-score"><span class="dot dot-red"></span> Very low</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ============== RADAR CHART ============== -->
+<div class="tab-panel" id="panel-radar">
+  <div class="radar-section">
+    <h2>Multi-Dimensional Scoring</h2>
+    <p style="color: var(--text-muted); margin-bottom: 24px;">Each approach scored 1-5 across 6 key dimensions. Outer ring = 5 (best).</p>
+
+    <div class="radar-container">
+      <canvas class="radar-canvas" id="radarChart" width="600" height="600"></canvas>
+    </div>
+
+    <div class="radar-legend">
+      <div class="legend-item"><span class="legend-color" style="background: #f85149;"></span> Legacy (Pre-Refactor)</div>
+      <div class="legend-item"><span class="legend-color" style="background: #3fb950;"></span> Refactored (Machines)</div>
+      <div class="legend-item"><span class="legend-color" style="background: #58a6ff;"></span> XState v5</div>
+      <div class="legend-item"><span class="legend-color" style="background: #d29922;"></span> RSC + Zustand</div>
+      <div class="legend-item"><span class="legend-color" style="background: #f0883e;"></span> Micro-frontends</div>
+      <div class="legend-item"><span class="legend-color" style="background: #bc8cff;"></span> Event Sourcing</div>
+    </div>
+  </div>
+
+  <div class="recommendation">
+    <h2>Assessment</h2>
+    <p>After analyzing all five approaches across testability, developer experience, migration cost, and architectural fitness for the media drawer domain:</p>
+
+    <div class="section-title">Why the current approach wins</div>
+    <p><strong>The custom machines approach is the right call for this specific problem.</strong> The media drawer is a complex but bounded UI domain. It needs high testability (363 tests prove it), AI agent comprehension (machines are declarative and readable), and zero new dependencies. The effect bridge pattern, while verbose, provides the cleanest testing seam of any approach.</p>
+
+    <div class="section-title">What to steal from the alternatives</div>
+    <p><strong>From XState:</strong> Build a lightweight state inspector / event logger for dev mode. The biggest gap in the current approach is observability. A simple React DevTools panel that shows machine state + recent events would close 80% of the devtools gap at 0% of the bundle cost.</p>
+    <p><strong>From Event Sourcing:</strong> The event log concept pairs naturally with the existing effect descriptors. Consider logging all machine events in dev mode for time-travel debugging without adopting full CQRS.</p>
+    <p><strong>From Zustand:</strong> Nothing structural, but the lesson is valid: if the team finds the custom patterns hard to learn, invest in documentation and worked examples rather than switching to a "familiar" tool that sacrifices testability.</p>
+
+    <div class="section-title">When to reconsider</div>
+    <p>If Gamma adopts XState broadly across the codebase (not just media drawer), migrating to XState v5 would make sense for consistency. If media drawer panels need independent deployment (unlikely given it's one feature), micro-frontends would become relevant. Neither condition exists today.</p>
+
+    <div class="verdict">Verdict: Stay with current approach. Invest in devtools and documentation, not architectural pivots.</div>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<script>
+// Tab switching
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+
+    // Draw radar when that tab is shown
+    if (btn.dataset.tab === 'radar') drawRadar();
+  });
+});
+
+// Expandable sections
+function toggleExpand(header) {
+  header.parentElement.classList.toggle('open');
+}
+
+// Open first expandable in each panel
+document.querySelectorAll('.tab-panel').forEach(panel => {
+  const first = panel.querySelector('.expandable');
+  if (first && !first.classList.contains('open')) first.classList.add('open');
+});
+
+// Radar Chart (pure canvas, no library)
+function drawRadar() {
+  const canvas = document.getElementById('radarChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W / 2, cy = H / 2;
+  const R = Math.min(W, H) / 2 - 60;
+
+  const labels = ['Unit Test', 'Integration Test', 'AI Agent', 'Simplicity', 'State Safety', 'Devtools'];
+  const n = labels.length;
+
+  const data = {
+    legacy:        [1, 1, 1, 3, 1, 1],
+    current:       [5, 4, 5, 3, 5, 2],
+    xstate:        [4, 4, 3, 3, 5, 5],
+    zustand:       [3, 3, 2, 5, 2, 4],
+    microfrontend: [4, 2, 2, 1, 3, 2],
+    eventsourcing: [5, 3, 4, 2, 4, 4],
+  };
+
+  const colors = {
+    legacy:        { stroke: '#f85149', fill: 'rgba(248, 81, 73, 0.08)' },
+    current:       { stroke: '#3fb950', fill: 'rgba(63, 185, 80, 0.1)' },
+    xstate:        { stroke: '#58a6ff', fill: 'rgba(88, 166, 255, 0.1)' },
+    zustand:       { stroke: '#d29922', fill: 'rgba(210, 153, 34, 0.1)' },
+    microfrontend: { stroke: '#f0883e', fill: 'rgba(240, 136, 62, 0.1)' },
+    eventsourcing: { stroke: '#bc8cff', fill: 'rgba(188, 140, 255, 0.1)' },
+  };
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Draw grid
+  for (let ring = 1; ring <= 5; ring++) {
+    const r = (ring / 5) * R;
+    ctx.beginPath();
+    for (let i = 0; i <= n; i++) {
+      const angle = (Math.PI * 2 * i) / n - Math.PI / 2;
+      const x = cx + r * Math.cos(angle);
+      const y = cy + r * Math.sin(angle);
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = ring === 5 ? '#30363d' : '#21262d';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // Draw axes + labels
+  for (let i = 0; i < n; i++) {
+    const angle = (Math.PI * 2 * i) / n - Math.PI / 2;
+    const x1 = cx + R * Math.cos(angle);
+    const y1 = cy + R * Math.sin(angle);
+
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(x1, y1);
+    ctx.strokeStyle = '#21262d';
+    ctx.stroke();
+
+    // Label
+    const lx = cx + (R + 30) * Math.cos(angle);
+    const ly = cy + (R + 30) * Math.sin(angle);
+    ctx.fillStyle = '#8b949e';
+    ctx.font = '13px -apple-system, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(labels[i], lx, ly);
+  }
+
+  // Draw data polygons
+  Object.keys(data).forEach(key => {
+    const vals = data[key];
+    const col = colors[key];
+
+    ctx.beginPath();
+    for (let i = 0; i <= n; i++) {
+      const idx = i % n;
+      const angle = (Math.PI * 2 * idx) / n - Math.PI / 2;
+      const r = (vals[idx] / 5) * R;
+      const x = cx + r * Math.cos(angle);
+      const y = cy + r * Math.sin(angle);
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.fillStyle = col.fill;
+    ctx.fill();
+    ctx.strokeStyle = col.stroke;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Dots
+    for (let i = 0; i < n; i++) {
+      const angle = (Math.PI * 2 * i) / n - Math.PI / 2;
+      const r = (vals[i] / 5) * R;
+      const x = cx + r * Math.cos(angle);
+      const y = cy + r * Math.sin(angle);
+      ctx.beginPath();
+      ctx.arc(x, y, 4, 0, Math.PI * 2);
+      ctx.fillStyle = col.stroke;
+      ctx.fill();
+    }
+  });
+
+  // Ring labels
+  for (let ring = 1; ring <= 5; ring++) {
+    const r = (ring / 5) * R;
+    ctx.fillStyle = '#484f58';
+    ctx.font = '11px -apple-system, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText(ring.toString(), cx + 4, cy - r - 4);
+  }
+}
+
+// Draw radar if it's the active tab on load
+if (document.getElementById('panel-radar').classList.contains('active')) {
+  drawRadar();
+}
+</script>
+
+</body>
+</html>
