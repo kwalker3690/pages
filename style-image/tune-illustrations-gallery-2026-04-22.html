@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Tune Illustrations — Natural Colors for Illustration Styles</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: system-ui; background: #1a1a2e; color: #e0e0e0; margin: 0; padding: 0; }
+.nav { position: sticky; top: 0; background: #0d0d1a; border-bottom: 1px solid #333; padding: 12px 20px; display: flex; gap: 12px; z-index: 100; flex-wrap: wrap; align-items: center; }
+.nav h1 { font-size: 16px; color: #26A688; margin-right: 16px; }
+.nav a { color: #B4EEE0; text-decoration: none; font-size: 13px; padding: 4px 12px; border-radius: 4px; background: #252540; }
+.nav a:hover { background: #26A688; color: #fff; }
+section { padding: 20px; border-bottom: 2px solid #333; }
+section h1 { color: #26A688; font-size: 1.4rem; margin-bottom: 4px; }
+section > p { color: #888; margin-bottom: 16px; }
+h2 { color: #B4EEE0; margin-top: 40px; border-bottom: 1px solid #333; padding-bottom: 8px; }
+h3 { color: #aaa; margin-top: 16px; }
+
+/* Comparison styles */
+.pair { display: inline-flex; gap: 4px; margin: 8px 8px 8px 0; vertical-align: top; }
+.pair img { width: 200px; height: 200px; object-fit: cover; border-radius: 6px; }
+.pair .label { font-size: 10px; text-align: center; margin-top: 2px; color: #888; }
+.baseline-img { border: 2px solid #F65F62; }
+.mood-img { border: 2px solid #26A688; }
+.ref-img { border: 2px solid #555; opacity: 0.7; }
+
+/* Grid styles */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, 200px); gap: 12px; margin: 16px 0; }
+.grid5 { display: grid; grid-template-columns: repeat(5, 200px); gap: 12px; margin: 16px 0; }
+.card { background: #252540; border-radius: 8px; overflow: hidden; }
+.card img { width: 200px; height: 200px; object-fit: cover; display: block; }
+.card .label { padding: 6px 8px; font-size: 11px; line-height: 1.3; }
+.card .style-name { font-weight: 600; }
+.mood { border: 2px solid #26A688; }
+.candidate { border: 2px solid #F2B42D; }
+.doodle { border: 2px solid #F2B42D; }
+
+/* Legend */
+.legend { display: flex; gap: 20px; margin: 16px 0; font-size: 13px; flex-wrap: wrap; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.dot { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+
+/* Deck render styles */
+.cards { display: flex; flex-wrap: wrap; gap: 12px; margin: 12px 0; }
+.card-section { background: #252540; border-radius: 8px; padding: 12px; max-width: 600px; }
+.card-section h4 { margin: 0 0 8px; font-size: 13px; color: #B4EEE0; }
+.card-section .images { display: flex; flex-wrap: wrap; gap: 8px; }
+.card-section img { max-width: 250px; max-height: 250px; border-radius: 6px; object-fit: cover; }
+</style></head><body>
+
+<div class="nav">
+<h1>kw/tune-illustrations</h1>
+<a href="#comparison">Comparison</a>
+<a href="#round2">Round 2</a>
+<a href="#baseline">Full Baseline</a>
+<a href="#decks">Deck Renders</a>
+</div>
+
+<!-- ============ SECTION 1: COMPARISON ============ -->
+<section id="comparison">
+<h1>Baseline (palette) vs Mood (natural colors)</h1>
+<p>Side-by-side for 5 changed styles x 5 prompts. Left=baseline (exact hex). Right=mood (natural). Seafoam theme.</p>
+<div class="legend">
+  <span><span class="dot" style="background:#F65F62"></span> Baseline (palette)</span>
+  <span><span class="dot" style="background:#26A688"></span> Mood (natural colors)</span>
+  <span><span class="dot" style="background:#555"></span> Reference (gouache/watercolor, already mood)</span>
+</div>
+<h2>chocolate chip cookies on a plate</h2>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/ADYX2J-DIoS255EMSjSQN.png" class="baseline-img"><div class="label">bold_poster_design<br>BASELINE</div></div><div><img src="https://cdn-staging.gamma.app/acme/generated-images/CQiN3peB1XMpFd60Je2CC.png" class="mood-img"><div class="label">bold_poster_design<br>MOOD</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/QgZLHtILICwoUDXlAzqz_.png" class="baseline-img"><div class="label">doodle<br>BASELINE</div></div><div><img src="https://cdn-staging.gamma.app/acme/generated-images/2PEVWubDRVg9I-hVSB29T.png" class="mood-img"><div class="label">doodle<br>MOOD</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/2JkG_RfUo1--XsXt2IfNF.png" class="baseline-img"><div class="label">cutout_collage<br>BASELINE</div></div><div><img src="https://cdn-staging.gamma.app/acme/generated-images/mOqMQgxjZG5DX8xdE3X3-.png" class="mood-img"><div class="label">cutout_collage<br>MOOD</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/LGXXzsVppwc92HdrDlQHd.png" class="baseline-img"><div class="label">paper_cutout<br>BASELINE</div></div><div><img src="https://cdn-staging.gamma.app/acme/generated-images/gMy65Al2UMqgu4DlHSu-R.png" class="mood-img"><div class="label">paper_cutout<br>MOOD</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/OmI2DAPWKU_Jl1i2JN9Qn.png" class="baseline-img"><div class="label">felt_craft_illustration<br>BASELINE</div></div><div><img src="https://cdn-staging.gamma.app/acme/generated-images/El7sr7ylmqpbKrXvt0bnk.png" class="mood-img"><div class="label">felt_craft_illustration<br>MOOD</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/_K4qDi_OyAkstyailurYf.png" class="ref-img"><div class="label">gouache_paint<br>REF</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/fhqAroQkP0xcxZfNz0_w-.png" class="ref-img"><div class="label">watercolor_neat<br>REF</div></div></div>
+<h2>sushi platter</h2>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/8VRS6UFvZAFaA2lyR-g3T.png" class="baseline-img"><div class="label">bold_poster_design<br>BASELINE</div></div><div><img src="https://cdn-staging.gamma.app/acme/generated-images/ZyG4qK5wZi9g1wD5RQEuo.png" class="mood-img"><div class="label">bold_poster_design<br>MOOD</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/A7jtLqMPmp0XrU7wXjw3O.png" class="baseline-img"><div class="label">doodle<br>BASELINE</div></div><div><img src="https://cdn-staging.gamma.app/acme/generated-images/IWVVc2b2NQxMcGSwBvqfI.png" class="mood-img"><div class="label">doodle<br>MOOD</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/KsX0I8AcNBOC_WsDFiEB4.png" class="baseline-img"><div class="label">cutout_collage<br>BASELINE</div></div><div><img src="https://cdn-staging.gamma.app/acme/generated-images/o_8uKJc3JjAgRSSGbMrxt.png" class="mood-img"><div class="label">cutout_collage<br>MOOD</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/4Emtm6P5IPUTJC49dqNFJ.png" class="baseline-img"><div class="label">paper_cutout<br>BASELINE</div></div><div><img src="https://cdn-staging.gamma.app/acme/generated-images/ZfYy9L5exFeNBDDb-V6hy.png" class="mood-img"><div class="label">paper_cutout<br>MOOD</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/MmKR4Syq4bUYFfDlW1TU7.png" class="baseline-img"><div class="label">felt_craft_illustration<br>BASELINE</div></div><div><img src="https://cdn-staging.gamma.app/acme/generated-images/JjLp4XVrkj4NT94WNNSbK.png" class="mood-img"><div class="label">felt_craft_illustration<br>MOOD</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/Wkbj_2jQNQPs8FjSugjoh.png" class="ref-img"><div class="label">gouache_paint<br>REF</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/7WxyWVZMuyl2gFWUl7Vw4.png" class="ref-img"><div class="label">watercolor_neat<br>REF</div></div></div>
+<h2>person jogging in a park</h2>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/sFWUnPqS-9a4-bICznJak.png" class="baseline-img"><div class="label">bold_poster_design<br>BASELINE</div></div><div><img src="https://cdn-staging.gamma.app/acme/generated-images/XxngvUCC4NmJatwvQFco9.png" class="mood-img"><div class="label">bold_poster_design<br>MOOD</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/zkSr3E3aU93VENvvlCDmL.png" class="baseline-img"><div class="label">doodle<br>BASELINE</div></div><div><img src="https://cdn-staging.gamma.app/acme/generated-images/4m1rsylwDZM5x-HJcLmk5.png" class="mood-img"><div class="label">doodle<br>MOOD</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/o8h6iYTbRXGLLQB6-P0zP.png" class="baseline-img"><div class="label">cutout_collage<br>BASELINE</div></div><div><img src="https://cdn-staging.gamma.app/acme/generated-images/mYZlMrNsj96jgBPKkHPvK.png" class="mood-img"><div class="label">cutout_collage<br>MOOD</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/wMUBNTFd8z3z4R0B5lrUr.png" class="baseline-img"><div class="label">paper_cutout<br>BASELINE</div></div><div><img src="https://cdn-staging.gamma.app/acme/generated-images/ZtVZaGWgs1q_y397PNZxd.png" class="mood-img"><div class="label">paper_cutout<br>MOOD</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/hg1HRF56uz5kqnCRPq9wU.png" class="baseline-img"><div class="label">felt_craft_illustration<br>BASELINE</div></div><div><img src="https://cdn-staging.gamma.app/acme/generated-images/R0G3dr17k9fUI7Bz-baHQ.png" class="mood-img"><div class="label">felt_craft_illustration<br>MOOD</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/Zjtwabr7JeSlYCzRbmuVn.png" class="ref-img"><div class="label">gouache_paint<br>REF</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/fHMPEtY1-W_zr5xm2EFCX.png" class="ref-img"><div class="label">watercolor_neat<br>REF</div></div></div>
+<h2>farmer's market fruit stand</h2>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/HIa6UHC4zOXL1JMZGseda.png" class="baseline-img"><div class="label">bold_poster_design<br>BASELINE</div></div><div><img src="https://cdn-staging.gamma.app/acme/generated-images/LYI_jQNWAsYKvoh8Oc8hC.png" class="mood-img"><div class="label">bold_poster_design<br>MOOD</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/B8BdJ9m-sqfl3YDf07Hg9.png" class="baseline-img"><div class="label">doodle<br>BASELINE</div></div><div><img src="https://cdn-staging.gamma.app/acme/generated-images/n-yXOE-vUt7BKpTbDq3wf.png" class="mood-img"><div class="label">doodle<br>MOOD</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/lK4MyYGrN244ZBAdhWBoU.png" class="baseline-img"><div class="label">cutout_collage<br>BASELINE</div></div><div><img src="https://cdn-staging.gamma.app/acme/generated-images/zQo33qp3iOjQbWyYO7kWH.png" class="mood-img"><div class="label">cutout_collage<br>MOOD</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/ZH5imW7CJXrUTh2ckcE4J.png" class="baseline-img"><div class="label">paper_cutout<br>BASELINE</div></div><div><img src="https://cdn-staging.gamma.app/acme/generated-images/ozEExQzFeqWaVpirRjdjo.png" class="mood-img"><div class="label">paper_cutout<br>MOOD</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/7w0jtjfkYw6C_ilEbJj-6.png" class="baseline-img"><div class="label">felt_craft_illustration<br>BASELINE</div></div><div><img src="https://cdn-staging.gamma.app/acme/generated-images/TcUJNknpkeCJDaw41j1Y-.png" class="mood-img"><div class="label">felt_craft_illustration<br>MOOD</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/Q6K2G4x9yl4qDnJjUzzOo.png" class="ref-img"><div class="label">gouache_paint<br>REF</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/b6BpKtMVAD2ecnbCQNHVC.png" class="ref-img"><div class="label">watercolor_neat<br>REF</div></div></div>
+<h2>kids in a classroom</h2>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/F4QVivk1TH8mmfU7Eo7_W.png" class="baseline-img"><div class="label">bold_poster_design<br>BASELINE</div></div><div><img src="https://cdn-staging.gamma.app/acme/generated-images/4gg4Fm5hrWSGhAtvcRf4d.png" class="mood-img"><div class="label">bold_poster_design<br>MOOD</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/gb4WgfkGKIQEkT8f_dwmT.png" class="baseline-img"><div class="label">doodle<br>BASELINE</div></div><div><img src="https://cdn-staging.gamma.app/acme/generated-images/4uQDa5fBoBMkXJkwg1k-c.png" class="mood-img"><div class="label">doodle<br>MOOD</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/sB83RoPD38TA8y2icKWM6.png" class="baseline-img"><div class="label">cutout_collage<br>BASELINE</div></div><div><img src="https://cdn-staging.gamma.app/acme/generated-images/_rSwktpbuG1jOxiSAlA0A.png" class="mood-img"><div class="label">cutout_collage<br>MOOD</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/6FuoaJ7H_jn8G5_vRKktr.png" class="baseline-img"><div class="label">paper_cutout<br>BASELINE</div></div><div><img src="https://cdn-staging.gamma.app/acme/generated-images/8HDUZQsX_THHMFpURhB5t.png" class="mood-img"><div class="label">paper_cutout<br>MOOD</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/hGTkKsSrERrYufHJkPPt1.png" class="baseline-img"><div class="label">felt_craft_illustration<br>BASELINE</div></div><div><img src="https://cdn-staging.gamma.app/acme/generated-images/tDmtSJSdt2FNuzMuV4515.png" class="mood-img"><div class="label">felt_craft_illustration<br>MOOD</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/CfwWFtxxBubopYWkWe-RY.png" class="ref-img"><div class="label">gouache_paint<br>REF</div></div></div>
+<div class="pair"><div><img src="https://cdn-staging.gamma.app/acme/generated-images/WUDuiOZbN7hGeubvKIgPJ.png" class="ref-img"><div class="label">watercolor_neat<br>REF</div></div></div>
+</section>
+
+<!-- ============ SECTION 2: ROUND 2 ============ -->
+<section id="round2">
+<h1>Round 2 — Mood Natural Colors (mixed topics)</h1>
+<p>40 images. All 5 styles with mood-based natural colors. Yellow border = doodle (on the fence). Seafoam theme.</p>
+<h2>electric guitar</h2>
+<div class="grid5">
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/LoSI7yxiBgg97gBiLUFML.png" loading="lazy"><div class="label"><div class="style-name">bold_poster_design</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/vfsSpAnDaLqpzb4IUUKo6.png" loading="lazy"><div class="label"><div class="style-name">cutout_collage</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/NwjXiMPfpRnveQCNiM9MP.png" loading="lazy"><div class="label"><div class="style-name">paper_cutout</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/83Uvzx5TPRPo6u1XMT25V.png" loading="lazy"><div class="label"><div class="style-name">felt_craft_illustration</div></div></div>
+<div class="card doodle"><img src="https://cdn-staging.gamma.app/acme/generated-images/5qShsD4ft3ewCJtumUnaV.png" loading="lazy"><div class="label"><div class="style-name">doodle</div></div></div>
+</div>
+<h2>stack of books</h2>
+<div class="grid5">
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/hoXuNGxUuLFUpsTmawpnv.png" loading="lazy"><div class="label"><div class="style-name">bold_poster_design</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/WGz9rqATjlt5A3YTKTtIb.png" loading="lazy"><div class="label"><div class="style-name">cutout_collage</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/s4RZlA4qL_GjUkp0my6Hk.png" loading="lazy"><div class="label"><div class="style-name">paper_cutout</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/PPJ2cgIslgY8xacXGjyV2.png" loading="lazy"><div class="label"><div class="style-name">felt_craft_illustration</div></div></div>
+<div class="card doodle"><img src="https://cdn-staging.gamma.app/acme/generated-images/ypzrtHc1gDvssz9FbZONr.png" loading="lazy"><div class="label"><div class="style-name">doodle</div></div></div>
+</div>
+<h2>coffee shop counter</h2>
+<div class="grid5">
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/Jnfjm4riNfRMa7YI3hrcU.png" loading="lazy"><div class="label"><div class="style-name">bold_poster_design</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/5t7bO16HQ-yOK98PKUeKy.png" loading="lazy"><div class="label"><div class="style-name">cutout_collage</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/ZDkFiSoWKiyXc9eUXKexX.png" loading="lazy"><div class="label"><div class="style-name">paper_cutout</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/j32nmiwftwnjW5Id7L_aD.png" loading="lazy"><div class="label"><div class="style-name">felt_craft_illustration</div></div></div>
+<div class="card doodle"><img src="https://cdn-staging.gamma.app/acme/generated-images/fmypsfRFNjQp1TH6blZuf.png" loading="lazy"><div class="label"><div class="style-name">doodle</div></div></div>
+</div>
+<h2>bicycle leaning on a wall</h2>
+<div class="grid5">
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/w1dqQL2tHtMkvZ1kPan1D.png" loading="lazy"><div class="label"><div class="style-name">bold_poster_design</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/eLKRib38uk0JZNKirkpAI.png" loading="lazy"><div class="label"><div class="style-name">cutout_collage</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/N5bn9nwlLPols2YENadYf.png" loading="lazy"><div class="label"><div class="style-name">paper_cutout</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/fTkSKCIIqR3om648BBXSY.png" loading="lazy"><div class="label"><div class="style-name">felt_craft_illustration</div></div></div>
+<div class="card doodle"><img src="https://cdn-staging.gamma.app/acme/generated-images/vHG40Rfqxc3U5qAGI98Mb.png" loading="lazy"><div class="label"><div class="style-name">doodle</div></div></div>
+</div>
+<h2>birthday cake with candles</h2>
+<div class="grid5">
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/6JfixagfVpQl-mhISzF2F.png" loading="lazy"><div class="label"><div class="style-name">bold_poster_design</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/vWW5-A8WoS1BcB-OM8mPp.png" loading="lazy"><div class="label"><div class="style-name">cutout_collage</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/0ccBCc8J6gW6CV6GVkCov.png" loading="lazy"><div class="label"><div class="style-name">paper_cutout</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/bXy-JYDKOYnfTCyvsIWYC.png" loading="lazy"><div class="label"><div class="style-name">felt_craft_illustration</div></div></div>
+<div class="card doodle"><img src="https://cdn-staging.gamma.app/acme/generated-images/SN4gx_qvtiE-3nGJc5Btl.png" loading="lazy"><div class="label"><div class="style-name">doodle</div></div></div>
+</div>
+<h2>laptop on a desk</h2>
+<div class="grid5">
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/aWMGesF8YnnDBcy411Q-2.png" loading="lazy"><div class="label"><div class="style-name">bold_poster_design</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/EHfaVjv1m7NIcHWrmr1yn.png" loading="lazy"><div class="label"><div class="style-name">cutout_collage</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/w8VQzg7pgxLEavDvobfI6.png" loading="lazy"><div class="label"><div class="style-name">paper_cutout</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/wk4E0olJzQwE1rs_Anj9p.png" loading="lazy"><div class="label"><div class="style-name">felt_craft_illustration</div></div></div>
+<div class="card doodle"><img src="https://cdn-staging.gamma.app/acme/generated-images/XsMzInelmHnEXbOOHLbWY.png" loading="lazy"><div class="label"><div class="style-name">doodle</div></div></div>
+</div>
+<h2>potted succulent</h2>
+<div class="grid5">
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/6BrdPa7YzZBqwPo7JiW3H.png" loading="lazy"><div class="label"><div class="style-name">bold_poster_design</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/IgmiCMfVuORccH0Frca2C.png" loading="lazy"><div class="label"><div class="style-name">cutout_collage</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/XyjgHptyHvhXROgAOM-OU.png" loading="lazy"><div class="label"><div class="style-name">paper_cutout</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/5c4ZkQt7RGXhbRB5NndQD.png" loading="lazy"><div class="label"><div class="style-name">felt_craft_illustration</div></div></div>
+<div class="card doodle"><img src="https://cdn-staging.gamma.app/acme/generated-images/KzXbI72dI4SHI42kTEmR4.png" loading="lazy"><div class="label"><div class="style-name">doodle</div></div></div>
+</div>
+<h2>basketball going through a hoop</h2>
+<div class="grid5">
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/TTBI-LgqsRB-B5ltjXoXq.png" loading="lazy"><div class="label"><div class="style-name">bold_poster_design</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/sa2OjG0AW2kbZly5JcqMO.png" loading="lazy"><div class="label"><div class="style-name">cutout_collage</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/sx5AoPgm0mkoHiVGKCqGe.png" loading="lazy"><div class="label"><div class="style-name">paper_cutout</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/58IwryzUHT3tGQlAlw3Ov.png" loading="lazy"><div class="label"><div class="style-name">felt_craft_illustration</div></div></div>
+<div class="card doodle"><img src="https://cdn-staging.gamma.app/acme/generated-images/VZ_SvV2CbTa7n8s_axjmR.png" loading="lazy"><div class="label"><div class="style-name">doodle</div></div></div>
+</div>
+</section>
+
+<!-- ============ SECTION 3: FULL BASELINE ============ -->
+<section id="baseline">
+<h1>Seafoam Theme x All Illustration Styles — Baseline</h1>
+<p>85 images, all generated with gpt-image-1-medium. Look for unnatural coloring on food/skin/nature subjects.</p>
+<div class="legend">
+  <span><span class="dot" style="background:#26A688"></span> Already uses natural colors (mood-based)</span>
+  <span><span class="dot" style="background:#F2B42D"></span> Candidate for natural colors fix</span>
+  <span><span class="dot" style="background:#555"></span> Likely fine as-is (geometric/abstract)</span>
+</div>
+<h2>chocolate chip cookies on a plate</h2>
+<div class="grid">
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/jteE8aLCBr5o0RHZPEbVG.png" loading="lazy"><div class="label"><div class="style-name">flat-corporate</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/k30h3v_rlrUDhAlPmJMi8.png" loading="lazy"><div class="label"><div class="style-name">isometric</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/ADYX2J-DIoS255EMSjSQN.png" loading="lazy"><div class="label"><div class="style-name">bold_poster_design</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/8naawl6kUHc1fHnanz8ft.png" loading="lazy"><div class="label"><div class="style-name">continuous_line_art</div></div></div>
+<div class="card candidate"><img src="https://cdn-staging.gamma.app/acme/generated-images/QgZLHtILICwoUDXlAzqz_.png" loading="lazy"><div class="label"><div class="style-name">doodle (candidate)</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/OcWogkrUhmVAFk1_uv5LY.png" loading="lazy"><div class="label"><div class="style-name">technical_line</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/X4qziNKpDgCrOnNi_CpVI.png" loading="lazy"><div class="label"><div class="style-name">spot_color_line_drawing</div></div></div>
+<div class="card mood"><img src="https://cdn-staging.gamma.app/acme/generated-images/_K4qDi_OyAkstyailurYf.png" loading="lazy"><div class="label"><div class="style-name">gouache_paint (mood)</div></div></div>
+<div class="card mood"><img src="https://cdn-staging.gamma.app/acme/generated-images/fhqAroQkP0xcxZfNz0_w-.png" loading="lazy"><div class="label"><div class="style-name">watercolor_neat (mood)</div></div></div>
+<div class="card candidate"><img src="https://cdn-staging.gamma.app/acme/generated-images/2JkG_RfUo1--XsXt2IfNF.png" loading="lazy"><div class="label"><div class="style-name">cutout_collage (candidate)</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/KG26wORIEHcp6L7OA2Jvx.png" loading="lazy"><div class="label"><div class="style-name">bauhaus_photomontage</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/xawj3m-TzWG4P4OZfHEPU.png" loading="lazy"><div class="label"><div class="style-name">magazine_editorial_cutout</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/iR2Ku6Majc9iayNL2XhkT.png" loading="lazy"><div class="label"><div class="style-name">digital_collage</div></div></div>
+<div class="card candidate"><img src="https://cdn-staging.gamma.app/acme/generated-images/LGXXzsVppwc92HdrDlQHd.png" loading="lazy"><div class="label"><div class="style-name">paper_cutout (candidate)</div></div></div>
+<div class="card candidate"><img src="https://cdn-staging.gamma.app/acme/generated-images/OmI2DAPWKU_Jl1i2JN9Qn.png" loading="lazy"><div class="label"><div class="style-name">felt_craft_illustration (candidate)</div></div></div>
+<div class="card candidate"><img src="https://cdn-staging.gamma.app/acme/generated-images/o2SrJ-2ip_-UUEMhL8qFx.png" loading="lazy"><div class="label"><div class="style-name">foam_board_models (candidate)</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/vmLpcntDUiOgQz29emCfN.png" loading="lazy"><div class="label"><div class="style-name">neon_glow</div></div></div>
+</div>
+<h2>sushi platter</h2>
+<div class="grid">
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/eN8hbmbdME-CQCwoR1MJk.png" loading="lazy"><div class="label"><div class="style-name">flat-corporate</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/Zcx-R6K31oLuMn9IsOqqm.png" loading="lazy"><div class="label"><div class="style-name">isometric</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/8VRS6UFvZAFaA2lyR-g3T.png" loading="lazy"><div class="label"><div class="style-name">bold_poster_design</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/uE5lCCArj_IKdyk32o117.png" loading="lazy"><div class="label"><div class="style-name">continuous_line_art</div></div></div>
+<div class="card candidate"><img src="https://cdn-staging.gamma.app/acme/generated-images/A7jtLqMPmp0XrU7wXjw3O.png" loading="lazy"><div class="label"><div class="style-name">doodle (candidate)</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/i-Blykah47CnbiqdIuHza.png" loading="lazy"><div class="label"><div class="style-name">technical_line</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/to1lAAT73nFm0kIeF87NG.png" loading="lazy"><div class="label"><div class="style-name">spot_color_line_drawing</div></div></div>
+<div class="card mood"><img src="https://cdn-staging.gamma.app/acme/generated-images/Wkbj_2jQNQPs8FjSugjoh.png" loading="lazy"><div class="label"><div class="style-name">gouache_paint (mood)</div></div></div>
+<div class="card mood"><img src="https://cdn-staging.gamma.app/acme/generated-images/7WxyWVZMuyl2gFWUl7Vw4.png" loading="lazy"><div class="label"><div class="style-name">watercolor_neat (mood)</div></div></div>
+<div class="card candidate"><img src="https://cdn-staging.gamma.app/acme/generated-images/KsX0I8AcNBOC_WsDFiEB4.png" loading="lazy"><div class="label"><div class="style-name">cutout_collage (candidate)</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/x40AD9o-ZzRzkt9l-UPal.png" loading="lazy"><div class="label"><div class="style-name">bauhaus_photomontage</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/v-ef7jqtdrJBYqL8RxFBb.png" loading="lazy"><div class="label"><div class="style-name">magazine_editorial_cutout</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/Bi9vOz4H6EcBNeMAn6whk.png" loading="lazy"><div class="label"><div class="style-name">digital_collage</div></div></div>
+<div class="card candidate"><img src="https://cdn-staging.gamma.app/acme/generated-images/4Emtm6P5IPUTJC49dqNFJ.png" loading="lazy"><div class="label"><div class="style-name">paper_cutout (candidate)</div></div></div>
+<div class="card candidate"><img src="https://cdn-staging.gamma.app/acme/generated-images/MmKR4Syq4bUYFfDlW1TU7.png" loading="lazy"><div class="label"><div class="style-name">felt_craft_illustration (candidate)</div></div></div>
+<div class="card candidate"><img src="https://cdn-staging.gamma.app/acme/generated-images/S1jQPTD3c48xAHKNcheei.png" loading="lazy"><div class="label"><div class="style-name">foam_board_models (candidate)</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/TiW36gSyZmRAVKmOBGNTo.png" loading="lazy"><div class="label"><div class="style-name">neon_glow</div></div></div>
+</div>
+<h2>person jogging in a park</h2>
+<div class="grid">
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/EHBR8O4W0Mq4MxbLMjxGL.png" loading="lazy"><div class="label"><div class="style-name">flat-corporate</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/EiJyEMGjp0L2NyJUFOJxu.png" loading="lazy"><div class="label"><div class="style-name">isometric</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/sFWUnPqS-9a4-bICznJak.png" loading="lazy"><div class="label"><div class="style-name">bold_poster_design</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/bqz5IJuS9JHGDuwZLONGB.png" loading="lazy"><div class="label"><div class="style-name">continuous_line_art</div></div></div>
+<div class="card candidate"><img src="https://cdn-staging.gamma.app/acme/generated-images/zkSr3E3aU93VENvvlCDmL.png" loading="lazy"><div class="label"><div class="style-name">doodle (candidate)</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/RHmxsnukTNBDLCJtoyovB.png" loading="lazy"><div class="label"><div class="style-name">technical_line</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/GwJkDoG4xt8sq6o7JLckx.png" loading="lazy"><div class="label"><div class="style-name">spot_color_line_drawing</div></div></div>
+<div class="card mood"><img src="https://cdn-staging.gamma.app/acme/generated-images/Zjtwabr7JeSlYCzRbmuVn.png" loading="lazy"><div class="label"><div class="style-name">gouache_paint (mood)</div></div></div>
+<div class="card mood"><img src="https://cdn-staging.gamma.app/acme/generated-images/fHMPEtY1-W_zr5xm2EFCX.png" loading="lazy"><div class="label"><div class="style-name">watercolor_neat (mood)</div></div></div>
+<div class="card candidate"><img src="https://cdn-staging.gamma.app/acme/generated-images/o8h6iYTbRXGLLQB6-P0zP.png" loading="lazy"><div class="label"><div class="style-name">cutout_collage (candidate)</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/NmSDTRJibnpRJwH3F7D-6.png" loading="lazy"><div class="label"><div class="style-name">bauhaus_photomontage</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/yhUq0m2nw0uLwlOUGhbOJ.png" loading="lazy"><div class="label"><div class="style-name">magazine_editorial_cutout</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/0hVEjYgMRBbdJhSrx414j.png" loading="lazy"><div class="label"><div class="style-name">digital_collage</div></div></div>
+<div class="card candidate"><img src="https://cdn-staging.gamma.app/acme/generated-images/wMUBNTFd8z3z4R0B5lrUr.png" loading="lazy"><div class="label"><div class="style-name">paper_cutout (candidate)</div></div></div>
+<div class="card candidate"><img src="https://cdn-staging.gamma.app/acme/generated-images/hg1HRF56uz5kqnCRPq9wU.png" loading="lazy"><div class="label"><div class="style-name">felt_craft_illustration (candidate)</div></div></div>
+<div class="card candidate"><img src="https://cdn-staging.gamma.app/acme/generated-images/DDWVDCa9gc87Dpe2l-spO.png" loading="lazy"><div class="label"><div class="style-name">foam_board_models (candidate)</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/gPTVg8mDXRO6a_3xWamPi.png" loading="lazy"><div class="label"><div class="style-name">neon_glow</div></div></div>
+</div>
+<h2>farmer's market fruit stand</h2>
+<div class="grid">
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/7LcQXjKvkk73VIQtzKUUO.png" loading="lazy"><div class="label"><div class="style-name">flat-corporate</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/dZg-dkMtjYmOk51i-LFHM.png" loading="lazy"><div class="label"><div class="style-name">isometric</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/HIa6UHC4zOXL1JMZGseda.png" loading="lazy"><div class="label"><div class="style-name">bold_poster_design</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/WcukryuEBv4dvA-jjHRQQ.png" loading="lazy"><div class="label"><div class="style-name">continuous_line_art</div></div></div>
+<div class="card candidate"><img src="https://cdn-staging.gamma.app/acme/generated-images/B8BdJ9m-sqfl3YDf07Hg9.png" loading="lazy"><div class="label"><div class="style-name">doodle (candidate)</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/nIXu8YrO_0QqBEHMY_I8M.png" loading="lazy"><div class="label"><div class="style-name">technical_line</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/FKNeC8x8u666DakfwUwuT.png" loading="lazy"><div class="label"><div class="style-name">spot_color_line_drawing</div></div></div>
+<div class="card mood"><img src="https://cdn-staging.gamma.app/acme/generated-images/Q6K2G4x9yl4qDnJjUzzOo.png" loading="lazy"><div class="label"><div class="style-name">gouache_paint (mood)</div></div></div>
+<div class="card mood"><img src="https://cdn-staging.gamma.app/acme/generated-images/b6BpKtMVAD2ecnbCQNHVC.png" loading="lazy"><div class="label"><div class="style-name">watercolor_neat (mood)</div></div></div>
+<div class="card candidate"><img src="https://cdn-staging.gamma.app/acme/generated-images/lK4MyYGrN244ZBAdhWBoU.png" loading="lazy"><div class="label"><div class="style-name">cutout_collage (candidate)</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/twGUeJAygJ5Psl6nMEuXg.png" loading="lazy"><div class="label"><div class="style-name">bauhaus_photomontage</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/eCRzq5fnq7FgEPDUJ4svh.png" loading="lazy"><div class="label"><div class="style-name">magazine_editorial_cutout</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/FcVoiHD912OZC-boWoNWk.png" loading="lazy"><div class="label"><div class="style-name">digital_collage</div></div></div>
+<div class="card candidate"><img src="https://cdn-staging.gamma.app/acme/generated-images/ZH5imW7CJXrUTh2ckcE4J.png" loading="lazy"><div class="label"><div class="style-name">paper_cutout (candidate)</div></div></div>
+<div class="card candidate"><img src="https://cdn-staging.gamma.app/acme/generated-images/7w0jtjfkYw6C_ilEbJj-6.png" loading="lazy"><div class="label"><div class="style-name">felt_craft_illustration (candidate)</div></div></div>
+<div class="card candidate"><img src="https://cdn-staging.gamma.app/acme/generated-images/jbh8CtbtU2JzJs8omFxXV.png" loading="lazy"><div class="label"><div class="style-name">foam_board_models (candidate)</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/LopzVB7-m8PJumyL7p6RO.png" loading="lazy"><div class="label"><div class="style-name">neon_glow</div></div></div>
+</div>
+<h2>kids in a classroom</h2>
+<div class="grid">
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/hdWfydFS8o6Q0yg9fOEPw.png" loading="lazy"><div class="label"><div class="style-name">flat-corporate</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/64MnladxRNU1faRSeY8mc.png" loading="lazy"><div class="label"><div class="style-name">isometric</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/F4QVivk1TH8mmfU7Eo7_W.png" loading="lazy"><div class="label"><div class="style-name">bold_poster_design</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/M2FEFGhmQINYghuYUT5rl.png" loading="lazy"><div class="label"><div class="style-name">continuous_line_art</div></div></div>
+<div class="card candidate"><img src="https://cdn-staging.gamma.app/acme/generated-images/gb4WgfkGKIQEkT8f_dwmT.png" loading="lazy"><div class="label"><div class="style-name">doodle (candidate)</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/ivaNESW9QwxJO1bc5uVLp.png" loading="lazy"><div class="label"><div class="style-name">technical_line</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/pCmcb9SWIRObOLQEGmoj_.png" loading="lazy"><div class="label"><div class="style-name">spot_color_line_drawing</div></div></div>
+<div class="card mood"><img src="https://cdn-staging.gamma.app/acme/generated-images/CfwWFtxxBubopYWkWe-RY.png" loading="lazy"><div class="label"><div class="style-name">gouache_paint (mood)</div></div></div>
+<div class="card mood"><img src="https://cdn-staging.gamma.app/acme/generated-images/WUDuiOZbN7hGeubvKIgPJ.png" loading="lazy"><div class="label"><div class="style-name">watercolor_neat (mood)</div></div></div>
+<div class="card candidate"><img src="https://cdn-staging.gamma.app/acme/generated-images/sB83RoPD38TA8y2icKWM6.png" loading="lazy"><div class="label"><div class="style-name">cutout_collage (candidate)</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/8PsJVzUbCFH4_hCHCi0sd.png" loading="lazy"><div class="label"><div class="style-name">bauhaus_photomontage</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/8f31AhGWRtT7NeyOqwG2c.png" loading="lazy"><div class="label"><div class="style-name">magazine_editorial_cutout</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/oMy-QvHEJLRZ1xLcaEm9m.png" loading="lazy"><div class="label"><div class="style-name">digital_collage</div></div></div>
+<div class="card candidate"><img src="https://cdn-staging.gamma.app/acme/generated-images/6FuoaJ7H_jn8G5_vRKktr.png" loading="lazy"><div class="label"><div class="style-name">paper_cutout (candidate)</div></div></div>
+<div class="card candidate"><img src="https://cdn-staging.gamma.app/acme/generated-images/hGTkKsSrERrYufHJkPPt1.png" loading="lazy"><div class="label"><div class="style-name">felt_craft_illustration (candidate)</div></div></div>
+<div class="card candidate"><img src="https://cdn-staging.gamma.app/acme/generated-images/lGXuR8TpjT2K-wly7L3rD.png" loading="lazy"><div class="label"><div class="style-name">foam_board_models (candidate)</div></div></div>
+<div class="card"><img src="https://cdn-staging.gamma.app/acme/generated-images/qzL2X0LFbAuExabM0eKhk.png" loading="lazy"><div class="label"><div class="style-name">neon_glow</div></div></div>
+</div>
+</section>
+
+<!-- ============ SECTION 4: DECK RENDERS ============ -->
+<section id="decks">
+<h1>Full Deck Renders — Seafoam + Mood Natural Colors</h1>
+<p>Each deck shows cards with their generated illustrations. Images use mood-based natural colors.</p>
+<h2>bold_poster_design: The history of coffee</h2>
+<div class="cards">
+<div class="card-section"><h4>Card 1: The History of Coffee</h4><div class="images"><img src="https://cdn-staging.gamma.app/acme/generated-images/_VqyQ7S9TTgqpSr93RsJ2.png" loading="lazy"></div></div>
+<div class="card-section"><h4>Card 2: Ancient Origins in Ethiopia</h4><div class="images"><img src="https://cdn-staging.gamma.app/acme/generated-images/8aFLf-k6l0USj8kk6xezZ.png" loading="lazy"></div></div>
+<div class="card-section"><h4>Card 3: Journey to the Islamic World</h4><div class="images"><span style="color:#666">No images</span></div></div>
+<div class="card-section"><h4>Card 4: European Awakening</h4><div class="images"><img src="https://cdn-staging.gamma.app/acme/generated-images/jZH1tvTwr8nyaF8ZYr4C7.png" loading="lazy"><img src="https://cdn-staging.gamma.app/acme/generated-images/-U6vJ7XwvlffcneQrk4GW.png" loading="lazy"><img src="https://cdn-staging.gamma.app/acme/generated-images/XL7POy_jeIkbwQx0fRD8z.png" loading="lazy"></div></div>
+<div class="card-section"><h4>Card 5: Modern Coffee Revolution</h4><div class="images"><img src="https://cdn-staging.gamma.app/acme/generated-images/YgDYo13m9Z-wdsEq.png" loading="lazy"></div></div>
+</div>
+<h2>cutout_collage: Indoor gardening for beginners</h2>
+<div class="cards">
+<div class="card-section"><h4>Card 1: Indoor Gardening for Beginners</h4><div class="images"><img src="https://cdn-staging.gamma.app/acme/generated-images/HPC83dYXzCM6euAQsRjUO.png" loading="lazy"></div></div>
+<div class="card-section"><h4>Card 2: Why Start Indoor Gardening?</h4><div class="images"><span style="color:#666">No images</span></div></div>
+<div class="card-section"><h4>Card 3: Essential Supplies to Get Started</h4><div class="images"><img src="https://cdn-staging.gamma.app/acme/generated-images/ccJZCWoaUOxgsonbuX5nQ.png" loading="lazy"></div></div>
+<div class="card-section"><h4>Card 4: Perfect Plants for Beginners</h4><div class="images"><img src="https://cdn-staging.gamma.app/acme/generated-images/x0b8p8Ndn0GpXocaKmacv.png" loading="lazy"><img src="https://cdn-staging.gamma.app/acme/generated-images/lgHPiZCFoUGXKHEQWpVQB.png" loading="lazy"><img src="https://cdn-staging.gamma.app/acme/generated-images/AHvxAEfZ0gqUmUfeAOdV8.png" loading="lazy"><img src="https://cdn-staging.gamma.app/acme/generated-images/Owud77YLh-Jf4KjLXfRGO.png" loading="lazy"></div></div>
+<div class="card-section"><h4>Card 5: Daily Care Made Simple</h4><div class="images"><span style="color:#666">No images</span></div></div>
+</div>
+<h2>paper_cutout: How basketball changed the world</h2>
+<div class="cards">
+<div class="card-section"><h4>Card 1: How Basketball Changed the World</h4><div class="images"><img src="https://cdn-staging.gamma.app/acme/generated-images/cx7n5cwhQZVn0_ckrAIj7.png" loading="lazy"></div></div>
+<div class="card-section"><h4>Card 2: The Global Language of Sport</h4><div class="images"><img src="https://cdn-staging.gamma.app/acme/generated-images/gX6kE5Sb8PcJPnQn4jRH6.png" loading="lazy"><img src="https://cdn-staging.gamma.app/acme/generated-images/9ckjD4IP7mo-tfK9Ed3Fk.png" loading="lazy"><img src="https://cdn-staging.gamma.app/acme/generated-images/s8N4jc_-pLAN21okX9PkC.png" loading="lazy"></div></div>
+<div class="card-section"><h4>Card 3: Breaking Barriers and Building Bridges</h4><div class="images"><img src="https://cdn-staging.gamma.app/acme/generated-images/FyUOVbVVv-REv8oxlO75n.png" loading="lazy"></div></div>
+<div class="card-section"><h4>Card 4: The Business Revolution</h4><div class="images"><span style="color:#666">No images</span></div></div>
+<div class="card-section"><h4>Card 5: Modern Impact and Future Legacy</h4><div class="images"><span style="color:#666">No images</span></div></div>
+</div>
+<h2>felt_craft_illustration: Introduction to Italian cooking</h2>
+<div class="cards">
+<div class="card-section"><h4>Card 1: Introduction to Italian Cooking</h4><div class="images"><img src="https://cdn-staging.gamma.app/acme/generated-images/cb8MybtZqcPeeyhLcQven.png" loading="lazy"></div></div>
+<div class="card-section"><h4>Card 2: A Tale of Twenty Regions</h4><div class="images"><img src="https://cdn-staging.gamma.app/acme/generated-images/8p3mvlOcp2M89rgr36RaV.png" loading="lazy"><img src="https://cdn-staging.gamma.app/acme/generated-images/z3GNYa7cimKT2gjBbKO39.png" loading="lazy"><img src="https://cdn-staging.gamma.app/acme/generated-images/nDxch-MTG93oL_oSWNCH6.png" loading="lazy"></div></div>
+<div class="card-section"><h4>Card 3: The Essential Pantry</h4><div class="images"><img src="https://cdn-staging.gamma.app/_app_static/icons/v0/olive.svg" loading="lazy"><img src="https://cdn-staging.gamma.app/_app_static/icons/v0/cheese.svg" loading="lazy"><img src="https://cdn-staging.gamma.app/_app_static/icons/v0/tomato.svg" loading="lazy"><img src="https://cdn-staging.gamma.app/_app_static/icons/v0/stripe.svg" loading="lazy"></div></div>
+<div class="card-section"><h4>Card 4: Master the Fundamentals</h4><div class="images"><span style="color:#666">No images</span></div></div>
+<div class="card-section"><h4>Card 5: Your Italian Journey Begins</h4><div class="images"><img src="https://cdn-staging.gamma.app/acme/generated-images/WYeGtb5qyxFc2Emxyi3mX.png" loading="lazy"></div></div>
+</div>
+<h2>doodle: The science of sleep</h2>
+<div class="cards">
+<div class="card-section"><h4>Card 1: The Science of Sleep</h4><div class="images"><img src="https://cdn-staging.gamma.app/acme/generated-images/XIPtSsfot8qqs-go_mzWn.png" loading="lazy"></div></div>
+<div class="card-section"><h4>Card 2: The Sleep Cycle Journey</h4><div class="images"><span style="color:#666">No images</span></div></div>
+<div class="card-section"><h4>Card 3: Why Sleep Matters</h4><div class="images"><span style="color:#666">No images</span></div></div>
+<div class="card-section"><h4>Card 4: Your Sleeping Brain</h4><div class="images"><img src="https://cdn-staging.gamma.app/acme/generated-images/O90WusWwC9DLdfY2tsQmA.png" loading="lazy"></div></div>
+<div class="card-section"><h4>Card 5: Optimizing Your Sleep</h4><div class="images"><img src="https://cdn-staging.gamma.app/_app_static/icons/v0/moon.svg" loading="lazy"><img src="https://cdn-staging.gamma.app/_app_static/icons/v0/temperature-three-quarters.svg" loading="lazy"><img src="https://cdn-staging.gamma.app/_app_static/icons/v0/mobile-notch.svg" loading="lazy"></div></div>
+</div>
+</section>
+
+</body></html>
