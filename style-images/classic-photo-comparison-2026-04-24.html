@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>classic_photo v6: Legacy vs Style</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #111; color: #eee; padding: 24px; }
+h1 { font-size: 1.5rem; margin-bottom: 4px; }
+.subtitle { color: #888; margin-bottom: 20px; font-size: 0.85rem; line-height: 1.5; }
+.subtitle code { background: #222; padding: 1px 4px; border-radius: 2px; color: #aaa; }
+.tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+.tab { padding: 6px 14px; border-radius: 4px; background: #222; color: #999; cursor: pointer; font-size: 0.8rem; border: 1px solid #333; }
+.tab.active { background: #333; color: #fff; border-color: #555; }
+.prompt-section { margin-bottom: 36px; border-bottom: 1px solid #222; padding-bottom: 28px; }
+.prompt-title { font-size: 1rem; margin-bottom: 10px; color: #ccc; }
+.cell { position: relative; }
+.cell img { width: 100%; border-radius: 4px; display: block; cursor: pointer; transition: transform 0.15s; }
+.cell img:hover { transform: scale(1.02); }
+.cell .label { position: absolute; top: 4px; left: 4px; background: rgba(0,0,0,0.8); color: #fff; font-size: 0.65rem; padding: 2px 5px; border-radius: 2px; }
+.cell .model { position: absolute; bottom: 4px; right: 4px; background: rgba(0,0,0,0.8); color: #888; font-size: 0.6rem; padding: 1px 4px; border-radius: 2px; }
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 100; align-items: center; justify-content: center; cursor: zoom-out; }
+.modal.open { display: flex; }
+.modal img { max-width: 90vw; max-height: 90vh; border-radius: 6px; }
+</style>
+</head>
+<body>
+<h1>classic_photo v6: Legacy vs Style Pipeline</h1>
+<p class="subtitle">
+  Both produce identical prompt: <code>{subject}, photorealistic. highly detailed, cinematic, professional</code><br>
+  No LLM upsample, no color mood, no style refs. 1920x1088 landscape.
+</p>
+<div class="tabs">
+  <div class="tab active" data-tier="plus">Plus (flux-2-pro)</div>
+  <div class="tab" data-tier="free">Free (ideogram-v3-flash)</div>
+  <div class="tab" data-tier="pro">Pro (flux-2-pro)</div>
+</div>
+<div id="gallery"></div>
+<div class="modal" id="modal" onclick="this.classList.remove('open')"><img id="modal-img"></div>
+<script id="ds">[{"prompt_key": "botanical-garden", "tier": "legacy", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/-hh0DUWcGF8MzUbeLBhtV.png", "pipeline": "legacy", "run": "v1"}, {"prompt_key": "control-panel", "tier": "legacy", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/9aEMZ4yZiPQS8l72wgzIJ.png", "pipeline": "legacy", "run": "v1"}, {"prompt_key": "dove-sunrise", "tier": "legacy", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/76xoUx1V0CzuSFNqg_nn3.png", "pipeline": "legacy", "run": "v1"}, {"prompt_key": "luxury-office", "tier": "legacy", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/5bgJQ3ekOW0FzCXxlfzi9.png", "pipeline": "legacy", "run": "v1"}, {"prompt_key": "milling-cutter", "tier": "legacy", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/daBUEAoZX4MyRdn6MICC9.png", "pipeline": "legacy", "run": "v1"}, {"prompt_key": "monastery", "tier": "legacy", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/vUbbrhawt-2zGAuaT4ljq.png", "pipeline": "legacy", "run": "v1"}, {"prompt_key": "solar-panel", "tier": "legacy", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/lwcBgymtM-gG1r_2giwDY.png", "pipeline": "legacy", "run": "v1"}, {"prompt_key": "supergiant-star", "tier": "legacy", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/ktu23OZBiXFX2rgfPZ8Ww.png", "pipeline": "legacy", "run": "v1"}, {"prompt_key": "tea-taster", "tier": "legacy", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/Y3t34YfvtBdrxNCiDydty.png", "pipeline": "legacy", "run": "v1"}, {"prompt_key": "yoga-outdoors", "tier": "legacy", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/mTvJjeGwJv4XDK6l6n-nN.png", "pipeline": "legacy", "run": "v1"}, {"prompt_key": "botanical-garden", "tier": "free", "model": "ideogram-v3-flash", "url": "https://cdn-staging.gamma.app/acme/generated-images/n5JA8-YBZClJIaN3wEzAN.png", "pipeline": "style", "run": "v1"}, {"prompt_key": "control-panel", "tier": "free", "model": "ideogram-v3-flash", "url": "https://cdn-staging.gamma.app/acme/generated-images/cjqwbgIngoU0AH6H1s_P2.png", "pipeline": "style", "run": "v1"}, {"prompt_key": "dove-sunrise", "tier": "free", "model": "ideogram-v3-flash", "url": "https://cdn-staging.gamma.app/acme/generated-images/-0pqVtyqUjdov4hvOs8w-.png", "pipeline": "style", "run": "v1"}, {"prompt_key": "luxury-office", "tier": "free", "model": "ideogram-v3-flash", "url": "https://cdn-staging.gamma.app/acme/generated-images/NfLr_4DmPgam3RQ4o4KIO.png", "pipeline": "style", "run": "v1"}, {"prompt_key": "milling-cutter", "tier": "free", "model": "ideogram-v3-flash", "url": "https://cdn-staging.gamma.app/acme/generated-images/5rvMMeCerITpsPu9ohgew.png", "pipeline": "style", "run": "v1"}, {"prompt_key": "monastery", "tier": "free", "model": "ideogram-v3-flash", "url": "https://cdn-staging.gamma.app/acme/generated-images/jj7SPxeKtZZiKYnsg9DOA.png", "pipeline": "style", "run": "v1"}, {"prompt_key": "solar-panel", "tier": "free", "model": "ideogram-v3-flash", "url": "https://cdn-staging.gamma.app/acme/generated-images/eJEpjzUoXhT5gBPKbx7v-.png", "pipeline": "style", "run": "v1"}, {"prompt_key": "supergiant-star", "tier": "free", "model": "ideogram-v3-flash", "url": "https://cdn-staging.gamma.app/acme/generated-images/aZhmDOR9mfAIwIofOAH0_.png", "pipeline": "style", "run": "v1"}, {"prompt_key": "tea-taster", "tier": "free", "model": "ideogram-v3-flash", "url": "https://cdn-staging.gamma.app/acme/generated-images/Is4o8-CyNrPeKaMVo0Txq.png", "pipeline": "style", "run": "v1"}, {"prompt_key": "yoga-outdoors", "tier": "free", "model": "ideogram-v3-flash", "url": "https://cdn-staging.gamma.app/acme/generated-images/Ws3z6MUBvgGuVVCqcYwtg.png", "pipeline": "style", "run": "v1"}, {"prompt_key": "botanical-garden", "tier": "plus", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/tIT2tZ9-bu_LpYJxwMVzP.jpg", "pipeline": "style", "run": "v1"}, {"prompt_key": "control-panel", "tier": "plus", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/8UQjXWWPYx_Y1n9Y9KYwo.jpg", "pipeline": "style", "run": "v1"}, {"prompt_key": "dove-sunrise", "tier": "plus", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/UKTKbgEeL0lBFadKNk1xe.jpg", "pipeline": "style", "run": "v1"}, {"prompt_key": "luxury-office", "tier": "plus", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/jJNUOWv2PvD8czSzf1Ka4.jpg", "pipeline": "style", "run": "v1"}, {"prompt_key": "milling-cutter", "tier": "plus", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/IuosGIE6nAD5sUpZNAim7.jpg", "pipeline": "style", "run": "v1"}, {"prompt_key": "monastery", "tier": "plus", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/pKDf6RpI4heu33UdiTSQG.jpg", "pipeline": "style", "run": "v1"}, {"prompt_key": "solar-panel", "tier": "plus", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/iKlLrXrkBd4vIvvAm57me.jpg", "pipeline": "style", "run": "v1"}, {"prompt_key": "supergiant-star", "tier": "plus", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/HaQkEBakTW1Pklw4FnSkA.jpg", "pipeline": "style", "run": "v1"}, {"prompt_key": "tea-taster", "tier": "plus", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/gav7Pb5X65RzH-c89hibm.jpg", "pipeline": "style", "run": "v1"}, {"prompt_key": "yoga-outdoors", "tier": "plus", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/LdVxNaIs7cmTSwxPvFGRD.jpg", "pipeline": "style", "run": "v1"}, {"prompt_key": "botanical-garden", "tier": "pro", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/edUtHIvIa1PHh_S3k15e-.jpg", "pipeline": "style", "run": "v1"}, {"prompt_key": "control-panel", "tier": "pro", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/ZYxdLGKEkFn7AM-kEas-l.jpg", "pipeline": "style", "run": "v1"}, {"prompt_key": "dove-sunrise", "tier": "pro", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/h8o_VNJvP_KZPPG4aOWEl.jpg", "pipeline": "style", "run": "v1"}, {"prompt_key": "luxury-office", "tier": "pro", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/KO73Vl9mKy72ilHSTPNLp.jpg", "pipeline": "style", "run": "v1"}, {"prompt_key": "milling-cutter", "tier": "pro", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/-Zx2ctP4NqyZYxJ9KU1ep.jpg", "pipeline": "style", "run": "v1"}, {"prompt_key": "monastery", "tier": "pro", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/R2fE7J5_YLQszH7GodX6C.jpg", "pipeline": "style", "run": "v1"}, {"prompt_key": "solar-panel", "tier": "pro", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/qWr5Trx2DWM2zsBCXR3yd.jpg", "pipeline": "style", "run": "v1"}, {"prompt_key": "supergiant-star", "tier": "pro", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/Ad2JymanmqmyTbssdPNt4.jpg", "pipeline": "style", "run": "v1"}, {"prompt_key": "tea-taster", "tier": "pro", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/Nzwj9LSZ36_19jpPbVDl5.jpg", "pipeline": "style", "run": "v1"}, {"prompt_key": "yoga-outdoors", "tier": "pro", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/tOIFNXcAqM6ixNXBRuDxk.jpg", "pipeline": "style", "run": "v1"}, {"prompt_key": "botanical-garden", "tier": "legacy", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/bFMQQKLovfJ5WxhB6CNmc.png", "pipeline": "legacy", "run": "v6"}, {"prompt_key": "control-panel", "tier": "legacy", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/YmKUy6nfc6LZTKg-I3cKW.png", "pipeline": "legacy", "run": "v6"}, {"prompt_key": "dove-sunrise", "tier": "legacy", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/a71jUxzoH-EhgtD7YcqPR.png", "pipeline": "legacy", "run": "v6"}, {"prompt_key": "luxury-office", "tier": "legacy", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/1bMiWrnk9FYvL841a6yDe.png", "pipeline": "legacy", "run": "v6"}, {"prompt_key": "milling-cutter", "tier": "legacy", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/66JDBOGaRQLOYm-JpE_O3.png", "pipeline": "legacy", "run": "v6"}, {"prompt_key": "monastery", "tier": "legacy", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/SSzuZJcG509lebC3C4EYG.png", "pipeline": "legacy", "run": "v6"}, {"prompt_key": "solar-panel", "tier": "legacy", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/9MNABZO1APQlgdAcOE2SZ.png", "pipeline": "legacy", "run": "v6"}, {"prompt_key": "supergiant-star", "tier": "legacy", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/sPD8uie5Yxc6qoCi_vB2g.png", "pipeline": "legacy", "run": "v6"}, {"prompt_key": "tea-taster", "tier": "legacy", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/8VLX1iyUJsG-GA5yzdr7T.png", "pipeline": "legacy", "run": "v6"}, {"prompt_key": "yoga-outdoors", "tier": "legacy", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/WRH7CHY0jJcME0-mBqG61.png", "pipeline": "legacy", "run": "v6"}, {"prompt_key": "botanical-garden", "tier": "free", "model": "ideogram-v3-flash", "url": "https://cdn-staging.gamma.app/acme/generated-images/3RDdbmHHLU8ZcScb5x3oN.png", "pipeline": "style", "run": "v6"}, {"prompt_key": "control-panel", "tier": "free", "model": "ideogram-v3-flash", "url": "https://cdn-staging.gamma.app/acme/generated-images/fsgEthMP6YX9yuUCM-gGm.png", "pipeline": "style", "run": "v6"}, {"prompt_key": "dove-sunrise", "tier": "free", "model": "ideogram-v3-flash", "url": "https://cdn-staging.gamma.app/acme/generated-images/dfe9Hr8ecq-boSsEZz7tD.png", "pipeline": "style", "run": "v6"}, {"prompt_key": "luxury-office", "tier": "free", "model": "ideogram-v3-flash", "url": "https://cdn-staging.gamma.app/acme/generated-images/LdCH7izGSPebiW2mmR3_k.png", "pipeline": "style", "run": "v6"}, {"prompt_key": "milling-cutter", "tier": "free", "model": "ideogram-v3-flash", "url": "https://cdn-staging.gamma.app/acme/generated-images/WbY2e0efo15ihY22ZoVhM.png", "pipeline": "style", "run": "v6"}, {"prompt_key": "monastery", "tier": "free", "model": "ideogram-v3-flash", "url": "https://cdn-staging.gamma.app/acme/generated-images/5Tm3_0Y1ABk8Kji30nrrW.png", "pipeline": "style", "run": "v6"}, {"prompt_key": "solar-panel", "tier": "free", "model": "ideogram-v3-flash", "url": "https://cdn-staging.gamma.app/acme/generated-images/4j2LMFVSkXiueAjNOHE0D.png", "pipeline": "style", "run": "v6"}, {"prompt_key": "supergiant-star", "tier": "free", "model": "ideogram-v3-flash", "url": "https://cdn-staging.gamma.app/acme/generated-images/rYnVgUkYgKVHqdj2wC68I.png", "pipeline": "style", "run": "v6"}, {"prompt_key": "tea-taster", "tier": "free", "model": "ideogram-v3-flash", "url": "https://cdn-staging.gamma.app/acme/generated-images/32GOu4aXFGY_10E_bcif6.png", "pipeline": "style", "run": "v6"}, {"prompt_key": "yoga-outdoors", "tier": "free", "model": "ideogram-v3-flash", "url": "https://cdn-staging.gamma.app/acme/generated-images/prCcEz6sYaZPr49leTrp6.png", "pipeline": "style", "run": "v6"}, {"prompt_key": "botanical-garden", "tier": "plus", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/gwRH5GFd5mv0vwTPLs-nw.jpg", "pipeline": "style", "run": "v6"}, {"prompt_key": "control-panel", "tier": "plus", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/0JIcOALp8uRy69Dp50aap.jpg", "pipeline": "style", "run": "v6"}, {"prompt_key": "dove-sunrise", "tier": "plus", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/qgu7Fcb8wPjZDD9EJtKB-.jpg", "pipeline": "style", "run": "v6"}, {"prompt_key": "luxury-office", "tier": "plus", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/fE4Cxd8RVbbev21E7PcoW.jpg", "pipeline": "style", "run": "v6"}, {"prompt_key": "milling-cutter", "tier": "plus", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/Z65MYzKU9xf24F4PrdqVA.jpg", "pipeline": "style", "run": "v6"}, {"prompt_key": "monastery", "tier": "plus", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/WT7bPkTP4aAdQjzlAVDCd.jpg", "pipeline": "style", "run": "v6"}, {"prompt_key": "solar-panel", "tier": "plus", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/ZpyBICJ8E5Uhku0p1w6wc.jpg", "pipeline": "style", "run": "v6"}, {"prompt_key": "supergiant-star", "tier": "plus", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/SGUl8d-U2qur-ZpE3aNwd.jpg", "pipeline": "style", "run": "v6"}, {"prompt_key": "tea-taster", "tier": "plus", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/zdVjEmU94p6QQndDoxI6D.jpg", "pipeline": "style", "run": "v6"}, {"prompt_key": "yoga-outdoors", "tier": "plus", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/ULnZPPNT4eYKBBwSjhW1t.jpg", "pipeline": "style", "run": "v6"}, {"prompt_key": "botanical-garden", "tier": "pro", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/vIyaoc2seX4JpPic2CayO.jpg", "pipeline": "style", "run": "v6"}, {"prompt_key": "control-panel", "tier": "pro", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/sDsNLxinFH-uGrMDWMX51.jpg", "pipeline": "style", "run": "v6"}, {"prompt_key": "dove-sunrise", "tier": "pro", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/AdL_rJML4-hDAMLJ42Re-.jpg", "pipeline": "style", "run": "v6"}, {"prompt_key": "luxury-office", "tier": "pro", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/kY8nfSXtnSmjwqkngk7dg.jpg", "pipeline": "style", "run": "v6"}, {"prompt_key": "milling-cutter", "tier": "pro", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/Xucy-K9suue7B6zYerXvn.jpg", "pipeline": "style", "run": "v6"}, {"prompt_key": "monastery", "tier": "pro", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/7VEdpfA3kue4l5WQ9i1I1.jpg", "pipeline": "style", "run": "v6"}, {"prompt_key": "solar-panel", "tier": "pro", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/kXM2-saaYQoZ58EzKKl69.jpg", "pipeline": "style", "run": "v6"}, {"prompt_key": "supergiant-star", "tier": "pro", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/SV9xWxkhHynx-dD89qkZO.jpg", "pipeline": "style", "run": "v6"}, {"prompt_key": "tea-taster", "tier": "pro", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/B1KaEkvG8Np8rDsWByiSt.jpg", "pipeline": "style", "run": "v6"}, {"prompt_key": "yoga-outdoors", "tier": "pro", "model": "flux-2-pro", "url": "https://cdn-staging.gamma.app/acme/generated-images/JQxbpqFPpr50wazhMw_4k.jpg", "pipeline": "style", "run": "v6"}]</script>
+<script>
+const data = JSON.parse(document.getElementById('ds').textContent);
+const prompts = [...new Set(data.map(d => d.prompt_key))].sort();
+let activeTier = 'plus';
+
+function render() {
+  const gallery = document.getElementById('gallery');
+  gallery.innerHTML = '';
+  prompts.forEach(pk => {
+    const section = document.createElement('div');
+    section.className = 'prompt-section';
+    const title = document.createElement('div');
+    title.className = 'prompt-title';
+    title.textContent = pk.replace(/-/g, ' ');
+    section.appendChild(title);
+
+    const legR1 = data.find(d => d.prompt_key === pk && d.tier === 'legacy' && d.run === 'v1');
+    const legR5 = data.find(d => d.prompt_key === pk && d.tier === 'legacy' && d.run === 'v6');
+    const styV5 = data.find(d => d.prompt_key === pk && d.tier === activeTier && d.run === 'v6');
+
+    const grid = document.createElement('div');
+    grid.style.display = 'grid';
+    grid.style.gridTemplateColumns = 'repeat(3, 1fr)';
+    grid.style.gap = '10px';
+    grid.style.alignItems = 'start';
+
+    [
+      { item: legR1, lbl: 'legacy (run 1)' },
+      { item: legR5, lbl: 'legacy (run 5)' },
+      { item: styV5, lbl: 'classic_photo v6' },
+    ].forEach(({item, lbl}) => {
+      if (!item) return;
+      const cell = document.createElement('div');
+      cell.className = 'cell';
+      const img = document.createElement('img');
+      img.src = item.url;
+      img.loading = 'lazy';
+      img.onclick = (e) => { e.stopPropagation(); document.getElementById('modal-img').src = item.url; document.getElementById('modal').classList.add('open'); };
+      const labelEl = document.createElement('div');
+      labelEl.className = 'label';
+      labelEl.textContent = lbl;
+      const modelEl = document.createElement('div');
+      modelEl.className = 'model';
+      modelEl.textContent = item.model;
+      cell.appendChild(img);
+      cell.appendChild(labelEl);
+      cell.appendChild(modelEl);
+      grid.appendChild(cell);
+    });
+
+    section.appendChild(grid);
+    gallery.appendChild(section);
+  });
+}
+
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    activeTier = tab.dataset.tier;
+    render();
+  });
+});
+
+render();
+</script>
+</body>
+</html>
