@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consultant Iter 3 — Design Iterate Results</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #e0e0e0; padding: 32px; }
+  h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; color: #fff; }
+  .subtitle { color: #888; font-size: 14px; margin-bottom: 32px; }
+  .section-title { font-size: 20px; font-weight: 600; margin: 40px 0 16px; color: #fff; border-bottom: 1px solid #333; padding-bottom: 8px; }
+
+  /* Iteration history */
+  .iter-history { display: flex; gap: 16px; margin-bottom: 32px; }
+  .iter-chip { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 16px 24px; text-align: center; flex: 1; }
+  .iter-chip.current { border-color: #5142E6; background: #1a1a2e; }
+  .iter-label { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+  .iter-score { font-size: 36px; font-weight: 700; margin-top: 4px; }
+  .iter-score.low { color: #f96c36; }
+  .iter-score.mid { color: #f0c040; }
+  .iter-score.high { color: #4ade80; }
+
+  /* Scorecard */
+  .scorecard { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin-bottom: 32px; }
+  .score-item { background: #1a1a1a; border-radius: 8px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; border-left: 4px solid; }
+  .score-item.pass { border-color: #4ade80; }
+  .score-item.fail { border-color: #f96c36; }
+  .score-name { font-size: 13px; font-weight: 500; }
+  .score-value { font-size: 14px; font-weight: 700; }
+  .score-value.pass { color: #4ade80; }
+  .score-value.fail { color: #f96c36; }
+  .score-badge { font-size: 10px; padding: 2px 8px; border-radius: 4px; margin-left: 8px; font-weight: 600; }
+  .score-badge.pass { background: rgba(74, 222, 128, 0.15); color: #4ade80; }
+  .score-badge.fail { background: rgba(249, 108, 54, 0.15); color: #f96c36; }
+
+  /* Gallery */
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(500px, 1fr)); gap: 24px; }
+  .card-frame { background: #1a1a1a; border-radius: 12px; overflow: hidden; border: 1px solid #222; }
+  .card-frame img { width: 100%; display: block; }
+  .card-meta { padding: 12px 16px; font-size: 12px; color: #888; display: flex; justify-content: space-between; }
+  .card-label { font-weight: 600; color: #ccc; }
+
+  /* Composite banner */
+  .composite-banner { background: linear-gradient(135deg, #1a1a2e, #0a0a0a); border: 1px solid #5142E6; border-radius: 12px; padding: 24px 32px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; }
+  .composite-label { font-size: 14px; color: #888; }
+  .composite-score { font-size: 48px; font-weight: 800; color: #4ade80; }
+  .composite-detail { font-size: 13px; color: #888; text-align: right; }
+</style>
+</head>
+<body>
+
+<h1>Consultant Guide — Iteration 3 Results</h1>
+<p class="subtitle">Prompt: "Cybersecurity trends and threat landscape 2026" &middot; 9 cards &middot; strategy: full-card &middot; 2026-04-25</p>
+
+<div class="composite-banner">
+  <div>
+    <div class="composite-label">Combined Composite</div>
+    <div class="composite-score">0.82</div>
+  </div>
+  <div class="composite-detail">
+    10/13 graders passing<br>
+    3 iterations &middot; 0.33 &rarr; 0.79 &rarr; 0.82
+  </div>
+</div>
+
+<div class="section-title">Iteration History</div>
+<div class="iter-history">
+  <div class="iter-chip">
+    <div class="iter-label">Iteration 1 (baseline)</div>
+    <div class="iter-score low">0.33</div>
+  </div>
+  <div class="iter-chip">
+    <div class="iter-label">Iteration 2</div>
+    <div class="iter-score mid">0.79</div>
+  </div>
+  <div class="iter-chip current">
+    <div class="iter-label">Iteration 3 (current)</div>
+    <div class="iter-score high">0.82</div>
+  </div>
+</div>
+
+<div class="section-title">Grader Scorecard</div>
+<div class="scorecard">
+  <div class="score-item pass">
+    <span class="score-name">density-compliance</span>
+    <span><span class="score-value pass">0.86</span><span class="score-badge pass">PASS</span></span>
+  </div>
+  <div class="score-item pass">
+    <span class="score-name">diagram-presence</span>
+    <span><span class="score-value pass">0.86</span><span class="score-badge pass">PASS</span></span>
+  </div>
+  <div class="score-item pass">
+    <span class="score-name">data-structure-variety</span>
+    <span><span class="score-value pass">0.80</span><span class="score-badge pass">PASS</span></span>
+  </div>
+  <div class="score-item pass">
+    <span class="score-name">chart-density</span>
+    <span><span class="score-value pass">1.00</span><span class="score-badge pass">PASS</span></span>
+  </div>
+  <div class="score-item pass">
+    <span class="score-name">label-coverage</span>
+    <span><span class="score-value pass">0.86</span><span class="score-badge pass">PASS</span></span>
+  </div>
+  <div class="score-item pass">
+    <span class="score-name">multi-zone</span>
+    <span><span class="score-value pass">1.00</span><span class="score-badge pass">PASS</span></span>
+  </div>
+  <div class="score-item pass">
+    <span class="score-name">column-balance</span>
+    <span><span class="score-value pass">1.00</span><span class="score-badge pass">PASS</span></span>
+  </div>
+  <div class="score-item pass">
+    <span class="score-name">wasted-space</span>
+    <span><span class="score-value pass">0.71</span><span class="score-badge pass">PASS</span></span>
+  </div>
+  <div class="score-item fail">
+    <span class="score-name">alignment-consistency</span>
+    <span><span class="score-value fail">0.89</span><span class="score-badge fail">FAIL</span></span>
+  </div>
+  <div class="score-item fail">
+    <span class="score-name">layout-variety</span>
+    <span><span class="score-value fail">0.30</span><span class="score-badge fail">FAIL</span></span>
+  </div>
+  <div class="score-item pass">
+    <span class="score-name">title-quality</span>
+    <span><span class="score-value pass">0.71</span><span class="score-badge pass">PASS</span></span>
+  </div>
+  <div class="score-item pass">
+    <span class="score-name">narrative-arc</span>
+    <span><span class="score-value pass">0.72</span><span class="score-badge pass">PASS</span></span>
+  </div>
+</div>
+
+<div class="section-title">Card Gallery (9 cards)</div>
+<div class="gallery">
+  <div class="card-frame">
+    <img src="consultant-iter3-screenshots/card-01.png" alt="Card 1" loading="lazy">
+    <div class="card-meta"><span class="card-label">Card 1 — Title</span><span>26 words &middot; topLineText</span></div>
+  </div>
+  <div class="card-frame">
+    <img src="consultant-iter3-screenshots/card-02.png" alt="Card 2" loading="lazy">
+    <div class="card-meta"><span class="card-label">Card 2 — AI Threat Analysis</span><span>177 words &middot; starStats + graph</span></div>
+  </div>
+  <div class="card-frame">
+    <img src="consultant-iter3-screenshots/card-03.png" alt="Card 3" loading="lazy">
+    <div class="card-meta"><span class="card-label">Card 3 — Ransomware</span><span>257 words &middot; solidJoinedBoxes</span></div>
+  </div>
+  <div class="card-frame">
+    <img src="consultant-iter3-screenshots/card-04.png" alt="Card 4" loading="lazy">
+    <div class="card-meta"><span class="card-label">Card 4 — Nation-State Interstitial</span><span>156 words &middot; stats</span></div>
+  </div>
+  <div class="card-frame">
+    <img src="consultant-iter3-screenshots/card-05.png" alt="Card 5" loading="lazy">
+    <div class="card-meta"><span class="card-label">Card 5 — Nation-State Deep Dive</span><span>248 words &middot; topLineText + graph</span></div>
+  </div>
+  <div class="card-frame">
+    <img src="consultant-iter3-screenshots/card-06.png" alt="Card 6" loading="lazy">
+    <div class="card-meta"><span class="card-label">Card 6 — Identity &amp; Cloud</span><span>184 words &middot; chart-trio</span></div>
+  </div>
+  <div class="card-frame">
+    <img src="consultant-iter3-screenshots/card-07.png" alt="Card 7" loading="lazy">
+    <div class="card-meta"><span class="card-label">Card 7 — Emerging Threats</span><span>272 words &middot; processSteps + 3 charts</span></div>
+  </div>
+  <div class="card-frame">
+    <img src="consultant-iter3-screenshots/card-08.png" alt="Card 8" loading="lazy">
+    <div class="card-meta"><span class="card-label">Card 8 — Defender's Imperative</span><span>138 words &middot; stats</span></div>
+  </div>
+  <div class="card-frame">
+    <img src="consultant-iter3-screenshots/card-09.png" alt="Card 9" loading="lazy">
+    <div class="card-meta"><span class="card-label">Card 9 — Sources &amp; Research</span><span>174 words &middot; starStats + graph</span></div>
+  </div>
+</div>
+
+<div class="section-title" style="margin-top: 48px;">Changelog</div>
+<div style="background: #1a1a1a; border-radius: 8px; padding: 16px 20px; font-size: 13px; line-height: 1.8;">
+  <strong style="color: #5142E6;">Iteration 1 &rarr; 2:</strong> Raised word ranges to 150-250, added no-sparse-cards rule, no-empty-column-cells rule, left-align consistency, per-card col-widths assignment.<br>
+  <strong style="color: #5142E6;">Iteration 2 &rarr; 3:</strong> Hard label rule (every content card MUST have LABELS), structural archetype diversity (6 archetypes, min 4 per deck, max 2 consecutive same).
+</div>
+
+<div style="margin-top: 48px; padding: 16px; background: #1a1a2e; border: 1px solid #333; border-radius: 8px; font-size: 13px; color: #888;">
+  <strong style="color: #ccc;">Remaining issues:</strong> layout-variety grader classifies 8/9 cards as "smart-layout" primary pattern despite 5 distinct variants. The grader's pattern taxonomy may need updating to recognize chart-trio and columns-with-data-panels as distinct from smart-layout. alignment-consistency is borderline (0.89, threshold 0.90).
+</div>
+
+</body>
+</html>
