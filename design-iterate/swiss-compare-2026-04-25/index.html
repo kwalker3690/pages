@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Swiss Design Compare — v1 vs v2+pipeline-fix</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #111; color: #eee; padding: 24px; }
+  h1 { font-size: 24px; margin-bottom: 8px; }
+  .subtitle { color: #888; margin-bottom: 24px; font-size: 14px; }
+  .scorecard { background: #1a1a1a; border-radius: 8px; padding: 16px; margin-bottom: 24px; font-family: monospace; font-size: 13px; line-height: 1.8; overflow-x: auto; white-space: pre; }
+  .pass { color: #4ade80; }
+  .fail { color: #f87171; }
+  .big-win { color: #fbbf24; font-weight: bold; }
+  .header { color: #60a5fa; font-weight: bold; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 32px; }
+  .grid-header { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+  .grid-header div { text-align: center; font-weight: bold; font-size: 14px; color: #888; padding: 8px; }
+  .card-pair { display: contents; }
+  .card-pair img { width: 100%; border-radius: 6px; border: 1px solid #333; }
+  .card-label { text-align: center; color: #666; font-size: 11px; padding: 2px 0 8px; }
+  .section { background: #1a1a1a; border-radius: 8px; padding: 16px; margin-top: 24px; }
+  .section h2 { font-size: 16px; margin-bottom: 12px; }
+  .section li { margin-bottom: 8px; font-size: 13px; line-height: 1.5; }
+  .impact { color: #f87171; font-size: 12px; }
+  .fix { color: #4ade80; font-size: 12px; }
+  .summary-box { background: #0f2b1a; border: 1px solid #4ade80; border-radius: 8px; padding: 16px; margin-bottom: 24px; }
+  .summary-box h2 { color: #4ade80; font-size: 18px; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<h1>Swiss Guide: v1 (baseline) vs v2 + Pipeline Fix</h1>
+<div class="subtitle">Prompt: "Ocean energy investment thesis" &bull; 2026-04-25 &bull; Same outline, different compose rules</div>
+
+<div class="summary-box">
+  <h2>14/28 &rarr; 18/28 (+4 graders)</h2>
+  <p style="font-size:14px">Philosophy-first design.md + guide-specific compositionRules in guide.ts unblocked 4 stuck-at-zero graders. Key wins: HR usage (0&rarr;1.0), stacked columns (0&rarr;0.29), bookend diagonal (0.41&rarr;0.62), grid deck (0.62&rarr;0.72).</p>
+</div>
+
+<div class="scorecard"><span class="header">Grader                               v1      fix     delta</span>
+<span class="pass">Accent color in headings            PASS    PASS    </span>
+<span class="pass">Accidental alignment                PASS    PASS    </span>
+<span class="pass">Background color variety            PASS    PASS    </span>
+<span class="big-win">Bookend diagonal                    FAIL    PASS    0.41&rarr;0.62 &#9733;</span>
+<span class="fail">Closing card quality                FAIL    FAIL    0.00&rarr;0.00</span>
+<span class="pass">Column split variety                PASS    PASS    </span>
+<span class="pass">Column usage                        PASS    PASS    </span>
+<span class="fail">Display-scale typography            FAIL    FAIL    0.00&rarr;0.10</span>
+<span class="pass">Empty-column offset                 PASS    PASS    0.22&rarr;0.56</span>
+<span class="big-win">Grid (deck-level)                   FAIL    PASS    0.62&rarr;0.72 &#9733;</span>
+<span class="fail">Grid structure                      FAIL    FAIL    0.61&rarr;0.57</span>
+<span class="fail">H1 inside column                    FAIL    FAIL    0.00&rarr;0.00</span>
+<span class="big-win">HR usage                            FAIL    PASS    0.00&rarr;1.00 &#9733;&#9733;</span>
+<span class="pass">Heading word break                  PASS    PASS    </span>
+<span class="pass">Image load failure                  PASS    PASS    </span>
+<span class="pass">No bullet lists                     PASS    PASS    </span>
+<span class="pass">Prose (deck-level)                  PASS    PASS    </span>
+<span class="fail">Prose density                       FAIL    FAIL    0.57&rarr;0.71</span>
+<span class="fail">Prose quality                       FAIL    FAIL    </span>
+<span class="pass">Smart layout family count           PASS    PASS    </span>
+<span class="pass">Smart layout overuse                PASS    PASS    </span>
+<span class="big-win">Stacked columns                     FAIL    PASS    0.00&rarr;0.29 &#9733;</span>
+<span class="pass">Text-color hierarchy                PASS    PASS    </span>
+<span class="fail">Title card quality                  FAIL    FAIL    </span>
+<span class="fail">Typographic statement               FAIL    FAIL    0.00&rarr;0.00</span>
+<span class="fail">Vertical-align variety              FAIL    FAIL    0.50&rarr;0.50</span>
+<span class="pass">Visual (deck-level)                 PASS    PASS    </span>
+<span class="fail">Visual composition                  FAIL    FAIL    </span>
+<span class="header">TOTAL                               14/28   18/28   +4</span></div>
+
+<div class="grid-header">
+  <div>v1 — Current design.md (14/28)</div>
+  <div>v2 + Pipeline Fix (18/28)</div>
+</div>
+
+<div class="grid">
+  <div class="card-pair">
+    <div><img src="v1/screenshots/card-01.png"><div class="card-label">Card 1 — Title (v1 uses DISPLAY, fix also uses DISPLAY)</div></div>
+    <div><img src="v2-pipeline-fix/screenshots/card-01.png"><div class="card-label">Card 1 — Title (DISPLAY xl + diagonal offset)</div></div>
+  </div>
+  <div class="card-pair">
+    <div><img src="v1/screenshots/card-02.png"><div class="card-label">Card 2 — Single column row</div></div>
+    <div><img src="v2-pipeline-fix/screenshots/card-02.png"><div class="card-label">Card 2 — STACKED columns + HR + diagonal offset</div></div>
+  </div>
+  <div class="card-pair">
+    <div><img src="v1/screenshots/card-03.png"><div class="card-label">Card 3</div></div>
+    <div><img src="v2-pipeline-fix/screenshots/card-03.png"><div class="card-label">Card 3</div></div>
+  </div>
+  <div class="card-pair">
+    <div><img src="v1/screenshots/card-04.png"><div class="card-label">Card 4 — Behind-image breather</div></div>
+    <div><img src="v2-pipeline-fix/screenshots/card-04.png"><div class="card-label">Card 4 — DISPLAY md breather</div></div>
+  </div>
+  <div class="card-pair">
+    <div><img src="v1/screenshots/card-05.png"><div class="card-label">Card 5</div></div>
+    <div><img src="v2-pipeline-fix/screenshots/card-05.png"><div class="card-label">Card 5</div></div>
+  </div>
+  <div class="card-pair">
+    <div><img src="v1/screenshots/card-06.png"><div class="card-label">Card 6</div></div>
+    <div><img src="v2-pipeline-fix/screenshots/card-06.png"><div class="card-label">Card 6 — HR divider between heading + smart layout</div></div>
+  </div>
+  <div class="card-pair">
+    <div><img src="v1/screenshots/card-07.png"><div class="card-label">Card 7</div></div>
+    <div><img src="v2-pipeline-fix/screenshots/card-07.png"><div class="card-label">Card 7 — STACKED columns + HR + 3-col grid</div></div>
+  </div>
+  <div class="card-pair">
+    <div><img src="v1/screenshots/card-08.png"><div class="card-label">Card 8 — Closing</div></div>
+    <div><img src="v2-pipeline-fix/screenshots/card-08.png"><div class="card-label">Card 8 — DISPLAY xl + bold/muted + bookend diagonal</div></div>
+  </div>
+  <div class="card-pair">
+    <div><img src="v1/screenshots/card-09.png"><div class="card-label">Card 9 — Sources</div></div>
+    <div><img src="v2-pipeline-fix/screenshots/card-09.png"><div class="card-label">Card 9 — Sources</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>What Changed</h2>
+  <ol>
+    <li><b>design-v2.md</b> — Philosophy-first rewrite: design feelings intro, "4 Swiss Moves" patterns, structural constraints at bottom with concrete GML examples for diagonal offset and HR usage</li>
+    <li><b>guide-config.ts</b> — Added <code>compositionRules</code> field to GuideConfig so guides can override compose prompt's generic rules</li>
+    <li><b>compose-card.tool.ts</b> — Uses guide.config.compositionRules when available, otherwise falls back to generic rules</li>
+    <li><b>guide.ts (Swiss)</b> — Added Swiss-specific compositionRules that mandate stacked columns, empty columns, DISPLAY tags, H1 placement, and HR dividers</li>
+  </ol>
+</div>
+
+<div class="section" style="border-left: 3px solid #f59e0b;">
+  <h2 style="color:#f59e0b">Still Failing (10 graders)</h2>
+  <ul>
+    <li><b>Closing card quality (0.00)</b> — Vision grader; may need more examples of sparse closings</li>
+    <li><b>Title card quality (0.00)</b> — Vision grader; title uses DISPLAY but grader may want different composition</li>
+    <li><b>Display-scale typography (0.10)</b> — DISPLAY tags present now but grader has stricter visual criteria</li>
+    <li><b>Typographic statement (0.00)</b> — Needs a dedicated card with ONLY a display line and nothing else</li>
+    <li><b>H1 inside column (0.00)</b> — Still happening on card 2 (H1 inside stacked columns)</li>
+    <li><b>Vertical-align variety (0.50)</b> — Still defaulting to "start" on content cards</li>
+    <li><b>Grid structure / Visual composition / Prose quality / Prose density</b> — Card-level vision graders, need more iteration</li>
+  </ul>
+</div>
+
+</body>
+</html>
