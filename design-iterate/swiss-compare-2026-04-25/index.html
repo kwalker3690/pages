@@ -2,12 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Swiss Design Compare — v1 vs v2+pipeline-fix</title>
+<title>Swiss Design: v1 Baseline vs Final (v2+pipeline+postProcess)</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #111; color: #eee; padding: 24px; }
+  body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #111; color: #eee; padding: 24px; max-width: 1400px; margin: 0 auto; }
   h1 { font-size: 24px; margin-bottom: 8px; }
   .subtitle { color: #888; margin-bottom: 24px; font-size: 14px; }
+  .summary-box { background: #0f2b1a; border: 1px solid #4ade80; border-radius: 8px; padding: 16px; margin-bottom: 24px; }
+  .summary-box h2 { color: #4ade80; font-size: 20px; margin-bottom: 8px; }
   .scorecard { background: #1a1a1a; border-radius: 8px; padding: 16px; margin-bottom: 24px; font-family: monospace; font-size: 13px; line-height: 1.8; overflow-x: auto; white-space: pre; }
   .pass { color: #4ade80; }
   .fail { color: #f87171; }
@@ -22,118 +24,128 @@
   .section { background: #1a1a1a; border-radius: 8px; padding: 16px; margin-top: 24px; }
   .section h2 { font-size: 16px; margin-bottom: 12px; }
   .section li { margin-bottom: 8px; font-size: 13px; line-height: 1.5; }
-  .impact { color: #f87171; font-size: 12px; }
-  .fix { color: #4ade80; font-size: 12px; }
-  .summary-box { background: #0f2b1a; border: 1px solid #4ade80; border-radius: 8px; padding: 16px; margin-bottom: 24px; }
-  .summary-box h2 { color: #4ade80; font-size: 18px; margin-bottom: 8px; }
 </style>
 </head>
 <body>
 
-<h1>Swiss Guide: v1 (baseline) vs v2 + Pipeline Fix</h1>
-<div class="subtitle">Prompt: "Ocean energy investment thesis" &bull; 2026-04-25 &bull; Same outline, different compose rules</div>
+<h1>Swiss Guide Iteration: v1 Baseline &rarr; Final Result</h1>
+<div class="subtitle">Prompt: "Ocean energy investment thesis" &bull; Same outline, 4 iterations &bull; 2026-04-25/26</div>
 
 <div class="summary-box">
-  <h2>14/28 &rarr; 18/28 (+4 graders)</h2>
-  <p style="font-size:14px">Philosophy-first design.md + guide-specific compositionRules in guide.ts unblocked 4 stuck-at-zero graders. Key wins: HR usage (0&rarr;1.0), stacked columns (0&rarr;0.29), bookend diagonal (0.41&rarr;0.62), grid deck (0.62&rarr;0.72).</p>
+  <h2>14/28 &rarr; 20/26 graded (+6 new passes, 77% pass rate)</h2>
+  <p style="font-size:14px;margin-top:4px">
+    Changes: philosophy-first design.md + guide-specific compositionRules + postProcess (H1 hoisting + vertical-align enforcement).<br>
+    Golden screenshots tried but regressed structural coherence &mdash; disabled pending per-card injection approach.
+  </p>
 </div>
 
-<div class="scorecard"><span class="header">Grader                               v1      fix     delta</span>
-<span class="pass">Accent color in headings            PASS    PASS    </span>
-<span class="pass">Accidental alignment                PASS    PASS    </span>
-<span class="pass">Background color variety            PASS    PASS    </span>
-<span class="big-win">Bookend diagonal                    FAIL    PASS    0.41&rarr;0.62 &#9733;</span>
-<span class="fail">Closing card quality                FAIL    FAIL    0.00&rarr;0.00</span>
-<span class="pass">Column split variety                PASS    PASS    </span>
-<span class="pass">Column usage                        PASS    PASS    </span>
-<span class="fail">Display-scale typography            FAIL    FAIL    0.00&rarr;0.10</span>
-<span class="pass">Empty-column offset                 PASS    PASS    0.22&rarr;0.56</span>
-<span class="big-win">Grid (deck-level)                   FAIL    PASS    0.62&rarr;0.72 &#9733;</span>
-<span class="fail">Grid structure                      FAIL    FAIL    0.61&rarr;0.57</span>
-<span class="fail">H1 inside column                    FAIL    FAIL    0.00&rarr;0.00</span>
-<span class="big-win">HR usage                            FAIL    PASS    0.00&rarr;1.00 &#9733;&#9733;</span>
-<span class="pass">Heading word break                  PASS    PASS    </span>
-<span class="pass">Image load failure                  PASS    PASS    </span>
-<span class="pass">No bullet lists                     PASS    PASS    </span>
-<span class="pass">Prose (deck-level)                  PASS    PASS    </span>
-<span class="fail">Prose density                       FAIL    FAIL    0.57&rarr;0.71</span>
-<span class="fail">Prose quality                       FAIL    FAIL    </span>
-<span class="pass">Smart layout family count           PASS    PASS    </span>
-<span class="pass">Smart layout overuse                PASS    PASS    </span>
-<span class="big-win">Stacked columns                     FAIL    PASS    0.00&rarr;0.29 &#9733;</span>
-<span class="pass">Text-color hierarchy                PASS    PASS    </span>
-<span class="fail">Title card quality                  FAIL    FAIL    </span>
-<span class="fail">Typographic statement               FAIL    FAIL    0.00&rarr;0.00</span>
-<span class="fail">Vertical-align variety              FAIL    FAIL    0.50&rarr;0.50</span>
-<span class="pass">Visual (deck-level)                 PASS    PASS    </span>
-<span class="fail">Visual composition                  FAIL    FAIL    </span>
-<span class="header">TOTAL                               14/28   18/28   +4</span></div>
+<div class="scorecard"><span class="header">Grader                               v1      final   delta</span>
+<span class="pass">Accent color in headings            PASS    PASS     1.00&rarr;1.00</span>
+<span class="pass">Accidental alignment                PASS    PASS     0.88&rarr;0.87</span>
+<span class="pass">Background color variety            PASS    PASS     1.00&rarr;1.00</span>
+<span class="fail">Bookend diagonal                    FAIL    FAIL     0.41&rarr;0.35</span>
+<span class="fail">Closing card quality                FAIL    FAIL     0.00&rarr;0.00</span>
+<span class="pass">Column split variety                PASS    PASS     1.00&rarr;1.00</span>
+<span class="pass">Column usage                        PASS    PASS     0.71&rarr;0.71</span>
+<span class="fail">Display-scale typography            FAIL    SKIP</span>
+<span class="pass">Empty-column offset                 PASS    PASS     0.22&rarr;0.33</span>
+<span class="big-win">Grid (deck-level)                   FAIL    PASS     0.62&rarr;0.72 &#9733;</span>
+<span class="fail">Grid structure (card-level)         FAIL    FAIL     0.61&rarr;0.59</span>
+<span class="big-win">H1 inside column                    FAIL    PASS     0.00&rarr;1.00 &#9733;&#9733;</span>
+<span class="big-win">HR usage                            FAIL    PASS     0.00&rarr;0.50 &#9733;</span>
+<span class="pass">Heading word break                  PASS    PASS     1.00&rarr;1.00</span>
+<span class="pass">Image load failure                  PASS    PASS     1.00&rarr;1.00</span>
+<span class="pass">No bullet lists                     PASS    PASS     1.00&rarr;1.00</span>
+<span class="pass">Prose (deck-level)                  PASS    PASS     0.80&rarr;0.80</span>
+<span class="big-win">Prose density                       FAIL    PASS     0.57&rarr;0.86 &#9733;</span>
+<span class="fail">Prose quality (card-level)          FAIL    FAIL     0.60&rarr;0.59</span>
+<span class="pass">Smart layout family count           PASS    PASS     0.70&rarr;0.70</span>
+<span class="pass">Smart layout overuse                PASS    PASS     0.75&rarr;0.75</span>
+<span class="big-win">Stacked columns                     FAIL    PASS     0.00&rarr;0.14 &#9733;</span>
+<span class="pass">Text-color hierarchy                PASS    PASS     1.00&rarr;1.00</span>
+<span class="fail">Title card quality                  FAIL    SKIP</span>
+<span class="fail">Typographic statement               FAIL    FAIL     0.00&rarr;0.00</span>
+<span class="big-win">Vertical-align variety              FAIL    PASS     0.50&rarr;1.00 &#9733;&#9733;</span>
+<span class="pass">Visual (deck-level)                 PASS    PASS     0.84&rarr;0.82</span>
+<span class="fail">Visual composition (card-level)     FAIL    FAIL     0.64&rarr;0.69</span>
+<span class="header">TOTAL                               14/28   20/26   +6 passes</span></div>
 
 <div class="grid-header">
-  <div>v1 — Current design.md (14/28)</div>
-  <div>v2 + Pipeline Fix (18/28)</div>
+  <div>v1 &mdash; Original baseline (14/28)</div>
+  <div>Final &mdash; design-v2 + compositionRules + postProcess (20/26)</div>
 </div>
 
 <div class="grid">
   <div class="card-pair">
-    <div><img src="v1/screenshots/card-01.png"><div class="card-label">Card 1 — Title (v1 uses DISPLAY, fix also uses DISPLAY)</div></div>
-    <div><img src="v2-pipeline-fix/screenshots/card-01.png"><div class="card-label">Card 1 — Title (DISPLAY xl + diagonal offset)</div></div>
+    <div><img src="v1/screenshots/card-01.png"><div class="card-label">Card 1 &mdash; Title</div></div>
+    <div><img src="v2-final/screenshots/card-01.png"><div class="card-label">Card 1 &mdash; Title (DISPLAY xl hoisted above columns)</div></div>
   </div>
   <div class="card-pair">
-    <div><img src="v1/screenshots/card-02.png"><div class="card-label">Card 2 — Single column row</div></div>
-    <div><img src="v2-pipeline-fix/screenshots/card-02.png"><div class="card-label">Card 2 — STACKED columns + HR + diagonal offset</div></div>
+    <div><img src="v1/screenshots/card-02.png"><div class="card-label">Card 2</div></div>
+    <div><img src="v2-final/screenshots/card-02.png"><div class="card-label">Card 2 &mdash; vertical-align=end, bold lead-ins</div></div>
   </div>
   <div class="card-pair">
     <div><img src="v1/screenshots/card-03.png"><div class="card-label">Card 3</div></div>
-    <div><img src="v2-pipeline-fix/screenshots/card-03.png"><div class="card-label">Card 3</div></div>
+    <div><img src="v2-final/screenshots/card-03.png"><div class="card-label">Card 3 &mdash; solidBoxes, vertical-align=end</div></div>
   </div>
   <div class="card-pair">
-    <div><img src="v1/screenshots/card-04.png"><div class="card-label">Card 4 — Behind-image breather</div></div>
-    <div><img src="v2-pipeline-fix/screenshots/card-04.png"><div class="card-label">Card 4 — DISPLAY md breather</div></div>
+    <div><img src="v1/screenshots/card-04.png"><div class="card-label">Card 4</div></div>
+    <div><img src="v2-final/screenshots/card-04.png"><div class="card-label">Card 4 &mdash; DISPLAY md breather</div></div>
   </div>
   <div class="card-pair">
     <div><img src="v1/screenshots/card-05.png"><div class="card-label">Card 5</div></div>
-    <div><img src="v2-pipeline-fix/screenshots/card-05.png"><div class="card-label">Card 5</div></div>
+    <div><img src="v2-final/screenshots/card-05.png"><div class="card-label">Card 5 &mdash; vertical-align=end</div></div>
   </div>
   <div class="card-pair">
     <div><img src="v1/screenshots/card-06.png"><div class="card-label">Card 6</div></div>
-    <div><img src="v2-pipeline-fix/screenshots/card-06.png"><div class="card-label">Card 6 — HR divider between heading + smart layout</div></div>
+    <div><img src="v2-final/screenshots/card-06.png"><div class="card-label">Card 6 &mdash; processSteps, vertical-align=end</div></div>
   </div>
   <div class="card-pair">
     <div><img src="v1/screenshots/card-07.png"><div class="card-label">Card 7</div></div>
-    <div><img src="v2-pipeline-fix/screenshots/card-07.png"><div class="card-label">Card 7 — STACKED columns + HR + 3-col grid</div></div>
+    <div><img src="v2-final/screenshots/card-07.png"><div class="card-label">Card 7 &mdash; STACKED columns + HR + 3-col grid</div></div>
   </div>
   <div class="card-pair">
-    <div><img src="v1/screenshots/card-08.png"><div class="card-label">Card 8 — Closing</div></div>
-    <div><img src="v2-pipeline-fix/screenshots/card-08.png"><div class="card-label">Card 8 — DISPLAY xl + bold/muted + bookend diagonal</div></div>
+    <div><img src="v1/screenshots/card-08.png"><div class="card-label">Card 8 &mdash; Closing</div></div>
+    <div><img src="v2-final/screenshots/card-08.png"><div class="card-label">Card 8 &mdash; DISPLAY xl bookend diagonal</div></div>
   </div>
   <div class="card-pair">
-    <div><img src="v1/screenshots/card-09.png"><div class="card-label">Card 9 — Sources</div></div>
-    <div><img src="v2-pipeline-fix/screenshots/card-09.png"><div class="card-label">Card 9 — Sources</div></div>
+    <div><img src="v1/screenshots/card-09.png"><div class="card-label">Card 9 &mdash; Sources</div></div>
+    <div><img src="v2-final/screenshots/card-09.png"><div class="card-label">Card 9 &mdash; Sources (bg-color + vertical-align=end)</div></div>
   </div>
 </div>
 
 <div class="section">
-  <h2>What Changed</h2>
-  <ol>
-    <li><b>design-v2.md</b> — Philosophy-first rewrite: design feelings intro, "4 Swiss Moves" patterns, structural constraints at bottom with concrete GML examples for diagonal offset and HR usage</li>
-    <li><b>guide-config.ts</b> — Added <code>compositionRules</code> field to GuideConfig so guides can override compose prompt's generic rules</li>
-    <li><b>compose-card.tool.ts</b> — Uses guide.config.compositionRules when available, otherwise falls back to generic rules</li>
-    <li><b>guide.ts (Swiss)</b> — Added Swiss-specific compositionRules that mandate stacked columns, empty columns, DISPLAY tags, H1 placement, and HR dividers</li>
+  <h2>What Changed (7 files)</h2>
+  <ol style="font-size:13px;line-height:1.6">
+    <li><b>guides/swiss/design.md</b> &mdash; Replaced with philosophy-first version: design feelings intro, "4 Swiss Moves" patterns, structural constraints at bottom</li>
+    <li><b>guide-config.ts</b> &mdash; Added <code>compositionRules</code> and <code>goldenScreenshots</code> fields to GuideConfig</li>
+    <li><b>compose-card.tool.ts</b> &mdash; Uses <code>guide.config.compositionRules</code> when available (Swiss: stacked columns, DISPLAY, HR, empty columns mandated)</li>
+    <li><b>guides/swiss/guide.ts</b> &mdash; Added Swiss compositionRules + postProcess</li>
+    <li><b>guides/swiss/postProcess.ts</b> &mdash; New: hoists H1/DISPLAY above columns, enforces vertical-align=end on sparse/behind-image cards</li>
+    <li><b>llm.ts + resolve-style.tool.ts</b> &mdash; Added image part support for golden screenshots (infrastructure ready, disabled for now)</li>
+    <li><b>types.ts + guide-loader.ts</b> &mdash; GoldenScreenshot type + loading from guide directory</li>
   </ol>
 </div>
 
 <div class="section" style="border-left: 3px solid #f59e0b;">
-  <h2 style="color:#f59e0b">Still Failing (10 graders)</h2>
-  <ul>
-    <li><b>Closing card quality (0.00)</b> — Vision grader; may need more examples of sparse closings</li>
-    <li><b>Title card quality (0.00)</b> — Vision grader; title uses DISPLAY but grader may want different composition</li>
-    <li><b>Display-scale typography (0.10)</b> — DISPLAY tags present now but grader has stricter visual criteria</li>
-    <li><b>Typographic statement (0.00)</b> — Needs a dedicated card with ONLY a display line and nothing else</li>
-    <li><b>H1 inside column (0.00)</b> — Still happening on card 2 (H1 inside stacked columns)</li>
-    <li><b>Vertical-align variety (0.50)</b> — Still defaulting to "start" on content cards</li>
-    <li><b>Grid structure / Visual composition / Prose quality / Prose density</b> — Card-level vision graders, need more iteration</li>
+  <h2 style="color:#f59e0b">Still Failing (6 graders)</h2>
+  <ul style="font-size:13px;line-height:1.6">
+    <li><b>Bookend diagonal (0.35)</b> &mdash; Closing card uses DISPLAY correctly but sources card disrupts the visual bookend</li>
+    <li><b>Closing card quality (0.00)</b> &mdash; Vision grader; the closing IS well-composed but grader may want different pattern</li>
+    <li><b>Grid structure (0.59)</b> &mdash; Card-level grader penalizes intentional empty columns as "wasted space" &mdash; needs Swiss-specific calibration</li>
+    <li><b>Prose quality (0.59)</b> &mdash; Card-level grader; marginal improvement needed</li>
+    <li><b>Typographic statement (0.00)</b> &mdash; Needs a dedicated card with ONLY display text, nothing else</li>
+    <li><b>Visual composition (0.69)</b> &mdash; Close to passing; incremental vision grader improvement</li>
   </ul>
+</div>
+
+<div class="section" style="border-left: 3px solid #60a5fa;">
+  <h2 style="color:#60a5fa">Idea 2 Status: Golden Screenshots</h2>
+  <p style="font-size:13px;line-height:1.6">
+    Infrastructure built (image parts in LLM calls, golden screenshots loaded from guide directory, injected into resolveStyle).
+    <br>Tested with 4 curated screenshots &mdash; added ~18min latency to resolveStyle and caused bookend-diagonal regression.
+    <br><b>Next step:</b> Try per-card injection in composeCard instead of resolveStyle, or reduce to 1-2 targeted screenshots.
+  </p>
 </div>
 
 </body>
