@@ -1,0 +1,202 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<title>Swiss E2E Batch — 3 Prompts</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#111;color:#eee;padding:24px;max-width:1400px;margin:0 auto}
+h1{font-size:24px;margin-bottom:8px}
+h2{font-size:18px;margin:24px 0 12px;color:#60a5fa}
+.sub{color:#888;margin-bottom:24px;font-size:14px}
+.sum{background:#1a1a1a;border-radius:8px;padding:16px;margin-bottom:24px}
+.pass{color:#4ade80} .fail{color:#f87171} .skip{color:#666}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:24px}
+th,td{padding:6px 10px;text-align:left;border-bottom:1px solid #222}
+th{color:#888;font-weight:normal}
+.scroll{display:flex;gap:8px;overflow-x:auto;padding-bottom:12px;margin-bottom:24px}
+.scroll img{height:280px;border-radius:6px;border:1px solid #333;flex-shrink:0}
+.card-label{text-align:center;color:#555;font-size:10px;margin-top:2px}
+</style></head><body>
+<h1>Swiss E2E Batch: Full Gen3 → GenDeck Pipeline</h1>
+<div class="sub">3 prompts, all through Gen3 planLayout+writeOutline → GenDeck resolve → grade • 2026-04-26</div>
+
+<div class="sum"><b>Ocean Energy</b>: <span class="pass">15 pass</span>, <span class="fail">11 fail</span>, <span class="skip">2 skip</span> (15/26 = 57%)</div>
+<div class="sum"><b>Japanese Woodblock</b>: <span class="pass">17 pass</span>, <span class="fail">10 fail</span>, <span class="skip">1 skip</span> (17/27 = 62%)</div>
+<div class="sum"><b>AI Safety</b>: <span class="pass">17 pass</span>, <span class="fail">9 fail</span>, <span class="skip">2 skip</span> (17/26 = 65%)</div>
+<h2>Ocean Energy</h2><div class="scroll">
+<div><img src="ocean-energy/screenshots/card-01.png"><div class="card-label">Card 1</div></div>
+<div><img src="ocean-energy/screenshots/card-02.png"><div class="card-label">Card 2</div></div>
+<div><img src="ocean-energy/screenshots/card-03.png"><div class="card-label">Card 3</div></div>
+<div><img src="ocean-energy/screenshots/card-04.png"><div class="card-label">Card 4</div></div>
+<div><img src="ocean-energy/screenshots/card-05.png"><div class="card-label">Card 5</div></div>
+<div><img src="ocean-energy/screenshots/card-06.png"><div class="card-label">Card 6</div></div>
+<div><img src="ocean-energy/screenshots/card-07.png"><div class="card-label">Card 7</div></div>
+<div><img src="ocean-energy/screenshots/card-08.png"><div class="card-label">Card 8</div></div>
+<div><img src="ocean-energy/screenshots/card-09.png"><div class="card-label">Card 9</div></div>
+</div>
+<h2>Japanese Woodblock</h2><div class="scroll">
+<div><img src="japanese-woodblock/screenshots/card-01.png"><div class="card-label">Card 1</div></div>
+<div><img src="japanese-woodblock/screenshots/card-02.png"><div class="card-label">Card 2</div></div>
+<div><img src="japanese-woodblock/screenshots/card-03.png"><div class="card-label">Card 3</div></div>
+<div><img src="japanese-woodblock/screenshots/card-04.png"><div class="card-label">Card 4</div></div>
+<div><img src="japanese-woodblock/screenshots/card-05.png"><div class="card-label">Card 5</div></div>
+<div><img src="japanese-woodblock/screenshots/card-06.png"><div class="card-label">Card 6</div></div>
+<div><img src="japanese-woodblock/screenshots/card-07.png"><div class="card-label">Card 7</div></div>
+<div><img src="japanese-woodblock/screenshots/card-08.png"><div class="card-label">Card 8</div></div>
+<div><img src="japanese-woodblock/screenshots/card-09.png"><div class="card-label">Card 9</div></div>
+</div>
+<h2>AI Safety</h2><div class="scroll">
+<div><img src="ai-safety/screenshots/card-01.png"><div class="card-label">Card 1</div></div>
+<div><img src="ai-safety/screenshots/card-02.png"><div class="card-label">Card 2</div></div>
+<div><img src="ai-safety/screenshots/card-03.png"><div class="card-label">Card 3</div></div>
+<div><img src="ai-safety/screenshots/card-04.png"><div class="card-label">Card 4</div></div>
+<div><img src="ai-safety/screenshots/card-05.png"><div class="card-label">Card 5</div></div>
+<div><img src="ai-safety/screenshots/card-06.png"><div class="card-label">Card 6</div></div>
+<div><img src="ai-safety/screenshots/card-07.png"><div class="card-label">Card 7</div></div>
+<div><img src="ai-safety/screenshots/card-08.png"><div class="card-label">Card 8</div></div>
+<div><img src="ai-safety/screenshots/card-09.png"><div class="card-label">Card 9</div></div>
+</div>
+<h2>Cross-Prompt Comparison</h2><table><tr><th>Grader</th>
+<th>Ocean Energy</th>
+<th>Japanese Woodblock</th>
+<th>AI Safety</th>
+</tr>
+<tr><td>Accent color in headings</td>
+<td class="pass">PASS (1.00)</td>
+<td class="pass">PASS (1.00)</td>
+<td class="pass">PASS (1.00)</td>
+</tr>
+<tr><td>Accidental alignment</td>
+<td class="fail">FAIL (0.83)</td>
+<td class="pass">PASS (0.88)</td>
+<td class="fail">FAIL (0.81)</td>
+</tr>
+<tr><td>Background color variety</td>
+<td class="pass">PASS (1.00)</td>
+<td class="pass">PASS (1.00)</td>
+<td class="pass">PASS (1.00)</td>
+</tr>
+<tr><td>Bookend diagonal</td>
+<td class="fail">FAIL (0.25)</td>
+<td class="fail">FAIL (0.25)</td>
+<td class="fail">FAIL (0.20)</td>
+</tr>
+<tr><td>Closing card quality</td>
+<td class="fail">FAIL (0.00)</td>
+<td class="fail">FAIL (0.00)</td>
+<td class="fail">FAIL (0.00)</td>
+</tr>
+<tr><td>Column split variety</td>
+<td class="pass">PASS (1.00)</td>
+<td class="pass">PASS (1.00)</td>
+<td class="pass">PASS (1.00)</td>
+</tr>
+<tr><td>Column usage</td>
+<td class="pass">PASS (0.71)</td>
+<td class="pass">PASS (0.71)</td>
+<td class="pass">PASS (0.86)</td>
+</tr>
+<tr><td>Display-scale typography</td>
+<td class="skip">SKIP</td>
+<td class="fail">FAIL (0.15)</td>
+<td class="skip">SKIP</td>
+</tr>
+<tr><td>Empty-column offset</td>
+<td class="pass">PASS (0.56)</td>
+<td class="pass">PASS (0.67)</td>
+<td class="pass">PASS (0.67)</td>
+</tr>
+<tr><td>Grid (deck-level)</td>
+<td class="fail">FAIL (0.52)</td>
+<td class="pass">PASS (0.67)</td>
+<td class="fail">FAIL (0.62)</td>
+</tr>
+<tr><td>Grid structure</td>
+<td class="fail">FAIL (0.54)</td>
+<td class="fail">FAIL (0.60)</td>
+<td class="fail">FAIL (0.41)</td>
+</tr>
+<tr><td>H1 inside column</td>
+<td class="pass">PASS (1.00)</td>
+<td class="pass">PASS (1.00)</td>
+<td class="pass">PASS (1.00)</td>
+</tr>
+<tr><td>HR usage</td>
+<td class="pass">PASS (1.00)</td>
+<td class="pass">PASS (1.00)</td>
+<td class="pass">PASS (1.00)</td>
+</tr>
+<tr><td>Heading word break</td>
+<td class="pass">PASS (1.00)</td>
+<td class="pass">PASS (1.00)</td>
+<td class="pass">PASS (1.00)</td>
+</tr>
+<tr><td>Image load failure</td>
+<td class="pass">PASS (1.00)</td>
+<td class="pass">PASS (1.00)</td>
+<td class="pass">PASS (1.00)</td>
+</tr>
+<tr><td>No bullet lists</td>
+<td class="pass">PASS (1.00)</td>
+<td class="pass">PASS (1.00)</td>
+<td class="pass">PASS (1.00)</td>
+</tr>
+<tr><td>Prose (deck-level)</td>
+<td class="fail">FAIL (0.65)</td>
+<td class="fail">FAIL (0.68)</td>
+<td class="pass">PASS (0.73)</td>
+</tr>
+<tr><td>Prose density</td>
+<td class="fail">FAIL (0.57)</td>
+<td class="fail">FAIL (0.57)</td>
+<td class="pass">PASS (0.86)</td>
+</tr>
+<tr><td>Prose quality</td>
+<td class="fail">FAIL (0.53)</td>
+<td class="fail">FAIL (0.56)</td>
+<td class="fail">FAIL (0.38)</td>
+</tr>
+<tr><td>Smart layout family count</td>
+<td class="pass">PASS (1.00)</td>
+<td class="pass">PASS (0.70)</td>
+<td class="pass">PASS (1.00)</td>
+</tr>
+<tr><td>Smart layout overuse</td>
+<td class="pass">PASS (0.88)</td>
+<td class="pass">PASS (0.75)</td>
+<td class="pass">PASS (1.00)</td>
+</tr>
+<tr><td>Stacked columns</td>
+<td class="pass">PASS (0.57)</td>
+<td class="pass">PASS (0.29)</td>
+<td class="pass">PASS (0.43)</td>
+</tr>
+<tr><td>Text-color hierarchy</td>
+<td class="pass">PASS (1.00)</td>
+<td class="pass">PASS (0.75)</td>
+<td class="pass">PASS (1.00)</td>
+</tr>
+<tr><td>Title card quality</td>
+<td class="skip">SKIP</td>
+<td class="skip">SKIP</td>
+<td class="skip">SKIP</td>
+</tr>
+<tr><td>Typographic statement</td>
+<td class="fail">FAIL (0.00)</td>
+<td class="fail">FAIL (0.00)</td>
+<td class="fail">FAIL (0.00)</td>
+</tr>
+<tr><td>Vertical-align variety</td>
+<td class="fail">FAIL (0.50)</td>
+<td class="fail">FAIL (0.50)</td>
+<td class="fail">FAIL (0.50)</td>
+</tr>
+<tr><td>Visual (deck-level)</td>
+<td class="pass">PASS (0.68)</td>
+<td class="pass">PASS (0.74)</td>
+<td class="pass">PASS (0.68)</td>
+</tr>
+<tr><td>Visual composition</td>
+<td class="fail">FAIL (0.57)</td>
+<td class="fail">FAIL (0.60)</td>
+<td class="fail">FAIL (0.41)</td>
+</tr>
+</table></body></html>
