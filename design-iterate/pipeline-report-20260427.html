@@ -40,13 +40,21 @@
   tr:hover td { background: #1a1a1a; }
 
   .template-golden { color: #f0c040; }
-  .template-skeleton { color: #888; }
+  .template-hand-authored { color: #888; }
 
   /* GML code */
   details { margin: 4px 0; }
   summary { cursor: pointer; font-size: 13px; color: #5142E6; padding: 4px 0; }
   summary:hover { color: #7b6ff0; }
   pre.gml { background: #0d0d0d; border: 1px solid #222; border-radius: 4px; padding: 12px; font-size: 11px; font-family: 'SF Mono', Monaco, 'Courier New', monospace; color: #bbb; overflow-x: auto; white-space: pre-wrap; word-break: break-all; max-height: 500px; overflow-y: auto; line-height: 1.4; }
+
+  /* Card GML + screenshot layout */
+  .card-gml-row { display: flex; gap: 16px; align-items: flex-start; margin: 8px 0; padding: 12px 0; border-bottom: 1px solid #222; }
+  .card-gml-row .card-screenshot { flex: 0 0 400px; max-width: 400px; }
+  .card-gml-row .card-screenshot img { width: 100%; border-radius: 4px; border: 1px solid #333; }
+  .card-gml-row .card-gml-details { flex: 1; min-width: 0; }
+  .card-gml-row .card-meta { font-size: 12px; color: #888; margin-bottom: 6px; }
+  .card-gml-row .card-meta .card-num { font-weight: 700; color: #ccc; font-size: 14px; margin-right: 8px; }
 
   /* Grader scores */
   .grader-row { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid #1a1a1a; }
@@ -170,7 +178,7 @@
   <table>
     <tr><th>#</th><th>Template</th><th>Score</th><th>Strategy</th><th>Type</th></tr>
     <tr><td>0</td><td>consultant-sidereal-card0</td><td>6</td><td>full-card</td><td class="template-golden">golden (sidereal)</td></tr>
-    <tr><td>1</td><td>consultant-analysis-2col</td><td>3</td><td>full-card</td><td class="template-skeleton">skeleton</td></tr>
+    <tr><td>1</td><td>consultant-analysis-2col</td><td>3</td><td>full-card</td><td class="template-hand-authored">hand-authored</td></tr>
     <tr><td>2</td><td><span class="template-golden">consultant-breach-card1</span></td><td>3</td><td>full-card</td><td class="template-golden">golden (breach)</td></tr>
     <tr><td>3</td><td>consultant-clearpath-card0</td><td>2</td><td>full-card</td><td class="template-golden">golden (clearpath)</td></tr>
     <tr><td>4</td><td><span class="template-golden">consultant-breach-card2</span></td><td>3</td><td>full-card</td><td class="template-golden">golden (breach)</td></tr>
@@ -179,16 +187,15 @@
     <tr><td>7</td><td>consultant-ironbridge-card0</td><td>2</td><td>full-card</td><td class="template-golden">golden (ironbridge)</td></tr>
     <tr><td>8</td><td><span class="template-golden">consultant-breach-card5</span></td><td>3</td><td>full-card</td><td class="template-golden">golden (breach)</td></tr>
   </table>
-  <p style="font-size:12px;color:#888;margin-top:4px;">100% template match rate | 8/9 golden-indexed templates (breach x5, sidereal x1, clearpath x1, ironbridge x1) | 1 skeleton (analysis-2col)</p>
+  <p style="font-size:12px;color:#888;margin-top:4px;">100% template match rate | 8/9 golden-indexed templates (breach x5, sidereal x1, clearpath x1, ironbridge x1) | 1 hand-authored (analysis-2col)</p>
 
   <!-- 4. Generated GML -->
   <h3>4. Generated GML (card by card)</h3>
-  <table>
-    <tr><th>#</th><th>Words</th><th>Tags</th><th>Key Elements</th><th>GML</th></tr>
-    <tr>
-      <td>0</td><td>25</td><td>10</td>
-      <td><span class="chip chip-labels">LABELS</span> bg:#171717</td>
-      <td><details><summary>Show GML (713 bytes)</summary><pre class="gml">&lt;SECTION image-layout="top" vertical-align="end" background-color="#171717"&gt;
+    <div class="card-gml-row">
+    <div class="card-screenshot"><img src="unified-screenshots/consultant/card-01.png" alt="Card 0"></div>
+    <div class="card-gml-details">
+      <div class="card-meta"><span class="card-num">#0</span> 25w | 10 tags | <span class="chip chip-labels">LABELS</span> bg:#171717</div>
+      <details><summary>Show GML (713 bytes)</summary><pre class="gml">&lt;SECTION image-layout="top" vertical-align="end" background-color="#171717"&gt;
 &lt;IMG class="accent-image" query="digital fortress cybersecurity network visualization with glowing threat indicators, dark tech aesthetic, geometric patterns, data streams"&gt;
 &lt;DIV class="body"&gt;
 &lt;LABELS&gt;
@@ -201,12 +208,15 @@
 &lt;DISPLAY size="lg"&gt;Cybersecurity Trends &amp; Threat Landscape 2026&lt;/DISPLAY&gt;
 &lt;P font-size="lg"&gt;Intelligence briefing for security leaders -- what's changed, what's escalating, and what to do next&lt;/P&gt;
 &lt;/DIV&gt;
-&lt;/SECTION&gt;</pre></details></td>
-    </tr>
-    <tr>
-      <td>1</td><td>160</td><td>31</td>
-      <td><span class="chip chip-graph">GRAPH bar</span> <span class="chip chip-sl">starStats</span> <span class="chip chip-cols">cols [42,58]</span> <span class="chip chip-labels">LABELS</span></td>
-      <td><details><summary>Show GML (2,677 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank"&gt;
+&lt;/SECTION&gt;</pre></details>
+    </div>
+  </div>
+
+  <div class="card-gml-row">
+    <div class="card-screenshot"><img src="unified-screenshots/consultant/card-02.png" alt="Card 1"></div>
+    <div class="card-gml-details">
+      <div class="card-meta"><span class="card-num">#1</span> 160w | 31 tags | <span class="chip chip-graph">GRAPH bar</span> <span class="chip chip-sl">starStats</span> <span class="chip chip-cols">cols [42,58]</span> <span class="chip chip-labels">LABELS</span></div>
+      <details><summary>Show GML (2,677 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank"&gt;
 &lt;DIV class="body"&gt;
 &lt;LABELS&gt;&lt;LABEL color="#5142E6" variant="solid"&gt;Threat Intelligence&lt;/LABEL&gt;&lt;/LABELS&gt;
 &lt;H1&gt;AI Is Now an End-to-End Attack Vector: &lt;B&gt;Dual Threat Landscape&lt;/B&gt;&lt;/H1&gt;
@@ -218,24 +228,30 @@
 &lt;SMART-LAYOUT variant="starStats" color="#f96c36"&gt;
   94% | 90% | 16%
 &lt;/SMART-LAYOUT&gt;
-&lt;/DIV&gt;&lt;/SECTION&gt;</pre></details></td>
-    </tr>
-    <tr>
-      <td>2</td><td>182</td><td>26</td>
-      <td><span class="chip chip-graph">GRAPH column</span> <span class="chip chip-sl">starStats</span> <span class="chip chip-cols">cols [42,58]</span> <span class="chip chip-labels">LABELS</span></td>
-      <td><details><summary>Show GML (2,691 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank"&gt;
+&lt;/DIV&gt;&lt;/SECTION&gt;</pre></details>
+    </div>
+  </div>
+
+  <div class="card-gml-row">
+    <div class="card-screenshot"><img src="unified-screenshots/consultant/card-03.png" alt="Card 2"></div>
+    <div class="card-gml-details">
+      <div class="card-meta"><span class="card-num">#2</span> 182w | 26 tags | <span class="chip chip-graph">GRAPH column</span> <span class="chip chip-sl">starStats</span> <span class="chip chip-cols">cols [42,58]</span> <span class="chip chip-labels">LABELS</span></div>
+      <details><summary>Show GML (2,691 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank"&gt;
 &lt;H1&gt;Ransomware: More Victims, &lt;B&gt;Smarter Tactics&lt;/B&gt;&lt;/H1&gt;
 &lt;COLUMNS col-widths="[42,58]"&gt;
   &lt;DIV&gt;&lt;GRAPH data-chart-type="column"&gt;...7809, 78, 23, 27...&lt;/GRAPH&gt;&lt;/DIV&gt;
   &lt;DIV data-background-color="#2e2e2e"&gt;...SMB targeting...&lt;/DIV&gt;
 &lt;/COLUMNS&gt;
 &lt;SMART-LAYOUT variant="starStats"&gt;7,809 | 27 sec | 78%&lt;/SMART-LAYOUT&gt;
-&lt;/SECTION&gt;</pre></details></td>
-    </tr>
-    <tr>
-      <td>3</td><td>101</td><td>20</td>
-      <td><span class="chip chip-sl">starStats</span> <span class="chip chip-cols">cols [42,58]</span> <span class="chip chip-labels">LABELS</span> bg:#ffffff</td>
-      <td><details><summary>Show GML (1,753 bytes)</summary><pre class="gml">&lt;SECTION image-layout="top" background-color="#ffffff"&gt;
+&lt;/SECTION&gt;</pre></details>
+    </div>
+  </div>
+
+  <div class="card-gml-row">
+    <div class="card-screenshot"><img src="unified-screenshots/consultant/card-04.png" alt="Card 3"></div>
+    <div class="card-gml-details">
+      <div class="card-meta"><span class="card-num">#3</span> 101w | 20 tags | <span class="chip chip-sl">starStats</span> <span class="chip chip-cols">cols [42,58]</span> <span class="chip chip-labels">LABELS</span> bg:#ffffff</div>
+      <details><summary>Show GML (1,753 bytes)</summary><pre class="gml">&lt;SECTION image-layout="top" background-color="#ffffff"&gt;
 &lt;IMG query="digital network visualization..."&gt;
 &lt;DISPLAY size="xl"&gt;Exploitation now happens &lt;I&gt;before&lt;/I&gt; the patch exists&lt;/DISPLAY&gt;
 &lt;COLUMNS col-widths="[42,58]"&gt;
@@ -244,12 +260,15 @@
   &lt;/DIV&gt;
   &lt;DIV&gt;&lt;H1&gt;Zero-Day Reality: The Patch Race is Over&lt;/H1&gt;...&lt;/DIV&gt;
 &lt;/COLUMNS&gt;
-&lt;/SECTION&gt;</pre></details></td>
-    </tr>
-    <tr>
-      <td>4</td><td>193</td><td>21</td>
-      <td><span class="chip chip-graph">GRAPH column</span> <span class="chip chip-sl">topLineText</span> <span class="chip chip-sl">solidBoxesAlternating</span> <span class="chip chip-labels">LABELS</span></td>
-      <td><details><summary>Show GML (2,934 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank"&gt;
+&lt;/SECTION&gt;</pre></details>
+    </div>
+  </div>
+
+  <div class="card-gml-row">
+    <div class="card-screenshot"><img src="unified-screenshots/consultant/card-05.png" alt="Card 4"></div>
+    <div class="card-gml-details">
+      <div class="card-meta"><span class="card-num">#4</span> 193w | 21 tags | <span class="chip chip-graph">GRAPH column</span> <span class="chip chip-sl">topLineText</span> <span class="chip chip-sl">solidBoxesAlternating</span> <span class="chip chip-labels">LABELS</span></div>
+      <details><summary>Show GML (2,934 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank"&gt;
 &lt;H1&gt;Supply Chain &amp; Edge Devices: &lt;B&gt;The Blind Spots&lt;/B&gt;&lt;/H1&gt;
 &lt;SMART-LAYOUT variant="topLineText"&gt;
   &lt;SMART-LAYOUT-ITEM&gt;&lt;GRAPH&gt;...3-year trend...&lt;/GRAPH&gt;&lt;/SMART-LAYOUT-ITEM&gt;
@@ -258,35 +277,44 @@
 &lt;SMART-LAYOUT variant="solidBoxesAlternating"&gt;
   Supply Chain Acceleration Problem
 &lt;/SMART-LAYOUT&gt;
-&lt;/SECTION&gt;</pre></details></td>
-    </tr>
-    <tr>
-      <td>5</td><td>137</td><td>22</td>
-      <td><span class="chip chip-sl">starStats</span> <span class="chip chip-cols">cols [42,58]</span> <span class="chip chip-labels">LABELS</span></td>
-      <td><details><summary>Show GML (2,058 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank"&gt;
+&lt;/SECTION&gt;</pre></details>
+    </div>
+  </div>
+
+  <div class="card-gml-row">
+    <div class="card-screenshot"><img src="unified-screenshots/consultant/card-06.png" alt="Card 5"></div>
+    <div class="card-gml-details">
+      <div class="card-meta"><span class="card-num">#5</span> 137w | 22 tags | <span class="chip chip-sl">starStats</span> <span class="chip chip-cols">cols [42,58]</span> <span class="chip chip-labels">LABELS</span></div>
+      <details><summary>Show GML (2,058 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank"&gt;
 &lt;H1&gt;Cloud &amp; Identity: &lt;B&gt;The New Perimeter Is Broken&lt;/B&gt;&lt;/H1&gt;
 &lt;COLUMNS col-widths="[42,58]"&gt;
   &lt;DIV&gt;&lt;SMART-LAYOUT variant="starStats"&gt;266% | 40%&lt;/SMART-LAYOUT&gt;&lt;/DIV&gt;
   &lt;DIV data-background-color="#2e2e2e"&gt;...identity battleground...82% malware-free...&lt;/DIV&gt;
 &lt;/COLUMNS&gt;
-&lt;/SECTION&gt;</pre></details></td>
-    </tr>
-    <tr>
-      <td>6</td><td>199</td><td>30</td>
-      <td><span class="chip chip-graph">GRAPH column</span> <span class="chip chip-sl">starStats</span> <span class="chip chip-cols">cols [42,58]</span> <span class="chip chip-labels">LABELS</span></td>
-      <td><details><summary>Show GML (3,123 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank"&gt;
+&lt;/SECTION&gt;</pre></details>
+    </div>
+  </div>
+
+  <div class="card-gml-row">
+    <div class="card-screenshot"><img src="unified-screenshots/consultant/card-07.png" alt="Card 6"></div>
+    <div class="card-gml-details">
+      <div class="card-meta"><span class="card-num">#6</span> 199w | 30 tags | <span class="chip chip-graph">GRAPH column</span> <span class="chip chip-sl">starStats</span> <span class="chip chip-cols">cols [42,58]</span> <span class="chip chip-labels">LABELS</span></div>
+      <details><summary>Show GML (3,123 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank"&gt;
 &lt;H1&gt;Defending in the AI Era: &lt;B&gt;What Actually Works&lt;/B&gt;&lt;/H1&gt;
 &lt;COLUMNS col-widths="[42,58]"&gt;
   &lt;DIV&gt;&lt;GRAPH data-chart-type="column"&gt;...traditional vs AI-driven...&lt;/GRAPH&gt;&lt;/DIV&gt;
   &lt;DIV data-background-color="#2e2e2e"&gt;...defense imperatives...&lt;/DIV&gt;
 &lt;/COLUMNS&gt;
 &lt;SMART-LAYOUT variant="starStats"&gt;80 days | 90% | 7 days&lt;/SMART-LAYOUT&gt;
-&lt;/SECTION&gt;</pre></details></td>
-    </tr>
-    <tr>
-      <td>7</td><td>76</td><td>26</td>
-      <td><span class="chip chip-sl">stats</span> <span class="chip chip-sl">solidJoinedBoxes</span> <span class="chip chip-cols">cols [42,58]</span> <span class="chip chip-labels">LABELS</span></td>
-      <td><details><summary>Show GML (1,643 bytes)</summary><pre class="gml">&lt;SECTION image-layout="top"&gt;
+&lt;/SECTION&gt;</pre></details>
+    </div>
+  </div>
+
+  <div class="card-gml-row">
+    <div class="card-screenshot"><img src="unified-screenshots/consultant/card-08.png" alt="Card 7"></div>
+    <div class="card-gml-details">
+      <div class="card-meta"><span class="card-num">#7</span> 76w | 26 tags | <span class="chip chip-sl">stats</span> <span class="chip chip-sl">solidJoinedBoxes</span> <span class="chip chip-cols">cols [42,58]</span> <span class="chip chip-labels">LABELS</span></div>
+      <details><summary>Show GML (1,643 bytes)</summary><pre class="gml">&lt;SECTION image-layout="top"&gt;
 &lt;IMG query="cybersecurity command center..."&gt;
 &lt;H1&gt;The Window to Act Is Measured in Seconds -- Not Quarters&lt;/H1&gt;
 &lt;COLUMNS col-widths="[42,58]"&gt;
@@ -297,12 +325,15 @@
     &lt;SMART-LAYOUT variant="solidJoinedBoxes"&gt;...&lt;/SMART-LAYOUT&gt;
   &lt;/DIV&gt;
 &lt;/COLUMNS&gt;
-&lt;/SECTION&gt;</pre></details></td>
-    </tr>
-    <tr>
-      <td>8</td><td>110</td><td>32</td>
-      <td><span class="chip chip-sl">stats</span> <span class="chip chip-cols">cols [42,58]</span></td>
-      <td><details><summary>Show GML (2,161 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank"&gt;
+&lt;/SECTION&gt;</pre></details>
+    </div>
+  </div>
+
+  <div class="card-gml-row">
+    <div class="card-screenshot"><img src="unified-screenshots/consultant/card-09.png" alt="Card 8"></div>
+    <div class="card-gml-details">
+      <div class="card-meta"><span class="card-num">#8</span> 110w | 32 tags | <span class="chip chip-sl">stats</span> <span class="chip chip-cols">cols [42,58]</span></div>
+      <details><summary>Show GML (2,161 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank"&gt;
 &lt;H1&gt;&lt;B&gt;2026 Cybersecurity Intelligence&lt;/B&gt; Briefing: Sources &amp; Methodology&lt;/H1&gt;
 &lt;COLUMNS col-widths="[42,58]"&gt;
   &lt;DIV&gt;...7 source links...&lt;/DIV&gt;
@@ -310,9 +341,9 @@
     &lt;SMART-LAYOUT variant="stats"&gt;2.4M+ | 94 countries&lt;/SMART-LAYOUT&gt;
   &lt;/DIV&gt;
 &lt;/COLUMNS&gt;
-&lt;/SECTION&gt;</pre></details></td>
-    </tr>
-  </table>
+&lt;/SECTION&gt;</pre></details>
+    </div>
+  </div>
 
   <!-- 5. Grader Scores -->
   <h3>5. Grader Scores</h3>
@@ -452,7 +483,7 @@
   <table>
     <tr><th>#</th><th>Template</th><th>Score</th><th>Strategy</th><th>Type</th></tr>
     <tr><td>0</td><td><span class="template-golden">minimal-astronomy-card7</span></td><td>6</td><td>full-card</td><td class="template-golden">golden (astronomy)</td></tr>
-    <tr><td>1</td><td>minimal-catalog-images</td><td>7</td><td>full-card</td><td class="template-skeleton">skeleton</td></tr>
+    <tr><td>1</td><td>minimal-catalog-images</td><td>7</td><td>full-card</td><td class="template-hand-authored">hand-authored</td></tr>
     <tr><td>2</td><td><span class="template-golden">minimal-bookshops-card1</span></td><td>3</td><td>full-card</td><td class="template-golden">golden (bookshops)</td></tr>
     <tr><td>3</td><td><span class="template-golden">minimal-astronomy-card5</span></td><td>6</td><td>full-card</td><td class="template-golden">golden (astronomy)</td></tr>
     <tr><td>4</td><td><span class="template-golden">minimal-color-card6</span></td><td>6</td><td>full-card</td><td class="template-golden">golden (color)</td></tr>
@@ -461,16 +492,15 @@
     <tr><td>7</td><td><span class="template-golden">minimal-botaniq-card2</span></td><td>6</td><td>full-card</td><td class="template-golden">golden (botaniq)</td></tr>
     <tr><td>8</td><td><span class="template-golden">minimal-espresso-card4</span></td><td>6</td><td>full-card</td><td class="template-golden">golden (espresso)</td></tr>
   </table>
-  <p style="font-size:12px;color:#888;margin-top:4px;">100% template match rate | 8/9 golden-indexed (astronomy x2, bookshops x2, color x1, drift x1, botaniq x1, espresso x1) | 1 skeleton (catalog-images)</p>
+  <p style="font-size:12px;color:#888;margin-top:4px;">100% template match rate | 8/9 golden-indexed (astronomy x2, bookshops x2, color x1, drift x1, botaniq x1, espresso x1) | 1 hand-authored (catalog-images)</p>
 
   <!-- 4. Generated GML -->
   <h3>4. Generated GML (card by card)</h3>
-  <table>
-    <tr><th>#</th><th>Words</th><th>Tags</th><th>Key Elements</th><th>GML</th></tr>
-    <tr>
-      <td>0</td><td>14</td><td>8</td>
-      <td>behind-image | DISPLAY | bg:#030303</td>
-      <td><details><summary>Show GML (526 bytes)</summary><pre class="gml">&lt;SECTION image-layout="behind" background-color="#030303"&gt;
+    <div class="card-gml-row">
+    <div class="card-screenshot"><img src="unified-screenshots/minimal/card-01.png" alt="Card 0"></div>
+    <div class="card-gml-details">
+      <div class="card-meta"><span class="card-num">#0</span> 14w | 8 tags | behind-image | DISPLAY | bg:#030303</div>
+      <details><summary>Show GML (526 bytes)</summary><pre class="gml">&lt;SECTION image-layout="behind" background-color="#030303"&gt;
 &lt;IMG class="accent-image" query="ancient olive groves in Puglia at golden sunset, gnarled olive trees silhouetted against warm orange sky"&gt;
 &lt;DIV class="body"&gt;
 &lt;DISPLAY size="lg" style="text-align: center"&gt;
@@ -480,12 +510,15 @@
 &lt;SPAN text-color="#FFFFFF"&gt;Liquid gold from the oldest olive groves in Italy&lt;/SPAN&gt;
 &lt;/P&gt;
 &lt;/DIV&gt;
-&lt;/SECTION&gt;</pre></details></td>
-    </tr>
-    <tr>
-      <td>1</td><td>70</td><td>15</td>
-      <td><span class="chip chip-cols">cols [40,60]</span> inline IMG | bg:#f5f0eb</td>
-      <td><details><summary>Show GML (948 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" background-color="#f5f0eb"&gt;
+&lt;/SECTION&gt;</pre></details>
+    </div>
+  </div>
+
+  <div class="card-gml-row">
+    <div class="card-screenshot"><img src="unified-screenshots/minimal/card-02.png" alt="Card 1"></div>
+    <div class="card-gml-details">
+      <div class="card-meta"><span class="card-num">#1</span> 70w | 15 tags | <span class="chip chip-cols">cols [40,60]</span> inline IMG | bg:#f5f0eb</div>
+      <details><summary>Show GML (948 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" background-color="#f5f0eb"&gt;
 &lt;COLUMNS col-widths="[40,60]"&gt;
   &lt;DIV&gt;&lt;IMG query="ancient olive groves..."&gt;&lt;/DIV&gt;
   &lt;DIV&gt;
@@ -493,53 +526,68 @@
     ...heritage prose...
   &lt;/DIV&gt;
 &lt;/COLUMNS&gt;
-&lt;/SECTION&gt;</pre></details></td>
-    </tr>
-    <tr>
-      <td>2</td><td>67</td><td>24</td>
-      <td><span class="chip chip-sl">solidBoxes</span> (2 items) | centered H1</td>
-      <td><details><summary>Show GML (1,156 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" background-color="#f5f0eb"&gt;
+&lt;/SECTION&gt;</pre></details>
+    </div>
+  </div>
+
+  <div class="card-gml-row">
+    <div class="card-screenshot"><img src="unified-screenshots/minimal/card-03.png" alt="Card 2"></div>
+    <div class="card-gml-details">
+      <div class="card-meta"><span class="card-num">#2</span> 67w | 24 tags | <span class="chip chip-sl">solidBoxes</span> (2 items) | centered H1</div>
+      <details><summary>Show GML (1,156 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" background-color="#f5f0eb"&gt;
 &lt;H1 style="text-align: center"&gt;Two Native Cultivars. Infinite Character.&lt;/H1&gt;
 &lt;SMART-LAYOUT variant="solidBoxes"&gt;
   Coratina | Ogliarola
 &lt;/SMART-LAYOUT&gt;
-&lt;/SECTION&gt;</pre></details></td>
-    </tr>
-    <tr>
-      <td>3</td><td>20</td><td>9</td>
-      <td>behind-image | DISPLAY | breather</td>
-      <td><details><summary>Show GML (579 bytes)</summary><pre class="gml">&lt;SECTION image-layout="behind" background-color="#f5f0eb"&gt;
+&lt;/SECTION&gt;</pre></details>
+    </div>
+  </div>
+
+  <div class="card-gml-row">
+    <div class="card-screenshot"><img src="unified-screenshots/minimal/card-04.png" alt="Card 3"></div>
+    <div class="card-gml-details">
+      <div class="card-meta"><span class="card-num">#3</span> 20w | 9 tags | behind-image | DISPLAY | breather</div>
+      <details><summary>Show GML (579 bytes)</summary><pre class="gml">&lt;SECTION image-layout="behind" background-color="#f5f0eb"&gt;
 &lt;IMG class="accent-image" query="ancient stone olive mill..."&gt;
 &lt;DISPLAY size="lg"&gt;Pressed Within Hours of Harvest&lt;/DISPLAY&gt;
 &lt;P&gt;Cold extraction at under 27 C...&lt;/P&gt;
-&lt;/SECTION&gt;</pre></details></td>
-    </tr>
-    <tr>
-      <td>4</td><td>60</td><td>22</td>
-      <td><span class="chip chip-sl">solidBoxes</span> (4 items) <span class="chip chip-cols">cols [32,68]</span></td>
-      <td><details><summary>Show GML (975 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" background-color="#f5f0eb"&gt;
+&lt;/SECTION&gt;</pre></details>
+    </div>
+  </div>
+
+  <div class="card-gml-row">
+    <div class="card-screenshot"><img src="unified-screenshots/minimal/card-05.png" alt="Card 4"></div>
+    <div class="card-gml-details">
+      <div class="card-meta"><span class="card-num">#4</span> 60w | 22 tags | <span class="chip chip-sl">solidBoxes</span> (4 items) <span class="chip chip-cols">cols [32,68]</span></div>
+      <details><summary>Show GML (975 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" background-color="#f5f0eb"&gt;
 &lt;COLUMNS col-widths="[32,68]"&gt;
   &lt;DIV&gt;&lt;SMART-LAYOUT variant="solidBoxes"&gt;
     Hand Harvest | Same-Day Mill | Cold Extract | Inert Storage
   &lt;/SMART-LAYOUT&gt;&lt;/DIV&gt;
   &lt;DIV&gt;&lt;H1&gt;From Grove to Bottle&lt;/H1&gt;...&lt;/DIV&gt;
 &lt;/COLUMNS&gt;
-&lt;/SECTION&gt;</pre></details></td>
-    </tr>
-    <tr>
-      <td>5</td><td>47</td><td>23</td>
-      <td><span class="chip chip-sl">solidBoxes</span> (3 items) | centered H1</td>
-      <td><details><summary>Show GML (1,054 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" background-color="#f5f0eb"&gt;
+&lt;/SECTION&gt;</pre></details>
+    </div>
+  </div>
+
+  <div class="card-gml-row">
+    <div class="card-screenshot"><img src="unified-screenshots/minimal/card-06.png" alt="Card 5"></div>
+    <div class="card-gml-details">
+      <div class="card-meta"><span class="card-num">#5</span> 47w | 23 tags | <span class="chip chip-sl">solidBoxes</span> (3 items) | centered H1</div>
+      <details><summary>Show GML (1,054 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" background-color="#f5f0eb"&gt;
 &lt;H1&gt;Certified Quality. Guaranteed Origin.&lt;/H1&gt;
 &lt;SMART-LAYOUT variant="solidBoxes"&gt;
   DOP Protected | IGP Certified | Organic Standards
 &lt;/SMART-LAYOUT&gt;
-&lt;/SECTION&gt;</pre></details></td>
-    </tr>
-    <tr>
-      <td>6</td><td>30</td><td>33</td>
-      <td><span class="chip chip-sl">solidBoxes</span> (3 items, dark) <span class="chip chip-cols">cols [32,68]</span> inline IMG</td>
-      <td><details><summary>Show GML (1,266 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" background-color="#f5f0eb"&gt;
+&lt;/SECTION&gt;</pre></details>
+    </div>
+  </div>
+
+  <div class="card-gml-row">
+    <div class="card-screenshot"><img src="unified-screenshots/minimal/card-07.png" alt="Card 6"></div>
+    <div class="card-gml-details">
+      <div class="card-meta"><span class="card-num">#6</span> 30w | 33 tags | <span class="chip chip-sl">solidBoxes</span> (3 items, dark) <span class="chip chip-cols">cols [32,68]</span> inline IMG</div>
+      <details><summary>Show GML (1,266 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" background-color="#f5f0eb"&gt;
 &lt;COLUMNS col-widths="[32,68]"&gt;
   &lt;DIV&gt;&lt;IMG query="olive oil tasting..."&gt;&lt;/DIV&gt;
   &lt;DIV&gt;
@@ -549,28 +597,34 @@
     &lt;/SMART-LAYOUT&gt;
   &lt;/DIV&gt;
 &lt;/COLUMNS&gt;
-&lt;/SECTION&gt;</pre></details></td>
-    </tr>
-    <tr>
-      <td>7</td><td>25</td><td>9</td>
-      <td>behind-image | closing CTA</td>
-      <td><details><summary>Show GML (600 bytes)</summary><pre class="gml">&lt;SECTION image-layout="behind" background-color="#f5f0eb"&gt;
+&lt;/SECTION&gt;</pre></details>
+    </div>
+  </div>
+
+  <div class="card-gml-row">
+    <div class="card-screenshot"><img src="unified-screenshots/minimal/card-08.png" alt="Card 7"></div>
+    <div class="card-gml-details">
+      <div class="card-meta"><span class="card-num">#7</span> 25w | 9 tags | behind-image | closing CTA</div>
+      <details><summary>Show GML (600 bytes)</summary><pre class="gml">&lt;SECTION image-layout="behind" background-color="#f5f0eb"&gt;
 &lt;IMG class="accent-image" query="elegant olive oil bottles..."&gt;
 &lt;H1&gt;Let's Bring Puglia to Your Market&lt;/H1&gt;
 &lt;P&gt;Ready to partner with heritage?...&lt;/P&gt;
-&lt;/SECTION&gt;</pre></details></td>
-    </tr>
-    <tr>
-      <td>8</td><td>23</td><td>15</td>
-      <td><span class="chip chip-sl">solidBoxes</span> (2 items, colored)</td>
-      <td><details><summary>Show GML (680 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" background-color="#f5f0eb"&gt;
+&lt;/SECTION&gt;</pre></details>
+    </div>
+  </div>
+
+  <div class="card-gml-row">
+    <div class="card-screenshot"><img src="unified-screenshots/minimal/card-09.png" alt="Card 8"></div>
+    <div class="card-gml-details">
+      <div class="card-meta"><span class="card-num">#8</span> 23w | 15 tags | <span class="chip chip-sl">solidBoxes</span> (2 items, colored)</div>
+      <details><summary>Show GML (680 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" background-color="#f5f0eb"&gt;
 &lt;H1&gt;Sources&lt;/H1&gt;
 &lt;SMART-LAYOUT variant="solidBoxes"&gt;
   l'OlivoNews (#030303) | Observatory of Economic Complexity (#e57435)
 &lt;/SMART-LAYOUT&gt;
-&lt;/SECTION&gt;</pre></details></td>
-    </tr>
-  </table>
+&lt;/SECTION&gt;</pre></details>
+    </div>
+  </div>
 
   <!-- 5. Grader Scores -->
   <h3>5. Grader Scores</h3>
@@ -679,47 +733,52 @@
   <h3>3. Template Matching (card by card)</h3>
   <table>
     <tr><th>#</th><th>Template</th><th>Score</th><th>Strategy</th><th>Type</th></tr>
-    <tr><td>0</td><td>swiss-breather-light</td><td>2</td><td>full-card</td><td class="template-skeleton">skeleton</td></tr>
-    <tr><td>1</td><td>swiss-asymmetric-heavy</td><td>7</td><td>full-card</td><td class="template-skeleton">skeleton</td></tr>
-    <tr><td>2</td><td>swiss-dense-grid</td><td>7</td><td>full-card</td><td class="template-skeleton">skeleton</td></tr>
-    <tr><td>3</td><td>swiss-closing-mirror</td><td>2</td><td>full-card</td><td class="template-skeleton">skeleton</td></tr>
-    <tr><td>4</td><td>swiss-data-context</td><td>4</td><td>full-card</td><td class="template-skeleton">skeleton</td></tr>
-    <tr><td>5</td><td>swiss-section-divider</td><td>6</td><td>full-card</td><td class="template-skeleton">skeleton</td></tr>
-    <tr><td>6</td><td>swiss-pull-quote-dark</td><td>3</td><td>full-card</td><td class="template-skeleton">skeleton</td></tr>
-    <tr><td>7</td><td>swiss-title-dark</td><td>2</td><td>full-card</td><td class="template-skeleton">skeleton</td></tr>
-    <tr><td>8</td><td>swiss-asymmetric-heavy</td><td>2</td><td>full-card</td><td class="template-skeleton">skeleton</td></tr>
+    <tr><td>0</td><td>swiss-breather-light</td><td>2</td><td>full-card</td><td class="template-hand-authored">hand-authored</td></tr>
+    <tr><td>1</td><td>swiss-asymmetric-heavy</td><td>7</td><td>full-card</td><td class="template-hand-authored">hand-authored</td></tr>
+    <tr><td>2</td><td>swiss-dense-grid</td><td>7</td><td>full-card</td><td class="template-hand-authored">hand-authored</td></tr>
+    <tr><td>3</td><td>swiss-closing-mirror</td><td>2</td><td>full-card</td><td class="template-hand-authored">hand-authored</td></tr>
+    <tr><td>4</td><td>swiss-data-context</td><td>4</td><td>full-card</td><td class="template-hand-authored">hand-authored</td></tr>
+    <tr><td>5</td><td>swiss-section-divider</td><td>6</td><td>full-card</td><td class="template-hand-authored">hand-authored</td></tr>
+    <tr><td>6</td><td>swiss-pull-quote-dark</td><td>3</td><td>full-card</td><td class="template-hand-authored">hand-authored</td></tr>
+    <tr><td>7</td><td>swiss-title-dark</td><td>2</td><td>full-card</td><td class="template-hand-authored">hand-authored</td></tr>
+    <tr><td>8</td><td>swiss-asymmetric-heavy</td><td>2</td><td>full-card</td><td class="template-hand-authored">hand-authored</td></tr>
   </table>
-  <p style="font-size:12px;color:#888;margin-top:4px;">100% template match rate | 0/9 golden-indexed (all skeleton templates) | 8 distinct templates, asymmetric-heavy used 2x</p>
+  <p style="font-size:12px;color:#888;margin-top:4px;">100% template match rate | 0/9 golden-indexed (all hand-authored templates) | 8 distinct templates, asymmetric-heavy used 2x</p>
 
   <!-- 4. Generated GML -->
   <h3>4. Generated GML (card by card)</h3>
-  <table>
-    <tr><th>#</th><th>Words</th><th>Tags</th><th>Key Elements</th><th>GML</th></tr>
-    <tr>
-      <td>0</td><td>16</td><td>7</td>
-      <td>behind-image | H1 | bg:#1a1a1a | v-align:end</td>
-      <td><details><summary>Show GML (456 bytes)</summary><pre class="gml">&lt;SECTION image-layout="behind" vertical-align="end" background-color="#1a1a1a"&gt;
+    <div class="card-gml-row">
+    <div class="card-screenshot"><img src="unified-screenshots/swiss/card-01.png" alt="Card 0"></div>
+    <div class="card-gml-details">
+      <div class="card-meta"><span class="card-num">#0</span> 16w | 7 tags | behind-image | H1 | bg:#1a1a1a | v-align:end</div>
+      <details><summary>Show GML (456 bytes)</summary><pre class="gml">&lt;SECTION image-layout="behind" vertical-align="end" background-color="#1a1a1a"&gt;
 &lt;IMG class="accent-image" query="Bauhaus building facade geometric architecture dramatic lighting black and white modernist concrete glass steel"&gt;
 &lt;DIV class="body"&gt;
 &lt;H1&gt;&lt;SPAN text-color="#f8f8f8"&gt;Bauhaus Design Principles in Modern UI&lt;/SPAN&gt;&lt;/H1&gt;
 &lt;P font-size="sm"&gt;&lt;SPAN text-color="#727271"&gt;From Weimar, 1919 -- to the interfaces we build today&lt;/SPAN&gt;&lt;/P&gt;
 &lt;/DIV&gt;
-&lt;/SECTION&gt;</pre></details></td>
-    </tr>
-    <tr>
-      <td>1</td><td>67</td><td>22</td>
-      <td><span class="chip chip-sl">timeline</span> (4 items) | H2 | v-align:start</td>
-      <td><details><summary>Show GML (1,143 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" vertical-align="start"&gt;
+&lt;/SECTION&gt;</pre></details>
+    </div>
+  </div>
+
+  <div class="card-gml-row">
+    <div class="card-screenshot"><img src="unified-screenshots/swiss/card-02.png" alt="Card 1"></div>
+    <div class="card-gml-details">
+      <div class="card-meta"><span class="card-num">#1</span> 67w | 22 tags | <span class="chip chip-sl">timeline</span> (4 items) | H2 | v-align:start</div>
+      <details><summary>Show GML (1,143 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" vertical-align="start"&gt;
 &lt;H2&gt;A Century of Radical Simplicity&lt;/H2&gt;
 &lt;SMART-LAYOUT variant="timeline"&gt;
   1919 Weimar Foundation | 1933 Forced Diaspora | 1950s Corporate Identity | 2010s Digital Renaissance
 &lt;/SMART-LAYOUT&gt;
-&lt;/SECTION&gt;</pre></details></td>
-    </tr>
-    <tr>
-      <td>2</td><td>93</td><td>17</td>
-      <td><span class="chip chip-cols">cols [31,69]</span> inline IMG | H4 sub-headers | v-align:start</td>
-      <td><details><summary>Show GML (1,185 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" vertical-align="start"&gt;
+&lt;/SECTION&gt;</pre></details>
+    </div>
+  </div>
+
+  <div class="card-gml-row">
+    <div class="card-screenshot"><img src="unified-screenshots/swiss/card-03.png" alt="Card 2"></div>
+    <div class="card-gml-details">
+      <div class="card-meta"><span class="card-num">#2</span> 93w | 17 tags | <span class="chip chip-cols">cols [31,69]</span> inline IMG | H4 sub-headers | v-align:start</div>
+      <details><summary>Show GML (1,185 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" vertical-align="start"&gt;
 &lt;H2&gt;Three Principles That Still Govern Every Screen&lt;/H2&gt;
 &lt;COLUMNS col-widths="[31,69]"&gt;
   &lt;DIV&gt;&lt;IMG query="classic Bauhaus poster..."&gt;&lt;/DIV&gt;
@@ -727,21 +786,27 @@
     Form Follows Function | Geometric Simplicity | Unity of Art and Craft
   &lt;/DIV&gt;
 &lt;/COLUMNS&gt;
-&lt;/SECTION&gt;</pre></details></td>
-    </tr>
-    <tr>
-      <td>3</td><td>21</td><td>7</td>
-      <td>behind-image | pull-quote H1 | bg:#2C3E50 | v-align:end</td>
-      <td><details><summary>Show GML (469 bytes)</summary><pre class="gml">&lt;SECTION image-layout="behind" vertical-align="end" background-color="#2C3E50"&gt;
+&lt;/SECTION&gt;</pre></details>
+    </div>
+  </div>
+
+  <div class="card-gml-row">
+    <div class="card-screenshot"><img src="unified-screenshots/swiss/card-04.png" alt="Card 3"></div>
+    <div class="card-gml-details">
+      <div class="card-meta"><span class="card-num">#3</span> 21w | 7 tags | behind-image | pull-quote H1 | bg:#2C3E50 | v-align:end</div>
+      <details><summary>Show GML (469 bytes)</summary><pre class="gml">&lt;SECTION image-layout="behind" vertical-align="end" background-color="#2C3E50"&gt;
 &lt;IMG class="accent-image" query="geometric minimalist pattern..."&gt;
 &lt;H1&gt;"Less is not more. Less is only more when more is no good."&lt;/H1&gt;
 &lt;P font-size="sm"&gt;-- Frank Lloyd Wright, on the Bauhaus legacy&lt;/P&gt;
-&lt;/SECTION&gt;</pre></details></td>
-    </tr>
-    <tr>
-      <td>4</td><td>91</td><td>18</td>
-      <td><span class="chip chip-cols">cols [63,37]</span> inline IMG | H2+H4 hierarchy | text-color hierarchy</td>
-      <td><details><summary>Show GML (1,247 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" vertical-align="start"&gt;
+&lt;/SECTION&gt;</pre></details>
+    </div>
+  </div>
+
+  <div class="card-gml-row">
+    <div class="card-screenshot"><img src="unified-screenshots/swiss/card-05.png" alt="Card 4"></div>
+    <div class="card-gml-details">
+      <div class="card-meta"><span class="card-num">#4</span> 91w | 18 tags | <span class="chip chip-cols">cols [63,37]</span> inline IMG | H2+H4 hierarchy | text-color hierarchy</div>
+      <details><summary>Show GML (1,247 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" vertical-align="start"&gt;
 &lt;COLUMNS col-widths="[63,37]"&gt;
   &lt;DIV&gt;
     &lt;H2&gt;Typography &amp; Color: The Bauhaus Toolkit&lt;/H2&gt;
@@ -751,24 +816,30 @@
     &lt;IMG&gt; Primary Palette | Modern Echo
   &lt;/DIV&gt;
 &lt;/COLUMNS&gt;
-&lt;/SECTION&gt;</pre></details></td>
-    </tr>
-    <tr>
-      <td>5</td><td>44</td><td>21</td>
-      <td><span class="chip chip-cols">cols [46,54]</span> H4 catalog rows | bg:#f8f8f8 | v-align:end</td>
-      <td><details><summary>Show GML (979 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" vertical-align="end" background-color="#f8f8f8"&gt;
+&lt;/SECTION&gt;</pre></details>
+    </div>
+  </div>
+
+  <div class="card-gml-row">
+    <div class="card-screenshot"><img src="unified-screenshots/swiss/card-06.png" alt="Card 5"></div>
+    <div class="card-gml-details">
+      <div class="card-meta"><span class="card-num">#5</span> 44w | 21 tags | <span class="chip chip-cols">cols [46,54]</span> H4 catalog rows | bg:#f8f8f8 | v-align:end</div>
+      <details><summary>Show GML (979 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" vertical-align="end" background-color="#f8f8f8"&gt;
 &lt;COLUMNS col-widths="[46,54]"&gt;
   &lt;DIV&gt;&lt;H2&gt;Bauhaus in the Wild&lt;/H2&gt;&lt;/DIV&gt;
   &lt;DIV&gt;
     GOOGLE MATERIAL | APPLE INTERFACE | FIGMA COMPONENTS
   &lt;/DIV&gt;
 &lt;/COLUMNS&gt;
-&lt;/SECTION&gt;</pre></details></td>
-    </tr>
-    <tr>
-      <td>6</td><td>68</td><td>14</td>
-      <td><span class="chip chip-cols">cols [63,37]</span> inline IMG | prose-heavy left col | v-align:start</td>
-      <td><details><summary>Show GML (1,051 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" vertical-align="start"&gt;
+&lt;/SECTION&gt;</pre></details>
+    </div>
+  </div>
+
+  <div class="card-gml-row">
+    <div class="card-screenshot"><img src="unified-screenshots/swiss/card-07.png" alt="Card 6"></div>
+    <div class="card-gml-details">
+      <div class="card-meta"><span class="card-num">#6</span> 68w | 14 tags | <span class="chip chip-cols">cols [63,37]</span> inline IMG | prose-heavy left col | v-align:start</div>
+      <details><summary>Show GML (1,051 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" vertical-align="start"&gt;
 &lt;COLUMNS col-widths="[63,37]"&gt;
   &lt;DIV&gt;
     &lt;H2&gt;The Grid Never Left -- It Just Went Digital&lt;/H2&gt;
@@ -776,21 +847,27 @@
   &lt;/DIV&gt;
   &lt;DIV data-vertical-align="center"&gt;&lt;IMG query="modern design system..."&gt;&lt;/DIV&gt;
 &lt;/COLUMNS&gt;
-&lt;/SECTION&gt;</pre></details></td>
-    </tr>
-    <tr>
-      <td>7</td><td>19</td><td>7</td>
-      <td>behind-image | H1 bold+muted | bg:#f8f8f8 | v-align:end</td>
-      <td><details><summary>Show GML (491 bytes)</summary><pre class="gml">&lt;SECTION image-layout="behind" vertical-align="end" background-color="#f8f8f8"&gt;
+&lt;/SECTION&gt;</pre></details>
+    </div>
+  </div>
+
+  <div class="card-gml-row">
+    <div class="card-screenshot"><img src="unified-screenshots/swiss/card-08.png" alt="Card 7"></div>
+    <div class="card-gml-details">
+      <div class="card-meta"><span class="card-num">#7</span> 19w | 7 tags | behind-image | H1 bold+muted | bg:#f8f8f8 | v-align:end</div>
+      <details><summary>Show GML (491 bytes)</summary><pre class="gml">&lt;SECTION image-layout="behind" vertical-align="end" background-color="#f8f8f8"&gt;
 &lt;IMG class="accent-image" query="clean geometric workspace..."&gt;
 &lt;H1&gt;Design with Purpose -- &lt;SPAN text-color="#727271"&gt;Every Element Must Earn Its Place&lt;/SPAN&gt;&lt;/H1&gt;
 &lt;P font-size="sm"&gt;&lt;SPAN text-color="#8fa8b8"&gt;Apply these principles. Build with intention.&lt;/SPAN&gt;&lt;/P&gt;
-&lt;/SECTION&gt;</pre></details></td>
-    </tr>
-    <tr>
-      <td>8</td><td>75</td><td>24</td>
-      <td><span class="chip chip-cols">cols [42,58]</span> + <span class="chip chip-cols">cols [31,69]</span> stacked | empty-col offset | v-align:end</td>
-      <td><details><summary>Show GML (1,588 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" vertical-align="end"&gt;
+&lt;/SECTION&gt;</pre></details>
+    </div>
+  </div>
+
+  <div class="card-gml-row">
+    <div class="card-screenshot"><img src="unified-screenshots/swiss/card-09.png" alt="Card 8"></div>
+    <div class="card-gml-details">
+      <div class="card-meta"><span class="card-num">#8</span> 75w | 24 tags | <span class="chip chip-cols">cols [42,58]</span> + <span class="chip chip-cols">cols [31,69]</span> stacked | empty-col offset | v-align:end</div>
+      <details><summary>Show GML (1,588 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" vertical-align="end"&gt;
 &lt;COLUMNS col-widths="[42,58]"&gt;
   &lt;DIV&gt;&lt;H2&gt;Sources&lt;/H2&gt;&lt;/DIV&gt;
   &lt;DIV&gt;&lt;/DIV&gt; &lt;!-- empty offset --&gt;
@@ -799,9 +876,9 @@
   &lt;DIV&gt;&lt;/DIV&gt; &lt;!-- empty offset --&gt;
   &lt;DIV&gt;...6 source links...&lt;/DIV&gt;
 &lt;/COLUMNS&gt;
-&lt;/SECTION&gt;</pre></details></td>
-    </tr>
-  </table>
+&lt;/SECTION&gt;</pre></details>
+    </div>
+  </div>
 
   <!-- 5. Grader Scores -->
   <h3>5. Grader Scores</h3>
