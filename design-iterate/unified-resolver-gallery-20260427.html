@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unified Resolver — All Guides Gallery</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #e0e0e0; padding: 24px; }
+  h1 { font-size: 28px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .subtitle { color: #888; font-size: 13px; margin-bottom: 24px; }
+  .section { margin-bottom: 48px; }
+  .section-title { font-size: 22px; font-weight: 600; color: #fff; border-bottom: 1px solid #333; padding-bottom: 8px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: baseline; }
+  .section-meta { font-size: 13px; color: #888; font-weight: 400; }
+
+  .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
+  .summary-card { background: #1a1a1a; border-radius: 12px; padding: 20px; border: 1px solid #222; }
+  .summary-card h3 { font-size: 16px; color: #fff; margin-bottom: 12px; }
+  .summary-score { font-size: 42px; font-weight: 800; margin-bottom: 4px; }
+  .summary-score.high { color: #4ade80; }
+  .summary-score.mid { color: #f0c040; }
+  .summary-score.low { color: #f96c36; }
+  .summary-detail { font-size: 12px; color: #888; line-height: 1.6; }
+
+  .scorecard { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+  .chip { font-size: 11px; padding: 3px 10px; border-radius: 4px; font-weight: 600; }
+  .chip.pass { background: rgba(74,222,128,0.12); color: #4ade80; }
+  .chip.fail { background: rgba(249,108,54,0.12); color: #f96c36; }
+
+  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .card-frame { background: #1a1a1a; border-radius: 8px; overflow: hidden; border: 1px solid #222; }
+  .card-frame img { width: 100%; display: block; }
+  .card-meta { padding: 8px 12px; font-size: 11px; color: #888; }
+
+  .findings { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 16px 20px; font-size: 13px; line-height: 1.8; margin-bottom: 24px; }
+  .findings strong { color: #ccc; }
+  .findings .win { color: #4ade80; }
+  .findings .issue { color: #f96c36; }
+
+  .pipeline-note { background: #1a1a2e; border: 1px solid #5142E6; border-radius: 8px; padding: 16px 20px; font-size: 13px; margin-bottom: 32px; }
+  .pipeline-note strong { color: #fff; }
+</style>
+</head>
+<body>
+
+<h1>Unified Resolver — Full-Card Golden Templates</h1>
+<p class="subtitle">All three guides &middot; single LLM call per card (remix-style) &middot; 2026-04-27</p>
+
+<div class="pipeline-note">
+  <strong>Pipeline:</strong> Gen3 planLayout (pre-matches golden template per card) &rarr; Gen3 writeOutline (template-aware) &rarr; Unified Resolver (golden GML as reference, T=0.3, single call) &rarr; Enrich &rarr; Process &rarr; Render &rarr; Upload &rarr; Grade<br>
+  <strong>Key change:</strong> Templates are full golden example cards with real content (not skeletons). The LLM sees a complete reference card and reproduces the structure with new content &mdash; same as remix.
+</div>
+
+<div class="summary-grid">
+  <div class="summary-card">
+    <h3>Consultant</h3>
+    <div class="summary-score high">11/13</div>
+    <div class="summary-detail">
+      85% passing &middot; 9/9 full-card &middot; 142s gen time<br>
+      56 templates loaded (40 golden + 16 skeleton)<br>
+      Prompt: "Cybersecurity trends and threat landscape 2026"
+    </div>
+  </div>
+  <div class="summary-card">
+    <h3>Minimal</h3>
+    <div class="summary-score mid">4/8</div>
+    <div class="summary-detail">
+      50% passing &middot; 9/9 full-card &middot; 171s gen time<br>
+      76 templates loaded (66 golden + 10 skeleton)<br>
+      Prompt: "Artisan olive oil from Puglia"
+    </div>
+  </div>
+  <div class="summary-card">
+    <h3>Swiss</h3>
+    <div class="summary-score mid">9/14</div>
+    <div class="summary-detail">
+      64% passing &middot; 9/9 full-card &middot; 412s gen time<br>
+      8 templates loaded (skeleton only, no golden GML examples)<br>
+      Prompt: "Bauhaus design principles in modern UI"
+    </div>
+  </div>
+</div>
+
+<!-- CONSULTANT -->
+<div class="section">
+  <div class="section-title">Consultant <span class="section-meta">9 cards &middot; avg 131 words &middot; 4 graphs</span></div>
+  <div class="scorecard">
+    <span class="chip fail">density-compliance</span>
+    <span class="chip pass">diagram-presence</span>
+    <span class="chip pass">data-structure-variety</span>
+    <span class="chip pass">chart-density</span>
+    <span class="chip pass">label-coverage</span>
+    <span class="chip pass">multi-zone</span>
+    <span class="chip pass">structural-fidelity</span>
+    <span class="chip pass">column-balance</span>
+    <span class="chip pass">wasted-space</span>
+    <span class="chip fail">alignment-consistency</span>
+    <span class="chip pass">layout-variety</span>
+    <span class="chip pass">title-quality</span>
+    <span class="chip pass">narrative-arc</span>
+  </div>
+  <div class="gallery">
+    <div class="card-frame"><img src="unified-screenshots/consultant/card-01.png" loading="lazy"><div class="card-meta">Card 1 &mdash; Title</div></div>
+    <div class="card-frame"><img src="unified-screenshots/consultant/card-02.png" loading="lazy"><div class="card-meta">Card 2 &mdash; AI Threats</div></div>
+    <div class="card-frame"><img src="unified-screenshots/consultant/card-03.png" loading="lazy"><div class="card-meta">Card 3 &mdash; Ransomware</div></div>
+    <div class="card-frame"><img src="unified-screenshots/consultant/card-04.png" loading="lazy"><div class="card-meta">Card 4 &mdash; Zero-Day</div></div>
+    <div class="card-frame"><img src="unified-screenshots/consultant/card-05.png" loading="lazy"><div class="card-meta">Card 5 &mdash; Supply Chain</div></div>
+    <div class="card-frame"><img src="unified-screenshots/consultant/card-06.png" loading="lazy"><div class="card-meta">Card 6 &mdash; Cloud &amp; Identity</div></div>
+    <div class="card-frame"><img src="unified-screenshots/consultant/card-07.png" loading="lazy"><div class="card-meta">Card 7 &mdash; Defense</div></div>
+    <div class="card-frame"><img src="unified-screenshots/consultant/card-08.png" loading="lazy"><div class="card-meta">Card 8 &mdash; CTA</div></div>
+    <div class="card-frame"><img src="unified-screenshots/consultant/card-09.png" loading="lazy"><div class="card-meta">Card 9 &mdash; Sources</div></div>
+  </div>
+</div>
+
+<!-- MINIMAL -->
+<div class="section">
+  <div class="section-title">Minimal <span class="section-meta">9 cards &middot; avg 40 words &middot; 0 graphs</span></div>
+  <div class="scorecard">
+    <span class="chip fail">behind-image-ratio</span>
+    <span class="chip pass">display-usage</span>
+    <span class="chip fail">content-sparsity</span>
+    <span class="chip pass">bg-alternation</span>
+    <span class="chip pass">variant-restraint</span>
+    <span class="chip fail">structural-fidelity</span>
+    <span class="chip pass">layout-variety</span>
+    <span class="chip fail">atmospheric-queries</span>
+  </div>
+  <div class="gallery">
+    <div class="card-frame"><img src="unified-screenshots/minimal/card-01.png" loading="lazy"><div class="card-meta">Card 1 &mdash; Title</div></div>
+    <div class="card-frame"><img src="unified-screenshots/minimal/card-02.png" loading="lazy"><div class="card-meta">Card 2</div></div>
+    <div class="card-frame"><img src="unified-screenshots/minimal/card-03.png" loading="lazy"><div class="card-meta">Card 3</div></div>
+    <div class="card-frame"><img src="unified-screenshots/minimal/card-04.png" loading="lazy"><div class="card-meta">Card 4</div></div>
+    <div class="card-frame"><img src="unified-screenshots/minimal/card-05.png" loading="lazy"><div class="card-meta">Card 5</div></div>
+    <div class="card-frame"><img src="unified-screenshots/minimal/card-06.png" loading="lazy"><div class="card-meta">Card 6</div></div>
+    <div class="card-frame"><img src="unified-screenshots/minimal/card-07.png" loading="lazy"><div class="card-meta">Card 7</div></div>
+    <div class="card-frame"><img src="unified-screenshots/minimal/card-08.png" loading="lazy"><div class="card-meta">Card 8</div></div>
+    <div class="card-frame"><img src="unified-screenshots/minimal/card-09.png" loading="lazy"><div class="card-meta">Card 9</div></div>
+  </div>
+</div>
+
+<!-- SWISS -->
+<div class="section">
+  <div class="section-title">Swiss <span class="section-meta">9 cards &middot; avg 55 words &middot; 0 graphs</span></div>
+  <div class="scorecard">
+    <span class="chip pass">image-load-failure</span>
+    <span class="chip fail">grid-card</span>
+    <span class="chip fail">grid-deck</span>
+    <span class="chip fail">visual-card</span>
+    <span class="chip pass">visual-deck</span>
+    <span class="chip fail">prose-card</span>
+    <span class="chip pass">prose-deck</span>
+    <span class="chip pass">accidental-alignment</span>
+    <span class="chip pass">heading-word-break</span>
+    <span class="chip pass">bg-color-variety</span>
+    <span class="chip pass">vertical-align-variety</span>
+    <span class="chip pass">text-color-hierarchy</span>
+    <span class="chip fail">accent-color-in-headings</span>
+    <span class="chip pass">prose-density</span>
+  </div>
+  <div class="gallery">
+    <div class="card-frame"><img src="unified-screenshots/swiss/card-01.png" loading="lazy"><div class="card-meta">Card 1 &mdash; Title</div></div>
+    <div class="card-frame"><img src="unified-screenshots/swiss/card-02.png" loading="lazy"><div class="card-meta">Card 2</div></div>
+    <div class="card-frame"><img src="unified-screenshots/swiss/card-03.png" loading="lazy"><div class="card-meta">Card 3</div></div>
+    <div class="card-frame"><img src="unified-screenshots/swiss/card-04.png" loading="lazy"><div class="card-meta">Card 4</div></div>
+    <div class="card-frame"><img src="unified-screenshots/swiss/card-05.png" loading="lazy"><div class="card-meta">Card 5</div></div>
+    <div class="card-frame"><img src="unified-screenshots/swiss/card-06.png" loading="lazy"><div class="card-meta">Card 6</div></div>
+    <div class="card-frame"><img src="unified-screenshots/swiss/card-07.png" loading="lazy"><div class="card-meta">Card 7</div></div>
+    <div class="card-frame"><img src="unified-screenshots/swiss/card-08.png" loading="lazy"><div class="card-meta">Card 8</div></div>
+    <div class="card-frame"><img src="unified-screenshots/swiss/card-09.png" loading="lazy"><div class="card-meta">Card 9</div></div>
+  </div>
+</div>
+
+<!-- FINDINGS -->
+<div class="section">
+  <div class="section-title">Key Findings</div>
+  <div class="findings">
+    <strong class="win">Gen3 outlining works correctly</strong> &mdash; all three guides produced 9-card outlines with rich content, citations, and card instructions. No hangs. Outline generation took ~2 min per guide.<br><br>
+    <strong class="win">Full-card golden templates deliver biggest impact on consultant</strong> &mdash; structural-fidelity and layout-variety both went from FAIL to PASS. 40 golden templates give enough coverage for every card to match.<br><br>
+    <strong class="win">30% generation speedup</strong> &mdash; single LLM call per card (unified resolver) vs two calls (structure+resolve). Consultant: 142s vs ~200s.<br><br>
+    <strong class="win">100% template match rate</strong> across all three guides &mdash; every card found a matching golden template.<br><br>
+    <strong class="issue">Minimal regressions</strong> &mdash; behind-image-ratio and atmospheric-queries regressed vs prior iterations. The golden template pool includes non-behind layouts and some functional image queries that shouldn't be minimal templates. Needs template curation.<br><br>
+    <strong class="issue">Swiss limited by template count</strong> &mdash; only 8 skeleton templates (no GML goldens exist for swiss). Swiss needs golden example decks created and indexed.<br><br>
+    <strong class="issue">Consultant density-compliance still failing</strong> &mdash; avg 131 words/card, target 150-250. The golden templates from some decks have lower density than the guide target. May need to filter goldens by density.
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Next Steps</div>
+  <div class="findings">
+    1. <strong>Curate minimal golden templates</strong> &mdash; filter to behind-image cards with atmospheric queries only<br>
+    2. <strong>Create swiss GML golden examples</strong> &mdash; generate + curate 5-10 decks, then index<br>
+    3. <strong>Filter consultant goldens by density</strong> &mdash; exclude cards below 150 words<br>
+    4. <strong>Run design-iterate loops</strong> with the unified resolver to measure convergence speed<br>
+    5. <strong>Spatial template derivation</strong> (deferred) &mdash; derive spatial region maps from goldens if full-card needs creative latitude fallback
+  </div>
+</div>
+
+</body>
+</html>
