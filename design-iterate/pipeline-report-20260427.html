@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unified Resolver Pipeline Report — 2026-04-27</title>
+<title>Golden Template Pipeline Report — 2026-04-27</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: #0a0a0a; color: #e0e0e0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 24px; line-height: 1.5; }
@@ -55,6 +55,7 @@
   .card-gml-row .card-gml-details { flex: 1; min-width: 0; }
   .card-gml-row .card-meta { font-size: 12px; color: #888; margin-bottom: 6px; }
   .card-gml-row .card-meta .card-num { font-weight: 700; color: #ccc; font-size: 14px; margin-right: 8px; }
+  .card-description { font-size: 13px; color: #b0b0b0; margin: 6px 0 8px; padding: 8px 12px; background: #151515; border-left: 3px solid #444; border-radius: 2px; line-height: 1.5; }
 
   /* Grader scores */
   .grader-row { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid #1a1a1a; }
@@ -87,14 +88,212 @@
   .chip-sl { background: #2a1a3a; color: #ba68c8; }
   .chip-cols { background: #1a3a2a; color: #66bb6a; }
   .chip-labels { background: #3a2a1a; color: #ffa726; }
+
+  /* How It Works section */
+  .how-it-works { background: #111; border: 1px solid #2a2a2a; border-radius: 8px; padding: 24px; margin-bottom: 32px; }
+  .how-it-works h3 { margin-top: 20px; }
+  .how-it-works h3:first-of-type { margin-top: 0; }
+  .how-it-works p { font-size: 14px; color: #bbb; margin: 6px 0; line-height: 1.6; }
+  .how-it-works ul { font-size: 14px; color: #bbb; margin: 6px 0 6px 20px; line-height: 1.7; }
+  .how-it-works li { margin: 4px 0; }
+  .how-it-works code { font-family: 'SF Mono', Monaco, monospace; font-size: 12px; background: #1a1a1a; padding: 2px 6px; border-radius: 3px; color: #e0e0e0; }
+  .pipeline-diagram { background: #0d0d0d; border: 1px solid #222; border-radius: 6px; padding: 16px 20px; font-family: 'SF Mono', Monaco, monospace; font-size: 13px; color: #aaa; white-space: pre; overflow-x: auto; margin: 12px 0; line-height: 1.6; }
+  .def-term { color: #f0c040; font-weight: 600; }
+  .def-desc { color: #bbb; }
+
+  /* Results summary */
+  .results-summary { background: linear-gradient(135deg, #1a2a1a 0%, #111 100%); border: 1px solid #2e7d32; border-radius: 8px; padding: 20px 24px; margin-bottom: 32px; }
+  .results-summary h2 { margin: 0 0 12px; border: none; padding: 0; }
+  .results-summary p { font-size: 14px; color: #ccc; margin: 6px 0; line-height: 1.6; }
+  .results-summary .big-stat { font-size: 28px; font-weight: 700; color: #4caf50; }
+
+  /* Golden examples gallery */
+  .golden-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin: 12px 0; }
+  .golden-gallery .golden-card { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 6px; overflow: hidden; }
+  .golden-gallery .golden-card img { width: 100%; display: block; }
+  .golden-gallery .golden-card .golden-caption { padding: 8px 10px; font-size: 11px; color: #888; }
+
+  /* Score explanation */
+  .score-explain { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 12px 0; }
+  .score-explain .score-box { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 6px; padding: 12px; text-align: center; }
+  .score-explain .score-num { font-size: 24px; font-weight: 700; }
+  .score-explain .score-label { font-size: 12px; color: #888; margin-top: 4px; }
 </style>
 </head>
 <body>
 
-<h1>Unified Resolver Pipeline Report</h1>
-<p style="color: #888; margin-bottom: 24px;">Generated from 3 guide runs on <strong>2026-04-27</strong> | Prompt: design-iterate unified-iter-1</p>
+<h1>Golden Template Pipeline Report</h1>
+<p style="color: #888; margin-bottom: 24px;">Generating slide decks from text prompts using a new "golden template" system | <strong>2026-04-27</strong></p>
+
+<!-- ============================== HOW IT WORKS ============================== -->
+<div class="how-it-works">
+  <h2 style="margin: 0 0 16px; border: none; padding: 0;">How It Works</h2>
+
+  <h3>What is this report?</h3>
+  <p><a href="https://gamma.app" style="color:#5142E6;">Gamma</a> generates slide decks from a text prompt. A user types something like "Cybersecurity trends 2026" and the system produces a complete, styled presentation. This report shows the output of running that pipeline end-to-end with a new approach called <strong>golden templates</strong>.</p>
+
+  <h3>The Pipeline: Two Stages</h3>
+  <p>The deck generation pipeline has two main stages:</p>
+  <div class="pipeline-diagram">User Prompt: "Cybersecurity trends 2026"
+          |
+    <span style="color:#5142E6">[Stage 1: Gen3]</span>  Plans the deck structure + writes an outline
+          |              - Decides how many cards (slides)
+          |              - Assigns each card a role (title, content, breather, closing, sources)
+          |              - Writes instructions for each card's content
+          |
+    <span style="color:#5142E6">[Stage 2: GenDeck]</span>  Converts the outline into visual card markup
+          |              - Matches each card to a golden template
+          |              - AI writes GML (card markup) based on the template
+          |              - One AI call per card (was previously two)
+          |
+    <span style="color:#5142E6">[Rendering]</span>  Screenshots + quality checks
+                         - Cards rendered as images
+                         - Automated graders score the output</div>
+
+  <h3>What are Guides? (Design Styles)</h3>
+  <p>A "guide" is a design style that controls how decks look. This report tests three guides:</p>
+  <ul>
+    <li><span class="guide-badge badge-consultant" style="font-size:11px;">Consultant</span> &mdash; Data-heavy, chart-rich slides with 150-250 words per card. Think McKinsey or BCG strategy decks: bar charts, key metrics, columnar layouts. Dense and analytical.</li>
+    <li><span class="guide-badge badge-minimal" style="font-size:11px;">Minimal</span> &mdash; Image-forward, atmospheric, only 15-40 words per card. The photo IS the design. Full-bleed background images with sparse, elegant text overlays.</li>
+    <li><span class="guide-badge badge-swiss" style="font-size:11px;">Swiss</span> &mdash; Editorial typography, high-contrast, strict grid structure. Inspired by Swiss/International Typographic Style: bold headings, structured columns, horizontal rules as dividers. Almost no smart-layouts &mdash; the grid does the work.</li>
+  </ul>
+
+  <h3>What are Golden Templates?</h3>
+  <p>Previously, the AI received abstract rules like "use a two-column layout with a chart." With golden templates, we instead show the AI a <strong>complete real card</strong> from a hand-crafted "golden" example deck that we know looks good, and say "make something like this but about [new topic]."</p>
+  <p>This is like remix &mdash; the AI sees what good looks like and reproduces the pattern. The golden examples contain real text content, real data, real charts. They are complete, polished cards extracted from curated reference decks.</p>
+  <p>There are also <strong>hand-authored templates</strong> &mdash; manually-written structural skeletons with placeholder content like <code>&lt;!-- 2-3 sentences --&gt;</code>. These define layout structure but not content, and are used as a fallback when no golden example is a strong match.</p>
+
+  <h3>How Template Matching Works</h3>
+  <p>Each card in the outline is matched to the best golden template based on a scoring system:</p>
+  <ul>
+    <li><span class="def-term">cardRole</span> <span class="def-desc">&mdash; Does the template's role match? (title-to-title, content-to-content, closing-to-closing) This is the strongest signal.</span></li>
+    <li><span class="def-term">imageLayout</span> <span class="def-desc">&mdash; Does the image placement match? (blank-to-blank, behind-to-behind) Important for visual consistency.</span></li>
+    <li><span class="def-term">density</span> <span class="def-desc">&mdash; Does the word density match? (sparse-to-sparse, dense-to-dense)</span></li>
+    <li><span class="def-term">variety penalty</span> <span class="def-desc">&mdash; Has this template already been used? Penalizes reusing the same template across multiple cards.</span></li>
+  </ul>
+  <p>The template with the highest total score is selected for each card.</p>
+  <div class="score-explain">
+    <div class="score-box"><div class="score-num" style="color:#4caf50;">6-7</div><div class="score-label">Strong match &mdash; role + layout + density all aligned</div></div>
+    <div class="score-box"><div class="score-num" style="color:#ffa726;">3-5</div><div class="score-label">Moderate match &mdash; role matched, but layout or density didn't</div></div>
+    <div class="score-box"><div class="score-num" style="color:#f44336;">2</div><div class="score-label">Weak match &mdash; best available, but not ideal</div></div>
+  </div>
+
+  <h3>What are the Quality Checks (Grader Scores)?</h3>
+  <p>After the deck is generated and rendered, automated quality checks evaluate the output. There are three types:</p>
+  <ul>
+    <li><strong>Code graders</strong> &mdash; Parse the GML (card markup) and check structural rules. Is the word count in the target range? Are there enough charts? Are columns balanced?</li>
+    <li><strong>Vision graders</strong> &mdash; Look at screenshots of the rendered cards and evaluate visual quality. Is there wasted space? Alignment issues? Column balance problems?</li>
+    <li><strong>Model graders</strong> &mdash; An AI reads the text content and evaluates quality: Are the titles compelling? Is there a narrative arc? Is there layout variety?</li>
+  </ul>
+  <p>Each grader returns a <strong>0-1 score</strong> and a <strong>pass/fail verdict</strong>. The pass rate across all graders is the headline quality metric.</p>
+</div>
+
+<!-- ============================== RESULTS SUMMARY ============================== -->
+<div class="results-summary">
+  <h2>Results Summary</h2>
+  <p>The golden template system shows strong results for the Consultant guide and promising foundations for Minimal and Swiss:</p>
+  <div class="metric-row" style="margin: 16px 0;">
+    <div class="metric-box" style="border-color:#2e7d32;">
+      <div class="val" style="color:#4caf50;">85%</div>
+      <div class="lbl">Consultant quality checks passing (11/13)</div>
+    </div>
+    <div class="metric-box">
+      <div class="val" style="color:#ffa726;">50%</div>
+      <div class="lbl">Minimal quality checks passing (4/8)</div>
+    </div>
+    <div class="metric-box">
+      <div class="val">61%</div>
+      <div class="lbl">Swiss quality checks passing (17/28)</div>
+    </div>
+  </div>
+  <p><strong>Key wins:</strong> The golden template approach produces cards in a <strong>single AI call</strong> instead of two (previously: one call to plan the layout, one to write the markup). This makes generation ~30% faster. The Consultant guide shows excellent template coverage (89% golden templates) and strong structural quality.</p>
+  <p><strong>Remaining gaps:</strong> Minimal needs more behind-image cards and tighter word counts. Swiss needs golden examples (currently using only hand-authored templates), plus structural features like horizontal rules and stacked column grids.</p>
+</div>
+
+<!-- ============================== GOLDEN EXAMPLES ============================== -->
+<h2>Golden Examples: What "Good" Looks Like</h2>
+<p style="color:#aaa; font-size:14px; margin-bottom: 16px;">These are screenshots from the hand-crafted golden decks. Templates are extracted from these cards and shown to the AI as references during generation. The AI sees the full card markup (not the screenshot) and writes new content that follows the same structural patterns.</p>
+
+<h3><span class="guide-badge badge-consultant" style="font-size:11px;">Consultant</span> Golden Decks</h3>
+<p style="color:#888; font-size:13px; margin-bottom: 8px;"><strong>Post-Breach Response Retainer Proposal</strong> &mdash; a cybersecurity consulting pitch deck. Dense layouts with bar charts, column metrics, and solidBoxes smart-layouts.</p>
+<div class="golden-gallery">
+  <div class="golden-card">
+    <img src="golden-screenshots/consultant/breach/1_Post-Breach-Response-Retainer-Proposal.png" alt="Breach card 1">
+    <div class="golden-caption">Title card &mdash; labels, accent image, bold heading</div>
+  </div>
+  <div class="golden-card">
+    <img src="golden-screenshots/consultant/breach/2_The-Breach-Landscape-Has-Changed-Are-You-Ready.png" alt="Breach card 2">
+    <div class="golden-caption">Content card &mdash; bar chart + bullet points in 2 columns</div>
+  </div>
+  <div class="golden-card">
+    <img src="golden-screenshots/consultant/breach/4_Our-Retainer-Framework-Assess-Contain-Harden.png" alt="Breach card 4">
+    <div class="golden-caption">Content card &mdash; chart + solidBoxesAlternating smart-layout</div>
+  </div>
+  <div class="golden-card">
+    <img src="golden-screenshots/consultant/breach/5_Sector-Threat-Analysis-Financial-and-Healthcare.png" alt="Breach card 5">
+    <div class="golden-caption">Content card &mdash; column chart + starStats key metrics</div>
+  </div>
+</div>
+
+<p style="color:#888; font-size:13px; margin: 16px 0 8px;"><strong>Sidereal Ventures Advisory</strong> &mdash; a venture capital fund overview. Similar density but different data: portfolio performance, funding gaps, revenue trends.</p>
+<div class="golden-gallery">
+  <div class="golden-card">
+    <img src="golden-screenshots/consultant/sidereal/1_Sidereal-Ventures-Advisory.png" alt="Sidereal card 1">
+    <div class="golden-caption">Title card &mdash; top accent image, category labels</div>
+  </div>
+  <div class="golden-card">
+    <img src="golden-screenshots/consultant/sidereal/3_The-Institutional-Funding-Gap.png" alt="Sidereal card 3">
+    <div class="golden-caption">Content card &mdash; column chart with starStats metrics</div>
+  </div>
+  <div class="golden-card">
+    <img src="golden-screenshots/consultant/sidereal/4_Portfolio-Performance-Outcomes.png" alt="Sidereal card 4">
+    <div class="golden-caption">Content card &mdash; bar chart + key outcome stats</div>
+  </div>
+</div>
+
+<h3 style="margin-top:24px;"><span class="guide-badge badge-minimal" style="font-size:11px;">Minimal</span> Golden Decks</h3>
+<p style="color:#888; font-size:13px; margin-bottom: 8px;"><strong>A Journey Through the Cosmos</strong> &mdash; atmospheric astronomy deck. Full-bleed space photography with minimal text overlays. The images do the storytelling.</p>
+<div class="golden-gallery">
+  <div class="golden-card">
+    <img src="golden-screenshots/minimal/astronomy/1_A-JOURNEY-THROUGH-THE-COSMOS.png" alt="Astronomy card 1">
+    <div class="golden-caption">Title card &mdash; behind-image, centered DISPLAY text</div>
+  </div>
+  <div class="golden-card">
+    <img src="golden-screenshots/minimal/astronomy/2_THE-VASTNESS-OF-SHAPE.png" alt="Astronomy card 2">
+    <div class="golden-caption">Content card &mdash; behind-image, sparse text overlay</div>
+  </div>
+  <div class="golden-card">
+    <img src="golden-screenshots/minimal/astronomy/5_NEBULAE-STELLAR-NURSERIES-AND-GRAVEYARDS.png" alt="Astronomy card 5">
+    <div class="golden-caption">Content card &mdash; atmospheric image with heading</div>
+  </div>
+  <div class="golden-card">
+    <img src="golden-screenshots/minimal/astronomy/7_Galaxies-Islands-of-Stars.png" alt="Astronomy card 7">
+    <div class="golden-caption">Content card &mdash; behind-image, minimal typography</div>
+  </div>
+</div>
+
+<p style="color:#888; font-size:13px; margin: 16px 0 8px;"><strong>The Story of Espresso</strong> &mdash; a coffee culture photo essay. Warm tones, editorial feel, sparse captions.</p>
+<div class="golden-gallery">
+  <div class="golden-card">
+    <img src="golden-screenshots/minimal/espresso/2_The-Dawn-of-Speed.png" alt="Espresso card 2">
+    <div class="golden-caption">Content card &mdash; behind-image, short prose</div>
+  </div>
+  <div class="golden-card">
+    <img src="golden-screenshots/minimal/espresso/3_The-Rise-of-Crema.png" alt="Espresso card 3">
+    <div class="golden-caption">Content card &mdash; behind-image, atmospheric</div>
+  </div>
+  <div class="golden-card">
+    <img src="golden-screenshots/minimal/espresso/5_The-Science-and-Art-of-the-Perfect-Shot.png" alt="Espresso card 5">
+    <div class="golden-caption">Content card &mdash; editorial layout with solidBoxes</div>
+  </div>
+</div>
+
+<p style="color:#888; font-size:13px; margin-top: 16px;"><strong>Swiss guide</strong> does not yet have golden example decks &mdash; it uses only hand-authored structural templates. This is a key area for improvement.</p>
 
 <!-- ============================== OVERVIEW ============================== -->
+<h2>Generated Decks Overview</h2>
+<p style="color:#aaa; font-size:14px; margin-bottom: 12px;">Three decks were generated from scratch &mdash; one per guide style &mdash; each from a single text prompt. The metrics below summarize what was produced.</p>
+
 <div class="deck-summary">
   <div class="deck-summary-card">
     <h3><span class="guide-badge badge-consultant">Consultant</span></h3>
@@ -104,7 +303,7 @@
       <div class="metric-box"><div class="val">1183</div><div class="lbl">Words</div></div>
       <div class="metric-box"><div class="val">4</div><div class="lbl">Graphs</div></div>
     </div>
-    <div style="font-size:12px;color:#888;margin-top:8px;">11/13 graders pass (85%) | 392.6s total</div>
+    <div style="font-size:12px;color:#888;margin-top:8px;">11/13 quality checks pass (85%) | 392.6s total</div>
   </div>
   <div class="deck-summary-card">
     <h3><span class="guide-badge badge-minimal">Minimal</span></h3>
@@ -114,7 +313,7 @@
       <div class="metric-box"><div class="val">356</div><div class="lbl">Words</div></div>
       <div class="metric-box"><div class="val">0</div><div class="lbl">Graphs</div></div>
     </div>
-    <div style="font-size:12px;color:#888;margin-top:8px;">4/8 graders pass (50%) | 171.1s total</div>
+    <div style="font-size:12px;color:#888;margin-top:8px;">4/8 quality checks pass (50%) | 171.1s total</div>
   </div>
   <div class="deck-summary-card">
     <h3><span class="guide-badge badge-swiss">Swiss</span></h3>
@@ -124,7 +323,7 @@
       <div class="metric-box"><div class="val">494</div><div class="lbl">Words</div></div>
       <div class="metric-box"><div class="val">0</div><div class="lbl">Graphs</div></div>
     </div>
-    <div style="font-size:12px;color:#888;margin-top:8px;">17/28 graders pass (61%) | 412.1s total</div>
+    <div style="font-size:12px;color:#888;margin-top:8px;">17/28 quality checks pass (61%) | 412.1s total</div>
   </div>
 </div>
 
@@ -136,70 +335,74 @@
   </div>
 
   <!-- 1. Pipeline Timeline -->
-  <h3>1. Pipeline Timeline</h3>
+  <h3>1. Pipeline Timeline (pipeline metrics)</h3>
   <div class="timeline">
-    <div class="timeline-item"><span class="ts">00:16:20</span> <span class="desc">Gen3 agent started</span></div>
-    <div class="timeline-item"><span class="ts">00:16:22</span> <span class="desc">Prompt sent</span> <span class="elapsed">+2s</span></div>
-    <div class="timeline-item"><span class="ts">00:16:29</span> <span class="desc">Miniform answered (round 1: style, audience, key areas, num cards)</span> <span class="elapsed">+7s</span></div>
-    <div class="timeline-item"><span class="ts">00:17:54</span> <span class="desc">Outline ready (10,902 chars, 9 cards)</span> <span class="elapsed">+85s</span></div>
-    <div class="timeline-item"><span class="ts">00:17:54</span> <span class="desc">GenDeck resolve started</span> <span class="elapsed">+0s</span></div>
-    <div class="timeline-item"><span class="ts">00:18:41</span> <span class="desc">GenDeck done: 9 cards, 21,327 chars</span> <span class="elapsed">+47s</span></div>
-    <div class="timeline-item"><span class="ts">00:18:47</span> <span class="desc">Image resolution done (18,334 chars resolved GML)</span> <span class="elapsed">+6s</span></div>
-    <div class="timeline-item"><span class="ts">00:18:55</span> <span class="desc">Screenshots rendered (9 cards)</span> <span class="elapsed">+8s</span></div>
-    <div class="timeline-item"><span class="ts">00:18:59</span> <span class="desc">Screenshots uploaded to Supabase</span> <span class="elapsed">+4s</span></div>
-    <div class="timeline-item"><span class="ts">00:22:52</span> <span class="desc">Eval suite complete</span> <span class="elapsed">+233s</span></div>
+    <div class="timeline-item"><span class="ts">00:16:20</span> <span class="desc">Gen3 agent started &mdash; begins planning the deck structure</span></div>
+    <div class="timeline-item"><span class="ts">00:16:22</span> <span class="desc">Prompt sent to AI</span> <span class="elapsed">+2s</span></div>
+    <div class="timeline-item"><span class="ts">00:16:29</span> <span class="desc">Style and structure questions answered (style, audience, key areas, card count)</span> <span class="elapsed">+7s</span></div>
+    <div class="timeline-item"><span class="ts">00:17:54</span> <span class="desc">Outline ready (10,902 chars, 9 cards planned)</span> <span class="elapsed">+85s</span></div>
+    <div class="timeline-item"><span class="ts">00:17:54</span> <span class="desc">GenDeck started &mdash; begins converting outline to visual card markup</span> <span class="elapsed">+0s</span></div>
+    <div class="timeline-item"><span class="ts">00:18:41</span> <span class="desc">GenDeck done: 9 cards generated, 21,327 chars of GML (card markup)</span> <span class="elapsed">+47s</span></div>
+    <div class="timeline-item"><span class="ts">00:18:47</span> <span class="desc">Image placeholders resolved to actual images</span> <span class="elapsed">+6s</span></div>
+    <div class="timeline-item"><span class="ts">00:18:55</span> <span class="desc">All 9 cards rendered as screenshots</span> <span class="elapsed">+8s</span></div>
+    <div class="timeline-item"><span class="ts">00:18:59</span> <span class="desc">Screenshots uploaded for review</span> <span class="elapsed">+4s</span></div>
+    <div class="timeline-item"><span class="ts">00:22:52</span> <span class="desc">Quality checks complete (13 graders evaluated)</span> <span class="elapsed">+233s</span></div>
   </div>
   <div class="metric-row">
-    <div class="metric-box"><div class="val">94s</div><div class="lbl">Gen3 (prompt-to-outline)</div></div>
-    <div class="metric-box"><div class="val">47s</div><div class="lbl">GenDeck resolve</div></div>
+    <div class="metric-box"><div class="val">94s</div><div class="lbl">Gen3 (prompt to outline)</div></div>
+    <div class="metric-box"><div class="val">47s</div><div class="lbl">GenDeck (outline to cards)</div></div>
     <div class="metric-box"><div class="val">18s</div><div class="lbl">Render + upload</div></div>
-    <div class="metric-box"><div class="val">233s</div><div class="lbl">Eval suite</div></div>
+    <div class="metric-box"><div class="val">233s</div><div class="lbl">Quality checks</div></div>
     <div class="metric-box"><div class="val">392.6s</div><div class="lbl">Total (6.5 min)</div></div>
   </div>
 
   <!-- 2. Outline Summary -->
   <h3>2. Outline Summary</h3>
-  <p style="font-size:13px;color:#aaa;margin-bottom:8px;">9 cards | 10,902 chars | planLayout=2, writeOutline=2 | cardInstructions=8, imageLayout=8, group=0</p>
+  <p style="font-size:13px;color:#aaa;margin-bottom:8px;">9 cards planned with roles, image placements, and content instructions for each</p>
   <table>
-    <tr><th>#</th><th>Card Role (trace)</th><th>Image Layout</th><th>Card Instructions (first 80 chars)</th></tr>
+    <tr><th>#</th><th>Card Role</th><th>Image Placement</th><th>Content Instructions (abbreviated)</th></tr>
     <tr><td>0</td><td>Title</td><td>right</td><td>Title card, 10-15 words. Bold H1 title with subtitle mentioning 2026 outlook...</td></tr>
-    <tr><td>1</td><td>Content</td><td>blank</td><td>Content card, 60-75 words. Explains how AI is revolutionizing both attack soph...</td></tr>
+    <tr><td>1</td><td>Content</td><td>blank (no image)</td><td>Content card, 60-75 words. Explains how AI is revolutionizing both attack soph...</td></tr>
     <tr><td>2</td><td>Content</td><td>blank</td><td>Smart layout card, 50-70 words. Covers ransomware evolution: surge in victims,...</td></tr>
     <tr><td>3</td><td>Breather</td><td>left</td><td>Breather card, 15-25 words. Single impactful statistic about zero-day exploit ...</td></tr>
     <tr><td>4</td><td>Content</td><td>blank</td><td>Content card, 70-85 words. Supply chain vulnerabilities and attack vectors -- e...</td></tr>
     <tr><td>5</td><td>Content</td><td>blank</td><td>Smart layout card, 55-75 words. Cloud security challenges: state-nexus intrusi...</td></tr>
     <tr><td>6</td><td>Content</td><td>blank</td><td>Content card, 60-80 words. Zero-trust and identity-first security strategies -...</td></tr>
     <tr><td>7</td><td>Closing</td><td>right</td><td>Closing card, 20-30 words. Call to action for security leaders. Focus on urgen...</td></tr>
-    <tr><td>8</td><td>Sources</td><td>(none)</td><td>(Sources card - no cardInstructions)</td></tr>
+    <tr><td>8</td><td>Sources</td><td>(none)</td><td>(Sources card - no content instructions)</td></tr>
   </table>
 
   <!-- 3. Template Matching -->
   <h3>3. Template Matching (card by card)</h3>
+  <p style="font-size:13px;color:#aaa;margin-bottom:8px;">Each card is matched to the best available template. "Golden" templates come from real example decks; "hand-authored" are structural skeletons. Higher score = better match.</p>
   <table>
-    <tr><th>#</th><th>Template</th><th>Score</th><th>Strategy</th><th>Type</th></tr>
-    <tr><td>0</td><td>consultant-sidereal-card0</td><td>6</td><td>full-card</td><td class="template-golden">golden (sidereal)</td></tr>
-    <tr><td>1</td><td>consultant-analysis-2col</td><td>3</td><td>full-card</td><td class="template-hand-authored">hand-authored</td></tr>
-    <tr><td>2</td><td><span class="template-golden">consultant-breach-card1</span></td><td>3</td><td>full-card</td><td class="template-golden">golden (breach)</td></tr>
-    <tr><td>3</td><td>consultant-clearpath-card0</td><td>2</td><td>full-card</td><td class="template-golden">golden (clearpath)</td></tr>
-    <tr><td>4</td><td><span class="template-golden">consultant-breach-card2</span></td><td>3</td><td>full-card</td><td class="template-golden">golden (breach)</td></tr>
-    <tr><td>5</td><td><span class="template-golden">consultant-breach-card3</span></td><td>3</td><td>full-card</td><td class="template-golden">golden (breach)</td></tr>
-    <tr><td>6</td><td><span class="template-golden">consultant-breach-card4</span></td><td>3</td><td>full-card</td><td class="template-golden">golden (breach)</td></tr>
-    <tr><td>7</td><td>consultant-ironbridge-card0</td><td>2</td><td>full-card</td><td class="template-golden">golden (ironbridge)</td></tr>
-    <tr><td>8</td><td><span class="template-golden">consultant-breach-card5</span></td><td>3</td><td>full-card</td><td class="template-golden">golden (breach)</td></tr>
+    <tr><th>#</th><th>Matched Template</th><th>Score</th><th>Generation Method</th><th>Template Source</th></tr>
+    <tr><td>0</td><td>consultant-sidereal-card0</td><td>6</td><td>single-step (unified resolver)</td><td class="template-golden">golden (Sidereal Ventures deck)</td></tr>
+    <tr><td>1</td><td>consultant-analysis-2col</td><td>3</td><td>single-step</td><td class="template-hand-authored">hand-authored skeleton</td></tr>
+    <tr><td>2</td><td><span class="template-golden">consultant-breach-card1</span></td><td>3</td><td>single-step</td><td class="template-golden">golden (Post-Breach deck)</td></tr>
+    <tr><td>3</td><td>consultant-clearpath-card0</td><td>2</td><td>single-step</td><td class="template-golden">golden (Clearpath Advisory deck)</td></tr>
+    <tr><td>4</td><td><span class="template-golden">consultant-breach-card2</span></td><td>3</td><td>single-step</td><td class="template-golden">golden (Post-Breach deck)</td></tr>
+    <tr><td>5</td><td><span class="template-golden">consultant-breach-card3</span></td><td>3</td><td>single-step</td><td class="template-golden">golden (Post-Breach deck)</td></tr>
+    <tr><td>6</td><td><span class="template-golden">consultant-breach-card4</span></td><td>3</td><td>single-step</td><td class="template-golden">golden (Post-Breach deck)</td></tr>
+    <tr><td>7</td><td>consultant-ironbridge-card0</td><td>2</td><td>single-step</td><td class="template-golden">golden (IronBridge Ops deck)</td></tr>
+    <tr><td>8</td><td><span class="template-golden">consultant-breach-card5</span></td><td>3</td><td>single-step</td><td class="template-golden">golden (Post-Breach deck)</td></tr>
   </table>
-  <p style="font-size:12px;color:#888;margin-top:4px;">100% template match rate | 8/9 golden-indexed templates (breach x5, sidereal x1, clearpath x1, ironbridge x1) | 1 hand-authored (analysis-2col)</p>
+  <p style="font-size:12px;color:#888;margin-top:4px;">100% template match rate | 8/9 from golden decks (breach x5, sidereal x1, clearpath x1, ironbridge x1) | 1 hand-authored skeleton (analysis-2col)</p>
 
   <!-- 4. Generated GML -->
-  <h3>4. Generated GML (card by card)</h3>
+  <h3>4. Generated Cards (card by card)</h3>
+  <p style="font-size:13px;color:#aaa;margin-bottom:8px;">Each row shows the rendered screenshot on the left and the GML (card markup) on the right. The plain-English description explains what the card looks like.</p>
+
     <div class="card-gml-row">
     <div class="card-screenshot"><img src="unified-screenshots/consultant/card-01.png" alt="Card 0"></div>
     <div class="card-gml-details">
       <div class="card-meta"><span class="card-num">#0</span> 25w | 10 tags | <span class="chip chip-labels">LABELS</span> bg:#171717</div>
-      <details><summary>Show GML (713 bytes)</summary><pre class="gml">&lt;SECTION image-layout="top" vertical-align="end" background-color="#171717"&gt;
+      <div class="card-description">Title card with a dark background. A large hero image at the top, category labels ("Threat Intelligence", "2026 Outlook"), and a bold heading with a subtitle beneath. Sets the deck's tone.</div>
+      <details><summary>Show GML (card markup) &mdash; 713 bytes</summary><pre class="gml">&lt;SECTION image-layout="top" vertical-align="end" background-color="#171717"&gt;
 &lt;IMG class="accent-image" query="digital fortress cybersecurity network visualization with glowing threat indicators, dark tech aesthetic, geometric patterns, data streams"&gt;
 &lt;DIV class="body"&gt;
 &lt;LABELS&gt;
-&lt;LABEL color="#5142E6" variant="solid" data-icon="{\"query\":\"shield\"}"&gt;
+&lt;LABEL color="#5142E6" variant="solid" data-icon="{&quot;query&quot;:&quot;shield&quot;}"&gt;
 &lt;ICON bookmark="ref1"&gt;&lt;/ICON&gt;
 &lt;SPAN&gt;Threat Intelligence&lt;/SPAN&gt;
 &lt;/LABEL&gt;
@@ -216,7 +419,8 @@
     <div class="card-screenshot"><img src="unified-screenshots/consultant/card-02.png" alt="Card 1"></div>
     <div class="card-gml-details">
       <div class="card-meta"><span class="card-num">#1</span> 160w | 31 tags | <span class="chip chip-graph">GRAPH bar</span> <span class="chip chip-sl">starStats</span> <span class="chip chip-cols">cols [42,58]</span> <span class="chip chip-labels">LABELS</span></div>
-      <details><summary>Show GML (2,677 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank"&gt;
+      <div class="card-description">Two-column layout: a bar chart on the left showing AI threat data, and a bullet-point analysis on the right with a dark background box. Below the columns, a starStats smart-layout shows three key metrics (94%, 90%, 16%). Dense and data-rich.</div>
+      <details><summary>Show GML (card markup) &mdash; 2,677 bytes</summary><pre class="gml">&lt;SECTION image-layout="blank"&gt;
 &lt;DIV class="body"&gt;
 &lt;LABELS&gt;&lt;LABEL color="#5142E6" variant="solid"&gt;Threat Intelligence&lt;/LABEL&gt;&lt;/LABELS&gt;
 &lt;H1&gt;AI Is Now an End-to-End Attack Vector: &lt;B&gt;Dual Threat Landscape&lt;/B&gt;&lt;/H1&gt;
@@ -236,7 +440,8 @@
     <div class="card-screenshot"><img src="unified-screenshots/consultant/card-03.png" alt="Card 2"></div>
     <div class="card-gml-details">
       <div class="card-meta"><span class="card-num">#2</span> 182w | 26 tags | <span class="chip chip-graph">GRAPH column</span> <span class="chip chip-sl">starStats</span> <span class="chip chip-cols">cols [42,58]</span> <span class="chip chip-labels">LABELS</span></div>
-      <details><summary>Show GML (2,691 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank"&gt;
+      <div class="card-description">Two-column layout: a column chart on the left showing ransomware victim counts over time, and analysis text on the right in a dark box. Below, a starStats row displays three headline numbers (7,809 victims, 27 sec breach time, 78% SMB targeting).</div>
+      <details><summary>Show GML (card markup) &mdash; 2,691 bytes</summary><pre class="gml">&lt;SECTION image-layout="blank"&gt;
 &lt;H1&gt;Ransomware: More Victims, &lt;B&gt;Smarter Tactics&lt;/B&gt;&lt;/H1&gt;
 &lt;COLUMNS col-widths="[42,58]"&gt;
   &lt;DIV&gt;&lt;GRAPH data-chart-type="column"&gt;...7809, 78, 23, 27...&lt;/GRAPH&gt;&lt;/DIV&gt;
@@ -251,7 +456,8 @@
     <div class="card-screenshot"><img src="unified-screenshots/consultant/card-04.png" alt="Card 3"></div>
     <div class="card-gml-details">
       <div class="card-meta"><span class="card-num">#3</span> 101w | 20 tags | <span class="chip chip-sl">starStats</span> <span class="chip chip-cols">cols [42,58]</span> <span class="chip chip-labels">LABELS</span> bg:#ffffff</div>
-      <details><summary>Show GML (1,753 bytes)</summary><pre class="gml">&lt;SECTION image-layout="top" background-color="#ffffff"&gt;
+      <div class="card-description">Breather card with a white background and hero image at the top. A large display-size quote ("Exploitation now happens before the patch exists"), then a two-column layout: a starStats metric on the left ("-7 days") and explanatory text on the right. Visual pause in the deck flow.</div>
+      <details><summary>Show GML (card markup) &mdash; 1,753 bytes</summary><pre class="gml">&lt;SECTION image-layout="top" background-color="#ffffff"&gt;
 &lt;IMG query="digital network visualization..."&gt;
 &lt;DISPLAY size="xl"&gt;Exploitation now happens &lt;I&gt;before&lt;/I&gt; the patch exists&lt;/DISPLAY&gt;
 &lt;COLUMNS col-widths="[42,58]"&gt;
@@ -268,7 +474,8 @@
     <div class="card-screenshot"><img src="unified-screenshots/consultant/card-05.png" alt="Card 4"></div>
     <div class="card-gml-details">
       <div class="card-meta"><span class="card-num">#4</span> 193w | 21 tags | <span class="chip chip-graph">GRAPH column</span> <span class="chip chip-sl">topLineText</span> <span class="chip chip-sl">solidBoxesAlternating</span> <span class="chip chip-labels">LABELS</span></div>
-      <details><summary>Show GML (2,934 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank"&gt;
+      <div class="card-description">Different layout pattern: a topLineText smart-layout at the top containing a column chart inside one panel and a text summary in another. Below, a solidBoxesAlternating smart-layout presents the "Supply Chain Acceleration Problem" as alternating colored boxes. No columns wrapper &mdash; the smart-layouts create the structure.</div>
+      <details><summary>Show GML (card markup) &mdash; 2,934 bytes</summary><pre class="gml">&lt;SECTION image-layout="blank"&gt;
 &lt;H1&gt;Supply Chain &amp; Edge Devices: &lt;B&gt;The Blind Spots&lt;/B&gt;&lt;/H1&gt;
 &lt;SMART-LAYOUT variant="topLineText"&gt;
   &lt;SMART-LAYOUT-ITEM&gt;&lt;GRAPH&gt;...3-year trend...&lt;/GRAPH&gt;&lt;/SMART-LAYOUT-ITEM&gt;
@@ -285,7 +492,8 @@
     <div class="card-screenshot"><img src="unified-screenshots/consultant/card-06.png" alt="Card 5"></div>
     <div class="card-gml-details">
       <div class="card-meta"><span class="card-num">#5</span> 137w | 22 tags | <span class="chip chip-sl">starStats</span> <span class="chip chip-cols">cols [42,58]</span> <span class="chip chip-labels">LABELS</span></div>
-      <details><summary>Show GML (2,058 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank"&gt;
+      <div class="card-description">Two-column layout: starStats key metrics on the left (266% increase, 40%) and a dark-background analysis box on the right covering cloud security and identity-based attacks. Follows the same chart-left/text-right pattern as cards 1-2.</div>
+      <details><summary>Show GML (card markup) &mdash; 2,058 bytes</summary><pre class="gml">&lt;SECTION image-layout="blank"&gt;
 &lt;H1&gt;Cloud &amp; Identity: &lt;B&gt;The New Perimeter Is Broken&lt;/B&gt;&lt;/H1&gt;
 &lt;COLUMNS col-widths="[42,58]"&gt;
   &lt;DIV&gt;&lt;SMART-LAYOUT variant="starStats"&gt;266% | 40%&lt;/SMART-LAYOUT&gt;&lt;/DIV&gt;
@@ -299,7 +507,8 @@
     <div class="card-screenshot"><img src="unified-screenshots/consultant/card-07.png" alt="Card 6"></div>
     <div class="card-gml-details">
       <div class="card-meta"><span class="card-num">#6</span> 199w | 30 tags | <span class="chip chip-graph">GRAPH column</span> <span class="chip chip-sl">starStats</span> <span class="chip chip-cols">cols [42,58]</span> <span class="chip chip-labels">LABELS</span></div>
-      <details><summary>Show GML (3,123 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank"&gt;
+      <div class="card-description">Two-column layout: a column chart comparing traditional vs AI-driven defense timelines on the left, and defense strategy bullet points in a dark box on the right. StarStats footer shows three metrics (80 days, 90%, 7 days). Heaviest card in the deck at 199 words.</div>
+      <details><summary>Show GML (card markup) &mdash; 3,123 bytes</summary><pre class="gml">&lt;SECTION image-layout="blank"&gt;
 &lt;H1&gt;Defending in the AI Era: &lt;B&gt;What Actually Works&lt;/B&gt;&lt;/H1&gt;
 &lt;COLUMNS col-widths="[42,58]"&gt;
   &lt;DIV&gt;&lt;GRAPH data-chart-type="column"&gt;...traditional vs AI-driven...&lt;/GRAPH&gt;&lt;/DIV&gt;
@@ -314,7 +523,8 @@
     <div class="card-screenshot"><img src="unified-screenshots/consultant/card-08.png" alt="Card 7"></div>
     <div class="card-gml-details">
       <div class="card-meta"><span class="card-num">#7</span> 76w | 26 tags | <span class="chip chip-sl">stats</span> <span class="chip chip-sl">solidJoinedBoxes</span> <span class="chip chip-cols">cols [42,58]</span> <span class="chip chip-labels">LABELS</span></div>
-      <details><summary>Show GML (1,643 bytes)</summary><pre class="gml">&lt;SECTION image-layout="top"&gt;
+      <div class="card-description">Closing card with a hero image at top. Bold call-to-action heading, then a two-column layout: a dark box on the left with stats (4.2 min, 287 days), and on the right a blockquote plus a solidJoinedBoxes smart-layout with action items. Designed to drive urgency.</div>
+      <details><summary>Show GML (card markup) &mdash; 1,643 bytes</summary><pre class="gml">&lt;SECTION image-layout="top"&gt;
 &lt;IMG query="cybersecurity command center..."&gt;
 &lt;H1&gt;The Window to Act Is Measured in Seconds -- Not Quarters&lt;/H1&gt;
 &lt;COLUMNS col-widths="[42,58]"&gt;
@@ -333,7 +543,8 @@
     <div class="card-screenshot"><img src="unified-screenshots/consultant/card-09.png" alt="Card 8"></div>
     <div class="card-gml-details">
       <div class="card-meta"><span class="card-num">#8</span> 110w | 32 tags | <span class="chip chip-sl">stats</span> <span class="chip chip-cols">cols [42,58]</span></div>
-      <details><summary>Show GML (2,161 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank"&gt;
+      <div class="card-description">Sources card: two-column layout with 7 source links on the left and a stats smart-layout on the right showing aggregate data scope (2.4M+ data points, 94 countries). Provides credibility for the data cited throughout the deck.</div>
+      <details><summary>Show GML (card markup) &mdash; 2,161 bytes</summary><pre class="gml">&lt;SECTION image-layout="blank"&gt;
 &lt;H1&gt;&lt;B&gt;2026 Cybersecurity Intelligence&lt;/B&gt; Briefing: Sources &amp; Methodology&lt;/H1&gt;
 &lt;COLUMNS col-widths="[42,58]"&gt;
   &lt;DIV&gt;...7 source links...&lt;/DIV&gt;
@@ -346,86 +557,87 @@
   </div>
 
   <!-- 5. Grader Scores -->
-  <h3>5. Grader Scores</h3>
+  <h3>5. Quality Check Results</h3>
+  <p style="font-size:13px;color:#aaa;margin-bottom:8px;">Automated graders evaluate the generated deck against Consultant guide standards. Each returns a 0-1 score and pass/fail.</p>
   <div class="score-bar">
     <div class="score-segment seg-pass" style="flex:11;">11 pass</div>
     <div class="score-segment seg-fail" style="flex:2;">2 fail</div>
   </div>
   <div style="margin-top:8px;">
     <div class="grader-row">
-      <span class="grader-name">consultant-density-compliance</span>
+      <span class="grader-name">Word density per card</span>
       <span class="grader-score fail-tag">0.571</span>
       <span class="grader-verdict verdict-fail">FAIL</span>
       <span class="grader-explanation">4/7 content cards in 150-350w range (57%). Average: 149 words/card. card 4: 101w soft-fail, card 6: 136w soft-fail, card 8: 76w hard-fail</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">consultant-diagram-presence</span>
+      <span class="grader-name">Chart/diagram presence</span>
       <span class="grader-score pass-tag">1.000</span>
       <span class="grader-verdict verdict-pass">PASS</span>
       <span class="grader-explanation">7/7 content cards have data visualization elements (100%)</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">consultant-data-structure-variety</span>
+      <span class="grader-name">Data structure variety</span>
       <span class="grader-score pass-tag">0.800</span>
       <span class="grader-verdict verdict-pass">PASS</span>
       <span class="grader-explanation">4 distinct structure types: blockquote, bullet-list, columns, smart-layout. 5 smart-layout variants.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">consultant-chart-density</span>
+      <span class="grader-name">Chart count</span>
       <span class="grader-score pass-tag">1.000</span>
       <span class="grader-verdict verdict-pass">PASS</span>
-      <span class="grader-explanation">4 graph(s) in deck GML. Target: &gt;= 3 for consultant decks.</span>
+      <span class="grader-explanation">4 graph(s) in deck. Target: &gt;= 3 for consultant decks.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">consultant-label-coverage</span>
+      <span class="grader-name">Category label coverage</span>
       <span class="grader-score pass-tag">1.000</span>
       <span class="grader-verdict verdict-pass">PASS</span>
       <span class="grader-explanation">7/7 content cards have LABELS (100%). Target: &gt;= 70%.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">consultant-multi-zone</span>
+      <span class="grader-name">Multi-zone layouts</span>
       <span class="grader-score pass-tag">0.889</span>
       <span class="grader-verdict verdict-pass">PASS</span>
       <span class="grader-explanation">8/9 cards use COLUMNS or SMART-LAYOUT (89%). Target: &gt;= 40%.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">guide-structural-fidelity</span>
+      <span class="grader-name">Structural fidelity to guide</span>
       <span class="grader-score pass-tag">0.800</span>
       <span class="grader-verdict verdict-pass">PASS</span>
-      <span class="grader-explanation">4/5 checks passed (80%). Failed: colWidthsDiversity -- 1 distinct col-widths (need &gt;=4): [42,58]</span>
+      <span class="grader-explanation">4/5 checks passed (80%). Failed: column width diversity -- 1 distinct col-widths (need &gt;=4): [42,58]</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">consultant-column-balance</span>
+      <span class="grader-name">Column balance (vision)</span>
       <span class="grader-score pass-tag">0.714</span>
       <span class="grader-verdict verdict-pass">PASS</span>
       <span class="grader-explanation">5/7 column cards balanced. card 3: 0.40 (imbalanced), card 5: 0.45 (imbalanced)</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">consultant-wasted-space</span>
+      <span class="grader-name">Wasted space (vision)</span>
       <span class="grader-score pass-tag">0.714</span>
       <span class="grader-verdict verdict-pass">PASS</span>
       <span class="grader-explanation">5/7 content cards OK. card 3: 0.35 (wasted), card 4: 0.45 (wasted)</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">consultant-alignment-consistency</span>
+      <span class="grader-name">Alignment consistency (vision)</span>
       <span class="grader-score fail-tag">0.667</span>
       <span class="grader-verdict verdict-fail">FAIL</span>
       <span class="grader-explanation">6/9 cards consistent. Issues on cards 4, 7, 8: mixed alignment within visual zones.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">consultant-layout-variety</span>
+      <span class="grader-name">Layout variety (model)</span>
       <span class="grader-score pass-tag">0.600</span>
       <span class="grader-verdict verdict-pass">PASS</span>
       <span class="grader-explanation">4 unique patterns, 4 consecutive repeats. starStats appears 5x.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">consultant-title-quality</span>
+      <span class="grader-name">Title quality (model)</span>
       <span class="grader-score pass-tag">0.640</span>
       <span class="grader-verdict verdict-pass">PASS</span>
       <span class="grader-explanation">Most titles Tier 1-2. Best: 'The Window to Act...' (~0.85). Weakest: 'Sources & Methodology' (~0.25)</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">consultant-narrative-arc</span>
+      <span class="grader-name">Narrative arc (model)</span>
       <span class="grader-score pass-tag">0.710</span>
       <span class="grader-verdict verdict-pass">PASS</span>
       <span class="grader-explanation">(no detailed explanation)</span>
@@ -441,32 +653,32 @@
   </div>
 
   <!-- 1. Pipeline Timeline -->
-  <h3>1. Pipeline Timeline</h3>
+  <h3>1. Pipeline Timeline (pipeline metrics)</h3>
   <div class="timeline">
-    <div class="timeline-item"><span class="ts">00:23:24</span> <span class="desc">Gen3 agent started</span></div>
-    <div class="timeline-item"><span class="ts">00:23:27</span> <span class="desc">Prompt sent</span> <span class="elapsed">+3s</span></div>
-    <div class="timeline-item"><span class="ts">00:23:34</span> <span class="desc">Miniform answered (round 1: style, purpose, audience, num cards)</span> <span class="elapsed">+7s</span></div>
-    <div class="timeline-item"><span class="ts">00:25:03</span> <span class="desc">Outline ready (9,607 chars, 9 cards)</span> <span class="elapsed">+89s</span></div>
-    <div class="timeline-item"><span class="ts">00:25:03</span> <span class="desc">GenDeck resolve started</span> <span class="elapsed">+0s</span></div>
-    <div class="timeline-item"><span class="ts">00:25:33</span> <span class="desc">GenDeck done: 9 cards, 10,014 chars</span> <span class="elapsed">+30s</span></div>
-    <div class="timeline-item"><span class="ts">00:25:38</span> <span class="desc">Image resolution done (8,603 chars resolved GML)</span> <span class="elapsed">+5s</span></div>
-    <div class="timeline-item"><span class="ts">00:25:50</span> <span class="desc">Screenshots rendered (9 cards)</span> <span class="elapsed">+12s</span></div>
-    <div class="timeline-item"><span class="ts">00:25:53</span> <span class="desc">Screenshots uploaded to Supabase</span> <span class="elapsed">+3s</span></div>
-    <div class="timeline-item"><span class="ts">00:26:16</span> <span class="desc">Eval suite complete</span> <span class="elapsed">+23s</span></div>
+    <div class="timeline-item"><span class="ts">00:23:24</span> <span class="desc">Gen3 agent started &mdash; begins planning the deck structure</span></div>
+    <div class="timeline-item"><span class="ts">00:23:27</span> <span class="desc">Prompt sent to AI</span> <span class="elapsed">+3s</span></div>
+    <div class="timeline-item"><span class="ts">00:23:34</span> <span class="desc">Style and structure questions answered</span> <span class="elapsed">+7s</span></div>
+    <div class="timeline-item"><span class="ts">00:25:03</span> <span class="desc">Outline ready (9,607 chars, 9 cards planned)</span> <span class="elapsed">+89s</span></div>
+    <div class="timeline-item"><span class="ts">00:25:03</span> <span class="desc">GenDeck started &mdash; converting outline to card markup</span> <span class="elapsed">+0s</span></div>
+    <div class="timeline-item"><span class="ts">00:25:33</span> <span class="desc">GenDeck done: 9 cards, 10,014 chars of GML (card markup)</span> <span class="elapsed">+30s</span></div>
+    <div class="timeline-item"><span class="ts">00:25:38</span> <span class="desc">Image placeholders resolved</span> <span class="elapsed">+5s</span></div>
+    <div class="timeline-item"><span class="ts">00:25:50</span> <span class="desc">All 9 cards rendered as screenshots</span> <span class="elapsed">+12s</span></div>
+    <div class="timeline-item"><span class="ts">00:25:53</span> <span class="desc">Screenshots uploaded</span> <span class="elapsed">+3s</span></div>
+    <div class="timeline-item"><span class="ts">00:26:16</span> <span class="desc">Quality checks complete (8 graders evaluated)</span> <span class="elapsed">+23s</span></div>
   </div>
   <div class="metric-row">
-    <div class="metric-box"><div class="val">99s</div><div class="lbl">Gen3 (prompt-to-outline)</div></div>
-    <div class="metric-box"><div class="val">30s</div><div class="lbl">GenDeck resolve</div></div>
+    <div class="metric-box"><div class="val">99s</div><div class="lbl">Gen3 (prompt to outline)</div></div>
+    <div class="metric-box"><div class="val">30s</div><div class="lbl">GenDeck (outline to cards)</div></div>
     <div class="metric-box"><div class="val">15s</div><div class="lbl">Render + upload</div></div>
-    <div class="metric-box"><div class="val">23s</div><div class="lbl">Eval suite</div></div>
+    <div class="metric-box"><div class="val">23s</div><div class="lbl">Quality checks</div></div>
     <div class="metric-box"><div class="val">171.1s</div><div class="lbl">Total (2.9 min)</div></div>
   </div>
 
   <!-- 2. Outline Summary -->
   <h3>2. Outline Summary</h3>
-  <p style="font-size:13px;color:#aaa;margin-bottom:8px;">9 cards | 9,607 chars | planLayout=2, writeOutline=2 | cardInstructions=8, imageLayout=8, group=8</p>
+  <p style="font-size:13px;color:#aaa;margin-bottom:8px;">9 cards planned with roles, image placements, and content instructions for each</p>
   <table>
-    <tr><th>#</th><th>Card Role (trace)</th><th>Image Layout</th><th>Card Instructions (first 80 chars)</th></tr>
+    <tr><th>#</th><th>Card Role</th><th>Image Placement</th><th>Content Instructions (abbreviated)</th></tr>
     <tr><td>0</td><td>Title</td><td>right</td><td>Title card, 10-15 words. Hero moment with company name and tagline about Puglia...</td></tr>
     <tr><td>1</td><td>Content</td><td>blank</td><td>Content card, 60-75 words. The land and heritage story. Use columns layout wit...</td></tr>
     <tr><td>2</td><td>Content</td><td>blank</td><td>Content card, 55-70 words. Olive varieties focus. SMART LAYOUT CARD #1: Use so...</td></tr>
@@ -475,32 +687,35 @@
     <tr><td>5</td><td>Content</td><td>blank</td><td>Content card, 50-65 words. Quality certifications. SMART LAYOUT CARD #2: Use s...</td></tr>
     <tr><td>6</td><td>Content</td><td>blank</td><td>Content card, 70-85 words. Flavor profile and export strength. Use columns lay...</td></tr>
     <tr><td>7</td><td>Closing</td><td>right</td><td>Closing card, 20-30 words. Call to action with contact information and next ste...</td></tr>
-    <tr><td>8</td><td>Sources</td><td>(none)</td><td>(Sources card - no cardInstructions)</td></tr>
+    <tr><td>8</td><td>Sources</td><td>(none)</td><td>(Sources card - no content instructions)</td></tr>
   </table>
 
   <!-- 3. Template Matching -->
   <h3>3. Template Matching (card by card)</h3>
+  <p style="font-size:13px;color:#aaa;margin-bottom:8px;">Each card is matched to the best available template. Higher score = better match.</p>
   <table>
-    <tr><th>#</th><th>Template</th><th>Score</th><th>Strategy</th><th>Type</th></tr>
-    <tr><td>0</td><td><span class="template-golden">minimal-astronomy-card7</span></td><td>6</td><td>full-card</td><td class="template-golden">golden (astronomy)</td></tr>
-    <tr><td>1</td><td>minimal-catalog-images</td><td>7</td><td>full-card</td><td class="template-hand-authored">hand-authored</td></tr>
-    <tr><td>2</td><td><span class="template-golden">minimal-bookshops-card1</span></td><td>3</td><td>full-card</td><td class="template-golden">golden (bookshops)</td></tr>
-    <tr><td>3</td><td><span class="template-golden">minimal-astronomy-card5</span></td><td>6</td><td>full-card</td><td class="template-golden">golden (astronomy)</td></tr>
-    <tr><td>4</td><td><span class="template-golden">minimal-color-card6</span></td><td>6</td><td>full-card</td><td class="template-golden">golden (color)</td></tr>
-    <tr><td>5</td><td><span class="template-golden">minimal-drift-card3</span></td><td>6</td><td>full-card</td><td class="template-golden">golden (drift)</td></tr>
-    <tr><td>6</td><td><span class="template-golden">minimal-bookshops-card4</span></td><td>3</td><td>full-card</td><td class="template-golden">golden (bookshops)</td></tr>
-    <tr><td>7</td><td><span class="template-golden">minimal-botaniq-card2</span></td><td>6</td><td>full-card</td><td class="template-golden">golden (botaniq)</td></tr>
-    <tr><td>8</td><td><span class="template-golden">minimal-espresso-card4</span></td><td>6</td><td>full-card</td><td class="template-golden">golden (espresso)</td></tr>
+    <tr><th>#</th><th>Matched Template</th><th>Score</th><th>Generation Method</th><th>Template Source</th></tr>
+    <tr><td>0</td><td><span class="template-golden">minimal-astronomy-card7</span></td><td>6</td><td>single-step</td><td class="template-golden">golden (Astronomy deck)</td></tr>
+    <tr><td>1</td><td>minimal-catalog-images</td><td>7</td><td>single-step</td><td class="template-hand-authored">hand-authored skeleton</td></tr>
+    <tr><td>2</td><td><span class="template-golden">minimal-bookshops-card1</span></td><td>3</td><td>single-step</td><td class="template-golden">golden (Bookshops deck)</td></tr>
+    <tr><td>3</td><td><span class="template-golden">minimal-astronomy-card5</span></td><td>6</td><td>single-step</td><td class="template-golden">golden (Astronomy deck)</td></tr>
+    <tr><td>4</td><td><span class="template-golden">minimal-color-card6</span></td><td>6</td><td>single-step</td><td class="template-golden">golden (Color Theory deck)</td></tr>
+    <tr><td>5</td><td><span class="template-golden">minimal-drift-card3</span></td><td>6</td><td>single-step</td><td class="template-golden">golden (Drift deck)</td></tr>
+    <tr><td>6</td><td><span class="template-golden">minimal-bookshops-card4</span></td><td>3</td><td>single-step</td><td class="template-golden">golden (Bookshops deck)</td></tr>
+    <tr><td>7</td><td><span class="template-golden">minimal-botaniq-card2</span></td><td>6</td><td>single-step</td><td class="template-golden">golden (Botaniq deck)</td></tr>
+    <tr><td>8</td><td><span class="template-golden">minimal-espresso-card4</span></td><td>6</td><td>single-step</td><td class="template-golden">golden (Espresso deck)</td></tr>
   </table>
-  <p style="font-size:12px;color:#888;margin-top:4px;">100% template match rate | 8/9 golden-indexed (astronomy x2, bookshops x2, color x1, drift x1, botaniq x1, espresso x1) | 1 hand-authored (catalog-images)</p>
+  <p style="font-size:12px;color:#888;margin-top:4px;">100% template match rate | 8/9 from golden decks (astronomy x2, bookshops x2, color x1, drift x1, botaniq x1, espresso x1) | 1 hand-authored skeleton (catalog-images)</p>
 
   <!-- 4. Generated GML -->
-  <h3>4. Generated GML (card by card)</h3>
+  <h3>4. Generated Cards (card by card)</h3>
+
     <div class="card-gml-row">
     <div class="card-screenshot"><img src="unified-screenshots/minimal/card-01.png" alt="Card 0"></div>
     <div class="card-gml-details">
       <div class="card-meta"><span class="card-num">#0</span> 14w | 8 tags | behind-image | DISPLAY | bg:#030303</div>
-      <details><summary>Show GML (526 bytes)</summary><pre class="gml">&lt;SECTION image-layout="behind" background-color="#030303"&gt;
+      <div class="card-description">Full-bleed title card: a golden-hour olive grove photograph fills the entire background. Centered display-size text with the title in white and "Puglia" highlighted in the guide's orange accent color. Very minimal &mdash; just 14 words.</div>
+      <details><summary>Show GML (card markup) &mdash; 526 bytes</summary><pre class="gml">&lt;SECTION image-layout="behind" background-color="#030303"&gt;
 &lt;IMG class="accent-image" query="ancient olive groves in Puglia at golden sunset, gnarled olive trees silhouetted against warm orange sky"&gt;
 &lt;DIV class="body"&gt;
 &lt;DISPLAY size="lg" style="text-align: center"&gt;
@@ -518,7 +733,8 @@
     <div class="card-screenshot"><img src="unified-screenshots/minimal/card-02.png" alt="Card 1"></div>
     <div class="card-gml-details">
       <div class="card-meta"><span class="card-num">#1</span> 70w | 15 tags | <span class="chip chip-cols">cols [40,60]</span> inline IMG | bg:#f5f0eb</div>
-      <details><summary>Show GML (948 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" background-color="#f5f0eb"&gt;
+      <div class="card-description">Two-column layout on a warm cream background: a full-height olive grove photograph on the left (40%), and heading + heritage prose on the right (60%). The image is inline within the column, not a background. Slightly dense for minimal at 70 words.</div>
+      <details><summary>Show GML (card markup) &mdash; 948 bytes</summary><pre class="gml">&lt;SECTION image-layout="blank" background-color="#f5f0eb"&gt;
 &lt;COLUMNS col-widths="[40,60]"&gt;
   &lt;DIV&gt;&lt;IMG query="ancient olive groves..."&gt;&lt;/DIV&gt;
   &lt;DIV&gt;
@@ -534,7 +750,8 @@
     <div class="card-screenshot"><img src="unified-screenshots/minimal/card-03.png" alt="Card 2"></div>
     <div class="card-gml-details">
       <div class="card-meta"><span class="card-num">#2</span> 67w | 24 tags | <span class="chip chip-sl">solidBoxes</span> (2 items) | centered H1</div>
-      <details><summary>Show GML (1,156 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" background-color="#f5f0eb"&gt;
+      <div class="card-description">Centered heading ("Two Native Cultivars. Infinite Character.") with a solidBoxes smart-layout below showing two olive varieties (Coratina and Ogliarola) as content boxes. Cream background, no image. Clean and structured.</div>
+      <details><summary>Show GML (card markup) &mdash; 1,156 bytes</summary><pre class="gml">&lt;SECTION image-layout="blank" background-color="#f5f0eb"&gt;
 &lt;H1 style="text-align: center"&gt;Two Native Cultivars. Infinite Character.&lt;/H1&gt;
 &lt;SMART-LAYOUT variant="solidBoxes"&gt;
   Coratina | Ogliarola
@@ -547,7 +764,8 @@
     <div class="card-screenshot"><img src="unified-screenshots/minimal/card-04.png" alt="Card 3"></div>
     <div class="card-gml-details">
       <div class="card-meta"><span class="card-num">#3</span> 20w | 9 tags | behind-image | DISPLAY | breather</div>
-      <details><summary>Show GML (579 bytes)</summary><pre class="gml">&lt;SECTION image-layout="behind" background-color="#f5f0eb"&gt;
+      <div class="card-description">Breather card: full-bleed photograph of an ancient stone olive mill behind a large display-size statement ("Pressed Within Hours of Harvest"). Only 20 words &mdash; the image tells the story. This is the minimal aesthetic working correctly.</div>
+      <details><summary>Show GML (card markup) &mdash; 579 bytes</summary><pre class="gml">&lt;SECTION image-layout="behind" background-color="#f5f0eb"&gt;
 &lt;IMG class="accent-image" query="ancient stone olive mill..."&gt;
 &lt;DISPLAY size="lg"&gt;Pressed Within Hours of Harvest&lt;/DISPLAY&gt;
 &lt;P&gt;Cold extraction at under 27 C...&lt;/P&gt;
@@ -559,7 +777,8 @@
     <div class="card-screenshot"><img src="unified-screenshots/minimal/card-05.png" alt="Card 4"></div>
     <div class="card-gml-details">
       <div class="card-meta"><span class="card-num">#4</span> 60w | 22 tags | <span class="chip chip-sl">solidBoxes</span> (4 items) <span class="chip chip-cols">cols [32,68]</span></div>
-      <details><summary>Show GML (975 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" background-color="#f5f0eb"&gt;
+      <div class="card-description">Two-column layout: a vertical solidBoxes smart-layout on the left (32%) listing four production steps (Hand Harvest, Same-Day Mill, Cold Extract, Inert Storage), and heading + explanatory text on the right (68%). Process-focused card.</div>
+      <details><summary>Show GML (card markup) &mdash; 975 bytes</summary><pre class="gml">&lt;SECTION image-layout="blank" background-color="#f5f0eb"&gt;
 &lt;COLUMNS col-widths="[32,68]"&gt;
   &lt;DIV&gt;&lt;SMART-LAYOUT variant="solidBoxes"&gt;
     Hand Harvest | Same-Day Mill | Cold Extract | Inert Storage
@@ -574,7 +793,8 @@
     <div class="card-screenshot"><img src="unified-screenshots/minimal/card-06.png" alt="Card 5"></div>
     <div class="card-gml-details">
       <div class="card-meta"><span class="card-num">#5</span> 47w | 23 tags | <span class="chip chip-sl">solidBoxes</span> (3 items) | centered H1</div>
-      <details><summary>Show GML (1,054 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" background-color="#f5f0eb"&gt;
+      <div class="card-description">Centered heading ("Certified Quality. Guaranteed Origin.") with three solidBoxes below for DOP Protected, IGP Certified, and Organic Standards certifications. Clean, card-like presentation. No image &mdash; the certifications are the content.</div>
+      <details><summary>Show GML (card markup) &mdash; 1,054 bytes</summary><pre class="gml">&lt;SECTION image-layout="blank" background-color="#f5f0eb"&gt;
 &lt;H1&gt;Certified Quality. Guaranteed Origin.&lt;/H1&gt;
 &lt;SMART-LAYOUT variant="solidBoxes"&gt;
   DOP Protected | IGP Certified | Organic Standards
@@ -587,7 +807,8 @@
     <div class="card-screenshot"><img src="unified-screenshots/minimal/card-07.png" alt="Card 6"></div>
     <div class="card-gml-details">
       <div class="card-meta"><span class="card-num">#6</span> 30w | 33 tags | <span class="chip chip-sl">solidBoxes</span> (3 items, dark) <span class="chip chip-cols">cols [32,68]</span> inline IMG</div>
-      <details><summary>Show GML (1,266 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" background-color="#f5f0eb"&gt;
+      <div class="card-description">Two-column layout: a tasting photograph on the left (32%), and on the right a heading ("A Market That's Already Moving") with dark-colored solidBoxes showing three export metrics. Data-forward but still restrained at 30 words.</div>
+      <details><summary>Show GML (card markup) &mdash; 1,266 bytes</summary><pre class="gml">&lt;SECTION image-layout="blank" background-color="#f5f0eb"&gt;
 &lt;COLUMNS col-widths="[32,68]"&gt;
   &lt;DIV&gt;&lt;IMG query="olive oil tasting..."&gt;&lt;/DIV&gt;
   &lt;DIV&gt;
@@ -605,7 +826,8 @@
     <div class="card-screenshot"><img src="unified-screenshots/minimal/card-08.png" alt="Card 7"></div>
     <div class="card-gml-details">
       <div class="card-meta"><span class="card-num">#7</span> 25w | 9 tags | behind-image | closing CTA</div>
-      <details><summary>Show GML (600 bytes)</summary><pre class="gml">&lt;SECTION image-layout="behind" background-color="#f5f0eb"&gt;
+      <div class="card-description">Closing card: full-bleed image of elegant olive oil bottles behind a simple call-to-action heading and one line of text. Only 25 words. The photo sets the mood, the text gives the next step.</div>
+      <details><summary>Show GML (card markup) &mdash; 600 bytes</summary><pre class="gml">&lt;SECTION image-layout="behind" background-color="#f5f0eb"&gt;
 &lt;IMG class="accent-image" query="elegant olive oil bottles..."&gt;
 &lt;H1&gt;Let's Bring Puglia to Your Market&lt;/H1&gt;
 &lt;P&gt;Ready to partner with heritage?...&lt;/P&gt;
@@ -617,7 +839,8 @@
     <div class="card-screenshot"><img src="unified-screenshots/minimal/card-09.png" alt="Card 8"></div>
     <div class="card-gml-details">
       <div class="card-meta"><span class="card-num">#8</span> 23w | 15 tags | <span class="chip chip-sl">solidBoxes</span> (2 items, colored)</div>
-      <details><summary>Show GML (680 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" background-color="#f5f0eb"&gt;
+      <div class="card-description">Sources card with two colored solidBoxes listing the data sources. Minimal treatment &mdash; one dark box, one orange accent box. Clean and unobtrusive.</div>
+      <details><summary>Show GML (card markup) &mdash; 680 bytes</summary><pre class="gml">&lt;SECTION image-layout="blank" background-color="#f5f0eb"&gt;
 &lt;H1&gt;Sources&lt;/H1&gt;
 &lt;SMART-LAYOUT variant="solidBoxes"&gt;
   l'OlivoNews (#030303) | Observatory of Economic Complexity (#e57435)
@@ -627,56 +850,57 @@
   </div>
 
   <!-- 5. Grader Scores -->
-  <h3>5. Grader Scores</h3>
+  <h3>5. Quality Check Results</h3>
+  <p style="font-size:13px;color:#aaa;margin-bottom:8px;">Automated graders evaluate the generated deck against Minimal guide standards.</p>
   <div class="score-bar">
     <div class="score-segment seg-pass" style="flex:4;">4 pass</div>
     <div class="score-segment seg-fail" style="flex:4;">4 fail</div>
   </div>
   <div style="margin-top:8px;">
     <div class="grader-row">
-      <span class="grader-name">minimal-behind-image-ratio</span>
+      <span class="grader-name">Behind-image ratio</span>
       <span class="grader-score fail-tag">0.333</span>
       <span class="grader-verdict verdict-fail">FAIL</span>
-      <span class="grader-explanation">3/9 sections use behind-image (33%). Need &gt;= 50%.</span>
+      <span class="grader-explanation">3/9 sections use behind-image (33%). Need &gt;= 50%. Minimal decks should be image-dominant.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">minimal-display-usage</span>
+      <span class="grader-name">Display text usage</span>
       <span class="grader-score pass-tag">1.000</span>
       <span class="grader-verdict verdict-pass">PASS</span>
-      <span class="grader-explanation">2 DISPLAY tags found. Minimal decks need at least 2.</span>
+      <span class="grader-explanation">2 DISPLAY tags found. Minimal decks need at least 2 for dramatic typography.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">minimal-content-sparsity</span>
+      <span class="grader-name">Content sparsity</span>
       <span class="grader-score fail-tag">0.375</span>
       <span class="grader-verdict verdict-fail">FAIL</span>
-      <span class="grader-explanation">Avg 40w/card (score: 0.38). Cards over 50w: 3, over 70w: 0. card 2: 70w, card 3: 67w, card 5: 60w too dense.</span>
+      <span class="grader-explanation">Avg 40w/card (score: 0.38). Cards over 50w: 3, over 70w: 0. card 2: 70w, card 3: 67w, card 5: 60w too dense for minimal.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">minimal-bg-alternation</span>
+      <span class="grader-name">Background color alternation</span>
       <span class="grader-score pass-tag">1.000</span>
       <span class="grader-verdict verdict-pass">PASS</span>
-      <span class="grader-explanation">0 adjacent bg-color violations across 9 sections.</span>
+      <span class="grader-explanation">0 adjacent bg-color violations across 9 sections. Good visual rhythm.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">minimal-variant-restraint</span>
+      <span class="grader-name">Smart-layout restraint</span>
       <span class="grader-score pass-tag">1.000</span>
       <span class="grader-verdict verdict-pass">PASS</span>
-      <span class="grader-explanation">1 family: boxes (solidBoxes only). Excellent restraint.</span>
+      <span class="grader-explanation">1 family: boxes (solidBoxes only). Excellent restraint &mdash; minimal decks should use few smart-layouts.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">guide-structural-fidelity</span>
+      <span class="grader-name">Structural fidelity to guide</span>
       <span class="grader-score fail-tag">0.400</span>
       <span class="grader-verdict verdict-fail">FAIL</span>
-      <span class="grader-explanation">2/5 checks passed. Failed: wordCountCompliance (3/7 in [15,40]), behindImagePercent (33%, need &gt;=50%), avgWordsPerCard (46w, max 40).</span>
+      <span class="grader-explanation">2/5 checks passed. Failed: word count (3/7 in [15,40]w), behind-image % (33%, need &gt;=50%), avg words (46w, max 40).</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">deck-layout-variety</span>
+      <span class="grader-name">Layout variety</span>
       <span class="grader-score pass-tag">0.825</span>
       <span class="grader-verdict verdict-pass">PASS</span>
       <span class="grader-explanation">(no detailed explanation)</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">minimal-atmospheric-queries</span>
+      <span class="grader-name">Atmospheric image quality (model)</span>
       <span class="grader-score fail-tag">0.500</span>
       <span class="grader-verdict verdict-fail">FAIL</span>
       <span class="grader-explanation">Mixed quality. Olive grove/trulli images atmospheric. But 'tasting setup' and 'bottles with premium packaging' are product shots, not mood-first.</span>
@@ -692,32 +916,32 @@
   </div>
 
   <!-- 1. Pipeline Timeline -->
-  <h3>1. Pipeline Timeline</h3>
+  <h3>1. Pipeline Timeline (pipeline metrics)</h3>
   <div class="timeline">
-    <div class="timeline-item"><span class="ts">00:26:39</span> <span class="desc">Gen3 agent started</span></div>
-    <div class="timeline-item"><span class="ts">00:26:42</span> <span class="desc">Prompt sent</span> <span class="elapsed">+3s</span></div>
-    <div class="timeline-item"><span class="ts">00:26:49</span> <span class="desc">Miniform answered (round 1: style, audience, focus, num cards)</span> <span class="elapsed">+7s</span></div>
-    <div class="timeline-item"><span class="ts">00:28:17</span> <span class="desc">Outline ready (10,773 chars, 9 cards)</span> <span class="elapsed">+88s</span></div>
-    <div class="timeline-item"><span class="ts">00:28:17</span> <span class="desc">GenDeck resolve started</span> <span class="elapsed">+0s</span></div>
-    <div class="timeline-item"><span class="ts">00:28:53</span> <span class="desc">GenDeck done: 9 cards, 11,506 chars</span> <span class="elapsed">+36s</span></div>
-    <div class="timeline-item"><span class="ts">00:29:13</span> <span class="desc">Image resolution done (9,528 chars resolved GML)</span> <span class="elapsed">+20s</span></div>
-    <div class="timeline-item"><span class="ts">00:29:24</span> <span class="desc">Screenshots rendered (9 cards)</span> <span class="elapsed">+11s</span></div>
-    <div class="timeline-item"><span class="ts">00:29:27</span> <span class="desc">Screenshots uploaded to Supabase</span> <span class="elapsed">+3s</span></div>
-    <div class="timeline-item"><span class="ts">00:33:31</span> <span class="desc">Eval suite complete</span> <span class="elapsed">+244s</span></div>
+    <div class="timeline-item"><span class="ts">00:26:39</span> <span class="desc">Gen3 agent started &mdash; begins planning the deck structure</span></div>
+    <div class="timeline-item"><span class="ts">00:26:42</span> <span class="desc">Prompt sent to AI</span> <span class="elapsed">+3s</span></div>
+    <div class="timeline-item"><span class="ts">00:26:49</span> <span class="desc">Style and structure questions answered</span> <span class="elapsed">+7s</span></div>
+    <div class="timeline-item"><span class="ts">00:28:17</span> <span class="desc">Outline ready (10,773 chars, 9 cards planned)</span> <span class="elapsed">+88s</span></div>
+    <div class="timeline-item"><span class="ts">00:28:17</span> <span class="desc">GenDeck started &mdash; converting outline to card markup</span> <span class="elapsed">+0s</span></div>
+    <div class="timeline-item"><span class="ts">00:28:53</span> <span class="desc">GenDeck done: 9 cards, 11,506 chars of GML (card markup)</span> <span class="elapsed">+36s</span></div>
+    <div class="timeline-item"><span class="ts">00:29:13</span> <span class="desc">Image placeholders resolved</span> <span class="elapsed">+20s</span></div>
+    <div class="timeline-item"><span class="ts">00:29:24</span> <span class="desc">All 9 cards rendered as screenshots</span> <span class="elapsed">+11s</span></div>
+    <div class="timeline-item"><span class="ts">00:29:27</span> <span class="desc">Screenshots uploaded</span> <span class="elapsed">+3s</span></div>
+    <div class="timeline-item"><span class="ts">00:33:31</span> <span class="desc">Quality checks complete (28 graders evaluated)</span> <span class="elapsed">+244s</span></div>
   </div>
   <div class="metric-row">
-    <div class="metric-box"><div class="val">98s</div><div class="lbl">Gen3 (prompt-to-outline)</div></div>
-    <div class="metric-box"><div class="val">36s</div><div class="lbl">GenDeck resolve</div></div>
+    <div class="metric-box"><div class="val">98s</div><div class="lbl">Gen3 (prompt to outline)</div></div>
+    <div class="metric-box"><div class="val">36s</div><div class="lbl">GenDeck (outline to cards)</div></div>
     <div class="metric-box"><div class="val">34s</div><div class="lbl">Render + upload</div></div>
-    <div class="metric-box"><div class="val">244s</div><div class="lbl">Eval suite</div></div>
+    <div class="metric-box"><div class="val">244s</div><div class="lbl">Quality checks</div></div>
     <div class="metric-box"><div class="val">412.1s</div><div class="lbl">Total (6.9 min)</div></div>
   </div>
 
   <!-- 2. Outline Summary -->
   <h3>2. Outline Summary</h3>
-  <p style="font-size:13px;color:#aaa;margin-bottom:8px;">9 cards | 10,773 chars | planLayout=2, writeOutline=2 | cardInstructions=8, imageLayout=8, group=0</p>
+  <p style="font-size:13px;color:#aaa;margin-bottom:8px;">9 cards planned with roles, image placements, and content instructions for each</p>
   <table>
-    <tr><th>#</th><th>Card Role (trace)</th><th>Image Layout</th><th>Card Instructions (first 80 chars)</th></tr>
+    <tr><th>#</th><th>Card Role</th><th>Image Placement</th><th>Content Instructions (abbreviated)</th></tr>
     <tr><td>0</td><td>Title</td><td>left</td><td>Title card, 10-15 words. Bold H1 title with clean subtitle. Use left accent im...</td></tr>
     <tr><td>1</td><td>Content</td><td>blank</td><td>Content card, 60-70 words. Historical context and timeline. Use blank layout wi...</td></tr>
     <tr><td>2</td><td>Content</td><td>blank</td><td>Content card, 50-60 words. Core principles explanation. Two-column layout: left...</td></tr>
@@ -726,32 +950,35 @@
     <tr><td>5</td><td>Content</td><td>blank</td><td>Content card, 70-80 words. Modern UI examples. Use blank layout showing 3-4 con...</td></tr>
     <tr><td>6</td><td>Content</td><td>blank</td><td>Content card, 55-65 words. Evolution and legacy. Two-column layout: right colum...</td></tr>
     <tr><td>7</td><td>Closing</td><td>left</td><td>Closing card, 20-25 words. Call to action for design students. Left accent imag...</td></tr>
-    <tr><td>8</td><td>Sources</td><td>(none)</td><td>(Sources card - no cardInstructions)</td></tr>
+    <tr><td>8</td><td>Sources</td><td>(none)</td><td>(Sources card - no content instructions)</td></tr>
   </table>
 
   <!-- 3. Template Matching -->
   <h3>3. Template Matching (card by card)</h3>
+  <p style="font-size:13px;color:#aaa;margin-bottom:8px;">Swiss has no golden examples yet &mdash; all templates are hand-authored structural skeletons. This is a key gap compared to Consultant and Minimal.</p>
   <table>
-    <tr><th>#</th><th>Template</th><th>Score</th><th>Strategy</th><th>Type</th></tr>
-    <tr><td>0</td><td>swiss-breather-light</td><td>2</td><td>full-card</td><td class="template-hand-authored">hand-authored</td></tr>
-    <tr><td>1</td><td>swiss-asymmetric-heavy</td><td>7</td><td>full-card</td><td class="template-hand-authored">hand-authored</td></tr>
-    <tr><td>2</td><td>swiss-dense-grid</td><td>7</td><td>full-card</td><td class="template-hand-authored">hand-authored</td></tr>
-    <tr><td>3</td><td>swiss-closing-mirror</td><td>2</td><td>full-card</td><td class="template-hand-authored">hand-authored</td></tr>
-    <tr><td>4</td><td>swiss-data-context</td><td>4</td><td>full-card</td><td class="template-hand-authored">hand-authored</td></tr>
-    <tr><td>5</td><td>swiss-section-divider</td><td>6</td><td>full-card</td><td class="template-hand-authored">hand-authored</td></tr>
-    <tr><td>6</td><td>swiss-pull-quote-dark</td><td>3</td><td>full-card</td><td class="template-hand-authored">hand-authored</td></tr>
-    <tr><td>7</td><td>swiss-title-dark</td><td>2</td><td>full-card</td><td class="template-hand-authored">hand-authored</td></tr>
-    <tr><td>8</td><td>swiss-asymmetric-heavy</td><td>2</td><td>full-card</td><td class="template-hand-authored">hand-authored</td></tr>
+    <tr><th>#</th><th>Matched Template</th><th>Score</th><th>Generation Method</th><th>Template Source</th></tr>
+    <tr><td>0</td><td>swiss-breather-light</td><td>2</td><td>single-step</td><td class="template-hand-authored">hand-authored skeleton</td></tr>
+    <tr><td>1</td><td>swiss-asymmetric-heavy</td><td>7</td><td>single-step</td><td class="template-hand-authored">hand-authored skeleton</td></tr>
+    <tr><td>2</td><td>swiss-dense-grid</td><td>7</td><td>single-step</td><td class="template-hand-authored">hand-authored skeleton</td></tr>
+    <tr><td>3</td><td>swiss-closing-mirror</td><td>2</td><td>single-step</td><td class="template-hand-authored">hand-authored skeleton</td></tr>
+    <tr><td>4</td><td>swiss-data-context</td><td>4</td><td>single-step</td><td class="template-hand-authored">hand-authored skeleton</td></tr>
+    <tr><td>5</td><td>swiss-section-divider</td><td>6</td><td>single-step</td><td class="template-hand-authored">hand-authored skeleton</td></tr>
+    <tr><td>6</td><td>swiss-pull-quote-dark</td><td>3</td><td>single-step</td><td class="template-hand-authored">hand-authored skeleton</td></tr>
+    <tr><td>7</td><td>swiss-title-dark</td><td>2</td><td>single-step</td><td class="template-hand-authored">hand-authored skeleton</td></tr>
+    <tr><td>8</td><td>swiss-asymmetric-heavy</td><td>2</td><td>single-step</td><td class="template-hand-authored">hand-authored skeleton</td></tr>
   </table>
-  <p style="font-size:12px;color:#888;margin-top:4px;">100% template match rate | 0/9 golden-indexed (all hand-authored templates) | 8 distinct templates, asymmetric-heavy used 2x</p>
+  <p style="font-size:12px;color:#888;margin-top:4px;">100% template match rate | 0/9 from golden decks (all hand-authored skeletons) | 8 distinct templates, asymmetric-heavy used 2x</p>
 
   <!-- 4. Generated GML -->
-  <h3>4. Generated GML (card by card)</h3>
+  <h3>4. Generated Cards (card by card)</h3>
+
     <div class="card-gml-row">
     <div class="card-screenshot"><img src="unified-screenshots/swiss/card-01.png" alt="Card 0"></div>
     <div class="card-gml-details">
       <div class="card-meta"><span class="card-num">#0</span> 16w | 7 tags | behind-image | H1 | bg:#1a1a1a | v-align:end</div>
-      <details><summary>Show GML (456 bytes)</summary><pre class="gml">&lt;SECTION image-layout="behind" vertical-align="end" background-color="#1a1a1a"&gt;
+      <div class="card-description">Title card: a dramatic black-and-white Bauhaus building photograph fills the background. Bold white heading at the bottom with a muted gray subtitle. Minimal text (16 words), maximum visual impact. Dark, editorial tone.</div>
+      <details><summary>Show GML (card markup) &mdash; 456 bytes</summary><pre class="gml">&lt;SECTION image-layout="behind" vertical-align="end" background-color="#1a1a1a"&gt;
 &lt;IMG class="accent-image" query="Bauhaus building facade geometric architecture dramatic lighting black and white modernist concrete glass steel"&gt;
 &lt;DIV class="body"&gt;
 &lt;H1&gt;&lt;SPAN text-color="#f8f8f8"&gt;Bauhaus Design Principles in Modern UI&lt;/SPAN&gt;&lt;/H1&gt;
@@ -765,7 +992,8 @@
     <div class="card-screenshot"><img src="unified-screenshots/swiss/card-02.png" alt="Card 1"></div>
     <div class="card-gml-details">
       <div class="card-meta"><span class="card-num">#1</span> 67w | 22 tags | <span class="chip chip-sl">timeline</span> (4 items) | H2 | v-align:start</div>
-      <details><summary>Show GML (1,143 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" vertical-align="start"&gt;
+      <div class="card-description">Historical timeline card: a heading ("A Century of Radical Simplicity") followed by a timeline smart-layout showing four milestones from 1919 to 2010s. Content-only, no image. The timeline is the sole structural element &mdash; clean and focused.</div>
+      <details><summary>Show GML (card markup) &mdash; 1,143 bytes</summary><pre class="gml">&lt;SECTION image-layout="blank" vertical-align="start"&gt;
 &lt;H2&gt;A Century of Radical Simplicity&lt;/H2&gt;
 &lt;SMART-LAYOUT variant="timeline"&gt;
   1919 Weimar Foundation | 1933 Forced Diaspora | 1950s Corporate Identity | 2010s Digital Renaissance
@@ -778,7 +1006,8 @@
     <div class="card-screenshot"><img src="unified-screenshots/swiss/card-03.png" alt="Card 2"></div>
     <div class="card-gml-details">
       <div class="card-meta"><span class="card-num">#2</span> 93w | 17 tags | <span class="chip chip-cols">cols [31,69]</span> inline IMG | H4 sub-headers | v-align:start</div>
-      <details><summary>Show GML (1,185 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" vertical-align="start"&gt;
+      <div class="card-description">Two-column asymmetric layout (31/69 split): a Bauhaus poster image in the narrow left column, and on the right three principles with H4 sub-headers (Form Follows Function, Geometric Simplicity, Unity of Art and Craft). Structured grid with image accent.</div>
+      <details><summary>Show GML (card markup) &mdash; 1,185 bytes</summary><pre class="gml">&lt;SECTION image-layout="blank" vertical-align="start"&gt;
 &lt;H2&gt;Three Principles That Still Govern Every Screen&lt;/H2&gt;
 &lt;COLUMNS col-widths="[31,69]"&gt;
   &lt;DIV&gt;&lt;IMG query="classic Bauhaus poster..."&gt;&lt;/DIV&gt;
@@ -794,7 +1023,8 @@
     <div class="card-screenshot"><img src="unified-screenshots/swiss/card-04.png" alt="Card 3"></div>
     <div class="card-gml-details">
       <div class="card-meta"><span class="card-num">#3</span> 21w | 7 tags | behind-image | pull-quote H1 | bg:#2C3E50 | v-align:end</div>
-      <details><summary>Show GML (469 bytes)</summary><pre class="gml">&lt;SECTION image-layout="behind" vertical-align="end" background-color="#2C3E50"&gt;
+      <div class="card-description">Breather/pull-quote card: dark blue-gray background with a geometric pattern image behind it. A large quote from Frank Lloyd Wright on the Bauhaus legacy. Typography-driven but the background image competes with the text (noted as a grader issue).</div>
+      <details><summary>Show GML (card markup) &mdash; 469 bytes</summary><pre class="gml">&lt;SECTION image-layout="behind" vertical-align="end" background-color="#2C3E50"&gt;
 &lt;IMG class="accent-image" query="geometric minimalist pattern..."&gt;
 &lt;H1&gt;"Less is not more. Less is only more when more is no good."&lt;/H1&gt;
 &lt;P font-size="sm"&gt;-- Frank Lloyd Wright, on the Bauhaus legacy&lt;/P&gt;
@@ -806,7 +1036,8 @@
     <div class="card-screenshot"><img src="unified-screenshots/swiss/card-05.png" alt="Card 4"></div>
     <div class="card-gml-details">
       <div class="card-meta"><span class="card-num">#4</span> 91w | 18 tags | <span class="chip chip-cols">cols [63,37]</span> inline IMG | H2+H4 hierarchy | text-color hierarchy</div>
-      <details><summary>Show GML (1,247 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" vertical-align="start"&gt;
+      <div class="card-description">Reversed asymmetric layout (63/37): wider left column has heading + prose about Bayer's Universal typeface and Kandinsky's color theory. Narrow right column has an image and a comparison (Primary Palette / Modern Echo). Strong text-color hierarchy with muted grays.</div>
+      <details><summary>Show GML (card markup) &mdash; 1,247 bytes</summary><pre class="gml">&lt;SECTION image-layout="blank" vertical-align="start"&gt;
 &lt;COLUMNS col-widths="[63,37]"&gt;
   &lt;DIV&gt;
     &lt;H2&gt;Typography &amp; Color: The Bauhaus Toolkit&lt;/H2&gt;
@@ -824,7 +1055,8 @@
     <div class="card-screenshot"><img src="unified-screenshots/swiss/card-06.png" alt="Card 5"></div>
     <div class="card-gml-details">
       <div class="card-meta"><span class="card-num">#5</span> 44w | 21 tags | <span class="chip chip-cols">cols [46,54]</span> H4 catalog rows | bg:#f8f8f8 | v-align:end</div>
-      <details><summary>Show GML (979 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" vertical-align="end" background-color="#f8f8f8"&gt;
+      <div class="card-description">Light background card with a near-equal column split (46/54): heading on the left, and a catalog of modern Bauhaus-influenced systems on the right (Google Material, Apple Interface, Figma Components). Bottom-aligned content. Editorial catalog feel.</div>
+      <details><summary>Show GML (card markup) &mdash; 979 bytes</summary><pre class="gml">&lt;SECTION image-layout="blank" vertical-align="end" background-color="#f8f8f8"&gt;
 &lt;COLUMNS col-widths="[46,54]"&gt;
   &lt;DIV&gt;&lt;H2&gt;Bauhaus in the Wild&lt;/H2&gt;&lt;/DIV&gt;
   &lt;DIV&gt;
@@ -839,7 +1071,8 @@
     <div class="card-screenshot"><img src="unified-screenshots/swiss/card-07.png" alt="Card 6"></div>
     <div class="card-gml-details">
       <div class="card-meta"><span class="card-num">#6</span> 68w | 14 tags | <span class="chip chip-cols">cols [63,37]</span> inline IMG | prose-heavy left col | v-align:start</div>
-      <details><summary>Show GML (1,051 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" vertical-align="start"&gt;
+      <div class="card-description">Asymmetric layout (63/37) again: prose-heavy left column covering the evolution from drafting tables to CSS Grid, Bootstrap, and WCAG. Right column has a design system image centered vertically. Top-aligned for reading flow.</div>
+      <details><summary>Show GML (card markup) &mdash; 1,051 bytes</summary><pre class="gml">&lt;SECTION image-layout="blank" vertical-align="start"&gt;
 &lt;COLUMNS col-widths="[63,37]"&gt;
   &lt;DIV&gt;
     &lt;H2&gt;The Grid Never Left -- It Just Went Digital&lt;/H2&gt;
@@ -855,7 +1088,8 @@
     <div class="card-screenshot"><img src="unified-screenshots/swiss/card-08.png" alt="Card 7"></div>
     <div class="card-gml-details">
       <div class="card-meta"><span class="card-num">#7</span> 19w | 7 tags | behind-image | H1 bold+muted | bg:#f8f8f8 | v-align:end</div>
-      <details><summary>Show GML (491 bytes)</summary><pre class="gml">&lt;SECTION image-layout="behind" vertical-align="end" background-color="#f8f8f8"&gt;
+      <div class="card-description">Closing card: light background with a clean workspace photograph behind it. Bold heading with a muted gray continuation ("Every Element Must Earn Its Place"). Very sparse (19 words). The graders noted this lacks the dramatic typography a Swiss closing card needs.</div>
+      <details><summary>Show GML (card markup) &mdash; 491 bytes</summary><pre class="gml">&lt;SECTION image-layout="behind" vertical-align="end" background-color="#f8f8f8"&gt;
 &lt;IMG class="accent-image" query="clean geometric workspace..."&gt;
 &lt;H1&gt;Design with Purpose -- &lt;SPAN text-color="#727271"&gt;Every Element Must Earn Its Place&lt;/SPAN&gt;&lt;/H1&gt;
 &lt;P font-size="sm"&gt;&lt;SPAN text-color="#8fa8b8"&gt;Apply these principles. Build with intention.&lt;/SPAN&gt;&lt;/P&gt;
@@ -867,7 +1101,8 @@
     <div class="card-screenshot"><img src="unified-screenshots/swiss/card-09.png" alt="Card 8"></div>
     <div class="card-gml-details">
       <div class="card-meta"><span class="card-num">#8</span> 75w | 24 tags | <span class="chip chip-cols">cols [42,58]</span> + <span class="chip chip-cols">cols [31,69]</span> stacked | empty-col offset | v-align:end</div>
-      <details><summary>Show GML (1,588 bytes)</summary><pre class="gml">&lt;SECTION image-layout="blank" vertical-align="end"&gt;
+      <div class="card-description">Sources card with a distinctive Swiss layout: two stacked column blocks. The first has the "Sources" heading offset to the left. The second has an empty narrow left column as whitespace, with 6 source links in the wider right column. Uses empty columns as intentional negative space.</div>
+      <details><summary>Show GML (card markup) &mdash; 1,588 bytes</summary><pre class="gml">&lt;SECTION image-layout="blank" vertical-align="end"&gt;
 &lt;COLUMNS col-widths="[42,58]"&gt;
   &lt;DIV&gt;&lt;H2&gt;Sources&lt;/H2&gt;&lt;/DIV&gt;
   &lt;DIV&gt;&lt;/DIV&gt; &lt;!-- empty offset --&gt;
@@ -881,186 +1116,188 @@
   </div>
 
   <!-- 5. Grader Scores -->
-  <h3>5. Grader Scores</h3>
+  <h3>5. Quality Check Results</h3>
+  <p style="font-size:13px;color:#aaa;margin-bottom:8px;">Swiss has the most graders (28) because the style has very specific structural requirements. Each checks a different aspect of the Swiss design language.</p>
   <div class="score-bar">
     <div class="score-segment seg-pass" style="flex:17;">17 pass</div>
     <div class="score-segment seg-fail" style="flex:10;">10 fail</div>
   </div>
-  <p style="font-size:12px;color:#888;margin:4px 0 8px;">(1 skipped: swiss-title-card-quality -- no card_index available)</p>
+  <p style="font-size:12px;color:#888;margin:4px 0 8px;">(1 skipped: title card quality check &mdash; no card index available)</p>
   <div style="margin-top:8px;">
     <div class="grader-row">
-      <span class="grader-name">swiss-image-load-failure-card</span>
+      <span class="grader-name">Image loading (vision)</span>
       <span class="grader-score pass-tag">1.000</span>
       <span class="grader-verdict verdict-pass">PASS</span>
       <span class="grader-explanation">No image load failures.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">swiss-grid-card</span>
+      <span class="grader-name">Grid structure per card (vision)</span>
       <span class="grader-score fail-tag">0.427</span>
       <span class="grader-verdict verdict-fail">FAIL</span>
       <span class="grader-explanation">Cards 0, 3, 7 lack column structure; timeline card has no modular grid; uneven splits undermine grid discipline.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">swiss-grid-deck</span>
+      <span class="grader-name">Grid structure across deck (vision)</span>
       <span class="grader-score fail-tag">0.550</span>
       <span class="grader-verdict verdict-fail">FAIL</span>
-      <span class="grader-explanation">Deck never deploys 3-col or 4-col layouts. Every content card uses 2-col split. Cards 4-5-6 repeat same asymmetric arrangement.</span>
+      <span class="grader-explanation">Deck never deploys 3-col or 4-col layouts. Every content card uses 2-col split. Cards 4-5-6 repeat same arrangement.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">swiss-visual-card</span>
+      <span class="grader-name">Visual composition per card (vision)</span>
       <span class="grader-score fail-tag">0.631</span>
       <span class="grader-verdict verdict-fail">FAIL</span>
       <span class="grader-explanation">Card 1: timeline not a modular grid. Card 3: behind-image blurs composition. Card 4: image col mixed with text. Card 8: fragmented stacked columns.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">swiss-visual-deck</span>
+      <span class="grader-name">Visual composition across deck (vision)</span>
       <span class="grader-score pass-tag">0.720</span>
       <span class="grader-verdict verdict-pass">PASS</span>
       <span class="grader-explanation">5 distinct composition patterns. Information density contrast is strong. Overuse of atmospheric-background pattern.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">swiss-prose-card</span>
+      <span class="grader-name">Prose quality per card (model)</span>
       <span class="grader-score fail-tag">0.576</span>
       <span class="grader-verdict verdict-fail">FAIL</span>
       <span class="grader-explanation">Cards 1, 3, 4, 5, 6, 8 fail pattern commitment. Timeline not a Dense Info Grid. Quote card has no grid. Sources card fragmented.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">swiss-prose-deck</span>
+      <span class="grader-name">Prose quality across deck (model)</span>
       <span class="grader-score pass-tag">0.840</span>
       <span class="grader-verdict verdict-pass">PASS</span>
       <span class="grader-explanation">7 distinct composition patterns across 9 cards. Content arc strong: historical foundation through closing CTA. No 3-consecutive-same violations.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">swiss-accidental-alignment-card</span>
+      <span class="grader-name">Accidental alignment (vision)</span>
       <span class="grader-score pass-tag">0.867</span>
       <span class="grader-verdict verdict-pass">PASS</span>
       <span class="grader-explanation">No accidental alignment issues.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">heading-word-break</span>
+      <span class="grader-name">Heading word breaks</span>
       <span class="grader-score pass-tag">1.000</span>
       <span class="grader-verdict verdict-pass">PASS</span>
       <span class="grader-explanation">No heading word break issues.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">swiss-background-color-variety-deck</span>
+      <span class="grader-name">Background color variety</span>
       <span class="grader-score pass-tag">1.000</span>
       <span class="grader-verdict verdict-pass">PASS</span>
-      <span class="grader-explanation">3 distinct non-white bg colors: #1A1A1A, #2C3E50, #F8F8F8. Need &gt;= 2 for two-tone Swiss palette.</span>
+      <span class="grader-explanation">3 distinct non-white bg colors: #1A1A1A, #2C3E50, #F8F8F8. Swiss two-tone palette achieved.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">swiss-vertical-align-variety-deck</span>
+      <span class="grader-name">Vertical alignment variety</span>
       <span class="grader-score pass-tag">1.000</span>
       <span class="grader-verdict verdict-pass">PASS</span>
       <span class="grader-explanation">Both start and end vertical-align used on content cards.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">swiss-text-color-hierarchy-deck</span>
+      <span class="grader-name">Text color hierarchy</span>
       <span class="grader-score pass-tag">1.000</span>
       <span class="grader-verdict verdict-pass">PASS</span>
       <span class="grader-explanation">6 cards use text-color hierarchy in body text (need &gt;= 3). #727271 for muted, #8fa8b8 for accent.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">swiss-accent-color-in-headings-deck</span>
+      <span class="grader-name">Accent color in headings</span>
       <span class="grader-score fail-tag">0.000</span>
       <span class="grader-verdict verdict-fail">FAIL</span>
       <span class="grader-explanation">0 headings use accent text-color (need &gt;= 2). Zero accent color in headings.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">swiss-prose-density-card</span>
+      <span class="grader-name">Word density per card</span>
       <span class="grader-score pass-tag">0.857</span>
       <span class="grader-verdict verdict-pass">PASS</span>
-      <span class="grader-explanation">6/7 content cards in acceptable range (20-100 words). 3/7 in ideal (35-75). card 8: 19w SPARSE.</span>
+      <span class="grader-explanation">6/7 content cards in acceptable range (20-100 words). 3/7 in ideal (35-75). card 8: 19w sparse.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">swiss-column-usage-deck</span>
+      <span class="grader-name">Column usage</span>
       <span class="grader-score pass-tag">0.571</span>
       <span class="grader-verdict verdict-pass">PASS</span>
       <span class="grader-explanation">4/7 content cards use columns (57%).</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">swiss-stacked-columns-deck</span>
+      <span class="grader-name">Stacked column rows</span>
       <span class="grader-score fail-tag">0.000</span>
       <span class="grader-verdict verdict-fail">FAIL</span>
-      <span class="grader-explanation">0/7 cards have 2+ column blocks (stacked rows). Swiss design expects stacked column patterns.</span>
+      <span class="grader-explanation">0/7 cards have 2+ column blocks (stacked rows). Swiss design expects stacked column patterns for complex grids.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">swiss-column-split-variety-deck</span>
+      <span class="grader-name">Column split variety</span>
       <span class="grader-score pass-tag">0.800</span>
       <span class="grader-verdict verdict-pass">PASS</span>
       <span class="grader-explanation">4 distinct column split patterns: [31,69], [42,58], [46,54], [63,37]. Ideal &gt;= 5.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">swiss-empty-column-offset-deck</span>
+      <span class="grader-name">Empty column offsets</span>
       <span class="grader-score pass-tag">0.111</span>
       <span class="grader-verdict verdict-pass">PASS</span>
-      <span class="grader-explanation">1/9 cards have empty-column offsets (card 9 sources).</span>
+      <span class="grader-explanation">1/9 cards have empty-column offsets (card 9 sources). Used for intentional whitespace.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">swiss-heading-inside-column-deck</span>
+      <span class="grader-name">Heading placement (not inside columns)</span>
       <span class="grader-score pass-tag">1.000</span>
       <span class="grader-verdict verdict-pass">PASS</span>
       <span class="grader-explanation">No H1 tags inside column divs. Correct Swiss heading placement.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">swiss-smart-layout-overuse-deck</span>
+      <span class="grader-name">Smart-layout restraint</span>
       <span class="grader-score pass-tag">0.875</span>
       <span class="grader-verdict verdict-pass">PASS</span>
-      <span class="grader-explanation">1/8 content cards use smart-layout as sole structure (13%). Good restraint.</span>
+      <span class="grader-explanation">1/8 content cards use smart-layout as sole structure (13%). Swiss decks should rely on the grid, not smart-layouts.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">swiss-smart-layout-family-count-deck</span>
+      <span class="grader-name">Smart-layout family count</span>
       <span class="grader-score pass-tag">1.000</span>
       <span class="grader-verdict verdict-pass">PASS</span>
-      <span class="grader-explanation">1 smart layout family used: timeline (1 instance).</span>
+      <span class="grader-explanation">1 smart layout family used: timeline (1 instance). Minimal smart-layout usage is correct for Swiss.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">swiss-hr-usage-deck</span>
+      <span class="grader-name">Horizontal rule usage</span>
       <span class="grader-score fail-tag">0.000</span>
       <span class="grader-verdict verdict-fail">FAIL</span>
-      <span class="grader-explanation">No &lt;hr&gt; tags found. Swiss design expects horizontal rules as structural dividers.</span>
+      <span class="grader-explanation">No &lt;hr&gt; tags found. Swiss design expects horizontal rules as structural dividers between content sections.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">swiss-no-bullet-lists-deck</span>
+      <span class="grader-name">No bullet lists</span>
       <span class="grader-score pass-tag">1.000</span>
       <span class="grader-verdict verdict-pass">PASS</span>
-      <span class="grader-explanation">No &lt;ul&gt; or &lt;li&gt; tags found. Correctly avoids bullet lists.</span>
+      <span class="grader-explanation">No &lt;ul&gt; or &lt;li&gt; tags found. Correctly avoids bullet lists (Swiss uses grid structure instead).</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">swiss-title-card-quality</span>
+      <span class="grader-name">Title card quality</span>
       <span class="grader-score" style="color:#ff9800;">skip</span>
       <span class="grader-verdict verdict-skip">SKIP</span>
-      <span class="grader-explanation">No card_index available.</span>
+      <span class="grader-explanation">No card index available.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">swiss-closing-card-quality</span>
+      <span class="grader-name">Closing card quality</span>
       <span class="grader-score fail-tag">0.000</span>
       <span class="grader-verdict verdict-fail">FAIL</span>
       <span class="grader-explanation">Card 8 is a Sources/References page, not a closing card. No dramatic typography, no designed ending feel.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">swiss-bookend-diagonal-deck</span>
+      <span class="grader-name">Title/closing diagonal mirror</span>
       <span class="grader-score fail-tag">0.350</span>
       <span class="grader-verdict verdict-fail">FAIL</span>
-      <span class="grader-explanation">Title bottom-left, closing top-left -- vertical shift on same side, not diagonal mirror. Mismatched visual energy.</span>
+      <span class="grader-explanation">Title bottom-left, closing top-left &mdash; vertical shift on same side, not diagonal mirror. Swiss expects mirrored bookend energy.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">swiss-display-scale-typography-deck</span>
+      <span class="grader-name">Display-scale typography</span>
       <span class="grader-score fail-tag">0.200</span>
       <span class="grader-verdict verdict-fail">FAIL</span>
       <span class="grader-explanation">No display-scale typography cards. Card 3 (Wright quote) closest but background image competes with text.</span>
     </div>
     <div class="grader-row">
-      <span class="grader-name">swiss-typographic-statement-deck</span>
+      <span class="grader-name">Typographic statement cards</span>
       <span class="grader-score fail-tag">0.000</span>
       <span class="grader-verdict verdict-fail">FAIL</span>
-      <span class="grader-explanation">Zero typographic statement cards. Cards 3 and 7 are image-driven rather than typography-driven.</span>
+      <span class="grader-explanation">Zero typographic statement cards. Cards 3 and 7 are image-driven rather than typography-driven. Swiss needs pure-type cards.</span>
     </div>
   </div>
 </div>
 
 <!-- ============================== CROSS-GUIDE COMPARISON ============================== -->
 <h2>Cross-Guide Comparison</h2>
+<p style="color:#aaa; font-size:14px; margin-bottom:12px;">Side-by-side comparison of all three guides to show where the golden template approach is strongest and where gaps remain.</p>
 <table>
   <tr>
     <th>Metric</th>
@@ -1069,32 +1306,32 @@
     <th><span class="guide-badge badge-swiss" style="font-size:11px;">Swiss</span></th>
   </tr>
   <tr><td>Total time</td><td>392.6s (6.5 min)</td><td>171.1s (2.9 min)</td><td>412.1s (6.9 min)</td></tr>
-  <tr><td>Gen3 time (prompt to outline)</td><td>94s</td><td>99s</td><td>98s</td></tr>
-  <tr><td>GenDeck resolve time</td><td>47s</td><td>30s</td><td>36s</td></tr>
-  <tr><td>Eval suite time</td><td>233s</td><td>23s</td><td>244s</td></tr>
+  <tr><td>Outline planning time</td><td>94s</td><td>99s</td><td>98s</td></tr>
+  <tr><td>Card generation time</td><td>47s</td><td>30s</td><td>36s</td></tr>
+  <tr><td>Quality check time</td><td>233s</td><td>23s</td><td>244s</td></tr>
   <tr><td>Total words</td><td>1,183</td><td>356</td><td>494</td></tr>
-  <tr><td>Avg words/card</td><td>131</td><td>40</td><td>55</td></tr>
-  <tr><td>Graphs</td><td>4</td><td>0</td><td>0</td></tr>
+  <tr><td>Avg words per card</td><td>131</td><td>40</td><td>55</td></tr>
+  <tr><td>Charts/graphs</td><td>4</td><td>0</td><td>0</td></tr>
   <tr><td>Template match rate</td><td>100%</td><td>100%</td><td>100%</td></tr>
-  <tr><td>Golden-indexed templates</td><td>8/9 (89%)</td><td>8/9 (89%)</td><td>0/9 (0%)</td></tr>
-  <tr><td>Distinct col-widths</td><td>1</td><td>2</td><td>4</td></tr>
-  <tr><td>Distinct SL variants</td><td>3 (starStats, topLineText, stats...)</td><td>1 (solidBoxes)</td><td>1 (timeline)</td></tr>
-  <tr><td>Grader pass rate</td><td><span class="pass-tag">85%</span> (11/13)</td><td><span class="fail-tag">50%</span> (4/8)</td><td>61% (17/28)</td></tr>
+  <tr><td>Golden templates used</td><td>8/9 (89%)</td><td>8/9 (89%)</td><td>0/9 (0%)</td></tr>
+  <tr><td>Distinct column widths</td><td>1</td><td>2</td><td>4</td></tr>
+  <tr><td>Distinct smart-layout variants</td><td>3 (starStats, topLineText, stats...)</td><td>1 (solidBoxes)</td><td>1 (timeline)</td></tr>
+  <tr><td>Quality check pass rate</td><td><span class="pass-tag">85%</span> (11/13)</td><td><span class="fail-tag">50%</span> (4/8)</td><td>61% (17/28)</td></tr>
   <tr><td>Key failures</td>
-    <td>density-compliance, alignment-consistency</td>
-    <td>behind-image-ratio, content-sparsity, structural-fidelity, atmospheric-queries</td>
-    <td>grid-card, stacked-columns, hr-usage, accent-in-headings, closing-card, bookend-diagonal, display-typography, typographic-statement</td>
+    <td>Word density on 3 cards below 150w threshold; all columns use same [42,58] split</td>
+    <td>Not enough behind-image cards (33% vs 50% target); content too dense (avg 40w); product-shot images instead of atmospheric</td>
+    <td>No horizontal rules; no accent colors in headings; no typographic statement cards; no stacked column grids; closing card is a sources page</td>
   </tr>
 </table>
 
 <h3 style="margin-top:24px;">Key Observations</h3>
-<div style="background:#1a1a1a;border:1px solid #333;border-radius:6px;padding:16px;font-size:13px;color:#ccc;">
-  <p><strong>Consultant</strong> is the strongest performer at 85% pass rate. Primary issues: word density on 3 cards falls below the 150w threshold (card 4: 101w, card 6: 136w, card 8: 76w), and all column layouts use the same [42,58] split. The "breach" golden deck dominates template matching (5/9 cards).</p>
-  <p style="margin-top:8px;"><strong>Minimal</strong> struggles most with guide fidelity (50% pass). Core problem: not enough behind-image cards (3/9 vs target of &gt;=50%), and content cards are too dense for the minimal aesthetic (avg 40w vs max 40, but 3 cards exceed 50w). The solidBoxes-only variant restraint is correct, and bg-color alternation works well.</p>
-  <p style="margin-top:8px;"><strong>Swiss</strong> has the most graders (28) and the most failures (10). Key gaps: zero &lt;hr&gt; tags (Swiss structural dividers), no accent colors in headings, no typographic statement cards, no stacked column patterns, and the closing card is a Sources page rather than a designed ending. However, the prose quality, column split variety, text-color hierarchy, and smart-layout restraint all pass.</p>
+<div style="background:#1a1a1a;border:1px solid #333;border-radius:6px;padding:16px;font-size:13px;color:#ccc;line-height:1.7;">
+  <p><strong style="color:#fff;">Consultant</strong> is the strongest performer at 85% pass rate. Golden templates from the "breach" deck dominate (5/9 cards), producing consistent chart+column+metrics layouts. The two failures are: (1) word density &mdash; 3 cards fall below the 150-word minimum (card 4: 101w, card 6: 136w, card 8: 76w), and (2) alignment consistency &mdash; mixed alignment in some visual zones. A notable gap: every column layout uses the identical [42,58] split, which the structural fidelity grader flagged.</p>
+  <p style="margin-top:8px;"><strong style="color:#fff;">Minimal</strong> has the most room to improve at 50% pass rate. The core problem: not enough behind-image cards (3/9 vs the 50% minimum). The minimal aesthetic requires the photograph to BE the design, but most cards use blank layouts with inline images or smart-layouts instead. Additionally, content cards are too wordy for minimal (3 cards exceed 50 words when the target is 15-40). The positives: solidBoxes-only smart-layout restraint is excellent, and background color alternation works well.</p>
+  <p style="margin-top:8px;"><strong style="color:#fff;">Swiss</strong> has the most graders (28 &mdash; reflecting how specific the Swiss design language is) and the most failures (10). Key gaps: zero horizontal rules (a signature Swiss structural element), no accent colors in headings, no typographic statement cards (where bold type IS the design), no stacked column patterns, and the closing card is a Sources page rather than a dramatic typographic ending. However, the prose quality, column split variety (4 distinct patterns), text-color hierarchy, and smart-layout restraint all pass. The biggest improvement opportunity: creating golden example decks for Swiss, since it currently uses only hand-authored skeletons.</p>
 </div>
 
-<p style="color:#555;font-size:11px;margin-top:32px;">Report generated from .context/design-iterate/{consultant,minimal,swiss}/unified-iter-1/ artifacts</p>
+<p style="color:#555;font-size:11px;margin-top:32px;">Report generated from .context/design-iterate/{consultant,minimal,swiss}/unified-iter-1/ pipeline metrics</p>
 
 </body>
 </html>
