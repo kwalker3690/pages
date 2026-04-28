@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Scenic Illustration: All Models Comparison</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #AABCB6; color: #2B2E3C; padding: 20px; }
+h1 { margin-bottom: 8px; font-size: 22px; color: #2C3F42; }
+.subtitle { color: #4a5a5e; margin-bottom: 20px; font-size: 14px; }
+.cost-note { margin-bottom: 20px; background: #FFF8F0; padding: 10px 14px; border-radius: 8px; border: 1px solid #C3CDC1; font-size: 13px; display: flex; gap: 20px; flex-wrap: wrap; }
+.cost-note .credits { font-weight: 600; }
+.filters { margin-bottom: 20px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.filters label { font-size: 13px; color: #2C3F42; }
+.filters select { background: #FFF8F0; color: #2B2E3C; border: 1px solid #C3CDC1; padding: 6px 10px; border-radius: 4px; font-size: 13px; }
+.row-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+.row-card { background: #FFF8F0; border-radius: 8px; padding: 14px; border: 1px solid #C3CDC1; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+.row-header { font-size: 13px; color: #4a5a5e; margin-bottom: 10px; }
+.row-header strong { color: #2C3F42; }
+.row-header .style-tag { display: inline-block; background: #FBE2D1; color: #6a4a2a; padding: 1px 6px; border-radius: 3px; font-size: 11px; margin-left: 6px; }
+.images { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.img-card { text-align: center; }
+.img-card img { width: 100%; border-radius: 4px; cursor: pointer; transition: transform 0.2s; }
+.img-card img:hover { transform: scale(1.02); }
+.img-card .model-label { font-size: 11px; margin-top: 4px; font-weight: 500; }
+.c-flash { color: #6a1a9a; } .c-mini { color: #1a6a9a; } .c-flux { color: #9a4a1a; } .c-ideo { color: #1a7a4a; }
+.lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center; cursor: pointer; }
+.lightbox.active { display: flex; }
+.lightbox img { max-width: 90%; max-height: 90%; border-radius: 8px; }
+</style>
+</head>
+<body>
+<h1>Scenic Illustration: All Models</h1>
+<p class="subtitle">narrative_illustration + modern_editorial &mdash; 4 models compared</p>
+<div class="cost-note">
+  <span>ideogram-v3-flash: <span class="credits">3 cr</span></span>
+  <span>gpt-image-1-mini-medium: <span class="credits">8 cr</span></span>
+  <span>flux-2-pro: <span class="credits">8 cr</span></span>
+  <span>ideogram-v3: <span class="credits">20 cr</span></span>
+</div>
+<div class="filters">
+  <label>Prompt: <select id="fp"><option value="all">All</option></select></label>
+  <label>Style: <select id="fs"><option value="all">All</option></select></label>
+</div>
+<div class="row-grid" id="grid"></div>
+<div class="lightbox" id="lb" onclick="this.classList.remove('active')"><img id="lbi"></div>
+<script>
+const DATA = [{"type": "image", "prompt": "A lighthouse on a cliff at sunset", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/xv2i1YF3qbahFVMi18ijY.png", "style_reference_key": "narrative_illustration", "style_group": "scenic-illustration", "model_used": "gpt-image-1-mini-medium", "model_override": "gpt-image-1-mini-medium", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A lighthouse on a cliff at sunset", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/zwbFG2IvCAqiaTwuGc2MR.jpg", "style_reference_key": "narrative_illustration", "style_group": "scenic-illustration", "model_used": "flux-2-pro", "model_override": "flux-2-pro", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A lighthouse on a cliff at sunset", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/hFX6YfsNKUHLPBfgSV5KZ.png", "style_reference_key": "narrative_illustration", "style_group": "scenic-illustration", "model_used": "ideogram-v3", "model_override": "ideogram-v3", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A lighthouse on a cliff at sunset", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/CzOZO078hukJP6b5mrUjb.png", "style_reference_key": "modern_editorial", "style_group": "scenic-illustration", "model_used": "gpt-image-1-mini-medium", "model_override": "gpt-image-1-mini-medium", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A lighthouse on a cliff at sunset", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/yiIO4iHFQkJqGDTNj_wOa.jpg", "style_reference_key": "modern_editorial", "style_group": "scenic-illustration", "model_used": "flux-2-pro", "model_override": "flux-2-pro", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A lighthouse on a cliff at sunset", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/pV9fej-mupuEO6LaEoJPs.png", "style_reference_key": "modern_editorial", "style_group": "scenic-illustration", "model_used": "ideogram-v3", "model_override": "ideogram-v3", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A vintage bicycle with a flower basket", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/NjLuzOEoRiQmF7TNGgcX6.png", "style_reference_key": "narrative_illustration", "style_group": "scenic-illustration", "model_used": "gpt-image-1-mini-medium", "model_override": "gpt-image-1-mini-medium", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A vintage bicycle with a flower basket", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/uN2U2dvSluxy0d8qWXNd2.jpg", "style_reference_key": "narrative_illustration", "style_group": "scenic-illustration", "model_used": "flux-2-pro", "model_override": "flux-2-pro", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A vintage bicycle with a flower basket", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/2exoVhybInLGu8w4HAtre.png", "style_reference_key": "narrative_illustration", "style_group": "scenic-illustration", "model_used": "ideogram-v3", "model_override": "ideogram-v3", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A vintage bicycle with a flower basket", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/HnYX17-raEiuAJD_RA3DK.png", "style_reference_key": "modern_editorial", "style_group": "scenic-illustration", "model_used": "gpt-image-1-mini-medium", "model_override": "gpt-image-1-mini-medium", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A vintage bicycle with a flower basket", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/Q2MA3Vti-6KADrBnDr0Pd.jpg", "style_reference_key": "modern_editorial", "style_group": "scenic-illustration", "model_used": "flux-2-pro", "model_override": "flux-2-pro", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A vintage bicycle with a flower basket", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/dJ3xa_NCbHwQNM_v4tzq_.png", "style_reference_key": "modern_editorial", "style_group": "scenic-illustration", "model_used": "ideogram-v3", "model_override": "ideogram-v3", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A cat sitting on a windowsill", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/CgnWxL2xFzyrBJXQ24fE5.png", "style_reference_key": "narrative_illustration", "style_group": "scenic-illustration", "model_used": "gpt-image-1-mini-medium", "model_override": "gpt-image-1-mini-medium", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A cat sitting on a windowsill", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/uBskHWVibSz60j9GHSMVH.jpg", "style_reference_key": "narrative_illustration", "style_group": "scenic-illustration", "model_used": "flux-2-pro", "model_override": "flux-2-pro", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A cat sitting on a windowsill", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/oQ7_0MGOCEY1qpnvZ3a2w.png", "style_reference_key": "narrative_illustration", "style_group": "scenic-illustration", "model_used": "ideogram-v3", "model_override": "ideogram-v3", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A cat sitting on a windowsill", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/8M6XU-BIWDCASVcAzeh5R.png", "style_reference_key": "modern_editorial", "style_group": "scenic-illustration", "model_used": "gpt-image-1-mini-medium", "model_override": "gpt-image-1-mini-medium", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A cat sitting on a windowsill", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/pLQrsoap6ImD0haZJLi9u.jpg", "style_reference_key": "modern_editorial", "style_group": "scenic-illustration", "model_used": "flux-2-pro", "model_override": "flux-2-pro", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A cat sitting on a windowsill", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/EVFeXLFcJxw-PXgnF3H4a.png", "style_reference_key": "modern_editorial", "style_group": "scenic-illustration", "model_used": "ideogram-v3", "model_override": "ideogram-v3", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A lighthouse on a cliff at sunset", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/6vOFf0CwMY42oi10aUGqW.png", "style_reference_key": "narrative_illustration", "style_group": "scenic-illustration", "model_used": "ideogram-v3-flash", "model_override": "ideogram-v3-flash", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A lighthouse on a cliff at sunset", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/RBrIdqLM7QuFocXSXCOYw.png", "style_reference_key": "narrative_illustration", "style_group": "scenic-illustration", "model_used": "gpt-image-1-mini-medium", "model_override": "gpt-image-1-mini-medium", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A lighthouse on a cliff at sunset", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/Eta23VafTkvKCF3k5ldvx.png", "style_reference_key": "modern_editorial", "style_group": "scenic-illustration", "model_used": "ideogram-v3-flash", "model_override": "ideogram-v3-flash", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A lighthouse on a cliff at sunset", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/MkHRXz4G7EBv3xtu5hseP.png", "style_reference_key": "modern_editorial", "style_group": "scenic-illustration", "model_used": "gpt-image-1-mini-medium", "model_override": "gpt-image-1-mini-medium", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A vintage bicycle with a flower basket", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/LDODM7Ol5j6wH0xspQq6G.png", "style_reference_key": "narrative_illustration", "style_group": "scenic-illustration", "model_used": "ideogram-v3-flash", "model_override": "ideogram-v3-flash", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A vintage bicycle with a flower basket", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/cfPBw3OLuDWD9BNbyFkCO.png", "style_reference_key": "narrative_illustration", "style_group": "scenic-illustration", "model_used": "gpt-image-1-mini-medium", "model_override": "gpt-image-1-mini-medium", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A vintage bicycle with a flower basket", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/yGy1MihFKwJgtG955l_OZ.png", "style_reference_key": "modern_editorial", "style_group": "scenic-illustration", "model_used": "ideogram-v3-flash", "model_override": "ideogram-v3-flash", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A vintage bicycle with a flower basket", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/URHLjtsLTsWTVxPQ2FmOx.png", "style_reference_key": "modern_editorial", "style_group": "scenic-illustration", "model_used": "gpt-image-1-mini-medium", "model_override": "gpt-image-1-mini-medium", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A cat sitting on a windowsill", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/Ya2bnau5lOUUJ60vZJ1vh.png", "style_reference_key": "narrative_illustration", "style_group": "scenic-illustration", "model_used": "ideogram-v3-flash", "model_override": "ideogram-v3-flash", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A cat sitting on a windowsill", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/lYpHHFS-rCTGkp1qJ3CNU.png", "style_reference_key": "narrative_illustration", "style_group": "scenic-illustration", "model_used": "gpt-image-1-mini-medium", "model_override": "gpt-image-1-mini-medium", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A cat sitting on a windowsill", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/BmNpQHnpCOHNk1LHQxXsn.png", "style_reference_key": "modern_editorial", "style_group": "scenic-illustration", "model_used": "ideogram-v3-flash", "model_override": "ideogram-v3-flash", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}, {"type": "image", "prompt": "A cat sitting on a windowsill", "output_image": "https://cdn-staging.gamma.app/acme/generated-images/dd49x_Tsku2B7l61l1dL4.png", "style_reference_key": "modern_editorial", "style_group": "scenic-illustration", "model_used": "gpt-image-1-mini-medium", "model_override": "gpt-image-1-mini-medium", "theme_id": "6igdxf9bbdbuozo", "aspect_ratio": "square"}];
+const MODELS = [
+  { key:"ideogram-v3-flash", label:"ideogram-v3-flash (3cr)", cls:"c-flash" },
+  { key:"gpt-image-1-mini-medium", label:"gpt-image-1-mini-medium (8cr)", cls:"c-mini" },
+  { key:"flux-2-pro", label:"flux-2-pro (8cr)", cls:"c-flux" },
+  { key:"ideogram-v3", label:"ideogram-v3 (20cr)", cls:"c-ideo" },
+];
+function openLB(s) { document.getElementById("lbi").src=s; document.getElementById("lb").classList.add("active"); }
+function init() {
+  const goodRows = DATA.filter(r => r.model_used === r.model_override);
+  const groups = {};
+  for (const r of goodRows) {
+    const k = r.prompt+"|||"+r.style_reference_key;
+    if (!groups[k]) groups[k] = { prompt: r.prompt, style: r.style_reference_key, imgs: {} };
+    groups[k].imgs[r.model_override] = r;
+  }
+  const fp = document.getElementById("fp"), fs = document.getElementById("fs");
+  [...new Set(goodRows.map(r=>r.prompt))].forEach(p=>{const o=document.createElement("option");o.value=p;o.text=p;fp.add(o);});
+  [...new Set(goodRows.map(r=>r.style_reference_key))].forEach(s=>{const o=document.createElement("option");o.value=s;o.text=s;fs.add(o);});
+  const grid = document.getElementById("grid"), entries = Object.values(groups);
+  function render() {
+    grid.innerHTML = "";
+    for (const g of entries) {
+      if (fp.value!=="all"&&g.prompt!==fp.value) continue;
+      if (fs.value!=="all"&&g.style!==fs.value) continue;
+      const div = document.createElement("div"); div.className="row-card";
+      let ih = "";
+      for (const m of MODELS) {
+        const img = g.imgs[m.key];
+        ih += '<div class="img-card">'+(img&&img.output_image?'<img src="'+img.output_image+'" onclick="openLB(''+img.output_image+'')" loading="lazy">':'<div style="padding:40px;color:#bbb;font-size:12px">not generated</div>')+'<div class="model-label '+m.cls+'">'+m.label+'</div></div>';
+      }
+      div.innerHTML = '<div class="row-header"><strong>'+g.prompt+'</strong> <span class="style-tag">'+g.style+'</span></div><div class="images">'+ih+'</div>';
+      grid.appendChild(div);
+    }
+  }
+  fp.addEventListener("change", render); fs.addEventListener("change", render); render();
+}
+init();
+</script>
+</body>
+</html>
