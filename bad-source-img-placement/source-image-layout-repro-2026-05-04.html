@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bad Source Image Placement Repro</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #121933;
+      --panel-2: #1a2242;
+      --text: #eef2ff;
+      --muted: #a8b3d1;
+      --line: #33406b;
+      --accent: #8fb4ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #0a0f1d 0%, #101833 100%);
+      color: var(--text);
+    }
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+    h1, h2, h3, p { margin: 0; }
+    .hero {
+      padding: 28px;
+      background: rgba(18, 25, 51, 0.9);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-size: 36px;
+      line-height: 1.05;
+      margin-bottom: 12px;
+      letter-spacing: -0.03em;
+    }
+    .hero p {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 850px;
+    }
+    .note {
+      margin-top: 14px;
+      color: var(--accent);
+      font-size: 14px;
+    }
+    .case {
+      margin-top: 24px;
+      padding: 24px;
+      background: rgba(18, 25, 51, 0.92);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+    }
+    .case h2 {
+      font-size: 24px;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .meta a {
+      text-decoration: none;
+      color: var(--text);
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+    .meta a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+    }
+    .shot {
+      background: #0d1328;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .shot img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #0d1328;
+    }
+    .shot .label {
+      padding: 10px 12px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <h1>Bad Source Image Placement Repro</h1>
+      <p>
+        Two colleague-provided Gen3 outputs showing weak layout decisions for source images
+        extracted from PDFs. Each case includes the original PDF, the generated GML, and
+        the deck screenshots from the problematic run.
+      </p>
+      <p class="note">
+        Published on 2026-05-04 for sharing and review.
+      </p>
+    </section>
+
+    <section class="case">
+      <h2>2026 Market Update: Top Takeaways</h2>
+      <div class="meta">
+        <a href="./2026-Market-Update-Top-Takeaways/2026%20Market%20Update.pdf">Source PDF</a>
+        <a href="./2026-Market-Update-Top-Takeaways/2026-Market.gml">Generated GML</a>
+      </div>
+      <div class="grid">
+        <div class="shot"><img src="./2026-Market-Update-Top-Takeaways/1_2026-Market-Update-Top-Takeaways.png" alt="2026 Market Update screenshot 1"><div class="label">1_2026-Market-Update-Top-Takeaways.png</div></div>
+        <div class="shot"><img src="./2026-Market-Update-Top-Takeaways/2_The-AI-Build-Out-Is-Real-and-Nothing-Like-the-Dotcom-Bubble.png" alt="2026 Market Update screenshot 2"><div class="label">2_The-AI-Build-Out-Is-Real-and-Nothing-Like-the-Dotcom-Bubble.png</div></div>
+        <div class="shot"><img src="./2026-Market-Update-Top-Takeaways/3_AI-Is-Expanding-Software-Creation-Not-Replacing-Developers.png" alt="2026 Market Update screenshot 3"><div class="label">3_AI-Is-Expanding-Software-Creation-Not-Replacing-Developers.png</div></div>
+        <div class="shot"><img src="./2026-Market-Update-Top-Takeaways/4_Software-Stocks-Are-Pricing-in-a-Structural-Collapse-The-Market-May-Be-Overreacting.png" alt="2026 Market Update screenshot 4"><div class="label">4_Software-Stocks-Are-Pricing-in-a-Structural-Collapse-The-Market-May-Be-Overreacting.png</div></div>
+        <div class="shot"><img src="./2026-Market-Update-Top-Takeaways/5_Not-All-SaaS-Is-Equal-Moat-Depth-Determines-Survival.png" alt="2026 Market Update screenshot 5"><div class="label">5_Not-All-SaaS-Is-Equal-Moat-Depth-Determines-Survival.png</div></div>
+        <div class="shot"><img src="./2026-Market-Update-Top-Takeaways/6_CIO-Behavior-Is-Shifting-Consolidation-Not-Expansion.png" alt="2026 Market Update screenshot 6"><div class="label">6_CIO-Behavior-Is-Shifting-Consolidation-Not-Expansion.png</div></div>
+        <div class="shot"><img src="./2026-Market-Update-Top-Takeaways/7_The-Venture-Opportunity-AI-Native-Is-Where-Value-Is-Being-Created.png" alt="2026 Market Update screenshot 7"><div class="label">7_The-Venture-Opportunity-AI-Native-Is-Where-Value-Is-Being-Created.png</div></div>
+        <div class="shot"><img src="./2026-Market-Update-Top-Takeaways/8_What-to-Do-Now-Playbook-for-Founders-and-Investors.png" alt="2026 Market Update screenshot 8"><div class="label">8_What-to-Do-Now-Playbook-for-Founders-and-Investors.png</div></div>
+        <div class="shot"><img src="./2026-Market-Update-Top-Takeaways/9_Sources.png" alt="2026 Market Update screenshot 9"><div class="label">9_Sources.png</div></div>
+      </div>
+    </section>
+
+    <section class="case">
+      <h2>AI Effects on the Labor Market</h2>
+      <div class="meta">
+        <a href="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/Deep_Dive_Ai_And_Labor_Market.pdf">Source PDF</a>
+        <a href="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/AI-effects-future-work.gml">Generated GML</a>
+      </div>
+      <div class="grid">
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/1_AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work.png" alt="AI labor screenshot 1"><div class="label">1_AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/2_How-to-Read-This-Presentation.png" alt="AI labor screenshot 2"><div class="label">2_How-to-Read-This-Presentation.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/3_Table-of-Contents.png" alt="AI labor screenshot 3"><div class="label">3_Table-of-Contents.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/4_01-The-Mechanics-That-Drive-AIs-Impact-on-Labor.png" alt="AI labor screenshot 4"><div class="label">4_01-The-Mechanics-That-Drive-AIs-Impact-on-Labor.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/5_Experts-Agree-AI-Will-Transform-Jobs-but-Disagree-on-How.png" alt="AI labor screenshot 5"><div class="label">5_Experts-Agree-AI-Will-Transform-Jobs-but-Disagree-on-How.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/6_What-Is-a-Job.png" alt="AI labor screenshot 6"><div class="label">6_What-Is-a-Job.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/7_A-Three-Layer-Framework-for-AIs-Impact-on-Jobs.png" alt="AI labor screenshot 7"><div class="label">7_A-Three-Layer-Framework-for-AIs-Impact-on-Jobs.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/8_The-Scale-of-Potential-Impact.png" alt="AI labor screenshot 8"><div class="label">8_The-Scale-of-Potential-Impact.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/9_02-Layer-1-Exposure.png" alt="AI labor screenshot 9"><div class="label">9_02-Layer-1-Exposure.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/10_The-Exposure-Index.png" alt="AI labor screenshot 10"><div class="label">10_The-Exposure-Index.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/11_Which-Jobs-Are-Most-and-Least-Exposed.png" alt="AI labor screenshot 11"><div class="label">11_Which-Jobs-Are-Most-and-Least-Exposed.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/12_AI-Performance-vs-Human-Baseline-2012-2024.png" alt="AI labor screenshot 12"><div class="label">12_AI-Performance-vs-Human-Baseline-2012-2024.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/13_Exposure-Is-Positively-Correlated-with-Wages.png" alt="AI labor screenshot 13"><div class="label">13_Exposure-Is-Positively-Correlated-with-Wages.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/14_The-New-Moores-Law-AI-Capability-Is-Accelerating.png" alt="AI labor screenshot 14"><div class="label">14_The-New-Moores-Law-AI-Capability-Is-Accelerating.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/15_But-Experts-Have-Been-Wrong-Before.png" alt="AI labor screenshot 15"><div class="label">15_But-Experts-Have-Been-Wrong-Before.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/16_03-Layer-2-Adoption.png" alt="AI labor screenshot 16"><div class="label">16_03-Layer-2-Adoption.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/17_Exposure-Adoption.png" alt="AI labor screenshot 17"><div class="label">17_Exposure-Adoption.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/18_The-Productivity-J-Curve.png" alt="AI labor screenshot 18"><div class="label">18_The-Productivity-J-Curve.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/19_Generative-AI-Is-Adopting-Faster-Than-Any-Prior-Technology.png" alt="AI labor screenshot 19"><div class="label">19_Generative-AI-Is-Adopting-Faster-Than-Any-Prior-Technology.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/20_Business-Adoption-Fast-Growth-Still-Low-Penetration.png" alt="AI labor screenshot 20"><div class="label">20_Business-Adoption-Fast-Growth-Still-Low-Penetration.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/21_Adoption-Is-Uneven-by-Sector.png" alt="AI labor screenshot 21"><div class="label">21_Adoption-Is-Uneven-by-Sector.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/22_04-Layer-3-Labor-Market-Response-Augmentation.png" alt="AI labor screenshot 22"><div class="label">22_04-Layer-3-Labor-Market-Response-Augmentation.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/23_What-Is-Augmentation.png" alt="AI labor screenshot 23"><div class="label">23_What-Is-Augmentation.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/24_Case-Study-1-Knowledge-Workers-Microsoft-365-Copilot.png" alt="AI labor screenshot 24"><div class="label">24_Case-Study-1-Knowledge-Workers-Microsoft-365-Copilot.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/25_Case-Study-2-Chat-Support-Agents-GPT-3-Assistant.png" alt="AI labor screenshot 25"><div class="label">25_Case-Study-2-Chat-Support-Agents-GPT-3-Assistant.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/26_Case-Study-3-BCG-Consultants-GPT-4.png" alt="AI labor screenshot 26"><div class="label">26_Case-Study-3-BCG-Consultants-GPT-4.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/27_The-Jagged-Frontier.png" alt="AI labor screenshot 27"><div class="label">27_The-Jagged-Frontier.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/28_Case-Study-4-Radiologists-and-Jevons-Paradox.png" alt="AI labor screenshot 28"><div class="label">28_Case-Study-4-Radiologists-and-Jevons-Paradox.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/29_05-Layer-3-Labor-Market-Response-Displacement.png" alt="AI labor screenshot 29"><div class="label">29_05-Layer-3-Labor-Market-Response-Displacement.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/30_From-Augmentation-to-Displacement.png" alt="AI labor screenshot 30"><div class="label">30_From-Augmentation-to-Displacement.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/31_Corporate-Rebalancing-What-Leaders-Are-Saying.png" alt="AI labor screenshot 31"><div class="label">31_Corporate-Rebalancing-What-Leaders-Are-Saying.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/32_The-Evolution-of-Entry-Level-Work.png" alt="AI labor screenshot 32"><div class="label">32_The-Evolution-of-Entry-Level-Work.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/33_Early-vs-Mid-Career-A-Diverging-Picture.png" alt="AI labor screenshot 33"><div class="label">33_Early-vs-Mid-Career-A-Diverging-Picture.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/34_06-Layer-3-Labor-Market-Response-Reinstatement.png" alt="AI labor screenshot 34"><div class="label">34_06-Layer-3-Labor-Market-Response-Reinstatement.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/35_What-Is-Reinstatement.png" alt="AI labor screenshot 35"><div class="label">35_What-Is-Reinstatement.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/36_New-Occupations-Born-From-AI.png" alt="AI labor screenshot 36"><div class="label">36_New-Occupations-Born-From-AI.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/37_Resurgent-Roles-The-Physical-Infrastructure-of-AI.png" alt="AI labor screenshot 37"><div class="label">37_Resurgent-Roles-The-Physical-Infrastructure-of-AI.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/38_The-Skilled-Trades-Gap.png" alt="AI labor screenshot 38"><div class="label">38_The-Skilled-Trades-Gap.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/39_07-The-AI-Work-Feedback-Cycle.png" alt="AI labor screenshot 39"><div class="label">39_07-The-AI-Work-Feedback-Cycle.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/40_Feedback-Loops-A-Living-System.png" alt="AI labor screenshot 40"><div class="label">40_Feedback-Loops-A-Living-System.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/41_What-This-Means-for-You.png" alt="AI labor screenshot 41"><div class="label">41_What-This-Means-for-You.png</div></div>
+        <div class="shot"><img src="./AI-Effects-on-the-Labor-Market-Is-AI-Disrupting-the-Future-of-Work/42_Sources.png" alt="AI labor screenshot 42"><div class="label">42_Sources.png</div></div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
