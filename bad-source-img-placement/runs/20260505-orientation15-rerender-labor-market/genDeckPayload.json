@@ -1,0 +1,475 @@
+{
+  "promptKey": "GenerateDeckGen3WithLayout",
+  "variables": {
+    "model": "claude-sonnet-4-6",
+    "outline": "<card id=\"9oif4loaukeef4h\"><h1>AI &amp; the Labor Market: Is AI Disrupting the Future of Work?</h1></card><card id=\"ddlglzkkyz0mbcr\"><h1>The Debate Is Real — and the Stakes Are Enormous</h1><li variant=\"bullet\"><strong>$31 trillion</strong> U.S. economy — nearly 60% is labor costs. Even a small AI-driven shift moves trillions of dollars.<cite source-id=\"01KQTEDCD3D13R7E23HVDTD00J\">The U.S. economy is $31 trillion. Almost 60% of that is labor costs. So even if AI only affects a small percentage of jobs, we're talking about trillions of dollars shifting around the economy.</cite></li><li variant=\"bullet\"><strong>300 million</strong> full-time jobs globally — roughly 27% of OECD positions — could be transformed through AI automation.<cite source-id=\"01KQTEDCD3D13R7E23HVDTD00J\">Globally, analysts estimate that as many as 300 million full-time jobs, roughly 27% of positions in OECD countries, will be transformed through AI automation.</cite></li><li variant=\"bullet\"><strong>71%</strong> of Americans are concerned AI will put too many people out of work permanently — but the actual impact is more nuanced.<cite source-id=\"01KQTEDCD3D13R7E23HVDTD00J\">71% of respondents in an August 2025 poll said they were concerned AI will be \"putting too many people out of work permanently.\"</cite></li><img src=\"https://cdn-staging.gamma.app/acme/uploaded-images/VMSOvYY9Zfap-mZNFpbQI.png\" meta=\"null\" resize=\"null\" source-id=\"01KQTEDCD3D13R7E23HVDTD00J\"></card><card id=\"x1ddx5sdu1cluho\"><h1>A Job Is a Bundle of Tasks — Not a Single Thing</h1><li variant=\"bullet\">AI almost never wipes out whole jobs overnight. It affects <strong>tasks first</strong> — some get automated, some get supercharged, some create entirely new work.</li><li variant=\"bullet\">A doctor diagnoses, orders tests, interprets results, and coordinates care. A lawyer drafts, researches, argues, and advises. Each task has a different AI exposure profile.<cite source-id=\"01KQTEDCD3D13R7E23HVDTD00J\">At its core, a job is a bundle of tasks. A doctor diagnoses symptoms, orders tests, interprets results, and coordinates with specialists. A software engineer writes code, fixes bugs, reviews pull requests, and explains trade-offs to stakeholders.</cite></li><img src=\"https://cdn-staging.gamma.app/acme/uploaded-images/MfIJj4MZa3u3zYdmzsCic.png\" meta=\"null\" resize=\"null\" source-id=\"01KQTEDCD3D13R7E23HVDTD00J\"></card><card id=\"f9p599l1wrqiloe\"><h1>A Three-Layer Framework for Understanding AI's Impact</h1><li variant=\"bullet\"><strong>Layer 1 — Exposure:</strong> Which tasks in a job can AI plausibly assist or perform today?</li><li variant=\"bullet\"><strong>Layer 2 — Adoption:</strong> How quickly and in what form will organizations actually deploy AI?</li><li variant=\"bullet\"><strong>Layer 3 — Labor Market Response:</strong> What is the net effect on employment, wages, and new job creation?</li><p>These layers constantly feed back into each other — which is why the debate is so contentious.</p><img src=\"https://cdn-staging.gamma.app/acme/uploaded-images/tcJaZfVcfO2bxZF3Nbfe_.png\" meta=\"null\" resize=\"null\" source-id=\"01KQTEDCD3D13R7E23HVDTD00J\"></card><card id=\"bcn2f3xxrd9ge3y\"><h1>Layer 1: Who Is Most Exposed?</h1><li variant=\"bullet\"><strong>Highest exposure:</strong> Text-heavy, information-processing roles — legal research, financial analysis, programming, writing, customer support. High-paying, highly educated jobs score highest because their work is language and symbol dense.<cite source-id=\"01KQTEDCD3D13R7E23HVDTD00J\">Exposure is positively related to wages and education. Higher paid and higher educated occupations are more exposed to LLM era AI because their work is language and symbol dense. In contrast to earlier tech waves that automated routine or physical tasks, Gen AI reaches cognitive non-routine work once assumed to be safe from automation.</cite></li><li variant=\"bullet\"><strong>Lowest exposure:</strong> Embodied, on-site, and interpersonal roles — electricians, roofers, nursing assistants, athletes. Physical manipulation and rich social interaction remain largely AI-resistant today.</li><img src=\"https://cdn-staging.gamma.app/acme/uploaded-images/YUa98dwaWODFnA99ey7mK.png\" meta=\"null\" resize=\"null\" source-id=\"01KQTEDCD3D13R7E23HVDTD00J\"></card><card id=\"9vyc0jwl9umjuqa\"><h1>AI Capabilities Are Racing Ahead of Expectations</h1><li variant=\"bullet\">By 2024, AI surpassed the human baseline on reading comprehension, visual reasoning, PhD-level science questions, and multimodal understanding.<cite source-id=\"01KQTEDCD3D13R7E23HVDTD00J\">The data shows that AI performance has generally improved over time, with some categories like MID READING COMP. and VISUAL REASONING reaching or exceeding the human baseline by 2024.</cite></li><li variant=\"bullet\">The \"New Moore's Law\": AI's autonomous task capacity doubles every ~7 months. By 2027, AI may complete a full work day's worth of tasks; by 2029, a full work month.<cite source-id=\"01KQTEDCD3D13R7E23HVDTD00J\">This speed of progress in the past 5 years has led researchers to formulate the \"New Moore's Law\", which says the length of tasks AI can perform doubles every ~7 months. By 2026, AI can complete a 2-hour task. By 2027, AI can complete 1 work day (8 hours). By 2028, AI can complete 1 work week (40 hours). By 2029, AI can complete 1 work month (167 hours).</cite></li><img src=\"https://cdn-staging.gamma.app/acme/uploaded-images/0EOfYbjRCdmBrLzAIiyt-.png\" meta=\"null\" resize=\"null\" source-id=\"01KQTEDCD3D13R7E23HVDTD00J\"></card><card id=\"hefbsx7zuk2vj56\"><h1>Layer 2: Exposure ≠ Adoption</h1><li variant=\"bullet\">A job can be highly exposed in theory but untouched in practice. Legal constraints, union rules, data confidentiality, and workflow inertia all slow deployment.<cite source-id=\"01KQTEDCD3D13R7E23HVDTD00J\">Even if a task is technically automatable, adoption can lag because of cultural and institutional factors like legal constraints, union rules, customer backlash, or lack of complementary investments.</cite></li><li variant=\"bullet\">Generative AI hit 54.6% overall adult adoption by August 2025 — up 10 points in a single year. Work-specific adoption reached 37.4%, still trailing personal use.<cite source-id=\"01KQTEDCD3D13R7E23HVDTD00J\">The survey found that in August 2024, 44.6% of adults used generative AI overall. Within a year, the adoption of this new technology increased by 10 percentage points to 54.6%.</cite></li><img src=\"https://cdn-staging.gamma.app/acme/uploaded-images/36dqHYHpPqMq2xGj1uh38.png\" meta=\"null\" resize=\"null\" source-id=\"01KQTEDCD3D13R7E23HVDTD00J\"></card><card id=\"0qwgdvv9rclu83f\"><h1>The Productivity J-Curve: Why Gains Take Time</h1><li variant=\"bullet\">Like electricity and the PC before it, AI is a general-purpose technology. Electricity took decades to raise factory output; PC productivity gains only showed up in U.S. statistics in the mid-1990s — 15 years after launch.<cite source-id=\"01KQTEDCD3D13R7E23HVDTD00J\">The broad productivity gains from personal computers became visible in U.S. statistics only around the mid-1990s, as complementary software, networking, and new work practices matured.</cite></li><li variant=\"bullet\">Early AI adoption often dips productivity first — 40% of knowledge workers report spending ~2 hours/week fixing low-quality AI outputs — before gains accelerate as workflows mature.<cite source-id=\"01KQTEDCD3D13R7E23HVDTD00J\">A 2025 Harvard Business Review study found 40% of knowledge workers reported cleaning up such \"workslop,\" spending nearly 2 hours per week fixing low-quality outputs.</cite></li><img src=\"https://cdn-staging.gamma.app/acme/uploaded-images/q-WW-hRgYtpndVD52_C_A.png\" meta=\"null\" resize=\"null\" source-id=\"01KQTEDCD3D13R7E23HVDTD00J\"></card><card id=\"1hny6b0t0rqp422\"><h1>Response 1: Augmentation — AI Makes Workers More Productive</h1><li variant=\"bullet\">Daily AI users consistently outperform non-users across productivity, focus, stress management, and job satisfaction. 41% of daily AI users rate their productivity \"Very Good\" vs. 26% of non-users.<cite source-id=\"01KQTEDCD3D13R7E23HVDTD00J\">The latest Workforce Index from Slack shows that daily AI users consistently outperform non users across key work experience metrics, including productivity, focus, stress management, and job satisfaction.</cite></li><li variant=\"bullet\">Geoff Hinton predicted radiologists would be replaced within 5 years (2016). He was right that AI outperforms on benchmarks — but wrong about demand. Radiology continues to grow, a pattern seen across many exposed professions.<cite source-id=\"01KQTEDCD3D13R7E23HVDTD00J\">He was right about the models outperforming radiologists on benchmarks, but wrong about the demand. The field of Radiology continues to grow and stay strong.</cite></li></card><card id=\"3svm6uhzh3toudq\"><h1>Response 2: Displacement — Real, But Concentrated</h1><li variant=\"bullet\">Clerical and back-office roles face the highest displacement risk: routine document processing, booking, transcription, and standardized communications are repeatedly flagged as highly automatable.<cite source-id=\"01KQTEDCD3D13R7E23HVDTD00J\">Clerical and back-office roles are one of the most automatable within the exposed set. Routine document processing, booking, transcription, and standardized communications are repeatedly flagged as highly affected and plausibly automatable.</cite></li><li variant=\"bullet\">Andrej Karpathy's rule of thumb: look for jobs that are \"repetitive, independent, closed, short, forgiving, and digital\" — those are the ones most at risk on shorter timescales.<cite source-id=\"01KQTEDCD3D13R7E23HVDTD00J\">When looking for jobs that will change a lot due to AI on shorter time scales, I'd look in other places - jobs that look like repetition of one rote task, each task being relatively independent, closed (not requiring too much context), short (in time), forgiving (the cost of mistake is low), and of course automatable given current (and digital) capability.</cite></li><img src=\"https://cdn-staging.gamma.app/acme/uploaded-images/bbGVZndFwjHmGLZpma0Bu.png\" meta=\"null\" resize=\"null\" source-id=\"01KQTEDCD3D13R7E23HVDTD00J\"></card><card id=\"qpboxah0603kgjb\"><h1>Response 3: Reinstatement — AI Creates New Roles Too</h1><li variant=\"bullet\">History shows that technological revolutions rarely destroy jobs in aggregate — they transform them. The PC era created software engineers, IT support, and digital marketers that didn't exist before.</li><li variant=\"bullet\">AI is already spawning new occupations: AI engineers, prompt specialists, AI trainers, and trust &amp; safety roles. Productivity gains also lower costs, raise demand, and expand existing occupations.<cite source-id=\"01KQTEDCD3D13R7E23HVDTD00J\">The labor market responds by creating new tasks and expanding human roles that complement technology. This produces new jobs such as AI engineering and other times existing occupations broaden as productivity gains lower costs and raise demand.</cite></li><li variant=\"bullet\">The real challenge is the <strong>pace and distribution</strong> of change — who adapts fastest and who benefits most.<cite source-id=\"01KQTEDCD3D13R7E23HVDTD00J\">The real challenge lies in the pace and distribution of change, who adapts fastest, who benefits most, and how policy and institutions respond.</cite></li></card><card id=\"t7ixsm0z7o494cf\"><h1>What to Watch: Three Questions That Will Determine the Outcome</h1><li variant=\"bullet\"><strong>Will adoption accelerate or plateau?</strong> If AI capability growth continues doubling every 4–7 months, the window for workers and institutions to adapt narrows dramatically.</li><li variant=\"bullet\"><strong>Who captures the productivity gains?</strong> Higher-wage, higher-educated workers are most exposed — and most positioned to benefit. Lower-wage workers face less disruption but fewer gains.</li><li variant=\"bullet\"><strong>How will policy respond?</strong> Retraining programs, labor protections, and social safety nets will shape whether AI's abundance is broadly shared or concentrated at the top.</li><img src=\"https://cdn-staging.gamma.app/acme/uploaded-images/9yfLWL3zkz5f1WStGFzWZ.png\" meta=\"null\" resize=\"null\" source-id=\"01KQTEDCD3D13R7E23HVDTD00J\"></card><card id=\"4nqnhs8p64gpf1f\"><h1>Sources</h1><li variant=\"bullet\"><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"#\">AI and labor market PDF</a></li></card>",
+    "instructions": "Create a 12-slide Gamma presentation in the classic deck style (60–80 words per card, hard cap 90 words; vary bullet counts per the provided style guidance). Target a general/mixed non‑expert audience, covering all major sections with balanced depth. Preserve and reuse the best charts and source visuals from the PDF where they help explain points (specifically: concerns bar chart, task‑universe diagram, exposure scatter plot, AI vs. human performance chart, adoption curve, Productivity J‑Curve). Tone: polished, credible, accessible — weave in expert quotes lightly but avoid lecturey language.",
+    "numCards": 13,
+    "format": "deck",
+    "imageOptions": {
+      "model": "flux-1-quick",
+      "stylePrompt": "Classy and modern with a corporate and minimalist touch. Tone is serious yet elegant, using a palette of light, white, and cool gray colors.",
+      "stylePreset": "Theme",
+      "license": "All",
+      "styleReferenceKey": "narrative_illustration",
+      "styleReferenceImages": []
+    },
+    "deckStyle": "classic",
+    "textMode": "generate",
+    "imageProvider": "aiGenerated",
+    "cardDimensions": "fluid",
+    "theme": {
+      "accentColors": [
+        "#1B1B27"
+      ]
+    },
+    "blockFlags": {
+      "imageQueryGuideV2": false,
+      "imageCards": false,
+      "artificialLatencyMs": 0,
+      "remixImageUnderstanding": true,
+      "aiStyleReferenceUpload": true,
+      "aiStyleReferenceAllowed": true,
+      "codeCards": false,
+      "deckStyledImages": true
+    }
+  },
+  "docSettings": {
+    "stylesDerivedFrom": "deck_default",
+    "cardDimensions": "fluid",
+    "verticalAlign": "center",
+    "defaultFullBleed": "contained",
+    "defaultContentWidth": "lg",
+    "fontSize": "md",
+    "scaleContentToFit": false,
+    "locale": "en-US"
+  },
+  "transformOptions": {
+    "docFormatKey": "deck",
+    "imageOptions": {
+      "license": "All",
+      "provider": "aiGenerated",
+      "generateStyle": "Classy and modern with a corporate and minimalist touch. Tone is serious yet elegant, using a palette of light, white, and cool gray colors.",
+      "model": "flux-1-quick",
+      "stylePreset": "Theme",
+      "styleReferenceKey": "narrative_illustration",
+      "styleReferenceImages": [],
+      "modelAutoselect": false
+    },
+    "theme": {
+      "__typename": "Theme",
+      "createdBy": null,
+      "id": "pearl",
+      "workspaceId": null,
+      "name": "Pearl",
+      "headingFont": "Raleway",
+      "headingFontWeight": 400,
+      "bodyFont": "Roboto",
+      "bodyFontWeight": 400,
+      "accentColor": "#1B1B27",
+      "logoUrl": null,
+      "config": {
+        "keywords": {
+          "tone": [
+            "serious",
+            "classy",
+            "corporate",
+            "formal",
+            "elegant",
+            "professional",
+            "simple",
+            "minimalist",
+            "clean",
+            "soft",
+            "modern",
+            "high tech",
+            "fresh",
+            "thin"
+          ],
+          "color": [
+            "light",
+            "white",
+            "black",
+            "b&w",
+            "cool",
+            "contrast",
+            "gray",
+            "light-gray"
+          ]
+        },
+        "bodyColor": "#3C3939",
+        "themeBase": "glass",
+        "background": {
+          "type": "color",
+          "color": {
+            "hex": "#ECECF3"
+          },
+          "image": {
+            "src": "https://images.unsplash.com/photo-1619252584172-a83a949b6efd?ixid=MnwxOTgwNzN8MHwxfHNlYXJjaHwyfHx3aGl0ZSUyMGdyYWRpZW50fGVufDF8fHx8MTY3NjkxMjMzNA&ixlib=rb-4.0.3&w=3000&q=25",
+            "meta": {
+              "width": 3000,
+              "height": 2250
+            },
+            "query": "white gradient",
+            "tempUrl": "https://images.unsplash.com/photo-1619252584172-a83a949b6efd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxOTgwNzN8MHwxfHNlYXJjaHwyfHx3aGl0ZSUyMGdyYWRpZW50fGVufDF8fHx8MTY3NjkxMjMzNA&ixlib=rb-4.0.3&q=80&w=200"
+          },
+          "source": "color.solid"
+        },
+        "stylePrompt": "Classy and modern with a corporate and minimalist touch. Tone is serious yet elegant, using a palette of light, white, and cool gray colors.",
+        "headingColor": "#1B1B27",
+        "accentBackgrounds": [
+          {
+            "type": "image",
+            "image": {
+              "src": "https://cdn.gamma.app/theme_images/pearl/pearl-01_c60d988c.jpg",
+              "meta": {
+                "width": 4096,
+                "height": 4096
+              },
+              "name": "pearl-01_c60d988c.jpg",
+              "source": "image.custom"
+            },
+            "source": "accent.theme",
+            "accentId": "c60d988c",
+            "originalSource": "image.custom"
+          },
+          {
+            "type": "image",
+            "image": {
+              "src": "https://cdn.gamma.app/theme_images/pearl/pearl-02_882c22b3.jpg",
+              "meta": {
+                "width": 4096,
+                "height": 4096
+              },
+              "name": "pearl-02_882c22b3.jpg",
+              "source": "image.custom"
+            },
+            "source": "accent.theme",
+            "accentId": "882c22b3",
+            "originalSource": "image.custom"
+          },
+          {
+            "type": "image",
+            "image": {
+              "src": "https://cdn.gamma.app/theme_images/pearl/pearl-03_2a376d17.jpg",
+              "meta": {
+                "width": 4096,
+                "height": 4096
+              },
+              "name": "pearl-03_2a376d17.jpg",
+              "source": "image.custom"
+            },
+            "source": "accent.theme",
+            "accentId": "2a376d17",
+            "originalSource": "image.custom"
+          },
+          {
+            "type": "image",
+            "image": {
+              "src": "https://cdn.gamma.app/theme_images/pearl/pearl-04_463f8abf.jpg",
+              "meta": {
+                "width": 4096,
+                "height": 4096
+              },
+              "name": "pearl-04_463f8abf.jpg",
+              "source": "image.custom"
+            },
+            "source": "accent.theme",
+            "accentId": "463f8abf",
+            "originalSource": "image.custom"
+          },
+          {
+            "type": "image",
+            "image": {
+              "src": "https://cdn.gamma.app/theme_images/pearl/pearl-05_1f787ddd.jpg",
+              "meta": {
+                "width": 4096,
+                "height": 4096
+              },
+              "name": "pearl-05_1f787ddd.jpg",
+              "source": "image.custom"
+            },
+            "source": "accent.theme",
+            "accentId": "1f787ddd",
+            "originalSource": "image.custom"
+          },
+          {
+            "type": "image",
+            "image": {
+              "src": "https://cdn.gamma.app/theme_images/pearl/pearl-06_085f83a1.jpg",
+              "meta": {
+                "width": 4096,
+                "height": 4096
+              },
+              "name": "pearl-06_085f83a1.jpg",
+              "source": "image.custom"
+            },
+            "source": "accent.theme",
+            "accentId": "085f83a1",
+            "originalSource": "image.custom"
+          },
+          {
+            "type": "image",
+            "image": {
+              "src": "https://cdn.gamma.app/theme_images/pearl/pearl-07_6c93638c.jpg",
+              "meta": {
+                "width": 4096,
+                "height": 4096
+              },
+              "name": "pearl-07_6c93638c.jpg",
+              "source": "image.custom"
+            },
+            "source": "accent.theme",
+            "accentId": "6c93638c",
+            "originalSource": "image.custom"
+          },
+          {
+            "type": "image",
+            "image": {
+              "src": "https://cdn.gamma.app/theme_images/pearl/pearl-08_29e10395.jpg",
+              "meta": {
+                "width": 4096,
+                "height": 4096
+              },
+              "name": "pearl-08_29e10395.jpg",
+              "source": "image.custom"
+            },
+            "source": "accent.theme",
+            "accentId": "29e10395",
+            "originalSource": "image.custom"
+          },
+          {
+            "type": "image",
+            "image": {
+              "src": "https://cdn.gamma.app/theme_images/pearl/pearl-09_9450e72d.jpg",
+              "meta": {
+                "width": 4096,
+                "height": 4096
+              },
+              "name": "pearl-09_9450e72d.jpg",
+              "source": "image.custom"
+            },
+            "source": "accent.theme",
+            "accentId": "9450e72d",
+            "originalSource": "image.custom"
+          },
+          {
+            "type": "image",
+            "image": {
+              "src": "https://cdn.gamma.app/theme_images/pearl/pearl-10_1d71a9ae.jpg",
+              "meta": {
+                "width": 4096,
+                "height": 4096
+              },
+              "name": "pearl-10_1d71a9ae.jpg",
+              "source": "image.custom"
+            },
+            "source": "accent.theme",
+            "accentId": "1d71a9ae",
+            "originalSource": "image.custom"
+          },
+          {
+            "type": "image",
+            "image": {
+              "src": "https://cdn.gamma.app/theme_images/pearl/pearl-11_dff4ea30.jpg",
+              "meta": {
+                "width": 4096,
+                "height": 4096
+              },
+              "name": "pearl-11_dff4ea30.jpg",
+              "source": "image.custom"
+            },
+            "source": "accent.theme",
+            "accentId": "dff4ea30",
+            "originalSource": "image.custom"
+          },
+          {
+            "type": "image",
+            "image": {
+              "src": "https://cdn.gamma.app/theme_images/pearl/pearl-12_33cd77b6.jpg",
+              "meta": {
+                "width": 4096,
+                "height": 4096
+              },
+              "name": "pearl-12_33cd77b6.jpg",
+              "source": "image.custom"
+            },
+            "source": "accent.theme",
+            "accentId": "33cd77b6",
+            "originalSource": "image.custom"
+          },
+          {
+            "type": "image",
+            "image": {
+              "src": "https://cdn.gamma.app/theme_images/pearl/pearl-13_c30b1623.jpg",
+              "meta": {
+                "width": 4096,
+                "height": 4096
+              },
+              "name": "pearl-13_c30b1623.jpg",
+              "source": "image.custom"
+            },
+            "source": "accent.theme",
+            "accentId": "c30b1623",
+            "originalSource": "image.custom"
+          },
+          {
+            "type": "image",
+            "image": {
+              "src": "https://cdn.gamma.app/theme_images/pearl/pearl-14_10aee57a.jpg",
+              "meta": {
+                "width": 4096,
+                "height": 4096
+              },
+              "name": "pearl-14_10aee57a.jpg",
+              "source": "image.custom"
+            },
+            "source": "accent.theme",
+            "accentId": "10aee57a",
+            "originalSource": "image.custom"
+          },
+          {
+            "type": "image",
+            "image": {
+              "src": "https://cdn.gamma.app/theme_images/pearl/pearl-15_68dab7d6.jpg",
+              "meta": {
+                "width": 4096,
+                "height": 4096
+              },
+              "name": "pearl-15_68dab7d6.jpg",
+              "source": "image.custom"
+            },
+            "source": "accent.theme",
+            "accentId": "68dab7d6",
+            "originalSource": "image.custom"
+          },
+          {
+            "type": "image",
+            "image": {
+              "src": "https://cdn.gamma.app/theme_images/pearl/pearl-16_6f34a74e.jpg",
+              "meta": {
+                "width": 4096,
+                "height": 4096
+              },
+              "name": "pearl-16_6f34a74e.jpg",
+              "source": "image.custom"
+            },
+            "source": "accent.theme",
+            "accentId": "6f34a74e",
+            "originalSource": "image.custom"
+          },
+          {
+            "type": "image",
+            "image": {
+              "src": "https://cdn.gamma.app/theme_images/pearl/pearl-17_a4184fe9.jpg",
+              "meta": {
+                "width": 4096,
+                "height": 4096
+              },
+              "name": "pearl-17_a4184fe9.jpg",
+              "source": "image.custom"
+            },
+            "source": "accent.theme",
+            "accentId": "a4184fe9",
+            "originalSource": "image.custom"
+          },
+          {
+            "type": "image",
+            "image": {
+              "src": "https://cdn.gamma.app/theme_images/pearl/pearl-18_93a33789.jpg",
+              "meta": {
+                "width": 4096,
+                "height": 4096
+              },
+              "name": "pearl-18_93a33789.jpg",
+              "source": "image.custom"
+            },
+            "source": "accent.theme",
+            "accentId": "93a33789",
+            "originalSource": "image.custom"
+          },
+          {
+            "type": "image",
+            "image": {
+              "src": "https://cdn.gamma.app/theme_images/pearl/pearl-19_73e88596.jpg",
+              "meta": {
+                "width": 4096,
+                "height": 4096
+              },
+              "name": "pearl-19_73e88596.jpg",
+              "source": "image.custom"
+            },
+            "source": "accent.theme",
+            "accentId": "73e88596",
+            "originalSource": "image.custom"
+          },
+          {
+            "type": "image",
+            "image": {
+              "src": "https://cdn.gamma.app/theme_images/pearl/pearl-20_db108e67.jpg",
+              "meta": {
+                "width": 4096,
+                "height": 4096
+              },
+              "name": "pearl-20_db108e67.jpg",
+              "source": "image.custom"
+            },
+            "source": "accent.theme",
+            "accentId": "db108e67",
+            "originalSource": "image.custom"
+          },
+          {
+            "type": "image",
+            "image": {
+              "src": "https://cdn.gamma.app/theme_images/pearl/pearl-21_1193b280.jpg",
+              "meta": {
+                "width": 4096,
+                "height": 4096
+              },
+              "name": "pearl-21_1193b280.jpg",
+              "source": "image.custom"
+            },
+            "source": "accent.theme",
+            "accentId": "1193b280",
+            "originalSource": "image.custom"
+          }
+        ]
+      },
+      "priority": 722,
+      "previewUrl": "https://assets.api.staging.gamma.app/themes/preview/v1/pearl/aa8343dc41b631429b9e1122ab51ee98f175c10f",
+      "archived": false,
+      "createdTime": "2023-02-20T17:02:46.140Z",
+      "updatedTime": "2024-07-23T03:33:45.465Z",
+      "fonts": [
+        {
+          "__typename": "ThemeFont",
+          "id": "Raleway",
+          "name": "Raleway",
+          "url": "https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        },
+        {
+          "__typename": "ThemeFont",
+          "id": "Roboto",
+          "name": "Roboto",
+          "url": "https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        }
+      ]
+    },
+    "preserveLayouts": false,
+    "cardDimensions": "fluid",
+    "promptKey": "GenerateDeckGen3WithLayout"
+  },
+  "aiOptions": {
+    "preserveLayouts": false,
+    "imageOptions": {
+      "license": "All",
+      "provider": "aiGenerated",
+      "generateStyle": "Classy and modern with a corporate and minimalist touch. Tone is serious yet elegant, using a palette of light, white, and cool gray colors.",
+      "model": "flux-1-quick",
+      "stylePreset": "Theme",
+      "styleReferenceKey": "narrative_illustration",
+      "styleReferenceImages": [],
+      "modelAutoselect": false
+    }
+  }
+}
