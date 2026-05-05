@@ -1,0 +1,78 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "document",
+      "attrs": {
+        "aiOptions": {
+          "preserveLayouts": false,
+          "imageOptions": {
+            "license": "All",
+            "provider": "aiGenerated",
+            "generateStyle": "Classy and modern with a corporate and minimalist touch. Tone is serious yet elegant, using a palette of light, white, and cool gray colors.",
+            "model": "flux-1-quick",
+            "modelAutoselect": false,
+            "stylePreset": "Theme",
+            "styleReferenceImages": [],
+            "styleReferenceKey": "narrative_illustration"
+          }
+        },
+        "docId": "126ja4o8yjn44ou",
+        "background": {
+          "type": "none"
+        },
+        "docFlags": {
+          "cardLayoutsEnabled": true
+        },
+        "format": "deck",
+        "customCode": {},
+        "settings": {
+          "defaultFullBleed": "contained",
+          "stylesDerivedFrom": "deck_default",
+          "cardDimensions": "fluid",
+          "verticalAlign": "center",
+          "defaultContentWidth": "lg",
+          "fontSize": "sm",
+          "scaleContentToFit": false,
+          "locale": "en-US",
+          "animationsEnabled": true
+        },
+        "generateStatus": "streaming",
+        "generateInfo": {
+          "interactionId": "121gi3s4cf0xkt2",
+          "streamId": "126ja4o8yjn44ou",
+          "lastEventId": "0",
+          "lastCompletedCardId": null
+        }
+      },
+      "content": [
+        {
+          "type": "card",
+          "attrs": {
+            "background": {
+              "type": "none"
+            },
+            "container": {},
+            "cardSize": "default",
+            "layout": "blank",
+            "cardMarginSettings": {},
+            "hidden": false
+          },
+          "content": [
+            {
+              "type": "cardLayoutItem",
+              "attrs": {
+                "itemId": "body"
+              },
+              "content": [
+                {
+                  "type": "paragraph"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Baseline Source Image Renders</title>
+    <style>
+      :root {
+        --bg: #f4efe6;
+        --panel: #fffaf2;
+        --ink: #172033;
+        --muted: #5a657c;
+        --line: #d9cfbe;
+        --accent: #8b5e3c;
+        --handled-bg: #e9f6ee;
+        --handled-line: #3d8b5a;
+        --partial-bg: #fff4da;
+        --partial-line: #a97812;
+        --unhandled-bg: #f9e9e7;
+        --unhandled-line: #a5493f;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family:
+          "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino,
+          serif;
+        background:
+          radial-gradient(circle at top right, #efe3d0 0, transparent 28%),
+          linear-gradient(180deg, #f9f5ee 0%, var(--bg) 100%);
+        color: var(--ink);
+      }
+
+      main {
+        width: min(1280px, calc(100vw - 40px));
+        margin: 0 auto;
+        padding: 32px 0 72px;
+      }
+
+      header {
+        margin-bottom: 24px;
+        padding: 26px 28px;
+        border: 1px solid var(--line);
+        background: rgba(255, 250, 242, 0.9);
+        backdrop-filter: blur(10px);
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: 40px;
+        line-height: 1.03;
+        letter-spacing: -0.03em;
+      }
+
+      p {
+        margin: 0;
+        line-height: 1.45;
+      }
+
+      .meta {
+        margin-top: 14px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .legend {
+        display: grid;
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      .legend-item {
+        padding: 12px 14px;
+        border-left: 4px solid;
+        font-size: 14px;
+      }
+
+      .legend-item strong {
+        display: block;
+        margin-bottom: 4px;
+        color: var(--ink);
+      }
+
+      .handled {
+        background: var(--handled-bg);
+        border-color: var(--handled-line);
+      }
+
+      .partial {
+        background: var(--partial-bg);
+        border-color: var(--partial-line);
+      }
+
+      .unhandled {
+        background: var(--unhandled-bg);
+        border-color: var(--unhandled-line);
+      }
+
+      .deck {
+        margin-top: 28px;
+        padding: 20px 22px 24px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+      }
+
+      .deck h2 {
+        margin: 0 0 6px;
+        font-size: 28px;
+      }
+
+      .deck-note {
+        color: var(--muted);
+        font-size: 14px;
+        margin-bottom: 18px;
+      }
+
+      .grid {
+        display: grid;
+        gap: 18px;
+      }
+
+      .card {
+        padding: 16px;
+        border: 1px solid var(--line);
+        background: #fffdf8;
+      }
+
+      .card h3 {
+        margin: 0 0 4px;
+        font-size: 22px;
+      }
+
+      .status {
+        display: inline-block;
+        margin: 0 0 10px;
+        padding: 5px 8px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .status.handled {
+        border: 1px solid var(--handled-line);
+      }
+
+      .status.partial {
+        border: 1px solid var(--partial-line);
+      }
+
+      .status.unhandled {
+        border: 1px solid var(--unhandled-line);
+      }
+
+      .caption {
+        margin-bottom: 14px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border: 1px solid var(--line);
+        background: white;
+      }
+
+      .links {
+        margin-top: 10px;
+        font-size: 14px;
+      }
+
+      .links a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      .links a:hover {
+        text-decoration: underline;
+      }
+
+      code {
+        font-family:
+          "SFMono-Regular", ui-monospace, "Cascadia Code", "Source Code Pro",
+          Menlo, monospace;
+        font-size: 12px;
+      }
+
+      @media (min-width: 980px) {
+        .legend {
+          grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        .grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Baseline Source Image Renders</h1>
+        <p>
+          Baseline screenshots only. These are the decks we compare against
+          before any follow-on source-image placement experiments.
+        </p>
+        <p class="meta">
+          Market baseline:
+          <code
+            >runs/20260504-144744/bad-source-img-placement-market-update</code
+          ><br />
+          Labor baseline:
+          <code>runs/20260505-baseline-rerender-labor-market</code>
+        </p>
+
+        <div class="legend">
+          <div class="legend-item handled">
+            <strong>Handled by PR #18985</strong>
+            The image is top-level and the existing orientation-aware logic is
+            actually in control. If the card still looks weak, that is a
+            composition problem beyond the PR.
+          </div>
+          <div class="legend-item partial">
+            <strong>Handled, but still visually weak</strong>
+            The PR is firing, but the result is still awkward because
+            “landscape inline” or “portrait accent” is not enough by itself.
+          </div>
+          <div class="legend-item unhandled">
+            <strong>Not addressed by PR #18985</strong>
+            The image is already nested inside <code>columns</code> or another
+            container, so the PR never gets to apply its accent-vs-inline rule.
+          </div>
+        </div>
+      </header>
+
+      <section class="deck">
+        <h2>Market Update Baseline</h2>
+        <div class="deck-note">
+          This is the original source-backed baseline run:
+          <code>20260504-144744/bad-source-img-placement-market-update</code>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <div class="status unhandled">Not addressed by PR #18985</div>
+            <h3>Card 2</h3>
+            <div class="caption">
+              Landscape source chart is already inside <code>columns</code>, so
+              the PR never touches it.
+            </div>
+            <img
+              src="./runs/20260504-144744/bad-source-img-placement-market-update/screenshots/card-02.png"
+              alt="Market baseline card 2"
+            />
+            <div class="links">
+              <a
+                href="./runs/20260504-144744/bad-source-img-placement-market-update/screenshots/card-02.png"
+                >PNG</a
+              >
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="status unhandled">Not addressed by PR #18985</div>
+            <h3>Card 4</h3>
+            <div class="caption">
+              Another wide source visual committed to a 2-column layout before
+              orientation-aware accent logic can help.
+            </div>
+            <img
+              src="./runs/20260504-144744/bad-source-img-placement-market-update/screenshots/card-04.png"
+              alt="Market baseline card 4"
+            />
+            <div class="links">
+              <a
+                href="./runs/20260504-144744/bad-source-img-placement-market-update/screenshots/card-04.png"
+                >PNG</a
+              >
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="status unhandled">Not addressed by PR #18985</div>
+            <h3>Card 5</h3>
+            <div class="caption">
+              Landscape source chart in columns with dense companion content.
+              PR #18985 leaves this structure alone.
+            </div>
+            <img
+              src="./runs/20260504-144744/bad-source-img-placement-market-update/screenshots/card-05.png"
+              alt="Market baseline card 5"
+            />
+            <div class="links">
+              <a
+                href="./runs/20260504-144744/bad-source-img-placement-market-update/screenshots/card-05.png"
+                >PNG</a
+              >
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="status unhandled">Not addressed by PR #18985</div>
+            <h3>Card 8</h3>
+            <div class="caption">
+              Source image plus additional generated charting in a nested
+              layout. This is outside the PR’s scope.
+            </div>
+            <img
+              src="./runs/20260504-144744/bad-source-img-placement-market-update/screenshots/card-08.png"
+              alt="Market baseline card 8"
+            />
+            <div class="links">
+              <a
+                href="./runs/20260504-144744/bad-source-img-placement-market-update/screenshots/card-08.png"
+                >PNG</a
+              >
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="deck">
+        <h2>Labor Market Baseline</h2>
+        <div class="deck-note">
+          This is the saved baseline rerender:
+          <code>20260505-baseline-rerender-labor-market</code>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <div class="status partial">
+              Handled by PR #18985, but still weak
+            </div>
+            <h3>Card 2</h3>
+            <div class="caption">
+              Top-level inline source image. The existing orientation-aware logic
+              is active here, but “landscape inline” still does not guarantee a
+              strong composition.
+            </div>
+            <img
+              src="./runs/20260505-baseline-rerender-labor-market/screenshots/card-02.png"
+              alt="Labor market baseline card 2"
+            />
+            <div class="links">
+              <a
+                href="./runs/20260505-baseline-rerender-labor-market/screenshots/card-02.png"
+                >PNG</a
+              >
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="status unhandled">Not addressed by PR #18985</div>
+            <h3>Card 3</h3>
+            <div class="caption">
+              Landscape source image nested inside <code>columns</code>. This is
+              the clearest example of the PR not being involved at all.
+            </div>
+            <img
+              src="./runs/20260505-baseline-rerender-labor-market/screenshots/card-03.png"
+              alt="Labor market baseline card 3"
+            />
+            <div class="links">
+              <a
+                href="./runs/20260505-baseline-rerender-labor-market/screenshots/card-03.png"
+                >PNG</a
+              >
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="status unhandled">Not addressed by PR #18985</div>
+            <h3>Card 4</h3>
+            <div class="caption">
+              Another landscape source image already structurally committed to a
+              2-column layout.
+            </div>
+            <img
+              src="./runs/20260505-baseline-rerender-labor-market/screenshots/card-04.png"
+              alt="Labor market baseline card 4"
+            />
+            <div class="links">
+              <a
+                href="./runs/20260505-baseline-rerender-labor-market/screenshots/card-04.png"
+                >PNG</a
+              >
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="status unhandled">Not addressed by PR #18985</div>
+            <h3>Card 5</h3>
+            <div class="caption">
+              Landscape chart in columns with explanatory text opposite it. PR
+              #18985 leaves this untouched.
+            </div>
+            <img
+              src="./runs/20260505-baseline-rerender-labor-market/screenshots/card-05.png"
+              alt="Labor market baseline card 5"
+            />
+            <div class="links">
+              <a
+                href="./runs/20260505-baseline-rerender-labor-market/screenshots/card-05.png"
+                >PNG</a
+              >
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="status unhandled">Not addressed by PR #18985</div>
+            <h3>Card 6</h3>
+            <div class="caption">
+              Landscape source visual in columns, plus extra structure below.
+              This is a nested-layout problem, not an accent-eligibility
+              problem.
+            </div>
+            <img
+              src="./runs/20260505-baseline-rerender-labor-market/screenshots/card-06.png"
+              alt="Labor market baseline card 6"
+            />
+            <div class="links">
+              <a
+                href="./runs/20260505-baseline-rerender-labor-market/screenshots/card-06.png"
+                >PNG</a
+              >
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="status partial">
+              Handled by PR #18985, but still weak
+            </div>
+            <h3>Card 7</h3>
+            <div class="caption">
+              Top-level inline source image again. The PR is doing what it says,
+              but the result is still not clearly intentional enough.
+            </div>
+            <img
+              src="./runs/20260505-baseline-rerender-labor-market/screenshots/card-07.png"
+              alt="Labor market baseline card 7"
+            />
+            <div class="links">
+              <a
+                href="./runs/20260505-baseline-rerender-labor-market/screenshots/card-07.png"
+                >PNG</a
+              >
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="status unhandled">Not addressed by PR #18985</div>
+            <h3>Card 8</h3>
+            <div class="caption">
+              Landscape source image nested in columns. PR #18985 is bypassed
+              here.
+            </div>
+            <img
+              src="./runs/20260505-baseline-rerender-labor-market/screenshots/card-08.png"
+              alt="Labor market baseline card 8"
+            />
+            <div class="links">
+              <a
+                href="./runs/20260505-baseline-rerender-labor-market/screenshots/card-08.png"
+                >PNG</a
+              >
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="status unhandled">Not addressed by PR #18985</div>
+            <h3>Card 10</h3>
+            <div class="caption">
+              Portrait source image already nested inside
+              <code>columns</code>. Even though PR #18985 knows how to treat
+              portrait images, it never gets to apply that logic once the image
+              is structurally committed to a column layout.
+            </div>
+            <img
+              src="./runs/20260505-baseline-rerender-labor-market/screenshots/card-10.png"
+              alt="Labor market baseline card 10"
+            />
+            <div class="links">
+              <a
+                href="./runs/20260505-baseline-rerender-labor-market/screenshots/card-10.png"
+                >PNG</a
+              >
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="status unhandled">Not addressed by PR #18985</div>
+            <h3>Card 12</h3>
+            <div class="caption">
+              Landscape source image plus companion smart layout, already inside
+              columns before the PR can act.
+            </div>
+            <img
+              src="./runs/20260505-baseline-rerender-labor-market/screenshots/card-12.png"
+              alt="Labor market baseline card 12"
+            />
+            <div class="links">
+              <a
+                href="./runs/20260505-baseline-rerender-labor-market/screenshots/card-12.png"
+                >PNG</a
+              >
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
