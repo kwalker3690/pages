@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8" />
+<title>Classic v12 &mdash; Prod vs TemplateDeckFill</title>
+<style>
+  :root { color-scheme: dark; }
+  body { font-family: -apple-system, system-ui, sans-serif; margin: 24px; background: #0d0d0d; color: #eee; }
+  h1 { margin: 0 0 4px; font-size: 20px; }
+  .lead { color: #aaa; font-size: 13px; margin-bottom: 16px; max-width: 880px; }
+  .lead code { background: #222; padding: 1px 5px; border-radius: 3px; font-size: 12px; }
+  .changelog { background: #142028; border: 1px solid #1f3a4a; border-radius: 6px; padding: 12px 16px; margin-bottom: 28px; max-width: 880px; font-size: 13px; color: #cfe; }
+  .changelog h2 { margin: 0 0 8px; font-size: 14px; color: #9cf; text-transform: uppercase; letter-spacing: .5px;}
+  .changelog ul { margin: 0; padding-left: 18px; } .changelog li { margin-bottom: 4px; }
+  .deck { margin: 0 0 48px; padding: 16px; background: #161616; border-radius: 8px; border: 1px solid #222; }
+  .deck header { margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid #222; }
+  .deck h2 { margin: 0 0 4px; font-size: 17px; color: #fff; }
+  .topic { color: #ccc; font-size: 13px; margin: 0 0 4px; max-width: 880px; }
+  .meta { color: #777; font-size: 12px; margin: 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .col h3 { margin: 0 0 8px; font-size: 13px; color: #9cf; font-weight: 600; }
+  .strip { display: flex; flex-direction: column; gap: 8px; background: #0a0a0a; padding: 8px; border-radius: 4px; }
+  .strip img { width: 100%; max-width: 320px; height: auto; border-radius: 3px; background: #fff; }
+  .missing { color: #f66; }
+</style></head><body>
+<h1>Classic v12 &mdash; Production vs TemplateDeckFill</h1>
+<p class="lead">Left: production GenerateDeck2.5 output (rendered from Snowflake <code>OUTPUT</code>; images are placeholders).
+Right: TemplateDeckFill pipeline (classic guide) on the same prompt/outline, with this round's <code>mapping.md</code> edits &mdash; full pipeline incl. aiGenerated images + render.</p>
+<div class="changelog"><h2>mapping.md edits this round</h2><ul>
+<li>Content-type&rarr;template matching (description-only)</li>
+<li>Visual rhythm (deck-wide density alternation)</li>
+<li>Emphasis card (reserve one sparse high-impact card)</li>
+<li>Single reconciled accent-image target; dropped dead top/behind/table refs</li>
+<li>Image-with-text floor: template IDs pinned (hard constraint)</li>
+</ul></div>
+
+<section class="deck">
+  <header>
+    <h2>guy-fawkes</h2>
+    <p class="topic">Guy Fawkes Day — history, festival attributes, modern celebrations</p>
+    <p class="meta">numCards=8</p>
+  </header>
+  <div class="cols">
+    <div class="col"><h3>Production (GenerateDeck2.5) &mdash; 8 cards</h3>
+      <div class="strip"><img src="guy-fawkes/prod/card-01.png" loading="lazy">
+<img src="guy-fawkes/prod/card-02.png" loading="lazy">
+<img src="guy-fawkes/prod/card-03.png" loading="lazy">
+<img src="guy-fawkes/prod/card-04.png" loading="lazy">
+<img src="guy-fawkes/prod/card-05.png" loading="lazy">
+<img src="guy-fawkes/prod/card-06.png" loading="lazy">
+<img src="guy-fawkes/prod/card-07.png" loading="lazy">
+<img src="guy-fawkes/prod/card-08.png" loading="lazy"></div></div>
+    <div class="col"><h3>New v12 (TemplateDeckFill, mapping.md edits) &mdash; 8 cards</h3>
+      <div class="strip"><img src="guy-fawkes/new/card-01.png" loading="lazy">
+<img src="guy-fawkes/new/card-02.png" loading="lazy">
+<img src="guy-fawkes/new/card-03.png" loading="lazy">
+<img src="guy-fawkes/new/card-04.png" loading="lazy">
+<img src="guy-fawkes/new/card-05.png" loading="lazy">
+<img src="guy-fawkes/new/card-06.png" loading="lazy">
+<img src="guy-fawkes/new/card-07.png" loading="lazy">
+<img src="guy-fawkes/new/card-08.png" loading="lazy"></div></div>
+  </div>
+</section>
+
+<section class="deck">
+  <header>
+    <h2>electromagnetic-induction</h2>
+    <p class="topic">Electromagnetic Induction (academic physics PPT)</p>
+    <p class="meta">numCards=10</p>
+  </header>
+  <div class="cols">
+    <div class="col"><h3>Production (GenerateDeck2.5) &mdash; 10 cards</h3>
+      <div class="strip"><img src="electromagnetic-induction/prod/card-01.png" loading="lazy">
+<img src="electromagnetic-induction/prod/card-02.png" loading="lazy">
+<img src="electromagnetic-induction/prod/card-03.png" loading="lazy">
+<img src="electromagnetic-induction/prod/card-04.png" loading="lazy">
+<img src="electromagnetic-induction/prod/card-05.png" loading="lazy">
+<img src="electromagnetic-induction/prod/card-06.png" loading="lazy">
+<img src="electromagnetic-induction/prod/card-07.png" loading="lazy">
+<img src="electromagnetic-induction/prod/card-08.png" loading="lazy">
+<img src="electromagnetic-induction/prod/card-09.png" loading="lazy">
+<img src="electromagnetic-induction/prod/card-10.png" loading="lazy"></div></div>
+    <div class="col"><h3>New v12 (TemplateDeckFill, mapping.md edits) &mdash; 10 cards</h3>
+      <div class="strip"><img src="electromagnetic-induction/new/card-01.png" loading="lazy">
+<img src="electromagnetic-induction/new/card-02.png" loading="lazy">
+<img src="electromagnetic-induction/new/card-03.png" loading="lazy">
+<img src="electromagnetic-induction/new/card-04.png" loading="lazy">
+<img src="electromagnetic-induction/new/card-05.png" loading="lazy">
+<img src="electromagnetic-induction/new/card-06.png" loading="lazy">
+<img src="electromagnetic-induction/new/card-07.png" loading="lazy">
+<img src="electromagnetic-induction/new/card-08.png" loading="lazy">
+<img src="electromagnetic-induction/new/card-09.png" loading="lazy">
+<img src="electromagnetic-induction/new/card-10.png" loading="lazy"></div></div>
+  </div>
+</section>
+
+<section class="deck">
+  <header>
+    <h2>roman-bedroom-furniture</h2>
+    <p class="topic">Roman period master bedroom furniture set — orthographic + isometric views</p>
+    <p class="meta">numCards=10</p>
+  </header>
+  <div class="cols">
+    <div class="col"><h3>Production (GenerateDeck2.5) &mdash; 10 cards</h3>
+      <div class="strip"><img src="roman-bedroom-furniture/prod/card-01.png" loading="lazy">
+<img src="roman-bedroom-furniture/prod/card-02.png" loading="lazy">
+<img src="roman-bedroom-furniture/prod/card-03.png" loading="lazy">
+<img src="roman-bedroom-furniture/prod/card-04.png" loading="lazy">
+<img src="roman-bedroom-furniture/prod/card-05.png" loading="lazy">
+<img src="roman-bedroom-furniture/prod/card-06.png" loading="lazy">
+<img src="roman-bedroom-furniture/prod/card-07.png" loading="lazy">
+<img src="roman-bedroom-furniture/prod/card-08.png" loading="lazy">
+<img src="roman-bedroom-furniture/prod/card-09.png" loading="lazy">
+<img src="roman-bedroom-furniture/prod/card-10.png" loading="lazy"></div></div>
+    <div class="col"><h3>New v12 (TemplateDeckFill, mapping.md edits) &mdash; 10 cards</h3>
+      <div class="strip"><img src="roman-bedroom-furniture/new/card-01.png" loading="lazy">
+<img src="roman-bedroom-furniture/new/card-02.png" loading="lazy">
+<img src="roman-bedroom-furniture/new/card-03.png" loading="lazy">
+<img src="roman-bedroom-furniture/new/card-04.png" loading="lazy">
+<img src="roman-bedroom-furniture/new/card-05.png" loading="lazy">
+<img src="roman-bedroom-furniture/new/card-06.png" loading="lazy">
+<img src="roman-bedroom-furniture/new/card-07.png" loading="lazy">
+<img src="roman-bedroom-furniture/new/card-08.png" loading="lazy">
+<img src="roman-bedroom-furniture/new/card-09.png" loading="lazy">
+<img src="roman-bedroom-furniture/new/card-10.png" loading="lazy"></div></div>
+  </div>
+</section>
+
+<section class="deck">
+  <header>
+    <h2>starbucks-experience</h2>
+    <p class="topic">How Starbucks sells an experience, not just coffee (incl. product differentiation)</p>
+    <p class="meta">numCards=7</p>
+  </header>
+  <div class="cols">
+    <div class="col"><h3>Production (GenerateDeck2.5) &mdash; 7 cards</h3>
+      <div class="strip"><img src="starbucks-experience/prod/card-01.png" loading="lazy">
+<img src="starbucks-experience/prod/card-02.png" loading="lazy">
+<img src="starbucks-experience/prod/card-03.png" loading="lazy">
+<img src="starbucks-experience/prod/card-04.png" loading="lazy">
+<img src="starbucks-experience/prod/card-05.png" loading="lazy">
+<img src="starbucks-experience/prod/card-06.png" loading="lazy">
+<img src="starbucks-experience/prod/card-07.png" loading="lazy"></div></div>
+    <div class="col"><h3>New v12 (TemplateDeckFill, mapping.md edits) &mdash; 7 cards</h3>
+      <div class="strip"><img src="starbucks-experience/new/card-01.png" loading="lazy">
+<img src="starbucks-experience/new/card-02.png" loading="lazy">
+<img src="starbucks-experience/new/card-03.png" loading="lazy">
+<img src="starbucks-experience/new/card-04.png" loading="lazy">
+<img src="starbucks-experience/new/card-05.png" loading="lazy">
+<img src="starbucks-experience/new/card-06.png" loading="lazy">
+<img src="starbucks-experience/new/card-07.png" loading="lazy"></div></div>
+  </div>
+</section>
+
+<section class="deck">
+  <header>
+    <h2>prioritisation-pm</h2>
+    <p class="topic">Prioritisation in product management</p>
+    <p class="meta">numCards=11</p>
+  </header>
+  <div class="cols">
+    <div class="col"><h3>Production (GenerateDeck2.5) &mdash; 11 cards</h3>
+      <div class="strip"><img src="prioritisation-pm/prod/card-01.png" loading="lazy">
+<img src="prioritisation-pm/prod/card-02.png" loading="lazy">
+<img src="prioritisation-pm/prod/card-03.png" loading="lazy">
+<img src="prioritisation-pm/prod/card-04.png" loading="lazy">
+<img src="prioritisation-pm/prod/card-05.png" loading="lazy">
+<img src="prioritisation-pm/prod/card-06.png" loading="lazy">
+<img src="prioritisation-pm/prod/card-07.png" loading="lazy">
+<img src="prioritisation-pm/prod/card-08.png" loading="lazy">
+<img src="prioritisation-pm/prod/card-09.png" loading="lazy">
+<img src="prioritisation-pm/prod/card-10.png" loading="lazy">
+<img src="prioritisation-pm/prod/card-11.png" loading="lazy"></div></div>
+    <div class="col"><h3>New v12 (TemplateDeckFill, mapping.md edits) &mdash; 11 cards</h3>
+      <div class="strip"><img src="prioritisation-pm/new/card-01.png" loading="lazy">
+<img src="prioritisation-pm/new/card-02.png" loading="lazy">
+<img src="prioritisation-pm/new/card-03.png" loading="lazy">
+<img src="prioritisation-pm/new/card-04.png" loading="lazy">
+<img src="prioritisation-pm/new/card-05.png" loading="lazy">
+<img src="prioritisation-pm/new/card-06.png" loading="lazy">
+<img src="prioritisation-pm/new/card-07.png" loading="lazy">
+<img src="prioritisation-pm/new/card-08.png" loading="lazy">
+<img src="prioritisation-pm/new/card-09.png" loading="lazy">
+<img src="prioritisation-pm/new/card-10.png" loading="lazy">
+<img src="prioritisation-pm/new/card-11.png" loading="lazy"></div></div>
+  </div>
+</section>
+
+<section class="deck">
+  <header>
+    <h2>beyond-earth</h2>
+    <p class="topic">Beyond Earth — kids' presentation on Nubra, stars, solar system, moon, asteroids, milky way</p>
+    <p class="meta">numCards=10</p>
+  </header>
+  <div class="cols">
+    <div class="col"><h3>Production (GenerateDeck2.5) &mdash; 10 cards</h3>
+      <div class="strip"><img src="beyond-earth/prod/card-01.png" loading="lazy">
+<img src="beyond-earth/prod/card-02.png" loading="lazy">
+<img src="beyond-earth/prod/card-03.png" loading="lazy">
+<img src="beyond-earth/prod/card-04.png" loading="lazy">
+<img src="beyond-earth/prod/card-05.png" loading="lazy">
+<img src="beyond-earth/prod/card-06.png" loading="lazy">
+<img src="beyond-earth/prod/card-07.png" loading="lazy">
+<img src="beyond-earth/prod/card-08.png" loading="lazy">
+<img src="beyond-earth/prod/card-09.png" loading="lazy">
+<img src="beyond-earth/prod/card-10.png" loading="lazy"></div></div>
+    <div class="col"><h3>New v12 (TemplateDeckFill, mapping.md edits) &mdash; 10 cards</h3>
+      <div class="strip"><img src="beyond-earth/new/card-01.png" loading="lazy">
+<img src="beyond-earth/new/card-02.png" loading="lazy">
+<img src="beyond-earth/new/card-03.png" loading="lazy">
+<img src="beyond-earth/new/card-04.png" loading="lazy">
+<img src="beyond-earth/new/card-05.png" loading="lazy">
+<img src="beyond-earth/new/card-06.png" loading="lazy">
+<img src="beyond-earth/new/card-07.png" loading="lazy">
+<img src="beyond-earth/new/card-08.png" loading="lazy">
+<img src="beyond-earth/new/card-09.png" loading="lazy">
+<img src="beyond-earth/new/card-10.png" loading="lazy"></div></div>
+  </div>
+</section>
+
+<section class="deck">
+  <header>
+    <h2>biking-fun</h2>
+    <p class="topic">Biking is fun — casual lifestyle presentation</p>
+    <p class="meta">numCards=10</p>
+  </header>
+  <div class="cols">
+    <div class="col"><h3>Production (GenerateDeck2.5) &mdash; 10 cards</h3>
+      <div class="strip"><img src="biking-fun/prod/card-01.png" loading="lazy">
+<img src="biking-fun/prod/card-02.png" loading="lazy">
+<img src="biking-fun/prod/card-03.png" loading="lazy">
+<img src="biking-fun/prod/card-04.png" loading="lazy">
+<img src="biking-fun/prod/card-05.png" loading="lazy">
+<img src="biking-fun/prod/card-06.png" loading="lazy">
+<img src="biking-fun/prod/card-07.png" loading="lazy">
+<img src="biking-fun/prod/card-08.png" loading="lazy">
+<img src="biking-fun/prod/card-09.png" loading="lazy">
+<img src="biking-fun/prod/card-10.png" loading="lazy"></div></div>
+    <div class="col"><h3>New v12 (TemplateDeckFill, mapping.md edits) &mdash; 10 cards</h3>
+      <div class="strip"><img src="biking-fun/new/card-01.png" loading="lazy">
+<img src="biking-fun/new/card-02.png" loading="lazy">
+<img src="biking-fun/new/card-03.png" loading="lazy">
+<img src="biking-fun/new/card-04.png" loading="lazy">
+<img src="biking-fun/new/card-05.png" loading="lazy">
+<img src="biking-fun/new/card-06.png" loading="lazy">
+<img src="biking-fun/new/card-07.png" loading="lazy">
+<img src="biking-fun/new/card-08.png" loading="lazy">
+<img src="biking-fun/new/card-09.png" loading="lazy">
+<img src="biking-fun/new/card-10.png" loading="lazy"></div></div>
+  </div>
+</section>
+
+<section class="deck">
+  <header>
+    <h2>ai-healthcare</h2>
+    <p class="topic">Application of AI in Healthcare</p>
+    <p class="meta">numCards=6</p>
+  </header>
+  <div class="cols">
+    <div class="col"><h3>Production (GenerateDeck2.5) &mdash; 6 cards</h3>
+      <div class="strip"><img src="ai-healthcare/prod/card-01.png" loading="lazy">
+<img src="ai-healthcare/prod/card-02.png" loading="lazy">
+<img src="ai-healthcare/prod/card-03.png" loading="lazy">
+<img src="ai-healthcare/prod/card-04.png" loading="lazy">
+<img src="ai-healthcare/prod/card-05.png" loading="lazy">
+<img src="ai-healthcare/prod/card-06.png" loading="lazy"></div></div>
+    <div class="col"><h3>New v12 (TemplateDeckFill, mapping.md edits) &mdash; 6 cards</h3>
+      <div class="strip"><img src="ai-healthcare/new/card-01.png" loading="lazy">
+<img src="ai-healthcare/new/card-02.png" loading="lazy">
+<img src="ai-healthcare/new/card-03.png" loading="lazy">
+<img src="ai-healthcare/new/card-04.png" loading="lazy">
+<img src="ai-healthcare/new/card-05.png" loading="lazy">
+<img src="ai-healthcare/new/card-06.png" loading="lazy"></div></div>
+  </div>
+</section>
+
+<section class="deck">
+  <header>
+    <h2>prompt-engineering</h2>
+    <p class="topic">Prompt engineering techniques for ChatGPT (dark theme)</p>
+    <p class="meta">numCards=9</p>
+  </header>
+  <div class="cols">
+    <div class="col"><h3>Production (GenerateDeck2.5) &mdash; 10 cards</h3>
+      <div class="strip"><img src="prompt-engineering/prod/card-01.png" loading="lazy">
+<img src="prompt-engineering/prod/card-02.png" loading="lazy">
+<img src="prompt-engineering/prod/card-03.png" loading="lazy">
+<img src="prompt-engineering/prod/card-04.png" loading="lazy">
+<img src="prompt-engineering/prod/card-05.png" loading="lazy">
+<img src="prompt-engineering/prod/card-06.png" loading="lazy">
+<img src="prompt-engineering/prod/card-07.png" loading="lazy">
+<img src="prompt-engineering/prod/card-08.png" loading="lazy">
+<img src="prompt-engineering/prod/card-09.png" loading="lazy">
+<img src="prompt-engineering/prod/card-10.png" loading="lazy"></div></div>
+    <div class="col"><h3>New v12 (TemplateDeckFill, mapping.md edits) &mdash; 9 cards</h3>
+      <div class="strip"><img src="prompt-engineering/new/card-01.png" loading="lazy">
+<img src="prompt-engineering/new/card-02.png" loading="lazy">
+<img src="prompt-engineering/new/card-03.png" loading="lazy">
+<img src="prompt-engineering/new/card-04.png" loading="lazy">
+<img src="prompt-engineering/new/card-05.png" loading="lazy">
+<img src="prompt-engineering/new/card-06.png" loading="lazy">
+<img src="prompt-engineering/new/card-07.png" loading="lazy">
+<img src="prompt-engineering/new/card-08.png" loading="lazy">
+<img src="prompt-engineering/new/card-09.png" loading="lazy"></div></div>
+  </div>
+</section>
+
+<section class="deck">
+  <header>
+    <h2>anti-war-movements</h2>
+    <p class="topic">Assess the nature and significance of anti-war movements in the USA and Australia</p>
+    <p class="meta">numCards=10</p>
+  </header>
+  <div class="cols">
+    <div class="col"><h3>Production (GenerateDeck2.5) &mdash; 10 cards</h3>
+      <div class="strip"><img src="anti-war-movements/prod/card-01.png" loading="lazy">
+<img src="anti-war-movements/prod/card-02.png" loading="lazy">
+<img src="anti-war-movements/prod/card-03.png" loading="lazy">
+<img src="anti-war-movements/prod/card-04.png" loading="lazy">
+<img src="anti-war-movements/prod/card-05.png" loading="lazy">
+<img src="anti-war-movements/prod/card-06.png" loading="lazy">
+<img src="anti-war-movements/prod/card-07.png" loading="lazy">
+<img src="anti-war-movements/prod/card-08.png" loading="lazy">
+<img src="anti-war-movements/prod/card-09.png" loading="lazy">
+<img src="anti-war-movements/prod/card-10.png" loading="lazy"></div></div>
+    <div class="col"><h3>New v12 (TemplateDeckFill, mapping.md edits) &mdash; 10 cards</h3>
+      <div class="strip"><img src="anti-war-movements/new/card-01.png" loading="lazy">
+<img src="anti-war-movements/new/card-02.png" loading="lazy">
+<img src="anti-war-movements/new/card-03.png" loading="lazy">
+<img src="anti-war-movements/new/card-04.png" loading="lazy">
+<img src="anti-war-movements/new/card-05.png" loading="lazy">
+<img src="anti-war-movements/new/card-06.png" loading="lazy">
+<img src="anti-war-movements/new/card-07.png" loading="lazy">
+<img src="anti-war-movements/new/card-08.png" loading="lazy">
+<img src="anti-war-movements/new/card-09.png" loading="lazy">
+<img src="anti-war-movements/new/card-10.png" loading="lazy"></div></div>
+  </div>
+</section>
+</body></html>
