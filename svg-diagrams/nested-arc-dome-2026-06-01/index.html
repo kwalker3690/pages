@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nested Arc Dome — from screenshot to template</title>
+<style>
+  :root {
+    --bg: #0f1117; --panel: #171a23; --panel-2: #1e2230; --line: #2a2f3e;
+    --ink: #e8eaf0; --muted: #9aa3b8; --accent: #6b7bff; --accent-2: #4b4fe0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 28px; }
+
+  header { padding: 64px 0 36px; border-bottom: 1px solid var(--line); }
+  .kicker { color: var(--accent); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; font-size: 13px; }
+  h1 { font-size: 34px; line-height: 1.15; margin: 12px 0 14px; letter-spacing: -0.02em; }
+  .lede { font-size: 18px; color: var(--muted); max-width: 700px; margin: 0; }
+
+  section { padding: 52px 0; border-bottom: 1px solid var(--line); }
+  .step-num { color: var(--accent); font-family: ui-monospace, monospace; font-size: 14px; font-weight: 600; }
+  .h2row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 4px 0 6px; }
+  .h2row h2 { margin: 0; }
+  .tagrow { display: flex; gap: 8px; }
+  .ai-tag { font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #c6b6ff; background: #221c3a; border: 1px solid #4a3d7a; border-radius: 999px; padding: 3px 10px; }
+  .manual-tag { font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); background: var(--panel-2); border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; }
+  .inline-ai { font-size: 10.5px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; color: #c6b6ff; background: #221c3a; border: 1px solid #4a3d7a; border-radius: 999px; padding: 2px 8px; vertical-align: middle; margin-left: 8px; }
+  h2 { font-size: 24px; margin: 4px 0 6px; letter-spacing: -0.01em; }
+  .section-sub { color: var(--muted); margin: 0 0 26px; max-width: 700px; }
+
+  .imgcard { background: #ededed; border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+  .imgcard img { width: 100%; height: auto; display: block; border-radius: 6px; }
+  .imgcard.white { background: #fff; }
+  .cap { color: var(--muted); font-size: 13px; margin-top: 10px; }
+
+  /* variant grid */
+  .variants { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+  .variants figure { margin: 0; position: relative; background: #ededed; border: 2px solid transparent; border-radius: 9px; padding: 6px; }
+  .variants figure.picked { border-color: var(--accent); }
+  .variants img { width: 100%; height: auto; display: block; border-radius: 4px; }
+  .variants .badge { position: absolute; top: 8px; right: 8px; background: var(--accent); color: #fff; font-size: 10.5px; font-weight: 700; letter-spacing: .03em; padding: 2px 7px; border-radius: 999px; }
+
+  /* step counts */
+  .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .steps-grid figure { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 11px; overflow: hidden; }
+  .steps-grid figcaption { padding: 9px 13px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); }
+  .steps-grid figcaption b { color: var(--ink); }
+  .steps-grid .iw { background: #ededed; padding: 8px; }
+  .steps-grid img { width: 100%; height: auto; display: block; }
+
+  /* two-up */
+  .twoup { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
+  .twoup figure { margin: 0; }
+  .twoup .lbl { font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+
+  /* theming */
+  .theming { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .theming figure { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .theming figcaption { padding: 11px 15px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); }
+  .theming figcaption b { color: var(--ink); }
+  .theming .iw { background: #fff; padding: 10px; }
+  .theming img { width: 100%; height: auto; display: block; }
+
+  footer { padding: 40px 0 72px; color: var(--muted); font-size: 14px; }
+  footer a { color: var(--accent); }
+  code { font-family: ui-monospace, SFMono-Regular, monospace; font-size: .92em; background: var(--panel-2); padding: 1px 6px; border-radius: 5px; }
+
+  @media (max-width: 820px) {
+    .variants { grid-template-columns: repeat(2, 1fr); }
+    .steps-grid, .twoup, .theming { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="kicker">Smart Diagrams · Nested Arc Dome</div>
+    <h1>From a screenshot to a themeable diagram template</h1>
+    <p class="lede">Walking one template through the pipeline: start from a reference image, generate design options, pick one per step count, vectorize, and transform it into a component the editor recolors and resizes by content.</p>
+    <div class="tagrow" style="margin-top:20px"><span class="ai-tag">AI model call</span><span class="manual-tag">deterministic / human</span></div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="step-num">01</div>
+    <h2>The reference</h2>
+    <p class="section-sub">A screenshot of the look we want — the only hand-authored input.</p>
+    <div class="imgcard"><img src="img/ref.png" alt="reference screenshot"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="step-num">02</div>
+    <div class="h2row"><h2>Generate a batch, keep the cleanest</h2><div class="tagrow"><span class="ai-tag">Gemini · image model</span><span class="manual-tag">human pick</span></div></div>
+    <p class="section-sub">The image model is non-deterministic — every run varies in quality, spacing, and how faithfully it matches the reference. So instead of trusting one output, we generate a batch and a human keeps the cleanest one (highlighted). This is the batch for a single step count.</p>
+    <div class="variants">
+      <figure><img src="img/var-a.png" alt="variant a"></figure>
+      <figure><img src="img/var-b.png" alt="variant b"></figure>
+      <figure><img src="img/var-c.png" alt="variant c"></figure>
+      <figure><img src="img/var-d.png" alt="variant d"></figure>
+      <figure><img src="img/var-e.png" alt="variant e"></figure>
+      <figure><img src="img/var-f.png" alt="variant f"></figure>
+      <figure><img src="img/var-g.png" alt="variant g"></figure>
+      <figure class="picked"><span class="badge">picked</span><img src="img/var-h.png" alt="variant h"></figure>
+      <figure><img src="img/var-i.png" alt="variant i"></figure>
+      <figure><img src="img/var-j.png" alt="variant j"></figure>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="step-num">03</div>
+    <h2>Repeat for every step count</h2>
+    <p class="section-sub">A diagram has to render at different lengths depending on content — a 3-item list, a 5-item list. The model can't reflow one image to fit, so the batch-and-pick from step 2 runs once per step count. These are the kept picks for 3, 4, and 5 steps.</p>
+    <div class="steps-grid">
+      <figure><div class="iw"><img src="img/pick-3.png" alt="3 steps"></div><figcaption><b>3 steps</b></figcaption></figure>
+      <figure><div class="iw"><img src="img/pick-4.png" alt="4 steps"></div><figcaption><b>4 steps</b></figcaption></figure>
+      <figure><div class="iw"><img src="img/pick-5.png" alt="5 steps"></div><figcaption><b>5 steps</b></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="step-num">04</div>
+    <div class="h2row"><h2>Vectorize the picked image</h2><div class="tagrow"><span class="ai-tag">Quiver · vectorize model</span></div></div>
+    <p class="section-sub">The picked raster image is traced into SVG paths. Accurate, but raw — a flat picture with no notion of steps or theming.</p>
+    <div class="imgcard white"><img src="img/vectorize.png" alt="vectorized"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="step-num">05</div>
+    <div class="h2row"><h2>Transform into a component</h2><div class="tagrow"><span class="manual-tag">deterministic code</span></div></div>
+    <p class="section-sub">A transform re-classifies each vector shape into per-step elements the runtime understands — text slots, themeable shapes, step grouping. This is what turns the flat SVG into a live component, rendered here with real content.</p>
+    <div class="imgcard white"><img src="img/runtime.png" alt="runtime"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="step-num">06</div>
+    <h2>Themeable, not static</h2>
+    <p class="section-sub">Because each element is classified during the transform, the runtime recolors and emphasizes per step. The arc rings shade by opacity, so a single theme color reproduces the nested look and still recolors cleanly.</p>
+    <div class="theming">
+      <figure><div class="iw"><img src="img/color.png" alt="color"></div><figcaption><b>Color</b> — per-step theme colors</figcaption></figure>
+      <figure><div class="iw"><img src="img/emphasis.png" alt="emphasis"></div><figcaption><b>Emphasis</b> — one step highlighted, rest dimmed</figcaption></figure>
+    </div>
+    <p class="section-sub" style="margin-top:22px">Live: Storybook → <code>Smart Diagrams/Composable/NestedArcDome</code>.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a href="https://github.com/gamma-app/gamma/pull/21763">PR #21763</a> · pipeline tooling in <code>packages/claude-plugins/svg-diagram/</code>.
+  </div>
+</footer>
+
+</body>
+</html>
