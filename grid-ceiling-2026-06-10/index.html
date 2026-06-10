@@ -1,0 +1,59 @@
+<!doctype html><meta charset="utf-8"><title>Grid ceiling experiment — 6 cards</title>
+<style>
+body { font: 14px -apple-system, sans-serif; background: #1c1e22; color: #ddd; margin: 2em; }
+h1 { font-size: 1.3em; } h2 { font-size: 1em; margin: 1.6em 0 0.5em; } .meta { color: #8a8f98; font-weight: 400; font-size: 0.85em; }
+.row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+figure { margin: 0; } img { width: 100%; border-radius: 6px; display: block; }
+figcaption { color: #8a8f98; font-size: 0.8em; padding: 4px 2px; }
+</style>
+<h1>Grid node expressiveness ceiling — reference vs pipeline vs hand-authored</h1>
+<p class="meta">All 6 cards hand-authored to ship quality. Gap log: NODE-GAPS.md. 2026-06-10T10:27</p>
+
+  <section>
+    <h2>velvet_q1_tl <span class="meta">pipeline grid score 0.15 → hand-authored (6 iters)</span></h2>
+    <div class="row">
+      <figure><img src="_gallery_assets_velvet_q1_tl_ref.jpg"><figcaption>reference</figcaption></figure>
+      <figure><img src="velvet_q1_tl/iter-0.png"><figcaption>pipeline iter-0</figcaption></figure>
+      <figure><img src="velvet_q1_tl/iter-7-gapfix.png"><figcaption>hand-authored final (iter-7-gapfix)</figcaption></figure>
+    </div>
+  </section>
+  <section>
+    <h2>capsule_q3_bl <span class="meta">pipeline grid score 0.15 → hand-authored (4 iters)</span></h2>
+    <div class="row">
+      <figure><img src="_gallery_assets_capsule_q3_bl_ref.jpg"><figcaption>reference</figcaption></figure>
+      <figure><img src="capsule_q3_bl/iter-0.png"><figcaption>pipeline iter-0</figcaption></figure>
+      <figure><img src="capsule_q3_bl/iter-4-gapfix.png"><figcaption>hand-authored final (iter-4-gapfix)</figcaption></figure>
+    </div>
+  </section>
+  <section>
+    <h2>brutus_q1_tl <span class="meta">pipeline grid score 0.25 → hand-authored (2 iters)</span></h2>
+    <div class="row">
+      <figure><img src="_gallery_assets_brutus_q1_tl_ref.jpg"><figcaption>reference</figcaption></figure>
+      <figure><img src="brutus_q1_tl/iter-0.png"><figcaption>pipeline iter-0</figcaption></figure>
+      <figure><img src="brutus_q1_tl/iter-2.png"><figcaption>hand-authored final (iter-2)</figcaption></figure>
+    </div>
+  </section>
+  <section>
+    <h2>vitrine_q1_tl <span class="meta">pipeline grid score 0.2 → hand-authored (3 iters (agent))</span></h2>
+    <div class="row">
+      <figure><img src="_gallery_assets_vitrine_q1_tl_ref.jpg"><figcaption>reference</figcaption></figure>
+      <figure><img src="vitrine_q1_tl/iter-0.png"><figcaption>pipeline iter-0</figcaption></figure>
+      <figure><img src="vitrine_q1_tl/iter-3.png"><figcaption>hand-authored final (iter-3)</figcaption></figure>
+    </div>
+  </section>
+  <section>
+    <h2>findings_q4_br <span class="meta">pipeline grid score 0.15 → hand-authored (3 iters)</span></h2>
+    <div class="row">
+      <figure><img src="_gallery_assets_findings_q4_br_ref.jpg"><figcaption>reference</figcaption></figure>
+      <figure><img src="findings_q4_br/iter-0.png"><figcaption>pipeline iter-0</figcaption></figure>
+      <figure><img src="findings_q4_br/iter-3.png"><figcaption>hand-authored final (iter-3)</figcaption></figure>
+    </div>
+  </section>
+  <section>
+    <h2>cohort_q3_bl <span class="meta">pipeline grid score 0.2 → hand-authored (5 iters)</span></h2>
+    <div class="row">
+      <figure><img src="_gallery_assets_cohort_q3_bl_ref.jpg"><figcaption>reference</figcaption></figure>
+      <figure><img src="cohort_q3_bl/iter-0.png"><figcaption>pipeline iter-0</figcaption></figure>
+      <figure><img src="cohort_q3_bl/iter-5.png"><figcaption>hand-authored final (iter-5)</figcaption></figure>
+    </div>
+  </section>
