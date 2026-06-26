@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nested-grid + freeform — dev harness</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; }
+      body {
+        font-family: Inter, system-ui, -apple-system, sans-serif;
+        background: #1a1c20;
+        color: #e7e9ee;
+        display: flex;
+        flex-direction: column;
+      }
+      /* The React mount must propagate the flex column to fill the viewport —
+         otherwise #root sizes to content and the stage height tracks the tallest
+         sibling (the GML panel), so the card scale jumps as structure grows. */
+      #root {
+        flex: 1 1 auto;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* ── Top chrome ───────────────────────────────────────── */
+      .ng-header {
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.6rem 1rem;
+        border-bottom: 1px solid #2c2f36;
+        font-size: 0.8rem;
+      }
+      .ng-header h1 { font-size: 0.9rem; margin: 0; font-weight: 600; }
+      .ng-fixture-select {
+        background: #23262d;
+        color: #e7e9ee;
+        border: 1px solid #3a3f48;
+        border-radius: 4px;
+        padding: 2px 6px;
+        font: inherit;
+        font-size: 0.8rem;
+      }
+      .ng-header .ng-hint { color: #9aa0ad; }
+      .ng-header .ng-spacer { flex: 1; }
+      .ng-mode-toggle {
+        display: inline-flex;
+        border: 1px solid #3a3f48;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+      .ng-mode-toggle button {
+        background: #23262d;
+        color: #9aa0ad;
+        border: 0;
+        padding: 3px 12px;
+        font: inherit;
+        font-size: 0.8rem;
+        cursor: pointer;
+      }
+      .ng-mode-toggle button + button { border-left: 1px solid #3a3f48; }
+      .ng-mode-toggle button.is-active { background: #2f6bff; color: #fff; }
+
+      /* ── Main row: stage + live structure panel ───────────── */
+      .ng-main {
+        flex: 1 1 auto;
+        display: flex;
+        min-height: 0;
+        min-width: 0;
+      }
+
+      /* ── Stage + scaled card artboard ─────────────────────── */
+      .ng-stage {
+        position: relative;
+        flex: 1 1 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 32px;
+        min-height: 0;
+        min-width: 0;
+        overflow: hidden;
+      }
+
+      /* ── Live GML-shape panel ─────────────────────────────── */
+      .ng-gml-panel {
+        flex: 0 0 340px;
+        border-left: 1px solid #2c2f36;
+        background: #16181d;
+        overflow: auto;
+        padding: 12px 14px;
+      }
+      .ng-gml-title {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #7e8694;
+        margin-bottom: 10px;
+      }
+      .ng-gml-panel pre {
+        margin: 0;
+        font: 12px/1.55 ui-monospace, SFMono-Regular, Menlo, monospace;
+        color: #c0c7d4;
+        white-space: pre;
+      }
+      /* Reserves the SCALED box so flex-centering is correct; the native-size
+         card overflows it in layout terms but is transform-scaled to fit. */
+      .ng-card-scaler { position: relative; overflow: visible; }
+      /* The card is rendered at native 1280×720 then transform-scaled (the
+         transform is applied inline in main.tsx; transform-origin top-left so
+         the scaler's px box maps 1:1). position:relative establishes the
+         containing block for the absolute freeform overlay. */
+      .ng-card {
+        position: relative;
+        width: 1280px;
+        height: 720px;
+        background: var(--ng-card-bg, #ffffff);
+        color: #14161a;
+        border-radius: 6px;
+        overflow: hidden;
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+        transition: box-shadow 160ms ease; /* smooth freeform-glow fade */
+        /* single grid cell; flow wrapper + freeform overlay both occupy it */
+        display: grid;
+        grid-template: 1fr / 1fr;
+      }
+      /* fill-height chain: .ng-card-flow → ThemeScope div → .ProseMirror → .gml-grid */
+      .ng-card-flow {
+        grid-area: 1 / 1;
+        display: grid;
+        min-height: 0;
+        min-width: 0;
+      }
+      .ng-card-flow > div { display: grid; min-height: 0; min-width: 0; }
+      .ng-card-flow .ProseMirror { display: grid; min-height: 0; outline: none; }
+      .ng-card .gml-grid { height: 100%; min-height: 0; min-width: 0; }
+      /* Grids are authored with spacing:'none' (see fixtures + verbs) → the
+         renderer's `.gml-grid[data-spacing="none"]` zeroes --gml-grid-gap. This
+         avoids the 0.5em-per-track gap (×59 tracks ≈ 472px) that a narrow/nested
+         grid can't fit, which would overflow it into its neighbour. */
+
+      /* ── Blocks (flow content inside a cell) ──────────────── */
+      /* Blocks stack vertically; a hover drag-grip sits in the left gutter.
+         heading/paragraph carry no custom-css attr (SPEC gotcha 3) so all
+         block chrome is keyed off the .ng-block class here. */
+      .ng-card .ng-block {
+        position: relative;
+        margin: 0 0 0.5em 0;
+        font-family: 'DM Sans', Inter, sans-serif;
+        line-height: 1.35;
+      }
+      .ng-card h1.ng-block { font-size: 2.4em; font-weight: 700; margin-bottom: 0.3em; }
+      .ng-card h2.ng-block { font-size: 1.7em; font-weight: 700; margin-bottom: 0.3em; }
+      .ng-card h3.ng-block { font-size: 1.3em; font-weight: 600; }
+      .ng-card p.ng-block { font-size: 1.05em; }
+      .ng-card .ng-block:last-child { margin-bottom: 0; }
+
+      /* No drag-grip glyph: the whole box is the grab target now (press-drag, or
+         press-and-hold to pick up in place), so the `⠿` handle was redundant. */
+
+      /* Chrome diet: NO always-on per-cell structure outlines. Outlining every
+         cell at once read as "too many rings" (Jon/Michelle feedback). Structure
+         is shown by the single hover ring (the box a click would select) + the
+         selection ring. The dashed-all-cells debug view is still available by
+         adding `ng-show-cells` to <body>. */
+      .ng-card .gml-grid-cell { position: relative; }
+      body.ng-show-cells .ng-card:hover .gml-grid-cell {
+        outline: 1px dashed rgba(80, 120, 255, 0.35);
+        outline-offset: -1px;
+      }
+
+      /* ── Freeform box (Spike 4) — an in-doc node positioned absolutely ───── */
+      /* FreeBoxView sets position/left/top/width inline (card-px); this is the
+         visual chrome. It floats ON TOP of the whole card, so its z-index must beat
+         every flow-layer above the base grid — selected cell (7) and cell controls
+         (6) — or an overlapped cell steals the grab. Stays below the during-drag
+         overlays (preview/ghost ≥ 40). pointer-events auto so the DragController
+         can grab it. */
+      .ng-card .ng-free-box {
+        z-index: 20;
+        pointer-events: auto;
+        background: #fff;
+        border-radius: 4px;
+        padding: 0.5em 0.75em;
+        cursor: grab;
+      }
+
+      /* ── Drag layer (ghost during a drag) ─────────────────── */
+      .ng-drag-layer {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 50;
+      }
+      /* ghost is "lifted off the page" — the prototype's heavier shadow + tilt
+         read as picked-up, which is most of the freeform feel. */
+      .ng-ghost {
+        box-shadow: 0 18px 50px rgba(20, 24, 40, 0.3);
+        background: rgba(255, 255, 255, 0.96);
+        border-radius: 10px;
+        padding: 2px 6px;
+      }
+      .ng-ghost::before { display: none; } /* no drag grip on the ghost */
+
+      /* ── Edge cue (drop-to-add-cell affordance) ───────────── */
+      .ng-edge-cue {
+        position: absolute;
+        display: none;
+        z-index: 40;
+        background: rgba(80, 120, 255, 0.9);
+        box-shadow: 0 0 0 1px rgba(80, 120, 255, 0.5),
+          0 0 16px rgba(80, 120, 255, 0.5);
+        pointer-events: none;
+      }
+      .ng-edge-cue[data-edge='left'] { left: 0; top: 0; bottom: 0; width: 8px; }
+      .ng-edge-cue[data-edge='right'] { right: 0; top: 0; bottom: 0; width: 8px; }
+      .ng-edge-cue[data-edge='top'] { left: 0; right: 0; top: 0; height: 8px; }
+      .ng-edge-cue[data-edge='bottom'] { left: 0; right: 0; bottom: 0; height: 8px; }
+
+      /* ── Drop preview (size-appropriate placeholder) ──────── */
+      /* A dashed, faintly-filled rectangle sized to the FOOTPRINT of where the
+         dragged item will land (new column/row, reordered cell, block slot) —
+         mirrors the colleague's freeform prototype placeholder rather than a thin
+         line, so the drop target reads as "this much space". */
+      /* No transition here — the chase speed is set inline from __ngTune.previewMs
+         (0 = track the cursor 1:1; a few ms smooths discrete slot jumps). */
+      .ng-drop-preview {
+        position: absolute;
+        display: none;
+        z-index: 41;
+        pointer-events: none;
+        box-sizing: border-box;
+        border-radius: 8px;
+        border: 2px dashed rgba(79, 70, 229, 0.55);
+        background: rgba(79, 70, 229, 0.06);
+      }
+
+      /* ── Insert line (between-blocks / between-grid-items) ── */
+      .ng-insert-line {
+        position: absolute;
+        display: none;
+        z-index: 42;
+        background: #2f6bff;
+        border-radius: 2px;
+        pointer-events: none;
+      }
+      .ng-insert-line[data-orient='h'] { height: 3px; margin-top: -1.5px; }
+      .ng-insert-line[data-orient='v'] { width: 3px; margin-left: -1.5px; }
+
+      /* ── Freeform zone affordance ─────────────────────────── */
+      /* Smooth fade in/out (160ms) of an inset indigo glow — the prototype's
+         "now you're floating it" cue. (.ng-card transition added above.) */
+      .ng-card.ng-free-active {
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5),
+          inset 0 0 0 3px rgba(79, 70, 229, 0.45);
+      }
+      .ng-ghost.ng-ghost--free {
+        outline: 2px solid rgba(79, 70, 229, 0.85);
+        transform-origin: center;
+      }
+
+      /* ── Per-cell controls (GridCellView ControlsSlot) ────── */
+      /* Decluttered: the four edge "+" buttons and the bottom-right corner
+         drag-grip are gone. Move lives on the floating pill; "add cell" lives on
+         the pill's Split menu + hover insert-lines. Only the resize edge strips
+         remain per cell, shown on the selected cell. */
+      .ng-cell-controls {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 6;
+      }
+
+      /* Resize chrome becomes interactive ONLY on the selected cell, but stays
+         visually invisible — the col-resize / row-resize cursor on hover is the
+         only affordance (no persistent blue bar chrome). */
+      .ng-card .gml-grid-cell.ng-sel > .ng-cell-controls .ng-resize {
+        pointer-events: auto;
+      }
+
+      /* ── Hover preview (the box a click would select) ──────── */
+      /* Driven by the DragController (`.ng-hover` on the deepest box under the
+         cursor) so it tracks exactly what a click selects — faint, regime-tinted,
+         and never shown on the current selection. `pointer` cursor says "click to
+         select this." Kept deliberately LIGHTER than the selection ring so the two
+         read as preview vs. selected, not two competing rings. (The all-cells
+         structure dashes were removed, so no !important needed here anymore.) */
+      .ng-card .ng-hover {
+        outline: 1px solid rgba(80, 120, 255, 0.4);
+        outline-offset: 2px;
+        cursor: pointer;
+      }
+      .ng-card .gml-grid-cell.ng-hover { outline-offset: -1px; }
+      .ng-card .ng-free-box.ng-hover { outline-color: rgba(124, 77, 255, 0.5); }
+
+      /* ── Add-target grid highlight ────────────────────────── */
+      /* The DragController flags the innermost grid under the cursor with
+         `.ng-add-grid` (the grid the end-of-flow `+` would append to). Ring EVERY
+         cell in it — just a thin inset outline, no fill, no grid outline — so it's
+         clear which grid you're adding to without adding visual weight. box-shadow
+         (not outline) so it paints over the cell's own background. */
+      .ng-card .gml-grid.ng-add-grid > .gml-grid__content > .gml-grid-cell {
+        box-shadow: inset 0 0 0 1px rgba(80, 120, 255, 0.3);
+        border-radius: 2px;
+      }
+
+      /* ── Selection rings (regime-coloured) ────────────────── */
+      /* Flow boxes (block / cell / grid) = blue; freeform box = violet dashed, so
+         you can tell at a glance whether a drag will reflow or float. The selected
+         box gets a `move` cursor (drag to reposition); grids aren't movable so they
+         keep the default. */
+      .ng-card .ng-sel { z-index: 7; }
+      .ng-card .ng-sel:not([data-sel-kind='grid']) { cursor: move; }
+      .ng-card .gml-grid-cell.ng-sel {
+        outline: 2px solid #2f6bff !important;
+        outline-offset: -2px;
+      }
+      .ng-card .ng-block.ng-sel {
+        outline: 2px solid #2f6bff;
+        outline-offset: 3px;
+        border-radius: 2px;
+      }
+      .ng-card .gml-grid.ng-sel {
+        outline: 2px dashed #2f6bff;
+        outline-offset: -2px;
+      }
+      .ng-card .ng-free-box.ng-sel {
+        outline: 2px dashed #7c4dff;
+        outline-offset: 3px;
+        z-index: 21;
+      }
+      /* During a drag, force the grabbing cursor everywhere (beats per-element
+         cursors like move / resize). Toggled by the DragController. */
+      body.ng-dragging,
+      body.ng-dragging * { cursor: grabbing !important; }
+
+      /* ── Floating selection pill (rendered in scaler-space, constant size) ──── */
+      .ng-pill {
+        position: absolute;
+        z-index: 60;
+        display: inline-flex;
+        align-items: center;
+        gap: 2px;
+        padding: 3px;
+        border-radius: 9px;
+        background: #1f2430;
+        color: #e7e9ee;
+        box-shadow: 0 6px 22px rgba(0, 0, 0, 0.4),
+          0 0 0 1px rgba(255, 255, 255, 0.06);
+        font-size: 12px;
+        user-select: none;
+        white-space: nowrap;
+      }
+      .ng-pill--free { background: #2a2140; }
+      .ng-pill-label {
+        padding: 0 6px 0 2px;
+        font-weight: 600;
+        font-size: 11px;
+        color: #aeb6c6;
+      }
+      .ng-pill-btn {
+        appearance: none;
+        border: 0;
+        background: transparent;
+        color: #d7dbe4;
+        border-radius: 6px;
+        padding: 4px 7px;
+        font: inherit;
+        line-height: 1;
+        cursor: pointer;
+      }
+      .ng-pill-btn:hover { background: rgba(255, 255, 255, 0.1); }
+      .ng-pill-btn.is-danger:hover { background: rgba(255, 90, 90, 0.22); color: #ffd5d5; }
+      .ng-pill-split { position: relative; display: inline-flex; }
+      .ng-split-menu {
+        position: absolute;
+        top: calc(100% + 4px);
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        padding: 3px;
+        border-radius: 8px;
+        background: #1f2430;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5),
+          0 0 0 1px rgba(255, 255, 255, 0.06);
+      }
+      .ng-split-menu button {
+        appearance: none;
+        border: 0;
+        background: transparent;
+        color: #d7dbe4;
+        text-align: left;
+        border-radius: 5px;
+        padding: 5px 10px;
+        font: inherit;
+        font-size: 12px;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+      .ng-split-menu button:hover { background: rgba(80, 120, 255, 0.3); }
+
+      /* ── Breadcrumb (selection depth, docked top-left of the stage) ────────── */
+      .ng-breadcrumb {
+        position: absolute;
+        top: 8px;
+        left: 10px;
+        z-index: 30;
+        display: inline-flex;
+        align-items: center;
+        gap: 2px;
+        padding: 3px 5px;
+        border-radius: 7px;
+        background: rgba(20, 22, 28, 0.82);
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05);
+        font-size: 11px;
+      }
+      .ng-breadcrumb button {
+        appearance: none;
+        border: 0;
+        background: transparent;
+        color: #9aa0ad;
+        border-radius: 4px;
+        padding: 2px 5px;
+        font: inherit;
+        cursor: pointer;
+      }
+      .ng-breadcrumb button:hover { background: rgba(255, 255, 255, 0.08); color: #e7e9ee; }
+      .ng-breadcrumb button.is-current { color: #fff; font-weight: 600; }
+      .ng-crumb-sep { color: #5d6470; }
+
+      /* ── Resize strips on cell edges ──────────────────────── */
+      /* Visually invisible: only the cursor (col-resize / row-resize) signals the
+         affordance. Kept in the DOM so it stays hittable for resize-to-promote. */
+      .ng-resize {
+        position: absolute;
+        pointer-events: none;
+        opacity: 0;
+      }
+      /* Sit just INSIDE the edge — `.ng-card` is overflow:hidden, so a strip that
+         straddles the outer edge (negative offset) is clipped and unhittable
+         (elementFromPoint returns the stage). Inside-the-edge keeps the grid's
+         outer flow-end strip grabbable for resize-to-promote. */
+      .ng-resize--right {
+        top: 0; bottom: 0; right: 0; width: 8px;
+        cursor: col-resize;
+      }
+      .ng-resize--bottom {
+        left: 0; right: 0; bottom: 0; height: 8px;
+        cursor: row-resize;
+      }
+
+      /* ── Seam hover highlight (drag-the-boundary resize) ──── */
+      /* A faint line on the interior boundary between two sibling cells; the
+         DragController shows it (and a col/row-resize cursor) while the cursor is
+         near a seam, so the whole shared edge reads as a resize target without
+         selecting a cell first. Lives in card-px space (positioned by the
+         controller); a child of .ng-card so it scales with the artboard. */
+      .ng-seam-cue {
+        position: absolute;
+        display: none;
+        pointer-events: none;
+        z-index: 8;
+        background: rgba(80, 120, 255, 0.6);
+        border-radius: 2px;
+      }
+      .ng-seam-cue[data-orient='v'] { width: 4px; transform: translateX(-2px); }
+      .ng-seam-cue[data-orient='h'] { height: 4px; transform: translateY(-2px); }
+      /* While dragging the seam, keep it bold + fully opaque so it stays read-
+         able as the live divider. */
+      .ng-seam-cue.is-active { background: rgba(80, 120, 255, 0.95); }
+      .ng-seam-cue.is-active[data-orient='v'] { width: 6px; transform: translateX(-3px); }
+      .ng-seam-cue.is-active[data-orient='h'] { height: 6px; transform: translateY(-3px); }
+      /* The two cells bordering the dragged seam — faint fill so you can see
+         exactly which cells the drag is trading space between. */
+      .ng-seam-cell-a,
+      .ng-seam-cell-b {
+        position: absolute;
+        display: none;
+        pointer-events: none;
+        z-index: 7;
+        background: rgba(80, 120, 255, 0.1);
+        border-radius: 3px;
+      }
+
+      /* ── End-of-flow add-button (append cell) ─────────────── */
+      /* ONE `+` at the trailing flow-end of the grid under the cursor (the
+         DragController positions it in card-px). Append-only, so there's no axis to
+         decode — a single, low-chrome, unambiguous "add one more". Centered via
+         translate(-50%,-50%); clickable (pointer-events:auto), above the seam cue. */
+      .ng-add-btn {
+        position: absolute;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        transform: translate(-50%, -50%);
+        z-index: 9;
+        pointer-events: auto;
+        cursor: pointer;
+        border-radius: 50%;
+        background: #2f6bff;
+        color: #fff;
+        font-size: 14px;
+        line-height: 1;
+        font-weight: 600;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        user-select: none;
+        transition: transform 0.1s ease;
+      }
+      .ng-add-btn:hover { transform: translate(-50%, -50%) scale(1.15); }
+    </style>
+    <script type="module" crossorigin src="./assets/main-DJtn2aOT.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/main-CjRUFCGJ.css">
+  </head>
+  <!-- add class="ng-show-cells" to see the dashed all-cells structure (debug). -->
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
