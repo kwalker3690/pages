@@ -1,0 +1,35 @@
+<!doctype html>
+<meta charset="utf-8" />
+<title>Grid padding contract — Storybook baseline (pre-fix, 2026-07-07)</title>
+<style>
+  body { font-family: ui-sans-serif, system-ui, sans-serif; margin: 24px; background: #f8fafc; color: #0f172a; }
+  h1 { font-size: 20px; }
+  p.note { max-width: 80ch; color: #475569; }
+  section { margin: 32px 0; }
+  h2 { font-size: 16px; margin-bottom: 4px; }
+  h2 code { font-size: 13px; color: #64748b; font-weight: 400; }
+  img { max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; background: #fff; }
+</style>
+<h1>Grid padding contract — pre-fix baseline</h1>
+<p class="note">
+  Storybook <code>Components/Grid/Padding</code> before the grid.css fix. Each colored ring is a
+  cell's ACTUAL padding; the in-cell label states what it SHOULD be. Red "Bug today" lines mark
+  where the current render violates the contract (authored padding losing to the data-pad role
+  defaults on card-layout cells).
+</p>
+<section>
+  <h2>Role defaults <code>— correct today; the baseline the fix must not change</code></h2>
+  <img src="role-defaults.png" />
+</section>
+<section>
+  <h2>Authored override <code>— THE BUG: authored padding ignored on card-layout cells</code></h2>
+  <img src="authored-override.png" />
+</section>
+<section>
+  <h2>Nesting boundary <code>— grid-level padding: partially applied, incoherently</code></h2>
+  <img src="nesting-boundary.png" />
+</section>
+<section>
+  <h2>Themeable gutter <code>— correct today; default tracks the theme's cardPadding knob</code></h2>
+  <img src="themeable-gutter.png" />
+</section>

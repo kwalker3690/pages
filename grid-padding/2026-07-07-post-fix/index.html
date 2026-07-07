@@ -1,0 +1,36 @@
+<!doctype html>
+<meta charset="utf-8" />
+<title>Grid padding contract — Storybook after the fix (2026-07-07)</title>
+<style>
+  body { font-family: ui-sans-serif, system-ui, sans-serif; margin: 24px; background: #f8fafc; color: #0f172a; }
+  h1 { font-size: 20px; }
+  p.note { max-width: 80ch; color: #475569; }
+  section { margin: 32px 0; }
+  h2 { font-size: 16px; margin-bottom: 4px; }
+  h2 code { font-size: 13px; color: #64748b; font-weight: 400; }
+  img { max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px; background: #fff; }
+  a { color: #2563eb; }
+</style>
+<h1>Grid padding contract — after the grid.css fix</h1>
+<p class="note">
+  Storybook <code>Components/Grid/Padding</code> with the fix applied (role defaults become
+  <code>var(--cell-padding, …)</code> fallbacks + a <code>--cell-padding: initial</code> nesting
+  boundary on <code>.gml-grid</code>). Every ring now matches its label. Baseline (pre-fix) shots:
+  <a href="../2026-07-07-pre-fix/index.html">2026-07-07-pre-fix</a>.
+</p>
+<section>
+  <h2>Role defaults <code>— unchanged by the fix, as required</code></h2>
+  <img src="role-defaults.png" />
+</section>
+<section>
+  <h2>Authored override <code>— authored padding now wins on card / structural cells</code></h2>
+  <img src="authored-override.png" />
+</section>
+<section>
+  <h2>Nesting boundary <code>— grid-level 16pt applies to its own cells, stops at the nested grid</code></h2>
+  <img src="nesting-boundary.png" />
+</section>
+<section>
+  <h2>Themeable gutter <code>— unchanged; default still tracks the theme knob</code></h2>
+  <img src="themeable-gutter.png" />
+</section>
