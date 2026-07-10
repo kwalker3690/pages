@@ -1,0 +1,802 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>spacer lab</title>
+<style>
+  :root {
+    --accent: #d8241f;
+    --sel: #3b82f6;
+    --hatch: repeating-linear-gradient(-45deg, rgba(59,130,246,.16) 0 6px, rgba(59,130,246,.05) 6px 12px);
+    --hatch-dark: repeating-linear-gradient(-45deg, rgba(147,197,253,.22) 0 6px, rgba(147,197,253,.07) 6px 12px);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    font-family: -apple-system, "Helvetica Neue", sans-serif;
+    background: #ececec;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ---------- top bar ---------- */
+  #topbar {
+    display: flex; align-items: center; gap: 18px;
+    padding: 10px 16px; background: #1a1a1a; color: #ddd;
+    font-size: 12px; flex: none;
+  }
+  #topbar b { color: #fff; font-size: 13px; margin-right: 6px; }
+  #topbar .kbd {
+    background: #333; border-radius: 4px; padding: 1px 6px;
+    font-family: ui-monospace, monospace; font-size: 11px; color: #fff;
+  }
+  #topbar .legend { display: flex; gap: 16px; flex-wrap: wrap; }
+  #topbar button {
+    margin-left: auto; background: #333; color: #fff; border: 0;
+    border-radius: 6px; padding: 5px 12px; cursor: pointer; font-size: 12px;
+  }
+  #topbar button:hover { background: #444; }
+
+  #main { display: flex; flex: 1; min-height: 0; }
+  #stage { flex: 1; overflow: auto; display: flex; align-items: flex-start; justify-content: center; padding: 40px 24px; }
+
+  /* ---------- card / grid ---------- */
+  .card {
+    width: 980px; background: #fff; border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.18);
+    overflow: hidden; flex: none;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 26fr 46fr 28fr;
+    min-height: 560px;
+  }
+  .cell {
+    display: flex; flex-direction: column; min-height: 0; min-width: 0;
+    padding: 34px 30px; position: relative;
+  }
+  .cell.rail { background: #101010; color: #fff; }
+  .cell + .cell { border-left: 1px solid rgba(0,0,0,.06); }
+  .cell.rail + .cell { border-left: 0; }
+
+  /* ---------- blocks ---------- */
+  .block { position: relative; flex: none; }
+  .block .text {
+    outline: none; padding: 3px 0; line-height: 1.35;
+    font-size: 15px; color: #222; min-height: 1em;
+    word-break: break-word;
+  }
+  .rail .block .text { color: #fff; }
+  .block.kicker .text { font-weight: 800; font-size: 17px; letter-spacing: .04em; }
+  .block.hero .text { font-weight: 900; font-size: 54px; line-height: .95; letter-spacing: -.02em; text-transform: uppercase; }
+  .block.hero .text .dot { color: var(--accent); }
+  .block.meta .text { font-weight: 800; font-size: 15px; letter-spacing: .03em; }
+  .block.small .text { font-size: 12.5px; color: #666; line-height: 1.5; }
+  .block.label .text { font-size: 11px; font-weight: 700; letter-spacing: .12em; color: #999; }
+  .rail .block.small .text { color: #bbb; }
+  .tick { width: 46px; height: 8px; background: var(--accent); margin: 4px 0; }
+
+  .block .handle {
+    position: absolute; left: -22px; top: 50%; transform: translateY(-50%);
+    width: 16px; height: 22px; border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    color: #aaa; font-size: 13px; letter-spacing: -1px;
+    cursor: grab; opacity: 0; user-select: none;
+    transition: opacity .12s;
+  }
+  .block:hover .handle { opacity: 1; }
+  .block .handle:hover { background: rgba(0,0,0,.08); color: #555; }
+  .rail .block .handle { color: #777; }
+  .rail .block .handle:hover { background: rgba(255,255,255,.14); color: #ddd; }
+  .block.dragging { opacity: .25; }
+
+  /* ---------- spacer node ---------- */
+  /* heights are set by relayout(): desired size lives in data-size,
+     rendered height squishes to fit and springs back when room returns */
+  .spacer { position: relative; flex: none; min-height: 0; }
+
+  .spacer::before {
+    content: ""; position: absolute; inset: 0;
+    background: var(--hatch); border-radius: 4px;
+    opacity: 0; transition: opacity .12s; pointer-events: none;
+  }
+  .rail .spacer::before { background: var(--hatch-dark); }
+  .spacer:hover::before, .spacer.active::before { opacity: 1; }
+  .spacer.selected::before { opacity: 1; box-shadow: inset 0 0 0 1.5px var(--sel); }
+
+  .spacer .badge {
+    position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+    background: var(--sel); color: #fff; font-size: 10.5px; font-weight: 700;
+    font-family: ui-monospace, monospace;
+    padding: 2px 7px; border-radius: 999px;
+    opacity: 0; transition: opacity .12s; pointer-events: none; z-index: 5;
+    white-space: nowrap;
+  }
+  .spacer:hover .badge, .spacer.active .badge, .spacer.selected .badge { opacity: 1; }
+
+  .spacer .edge {
+    position: absolute; left: 0; right: 0; bottom: -4px; height: 10px;
+    cursor: ns-resize; z-index: 4;
+  }
+  .spacer .edge::after {
+    content: ""; position: absolute; left: 30%; right: 30%; top: 4px; height: 2.5px;
+    border-radius: 2px; background: var(--sel); opacity: 0; transition: opacity .12s;
+  }
+  .spacer:hover .edge::after, .spacer.active .edge::after { opacity: .9; }
+
+  /* ---------- drag chrome ---------- */
+  #ghost {
+    position: fixed; pointer-events: none; z-index: 100;
+    opacity: .9; transform: rotate(.6deg);
+    box-shadow: 0 8px 24px rgba(0,0,0,.28); border-radius: 6px;
+    background: #fff; padding: 4px 10px; display: none;
+  }
+  #ghost.on-dark { background: #181818; }
+  #dropline {
+    position: fixed; height: 3px; border-radius: 2px; background: var(--sel);
+    z-index: 90; display: none; pointer-events: none;
+  }
+  #spacer-preview {
+    position: fixed; z-index: 80; display: none; pointer-events: none;
+    background: var(--hatch); border-radius: 4px;
+    outline: 1.5px dashed rgba(59,130,246,.6); outline-offset: -1px;
+  }
+  #gap-hint {
+    position: fixed; z-index: 60; height: 14px; display: none;
+    cursor: ns-resize;
+  }
+  #gap-hint::after {
+    content: ""; position: absolute; left: 0; right: 0; top: 5.5px; height: 3px;
+    border-radius: 2px; background: var(--sel); opacity: .55;
+  }
+  #snapflag {
+    position: fixed; z-index: 110; display: none; pointer-events: none;
+    background: #111; color: #fff; font-size: 11px; font-weight: 700;
+    padding: 3px 9px; border-radius: 999px;
+  }
+
+  /* ---------- inspector ---------- */
+  #inspector {
+    width: 340px; flex: none; background: #14171c; color: #cdd6e4;
+    font-family: ui-monospace, SFMono-Regular, monospace; font-size: 11.5px;
+    padding: 14px 16px; overflow: auto; line-height: 1.55;
+    border-left: 1px solid #000;
+  }
+  #inspector h3 {
+    margin: 0 0 8px; font: 700 11px -apple-system, sans-serif;
+    letter-spacing: .1em; color: #7d8899; text-transform: uppercase;
+  }
+  #inspector .tag { color: #8aa9ff; }
+  #inspector .sp { color: #f9ae4b; font-weight: 700; }
+  #inspector .txt { color: #9aa7b8; }
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  <b>spacer lab</b>
+  <div class="legend">
+    <span><span class="kbd">drag ⋮⋮</span> reorder block · drop in empty space → spacer appears above it · drop inside a spacer → splits it</span>
+    <span><span class="kbd">drag gap</span> between blocks → open a mid-cell gap</span>
+    <span><span class="kbd">drag edge</span> resize spacer · snaps to <b>fill</b> near max</span>
+    <span><span class="kbd">click</span> select spacer · <span class="kbd">⌫</span> delete</span>
+    <span><span class="kbd">↵</span> new paragraph (watch spacers squish)</span>
+  </div>
+  <button onclick="location.reload()">reset</button>
+</div>
+
+<div id="main">
+  <div id="stage">
+    <div class="card">
+      <div class="grid">
+
+        <div class="cell rail">
+          <div class="block kicker"><div class="handle">⋮⋮</div><div class="text" contenteditable>SYSTEMS</div></div>
+          <div class="block kicker"><div class="handle">⋮⋮</div><div class="text" contenteditable>STRATEGY</div></div>
+          <div class="block kicker"><div class="handle">⋮⋮</div><div class="text" contenteditable>EXECUTION</div></div>
+          <div class="block kicker"><div class="handle">⋮⋮</div><div class="text" contenteditable>Q2 2024</div></div>
+          <div class="block kicker"><div class="handle">⋮⋮</div><div class="text" contenteditable>EXECUTIVE</div></div>
+          <div class="block kicker"><div class="handle">⋮⋮</div><div class="text" contenteditable>BRIEFING</div></div>
+        </div>
+
+        <div class="cell">
+          <div class="block hero"><div class="handle">⋮⋮</div><div class="text" contenteditable>Build</div></div>
+          <div class="block hero"><div class="handle">⋮⋮</div><div class="text" contenteditable>systems</div></div>
+          <div class="block hero"><div class="handle">⋮⋮</div><div class="text" contenteditable>that</div></div>
+          <div class="block hero"><div class="handle">⋮⋮</div><div class="text" contenteditable>endure<span class="dot">.</span></div></div>
+          <div class="block meta"><div class="handle">⋮⋮</div><div class="text" contenteditable>MAY 28, 2024</div></div>
+        </div>
+
+        <div class="cell">
+          <div class="block label"><div class="handle">⋮⋮</div><div class="text" contenteditable>CONTEXT</div></div>
+          <div class="block small"><div class="handle">⋮⋮</div><div class="text" contenteditable>Durable systems are built deliberately. This briefing covers the operating principles behind our Q2 strategy.</div></div>
+          <div class="block small"><div class="handle">⋮⋮</div><div class="text" contenteditable>Each section pairs a principle with the concrete execution steps the team commits to.</div></div>
+          <div class="block label"><div class="handle">⋮⋮</div><div class="text" contenteditable>FOR INTERNAL USE ONLY</div></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div id="inspector"><h3>structure</h3><div id="tree"></div></div>
+</div>
+
+<div id="ghost"></div>
+<div id="dropline"></div>
+<div id="spacer-preview"></div>
+<div id="gap-hint"></div>
+<div id="snapflag">fill</div>
+
+<script>
+'use strict';
+
+const SNAP = 16;        // px within free-space max that snaps to fill
+const MIN_SPACER = 8;   // spacers resized below this are removed
+const GAP_ZONE = 6;     // px around a block boundary that shows the gap grip
+
+const ghost = document.getElementById('ghost');
+const dropline = document.getElementById('dropline');
+const spacerPreview = document.getElementById('spacer-preview');
+const gapHint = document.getElementById('gap-hint');
+const snapflag = document.getElementById('snapflag');
+const treeEl = document.getElementById('tree');
+
+const cells = [...document.querySelectorAll('.cell')];
+let selectedSpacer = null;
+
+/* ================= helpers ================= */
+
+const items = (cell) => [...cell.children].filter(el =>
+  el.classList.contains('block') || el.classList.contains('spacer'));
+
+function cellInnerRect(cell) {
+  const r = cell.getBoundingClientRect();
+  const cs = getComputedStyle(cell);
+  return {
+    top: r.top + parseFloat(cs.paddingTop),
+    bottom: r.bottom - parseFloat(cs.paddingBottom),
+    left: r.left + parseFloat(cs.paddingLeft),
+    right: r.right - parseFloat(cs.paddingRight),
+  };
+}
+
+const blocksHeight = (cell) =>
+  items(cell).filter(el => el.classList.contains('block'))
+    .reduce((sum, el) => sum + el.getBoundingClientRect().height, 0);
+
+// free vertical space in a cell, optionally pretending some elements aren't there
+function freeSpace(cell, exclude = []) {
+  const inner = cellInnerRect(cell);
+  let content = 0;
+  for (const el of items(cell)) {
+    if (exclude.includes(el)) continue;
+    content += el.getBoundingClientRect().height;
+  }
+  return Math.max(0, (inner.bottom - inner.top) - content);
+}
+
+/* Core layout rule of the prototype: spacers never grow the card.
+   Row height is what the tallest cell's BLOCKS need (floored by the card min).
+   Each cell's leftover space goes to its spacers: fixed spacers get up to
+   their desired size (squishing proportionally when there isn't room, and
+   springing back when room returns), fill spacers share whatever remains. */
+function relayout() {
+  const grid = document.querySelector('.grid');
+  const minH = 560;
+  const pad = (cell) => {
+    const cs = getComputedStyle(cell);
+    return parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom);
+  };
+  const target = Math.max(minH, ...cells.map(c => blocksHeight(c) + pad(c)));
+  grid.style.minHeight = target + 'px';
+
+  for (const cell of cells) {
+    const avail = Math.max(0, target - pad(cell) - blocksHeight(cell));
+    const spacers = items(cell).filter(el => el.classList.contains('spacer'));
+    const fixed = spacers.filter(s => s.dataset.mode === 'fixed');
+    const fills = spacers.filter(s => s.dataset.mode === 'fill');
+    const wanted = fixed.reduce((sum, s) => sum + parseFloat(s.dataset.size), 0);
+    const scale = wanted > avail ? avail / wanted : 1;
+    let used = 0;
+    for (const s of fixed) {
+      const h = parseFloat(s.dataset.size) * scale;
+      s.style.height = h + 'px';
+      used += h;
+    }
+    const fillEach = fills.length ? Math.max(0, avail - used) / fills.length : 0;
+    for (const s of fills) s.style.height = fillEach + 'px';
+    spacers.forEach(updateBadge);
+  }
+}
+
+function makeSpacer(px, mode = 'fixed') {
+  const s = document.createElement('div');
+  s.className = 'spacer';
+  s.dataset.mode = mode;
+  s.dataset.size = px;
+  s.style.height = mode === 'fixed' ? px + 'px' : '';
+  s.innerHTML = '<div class="badge"></div><div class="edge"></div>';
+  updateBadge(s);
+  return s;
+}
+
+function updateBadge(s) {
+  const b = s.querySelector('.badge');
+  if (s.dataset.mode === 'fill') { b.textContent = 'fill ↕'; return; }
+  const desired = Math.round(parseFloat(s.dataset.size) || 0);
+  const rendered = Math.round(s.getBoundingClientRect().height);
+  b.textContent = rendered < desired - 1 ? `${desired}px → ${rendered}px` : `${desired}px`;
+}
+
+// nearest spacer below an element in its cell — the segment's "absorber"
+function followingSpacer(el) {
+  let n = el.nextElementSibling;
+  while (n) {
+    if (n.classList.contains('spacer')) return n;
+    n = n.nextElementSibling;
+  }
+  return null;
+}
+
+// trade block height with a fixed absorber (fills absorb on their own in relayout)
+function adjustSpacer(sp, delta) {
+  if (!sp || !sp.isConnected || sp.dataset.mode !== 'fixed') return;
+  const ns = Math.max(0, parseFloat(sp.dataset.size) + delta);
+  if (ns < MIN_SPACER && delta < 0) removeSpacer(sp);
+  else sp.dataset.size = ns;
+}
+
+function selectSpacer(s) {
+  if (selectedSpacer) selectedSpacer.classList.remove('selected');
+  selectedSpacer = s;
+  if (s) { s.classList.add('selected'); document.activeElement?.blur?.(); }
+}
+
+function removeSpacer(s) {
+  if (selectedSpacer === s) selectedSpacer = null;
+  s.remove();
+  renderTree();
+}
+
+// if two spacers end up adjacent (e.g. after a reorder), merge them
+function normalizeCell(cell) {
+  const kids = items(cell);
+  for (let i = kids.length - 1; i > 0; i--) {
+    if (kids[i].classList.contains('spacer') && kids[i - 1].classList.contains('spacer')) {
+      const a = kids[i - 1], b = kids[i];
+      if (a.dataset.mode === 'fill' || b.dataset.mode === 'fill') {
+        a.dataset.mode = 'fill';
+      } else {
+        a.dataset.size = parseFloat(a.dataset.size) + parseFloat(b.dataset.size);
+      }
+      updateBadge(a);
+      b.remove();
+    }
+  }
+}
+
+/* ================= block drag: reorder + drop-in-space ================= */
+
+let drag = null; // { block, srcCell, drop }
+
+document.addEventListener('pointerdown', (e) => {
+  const handle = e.target.closest('.handle');
+  if (handle) {
+    e.preventDefault();
+    startBlockDrag(handle.closest('.block'), e);
+    return;
+  }
+  const edge = e.target.closest('.spacer .edge');
+  if (edge) {
+    e.preventDefault();
+    startSpacerResize(edge.closest('.spacer'), e);
+    return;
+  }
+  const sp = e.target.closest('.spacer');
+  if (sp) { selectSpacer(sp); return; }
+  if (!e.target.closest('#inspector')) selectSpacer(null);
+});
+
+function startBlockDrag(block, e) {
+  const r = block.getBoundingClientRect();
+  drag = { block, srcCell: block.closest('.cell'), drop: null };
+  block.classList.add('dragging');
+
+  ghost.innerHTML = block.querySelector('.text').innerHTML;
+  ghost.className = block.closest('.cell').classList.contains('rail') ? 'on-dark' : '';
+  const heroFont = getComputedStyle(block.querySelector('.text'));
+  ghost.style.font = heroFont.font;
+  ghost.style.color = heroFont.color;
+  ghost.style.width = Math.min(r.width, 380) + 'px';
+  ghost.style.display = 'block';
+  moveGhost(e);
+
+  document.addEventListener('pointermove', onBlockDragMove);
+  document.addEventListener('pointerup', onBlockDragUp, { once: true });
+}
+
+function moveGhost(e) {
+  ghost.style.left = (e.clientX + 14) + 'px';
+  ghost.style.top = (e.clientY - 10) + 'px';
+}
+
+function onBlockDragMove(e) {
+  moveGhost(e);
+  hideGapHint();
+  drag.drop = null;
+  dropline.style.display = 'none';
+  spacerPreview.style.display = 'none';
+  snapflag.style.display = 'none';
+
+  const cell = cells.find(c => {
+    const r = c.getBoundingClientRect();
+    return e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+  });
+  if (!cell) return;
+
+  const inner = cellInnerRect(cell);
+  const others = items(cell).filter(el => el !== drag.block);
+  const lastBottom = others.length ? others[others.length - 1].getBoundingClientRect().bottom : inner.top;
+
+  // --- empty-space drop: pointer below all remaining content ---
+  const free = freeSpace(cell, [drag.block]);
+  const draggedH = drag.block.getBoundingClientRect().height;
+  const maxGap = Math.max(0, free - draggedH); // leave room for the block itself
+  if (e.clientY > lastBottom + 6 && maxGap > MIN_SPACER) {
+    let gap = Math.min(e.clientY - lastBottom, maxGap);
+    let fill = maxGap - gap < SNAP;
+    if (fill) gap = maxGap;
+
+    drag.drop = { cell, mode: 'space', gap, fill };
+    spacerPreview.style.display = 'block';
+    spacerPreview.style.left = inner.left + 'px';
+    spacerPreview.style.width = (inner.right - inner.left) + 'px';
+    spacerPreview.style.top = lastBottom + 'px';
+    spacerPreview.style.height = gap + 'px';
+    dropline.style.display = 'block';
+    dropline.style.left = inner.left + 'px';
+    dropline.style.width = (inner.right - inner.left) + 'px';
+    dropline.style.top = (lastBottom + gap) + 'px';
+    if (fill) {
+      snapflag.style.display = 'block';
+      snapflag.textContent = 'fill';
+      snapflag.style.left = (inner.left + 8) + 'px';
+      snapflag.style.top = (lastBottom + gap / 2 - 10) + 'px';
+    }
+    return;
+  }
+
+  // --- drop inside an existing spacer: split it at the drop point ---
+  const hitSpacer = others.find(el => {
+    if (!el.classList.contains('spacer')) return false;
+    const r = el.getBoundingClientRect();
+    return e.clientY >= r.top && e.clientY <= r.bottom;
+  });
+  if (hitSpacer) {
+    const r = hitSpacer.getBoundingClientRect();
+    const rel = e.clientY - r.top;
+    // near an edge → plain insert before/after, no split
+    if (rel >= SNAP && r.height - rel >= SNAP) {
+      drag.drop = { cell, mode: 'split', spacer: hitSpacer, rel, lowerHalf: rel > r.height / 2 };
+      dropline.style.display = 'block';
+      dropline.style.left = inner.left + 'px';
+      dropline.style.width = (inner.right - inner.left) + 'px';
+      dropline.style.top = e.clientY + 'px';
+      snapflag.style.display = 'block';
+      snapflag.textContent = drag.drop.lowerHalf ? 'anchor to below' : 'anchor to above';
+      snapflag.style.left = (inner.left + 8) + 'px';
+      snapflag.style.top = (e.clientY + 8) + 'px';
+      return;
+    }
+  }
+
+  // --- normal reorder: nearest boundary between items ---
+  let index = others.length, bestY = lastBottom, bestDist = Infinity;
+  const boundaries = [inner.top, ...others.map(el => el.getBoundingClientRect().bottom)];
+  boundaries.forEach((y, i) => {
+    const d = Math.abs(e.clientY - y);
+    if (d < bestDist) { bestDist = d; index = i; bestY = y; }
+  });
+  drag.drop = { cell, mode: 'reorder', index };
+  dropline.style.display = 'block';
+  dropline.style.left = inner.left + 'px';
+  dropline.style.width = (inner.right - inner.left) + 'px';
+  dropline.style.top = bestY + 'px';
+}
+
+function onBlockDragUp() {
+  document.removeEventListener('pointermove', onBlockDragMove);
+  ghost.style.display = 'none';
+  dropline.style.display = 'none';
+  spacerPreview.style.display = 'none';
+  snapflag.style.display = 'none';
+  drag.block.classList.remove('dragging');
+
+  const d = drag.drop;
+  if (d) {
+    const blockH = drag.block.getBoundingClientRect().height;
+    const srcFollow = followingSpacer(drag.block);
+    if (d.mode === 'space') {
+      d.cell.appendChild(drag.block);
+      // reuse a spacer already sitting above the drop point instead of stacking
+      const prev = drag.block.previousElementSibling;
+      const spacer = (prev && prev.classList.contains('spacer'))
+        ? prev
+        : d.cell.insertBefore(makeSpacer(0), drag.block);
+      if (d.fill) { spacer.dataset.mode = 'fill'; }
+      else { spacer.dataset.mode = 'fixed'; spacer.dataset.size = d.gap; }
+      updateBadge(spacer);
+    } else if (d.mode === 'split') {
+      const s = d.spacer;
+      const renderedH = s.getBoundingClientRect().height;
+      const draggedH = drag.block.getBoundingClientRect().height;
+      const above = d.rel;
+      const below = Math.max(0, renderedH - d.rel - draggedH);
+      s.after(drag.block);
+      if (s.dataset.mode === 'fill') {
+        if (d.lowerHalf) {
+          // block joins the bottom group: fill stays above, fixed gap below it
+          if (below >= MIN_SPACER) drag.block.after(makeSpacer(below));
+        } else {
+          // block hangs off the top content: fixed gap above, fill continues below
+          s.dataset.mode = 'fixed';
+          s.dataset.size = above;
+          s.style.height = above + 'px';
+          drag.block.after(makeSpacer(0, 'fill'));
+        }
+      } else {
+        s.dataset.size = above;
+        s.style.height = above + 'px';
+        if (below >= MIN_SPACER) drag.block.after(makeSpacer(below));
+      }
+    } else {
+      const kids = items(d.cell).filter(el => el !== drag.block);
+      const ref = kids[d.index] || null;
+      d.cell.insertBefore(drag.block, ref);
+    }
+    // segment trade: removal gives the block's height to the source segment's
+    // absorber, insertion takes it from the destination's. Split mode already
+    // accounts for the block inside its own math; same absorber → net zero.
+    const destFollow = d.mode === 'split' ? null : followingSpacer(drag.block);
+    if (srcFollow !== destFollow) {
+      adjustSpacer(srcFollow, blockH);
+      adjustSpacer(destFollow, -blockH);
+    }
+    normalizeCell(d.cell);
+    if (drag.srcCell !== d.cell) normalizeCell(drag.srcCell);
+  }
+  drag = null;
+  relayout();
+  renderTree();
+}
+
+/* ================= spacer resize ================= */
+
+let resize = null;
+
+function startSpacerResize(spacer, e) {
+  // fill spacers convert to fixed at their rendered height, then resize
+  if (spacer.dataset.mode === 'fill') {
+    spacer.dataset.size = spacer.getBoundingClientRect().height;
+    spacer.style.height = spacer.dataset.size + 'px';
+    spacer.dataset.mode = 'fixed';
+  }
+  const cell = spacer.closest('.cell');
+  // spacers after this one can be eaten (nearest first) when we grow past free space
+  const subs = items(cell).filter(el =>
+    el.classList.contains('spacer') && el !== spacer &&
+    (spacer.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_FOLLOWING));
+  resize = {
+    spacer,
+    startY: e.clientY,
+    startH: spacer.getBoundingClientRect().height,
+    cell,
+    startFree: freeSpace(cell),
+    subs: subs.map(el => ({ el, startH: el.getBoundingClientRect().height })),
+  };
+  spacer.classList.add('active');
+  document.addEventListener('pointermove', onSpacerResizeMove);
+  document.addEventListener('pointerup', onSpacerResizeUp, { once: true });
+}
+
+function onSpacerResizeMove(e) {
+  const { spacer, startY, startH, startFree, subs } = resize;
+  const eatable = subs.reduce((t, s) => t + s.startH, 0);
+  const max = startH + startFree + eatable;
+  let h = Math.max(0, Math.min(startH + (e.clientY - startY), max));
+  const fill = max - h < SNAP && max > MIN_SPACER;
+  if (fill) h = max;
+
+  spacer.style.height = h + 'px';
+  spacer.dataset.size = h;
+  resize.fill = fill;
+  updateBadge(spacer);
+
+  // the next spacer down is the shock absorber: content past it stays pinned.
+  // grow → eat following spacers nearest-first (free space only as remainder);
+  // shrink → the freed amount feeds the nearest following spacer.
+  const delta = h - startH;
+  if (delta >= 0) {
+    let overflow = delta;
+    for (const s of subs) {
+      const nh = Math.max(0, s.startH - overflow);
+      overflow -= s.startH - nh;
+      s.el.style.height = nh + 'px';
+      updateBadge(s.el);
+    }
+  } else {
+    subs.forEach((s, i) => {
+      s.el.style.height = (i === 0 ? s.startH - delta : s.startH) + 'px';
+      updateBadge(s.el);
+    });
+  }
+
+  const r = spacer.getBoundingClientRect();
+  if (fill) {
+    snapflag.style.display = 'block';
+    snapflag.textContent = 'fill';
+    snapflag.style.left = (r.left + 8) + 'px';
+    snapflag.style.top = (r.top + r.height / 2 - 10) + 'px';
+  } else {
+    snapflag.style.display = 'none';
+  }
+}
+
+function onSpacerResizeUp() {
+  document.removeEventListener('pointermove', onSpacerResizeMove);
+  snapflag.style.display = 'none';
+  const { spacer } = resize;
+  spacer.classList.remove('active');
+
+  const h = spacer.getBoundingClientRect().height;
+  if (resize.fill) {
+    spacer.dataset.mode = 'fill';
+  } else if (h < MIN_SPACER) {
+    removeSpacer(spacer);
+  } else {
+    spacer.dataset.size = h;
+  }
+
+  // commit the trade: spacers that gave or received space keep their new size
+  // (fills recompute in relayout), anything consumed to ~zero is removed
+  for (const s of resize.subs) {
+    if (!s.el.isConnected) continue;
+    const sh = s.el.getBoundingClientRect().height;
+    if (Math.abs(sh - s.startH) < 0.5) continue; // untouched
+    if (sh < MIN_SPACER && sh < s.startH) removeSpacer(s.el);
+    else if (s.el.dataset.mode === 'fixed') s.el.dataset.size = sh;
+  }
+
+  resize = null;
+  relayout();
+  renderTree();
+}
+
+/* ================= gap grip: open a mid-cell gap ================= */
+
+let gapTarget = null; // { cell, index, left, width }
+
+document.addEventListener('mousemove', (e) => {
+  if (drag || resize) return;
+  hideGapHint();
+  const cell = e.target.closest?.('.cell');
+  if (!cell) return;
+
+  const inner = cellInnerRect(cell);
+  const kids = items(cell);
+  // boundaries strictly between two blocks (not before first / after last,
+  // and not next to an existing spacer — resize that instead)
+  for (let i = 1; i < kids.length; i++) {
+    if (kids[i].classList.contains('spacer') || kids[i - 1].classList.contains('spacer')) continue;
+    const y = kids[i].getBoundingClientRect().top;
+    if (Math.abs(e.clientY - y) <= GAP_ZONE) {
+      gapTarget = { cell, index: i, left: inner.left, width: inner.right - inner.left };
+      gapHint.style.display = 'block';
+      gapHint.style.left = inner.left + 'px';
+      gapHint.style.width = (inner.right - inner.left) + 'px';
+      gapHint.style.top = (y - 7) + 'px';
+      return;
+    }
+  }
+});
+
+function hideGapHint() { gapHint.style.display = 'none'; }
+
+gapHint.addEventListener('pointerdown', (e) => {
+  e.preventDefault();
+  if (!gapTarget) return;
+  const { cell, index } = gapTarget;
+  const ref = items(cell)[index];
+  const spacer = cell.insertBefore(makeSpacer(0), ref);
+  hideGapHint();
+  startSpacerResize(spacer, e);
+});
+
+/* ================= keyboard: blocks + spacer selection ================= */
+
+document.addEventListener('keydown', (e) => {
+  // spacer selected → delete / escape
+  if (selectedSpacer) {
+    if (e.key === 'Backspace' || e.key === 'Delete') { e.preventDefault(); removeSpacer(selectedSpacer); }
+    if (e.key === 'Escape') selectSpacer(null);
+    return;
+  }
+
+  const text = e.target.closest?.('.text');
+  if (!text) return;
+  const block = text.closest('.block');
+
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    const nb = document.createElement('div');
+    nb.className = block.className.replace(' dragging', '');
+    nb.innerHTML = '<div class="handle">⋮⋮</div><div class="text" contenteditable></div>';
+    block.after(nb);
+    nb.querySelector('.text').focus();
+    relayout();
+    renderTree();
+    return;
+  }
+
+  if (e.key === 'Backspace') {
+    const sel = getSelection();
+    const atStart = sel.isCollapsed && sel.anchorOffset === 0 &&
+      (sel.anchorNode === text || sel.anchorNode === text.firstChild || text.textContent === '');
+    if (!atStart) return;
+    const prev = block.previousElementSibling;
+    // caret at start with a spacer above → first ⌫ selects the spacer
+    if (prev && prev.classList.contains('spacer')) {
+      e.preventDefault();
+      selectSpacer(prev);
+      return;
+    }
+    if (text.textContent === '' && items(block.closest('.cell')).filter(el => el.classList.contains('block')).length > 1) {
+      e.preventDefault();
+      const focusTo = prev?.querySelector?.('.text') || block.nextElementSibling?.querySelector?.('.text');
+      block.remove();
+      focusTo?.focus();
+      relayout();
+      renderTree();
+    }
+  }
+});
+
+document.addEventListener('input', () => { relayout(); renderTree(); });
+
+/* ================= inspector ================= */
+
+function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+
+function renderTree() {
+  let html = '<span class="tag">&lt;grid&gt;</span><br>';
+  for (const cell of cells) {
+    const cls = cell.classList.contains('rail') ? ' class="rail"' : '';
+    html += `&nbsp;&nbsp;<span class="tag">&lt;grid-item${esc(cls)}&gt;</span><br>`;
+    for (const el of items(cell)) {
+      if (el.classList.contains('spacer')) {
+        const attr = el.dataset.mode === 'fill'
+          ? 'mode="fill"'
+          : `size="${Math.round(parseFloat(el.dataset.size) || 0)}px"`;
+        html += `&nbsp;&nbsp;&nbsp;&nbsp;<span class="sp">&lt;spacer ${attr}/&gt;</span><br>`;
+      } else {
+        const t = el.querySelector('.text').textContent.trim();
+        html += `&nbsp;&nbsp;&nbsp;&nbsp;<span class="txt">&lt;p&gt;${esc(t.length > 34 ? t.slice(0, 34) + '…' : t)}&lt;/p&gt;</span><br>`;
+      }
+    }
+    html += `&nbsp;&nbsp;<span class="tag">&lt;/grid-item&gt;</span><br>`;
+  }
+  html += '<span class="tag">&lt;/grid&gt;</span>';
+  treeEl.innerHTML = html;
+}
+
+// safety net for anything that changes block heights without firing our
+// handlers (text wrap on window resize, style toggles, etc.)
+new ResizeObserver(() => { if (!drag && !resize) relayout(); })
+  .observe(document.querySelector('.card'));
+window.addEventListener('resize', relayout);
+setInterval(() => { if (!drag && !resize) relayout(); }, 500);
+
+relayout();
+renderTree();
+</script>
+</body>
+</html>
