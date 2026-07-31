@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Grid lines fix — before / after</title>
+<style>
+  body { font-family: -apple-system, sans-serif; margin: 24px; background: #f7f7f8; color: #1a1a1a; }
+  h1 { font-size: 20px; }
+  p { max-width: 70ch; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  figure { margin: 0; background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 12px; }
+  figcaption { font-weight: 600; margin-bottom: 8px; }
+  img { width: 100%; border-radius: 4px; }
+  .detail { margin-top: 24px; }
+  .crop { width: 100%; aspect-ratio: 2.2; overflow: hidden; border-radius: 4px; position: relative; }
+  .crop img { position: absolute; width: 220%; max-width: none; left: -28%; top: 0; margin-top: -32%; }
+  .note { color: #555; font-size: 14px; }
+</style>
+</head>
+<body>
+<h1>Grid lines & editor chrome — before / after</h1>
+<p>This theme's slides use 28pt body text. The grid editing lines were sized with the theme's
+line-thickness setting, which grows with text size — so they drew ~2.4× too thick (4.8px instead of 2px on screen).
+Now they're fixed screen-size, like the rest of the selection chrome.</p>
+
+<div class="pair">
+  <figure>
+    <figcaption>Before — lines follow the theme's text size</figcaption>
+    <img src="before.png">
+  </figure>
+  <figure>
+    <figcaption>After — lines are fixed screen size</figcaption>
+    <img src="after.png">
+  </figure>
+</div>
+
+<div class="pair detail">
+  <figure>
+    <figcaption>Detail: before</figcaption>
+    <div class="crop"><img src="before.png"></div>
+  </figure>
+  <figure>
+    <figcaption>Detail: after</figcaption>
+    <div class="crop"><img src="after.png"></div>
+  </figure>
+</div>
+
+<p class="note">Measured on the Course Agenda card: grid outline 4.8px → 2.15px, outline gap from text 9.3px → 4.3px,
+spacer size badge text 32px → 14px. Themed dividers (where the line is part of the design) are unchanged.</p>
+</body>
+</html>
