@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>GML layout types: fluid, freeformBlock, and positionedBox</title>
+    <title>GML layout types: fluid, freeformBlock, positionedBox, and freeform</title>
     <style>
       :root {
         color-scheme: light;
@@ -22,6 +22,8 @@
         --green-soft: #e3f7ed;
         --purple: #7652c8;
         --purple-soft: #eee9fb;
+        --orange: #ad5c00;
+        --orange-soft: #fff0d8;
         --radius: 16px;
         --shadow: 0 12px 32px rgba(23, 32, 51, 0.08);
       }
@@ -195,7 +197,7 @@
 
       .mode-grid {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 14px;
       }
 
@@ -229,6 +231,10 @@
         background: var(--purple-soft);
       }
 
+      .mode-card.freeform::after {
+        background: var(--orange-soft);
+      }
+
       .tag {
         position: relative;
         z-index: 1;
@@ -251,6 +257,11 @@
       .tag.purple {
         background: var(--purple-soft);
         color: #5d3faa;
+      }
+
+      .tag.orange {
+        background: var(--orange-soft);
+        color: var(--orange);
       }
 
       .mode-card h3 {
@@ -363,7 +374,7 @@
 
       .demo-grid {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 14px;
         align-items: start;
       }
@@ -559,6 +570,7 @@
       }
 
       .position-card {
+        container-type: inline-size;
         position: relative;
         aspect-ratio: 16 / 9;
         background:
@@ -659,6 +671,94 @@
         transform-origin: right bottom;
       }
 
+      .freeform-card {
+        container-type: inline-size;
+        position: relative;
+        aspect-ratio: 16 / 9;
+        background:
+          radial-gradient(circle at 76% 26%, rgba(255, 224, 177, 0.95), transparent 28%),
+          linear-gradient(145deg, #42220f 0%, #8d410d 58%, #d9872b 100%);
+        color: white;
+      }
+
+      .freeform-title-box,
+      .freeform-copy-box,
+      .freeform-badge-box {
+        position: absolute;
+        z-index: 1;
+      }
+
+      .freeform-title-box {
+        top: 17%;
+        left: 7%;
+        width: 58%;
+      }
+
+      .freeform-title-box .mini-kicker {
+        color: #ffd39d;
+      }
+
+      .freeform-title-box h4 {
+        margin: 3% 0 0;
+        color: white;
+        font-size: clamp(10px, 5.2cqw, 27px);
+        line-height: 1.02;
+      }
+
+      .freeform-copy-box {
+        bottom: 10%;
+        left: 7%;
+        width: 51%;
+        border-left: 2px solid rgba(255, 225, 188, 0.65);
+        padding-left: 3%;
+        color: rgba(255, 255, 255, 0.82);
+        font-size: clamp(5px, 2.2cqw, 11px);
+      }
+
+      .freeform-badge-box {
+        top: 21%;
+        right: 7%;
+        display: grid;
+        width: 23%;
+        aspect-ratio: 1;
+        place-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.66);
+        border-radius: 50%;
+        background: rgba(255, 245, 229, 0.2);
+        box-shadow: 0 8px 20px rgba(49, 19, 3, 0.25);
+        color: white;
+        font-size: clamp(8px, 4.5cqw, 22px);
+        font-weight: 850;
+        text-align: center;
+        transform: rotate(8deg);
+      }
+
+      .freeform-card > .frame-label,
+      .freeform-title-box .coord-label,
+      .freeform-copy-box .coord-label,
+      .freeform-badge-box .coord-label {
+        background: var(--orange);
+      }
+
+      .freeform-card > .frame-label {
+        top: 5px;
+        left: 5px;
+      }
+
+      .freeform-title-box .coord-label,
+      .freeform-copy-box .coord-label {
+        top: -7px;
+        left: 0;
+        transform: translateY(-100%);
+      }
+
+      .freeform-badge-box .coord-label {
+        top: -7px;
+        right: 0;
+        transform: translateY(-100%) rotate(-8deg);
+        transform-origin: right bottom;
+      }
+
       .demo-result {
         display: grid;
         grid-template-columns: 74px minmax(0, 1fr);
@@ -754,7 +854,7 @@
 
       .questions {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 1px;
         border-top: 1px solid #e4c6b5;
         background: #e4c6b5;
@@ -796,7 +896,7 @@
 
       .code-grid {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 14px;
       }
 
@@ -893,8 +993,14 @@
         font-size: 13px;
       }
 
-      @media (max-width: 980px) {
+      @media (max-width: 1100px) {
         .mode-grid,
+        .questions {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 820px) {
         .demo-grid,
         .code-grid {
           grid-template-columns: 1fr;
@@ -902,10 +1008,6 @@
 
         .demo-stage {
           min-height: 0;
-        }
-
-        .questions {
-          grid-template-columns: 1fr;
         }
 
         .code-card pre {
@@ -936,6 +1038,11 @@
         .section-heading {
           grid-template-columns: 1fr;
           gap: 12px;
+        }
+
+        .mode-grid,
+        .questions {
+          grid-template-columns: 1fr;
         }
 
         .name-note,
@@ -976,11 +1083,12 @@
     <main id="top">
       <section class="hero shell">
         <p class="eyebrow">GML renderer layout inventory</p>
-        <h1>Three ways content can occupy a card</h1>
+        <h1>Four ways content can occupy a card</h1>
         <p class="dek">
           Fluid content reflows. A <code>freeformBlock</code> occupies flow space
           but keeps a local 2D composition. A card-level
-          <code>positionedBox</code> uses card coordinates and pushes nothing.
+          <code>positionedBox</code> overlays flow. A <code>&lt;freeform&gt;</code>
+          wrapper declares that the whole card is positioned.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="#demo">Resize the same composition</a>
@@ -993,7 +1101,7 @@
           <h2>The placement model</h2>
           <p>
             The parent decides the coordinate space and the effect on nearby
-            content. The child content can look similar in all three modes.
+            content. The child content can look similar in all four modes.
           </p>
         </div>
 
@@ -1066,6 +1174,29 @@
               </div>
             </div>
           </article>
+
+          <article class="mode-card freeform">
+            <span class="tag orange">Whole card</span>
+            <h3><code>&lt;freeform&gt;</code></h3>
+            <p>
+              The wrapper declares that the card has no flow layer. Every
+              visible content item is a positioned box.
+            </p>
+            <div class="mode-facts">
+              <div class="mode-fact">
+                <strong>Space</strong>
+                <span>The card contains no flow substrate.</span>
+              </div>
+              <div class="mode-fact">
+                <strong>Geometry</strong>
+                <span>Each child box owns card-frame coordinates.</span>
+              </div>
+              <div class="mode-fact">
+                <strong>Change</strong>
+                <span>The wrapper adds no geometry. The boxes stay pinned.</span>
+              </div>
+            </div>
+          </article>
         </div>
 
         <div class="name-note">
@@ -1075,7 +1206,9 @@
             from <code>cardDimensions: "fluid"</code>, which controls the card
             frame. A <code>freeformBlock</code> can render inside a fluid card.
             Its members are <code>positionedBox</code> nodes with local
-            coordinates. The last column describes a direct card box.
+            coordinates. A direct card box overlays flow. A
+            <code>&lt;freeform&gt;</code> wrapper removes the flow layer and holds the
+            whole positioned composition.
           </span>
         </div>
       </section>
@@ -1221,6 +1354,41 @@
               <span>The box does not move the flow. The author owns collision risk.</span>
             </div>
           </article>
+
+          <article class="demo-panel">
+            <div class="demo-caption">
+              <div>
+                <h3><code>&lt;freeform&gt;</code></h3>
+                <p>Every item belongs to the card frame.</p>
+              </div>
+              <span class="tag orange">Whole-card 2D</span>
+            </div>
+            <div class="demo-stage">
+              <div class="responsive-host">
+                <div class="mini-card freeform-card">
+                  <span class="frame-label">card frame · no flow layer</span>
+                  <div class="freeform-title-box">
+                    <span class="mini-kicker">Launch sequence</span>
+                    <h4>Three milestones to market</h4>
+                    <span class="coord-label">box · x 67 · y 92</span>
+                  </div>
+                  <div class="freeform-copy-box">
+                    Beta proves the workflow. Proof closes the gaps. Launch
+                    opens access.
+                    <span class="coord-label">box · x 67 · y 388</span>
+                  </div>
+                  <div class="freeform-badge-box">
+                    03<br />Launch
+                    <span class="coord-label">box · x 672 · y 113</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="demo-result">
+              <strong>Result</strong>
+              <span>The card scales as one canvas. No flow content exists beneath the boxes.</span>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -1240,6 +1408,7 @@
                 <th>Fluid</th>
                 <th><code>freeformBlock</code></th>
                 <th>Card-level <code>positionedBox</code></th>
+                <th><code>&lt;freeform&gt;</code></th>
               </tr>
             </thead>
             <tbody>
@@ -1247,24 +1416,28 @@
                 <td>Parent</td>
                 <td><code>section</code>, <code>grid-item</code>, or another flow container</td>
                 <td><code>section</code>, <code>grid-item</code>, or another flow container</td>
-                <td>Direct card child or member of <code>freeform</code></td>
+                <td>Direct child of a card that also has flow content</td>
+                <td>Direct card child. The wrapper holds positioned boxes.</td>
               </tr>
               <tr>
                 <td>Flow space</td>
                 <td class="yes">Yes</td>
                 <td class="yes">Yes, for the wrapper</td>
                 <td class="no">No</td>
+                <td class="no">No flow layer exists</td>
               </tr>
               <tr>
                 <td>Coordinates</td>
                 <td class="no">None</td>
                 <td>Local design units from the block corner</td>
                 <td>Card-frame points from the card corner</td>
+                <td>The wrapper has none. Its boxes use card-frame points.</td>
               </tr>
               <tr>
                 <td>Width change</td>
                 <td>Content reflows and the height can change.</td>
                 <td>The internal composition scales proportionally.</td>
+                <td>The fixed card canvas scales as one unit.</td>
                 <td>The fixed card canvas scales as one unit.</td>
               </tr>
               <tr>
@@ -1272,24 +1445,28 @@
                 <td class="no">No deliberate overlap</td>
                 <td class="conditional">Inside the block only</td>
                 <td class="yes">Anywhere in its coordinate frame</td>
+                <td class="yes">All content can overlap in the card frame</td>
               </tr>
               <tr>
                 <td>Text growth</td>
                 <td>Later content moves.</td>
                 <td>Members use fixed geometry after entry. Text can overflow.</td>
                 <td>Neighbors do not move. Auto boxes can grow vertically.</td>
+                <td>Other boxes do not move. Each box owns its sizing.</td>
               </tr>
               <tr>
                 <td>Best fit</td>
                 <td>Lists, columns, repeated items, and long copy</td>
                 <td>One diagram, collage, or layered unit inside structured content</td>
-                <td>Badges, edge ornaments, image overlays, and whole-card compositions</td>
+                <td>Badges, edge ornaments, and image overlays above flow</td>
+                <td>Covers, full-card diagrams, and imported slides</td>
               </tr>
               <tr>
                 <td>Current editor</td>
                 <td class="yes">Full flow editing</td>
                 <td class="conditional">Renders in fluid cards. Interaction requires a fixed canvas.</td>
                 <td class="yes">Freeform interaction on fixed canvas cards</td>
+                <td class="conditional">GML, templates, or imports create it. Box editing works after creation.</td>
               </tr>
             </tbody>
           </table>
@@ -1302,7 +1479,7 @@
             <h2>Choose by responsibility</h2>
             <p>
               Decide who must own placement: the renderer, a local visual unit,
-              or the card author.
+              an overlay, or the whole card.
             </p>
           </div>
           <div class="questions">
@@ -1326,12 +1503,21 @@
             </article>
             <article class="question">
               <span class="number">03</span>
-              <h3>Must an element ignore flow and pin to the card?</h3>
+              <h3>Must one element pin above content that stays in flow?</h3>
               <p>
-                Use a card-level box. Reserve it for overlays and frame-based
-                compositions.
+                Use a direct card box. It overlays the flow layer and takes no
+                space from it.
               </p>
               <span class="answer">positionedBox</span>
+            </article>
+            <article class="question">
+              <span class="number">04</span>
+              <h3>Is the whole card one positioned composition?</h3>
+              <p>
+                Wrap the boxes in <code>&lt;freeform&gt;</code>. The card then has no
+                flow layer.
+              </p>
+              <span class="answer">&lt;freeform&gt;</span>
             </article>
           </div>
         </div>
@@ -1414,6 +1600,30 @@
   <span class="element">&lt;/box&gt;</span>
 <span class="element">&lt;/section&gt;</span></pre>
           </article>
+
+          <article class="code-card">
+            <div class="code-caption">
+              <h3><code>&lt;freeform&gt;</code></h3>
+              <p>The wrapper declares no flow layer. Child boxes own the geometry.</p>
+            </div>
+            <pre><span class="element">&lt;section&gt;</span>
+  <span class="element">&lt;img</span> <span class="attr">background</span>=<span class="value">"true"</span>
+    <span class="attr">src</span>=<span class="value">"launch.jpg"</span> <span class="element">/&gt;</span>
+  <span class="element">&lt;freeform&gt;</span>
+    <span class="element">&lt;box</span> <span class="attr">type</span>=<span class="value">"content"</span>
+      <span class="attr">x</span>=<span class="value">"67"</span> <span class="attr">y</span>=<span class="value">"92"</span>
+      <span class="attr">w</span>=<span class="value">"550"</span><span class="element">&gt;</span>
+      <span class="element">&lt;h1&gt;</span>Three milestones to market<span class="element">&lt;/h1&gt;</span>
+    <span class="element">&lt;/box&gt;</span>
+    <span class="element">&lt;box</span> <span class="attr">type</span>=<span class="value">"content"</span>
+      <span class="attr">x</span>=<span class="value">"67"</span> <span class="attr">y</span>=<span class="value">"388"</span>
+      <span class="attr">w</span>=<span class="value">"490"</span><span class="element">&gt;</span>
+      <span class="element">&lt;p&gt;</span>Beta. Proof. Launch.<span class="element">&lt;/p&gt;</span>
+    <span class="element">&lt;/box&gt;</span>
+    <span class="comment">&lt;!-- Every content item is a box. --&gt;</span>
+  <span class="element">&lt;/freeform&gt;</span>
+<span class="element">&lt;/section&gt;</span></pre>
+          </article>
         </div>
       </section>
 
@@ -1421,12 +1631,25 @@
         <div class="section-heading">
           <h2>Boundary notes</h2>
           <p>
-            These details prevent three common category errors in GML
+            These details prevent four common category errors in GML
             authoring.
           </p>
         </div>
         <div class="details-card">
           <details open>
+            <summary>Fluid placement differs from a fluid card</summary>
+            <div class="detail-body">
+              <p>
+                The editor calls an in-flow element “Fluid.” The element can
+                exist on a fixed card or a fluid card.
+              </p>
+              <p>
+                The <code>cardDimensions: "fluid"</code> setting controls the
+                card frame. It does not create a placement node.
+              </p>
+            </div>
+          </details>
+          <details>
             <summary>A <code>freeformBlock</code> is a flow block</summary>
             <div class="detail-body">
               <p>
