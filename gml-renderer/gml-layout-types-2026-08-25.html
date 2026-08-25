@@ -1,0 +1,1496 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GML layout types: fluid, freeformBlock, and positionedBox</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #172033;
+        --muted: #667085;
+        --line: #d9dee8;
+        --page: #eef1f5;
+        --paper: #ffffff;
+        --code: #111827;
+        --code-ink: #dbeafe;
+        --accent: #b6542b;
+        --accent-soft: #f9e9df;
+        --blue: #2d5bff;
+        --blue-soft: #e8edff;
+        --green: #18794e;
+        --green-soft: #e3f7ed;
+        --purple: #7652c8;
+        --purple-soft: #eee9fb;
+        --radius: 16px;
+        --shadow: 0 12px 32px rgba(23, 32, 51, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--page);
+        color: var(--ink);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        line-height: 1.55;
+      }
+
+      a {
+        color: var(--blue);
+      }
+
+      code,
+      pre {
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      }
+
+      code {
+        border: 1px solid #dce2ef;
+        border-radius: 5px;
+        background: #f6f8fc;
+        padding: 0.1em 0.35em;
+        font-size: 0.9em;
+      }
+
+      .shell {
+        width: min(1180px, calc(100% - 40px));
+        margin-inline: auto;
+      }
+
+      .topbar {
+        position: sticky;
+        z-index: 20;
+        top: 0;
+        border-bottom: 1px solid rgba(217, 222, 232, 0.92);
+        background: rgba(238, 241, 245, 0.9);
+        backdrop-filter: blur(16px);
+      }
+
+      .topbar .shell {
+        display: flex;
+        min-height: 56px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .brand {
+        color: var(--ink);
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      .topnav {
+        display: flex;
+        gap: 18px;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+
+      .topnav a {
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 650;
+        text-decoration: none;
+      }
+
+      .topnav a:hover {
+        color: var(--ink);
+      }
+
+      .hero {
+        padding: 76px 0 48px;
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3 {
+        letter-spacing: -0.025em;
+        line-height: 1.12;
+      }
+
+      h1 {
+        max-width: 930px;
+        margin: 0;
+        font-size: clamp(42px, 7vw, 74px);
+      }
+
+      .dek {
+        max-width: 790px;
+        margin: 24px 0 0;
+        color: var(--muted);
+        font-size: 19px;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .button {
+        display: inline-flex;
+        min-height: 42px;
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--paper);
+        color: var(--ink);
+        padding: 0 17px;
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .button.primary {
+        border-color: var(--ink);
+        background: var(--ink);
+        color: #fff;
+      }
+
+      .section {
+        padding: 36px 0;
+        scroll-margin-top: 70px;
+      }
+
+      .section-heading {
+        display: grid;
+        grid-template-columns: minmax(0, 0.75fr) minmax(280px, 1fr);
+        gap: 40px;
+        align-items: end;
+        margin-bottom: 24px;
+      }
+
+      .section-heading h2 {
+        margin: 0;
+        font-size: clamp(30px, 4vw, 46px);
+      }
+
+      .section-heading p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .mode-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .mode-card {
+        position: relative;
+        overflow: hidden;
+        min-height: 310px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--paper);
+        padding: 24px;
+        box-shadow: var(--shadow);
+      }
+
+      .mode-card::after {
+        position: absolute;
+        right: -62px;
+        bottom: -78px;
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        background: var(--blue-soft);
+        content: "";
+      }
+
+      .mode-card.block::after {
+        background: var(--green-soft);
+      }
+
+      .mode-card.positioned::after {
+        background: var(--purple-soft);
+      }
+
+      .tag {
+        position: relative;
+        z-index: 1;
+        display: inline-flex;
+        border-radius: 999px;
+        background: var(--blue-soft);
+        color: #2847be;
+        padding: 4px 9px;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .tag.green {
+        background: var(--green-soft);
+        color: var(--green);
+      }
+
+      .tag.purple {
+        background: var(--purple-soft);
+        color: #5d3faa;
+      }
+
+      .mode-card h3 {
+        position: relative;
+        z-index: 1;
+        margin: 22px 0 10px;
+        font-size: 27px;
+      }
+
+      .mode-card > p {
+        position: relative;
+        z-index: 1;
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .mode-facts {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        gap: 8px;
+        margin: 22px 0 0;
+      }
+
+      .mode-fact {
+        display: grid;
+        grid-template-columns: 84px minmax(0, 1fr);
+        gap: 10px;
+        border-top: 1px solid var(--line);
+        padding-top: 8px;
+        font-size: 12px;
+      }
+
+      .mode-fact strong {
+        color: var(--ink);
+      }
+
+      .mode-fact span {
+        color: var(--muted);
+      }
+
+      .name-note {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 14px;
+        align-items: start;
+        margin-top: 18px;
+        border: 1px solid #e4c6b5;
+        border-radius: 13px;
+        background: #fffaf7;
+        padding: 17px 19px;
+        color: #5f6674;
+        font-size: 14px;
+      }
+
+      .name-note strong {
+        color: var(--accent);
+      }
+
+      .demo-tools {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px 24px;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 18px;
+        border: 1px solid var(--line);
+        border-radius: 13px;
+        background: rgba(255, 255, 255, 0.74);
+        padding: 14px 16px;
+      }
+
+      .width-control {
+        display: grid;
+        grid-template-columns: auto minmax(150px, 280px) 52px;
+        gap: 12px;
+        align-items: center;
+        flex: 1 1 360px;
+      }
+
+      .width-control label,
+      .coordinate-toggle {
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      input[type="range"] {
+        width: 100%;
+        accent-color: var(--accent);
+      }
+
+      .width-value {
+        color: var(--accent);
+        font: 700 12px/1 "SFMono-Regular", Consolas, monospace;
+      }
+
+      .coordinate-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+      }
+
+      .coordinate-toggle input {
+        width: 16px;
+        height: 16px;
+        accent-color: var(--accent);
+      }
+
+      .demo-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        align-items: start;
+      }
+
+      .demo-panel {
+        overflow: hidden;
+        min-width: 0;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--paper);
+        box-shadow: var(--shadow);
+      }
+
+      .demo-caption {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        border-bottom: 1px solid var(--line);
+        padding: 16px 18px;
+      }
+
+      .demo-caption h3 {
+        margin: 0 0 2px;
+        font-size: 18px;
+      }
+
+      .demo-caption p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .demo-stage {
+        min-height: 560px;
+        background:
+          linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 24px 24px,
+          linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 24px 24px,
+          #f5f7fa;
+        padding: 18px;
+      }
+
+      .responsive-host {
+        width: var(--demo-width, 100%);
+        min-width: 170px;
+        margin-inline: auto;
+        transition: width 180ms ease;
+      }
+
+      .mini-card {
+        overflow: hidden;
+        border: 1px solid #cbd3df;
+        border-radius: 9px;
+        background: #fdfcf9;
+        color: #1b2437;
+        box-shadow: 0 6px 18px rgba(23, 32, 51, 0.12);
+      }
+
+      .mini-kicker {
+        color: #9e4b29;
+        font-size: 8px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .flow-card {
+        padding: 18px;
+      }
+
+      .flow-card h4 {
+        margin: 5px 0 12px;
+        font-size: 20px;
+        line-height: 1.05;
+      }
+
+      .flow-items {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(76px, 1fr));
+        gap: 8px;
+      }
+
+      .flow-item {
+        min-width: 0;
+        border: 1px solid #d8d2c8;
+        border-radius: 7px;
+        background: white;
+        padding: 9px;
+      }
+
+      .flow-item .number {
+        color: #b6542b;
+        font-size: 17px;
+        font-weight: 800;
+      }
+
+      .flow-item strong {
+        display: block;
+        margin-top: 4px;
+        font-size: 10px;
+      }
+
+      .flow-item p {
+        margin: 3px 0 0;
+        color: #6d7280;
+        font-size: 8px;
+        line-height: 1.35;
+      }
+
+      .flow-note,
+      .block-note,
+      .position-note {
+        margin: 10px 0 0;
+        border-top: 1px solid #ded8ce;
+        padding-top: 9px;
+        color: #6d7280;
+        font-size: 8px;
+      }
+
+      .block-card {
+        padding: 18px;
+      }
+
+      .block-card h4 {
+        margin: 5px 0 10px;
+        font-size: 20px;
+        line-height: 1.05;
+      }
+
+      .block-frame {
+        container-type: inline-size;
+        position: relative;
+        width: 100%;
+        aspect-ratio: 5 / 2;
+        border: 1px dashed #2d9161;
+        border-radius: 7px;
+        background: #edf9f3;
+      }
+
+      .block-frame::before {
+        position: absolute;
+        z-index: 0;
+        inset: 0;
+        background:
+          linear-gradient(rgba(24, 121, 78, 0.12) 1px, transparent 1px) 0 0 /
+            12.5% 25%,
+          linear-gradient(90deg, rgba(24, 121, 78, 0.12) 1px, transparent 1px)
+            0 0 / 12.5% 25%;
+        content: "";
+      }
+
+      .block-chip {
+        position: absolute;
+        z-index: 1;
+        display: grid;
+        place-items: center;
+        width: 25%;
+        height: 42%;
+        border-radius: 999px;
+        background: #18794e;
+        color: white;
+        font-size: clamp(5px, 3.6cqw, 13px);
+        font-weight: 800;
+        line-height: 1;
+        text-align: center;
+      }
+
+      .block-chip.one {
+        top: 14%;
+        left: 5%;
+      }
+
+      .block-chip.two {
+        top: 44%;
+        left: 37.5%;
+      }
+
+      .block-chip.three {
+        top: 14%;
+        left: 70%;
+      }
+
+      .block-line {
+        position: absolute;
+        z-index: 0;
+        top: 48%;
+        left: 17%;
+        width: 66%;
+        height: 2px;
+        background: rgba(24, 121, 78, 0.42);
+        transform: rotate(8deg);
+        transform-origin: center;
+      }
+
+      .position-card {
+        position: relative;
+        aspect-ratio: 16 / 9;
+        background:
+          linear-gradient(135deg, rgba(23, 32, 51, 0.02), rgba(118, 82, 200, 0.12)),
+          #fdfcf9;
+      }
+
+      .position-flow {
+        position: absolute;
+        inset: 0;
+        padding: 6% 7%;
+      }
+
+      .position-flow h4 {
+        max-width: 62%;
+        margin: 1.5% 0 0;
+        font-size: clamp(8px, 4.7cqw, 21px);
+        line-height: 1.04;
+      }
+
+      .position-flow p {
+        max-width: 57%;
+        margin: 3% 0 0;
+        color: #6d7280;
+        font-size: clamp(5px, 2.1cqw, 9px);
+      }
+
+      .position-box {
+        position: absolute;
+        top: 19%;
+        right: 5.5%;
+        display: grid;
+        width: 34%;
+        height: 58%;
+        place-items: center;
+        border: 2px solid #7652c8;
+        border-radius: 8px;
+        background: #eee9fb;
+        color: #5d3faa;
+        box-shadow: 0 5px 12px rgba(64, 41, 118, 0.18);
+        transform: rotate(5deg);
+      }
+
+      .position-box strong {
+        font-size: clamp(7px, 4.2cqw, 18px);
+      }
+
+      .position-note {
+        position: absolute;
+        right: 7%;
+        bottom: 6%;
+        left: 7%;
+        margin: 0;
+      }
+
+      .coord-label,
+      .frame-label {
+        display: none;
+        position: absolute;
+        z-index: 4;
+        border-radius: 4px;
+        background: #172033;
+        color: #fff;
+        padding: 3px 5px;
+        font: 700 7px/1.2 "SFMono-Regular", Consolas, monospace;
+        white-space: nowrap;
+      }
+
+      .show-coordinates .coord-label,
+      .show-coordinates .frame-label {
+        display: block;
+      }
+
+      .block-frame .frame-label {
+        top: 4px;
+        left: 4px;
+        background: #18794e;
+      }
+
+      .block-chip .coord-label {
+        top: -7px;
+        left: 50%;
+        background: #12603e;
+        transform: translate(-50%, -100%);
+      }
+
+      .position-card > .frame-label {
+        top: 5px;
+        left: 5px;
+        background: #7652c8;
+      }
+
+      .position-box .coord-label {
+        top: -7px;
+        right: 0;
+        background: #5d3faa;
+        transform: translateY(-100%) rotate(-5deg);
+        transform-origin: right bottom;
+      }
+
+      .demo-result {
+        display: grid;
+        grid-template-columns: 74px minmax(0, 1fr);
+        gap: 8px;
+        border-top: 1px solid var(--line);
+        background: #fbfcfe;
+        padding: 13px 16px 15px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .demo-result strong {
+        color: var(--ink);
+      }
+
+      .matrix-wrap {
+        overflow-x: auto;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--paper);
+        box-shadow: var(--shadow);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+
+      th,
+      td {
+        border-bottom: 1px solid var(--line);
+        padding: 15px 17px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        background: #f7f8fb;
+        color: var(--muted);
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      th:first-child,
+      td:first-child {
+        width: 20%;
+        color: var(--ink);
+        font-weight: 750;
+      }
+
+      tr:last-child td {
+        border-bottom: 0;
+      }
+
+      .yes {
+        color: #166534;
+        font-weight: 750;
+      }
+
+      .no {
+        color: #596273;
+      }
+
+      .conditional {
+        color: #92400e;
+        font-weight: 750;
+      }
+
+      .decision-path {
+        overflow: hidden;
+        border: 1px solid #e4c6b5;
+        border-radius: var(--radius);
+        background: var(--paper);
+        box-shadow: var(--shadow);
+      }
+
+      .decision-head {
+        padding: 28px 30px;
+      }
+
+      .decision-head h2 {
+        margin: 0;
+        font-size: clamp(30px, 4vw, 46px);
+      }
+
+      .decision-head p {
+        max-width: 820px;
+        margin: 14px 0 0;
+        color: var(--muted);
+      }
+
+      .questions {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1px;
+        border-top: 1px solid #e4c6b5;
+        background: #e4c6b5;
+      }
+
+      .question {
+        background: #fffaf7;
+        padding: 24px 26px;
+      }
+
+      .question .number {
+        color: var(--accent);
+        font: 800 12px/1 "SFMono-Regular", Consolas, monospace;
+      }
+
+      .question h3 {
+        margin: 18px 0 8px;
+        font-size: 20px;
+      }
+
+      .question p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .answer {
+        display: inline-flex;
+        margin-top: 15px;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        padding: 4px 9px;
+        font-size: 11px;
+        font-weight: 850;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .code-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .code-card {
+        min-width: 0;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--paper);
+        box-shadow: var(--shadow);
+      }
+
+      .code-caption {
+        padding: 18px;
+      }
+
+      .code-caption h3 {
+        margin: 0 0 5px;
+        font-size: 20px;
+      }
+
+      .code-caption p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .code-card pre {
+        overflow-x: auto;
+        min-height: 405px;
+        margin: 0;
+        border-top: 1px solid var(--line);
+        background: var(--code);
+        color: var(--code-ink);
+        padding: 16px;
+        font-size: 11px;
+        line-height: 1.55;
+        white-space: pre-wrap;
+      }
+
+      .code-card .comment {
+        color: #8290a8;
+      }
+
+      .code-card .element {
+        color: #93c5fd;
+      }
+
+      .code-card .attr {
+        color: #f0abfc;
+      }
+
+      .code-card .value {
+        color: #86efac;
+      }
+
+      .details-card {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--paper);
+        box-shadow: var(--shadow);
+      }
+
+      details + details {
+        border-top: 1px solid var(--line);
+      }
+
+      summary {
+        cursor: pointer;
+        padding: 18px 20px;
+        font-weight: 750;
+      }
+
+      .detail-body {
+        max-width: 900px;
+        padding: 0 20px 20px;
+        color: var(--muted);
+      }
+
+      .detail-body p {
+        margin: 0;
+      }
+
+      .detail-body p + p {
+        margin-top: 10px;
+      }
+
+      footer {
+        margin-top: 36px;
+        border-top: 1px solid var(--line);
+        padding: 26px 0 54px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      @media (max-width: 980px) {
+        .mode-grid,
+        .demo-grid,
+        .code-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .demo-stage {
+          min-height: 0;
+        }
+
+        .questions {
+          grid-template-columns: 1fr;
+        }
+
+        .code-card pre {
+          min-height: 0;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .shell {
+          width: min(100% - 24px, 1180px);
+        }
+
+        .topbar .shell {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 6px;
+          padding-block: 10px;
+        }
+
+        .topnav {
+          width: 100%;
+        }
+
+        .hero {
+          padding-top: 54px;
+        }
+
+        .section-heading {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+
+        .name-note,
+        .mode-fact,
+        .demo-result {
+          grid-template-columns: 1fr;
+        }
+
+        .width-control {
+          grid-template-columns: 1fr 48px;
+        }
+
+        .width-control label {
+          grid-column: 1 / -1;
+        }
+
+        th,
+        td {
+          min-width: 165px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="shell">
+        <a class="brand" href="#top">GML layout report</a>
+        <nav class="topnav" aria-label="Report sections">
+          <a href="#model">Model</a>
+          <a href="#demo">Resize demo</a>
+          <a href="#matrix">Comparison</a>
+          <a href="#decision">Decision path</a>
+          <a href="#gml">GML</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero shell">
+        <p class="eyebrow">GML renderer layout inventory</p>
+        <h1>Three ways content can occupy a card</h1>
+        <p class="dek">
+          Fluid content reflows. A <code>freeformBlock</code> occupies flow space
+          but keeps a local 2D composition. A card-level
+          <code>positionedBox</code> uses card coordinates and pushes nothing.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#demo">Resize the same composition</a>
+          <a class="button" href="#gml">Compare the markup</a>
+        </div>
+      </section>
+
+      <section class="section shell" id="model">
+        <div class="section-heading">
+          <h2>The placement model</h2>
+          <p>
+            The parent decides the coordinate space and the effect on nearby
+            content. The child content can look similar in all three modes.
+          </p>
+        </div>
+
+        <div class="mode-grid">
+          <article class="mode-card">
+            <span class="tag">Flow</span>
+            <h3>Fluid</h3>
+            <p>
+              Blocks stack or enter a grid. The renderer places them and moves
+              later content when a block grows.
+            </p>
+            <div class="mode-facts">
+              <div class="mode-fact">
+                <strong>Space</strong>
+                <span>Occupies normal flow space.</span>
+              </div>
+              <div class="mode-fact">
+                <strong>Geometry</strong>
+                <span>No authored <code>x</code> or <code>y</code>.</span>
+              </div>
+              <div class="mode-fact">
+                <strong>Change</strong>
+                <span>Reflows after edits and width changes.</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="mode-card block">
+            <span class="tag green">Hybrid</span>
+            <h3><code>freeformBlock</code></h3>
+            <p>
+              The wrapper sits in flow. Its boxes use local coordinates inside
+              a design frame that scales with the wrapper width.
+            </p>
+            <div class="mode-facts">
+              <div class="mode-fact">
+                <strong>Space</strong>
+                <span>Occupies flow space and pushes later blocks.</span>
+              </div>
+              <div class="mode-fact">
+                <strong>Geometry</strong>
+                <span>Local <code>w</code> and <code>h</code> design space.</span>
+              </div>
+              <div class="mode-fact">
+                <strong>Change</strong>
+                <span>Scales as one unit. Internal positions stay fixed.</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="mode-card positioned">
+            <span class="tag purple">Overlay</span>
+            <h3><code>positionedBox</code></h3>
+            <p>
+              A direct card box uses explicit card-frame coordinates. It can
+              overlap flow content, other boxes, and the card edge.
+            </p>
+            <div class="mode-facts">
+              <div class="mode-fact">
+                <strong>Space</strong>
+                <span>Occupies no flow space.</span>
+              </div>
+              <div class="mode-fact">
+                <strong>Geometry</strong>
+                <span>Card-level <code>x</code>, <code>y</code>, <code>w</code>, and <code>h</code>.</span>
+              </div>
+              <div class="mode-fact">
+                <strong>Change</strong>
+                <span>Keeps exact placement. Neighbors do not adapt.</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="name-note">
+          <strong>Name note</strong>
+          <span>
+            The editor uses “Fluid” for an in-flow element. This is separate
+            from <code>cardDimensions: "fluid"</code>, which controls the card
+            frame. A <code>freeformBlock</code> can render inside a fluid card.
+            Its members are <code>positionedBox</code> nodes with local
+            coordinates. The last column describes a direct card box.
+          </span>
+        </div>
+      </section>
+
+      <section class="section shell" id="demo">
+        <div class="section-heading">
+          <h2>The same composition under pressure</h2>
+          <p>
+            Reduce the available width. Watch which relationships reflow,
+            scale, or remain pinned.
+          </p>
+        </div>
+
+        <div class="demo-tools">
+          <div class="width-control">
+            <label for="demo-width">Available width</label>
+            <input
+              id="demo-width"
+              type="range"
+              min="52"
+              max="100"
+              step="1"
+              value="100"
+            />
+            <span class="width-value" id="demo-width-value">100%</span>
+          </div>
+          <label class="coordinate-toggle">
+            <input id="coordinate-toggle" type="checkbox" />
+            Show coordinate spaces
+          </label>
+        </div>
+
+        <div class="demo-grid" id="demo-grid">
+          <article class="demo-panel">
+            <div class="demo-caption">
+              <div>
+                <h3>Fluid</h3>
+                <p>The items choose new rows.</p>
+              </div>
+              <span class="tag">Reflow</span>
+            </div>
+            <div class="demo-stage">
+              <div class="responsive-host">
+                <div class="mini-card flow-card">
+                  <span class="mini-kicker">Launch sequence</span>
+                  <h4>Three milestones to market</h4>
+                  <div class="flow-items">
+                    <div class="flow-item">
+                      <span class="number">01</span>
+                      <strong>Beta</strong>
+                      <p>Test the full workflow with design partners.</p>
+                    </div>
+                    <div class="flow-item">
+                      <span class="number">02</span>
+                      <strong>Proof</strong>
+                      <p>Measure retention and close the product gaps.</p>
+                    </div>
+                    <div class="flow-item">
+                      <span class="number">03</span>
+                      <strong>Launch</strong>
+                      <p>Open access and start the campaign.</p>
+                    </div>
+                  </div>
+                  <p class="flow-note">The note moves down when the grid grows.</p>
+                </div>
+              </div>
+            </div>
+            <div class="demo-result">
+              <strong>Result</strong>
+              <span>The content grows vertically. Reading order remains intact.</span>
+            </div>
+          </article>
+
+          <article class="demo-panel">
+            <div class="demo-caption">
+              <div>
+                <h3><code>freeformBlock</code></h3>
+                <p>The local frame scales.</p>
+              </div>
+              <span class="tag green">Local 2D</span>
+            </div>
+            <div class="demo-stage">
+              <div class="responsive-host">
+                <div class="mini-card block-card">
+                  <span class="mini-kicker">Launch sequence</span>
+                  <h4>Three milestones to market</h4>
+                  <div class="block-frame">
+                    <span class="frame-label">local frame · 800 × 320</span>
+                    <div class="block-line"></div>
+                    <div class="block-chip one">
+                      01 Beta
+                      <span class="coord-label">x 40 · y 45</span>
+                    </div>
+                    <div class="block-chip two">
+                      02 Proof
+                      <span class="coord-label">x 300 · y 140</span>
+                    </div>
+                    <div class="block-chip three">
+                      03 Launch
+                      <span class="coord-label">x 560 · y 45</span>
+                    </div>
+                  </div>
+                  <p class="block-note">The note stays below the block frame.</p>
+                </div>
+              </div>
+            </div>
+            <div class="demo-result">
+              <strong>Result</strong>
+              <span>The whole unit scales. Internal overlap and geometry remain intact.</span>
+            </div>
+          </article>
+
+          <article class="demo-panel">
+            <div class="demo-caption">
+              <div>
+                <h3><code>positionedBox</code></h3>
+                <p>The overlay stays pinned.</p>
+              </div>
+              <span class="tag purple">Card 2D</span>
+            </div>
+            <div class="demo-stage">
+              <div class="responsive-host">
+                <div class="mini-card position-card">
+                  <span class="frame-label">card frame · 960 × 540</span>
+                  <div class="position-flow">
+                    <span class="mini-kicker">Launch sequence</span>
+                    <h4>Three milestones to market</h4>
+                    <p>
+                      The flow copy does not reserve space for the floating
+                      milestone panel.
+                    </p>
+                  </div>
+                  <div class="position-box">
+                    <strong>03<br />Launch</strong>
+                    <span class="coord-label">x 610 · y 102</span>
+                  </div>
+                  <p class="position-note">The overlay can cover this flow note.</p>
+                </div>
+              </div>
+            </div>
+            <div class="demo-result">
+              <strong>Result</strong>
+              <span>The box does not move the flow. The author owns collision risk.</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section shell" id="matrix">
+        <div class="section-heading">
+          <h2>Behavior matrix</h2>
+          <p>
+            These rules follow the node parent. They do not depend on how the
+            final composition looks.
+          </p>
+        </div>
+        <div class="matrix-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Behavior</th>
+                <th>Fluid</th>
+                <th><code>freeformBlock</code></th>
+                <th>Card-level <code>positionedBox</code></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Parent</td>
+                <td><code>section</code>, <code>grid-item</code>, or another flow container</td>
+                <td><code>section</code>, <code>grid-item</code>, or another flow container</td>
+                <td>Direct card child or member of <code>freeform</code></td>
+              </tr>
+              <tr>
+                <td>Flow space</td>
+                <td class="yes">Yes</td>
+                <td class="yes">Yes, for the wrapper</td>
+                <td class="no">No</td>
+              </tr>
+              <tr>
+                <td>Coordinates</td>
+                <td class="no">None</td>
+                <td>Local design units from the block corner</td>
+                <td>Card-frame points from the card corner</td>
+              </tr>
+              <tr>
+                <td>Width change</td>
+                <td>Content reflows and the height can change.</td>
+                <td>The internal composition scales proportionally.</td>
+                <td>The fixed card canvas scales as one unit.</td>
+              </tr>
+              <tr>
+                <td>Overlap</td>
+                <td class="no">No deliberate overlap</td>
+                <td class="conditional">Inside the block only</td>
+                <td class="yes">Anywhere in its coordinate frame</td>
+              </tr>
+              <tr>
+                <td>Text growth</td>
+                <td>Later content moves.</td>
+                <td>Members use fixed geometry after entry. Text can overflow.</td>
+                <td>Neighbors do not move. Auto boxes can grow vertically.</td>
+              </tr>
+              <tr>
+                <td>Best fit</td>
+                <td>Lists, columns, repeated items, and long copy</td>
+                <td>One diagram, collage, or layered unit inside structured content</td>
+                <td>Badges, edge ornaments, image overlays, and whole-card compositions</td>
+              </tr>
+              <tr>
+                <td>Current editor</td>
+                <td class="yes">Full flow editing</td>
+                <td class="conditional">Renders in fluid cards. Interaction requires a fixed canvas.</td>
+                <td class="yes">Freeform interaction on fixed canvas cards</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section shell" id="decision">
+        <div class="decision-path">
+          <div class="decision-head">
+            <h2>Choose by responsibility</h2>
+            <p>
+              Decide who must own placement: the renderer, a local visual unit,
+              or the card author.
+            </p>
+          </div>
+          <div class="questions">
+            <article class="question">
+              <span class="number">01</span>
+              <h3>Does the content read in rows or columns?</h3>
+              <p>
+                Use flow. The renderer can absorb edits, new items, and width
+                changes.
+              </p>
+              <span class="answer">Fluid</span>
+            </article>
+            <article class="question">
+              <span class="number">02</span>
+              <h3>Does one in-flow unit need exact internal overlap?</h3>
+              <p>
+                Give that unit a local coordinate frame. Keep the rest of the
+                card in flow.
+              </p>
+              <span class="answer">freeformBlock</span>
+            </article>
+            <article class="question">
+              <span class="number">03</span>
+              <h3>Must an element ignore flow and pin to the card?</h3>
+              <p>
+                Use a card-level box. Reserve it for overlays and frame-based
+                compositions.
+              </p>
+              <span class="answer">positionedBox</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section shell" id="gml">
+        <div class="section-heading">
+          <h2>The markup changes the ownership</h2>
+          <p>
+            The examples use the same content. The wrappers and geometry decide
+            how the renderer places it.
+          </p>
+        </div>
+
+        <div class="code-grid">
+          <article class="code-card">
+            <div class="code-caption">
+              <h3>Fluid</h3>
+              <p>No coordinate attributes. The grid owns placement.</p>
+            </div>
+            <pre><span class="element">&lt;section&gt;</span>
+  <span class="element">&lt;h1&gt;</span>Three milestones to market<span class="element">&lt;/h1&gt;</span>
+  <span class="element">&lt;grid&gt;</span>
+    <span class="element">&lt;grid-item&gt;</span>
+      <span class="element">&lt;h3&gt;</span>01 Beta<span class="element">&lt;/h3&gt;</span>
+      <span class="element">&lt;p&gt;</span>Test the workflow.<span class="element">&lt;/p&gt;</span>
+    <span class="element">&lt;/grid-item&gt;</span>
+    <span class="element">&lt;grid-item&gt;</span>
+      <span class="element">&lt;h3&gt;</span>02 Proof<span class="element">&lt;/h3&gt;</span>
+      <span class="element">&lt;p&gt;</span>Measure retention.<span class="element">&lt;/p&gt;</span>
+    <span class="element">&lt;/grid-item&gt;</span>
+    <span class="element">&lt;grid-item&gt;</span>
+      <span class="element">&lt;h3&gt;</span>03 Launch<span class="element">&lt;/h3&gt;</span>
+      <span class="element">&lt;p&gt;</span>Open access.<span class="element">&lt;/p&gt;</span>
+    <span class="element">&lt;/grid-item&gt;</span>
+  <span class="element">&lt;/grid&gt;</span>
+  <span class="element">&lt;p&gt;</span>The note follows the grid.<span class="element">&lt;/p&gt;</span>
+<span class="element">&lt;/section&gt;</span></pre>
+          </article>
+
+          <article class="code-card">
+            <div class="code-caption">
+              <h3><code>freeformBlock</code></h3>
+              <p>The wrapper owns flow space. Members own local geometry.</p>
+            </div>
+            <pre><span class="element">&lt;section&gt;</span>
+  <span class="element">&lt;h1&gt;</span>Three milestones to market<span class="element">&lt;/h1&gt;</span>
+  <span class="element">&lt;freeform-block</span>
+    <span class="attr">w</span>=<span class="value">"800"</span> <span class="attr">h</span>=<span class="value">"320"</span><span class="element">&gt;</span>
+    <span class="element">&lt;box</span> <span class="attr">type</span>=<span class="value">"content"</span>
+      <span class="attr">x</span>=<span class="value">"40"</span> <span class="attr">y</span>=<span class="value">"45"</span>
+      <span class="attr">w</span>=<span class="value">"200"</span> <span class="attr">h</span>=<span class="value">"130"</span>
+      <span class="attr">sizing</span>=<span class="value">"fixed"</span><span class="element">&gt;</span>
+      <span class="element">&lt;p&gt;</span>01 Beta<span class="element">&lt;/p&gt;</span>
+    <span class="element">&lt;/box&gt;</span>
+    <span class="comment">&lt;!-- two more local boxes --&gt;</span>
+  <span class="element">&lt;/freeform-block&gt;</span>
+  <span class="element">&lt;p&gt;</span>The note follows the block.<span class="element">&lt;/p&gt;</span>
+<span class="element">&lt;/section&gt;</span></pre>
+          </article>
+
+          <article class="code-card">
+            <div class="code-caption">
+              <h3><code>positionedBox</code></h3>
+              <p>The card frame owns the coordinate system.</p>
+            </div>
+            <pre><span class="element">&lt;section&gt;</span>
+  <span class="element">&lt;h1&gt;</span>Three milestones to market<span class="element">&lt;/h1&gt;</span>
+  <span class="element">&lt;p&gt;</span>
+    The flow does not reserve space.
+  <span class="element">&lt;/p&gt;</span>
+
+  <span class="comment">&lt;!-- Direct card child: overlay --&gt;</span>
+  <span class="element">&lt;box</span> <span class="attr">type</span>=<span class="value">"content"</span>
+    <span class="attr">x</span>=<span class="value">"610"</span> <span class="attr">y</span>=<span class="value">"102"</span>
+    <span class="attr">w</span>=<span class="value">"280"</span> <span class="attr">h</span>=<span class="value">"312"</span>
+    <span class="attr">sizing</span>=<span class="value">"fixed"</span>
+    <span class="attr">rotation</span>=<span class="value">"5"</span><span class="element">&gt;</span>
+    <span class="element">&lt;h3&gt;</span>03 Launch<span class="element">&lt;/h3&gt;</span>
+  <span class="element">&lt;/box&gt;</span>
+<span class="element">&lt;/section&gt;</span></pre>
+          </article>
+        </div>
+      </section>
+
+      <section class="section shell" id="notes">
+        <div class="section-heading">
+          <h2>Boundary notes</h2>
+          <p>
+            These details prevent three common category errors in GML
+            authoring.
+          </p>
+        </div>
+        <div class="details-card">
+          <details open>
+            <summary>A <code>freeformBlock</code> is a flow block</summary>
+            <div class="detail-body">
+              <p>
+                Its outer frame takes real height and pushes later content. Its
+                members use coordinates only inside that frame.
+              </p>
+              <p>
+                Use one block for one 2D unit. Do not use a card-sized block as
+                a replacement for a whole-card composition.
+              </p>
+            </div>
+          </details>
+          <details>
+            <summary>A card-level <code>positionedBox</code> is an overlay</summary>
+            <div class="detail-body">
+              <p>
+                The box measures from the true card corner. Card padding does
+                not offset its coordinates.
+              </p>
+              <p>
+                Later boxes paint above earlier boxes. A box does not move when
+                nearby flow content grows.
+              </p>
+            </div>
+          </details>
+          <details>
+            <summary>A whole positioned card uses <code>&lt;freeform&gt;</code></summary>
+            <div class="detail-body">
+              <p>
+                Wrap all boxes in <code>&lt;freeform&gt;</code> when the card has no
+                flow layer. The wrapper adds no geometry.
+              </p>
+              <p>
+                Keep direct card boxes for overlays that coexist with flow
+                content.
+              </p>
+            </div>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <footer class="shell">
+      GML renderer layout report. The examples follow the current GML authoring
+      and positioned-box contracts.
+    </footer>
+
+    <script>
+      const widthInput = document.querySelector("#demo-width");
+      const widthValue = document.querySelector("#demo-width-value");
+      const demoGrid = document.querySelector("#demo-grid");
+      const coordinateToggle = document.querySelector("#coordinate-toggle");
+
+      function updateWidth() {
+        const width = `${widthInput.value}%`;
+        demoGrid.style.setProperty("--demo-width", width);
+        widthValue.textContent = width;
+      }
+
+      widthInput.addEventListener("input", updateWidth);
+      coordinateToggle.addEventListener("change", () => {
+        demoGrid.classList.toggle("show-coordinates", coordinateToggle.checked);
+      });
+      updateWidth();
+    </script>
+  </body>
+</html>
