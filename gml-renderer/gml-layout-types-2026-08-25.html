@@ -1088,7 +1088,8 @@
           Fluid content reflows. A <code>freeformBlock</code> occupies flow space
           but keeps a local 2D composition. A card-level
           <code>positionedBox</code> overlays flow. A <code>&lt;freeform&gt;</code>
-          wrapper declares that the whole card is positioned.
+          wrapper declares that the whole card is positioned and should edit
+          like a canvas.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="#demo">Resize the same composition</a>
@@ -1180,7 +1181,8 @@
             <h3><code>&lt;freeform&gt;</code></h3>
             <p>
               The wrapper declares that the card has no flow layer. Every
-              visible content item is a positioned box.
+              visible content item is a positioned box, so the editor uses
+              canvas interactions instead of text-flow interactions.
             </p>
             <div class="mode-facts">
               <div class="mode-fact">
@@ -1193,7 +1195,7 @@
               </div>
               <div class="mode-fact">
                 <strong>Change</strong>
-                <span>The wrapper adds no geometry. The boxes stay pinned.</span>
+                <span>The wrapper changes editing semantics, not geometry.</span>
               </div>
             </div>
           </article>
@@ -1448,6 +1450,17 @@
                 <td class="yes">All content can overlap in the card frame</td>
               </tr>
               <tr>
+                <td>Editing model</td>
+                <td>Click, drag, and arrow navigation operate on text flow.</td>
+                <td>Flow outside; positioned editing inside the local frame.</td>
+                <td>Box interactions coexist with the card's text flow.</td>
+                <td>
+                  Canvas interactions: empty-space clicks avoid a text cursor,
+                  drag creates a marquee selection, and arrow navigation skips
+                  the card interior.
+                </td>
+              </tr>
+              <tr>
                 <td>Text growth</td>
                 <td>Later content moves.</td>
                 <td>Members use fixed geometry after entry. Text can overflow.</td>
@@ -1515,7 +1528,8 @@
               <h3>Is the whole card one positioned composition?</h3>
               <p>
                 Wrap the boxes in <code>&lt;freeform&gt;</code>. The card then has no
-                flow layer.
+                flow layer, and the editor treats it as a canvas rather than a
+                text surface.
               </p>
               <span class="answer">&lt;freeform&gt;</span>
             </article>
@@ -1676,15 +1690,27 @@
             </div>
           </details>
           <details>
-            <summary>A whole positioned card uses <code>&lt;freeform&gt;</code></summary>
+            <summary>
+              Why a whole positioned card uses <code>&lt;freeform&gt;</code>
+            </summary>
             <div class="detail-body">
               <p>
-                Wrap all boxes in <code>&lt;freeform&gt;</code> when the card has no
-                flow layer. The wrapper adds no geometry.
+                A set of direct card-level boxes can render the same as boxes
+                inside <code>&lt;freeform&gt;</code>. The wrapper adds no geometry;
+                its purpose is to tell the editor that the entire card is a
+                positioned canvas.
               </p>
               <p>
-                Keep direct card boxes for overlays that coexist with flow
-                content.
+                Without the wrapper, clicking empty space can place a text
+                cursor, dragging can start a text selection, and arrow
+                navigation can enter the card's flow. With the wrapper, empty
+                space stays non-textual, dragging makes a marquee selection,
+                and arrow navigation skips the card interior.
+              </p>
+              <p>
+                Use <code>&lt;freeform&gt;</code> whenever everything on the card is
+                positioned. Keep direct card boxes for the few overlays that
+                coexist with mostly fluid content.
               </p>
             </div>
           </details>
