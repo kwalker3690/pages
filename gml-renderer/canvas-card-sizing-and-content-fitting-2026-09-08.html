@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Canvas-card sizing and content fitting: engineering reference</title>
+    <link rel="stylesheet" href="editor-node-reference-2026-09-08.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="shell">
+        <a class="brand" href="#top">Editor node reference · draft</a>
+        <nav class="topnav" aria-label="Explainer sections">
+          <a href="#scope">Scope</a>
+          <a href="#model">Sizing modes</a>
+          <a href="#demo">Width example</a>
+          <a href="#tools">Scale variables</a>
+          <a href="#surfaces">Render surfaces</a>
+          <a href="#notes">Constraints</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero shell">
+        <p class="eyebrow">Engineering reference</p>
+        <h1>Canvas-card sizing and content fitting</h1>
+        <p class="dek">
+          This page describes the canvas-card render path: how its fixed and
+          fluid modes establish width, how fitting changes layout and type, how
+          display scaling maps the canvas to a viewport, and how each rendering
+          surface handles overflow.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#scope">Confirm the scope</a>
+          <a class="button" href="#demo">Interactive width example</a>
+          <a class="button" href="#surfaces">Rendering behavior</a>
+        </div>
+      </section>
+
+      <section class="section shell" id="scope">
+        <div class="section-heading">
+          <h2>Scope: canvas cards only</h2>
+          <p>
+            Everything on this page applies when <code>docFlags.canvasCards</code>
+            is enabled and the card renders through <code>CardCanvasHost</code>
+            and <code>gml-renderer/src/components/Card</code>.
+          </p>
+        </div>
+        <div class="grid-2">
+          <article class="panel">
+            <span class="tag purple">Canvas-card implementation</span>
+            <h3>Covered by this page</h3>
+            <ul>
+              <li>Fixed and fluid canvas-card modes.</li>
+              <li>
+                <code>CANVAS_DIMENSIONS</code>, <code>layoutFitScale</code>,
+                <code>contentFitScale</code>, <code>displayScale</code>, and
+                <code>overflowMode</code>.
+              </li>
+              <li>Document, present, export, and thumbnail behavior.</li>
+              <li>The point-based authored and export sizing contract.</li>
+            </ul>
+          </article>
+          <article class="panel">
+            <span class="tag green">Boundary</span>
+            <h3>General principles and excluded behavior</h3>
+            <p>
+              Two principles are general browser behavior: changing width can
+              reflow text, while uniformly scaling an element preserves its line
+              breaks. The variables and pipeline built on those principles are
+              canvas-card-specific.
+            </p>
+            <ul>
+              <li>Legacy <code>CardNodeView</code> fitting is not described here.</li>
+              <li>Legacy card layouts and accent-image behavior are not described here.</li>
+              <li>Fluid canvas cards do not fall back to <code>CardNodeView</code> on any surface.</li>
+            </ul>
+          </article>
+        </div>
+        <div class="callout">
+          <strong>Fixed and fluid are both canvas-card modes</strong>
+          <span>
+            They use the same renderer components and theme units. The mode
+            changes which width, fitting, display, and overflow mechanisms are active.
+          </span>
+        </div>
+      </section>
+
+      <section class="section shell" id="model">
+        <div class="section-heading">
+          <h2>Fixed and fluid canvas cards use different width constraints</h2>
+          <p>
+            The width constraint determines browser reflow and whether the
+            renderer must fit content into a fixed-height frame.
+          </p>
+        </div>
+        <div class="grid-2">
+          <article class="panel">
+            <span class="tag purple">Canvas · fixed</span>
+            <h3>Fixed card</h3>
+            <p>
+              The native frame stays constant—for example, 1280 × 720 canvas
+              pixels for a 16:9 card. The surface scales that artboard without
+              changing its geometry.
+            </p>
+            <ul>
+              <li>Line breaks stay stable when only the display size changes.</li>
+              <li>Layout relief runs before typography is reduced.</li>
+              <li>Presentation and export use the same fixed composition.</li>
+            </ul>
+          </article>
+          <article class="panel">
+            <span class="tag green">Canvas · fluid</span>
+            <h3>Fluid card</h3>
+            <p>
+              The card width tracks its container within a supported band. The
+              browser reflows the content at that real width and the card grows
+              vertically.
+            </p>
+            <ul>
+              <li>Text reflows when the container width changes.</li>
+              <li>Container queries can stack or simplify layouts.</li>
+              <li>There is no fixed document-mode frame to overflow.</li>
+            </ul>
+          </article>
+        </div>
+        <div class="callout">
+          <strong>Display scaling and content fitting are different operations</strong>
+          <span>
+            Shrinking the whole card preserves line breaks. Reducing content
+            size inside a held width creates new line breaks and can genuinely
+            fit more content vertically. Those are different operations.
+          </span>
+        </div>
+      </section>
+
+      <section class="section shell" id="demo">
+        <div class="section-heading">
+          <h2>Behavior when available width changes</h2>
+          <p>
+            Narrow the available width. The fixed card remains one composition;
+            the fluid card becomes a narrower document and eventually stacks.
+          </p>
+        </div>
+        <div class="demo-panel">
+          <div class="controls">
+            <label for="available-width">Available width</label>
+            <input id="available-width" type="range" min="48" max="100" value="100" />
+            <span class="value" id="available-width-value">100%</span>
+          </div>
+          <div class="demo-body">
+            <div class="demo-grid">
+              <article class="demo-column">
+                <h3>Fixed canvas card</h3>
+                <p>The 16:9 artboard scales as one unit. Internal geometry stays authored.</p>
+                <div class="demo-stage">
+                  <div id="fixed-host" style="width: 100%">
+                    <div class="fixed-viewport" id="fixed-viewport">
+                      <div class="sample-card fixed-artboard" id="fixed-artboard">
+                        <div class="sample-card-inner">
+                          <span class="sample-kicker">Example card</span>
+                          <h4>Heading with a media block</h4>
+                          <div class="sample-layout">
+                            <p class="sample-copy">
+                              This paragraph and the media block are authored as
+                              a two-column layout inside the card.
+                            </p>
+                            <div class="sample-media"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="result">
+                  <strong>Result:</strong> display scale changes; line breaks and
+                  the two-column composition remain stable.
+                </div>
+              </article>
+
+              <article class="demo-column">
+                <h3>Fluid canvas card</h3>
+                <p>The real layout width changes. Content reflows and height follows it.</p>
+                <div class="demo-stage">
+                  <div id="fluid-host" class="fluid-viewport" style="width: 100%">
+                    <div class="sample-card fluid-artboard">
+                      <div class="sample-card-inner">
+                        <span class="sample-kicker">Example card</span>
+                        <h4>Heading with a media block</h4>
+                        <div class="sample-layout">
+                          <p class="sample-copy">
+                            This paragraph and the media block are authored as
+                            a two-column layout inside the card.
+                          </p>
+                          <div class="sample-media"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="result">
+                  <strong>Result:</strong> text wraps at the container width;
+                  responsive rules can stack the media below the copy.
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section shell" id="tools">
+        <div class="section-heading">
+          <h2>Fitting and display variables</h2>
+          <p>
+            These variables act at different stages. Only the fitting values
+            affect content layout; display scaling affects the rendered card as a whole.
+          </p>
+        </div>
+        <div class="grid-3">
+          <article class="fact-card mechanism">
+            <span class="tag orange">1 · layout</span>
+            <h3><code>layoutFitScale</code></h3>
+            <p>
+              Reclaims eligible optional layout space—such as fill-media bands
+              and vertical spacers—before typography is reduced.
+            </p>
+            <div class="formula">authored layout → optional space floor</div>
+          </article>
+          <article class="fact-card mechanism">
+            <span class="tag green">2 · content</span>
+            <h3><code>contentFitScale</code></h3>
+            <p>
+              Reduces typography against the held fixed-card width. Text
+              reflows, so the content can consume less vertical space.
+            </p>
+            <div class="formula">role pt × contentFitScale</div>
+          </article>
+          <article class="fact-card mechanism">
+            <span class="tag purple">3 · display</span>
+            <h3><code>displayScale</code></h3>
+            <p>
+              Uniformly maps the entire canvas onto the current surface. It is
+              viewer-specific, does not reflow, and is never persisted.
+            </p>
+            <div class="formula">canvas × displayScale → screen</div>
+          </article>
+        </div>
+        <div class="grid-3" style="margin-top: 14px">
+          <article class="fact-card">
+            <span class="tag">Distribution</span>
+            <h3>Vertical alignment</h3>
+            <p>Uses leftover space. It moves content but scales nothing.</p>
+          </article>
+          <article class="fact-card">
+            <span class="tag red">Residue</span>
+            <h3>Overflow mode</h3>
+            <p>
+              Sets the overflow behavior after fitting: reveal in editing,
+              scroll in present, or clip in export and thumbnails.
+            </p>
+          </article>
+          <article class="fact-card">
+            <span class="tag orange">Theme</span>
+            <h3>Type scale</h3>
+            <p>
+              Defines the authored point sizes per semantic role. It is a deck
+              design input, not a per-viewer fit operation.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section shell" id="surfaces">
+        <div class="section-heading">
+          <h2>Behavior by rendering surface</h2>
+          <p>
+            Document editing can grow and scroll. Presentation and export must
+            reconcile the card with a bounded frame.
+          </p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Surface</th>
+                <th>Fixed canvas card</th>
+                <th>Fluid canvas card</th>
+                <th>Overflow residue</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Document</td>
+                <td>Uses persisted fit factors, then scales to the editor viewport.</td>
+                <td>Tracks container width and grows with content.</td>
+                <td>Fixed reveals spillover; fluid grows normally.</td>
+              </tr>
+              <tr>
+                <td>Present</td>
+                <td>Fits the native frame to both viewport axes.</td>
+                <td>Pins width and performs a viewer-specific present-time fit.</td>
+                <td>Scrolls if content still exceeds the fitting floor.</td>
+              </tr>
+              <tr>
+                <td>Export</td>
+                <td>Maps directly to the pinned page dimensions.</td>
+                <td>Pins onto the fixed-format path.</td>
+                <td>Clips or paginates according to the export surface.</td>
+              </tr>
+              <tr>
+                <td>Thumbnail</td>
+                <td>Uniformly scales the pinned composition.</td>
+                <td>Pins to the thumbnail width before scaling.</td>
+                <td>Clips to the thumbnail frame.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section shell" id="notes">
+        <div class="section-heading">
+          <h2>Implementation constraints</h2>
+          <p>These constraints define which values are authored, derived, or specific to a viewer.</p>
+        </div>
+        <div class="details-card">
+          <details open>
+            <summary>Point units define authored and export size</summary>
+            <div class="detail-body">
+              <p>
+                A 16pt role means 16pt in export. Its on-screen size is the
+                authored value after content fitting, displayed through the
+                viewer's card scale.
+              </p>
+            </div>
+          </details>
+          <details>
+            <summary>Fluid cards skip fixed-card fitting in document mode</summary>
+            <div class="detail-body">
+              <p>
+                The container width already causes real browser reflow. The
+                card grows vertically instead of shrinking its content toward a
+                fixed frame.
+              </p>
+            </div>
+          </details>
+          <details>
+            <summary>Fitting stops at configured minimum values</summary>
+            <div class="detail-body">
+              <p>
+                Once optional layout space and typography reach their floors,
+                the remaining overflow is exposed by the active surface rather
+                than reducing content below those minimums.
+              </p>
+            </div>
+          </details>
+        </div>
+        <p class="source-note">
+          Source references:
+          <code>packages/gml-renderer/src/components/Card/docs/CONTENT-FITTING.md</code>,
+          <code>packages/gml-renderer/src/components/Card/docs/fixed-vs-fluid.html</code>,
+          <code>packages/gml-renderer/src/components/Card/docs/FEATURE-PARITY.md</code>,
+          <code>packages/gml-renderer/src/components/Card/docs/card-sizing-approach.html</code>,
+          and <code>packages/client/src/modules/tiptap_editor/extensions/Card/SwitchingCardView.tsx</code>.
+        </p>
+      </section>
+    </main>
+
+    <footer class="shell">
+      Draft engineering reference · publication location not yet selected.
+    </footer>
+
+    <script>
+      const widthInput = document.querySelector("#available-width");
+      const widthValue = document.querySelector("#available-width-value");
+      const fixedHost = document.querySelector("#fixed-host");
+      const fluidHost = document.querySelector("#fluid-host");
+      const fixedViewport = document.querySelector("#fixed-viewport");
+      const fixedArtboard = document.querySelector("#fixed-artboard");
+
+      function updateDemo() {
+        const pct = Number(widthInput.value);
+        widthValue.textContent = `${pct}%`;
+        fixedHost.style.width = `${pct}%`;
+        fluidHost.style.width = `${pct}%`;
+
+        const available = fixedHost.getBoundingClientRect().width;
+        const scale = Math.min(1, available / 640);
+        fixedArtboard.style.transform = `scale(${scale})`;
+        fixedViewport.style.height = `${360 * scale}px`;
+      }
+
+      widthInput.addEventListener("input", updateDemo);
+      window.addEventListener("resize", updateDemo);
+      updateDemo();
+    </script>
+  </body>
+</html>

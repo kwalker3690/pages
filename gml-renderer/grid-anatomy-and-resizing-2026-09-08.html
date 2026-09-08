@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Grid representation and editor behavior: engineering reference</title>
+    <link rel="stylesheet" href="editor-node-reference-2026-09-08.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="shell">
+        <a class="brand" href="#top">Editor node reference · draft</a>
+        <nav class="topnav" aria-label="Explainer sections">
+          <a href="#anatomy">Node structure</a>
+          <a href="#spans">Spans and resize</a>
+          <a href="#groups">Grouping</a>
+          <a href="#roles">Grid roles</a>
+          <a href="#dragging">Cell drag</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero shell">
+        <p class="eyebrow">Engineering reference</p>
+        <h1>Grid representation and editor behavior</h1>
+        <p class="dek">
+          This page describes the grid and gridItem node structure, the 60-unit
+          span system, direction and wrapping, derived grid roles, resizing,
+          and structural changes made by cell dragging.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#spans">Interactive span example</a>
+          <a class="button" href="#roles">Collection and structure roles</a>
+        </div>
+      </section>
+
+      <section class="section shell" id="anatomy">
+        <div class="section-heading">
+          <h2>Grid nodes and rendered boxes</h2>
+          <p>
+            The grid computes placement. Each cell owns a geometry frame, a
+            visual surface, and an editable content region.
+          </p>
+        </div>
+        <div class="grid-2">
+          <div class="anatomy">
+            <span class="anatomy-label">grid · direction + group layout</span>
+            <div class="anatomy-grid">
+              <div class="anatomy-cell">
+                <strong>gridItem · cell A</strong>
+                <span>Cell frame → visual surface → editable content</span>
+              </div>
+              <div class="anatomy-cell">
+                <strong>gridItem · cell B</strong>
+                <span>Cell frame → visual surface → nested grid or content</span>
+              </div>
+            </div>
+          </div>
+          <article class="panel">
+            <span class="tag">Ownership</span>
+            <h3>Cell frame and cell surface have separate responsibilities</h3>
+            <p>
+              The private cell frame owns pointer geometry, selection state,
+              resize previews, and chrome. The public cell surface owns authored
+              backgrounds, borders, masks, padding, and custom CSS.
+            </p>
+            <ul>
+              <li>Chrome stays a sibling of the painted surface, so authored clipping cannot hide it.</li>
+              <li>Only the grid's direct cells participate in its placement calculation.</li>
+              <li>A nested grid starts a new layout context inside its containing cell.</li>
+            </ul>
+          </article>
+        </div>
+        <div class="callout">
+          <strong>Stored spans are the source data</strong>
+          <span>
+            Stored spans describe intent. The layout engine turns them into CSS
+            placement; authors do not write <code>grid-column</code> or
+            <code>grid-row</code> directly.
+          </span>
+        </div>
+      </section>
+
+      <section class="section shell" id="spans">
+        <div class="section-heading">
+          <h2>Span representation and resize behavior</h2>
+          <p>
+            Dragging a seam trades span between adjacent cells while the outer
+            grid edges stay fixed. The preview and commit use the same math.
+          </p>
+        </div>
+        <div class="demo-panel">
+          <div class="controls">
+            <div class="segmented" aria-label="Grid direction">
+              <button class="active" data-direction="horizontal">Horizontal</button>
+              <button data-direction="vertical">Vertical</button>
+            </div>
+            <label for="span-control">Cell A span</label>
+            <input id="span-control" type="range" min="10" max="50" value="24" />
+            <span class="value" id="span-value">24 / 36</span>
+          </div>
+          <div class="demo-body">
+            <div class="span-demo" id="span-demo">
+              <div class="span-cell a" id="span-a">
+                <span>Cell A <small id="label-a">24 units</small></span>
+              </div>
+              <div class="span-cell b" id="span-b">
+                <span>Cell B <small id="label-b">36 units</small></span>
+              </div>
+            </div>
+            <div class="result">
+              <strong>Document:</strong> semantic spans may store one decimal
+              place. <strong>Renderer:</strong> each semantic unit becomes ten
+              physical CSS tracks, so tenths stay exact without fractional span syntax.
+            </div>
+          </div>
+        </div>
+        <div class="grid-3" style="margin-top: 14px">
+          <article class="fact-card">
+            <span class="tag green">Preview · CSS</span>
+            <h3>Preview writes CSS custom properties</h3>
+            <p>
+              During pointer movement, the editor writes temporary physical-track
+              values directly to CSS custom properties on the affected grid and
+              cell DOM elements. It does not dispatch a ProseMirror transaction
+              on every frame.
+            </p>
+          </article>
+          <article class="fact-card">
+            <span class="tag purple">Commit</span>
+            <h3>Commit updates document spans</h3>
+            <p>Pointer release writes the semantic spans and restores temporary preview styles before React paints again.</p>
+          </article>
+          <article class="fact-card">
+            <span class="tag orange">Alignment</span>
+            <h3>Snap targets come from peer seams</h3>
+            <p>Nearby peer-grid seams provide screen-space alignment targets. Cmd/Ctrl bypasses the magnetic snap.</p>
+          </article>
+        </div>
+        <div class="grid-2" style="margin-top: 14px">
+          <article class="panel">
+            <span class="tag">Span contract</span>
+            <h3>Each grid axis uses a 60-unit semantic space</h3>
+            <p>
+              A span is a document value, not a percentage or a CSS track count.
+              Within one flow group, 60 represents the full available axis:
+              30 is one half, 20 is one third, and 15 is one quarter.
+            </p>
+            <ul>
+              <li>Authored and resized spans may use one decimal place.</li>
+              <li>For example, <code>16.3 + 43.7 = 60</code>.</li>
+              <li>Values are rounded with <code>roundGridSpan</code> before commit.</li>
+            </ul>
+          </article>
+          <article class="panel">
+            <span class="tag purple">Axis mapping</span>
+            <h3>The direction determines which span field is the flow axis</h3>
+            <ul>
+              <li>
+                Horizontal grid: <code>horizontalColumnSpan</code> controls width;
+                <code>horizontalRowSpan</code> is the optional cross-axis height.
+              </li>
+              <li>
+                Vertical grid: <code>verticalRowSpan</code> controls height;
+                <code>verticalColumnSpan</code> is the optional cross-axis width.
+              </li>
+              <li>The next cell wraps when adding its flow span would exceed 60.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section shell" id="groups">
+        <div class="section-heading">
+          <h2>Direction, grouping, and wrapping</h2>
+          <p>
+            Cells consume span along the flow axis and wrap when the next cell
+            would exceed 60. The cross axis contains the resulting groups.
+          </p>
+        </div>
+        <div class="grid-2">
+          <article class="panel">
+            <span class="tag">Horizontal grid</span>
+            <h3>Flow groups are rows</h3>
+            <div class="flow-groups" style="margin-top: 18px">
+              <div class="flow-group">
+                <div class="flow-item"><strong>A</strong><br /><small>authored 24</small></div>
+                <div class="flow-item"><strong>B</strong><br /><small>authored 24</small></div>
+              </div>
+              <div class="flow-group">
+                <div class="flow-item"><strong>C</strong><br /><small>wraps to row 2</small></div>
+              </div>
+            </div>
+            <p style="margin-top: 14px">
+              A + B fit in the first row. C would cross the 60-unit boundary, so
+              it begins a new row. Partial groups stretch proportionally to fill.
+            </p>
+          </article>
+          <article class="panel">
+            <span class="tag purple">Vertical grid</span>
+            <h3>Flow groups are columns</h3>
+            <div class="flow-groups" style="margin-top: 18px">
+              <div class="flow-group" style="grid-template-columns: 1fr">
+                <div class="flow-item"><strong>A</strong><br /><small>top band</small></div>
+                <div class="flow-item"><strong>B</strong><br /><small>bottom band</small></div>
+              </div>
+              <div class="flow-group" style="grid-template-columns: 1fr">
+                <div class="flow-item"><strong>C</strong><br /><small>wraps to column 2</small></div>
+              </div>
+            </div>
+            <p style="margin-top: 14px">
+              The same algorithm is transposed. Explicit row sizes can pin
+              vertical bands; wrapped columns can also trade cross-axis span.
+            </p>
+          </article>
+        </div>
+        <div class="callout orange">
+          <strong>Why flexible grids use cell margins instead of CSS <code>gap</code></strong>
+          <span>
+            The rendered grid is not a two-column CSS grid. A 24 / 36 split uses
+            600 narrow tracks: cell A spans 240 and cell B spans 360. CSS
+            <code>gap</code> would create 599 gaps, including gaps inside each
+            spanning cell, when the layout needs only one visible gutter between
+            A and B. The renderer sets CSS gap to zero and applies
+            <code>--gml-grid-gap</code> as margins at cell boundaries instead.
+            The cell areas still cover the full grid and its outside edges stay flush.
+          </span>
+        </div>
+      </section>
+
+      <section class="section shell" id="roles">
+        <div class="section-heading">
+          <h2>Collection and structure grid roles</h2>
+          <p>
+            A grid's role is derived from its structure, not stored in the
+            document. It affects selection, growth, arrow navigation, and chrome.
+          </p>
+        </div>
+        <div class="grid-2">
+          <article class="panel">
+            <span class="tag green">Collection</span>
+            <h3>Collection grid</h3>
+            <p>Used for cells with a repeated structural signature, such as cards, steps, people, or features.</p>
+            <ul>
+              <li>Click entry prefers the items.</li>
+              <li>Arrow keys walk between members.</li>
+              <li>The add control grows the set at its end.</li>
+              <li>Grid-level chrome exposes actions for the set.</li>
+            </ul>
+          </article>
+          <article class="panel">
+            <span class="tag purple">Structure</span>
+            <h3>Structure grid</h3>
+            <p>Used for unlike regions, such as a heading beside a chart or nested layout scaffolding.</p>
+            <ul>
+              <li>Selection emphasizes the direct-cell lattice.</li>
+              <li>Flush nested structures avoid duplicate selection rungs.</li>
+              <li>Cells can expose row, column, or cell labels from their direct shape.</li>
+              <li>A one-cell grid remains structure and has no set-growth control.</li>
+            </ul>
+          </article>
+        </div>
+        <div class="callout">
+          <strong>Grid role is derived, not authored</strong>
+          <span>
+            There is no authored role flag. A classifier derives the role from
+            the grid's cells, signatures, spans, markers, and nesting context,
+            so legacy and imported documents get the same behavior automatically.
+          </span>
+        </div>
+      </section>
+
+      <section class="section shell" id="dragging">
+        <div class="section-heading">
+          <h2>Cell drag operations</h2>
+          <p>
+            The target zone determines
+            whether the cell joins a group, creates a group, or splits a peer cell.
+          </p>
+        </div>
+        <div class="grid-3">
+          <article class="fact-card">
+            <span class="tag">Same grid</span>
+            <h3>Drop within the same grid</h3>
+            <div class="drop-map" style="margin-top: 16px">
+              <div class="drop-boundary">new row / column</div>
+              <div class="drop-join">join this flow group</div>
+              <div class="drop-boundary">new row / column</div>
+            </div>
+            <p style="margin-top: 14px">
+              Deep inside a band joins it. Gutters, outer cross edges, and space
+              beyond the grid create a new full-span group.
+            </p>
+          </article>
+          <article class="fact-card">
+            <span class="tag purple">Parent peer</span>
+            <h3>Drop onto a parent peer</h3>
+            <div class="drop-map" style="margin-top: 16px; grid-template-rows: 1fr">
+              <div class="drop-join">
+                top / bottom → vertical split<br />
+                left / right → horizontal split
+              </div>
+            </div>
+            <p style="margin-top: 14px">
+              Dropping onto a direct sibling can create a nested grid that wraps
+              the target content and the moved cell in one transaction.
+            </p>
+          </article>
+          <article class="fact-card">
+            <span class="tag orange">Contract</span>
+            <h3>One plan drives preview and commit</h3>
+            <div class="drop-map" style="margin-top: 16px; grid-template-rows: 1fr">
+              <div class="drop-join">
+                one reorder plan<br />→ preview<br />→ transaction
+              </div>
+            </div>
+            <p style="margin-top: 14px">
+              The same plan computes post-drop order, span redistribution, live
+              placement, and the final ProseMirror edit.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section shell" id="notes">
+        <div class="section-heading">
+          <h2>Selection and interaction ownership</h2>
+          <p>Pointer resolution assigns each interaction to one grid while nested grids may still contribute visible presentation layers.</p>
+        </div>
+        <div class="details-card">
+          <details open>
+            <summary>One grid owns each pointer interaction</summary>
+            <div class="detail-body">
+              <p>
+                Pointer resolution selects one interaction owner while allowing
+                subordinate grids to contribute presentation layers. This keeps
+                nested seams visible without showing competing handles.
+              </p>
+            </div>
+          </details>
+          <details>
+            <summary>Native text surfaces keep the caret</summary>
+            <div class="detail-body">
+              <p>
+                Text ink and blank authored flow space remain native caret
+                territory. Resize seams and exact handle seats win only inside
+                their explicit hit regions.
+              </p>
+            </div>
+          </details>
+          <details>
+            <summary>Temporary layout must be restored after every drag</summary>
+            <div class="detail-body">
+              <p>
+                Live preview writes directly to DOM styles for speed. Cleanup
+                restores the DOM before the document transaction so React never
+                inherits stale placement from an earlier gesture.
+              </p>
+            </div>
+          </details>
+        </div>
+        <p class="source-note">
+          Source references:
+          <code>packages/client/src/modules/tiptap_editor/extensions/Grid/CLAUDE.md</code>,
+          <code>packages/gml-renderer/src/components/Grid/layout.ts</code>, and
+          <code>packages/gml-renderer/src/components/Grid/SPEC.md</code>.
+        </p>
+      </section>
+    </main>
+
+    <footer class="shell">
+      Draft engineering reference · publication location not yet selected.
+    </footer>
+
+    <script>
+      const slider = document.querySelector("#span-control");
+      const value = document.querySelector("#span-value");
+      const demo = document.querySelector("#span-demo");
+      const cellA = document.querySelector("#span-a");
+      const cellB = document.querySelector("#span-b");
+      const labelA = document.querySelector("#label-a");
+      const labelB = document.querySelector("#label-b");
+      let direction = "horizontal";
+
+      function updateSpan() {
+        const a = Number(slider.value);
+        const b = 60 - a;
+        value.textContent = `${a} / ${b}`;
+        labelA.textContent = `${a} units`;
+        labelB.textContent = `${b} units`;
+
+        if (direction === "horizontal") {
+          cellA.style.gridColumn = `span ${a}`;
+          cellB.style.gridColumn = `span ${b}`;
+          cellA.style.gridRow = "1";
+          cellB.style.gridRow = "1";
+        } else {
+          cellA.style.gridRow = `span ${a}`;
+          cellB.style.gridRow = `span ${b}`;
+          cellA.style.gridColumn = "1";
+          cellB.style.gridColumn = "1";
+        }
+      }
+
+      document.querySelectorAll("[data-direction]").forEach((button) => {
+        button.addEventListener("click", () => {
+          direction = button.dataset.direction;
+          demo.classList.toggle("vertical", direction === "vertical");
+          document.querySelectorAll("[data-direction]").forEach((item) => {
+            item.classList.toggle("active", item === button);
+          });
+          updateSpan();
+        });
+      });
+
+      slider.addEventListener("input", updateSpan);
+      updateSpan();
+    </script>
+  </body>
+</html>

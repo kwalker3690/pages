@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Card paint order and hit testing: engineering reference</title>
+    <link rel="stylesheet" href="editor-node-reference-2026-09-08.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="shell">
+        <a class="brand" href="#top">Editor node reference · draft</a>
+        <nav class="topnav" aria-label="Explainer sections">
+          <a href="#stack">Layer example</a>
+          <a href="#ladder">Layer order</a>
+          <a href="#contexts">Stacking contexts</a>
+          <a href="#reorder">Freeform reorder</a>
+          <a href="#hit-testing">Hit testing</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero shell">
+        <p class="eyebrow">Engineering reference</p>
+        <h1>Card paint order, stacking contexts, and hit testing</h1>
+        <p class="dek">
+          This page describes the paint order for card backgrounds, flow
+          content, freeform objects, overflow UI, and editor chrome. It also
+          explains how stacking contexts, reordering, and hit testing interact.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#stack">Interactive layer example</a>
+          <a class="button" href="#reorder">Freeform reorder behavior</a>
+        </div>
+      </section>
+
+      <section class="section shell" id="stack">
+        <div class="section-heading">
+          <h2>Card-level paint order</h2>
+          <p>
+            Toggle layers to see which content each tier can cover. The example
+            combines authored content with editing and overflow affordances.
+          </p>
+        </div>
+        <div class="demo-panel">
+          <div class="demo-body">
+            <div class="paint-layout">
+              <div class="paint-stage-shell">
+                <div class="paint-stage" id="paint-stage">
+                  <div class="paint-layer paint-background" data-layer="background"></div>
+                  <div class="paint-layer paint-treatment" data-layer="treatment"></div>
+                  <div class="paint-layer paint-behind" data-layer="behind"></div>
+                  <div class="paint-layer paint-flow" data-layer="flow">
+                    <span class="mini-kicker">Annual planning</span>
+                    <h3>Example flow content</h3>
+                    <p>
+                      Flow content stays readable over the background stack and
+                      participates in the card's document layout.
+                    </p>
+                  </div>
+                  <div class="paint-layer paint-front" data-layer="front">
+                    <strong>03</strong>
+                    <span>Freeform overlay above the text layer</span>
+                  </div>
+                  <div class="paint-layer paint-scrim" data-layer="scrim"></div>
+                  <div class="paint-layer paint-footer" data-layer="footer">GAMMA · 12</div>
+                  <div class="paint-layer paint-selection" data-layer="selection"></div>
+                  <div class="paint-layer paint-chrome" data-layer="chrome"></div>
+                </div>
+              </div>
+              <div class="layer-controls" aria-label="Visible paint layers">
+                <label class="layer-toggle">
+                  <input type="checkbox" checked data-toggle-layer="background" />
+                  <span>Card background image</span><code>−2</code>
+                </label>
+                <label class="layer-toggle">
+                  <input type="checkbox" checked data-toggle-layer="treatment" />
+                  <span>Background treatment</span><code>−1</code>
+                </label>
+                <label class="layer-toggle">
+                  <input type="checkbox" checked data-toggle-layer="behind" />
+                  <span>Behind-flow object</span><code>−1</code>
+                </label>
+                <label class="layer-toggle">
+                  <input type="checkbox" checked data-toggle-layer="flow" />
+                  <span>Flow content</span><code>auto / 0</code>
+                </label>
+                <label class="layer-toggle">
+                  <input type="checkbox" checked data-toggle-layer="front" />
+                  <span>Freeform object</span><code>3</code>
+                </label>
+                <label class="layer-toggle">
+                  <input type="checkbox" checked data-toggle-layer="scrim" />
+                  <span>Overflow scrim</span><code>4</code>
+                </label>
+                <label class="layer-toggle">
+                  <input type="checkbox" checked data-toggle-layer="footer" />
+                  <span>Reveal footer</span><code>5</code>
+                </label>
+                <label class="layer-toggle">
+                  <input type="checkbox" checked data-toggle-layer="selection" />
+                  <span>Selection ring</span><code>10</code>
+                </label>
+                <label class="layer-toggle">
+                  <input type="checkbox" checked data-toggle-layer="chrome" />
+                  <span>Editor chrome</span><code>11</code>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="callout">
+          <strong><code>z-index</code> values are relative to a stacking context</strong>
+          <span>
+            A negative <code>z-index</code> is safe only because the card canvas
+            creates an isolated stacking context. The number orders descendants
+            inside that arena; it does not place them behind the entire card.
+          </span>
+        </div>
+      </section>
+
+      <section class="section shell" id="ladder">
+        <div class="section-heading">
+          <h2>Card layers from back to front</h2>
+          <p>
+            Authored layers occupy the lower values. Overflow UI and editor
+            chrome render above them without participating in document layout.
+          </p>
+        </div>
+        <div class="layer-ladder">
+          <div class="layer-rung">
+            <div><strong>Card fill</strong><span>Solid or gradient paint on the card root.</span></div>
+            <code>root background</code>
+          </div>
+          <div class="layer-rung">
+            <div><strong>Card background image</strong><span>A document image node rendered out of flow across the frame.</span></div>
+            <code>z: −2</code>
+          </div>
+          <div class="layer-rung">
+            <div><strong>Background treatment</strong><span>Card-level tint or frost between backdrop and foreground.</span></div>
+            <code>z: −1</code>
+          </div>
+          <div class="layer-rung">
+            <div><strong>Behind-flow image or shape</strong><span>A movable canvas object deliberately pushed below text and grids.</span></div>
+            <code>z: −1</code>
+          </div>
+          <div class="layer-rung">
+            <div><strong>Flow content</strong><span>Headings, paragraphs, grids, and ordinary document content.</span></div>
+            <code>auto / 0</code>
+          </div>
+          <div class="layer-rung">
+            <div><strong>Freeform objects</strong><span>Movable boxes above the card's flow layer; sibling order resolves ties.</span></div>
+            <code>z: 3</code>
+          </div>
+          <div class="layer-rung">
+            <div><strong>Overflow feedback</strong><span>Reveal-mode cutoff scrim dims authored content beyond the fixed frame.</span></div>
+            <code>z: 4</code>
+          </div>
+          <div class="layer-rung">
+            <div><strong>Footer in reveal mode</strong><span>Stays readable above the overflow scrim.</span></div>
+            <code>z: 5</code>
+          </div>
+          <div class="layer-rung">
+            <div><strong>Selection and editor chrome</strong><span>Handles, rings, menus, and canvas overlays at screen or canvas scale.</span></div>
+            <code>z: 10–11</code>
+          </div>
+        </div>
+      </section>
+
+      <section class="section shell" id="contexts">
+        <div class="section-heading">
+          <h2>Nested stacking contexts</h2>
+          <p>
+            Cards, cells, and painted content boxes each create a local version
+            of the same background → treatment → content pattern.
+          </p>
+        </div>
+        <div class="grid-3">
+          <article class="fact-card">
+            <span class="tag">Card</span>
+            <h3>Card stacking context</h3>
+            <p>
+              The card fill sits on the root. A background image and optional
+              treatment paint inside the isolated canvas below flow content.
+            </p>
+          </article>
+          <article class="fact-card">
+            <span class="tag green">Grid cell</span>
+            <h3>Grid-cell stacking context</h3>
+            <p>
+              A cell background, background image, and tint/frost are clipped
+              to that cell's radius and sit behind its editable content.
+            </p>
+          </article>
+          <article class="fact-card">
+            <span class="tag purple">Content box</span>
+            <h3>Content-box stacking context</h3>
+            <p>
+              The box background sits at the base, its image at −2, its overlay
+              at −1, and the box's flow content remains in front.
+            </p>
+          </article>
+        </div>
+        <div class="callout orange">
+          <strong>Compare stacking contexts before comparing numeric values</strong>
+          <span>
+            A cell's <code>z: −1</code> treatment is scoped to the cell. A card's
+            <code>z: −1</code> back layer is scoped to the canvas. Compare the
+            containing stacking context before comparing raw numbers.
+          </span>
+        </div>
+      </section>
+
+      <section class="section shell" id="reorder">
+        <div class="section-heading">
+          <h2>Freeform reordering and the flow boundary</h2>
+          <p>
+            Freeform siblings first reorder within their own layer. At the back
+            edge, supported objects can move into the behind-flow layer.
+          </p>
+        </div>
+        <div class="grid-4">
+          <article class="fact-card">
+            <span class="tag">Step 1</span>
+            <h3>Freeform sibling order</h3>
+            <p>Bring forward or send backward changes sibling order at <code>z: 3</code>.</p>
+          </article>
+          <article class="fact-card">
+            <span class="tag">Step 2</span>
+            <h3>Back edge of the freeform layer</h3>
+            <p>The object is adjacent to the flow boundary but still paints above flow.</p>
+          </article>
+          <article class="fact-card">
+            <span class="tag orange">Step 3</span>
+            <h3>Transition to <code>behindFlow</code></h3>
+            <p>Sending farther back moves an eligible image or shape to <code>z: −1</code>.</p>
+          </article>
+          <article class="fact-card">
+            <span class="tag green">Return</span>
+            <h3>Return to the freeform layer</h3>
+            <p>The frontmost back-layer object crosses upward as the backmost freeform object.</p>
+          </article>
+        </div>
+        <div class="callout">
+          <strong>Only images and shapes can use <code>behindFlow</code></strong>
+          <span>
+            Images and shapes can become visual back-layer objects. Text and
+            content boxes stay above flow so document text does not disappear
+            behind other editable document content.
+          </span>
+        </div>
+      </section>
+
+      <section class="section shell" id="hit-testing">
+        <div class="section-heading">
+          <h2>Paint order and hit testing are separate</h2>
+          <p>
+            A behind-flow object is visually covered by flow, but the editor can
+            still recover it through geometry-aware interaction rules.
+          </p>
+        </div>
+        <div class="grid-3">
+          <article class="panel">
+            <span class="tag green">Flow ink</span>
+            <h3>Text receives native pointer behavior</h3>
+            <p>
+              Clicking or double-clicking actual text over a behind-flow image
+              keeps native caret and word-selection behavior.
+            </p>
+          </article>
+          <article class="panel">
+            <span class="tag purple">Bare area</span>
+            <h3>Bare areas can resolve the underlying object</h3>
+            <p>
+              Empty painted area can select the underlying object even when the
+              browser's DOM target belongs to the flow layer above it.
+            </p>
+          </article>
+          <article class="panel">
+            <span class="tag orange">Deep select</span>
+            <h3>Modifier-assisted deep selection</h3>
+            <p>
+              The modifier-assisted selection path reaches covered canvas
+              objects without giving ordinary text clicks to the freeform engine.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section shell" id="notes">
+        <div class="section-heading">
+          <h2>Rendering constraints</h2>
+          <p>These constraints separate authored paint order from overflow feedback and editor-only UI.</p>
+        </div>
+        <div class="details-card">
+          <details open>
+            <summary>Editor chrome must not move layout</summary>
+            <div class="detail-body">
+              <p>
+                Selection rings and controls are overlays or slots. They paint
+                above the document without adding padding, changing box size, or
+                creating an editor-only rendering difference.
+              </p>
+            </div>
+          </details>
+          <details>
+            <summary>Sibling order resolves objects inside one layer</summary>
+            <div class="detail-body">
+              <p>
+                Freeform objects share the same layer value. Their document
+                order is therefore the paint order: later siblings appear on top.
+              </p>
+            </div>
+          </details>
+          <details>
+            <summary>Export and published rendering keep the authored stack</summary>
+            <div class="detail-body">
+              <p>
+                The canvas stacking contract is renderer-owned. Read-only,
+                server-rendered, and published surfaces keep the same authored
+                layer order while omitting editor-only chrome.
+              </p>
+            </div>
+          </details>
+        </div>
+        <p class="source-note">
+          Source references:
+          <code>packages/gml-renderer/src/components/Card/CardBackLayer.stories.tsx</code>,
+          <code>packages/gml-renderer/src/components/Card/card.css</code>,
+          <code>packages/gml-renderer/src/components/PositionedBox/positioned-box.css</code>,
+          and <code>packages/gml-renderer/src/components/Card/docs/POSITIONED-BOXES.md</code>.
+        </p>
+      </section>
+    </main>
+
+    <footer class="shell">
+      Draft engineering reference · publication location not yet selected.
+    </footer>
+
+    <script>
+      document.querySelectorAll("[data-toggle-layer]").forEach((toggle) => {
+        toggle.addEventListener("change", () => {
+          const name = toggle.dataset.toggleLayer;
+          const layer = document.querySelector(`[data-layer="${name}"]`);
+          layer.classList.toggle("hidden", !toggle.checked);
+        });
+      });
+    </script>
+  </body>
+</html>
