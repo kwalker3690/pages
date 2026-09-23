@@ -1,0 +1,30 @@
+{
+  "id": "premium-wellness-with-explicit-style",
+  "ready": true,
+  "cardCount": 18,
+  "collectedAt": "2026-09-23T13:46:42.244Z",
+  "harnessSessionId": "2026-09-23T13-42-55-894Z_33e5f785-2db1-472d-8b44-1b5584410bdd",
+  "sessionUrl": "https://staging.gamma.app/agents?session=2026-09-23T13-42-55-894Z_33e5f785-2db1-472d-8b44-1b5584410bdd",
+  "snapshot": "tpl-4f4cb05b11697aa4c7d0356f",
+  "target": "cubesandbox:blue",
+  "model": "claude-opus-5",
+  "provider": "anthropic",
+  "thinkingLevel": "medium",
+  "outlineSha256": "610a24f159c361280a0b5569ad4190b045dfa8efc947a0ca4f8187ea873839b0",
+  "agentPath": "gamma-agent/session/generations/wellness-boutique-hotels/brief.xml",
+  "tools": [
+    "web_search",
+    "web_search",
+    "web_search",
+    "web_search",
+    "generation_init",
+    "template_selection",
+    "generation_source_prepare",
+    "show_file",
+    "write",
+    "template_restyle",
+    "template_restyle"
+  ],
+  "handover": "The plan's ready for you.\n\nThe angle I took: **\"you don't need a spa.\"** That's the whole argument, and the benchmark data backs it hard — in 2025, small curated wellness properties overtook full-spa hotels on ADR, RevPAR *and* operating profit simultaneously for the first time. So the deck sells restraint to people who've been told they need capex, and it leads with sleep because it's the one wellness product with no booking friction and a 100% addressable audience.\n\nTwo calls worth flagging:\n\n- **The worked example is the centerpiece**, not the market stats. I invented a provider (Stillwater Rooms) and a 42-key property (The Ardmore) and modeled the economics line by line — attach rate, session share, retail COGS, program fee, net contribution, payback. A GM can stress-test it in their head. It's labeled once, plainly, as fictional and as a model rather than a result, and nothing anywhere in the deck claims a real client or outcome.\n- **I skipped the workspace brand templates** the picker ranked first — they'd have imposed someone else's palette over your white-and-teal. Instead I took a clean library look and recolored it: white cards, soft teal accent, warm ink.\n\n17 slides, two dark chapter breaks for pace. If you'd rather open on the revenue upside than on the tired guest, or want the objections slide pulled forward to sit right after the spa-trap argument, say so and I'll reshape it before we build.",
+  "sourcePr": 37703
+}

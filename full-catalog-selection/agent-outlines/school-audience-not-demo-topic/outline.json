@@ -1,0 +1,30 @@
+{
+  "id": "school-audience-not-demo-topic",
+  "ready": true,
+  "cardCount": 15,
+  "collectedAt": "2026-09-23T13:39:51.462Z",
+  "harnessSessionId": "2026-09-23T13-36-16-335Z_b76e496f-7299-4b0c-b872-90a70e12437d",
+  "sessionUrl": "https://staging.gamma.app/agents?session=2026-09-23T13-36-16-335Z_b76e496f-7299-4b0c-b872-90a70e12437d",
+  "snapshot": "tpl-4f4cb05b11697aa4c7d0356f",
+  "target": "cubesandbox:blue",
+  "model": "claude-opus-5",
+  "provider": "anthropic",
+  "thinkingLevel": "medium",
+  "outlineSha256": "068f89b1536e438913059aba6df0700e157454284fadd03a2fd715a574311227",
+  "agentPath": "gamma-agent/session/generations/ozone-lesson/brief.xml",
+  "tools": [
+    "web_search",
+    "web_search",
+    "web_search",
+    "web_search",
+    "generation_init",
+    "template_selection",
+    "generation_source_prepare",
+    "web_search",
+    "web_search",
+    "show_file",
+    "write"
+  ],
+  "handover": "The complete 15-slide plan is ready for review. I chose a science-mystery arc with a hands-on UV demo, a chlorine “wrecking robot” analogy, and a team rescue challenge. No slides have been generated.\n\n![Review the ozone lesson outline](file:gamma-agent/session/generations/ozone-lesson/brief.xml)",
+  "sourcePr": 37703
+}

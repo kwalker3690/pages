@@ -1,0 +1,197 @@
+{
+  "id": "g_ht6byweg9lzl1u8",
+  "name": "File",
+  "headingFont": "Cormorant Garamond",
+  "headingFontName": "Cormorant Garamond",
+  "headingFontWeight": 600,
+  "bodyFont": "Source Sans 3",
+  "bodyFontName": "Source Sans 3",
+  "bodyFontWeight": 400,
+  "config": {
+    "canvasPalette": {
+      "colors": [
+        {
+          "key": "sage",
+          "name": "Sage",
+          "color": {
+            "type": "solid",
+            "color": "#A8BDA8"
+          }
+        },
+        {
+          "key": "eucalyptus",
+          "name": "Eucalyptus",
+          "color": {
+            "type": "solid",
+            "color": "#58705F"
+          }
+        },
+        {
+          "key": "sand",
+          "name": "Warm sand",
+          "color": {
+            "type": "solid",
+            "color": "#D5C5AF"
+          }
+        },
+        {
+          "key": "mist",
+          "name": "Glass mist",
+          "color": {
+            "type": "solid",
+            "color": "#DDE8E0"
+          }
+        },
+        {
+          "key": "fir",
+          "name": "Deep fir",
+          "color": {
+            "type": "solid",
+            "color": "#173C2C"
+          }
+        },
+        {
+          "key": "water",
+          "name": "Water",
+          "color": {
+            "type": "solid",
+            "color": "#B8D0C7"
+          }
+        }
+      ],
+      "gradients": []
+    },
+    "headingColor": "#173C2C",
+    "bodyColor": "#304A3E",
+    "mutedColor": "#5F7066",
+    "cardColor": {
+      "type": "solid",
+      "color": "#F7F3EA"
+    },
+    "surfaceColor": {
+      "type": "solid",
+      "color": "#FBF9F4"
+    },
+    "neutralBorderColor": {
+      "type": "solid",
+      "color": "rgba(23,60,44,0.22)"
+    },
+    "background": {
+      "type": "color",
+      "color": {
+        "hex": "#E7E0D5"
+      },
+      "source": "color.solid"
+    },
+    "dividerColor": "#8FA496",
+    "dividerThickness": "sm",
+    "roundness": "sm",
+    "cardShadow": "none",
+    "cardBorder": "none",
+    "cardPadding": "lg",
+    "density": "lg",
+    "blockSpacing": 13,
+    "letterSpacingHeading": 0,
+    "letterSpacingBody": 0,
+    "lineHeightHeading": 1.02,
+    "lineHeightBody": 1.38,
+    "headingTransform": "none",
+    "typeScale": {
+      "display-xl": 80,
+      "display-lg": 58,
+      "display-md": 42,
+      "heading-1": 36,
+      "heading-2": 27,
+      "heading-3": 21,
+      "heading-4": 17,
+      "subheading": 17,
+      "body-normal": 14,
+      "body-sm": 12.5,
+      "body-lg": 16,
+      "eyebrow": 11,
+      "caption": 10.5
+    },
+    "roleStyles": {
+      "display": {
+        "font": "Cormorant Garamond",
+        "fontWeight": 600,
+        "italic": false,
+        "transform": "none",
+        "letterSpacing": -0.015,
+        "lineHeight": 1
+      },
+      "eyebrow": {
+        "font": "Source Sans 3",
+        "fontWeight": 600,
+        "italic": false,
+        "transform": "uppercase",
+        "color": "#58705F",
+        "letterSpacing": 0.11,
+        "lineHeight": 1.25
+      },
+      "caption": {
+        "font": "Source Sans 3",
+        "fontWeight": 400,
+        "italic": false,
+        "transform": "none",
+        "color": "#5F7066",
+        "letterSpacing": 0.01,
+        "lineHeight": 1.35
+      },
+      "label": {
+        "font": "Source Sans 3",
+        "fontWeight": 600,
+        "italic": false,
+        "transform": "uppercase",
+        "color": "#58705F",
+        "letterSpacing": 0.09,
+        "lineHeight": 1.25
+      },
+      "subheading": {
+        "font": "Source Sans 3",
+        "fontWeight": 500,
+        "italic": false,
+        "transform": "none",
+        "letterSpacing": 0,
+        "lineHeight": 1.2
+      }
+    },
+    "cardMargins": {
+      "footer": {},
+      "pageNumberFormat": "number",
+      "pageNumberPadded": true
+    },
+    "imagery": {
+      "defaultStyleId": "winter-glasshouse",
+      "styles": [
+        {
+          "id": "winter-glasshouse",
+          "promptGuidance": "soft editorial still-life or documentary photograph, diffuse winter daylight, warm ivory and layered sage-green palette, tactile materials, airy negative space, low contrast, matte finish, absolutely no people or human body parts, no hands, no silhouettes, no reflections of people, no logos, no text",
+          "subjects": "Use the user's concrete subject. Favor quiet observational details, architecture, tools, materials, plants, water, and work surfaces only when the content calls for them. Never add greenhouse, wellness, spa, soft goods, ceramics, or botanical props unless the subject requires them. Never people, bodies, hands, silhouettes, mirrors with figures, signage, products, text, or logos.",
+          "whenToUse": "Use for atmospheric plates and observational details; derive every subject from the slide content and keep argumentative and data slides photographic-free."
+        }
+      ]
+    },
+    "shapeColorScheme": "default",
+    "charts": {
+      "textSize": "md",
+      "roundness": "sm",
+      "gridlineStyle": "none",
+      "lineWeight": "sm",
+      "font": "body"
+    }
+  },
+  "fonts": [
+    {
+      "id": "Cormorant Garamond",
+      "name": "Cormorant Garamond",
+      "url": "https://fonts.googleapis.com/css2?family=Cormorant+Garamond%3Aital%2Cwght%400%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B1%2C300%3B1%2C400%3B1%2C500%3B1%2C600%3B1%2C700&display=swap"
+    },
+    {
+      "id": "Source Sans 3",
+      "name": "Source Sans 3",
+      "url": "https://fonts.googleapis.com/css2?family=Source+Sans+3%3Aital%2Cwght%400%2C200%3B0%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800%3B0%2C900%3B1%2C200%3B1%2C300%3B1%2C400%3B1%2C500%3B1%2C600%3B1%2C700%3B1%2C800%3B1%2C900&display=swap"
+    }
+  ],
+  "isDefault": false
+}

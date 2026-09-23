@@ -1,0 +1,122 @@
+{
+  "headingFont": "Sora",
+  "headingFontWeight": 700,
+  "bodyFont": "IBM Plex Sans",
+  "bodyFontWeight": 400,
+  "config": {
+    "canvasPalette": {
+      "colors": [
+        {
+          "key": "primary",
+          "name": "Request Signal",
+          "color": {
+            "type": "solid",
+            "color": "#58E6FF"
+          }
+        },
+        {
+          "key": "boundary",
+          "name": "Trust Boundary",
+          "color": {
+            "type": "solid",
+            "color": "#9B7BFF"
+          }
+        },
+        {
+          "key": "positive",
+          "name": "Verified State",
+          "color": {
+            "type": "solid",
+            "color": "#59F2C3"
+          }
+        },
+        {
+          "key": "ink",
+          "name": "Interface Ink",
+          "color": {
+            "type": "solid",
+            "color": "#F5F8FF"
+          }
+        },
+        {
+          "key": "rule",
+          "name": "Graphite Rule",
+          "color": {
+            "type": "solid",
+            "color": "#40506B"
+          }
+        }
+      ],
+      "gradients": []
+    },
+    "cardColor": {
+      "type": "solid",
+      "color": "#09111F"
+    },
+    "surfaceColor": {
+      "type": "solid",
+      "color": "#101B30"
+    },
+    "headingColor": "#F5F8FF",
+    "bodyColor": "#D7E2F2",
+    "mutedColor": {
+      "type": "solid",
+      "color": "#9AACC8"
+    },
+    "background": {
+      "type": "color",
+      "source": "color.solid",
+      "color": {
+        "hex": "#050A13"
+      }
+    },
+    "letterSpacingHeading": -0.02,
+    "roundness": "lg",
+    "cardShadow": "default",
+    "cardBorder": "sm",
+    "shapeFill": "semi",
+    "shapeColorScheme": "accent",
+    "roleStyles": {
+      "subheading": {
+        "font": "IBM Plex Sans",
+        "fontWeight": 600
+      },
+      "eyebrow": {
+        "font": "IBM Plex Sans",
+        "transform": "uppercase",
+        "letterSpacing": 0.12
+      }
+    },
+    "imagery": {
+      "defaultStyleId": "secure-stack-isometric",
+      "styles": [
+        {
+          "id": "secure-stack-isometric",
+          "name": "Secure-stack isometric render",
+          "promptGuidance": "Matte isometric 3D software infrastructure built from translucent glass and dark graphite under controlled rim light, using near-black #050A13, signal cyan #58E6FF, violet #9B7BFF and mint #59F2C3 with crisp shadows, no text or lettering.",
+          "subjects": "Abstract browser frames, request packets, middleware gates, server blocks, database cylinders, session vaults, shields, and locks without brands or people.",
+          "whenToUse": "Use selectively for the opening, architecture, session, and security moments; keep all technical labels, code, UI, arrows, and data native and editable."
+        }
+      ]
+    },
+    "typeScale": {
+      "display-xl": 84,
+      "display-lg": 64,
+      "display-md": 48,
+      "heading-1": 40,
+      "heading-2": 30,
+      "heading-3": 22,
+      "heading-4": 18,
+      "subheading": 20,
+      "body-lg": 19,
+      "body-normal": 16,
+      "body-sm": 13,
+      "eyebrow": 11,
+      "caption": 11
+    },
+    "density": "md",
+    "cardPadding": "lg",
+    "lineHeightBody": 1.35,
+    "lineHeightHeading": 1.1
+  }
+}

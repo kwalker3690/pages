@@ -1,0 +1,122 @@
+{
+  "headingFont": "Newsreader",
+  "headingFontWeight": 700,
+  "bodyFont": "IBM Plex Sans",
+  "bodyFontWeight": 400,
+  "config": {
+    "canvasPalette": {
+      "colors": [
+        {
+          "key": "primary",
+          "name": "Operational Blue",
+          "color": {
+            "type": "solid",
+            "color": "#2557A7"
+          }
+        },
+        {
+          "key": "attention",
+          "name": "Signal Amber",
+          "color": {
+            "type": "solid",
+            "color": "#B86422"
+          }
+        },
+        {
+          "key": "validated",
+          "name": "Field Sage",
+          "color": {
+            "type": "solid",
+            "color": "#527064"
+          }
+        },
+        {
+          "key": "ink",
+          "name": "Graphite Ink",
+          "color": {
+            "type": "solid",
+            "color": "#1F272E"
+          }
+        },
+        {
+          "key": "rule",
+          "name": "Warm Rule",
+          "color": {
+            "type": "solid",
+            "color": "#C9C5BB"
+          }
+        }
+      ],
+      "gradients": []
+    },
+    "cardColor": {
+      "type": "solid",
+      "color": "#FFFDF8"
+    },
+    "surfaceColor": {
+      "type": "solid",
+      "color": "#F1EEE7"
+    },
+    "headingColor": "#1F272E",
+    "bodyColor": "#343E46",
+    "mutedColor": {
+      "type": "solid",
+      "color": "#626B70"
+    },
+    "background": {
+      "type": "color",
+      "source": "color.solid",
+      "color": {
+        "hex": "#E8E4DB"
+      }
+    },
+    "letterSpacingHeading": -0.012,
+    "roundness": "sm",
+    "cardShadow": "none",
+    "cardBorder": "sm",
+    "shapeFill": "solid",
+    "shapeColorScheme": "default",
+    "roleStyles": {
+      "subheading": {
+        "font": "IBM Plex Sans",
+        "fontWeight": 600
+      },
+      "eyebrow": {
+        "font": "IBM Plex Sans",
+        "transform": "uppercase",
+        "letterSpacing": 0.1
+      }
+    },
+    "imagery": {
+      "defaultStyleId": "operational-still-life",
+      "styles": [
+        {
+          "id": "operational-still-life",
+          "name": "Operational studio still life",
+          "promptGuidance": "Editorial studio photograph of modular paper blocks, translucent tabs, clips and connector cord arranged as a precise working system under soft directional daylight, warm white #FFFDF8 and graphite #1F272E with operational blue #2557A7, signal amber #B86422 and field sage #527064 accents, tactile but clean, generous negative space, no text or lettering.",
+          "subjects": "Abstract project systems, connected workstreams, transitions, handoffs, gates, and unresolved dependencies; no people, logos, screens, or readable documents.",
+          "whenToUse": "Cover, context, operating-model transition, and closing slide; use native editable diagrams instead when the content expresses a process, quantity, responsibility, or decision."
+        }
+      ]
+    },
+    "typeScale": {
+      "display-xl": 84,
+      "display-lg": 64,
+      "display-md": 48,
+      "heading-1": 40,
+      "heading-2": 30,
+      "heading-3": 22,
+      "heading-4": 18,
+      "subheading": 20,
+      "body-lg": 19,
+      "body-normal": 16,
+      "body-sm": 13,
+      "eyebrow": 11,
+      "caption": 11
+    },
+    "density": "md",
+    "cardPadding": "lg",
+    "lineHeightBody": 1.35,
+    "lineHeightHeading": 1.1
+  }
+}

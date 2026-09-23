@@ -1,0 +1,33 @@
+{
+  "id": "big-bang-for-a-pirate",
+  "ready": true,
+  "cardCount": 10,
+  "collectedAt": "2026-09-23T13:50:47.628Z",
+  "harnessSessionId": "2026-09-23T13-41-37-464Z_c283587d-88e4-48db-9a22-c48b93f2bef9",
+  "sessionUrl": "https://staging.gamma.app/agents?session=2026-09-23T13-41-37-464Z_c283587d-88e4-48db-9a22-c48b93f2bef9",
+  "snapshot": "tpl-4f4cb05b11697aa4c7d0356f",
+  "target": "cubesandbox:blue",
+  "model": "claude-opus-5",
+  "provider": "anthropic",
+  "thinkingLevel": "medium",
+  "outlineSha256": "7ae790bbfa9238243d24c098cd42b51b05b026529bbf503957a8eb017dcb8e84",
+  "agentPath": "gamma-agent/session/generations/big-bang-pirate/brief.xml",
+  "tools": [
+    "bash",
+    "web_search",
+    "web_search",
+    "web_search",
+    "web_search",
+    "bash",
+    "generation_init",
+    "template_selection",
+    "generation_source_prepare",
+    "show_file",
+    "write",
+    "template_restyle",
+    "web_fetch",
+    "write"
+  ],
+  "handover": "Updated, still 10 slides.\n\nThe lithium fix was the real one. The review is blunt: deuterium and helium-4 sit in remarkable agreement with the predictions, while predicted lithium-7 runs about three times what's seen in the oldest stars. So the evidence slides now rest on deuterium and helium alone, and lithium moved to the closing slide as the one genuinely open sounding — which earns that slide its keep better than a vague line about unseen mass.\n\nThe forge slide also changes shape: protons were already there, so the surprising, accurate title is now \"The first minutes forged helium, not hydrogen,\" with most hydrogen nuclei being protons that never fused.\n\nOn readability, the copy says \"about 13.8 billion years\" and Planck's 13.797 ± 0.023 sits in a note beneath it. The noon-position boast is gone, the redshift slide just explains that space grows while the light is crossing so the waves arrive longer, and the antenna team now checks their equipment and surroundings rather than \"the sky.\" The closing slide stays on the earliest history instead of making an unqualified claim about dark matter — and if the writer ever does reach for it, the instructions hold dark matter and dark energy apart.\n\nI also told the writer to lead each line with the thing itself and allow at most one qualification per slide, folded into its sentence, so the caveats read as teaching rather than hedging.\n\n![Big Bang for sailing folk — plan](file:gamma-agent/session/generations/big-bang-pirate/brief.xml)\n\nStopping here for your review — hit generate when it reads right, or I can take another pass.",
+  "sourcePr": 37703
+}

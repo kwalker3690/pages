@@ -1,0 +1,28 @@
+{
+  "id": "feedback-negative-10-visual-communication-history",
+  "ready": true,
+  "cardCount": 20,
+  "collectedAt": "2026-09-23T14:11:36.871Z",
+  "harnessSessionId": "2026-09-23T14-08-17-634Z_9a50458b-1dbf-46d3-9801-7be9e80bc008",
+  "sessionUrl": "https://staging.gamma.app/agents?session=2026-09-23T14-08-17-634Z_9a50458b-1dbf-46d3-9801-7be9e80bc008",
+  "snapshot": "tpl-4f4cb05b11697aa4c7d0356f",
+  "target": "cubesandbox:blue",
+  "model": "claude-opus-5",
+  "provider": "anthropic",
+  "thinkingLevel": "medium",
+  "outlineSha256": "96e5b7847c2464cd55468a71c42f86d88f51aaf3ff1eaff3cf5265e535f3857e",
+  "agentPath": "gamma-agent/session/generations/media-evolution-lecture/brief.xml",
+  "tools": [
+    "bash",
+    "web_fetch",
+    "web_search",
+    "web_search",
+    "generation_init",
+    "generation_source_prepare",
+    "show_file",
+    "write",
+    "bash"
+  ],
+  "handover": "Parses clean, and both attachment blocks now sit last inside their cards.\n\n![Outline](file:gamma-agent/session/generations/media-evolution-lecture/brief.xml)\n\nCorrected and stopped before generation — no slides built. What changed:\n\n**The priority claims.** Gutenberg's section is now \"European metal type and its industrial adoption.\" The qualification is one slide plus one timeline clause, verified independently rather than carried over: the Dunhuang *Diamond Sutra* colophon dated 11 May 868 as the earliest *dated* printed book (British Library/IDP), Bi Sheng's baked-clay characters 1041–48 as recorded by Shen Kuo, cast metal type in Korea from the 13th century (Columbia's Asia for Educators), and the *Jikji* of July 1377 as the oldest surviving metal-type book, 78 years before the 42-line Bible (UNESCO and the BnF). No chronology beyond what those sources state. Every surviving superlative is now exactly as narrow as its source, and the Bible is no longer called the first printed book.\n\n**The argument survives intact.** Module → rule → model still carries the deck; Mainz now earns its place as the moment the module became an *industry*, which is the stronger version of your thesis anyway — the visual consequences follow from scale, not from invention. The 1455 timeline entry says \"European adoption, not origin.\"\n\n**Attachments.** Both the timeline instruction and the three-regimes table now close their cards, after the bullets. All table data kept; I widened the first column header to \"European metal-type print\" and added one line noting the regime dates are a teaching frame, not world periodization.\n\n**Register made visible.** A new *Evidence and qualification* instruction separates facts (cited, hedges preserved), interpretation (Eisenstein on fixity, the Swiss-neutrality critique, and your own thesis — all attributed), and illustrative assumptions (the three-regime frame). Eisenstein is now explicitly an argument rather than a measurement.\n\nOne deliberate deviation: the deck is 20 cards, not 19. The accuracy fix needed its own slide, so the old Gutenberg card split into the qualification and the 42-line Bible production slide — all its cited data (16,000 sorts, ~50,000 sheets, ~180 copies, the ~30% mid-run increase) is preserved. Say the word if you'd rather I compress them back into one dense card.",
+  "sourcePr": 37703
+}

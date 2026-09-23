@@ -1,0 +1,29 @@
+{
+  "id": "three-distinct-business-choices",
+  "ready": true,
+  "cardCount": 15,
+  "collectedAt": "2026-09-23T14:12:52.745Z",
+  "harnessSessionId": "2026-09-23T14-02-26-320Z_f516e626-1d8c-4a9a-ac49-a7141d397b44",
+  "sessionUrl": "https://staging.gamma.app/agents?session=2026-09-23T14-02-26-320Z_f516e626-1d8c-4a9a-ac49-a7141d397b44",
+  "snapshot": "tpl-4f4cb05b11697aa4c7d0356f",
+  "target": "cubesandbox:blue",
+  "model": "claude-opus-5",
+  "provider": "anthropic",
+  "thinkingLevel": "medium",
+  "outlineSha256": "947373ee3a7b246bfb52a68d3855314e11690363238c3bc08e5d5a3242272474",
+  "agentPath": "gamma-agent/session/generations/qbr-leadership/brief.xml",
+  "tools": [
+    "bash",
+    "bash",
+    "web_search",
+    "generation_init",
+    "web_fetch",
+    "generation_source_prepare",
+    "show_file",
+    "write",
+    "edit",
+    "edit"
+  ],
+  "handover": "Fixed. The recovery promise is gone — it was never recoverable, since $400k of lost ARR recurs while the $204k of cost-to-serve saving only offsets half of it.\n\nDecision 2 now states the trade plainly: **$196k of contribution given up every year it holds**, in exchange for taking 40 accounts (a tenth of the SMB book) off human coverage and onto the self-serve tier. Its accountable number is the 90-day conversion mix, not a payback date.\n\nTwo dependent claims followed:\n\n- **Slide 13** now reads \"net new cost: $620k of payroll plus about $196k a year of contribution we give up at the price floor\" against the ~$2.0M modeled retention benefit — the price floor was previously being netted out of the investment line as if it were free.\n- **Slide 14** picks up the honest downside: if self-serve conversion is weak, this is a straight $196k-a-year revenue decision with only capacity to show for it.\n\nI also wrote the arithmetic into the accuracy instruction and banned any payback, break-even, or recovery date for the price floor, so the writer can't reintroduce it on a slide.\n\nAll 15 cards and the reconciled ledger are otherwise untouched. Stopping before generation.",
+  "sourcePr": 37703
+}

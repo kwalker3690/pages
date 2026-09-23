@@ -1,0 +1,30 @@
+{
+  "id": "preserve-dense-text-return-fewer",
+  "ready": true,
+  "cardCount": 28,
+  "collectedAt": "2026-09-23T14:13:57.959Z",
+  "harnessSessionId": "2026-09-23T14-06-01-057Z_f12fbc53-6549-4fa4-ba1e-742907b0e06d",
+  "sessionUrl": "https://staging.gamma.app/agents?session=2026-09-23T14-06-01-057Z_f12fbc53-6549-4fa4-ba1e-742907b0e06d",
+  "snapshot": "tpl-4f4cb05b11697aa4c7d0356f",
+  "target": "cubesandbox:blue",
+  "model": "claude-opus-5",
+  "provider": "anthropic",
+  "thinkingLevel": "medium",
+  "outlineSha256": "dcfe2ea0c777ec5944de877f3d49ba30ce488155e9c687c9436bb9cf2bad9422",
+  "agentPath": "gamma-agent/session/generations/project-handover/brief.xml",
+  "tools": [
+    "bash",
+    "bash",
+    "bash",
+    "bash",
+    "generation_init",
+    "generation_source_prepare",
+    "show_file",
+    "write",
+    "bash",
+    "edit",
+    "bash"
+  ],
+  "handover": "Fixed, and the plan still holds all 28 cards with the reconciled ledger untouched.\n\nWhat changed on card 27: I anchored day one to 1 October, which makes the blocks end 30 October, 29 November and 29 December. The **16 December review and the 31 December wave decision moved to days 61–90**, where 16 December actually falls. Two knock-on corrections while checking the rest:\n\n- The **14 October vendor review** was sitting in days 61–90 as \"run it yourself\" — it happens on day 14, while I'm still chairing. Days 1–30 now has you sitting in on it, and days 61–90 has you booking and chairing the January one.\n- The **Tessera upsize (due 30 October)** and the **Metering API check (before 20 November)** had no home in the sequence, so they now sit in the blocks their due dates land in. The complex-account steering item reads as following 23 October rather than pre-empting it.\n\nEverything else in the ninety days already sequenced correctly against its due date. Stopping here — nothing generated.",
+  "sourcePr": 37703
+}

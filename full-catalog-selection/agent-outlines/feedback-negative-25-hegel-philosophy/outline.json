@@ -1,0 +1,28 @@
+{
+  "id": "feedback-negative-25-hegel-philosophy",
+  "ready": true,
+  "cardCount": 20,
+  "collectedAt": "2026-09-23T13:38:33.763Z",
+  "harnessSessionId": "2026-09-23T13-35-03-966Z_90b3e616-3dbf-4920-aa27-7fdc05ee5df4",
+  "sessionUrl": "https://staging.gamma.app/agents?session=2026-09-23T13-35-03-966Z_90b3e616-3dbf-4920-aa27-7fdc05ee5df4",
+  "snapshot": "tpl-4f4cb05b11697aa4c7d0356f",
+  "target": "cubesandbox:blue",
+  "model": "claude-opus-5",
+  "provider": "anthropic",
+  "thinkingLevel": "medium",
+  "outlineSha256": "64595f49589a951d12a77359fdce40f76092dcd2d19a6d0a9b87fcc6a89feace",
+  "agentPath": "gamma-agent/session/generations/hegel-lesson/brief.xml",
+  "tools": [
+    "generation_init",
+    "web_search",
+    "web_search",
+    "web_search",
+    "template_selection",
+    "generation_source_prepare",
+    "web_search",
+    "show_file",
+    "write"
+  ],
+  "handover": "The plan's in the pane — 20 slides, three movements.\n\nThe call I'd most want your read on: I spend two slides *correcting* Hegel rather than explaining him — the thesis–antithesis–synthesis myth up front, and the \"apologist for Prussia\" charge near the end. That costs about 10% of the deck, and I think it's the best 10%: the myth is what makes people think they already understand him, and clearing it is what makes the real three moments land. Every abstraction is carried by a concrete case — Kant's wall, the child's rule about sharing, grammar as the model of freedom, Antigone as two rights colliding.\n\nIf you'd rather go deeper on one thing instead of covering the span — say, the whole lesson built around the *Phenomenology* and recognition — I can reshape it in one pass. Otherwise hit generate when it reads right.",
+  "sourcePr": 37703
+}

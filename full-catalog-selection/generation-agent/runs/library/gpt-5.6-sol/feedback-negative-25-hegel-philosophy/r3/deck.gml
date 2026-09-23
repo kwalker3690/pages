@@ -1,0 +1,197 @@
+<HEAD><style>/* Marginalia — page treatment sheet.
+   The annotated reading copy: cream paper, warm ink, a calligraphic serif for quotations
+   and a humanist sans for the reader's notes, hairline rules, two inks that each mean one
+   work, one highlighter. Palette-var only — the dark swap skin flips every value through
+   the theme and this sheet follows. */
+
+.gml-card {
+  --work-a: var(--palette-1);
+  --work-b: var(--palette-2);
+  --hairline: var(--palette-8);
+  --line: 1pt;
+  /* Move 8 — hairline ledger: every seam, rule, table line and cell edge is one warm hairline. */
+  --grid-divider-color: var(--hairline);
+  --grid-divider-width: var(--line);
+  --divider-color: var(--hairline);
+  --divider-thickness: var(--line);
+  --cell-radius: 0;
+  --cell-border-color: var(--hairline);
+  --table-border-color: var(--hairline);
+  --table-border-width: var(--line);
+  --table-radius: 0;
+  --figure-radius: 0;
+  /* Numbered markers count in graphite: the two work inks never number anything. */
+  --marker-color: var(--palette-7);
+  /* A caption hugging a drawing keeps a line of air from its crop. */
+  --caption-hug-gap: 16pt;
+}
+
+/* ─── Move 1 — quotation ────────────────────────────────────────────────────────────────── */
+/* A real <blockquote> whose accent bar is retired: the serif italic IS the signal. The inner
+   <p> carries the size as an attr (hero 33–36pt, paired 30pt, epigraph 30pt; never below 27pt —
+   the deck is sized for projection in a classroom). */
+.quote.gml-blockquote {
+  padding-inline-start: 0;
+  margin-inline-start: 0;
+  font-style: italic;
+}
+.quote.gml-blockquote > .gml-blockquote__bar {
+  display: none;
+}
+.quote.gml-blockquote p.gml-paragraph {
+  font-family: var(--display-font);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.005em;
+}
+
+/* ─── Move 2 — gloss ────────────────────────────────────────────────────────────────────── */
+/* The translated line in the serif roman, set tight under its quotation so quote + gloss read
+   as one object. Author it as <p class="gloss" font-size="lg">. */
+.gloss.gml-paragraph {
+  font-family: var(--display-font);
+  font-style: normal;
+  line-height: 1.22;
+  margin-block-start: 4pt;
+}
+
+/* ─── Move 3 — source line ──────────────────────────────────────────────────────────────── */
+/* One quiet micro line under every quotation — author · work · translator · edition · page —
+   separated by middle dots. Author it as <p role="caption" class="source">. */
+.source.gml-paragraph {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+}
+
+/* ─── Move 4 — work ink tags ────────────────────────────────────────────────────────────── */
+/* The only chromatic ink on the deck besides the highlighter. A 15pt uppercase eyebrow with a
+   2pt rule down its leading edge: <p role="eyebrow" class="work-a"><span text-color="accent">…
+   and <p role="eyebrow" class="work-b"><span text-color="palette-2">… . */
+.work-a.gml-paragraph,
+.work-b.gml-paragraph {
+  border-inline-start: 2pt solid var(--work-a);
+  padding-inline-start: 9pt;
+  margin-block-end: 6pt;
+}
+.work-b.gml-paragraph {
+  border-inline-start-color: var(--work-b);
+}
+
+/* ─── Move 5 — margin note ──────────────────────────────────────────────────────────────── */
+/* The reader's analysis: a narrower sans column beside the quotation, hung from the grid's
+   hairline seam, each note led by a bold keyword. Class on the note cell. */
+.note.gml-grid-cell > .gml-grid-cell__content {
+  --block-gap: 10pt;
+}
+
+/* ─── Move 7 — line numbers ─────────────────────────────────────────────────────────────── */
+/* A borderless two-column table: muted cited line numbers in a narrow gutter, the quotation
+   line in the serif italic beside them. Class on the <table>. The number cell carries a <p> at
+   the quotation's size with a small span inside, so both columns share one baseline. */
+.lineno {
+  --table-cell-padding: 2pt 16pt 2pt 0;
+  --table-border-width: 0;
+}
+.lineno .gml-table__cell[data-col='0'] {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+.lineno .gml-table__cell[data-col='1'] p.gml-paragraph {
+  font-family: var(--display-font);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+}
+
+/* ─── Move 8 — hairline ledger (tables) ────────────────────────────────────────────────── */
+/* References, comparison matrices, glossaries: one hairline per seam, a heavier ink rule
+   under the head row only, closed by a hairline under the last row. Class on the <table>. */
+.ledger {
+  --table-cell-padding: 9pt 12pt;
+  --table-header-color: var(--heading-color);
+}
+.ledger .gml-table__row[data-header] .gml-table__cell {
+  border-bottom: 1.5pt solid var(--heading-color);
+}
+.ledger .gml-table__row:last-child .gml-table__cell {
+  border-bottom: var(--table-border-width) solid var(--table-border-color);
+}
+
+/* ─── claim — the thesis voice ──────────────────────────────────────────────────────────── */
+/* A <display> in the serif ROMAN at medium weight: quotations are italic, the student's own
+   claim is upright. Class on the <display>. */
+.claim.gml-title,
+.claim.gml-display {
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+/* ─── prose — a measured reading column ───────────────────────────────────────────────── */
+/* Running analysis paragraphs get a slightly wider beat than the note rail. */
+.prose.gml-grid-cell > .gml-grid-cell__content {
+  --block-gap: 14pt;
+}
+
+/* ─── spot — the drawing's cell ───────────────────────────────────────────────────────── */
+/* The cell that holds a transparent spot drawing beside type (margin spot, foot plate, act-break
+   plane). It is a slot: the theme figure radius is already 0 so the cutout sits straight on the
+   paper; the class marks the role so a fill writer keeps the drawing in its own cell. */
+.spot.gml-grid-cell .gml-figure__img {
+  border-radius: 0;
+}
+
+/* ─── voice — a tagged name cell ──────────────────────────────────────────────────────── */
+/* Work tag, name and one clause hug as a single entry inside a hairline quadrant, so four
+   voices fit the frame at reading size. Class on the cell. */
+.voice.gml-grid-cell > .gml-grid-cell__content {
+  --block-gap: 6pt;
+}</style></HEAD>
+<section image-layout="blank" id="XViclo9-JD"><grid spacing="none"><grid-item id="Zwt8aQSWAx" colspan="40"><p role="eyebrow">A lesson in dialectical thinking</p><h1>Hegel: Why contradiction is the engine of thought</h1><p>How concepts break, survive and become more adequate to the world they describe.</p><spacer mode="fill"></spacer><p role="caption">Method · recognition · freedom · historical judgment</p></grid-item><grid-item id="AwJ_wwJqaE" class="spot" align="right" vertical-align="end" padding="0" colspan="20"><img src="https://cdn-staging.gamma.app/QWjS6fBfpt/generated-images/-kz7MhQk-cQNXDxYpidVJ.png" saved-media-id="ut3c4q2xy2nkrzo" source="image.ai-generated" fill="contain" image-style="spot-line" alt="Fine pen-and-ink drawing in the manner of a nineteenth-century book engraving of two interlocking iron gears, one gear visibly forcing the other to turn, both mechanisms drawn whole with close construction detail, delicate cross-hatching and stipple, one small muted teal accent on a single tooth, transparent background, no frame, no text" meta="{&quot;width&quot;:1440,&quot;height&quot;:1440}"></grid-item></grid><notes><p>Open with the basic claim: for Hegel, contradiction is not where thought stops. It is the evidence that a concept must move.</p></notes></section>
+<section image-layout="blank" id="z7HS_Hlzca"><grid spacing="none"><grid-item id="gd2pO22KKN" padding="54pt 54pt 24pt"><h2>Hegel is hard for a reason, and it is not the vocabulary</h2><p>Most philosophers ask what is true. Hegel asks how a mind capable of asking that question came to exist.</p><grid marker="number" marker-rule="true" marker-position="above" marker-align="start" marker-numbering-format="decimal-leading-zero" vertical-sizing="hug" style="--marker-gap: 0.6em;"><grid-item id="7van9gsu_Y" colspan="20"><h4>Take a position</h4><p font-size="sm">Thinking draws a firm distinction and treats it as settled.</p></grid-item><grid-item id="VRsGXeZQOH" colspan="20"><h4>Find its trouble</h4><p font-size="sm">The distinction produces a problem from inside its own terms.</p></grid-item><grid-item id="QRUk4Rk7ZO" colspan="20"><h4>Keep what survives</h4><p font-size="sm">A richer concept preserves the earlier insight without its old limit.</p></grid-item></grid><grid spacing="medium" vertical-sizing="hug"><grid-item id="58_3kEOJN2" colspan="44"><p font-size="sm">His unfamiliar words name concepts that change while we hold them. The route ahead is one inherited problem, one method, three examples, and a reckoning with what he got right and wrong.</p></grid-item><grid-item id="xCmc-EUvDS" colspan="16"><p role="caption">Goethe once answered a question about the age’s most celebrated man by sending a painter to Hegel. <a href="https://www.sup.org/books/theory-and-philosophy/hegel">Stanford University Press</a></p></grid-item></grid></grid-item></grid><notes><p>Do not apologize for the difficulty. Explain that Hegel writes motion rather than reporting a finished result.</p></notes></section>
+<section image-layout="blank" id="jT843n321-"><grid spacing="none"><grid-item id="pIoFhwo6HR" padding-bottom="24pt"><h2>The problem he inherited: Kant left a wall down the middle of reality</h2><p font-size="sm">Kant argued in 1781 that the mind gives experience its space, time and causality. We know appearances, never the thing-in-itself beyond them.</p><custom-code>
+<style>
+  .kant-wall { width: 100%; font-family: var(--body-font); color: var(--body-color); }
+  .kant-wall svg { display: block; width: 100%; height: 175pt; }
+  .kant-wall .panel { fill: color-mix(in srgb, var(--card-color) 74%, var(--accent-color)); stroke: var(--neutral-border-color); stroke-width: 1; }
+  .kant-wall .wall { stroke: var(--body-color); stroke-width: 5; }
+  .kant-wall .reach { fill: none; stroke: var(--accent-color); stroke-width: 3; }
+  .kant-wall .title { font-family: var(--heading-font); font-size: 1.15em; font-weight: 600; fill: var(--heading-color); }
+  .kant-wall .note { font-size: 0.78em; fill: var(--body-color); }
+  .kant-wall .claim { font-family: var(--heading-font); font-size: 0.92em; font-weight: 600; fill: var(--accent-color); }
+</style>
+<div class="kant-wall" role="img" aria-label="Kant divides appearances from the thing-in-itself; Hegel argues that describing the boundary already reaches beyond it.">
+  <svg width="792" height="175" viewBox="0 0 792 175">
+    <rect class="panel" x="20" y="42" width="250" height="78"></rect>
+    <rect class="panel" x="522" y="42" width="250" height="78"></rect>
+    <line class="wall" x1="396" y1="24" x2="396" y2="132"></line>
+    <path class="reach" d="M268 28 C342 0, 450 0, 524 28"></path>
+    <polygon points="524,28 510,20 512,35" fill="var(--accent-color)"></polygon>
+    <text class="title" x="145" y="70" text-anchor="middle">Appearances</text>
+    <text class="note" x="145" y="96" text-anchor="middle">What the mind can experience</text>
+    <text class="title" x="647" y="70" text-anchor="middle">Thing-in-itself</text>
+    <text class="note" x="647" y="96" text-anchor="middle">Reality beyond experience</text>
+    <text class="claim" x="396" y="158" text-anchor="middle">To describe the limit is already to exceed it.</text>
+  </svg>
+</div>
+</custom-code><p role="caption">At Tübingen from 1788, Hegel studied theology beside Hölderlin and Schelling. Their shared project was to close Kant’s gap. <a href="https://plato.stanford.edu/entries/hegel/">Stanford Encyclopedia of Philosophy</a></p></grid-item></grid><notes><p>Point to the wall. Hegel’s objection is not that Kant chose the wrong boundary. It is that a completely unknowable boundary could never be drawn or described.</p></notes></section>
+<section image-layout="blank" id="oaHHNJPcxk"><grid spacing="none"><grid-item id="pycphEyGRe" colspan="30"><p role="eyebrow">Part I</p><display size="lg">The method</display><spacer size="14pt"></spacer><grid divider="sm palette-8" direction="vertical" vertical-sizing="hug"><grid-item id="rQLiKYUSrK" padding="9pt 0"><h4>Retire the textbook myth</h4></grid-item><grid-item id="1bO3leoF38" padding="9pt 0"><h4>Follow the three real moments</h4></grid-item><grid-item id="bbl0E8qdRq" padding="9pt 0"><h4>See what survives contradiction</h4></grid-item></grid></grid-item><grid-item id="X-Ki28OreA" class="spot" vertical-align="end" padding="0" colspan="30"><img src="https://cdn-staging.gamma.app/QWjS6fBfpt/generated-images/bX8xMpsk93oMYtu-3kXOY.png" saved-media-id="62l7omf2csgxxlw" source="image.ai-generated" fill="contain" image-style="spot-line" alt="Fine pen-and-ink drawing in the manner of a nineteenth-century book engraving of an iron-bound wooden door standing partly open with a heavy key resting precisely across its threshold, close observational detail, delicate cross-hatching and stipple, one small dull ochre accent on the key, transparent background, no frame, no text" meta="{&quot;width&quot;:1248,&quot;height&quot;:1664}"></grid-item></grid><notes><p>The method begins with a correction. Hegel’s concepts do not advance because an outside opponent attacks them.</p></notes></section>
+<section image-layout="blank" id="kcxph0yv3I"><grid spacing="none"><grid-item id="oX63_rlG_f" padding="70pt 84pt 24pt"><h2>Clear the biggest myth first: “thesis, antithesis, synthesis” is not Hegel’s</h2><grid spacing="large" vertical-sizing="fill"><grid-item id="mjdQwbDiNd" border="4px solid palette-2" border-sides="left" colspan="30"><p role="eyebrow" class="work-b"><span text-color="palette-2">The textbook formula</span></p><h4>Two claims meet, then compromise</h4><p font-size="sm">The vocabulary came from Fichte and was popularized by Heinrich Moritz Chalybäus in 1837, six years after Hegel died. It makes dialectic look like a debate judged from outside.</p></grid-item><grid-item id="qS8G17rs3k" border="4px solid accent" border-sides="left" colspan="30"><p role="eyebrow" class="work-a"><span text-color="accent">Hegel’s claim</span></p><h4>A concept <mark highlight-color="#E9D58A">undermines itself</mark></h4><p font-size="sm">No rival claim is required. The concept develops consequences it cannot contain, and those consequences force a more adequate standpoint.</p></grid-item></grid><p role="caption">Gustav Mueller called the misattribution “The Hegel Legend” in 1958. It remains common because the slogan is easier to teach than the method. <a href="https://archive.hegel.net/en/stewart1996.htm">Hegel.net archive</a></p></grid-item></grid><notes><p>Stress the difference between an external opponent and internal pressure. That distinction controls every example that follows.</p></notes></section>
+<section image-layout="blank" id="hrtthvZHp-"><grid spacing="none"><grid-item id="hLv5wQIL_o" padding-bottom="64pt"><h2>The real three moments: fix it, watch it break, hold both</h2><p font-size="sm">These are moments within every concept, not stages in a debate.</p><grid marker="number" marker-rule="true" marker-position="above" marker-align="start" marker-numbering-format="decimal-leading-zero" vertical-sizing="fill" style="--marker-gap: 0.6em;"><grid-item id="tJArJuZ0GE" colspan="20"><h4>Understanding</h4><p font-size="sm">Draw a firm line: this is this, not that. Hegel respects this moment because thinking needs determinate claims.</p></grid-item><grid-item id="b6pLd7wpCc" colspan="20"><h4>Dialectical</h4><p font-size="sm">Follow the definition until it reaches its limit and turns into its opposite on its own account.</p></grid-item><grid-item id="agm_SYoIrS" colspan="20"><h4>Speculative</h4><p font-size="sm">Find the standpoint from which the determination and its collapse both make sense.</p></grid-item></grid><p role="caption">Movement begins where a boundary becomes untenable or interests become genuinely incompatible. See <i>Encyclopedia</i> §§79–82. <a href="https://hegel.net/en/faq-logik.htm">Hegel.net</a></p></grid-item></grid><notes><p>Hegel does not dismiss the first definition as stupid. Each later moment needs the clarity the first moment supplied.</p></notes></section>
+<section image-layout="blank" id="g4FpdoGwQw"><grid spacing="none"><grid-item id="yUWGZ-LPpC" padding-bottom="50pt"><h2><i>Aufhebung</i>: the word that means “cancel” and “preserve” at the same time</h2><grid divider="sm palette-8" vertical-sizing="fill"><grid-item id="5jgEjA98ms" vertical-align="center" colspan="22"><p role="eyebrow">One German verb, three ordinary senses</p><blockquote class="quote"><p font-size="33pt"><i>aufheben</i></p></blockquote><grid divider="sm palette-8" direction="vertical" vertical-sizing="hug"><grid-item id="lJGyxtzbzB" padding="7pt 0"><p><b>Abolish</b> something.</p></grid-item><grid-item id="QJzdaO_K0s" padding="7pt 0"><p><b>Lift</b> it to another level.</p></grid-item><grid-item id="RoMnJnweV0" padding="7pt 0"><p><b>Keep</b> it safe.</p></grid-item></grid></grid-item><grid-item id="KqPR85CZJ2" colspan="38"><p role="eyebrow">A child’s rule changes</p><grid divider="sm palette-8" direction="vertical" vertical-sizing="fill"><grid-item id="9EElYOaN_N" vertical-align="center"><p><b>Rule:</b> Sharing means splitting everything equally.</p></grid-item><grid-item id="Oa-y63uQBM" vertical-align="center"><p><b>Problem:</b> A friend needs more than half.</p></grid-item><grid-item id="trTJjXM7vK" vertical-align="center"><p><b>Richer idea:</b> Fairness includes equal splitting, but it is not exhausted by it.</p></grid-item></grid><p font-size="sm">The old rule is neither erased nor left untouched. It survives as one case within the new concept.</p></grid-item></grid></grid-item></grid><notes><p>English “sublate” and “supersede” lose the pun. The worked example matters more than the preferred translation.</p></notes></section>
+<section image-layout="blank" id="FFohbkS_Tb"><grid spacing="none"><grid-item id="pNKCnpvri8"><h2 font-size="32pt"><i>Geist</i>: thinking is a collective achievement, not a private possession</h2><grid spacing="medium" vertical-sizing="fill"><grid-item id="eV7DxarkNz" class="prose" colspan="28"><p font-size="17pt"><i>Geist</i> means spirit or mind, but for Hegel it names what no single skull contains.</p><p font-size="17pt">You did not invent language, number systems, or standards of evidence; solitary reasoning internalizes generations of work.</p><p font-size="17pt">The <i>Phenomenology of Spirit</i> (1807) traces that collective process becoming aware of itself.</p><p role="caption">For Hegel, studying history is also studying the structure already active in one’s own mind.</p></grid-item><grid-item id="GDYUr5MlUn" vertical-align="center" colspan="32"><diagram template-key="inputs" align="center" width="390pt" height="250pt" data-meta="{&quot;general&quot;:[{&quot;text&quot;:&quot;<h4>Thinking</h4>&quot;}],&quot;step&quot;:[{&quot;text&quot;:&quot;<h4>Language</h4><p>Shared symbols and grammar</p>&quot;},{&quot;text&quot;:&quot;<h4>Number Systems</h4><p>Inherited numeric tools</p>&quot;},{&quot;text&quot;:&quot;<h4>Standards of Evidence</h4><p>Methods to evaluate claims</p>&quot;},{&quot;text&quot;:&quot;<h4>Historical Memory</h4><p>Accumulated lessons and records</p>&quot;}]}"></diagram></grid-item></grid></grid-item></grid><notes><p>Do not turn Geist into a ghostly substance. Use the concrete inheritance of language and evidence to keep the claim social and historical.</p></notes></section>
+<section image-layout="blank" id="bx0jW95P0r"><grid spacing="none"><grid-item id="_gQkfvlIjw" colspan="30"><p role="eyebrow">Part II</p><display size="lg">Three worked examples</display><spacer size="14pt"></spacer><grid divider="sm palette-8" direction="vertical" vertical-sizing="hug"><grid-item id="h1ZLNDZY2R" padding="9pt 0"><h4>Domination defeats itself</h4></grid-item><grid-item id="Dmxvad6DOE" padding="9pt 0"><h4>Ethical claims collide</h4></grid-item><grid-item id="5fFVm0cbR1" padding="9pt 0"><h4>Freedom needs structure</h4></grid-item></grid></grid-item><grid-item id="1KkUpspS4P" class="spot" vertical-align="end" padding="0" colspan="30"><img src="https://cdn-staging.gamma.app/QWjS6fBfpt/generated-images/puwmRieWx8Jsu6wezGP_C.png" saved-media-id="f8sd3htv83x1txp" source="image.ai-generated" fill="contain" image-style="spot-line" alt="Fine pen-and-ink drawing in the manner of a nineteenth-century book engraving of a heavy iron chain fixed to a craftsman’s wooden workbench, one link opened beside a small finished metal cup, the objects drawn whole with close construction detail, delicate cross-hatching and stipple, one small muted teal accent on the finished cup, transparent background, no frame, no text" meta="{&quot;width&quot;:1248,&quot;height&quot;:1664}"></grid-item></grid><notes><p>Each example begins from a stable-looking arrangement and follows the contradiction already inside it.</p></notes></section>
+<section image-layout="blank" id="k5dsYxZPP_"><grid spacing="none"><grid-item id="ErSN-YkPN3" vertical-align="center" padding="56pt 24pt 56pt 84pt" colspan="24"><p role="eyebrow">EXAMPLE 1</p><h2 font-size="31pt">Master and slave: why domination defeats itself</h2><p font-size="18pt">Recognition extracted by force is worthless to the person who demanded it. The relation points beyond bondage toward legal relations between equals.</p><p role="caption"><a href="https://www.marxists.org/reference/archive/hegel/works/ph/phba.htm">Hegel, <i>Phenomenology of Spirit</i></a> · <a href="https://cambridgeblog.org/2014/05/hegel-on-the-master-slave-relation/">Cambridge University Press</a></p></grid-item><grid-item id="8od8xvlthJ" vertical-align="center" padding="24pt 84pt 24pt 24pt" colspan="36"><grid divider="sm neutral-border" marker="number" marker-size="small" marker-style="outline" marker-shape="circle" marker-position="inline" marker-numbering-format="decimal-leading-zero" direction="vertical" spacing="none" vertical-sizing="hug" style="--marker-inline-size: 30pt; --marker-gap: 12pt;"><grid-item id="h-q1HcbYSC" padding="6pt 0"><h4 font-size="21pt">Need</h4><p font-size="18pt">Each self needs recognition from another.</p></grid-item><grid-item id="5cRcyKIZLd" padding="6pt 0"><h4 font-size="21pt">Struggle</h4><p font-size="18pt">Neither wants to yield first.</p></grid-item><grid-item id="8vEqFUOcgj" padding="6pt 0"><h4 font-size="21pt">Domination</h4><p font-size="18pt">One submits and becomes the bondsman.</p></grid-item><grid-item id="4wHf1Ff5tm" padding="6pt 0"><h4 font-size="21pt">Failure</h4><p font-size="18pt">The master is acknowledged only by someone reduced to a tool.</p></grid-item><grid-item id="vQptp7o70L" padding="6pt 0"><h4 font-size="21pt">Reversal</h4><p font-size="18pt">Through work, the bondsman sees his mind embodied in the world.</p></grid-item></grid></grid-item></grid><notes><p>The cycle is deliberately self-defeating. The master wins the struggle and loses the recognition the struggle was meant to secure.</p></notes></section>
+<section image-layout="blank" id="SAdd8UeKjt"><grid spacing="none"><grid-item id="HcfH58Vwjp"><h2 font-size="30pt">Reading the master–slave passage without overclaiming</h2><grid spacing="medium" vertical-sizing="hug"><grid-item id="JsFnQRi81k" padding="12pt 10pt 10pt" border="sm solid palette-8" border-sides="top" colspan="20"><p role="eyebrow">Political reading</p><p font-size="18pt">Later Marxists made the reversal central. Marx himself did not present the passage that way.</p></grid-item><grid-item id="LM2BEbNp-a" padding="12pt 10pt 10pt" border="sm solid palette-8" border-sides="top" colspan="20"><p role="eyebrow">Logical reading</p><p font-size="18pt">Some scholars treat the social scene as an illustration of categories developing behind it.</p></grid-item><grid-item id="XTU-uNP2z2" padding="12pt 10pt 10pt" border="sm solid palette-8" border-sides="top" colspan="20"><p role="eyebrow">Internal reading</p><p font-size="18pt">Others see reason trying to dominate supposedly inferior human faculties.</p></grid-item></grid><aside icon="false"><p font-size="18pt"><b>Keep the language precise.</b> German <i>Knechtschaft</i> means bondage, not chattel slavery, although Hegel’s bondsman has neither rights nor a contract. In class, treat the scene as a philosophical myth: a constructed situation that makes an argument tangible.</p></aside><p role="caption"><a href="https://cambridgeblog.org/2014/05/hegel-on-the-master-slave-relation/">Cambridge University Press</a> · <a href="https://www.skepticsociety.co.uk/hegels-master-slave-dialectic-explained/">The Skeptic</a></p></grid-item></grid><notes><p>Keep these as competing readings. The useful stance is methodological humility, not a final ruling on what the passage secretly means.</p></notes></section>
+<section image-layout="blank" id="v2DkfOBTcP"><grid spacing="none"><grid-item id="nzGKQ3T5e7" padding-bottom="36pt"><h2>Example 2: Antigone, when both sides are right</h2><p font-size="sm">Sophocles gives Hegel a conflict in which neither side is simply mistaken.</p><grid divider="sm palette-8" vertical-sizing="fill"><grid-item id="Ajp_32GOlV" border="4px solid accent" border-sides="left" colspan="20"><p role="eyebrow" class="work-a"><span text-color="accent">Antigone</span></p><h4>Family duty</h4><p font-size="sm">She buries her brother despite Creon’s edict. Loyalty to the dead is a genuine ethical claim.</p></grid-item><grid-item id="E2h-sO89xf" vertical-align="center" colspan="20"><p role="eyebrow">The contradiction</p><h4>Each side must destroy the other to remain itself</h4><p font-size="sm">The fracture belongs to the ethical world, not to one person’s faulty reasoning.</p></grid-item><grid-item id="RnRiR_C8Bb" border="4px solid palette-2" border-sides="left" colspan="20"><p role="eyebrow" class="work-b"><span text-color="palette-2">Creon</span></p><h4>Civic law</h4><p font-size="sm">He defends the authority of the city against private loyalty. That claim is genuine too.</p></grid-item></grid><p role="caption">This becomes Hegel’s model of historical change: a form of life collapses through a conflict it already contains.</p></grid-item></grid><notes><p>Avoid reducing the tragedy to a virtuous rebel confronting a simple tyrant. Hegel’s reading depends on the legitimacy and one-sidedness of both claims.</p></notes></section>
+<section image-layout="blank" id="YBy2OWIJLT"><grid spacing="none"><grid-item id="tYUV76XLYy" vertical-align="center" padding="46pt 84pt 30pt"><h2 font-size="32pt">Example 3: Freedom is not the absence of constraint</h2><p font-size="18pt">A will with nothing in its way but nothing particular to do is free only in the abstract.</p><grid marker="number" marker-size="small" marker-style="subtle" marker-shape="chevron" marker-position="above" marker-align="center" marker-fill="true" spacing="none" vertical-sizing="hug" padding="8pt 12pt 10pt" style="--marker-chip-padding: 0.45em;"><grid-item id="2n6tg-J57M" colspan="20"><h4 font-size="22pt">Empty independence</h4><p font-size="18pt">“Nothing interferes with me” says little about what I can actually become.</p></grid-item><grid-item id="KjFfOygpTL" colspan="20"><h4 font-size="22pt">Grammar</h4><p font-size="18pt">A language constrains every sentence, yet those rules are precisely what let you say anything.</p></grid-item><grid-item id="2ETj0-p1Io" colspan="20"><h4 font-size="22pt"><i>Sittlichkeit</i></h4><p font-size="18pt"><i>Sittlichkeit</i>, ethical life, is freedom lived through family, civil society and institutions you recognize as your own.</p></grid-item></grid><grid spacing="medium" vertical-sizing="hug"><grid-item id="01D5-sTJSV" colspan="46"><p font-size="18pt">Walking a city street safely at night can feel like second nature, although that ease is the work of institutions. Hegel states the larger account in the <i>Philosophy of Right</i> (1820).</p></grid-item><grid-item id="apgUs-4rva" colspan="14"><p role="caption"><a href="https://www.sup.org/books/theory-and-philosophy/hegel">Stanford University Press</a></p></grid-item></grid></grid-item></grid><notes><p>The grammar example is the anchor. Constraint can be enabling when we recognize the structure as making our own activity possible.</p></notes></section>
+<section image-layout="blank" id="yfQOFduvtE"><grid spacing="none"><grid-item id="bjduawN3Tj" colspan="30"><p role="eyebrow">Part III</p><display size="lg">The reckoning</display><spacer size="14pt"></spacer><grid divider="sm palette-8" direction="vertical" vertical-sizing="hug"><grid-item id="dKb9-vfYgv" padding="9pt 0"><h4>Was he defending Prussia?</h4></grid-item><grid-item id="9cukKE81Of" padding="9pt 0"><h4>Why philosophy arrives at dusk</h4></grid-item><grid-item id="j_QFcNz20s" padding="9pt 0"><h4>What later thinkers inherited</h4></grid-item></grid></grid-item><grid-item id="3SpgM1MgFS" class="spot" vertical-align="end" padding="0" colspan="30"><img src="https://cdn-staging.gamma.app/QWjS6fBfpt/generated-images/si4BfWiivSRP_P7mWp5Mn.png" saved-media-id="1rk2ctjcrek05b1" source="image.ai-generated" fill="contain" image-style="spot-line" alt="Fine pen-and-ink drawing in the manner of a nineteenth-century book engraving of a single owl perched on a bare branch at dusk, wings partly opened as if about to fly, plumage rendered with delicate cross-hatching and stipple, one small dull ochre accent in one eye, transparent background, no ground line, no frame, no text" meta="{&quot;width&quot;:1248,&quot;height&quot;:1664}"></grid-item></grid><notes><p>The final part separates Hegel’s retrospective philosophy from the political uses and accusations attached to it.</p></notes></section>
+<section image-layout="blank" id="EsRp4JPTwE"><grid spacing="none"><grid-item id="9PWzUC7y52"><h2>The charge: apologist for the Prussian state</h2><grid divider="sm palette-8" vertical-sizing="hug"><grid-item id="V02_CbJsou" colspan="30"><p role="eyebrow">The incriminating line</p><blockquote class="quote"><p font-size="28pt">“What is rational is actual; and what is actual is rational.”</p></blockquote><p font-size="18pt" class="gloss">Read flatly, the sentence seems to bless any regime that happens to exist.</p><p role="caption" class="source"><i>Philosophy of Right</i> · preface</p></grid-item><grid-item id="KhtwnhDGH0" class="note" colspan="30"><h4>The defense</h4><p font-size="17pt">Here, <i>Wirklich</i> (“actual”) is rational essence unfolding; <i>Dasein</i> is mere existence—even the degenerate and transitory.</p><p font-size="17pt">The preface also says philosophy should not tell the world what it ought to be.</p><p font-size="17pt">After taking the Berlin chair in 1818, Hegel dominated German-speaking academic philosophy—making the charge harder to shake.</p></grid-item></grid><p role="caption"><a href="https://thetelos.org/elements-of-the-philosophy-of-right-georg-wilhelm-friedrich-hegel/">The Telos</a> · <a href="https://archive.hegel.net/en/stewart1996.htm">Hegel.net archive</a></p></grid-item></grid><notes><p>Do not pretend the defense settles the politics. It shows that the famous line is more technical than its blunt English appearance suggests.</p></notes></section>
+<section image-layout="blank" id="bfGY_z8Rk7"><grid spacing="none"><grid-item id="OwYpqnAxuq" padding-bottom="12pt" colspan="42"><blockquote class="quote"><p font-size="36pt">“The owl of Minerva spreads its wings only with the falling of the dusk.”</p></blockquote><p font-size="lg" class="gloss">Understanding arrives after a form of life has finished taking shape.</p><blockquote class="quote"><p font-size="27pt">“When philosophy paints its grey in grey, then has a shape of life grown old.”</p></blockquote><p font-size="sm"><i>Nachdenken</i> means thinking after the fact. Philosophy is “its own time apprehended in thought,” not a blueprint delivered in advance. The bitter irony is that Hegel also says nations and governments have never learned from history.</p><p role="caption" class="source"><i>Philosophy of Right</i> · preface</p></grid-item><grid-item id="f4jqz_J_MB" class="spot" align="right" vertical-align="end" padding="0" colspan="18"><img src="https://cdn-staging.gamma.app/QWjS6fBfpt/generated-images/4e8-OuDI78OR3Y9R2HH0I.png" saved-media-id="iy2fz8ek3lzmnfz" source="image.ai-generated" fill="contain" image-style="spot-line" alt="Fine pen-and-ink drawing in the manner of a nineteenth-century book engraving of an owl lifting away from a bare branch with both wings spread, feathers drawn in delicate cross-hatching and stipple, one small muted teal accent on a single flight feather, transparent background, no ground line, no frame, no text" meta="{&quot;width&quot;:1248,&quot;height&quot;:1664}"></grid-item></grid><notes><p>Let the first quotation stand before explaining it. Hegel’s philosophy is retrospective by design, which both limits and clarifies its political ambition.</p></notes></section>
+<section image-layout="blank" id="DoulupB9A8"><grid spacing="none"><grid-item id="xYU4_aw4Z-" padding-bottom="48pt"><h2>Where his ideas went after he died</h2><grid divider="sm palette-8" direction="vertical" vertical-sizing="fill" padding="5pt 0"><grid-item id="suPKGKxsWh" vertical-align="center"><p font-size="sm"><b>Marx</b> takes Hegel’s developmental history and inverts it into a materialist movement culminating in communism.</p></grid-item><grid-item id="t61axoO_3s" vertical-align="center"><p font-size="sm"><b>Existentialism</b> carries the recognition dialectic into Sartre’s <i>Being and Nothingness</i> and Beauvoir’s <i>The Second Sex</i>.</p></grid-item><grid-item id="6-jSS_vctd" vertical-align="center"><p font-size="sm"><b>Anticolonial thought</b> reworks master and slave in Fanon’s <i>Black Skin, White Masks</i>.</p></grid-item><grid-item id="r5fGfAyVM8" vertical-align="center"><p font-size="sm"><b>Recognition politics</b> brings the same inheritance into the Taylor–Habermas debate on multiculturalism.</p></grid-item><grid-item id="SQgyLn7qQ5" vertical-align="center"><p font-size="sm"><b>The revival</b> returns to a logic largely neglected after 1900. Systematic interest reappears in the 1970s and continues.</p></grid-item></grid><p role="caption"><a href="https://plato.stanford.edu/entries/hegel/">Stanford Encyclopedia of Philosophy</a> · <a href="https://www.tandfonline.com/doi/abs/10.1080/17496977.2021.1955647">Intellectual History Review</a></p></grid-item></grid><notes><p>This is not one continuous school. The inheritance splits because later thinkers keep different parts of Hegel: history, recognition, social conflict or logic.</p></notes></section>
+<section image-layout="blank" id="DN8lPuOPAL"><grid spacing="none"><grid-item id="MtOxhhlL8D"><h2>Hegel’s life, in the dates that shaped the work</h2><spacer mode="fill"></spacer><grid marker="symbol" marker-label="●" marker-rule="true" marker-position="above" marker-align="center" spacing="none" vertical-sizing="hug" padding="0 9pt"><grid-item id="eP0QIK43tf" colspan="12"><h4 font-size="21pt" align="center">1770</h4><p font-size="18pt" align="center">Born in Stuttgart.</p></grid-item><grid-item id="ON2vR0Ltw2" colspan="12"><h4 font-size="21pt" align="center">1788–1793</h4><p font-size="18pt" align="center">Tübingen with Hölderlin and Schelling.</p></grid-item><grid-item id="yjFK0iy3D1" colspan="12"><h4 font-size="21pt" align="center">1801–1807</h4><p font-size="18pt" align="center">Jena; <i>Phenomenology of Spirit</i>.</p></grid-item><grid-item id="LABEtGXGXz" colspan="12"><h4 font-size="21pt" align="center">1812–1816</h4><p font-size="18pt" align="center"><i>Science of Logic</i>; Heidelberg.</p></grid-item><grid-item id="H05fQQQN5N" colspan="12"><h4 font-size="21pt" align="center">1818–1831</h4><p font-size="18pt" align="center">Berlin; <i>Philosophy of Right</i>; death.</p></grid-item></grid><spacer mode="fill"></spacer><p role="caption">His mother taught him Latin. The first <i>Encyclopaedia</i> appeared in 1816; the <i>Philosophy of Right</i> in 1820–21. <a href="https://plato.stanford.edu/entries/hegel/">Stanford Encyclopedia of Philosophy</a></p></grid-item></grid><notes><p>Use the dates as intellectual settings, not biography trivia: Tübingen for the Kant problem, Jena for consciousness, the Logic years for the system, Berlin for political philosophy.</p></notes></section>
+<section image-layout="blank" id="tw7S36BtVO"><grid spacing="none"><grid-item id="-jR2v6MzRY" padding="40pt 84pt 28pt"><h2>Four mistakes to avoid when you talk about Hegel</h2><grid divider="sm palette-8" vertical-sizing="fill"><grid-item id="iclZaVEldO" colspan="30"><h4>Calling the method “thesis–antithesis–synthesis”</h4><p font-size="sm">It is not his formula, and it falsely introduces an external referee.</p></grid-item><grid-item id="-dY2TkbXI_" colspan="30"><h4>Treating the result as a compromise</h4><p font-size="sm">The new concept preserves what was true and cancels the earlier one-sidedness. It does not split the difference.</p></grid-item><grid-item id="BmojjjMqLb" colspan="30"><h4>Reading “the actual is rational” as approval</h4><p font-size="sm">Hegel’s actuality excludes things that merely exist in a degenerate or transitory form.</p></grid-item><grid-item id="zBJew1Dd34" colspan="30"><h4>Saying everything in history happens according to reason</h4><p font-size="sm">That reference-book slogan is one of the myths specialists have repeatedly worked to dismantle.</p></grid-item></grid><p role="caption"><a href="https://hegel.net/en/faq-logik.htm">Hegel.net</a> · <a href="https://archive.hegel.net/en/stewart1996.htm">Hegel myths and legends</a></p></grid-item></grid><notes><p>Use this as a quick diagnostic. Each mistake replaces an internal, developmental claim with a simpler slogan.</p></notes></section>
+<section image-layout="blank" id="5xqNHduPF8"><grid spacing="none"><grid-item id="tVU08BkDP-" padding="66pt 84pt 24pt"><h2>What to keep: three ideas that outlive the system</h2><spacer mode="fill"></spacer><grid spacing="medium" vertical-sizing="hug"><grid-item id="CFIVmLVUOk" border="sm solid palette-8" border-sides="top" colspan="20"><h4>Contradiction is information</h4><p font-size="sm">When a position breaks under its own pressure, the break tells you what must be thought next.</p></grid-item><grid-item id="jCwkTb_wEi" border="sm solid palette-8" border-sides="top" colspan="20"><h4>Selfhood is social</h4><p font-size="sm">You cannot recognize yourself alone, and recognition taken by force is worthless to the taker.</p></grid-item><grid-item id="6FebuUTcK2" border="sm solid palette-8" border-sides="top" colspan="20"><h4>Freedom needs structure</h4><p font-size="sm">Being at home in institutions you endorse is richer than simply having nothing in your way.</p></grid-item></grid><spacer mode="fill"></spacer><blockquote class="quote"><p font-size="27pt">Philosophy comes too late to tell the world what it ought to be. It can help us understand the world we were handed.</p></blockquote><p role="caption"><a href="https://iperceptive.com/author/hegel/">Hegel quotations and works</a></p></grid-item></grid><notes><p>Close on the three durable ideas, then keep the caveat. Hegel’s strength is diagnosis after the fact, not prediction from above.</p></notes></section>

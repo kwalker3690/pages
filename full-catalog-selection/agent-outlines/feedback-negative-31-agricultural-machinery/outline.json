@@ -1,0 +1,31 @@
+{
+  "id": "feedback-negative-31-agricultural-machinery",
+  "ready": true,
+  "cardCount": 16,
+  "collectedAt": "2026-09-23T13:53:08.415Z",
+  "harnessSessionId": "2026-09-23T13-49-03-864Z_fcdd1105-2eff-4ea3-8696-2f1d88005525",
+  "sessionUrl": "https://staging.gamma.app/agents?session=2026-09-23T13-49-03-864Z_fcdd1105-2eff-4ea3-8696-2f1d88005525",
+  "snapshot": "tpl-4f4cb05b11697aa4c7d0356f",
+  "target": "cubesandbox:blue",
+  "model": "claude-opus-5",
+  "provider": "anthropic",
+  "thinkingLevel": "medium",
+  "outlineSha256": "26c80b56ec071b78062b57cae5d09838f38514279218551e2e2b4951131a5c62",
+  "agentPath": "gamma-agent/session/generations/alsintan-efficiency/brief.xml",
+  "tools": [
+    "bash",
+    "web_search",
+    "web_search",
+    "web_search",
+    "web_search",
+    "generation_init",
+    "template_selection",
+    "generation_source_prepare",
+    "show_file",
+    "write",
+    "template_restyle",
+    "template_restyle"
+  ],
+  "handover": "The plan's ready for you.\n\nThe angle I took: **efficiency is a ratio you compute, not a quality the machine has**. So the deck opens on the real killer — an underused machine, not a slow one — then builds the arithmetic (field capacity → field efficiency → cost per hectare → break-even area) and lands on a case study where the *planting calendar*, not horsepower, is the binding constraint. A fictional service unit buys a transplanter, misses break-even at 28.8 ha/year because one village's planting window is only 20 days, and clears it at 48 ha by staggering dates across three villages. It's labeled as illustrative on the slide, and every input is shown so the math is reproducible.\n\nTwo calls worth your view:\n\n- **Real research carries the facts.** A measured Indonesian transplanter (86% field efficiency, Pinrang), a published break-even of 13.46 ha/year from West Sumatra, and three harvest-loss studies that disagree — I made that disagreement a teaching point rather than averaging it away.\n- **Density over sparseness.** I picked a look that holds real tables and charts at ~55 words a slide, then took it to a true white ground with a signal-red accent. The formula, cost curve, and indicator table get evidence furniture instead of photos.\n\nSixteen slides. If you'd rather lead with the five usage stages and keep the economics as the payoff, or drop the case study to one slide, say the word — and hit generate when it reads right.\n\n![Alsintan efficiency outline](file:gamma-agent/session/generations/alsintan-efficiency/brief.xml)",
+  "sourcePr": 37703
+}

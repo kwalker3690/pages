@@ -1,0 +1,32 @@
+{
+  "id": "feedback-negative-39-vietnamese-literature",
+  "ready": true,
+  "cardCount": 24,
+  "collectedAt": "2026-09-23T14:08:17.376Z",
+  "harnessSessionId": "2026-09-23T14-02-26-310Z_0e1f9e25-0d6b-4bd9-994d-43f5b07fcc1e",
+  "sessionUrl": "https://staging.gamma.app/agents?session=2026-09-23T14-02-26-310Z_0e1f9e25-0d6b-4bd9-994d-43f5b07fcc1e",
+  "snapshot": "tpl-4f4cb05b11697aa4c7d0356f",
+  "target": "cubesandbox:blue",
+  "model": "claude-opus-5",
+  "provider": "anthropic",
+  "thinkingLevel": "medium",
+  "outlineSha256": "61d9d9ca6e8edf442e8e3b388b6e1d88994327f3e1ee1c3e42447df50afafad1",
+  "agentPath": "gamma-agent/session/generations/tale-of-kieu/brief.xml",
+  "tools": [
+    "bash",
+    "web_search",
+    "bash",
+    "web_search",
+    "web_search",
+    "generation_init",
+    "web_search",
+    "web_search",
+    "web_fetch",
+    "generation_source_prepare",
+    "web_fetch",
+    "show_file",
+    "write"
+  ],
+  "handover": "The corrected plan is in the pane, same 24 slides and same arc. What changed, and why:\n\n- **Chronology rebuilt on verified dates.** The Lê line ended in 1789, the Tây Sơn were defeated in 1802, the Nguyễn ran 1802–1945, and he died in 1820 — so two dynasties fell in his lifetime, not three, and Gia Long displaced the Tây Sơn, not the Lê. The \"how do you keep faith\" parallel survives, but now labelled as a reading of the poem rather than a claim about his daily motives.\n- **The prosody demonstration now matches the verse actually quoted.** It runs on lines 1–6: ta→là, nhau→dâu→đau, lòng→phong→hồng, with the next couplet printed in full (\"Lạ gì bỉ sắc tư phong / Trời xanh quen thói má hồng đánh ghen\") so phong–hồng appears where it really occurs. Tone marking uses tài–mệnh–là, and là (huyền) against nhau (ngang) for the 6/8 rule.\n- **Closing lines fixed.** The tâm/tài couplet is now identified as lines 3251–3252, with the actual final couplet, \"Lời quê chắp nhặt dông dài / Mua vui cũng được một vài trống canh\" (3253–3254) — the earlier draft misquoted \"góp nhặt\". I added lines 3247–3248, the tài/tai rhyme pun, as real textual evidence in place of the deleted \"first Vietnamese character with an inner life\" and emotional-labor claims; the Kiều slide now works from her introduction at lines 26–34, including the *Bạc mệnh* omen and the hồ cầm (her instrument in the text, not the đàn nguyệt).\n- **Biden is Vice President, July 2015**, at the State Department lunch for Nguyễn Phú Trọng, with the couplet he actually quoted.\n- **One internal contradiction repaired:** Đào Duy Anh's \"without cutting or adding anything\" sat directly beside \"he cut two chapters\". It's now presented as a scholarly disagreement about scale. I also dropped the unverifiable three-hundred-tael demand and Từ Hải's five-year reign, and kept translation excerpts to a line each with translators named.\n\nA new \"Evidence discipline\" instruction holds the three registers apart — fact, interpretation, inference — and bars the removed claim types from creeping back in during writing.\n\nStopping here as asked: nothing has been built.\n\n![Outline](file:gamma-agent/session/generations/tale-of-kieu/brief.xml)",
+  "sourcePr": 37703
+}

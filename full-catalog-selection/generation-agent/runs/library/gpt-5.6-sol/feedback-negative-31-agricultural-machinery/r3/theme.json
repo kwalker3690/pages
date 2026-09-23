@@ -1,0 +1,208 @@
+{
+  "id": "g_ovhsivsdus8stvv",
+  "name": "File",
+  "headingFont": "Atkinson Hyperlegible Next",
+  "headingFontName": "Atkinson Hyperlegible Next",
+  "headingFontWeight": 700,
+  "bodyFont": "Atkinson Hyperlegible Next",
+  "bodyFontName": "Atkinson Hyperlegible Next",
+  "bodyFontWeight": 500,
+  "config": {
+    "headingColor": "#131A2B",
+    "bodyColor": "#131A2B",
+    "cardColor": {
+      "type": "solid",
+      "color": "#FAF8F3"
+    },
+    "background": {
+      "type": "color",
+      "source": "color.solid",
+      "color": {
+        "hex": "#DDD9D0"
+      }
+    },
+    "roundness": "sm",
+    "cardShadow": "none",
+    "cardBorder": "none",
+    "cardPadding": "md",
+    "dividerColor": "rgba(19, 26, 43, 0.28)",
+    "dividerThickness": "sm",
+    "letterSpacingHeading": -0.025,
+    "letterSpacingBody": 0,
+    "lineHeightBody": 1.18,
+    "lineHeightHeading": 1.02,
+    "headingTransform": "uppercase",
+    "density": "md",
+    "blockSpacing": 16,
+    "cardMargins": {
+      "footer": {},
+      "pageNumberFormat": "number",
+      "pageNumberPadded": false
+    },
+    "typeScale": {
+      "display-xl": 92,
+      "display-lg": 76,
+      "display-md": 60,
+      "heading-1": 52,
+      "heading-2": 36,
+      "heading-3": 27,
+      "heading-4": 22,
+      "subheading": 21,
+      "body-normal": 20,
+      "body-sm": 17,
+      "body-lg": 23,
+      "eyebrow": 15,
+      "caption": 15
+    },
+    "roleStyles": {
+      "display": {
+        "font": "Atkinson Hyperlegible Next",
+        "fontWeight": 800,
+        "italic": false,
+        "transform": "uppercase",
+        "letterSpacing": -0.035,
+        "lineHeight": 0.95
+      },
+      "eyebrow": {
+        "font": "Atkinson Hyperlegible Next",
+        "fontWeight": 700,
+        "italic": false,
+        "transform": "uppercase",
+        "color": "#131A2B",
+        "letterSpacing": 0.04,
+        "lineHeight": 1.12
+      },
+      "caption": {
+        "font": "Atkinson Hyperlegible Next",
+        "fontWeight": 600,
+        "italic": false,
+        "transform": "none",
+        "color": "rgba(19, 26, 43, 0.76)",
+        "letterSpacing": 0,
+        "lineHeight": 1.16
+      },
+      "label": {
+        "font": "Atkinson Hyperlegible Next",
+        "fontWeight": 700,
+        "italic": false,
+        "transform": "uppercase",
+        "color": "#131A2B",
+        "letterSpacing": 0.04,
+        "lineHeight": 1.12
+      },
+      "subheading": {
+        "font": "Atkinson Hyperlegible Next",
+        "fontWeight": 700,
+        "italic": false,
+        "transform": "none",
+        "letterSpacing": 0,
+        "lineHeight": 1.14
+      }
+    },
+    "canvasPalette": {
+      "colors": [
+        {
+          "key": "signal",
+          "name": "Signal red",
+          "color": {
+            "type": "solid",
+            "color": "#B23A2E"
+          }
+        },
+        {
+          "key": "ink",
+          "name": "Ink navy",
+          "color": {
+            "type": "solid",
+            "color": "#131A2B"
+          }
+        },
+        {
+          "key": "chalk",
+          "name": "Chalk white",
+          "color": {
+            "type": "solid",
+            "color": "#FAF8F3"
+          }
+        },
+        {
+          "key": "diagram-fill",
+          "name": "Diagram fill",
+          "color": {
+            "type": "solid",
+            "color": "rgba(19, 26, 43, 0.15)"
+          }
+        },
+        {
+          "key": "ink-mid",
+          "name": "Mid ink",
+          "color": {
+            "type": "solid",
+            "color": "rgba(19, 26, 43, 0.55)"
+          }
+        },
+        {
+          "key": "ink-soft",
+          "name": "Soft ink",
+          "color": {
+            "type": "solid",
+            "color": "rgba(19, 26, 43, 0.32)"
+          }
+        }
+      ],
+      "gradients": []
+    },
+    "surfaceColor": {
+      "type": "solid",
+      "color": "rgba(19, 26, 43, 0.15)"
+    },
+    "mutedColor": {
+      "type": "solid",
+      "color": "rgba(19, 26, 43, 0.72)"
+    },
+    "neutralBorderColor": {
+      "type": "solid",
+      "color": "rgba(19, 26, 43, 0.32)"
+    },
+    "charts": {
+      "textSize": "lg",
+      "roundness": "sm",
+      "gridlineStyle": "solid",
+      "gridlineWidth": "sm",
+      "lineWeight": "sm",
+      "font": "body"
+    },
+    "imagery": {
+      "defaultStyleId": "lecture-spot",
+      "styles": [
+        {
+          "id": "lecture-spot",
+          "name": "Spot-color technical line drawing",
+          "subjects": "Named objects, places, mechanisms, instruments, specimens, cutaways, or one person doing one physical action. Use concrete material and environment cues; keep every label, callout, logo, brand mark, and numeral out of the generated image.",
+          "whenToUse": "Use for enlarged explanatory figures, inspection plates, image rails, paired views, and physical mechanisms. Native diagrams, graphs, and tables remain native.",
+          "styleReferenceKey": "spot_color_line_drawing"
+        },
+        {
+          "id": "lecture-photo",
+          "name": "Editorial field photograph",
+          "styleReferenceKey": "editorial_photo",
+          "subjects": "One real subject-specific place, object, or person doing one physical action; never generic classrooms, paper, documents, desks, screens, logos, brands, or readable displays.",
+          "whenToUse": "Use as the single photographic exception for one divider or hero when physical reality matters more than a drawn explanation."
+        }
+      ]
+    },
+    "shapeFill": "solid",
+    "shapeColorScheme": "default",
+    "shapeColors": [
+      "#131A2B"
+    ]
+  },
+  "fonts": [
+    {
+      "id": "Atkinson Hyperlegible Next",
+      "name": "Atkinson Hyperlegible Next",
+      "url": "https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next%3Aital%2Cwght%400%2C200%3B0%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800%3B1%2C200%3B1%2C300%3B1%2C400%3B1%2C500%3B1%2C600%3B1%2C700%3B1%2C800&display=swap"
+    }
+  ],
+  "isDefault": false
+}

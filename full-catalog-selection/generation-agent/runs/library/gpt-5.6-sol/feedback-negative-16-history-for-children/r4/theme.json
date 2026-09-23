@@ -1,0 +1,304 @@
+{
+  "id": "g_a27pt1rrb0wb3es",
+  "name": "File",
+  "headingFont": "Baloo 2",
+  "headingFontName": "Baloo 2",
+  "headingFontWeight": 800,
+  "bodyFont": "Andika",
+  "bodyFontName": "Andika",
+  "bodyFontWeight": 400,
+  "config": {
+    "headingColor": "#2B2118",
+    "bodyColor": "#2B2118",
+    "mutedColor": {
+      "type": "solid",
+      "color": "#6B5A4B"
+    },
+    "cardColor": {
+      "type": "solid",
+      "color": "#FFF7E8"
+    },
+    "surfaceColor": {
+      "type": "solid",
+      "color": "#F0E2C9"
+    },
+    "neutralBorderColor": {
+      "type": "solid",
+      "color": "#D9CBB2"
+    },
+    "background": {
+      "type": "color",
+      "source": "color.solid",
+      "color": {
+        "hex": "#E9DAC1"
+      }
+    },
+    "roundness": "lg",
+    "cardShadow": "default",
+    "cardBorder": "none",
+    "cardFrame": "none",
+    "cardPadding": "68pt",
+    "density": "md",
+    "blockSpacing": 30,
+    "dividerColor": "#D9CBB2",
+    "dividerThickness": "sm",
+    "letterSpacingHeading": 0,
+    "letterSpacingBody": 0,
+    "lineHeightHeading": 1.12,
+    "lineHeightBody": 1.45,
+    "headingTransform": "none",
+    "shapeFill": "solid",
+    "shapeShadow": "none",
+    "shapeBorder": "none",
+    "shapeColorScheme": "custom",
+    "shapeColors": [
+      {
+        "type": "solid",
+        "color": "#E9A23B"
+      },
+      {
+        "type": "solid",
+        "color": "#3A7640"
+      },
+      {
+        "type": "solid",
+        "color": "#B8452B"
+      },
+      {
+        "type": "solid",
+        "color": "#2F6FB0"
+      }
+    ],
+    "charts": {
+      "roundness": "lg",
+      "gridlineStyle": "solid",
+      "gridlineColor": {
+        "type": "solid",
+        "color": "#D9CBB2"
+      },
+      "gridlineWidth": "sm",
+      "lineWeight": "lg",
+      "font": "body",
+      "textSize": "lg"
+    },
+    "typeScale": {
+      "display-xl": 84,
+      "display-lg": 72,
+      "display-md": 64,
+      "heading-1": 48,
+      "heading-2": 42,
+      "heading-3": 36,
+      "heading-4": 32,
+      "subheading": 32,
+      "body-lg": 32,
+      "body-normal": 28,
+      "body-sm": 26,
+      "eyebrow": 24,
+      "label": 24,
+      "caption": 24,
+      "source": 24
+    },
+    "roleStyles": {
+      "display": {
+        "font": "Baloo 2",
+        "fontWeight": 800,
+        "transform": "none",
+        "italic": false,
+        "letterSpacing": -0.01,
+        "lineHeight": 1
+      },
+      "heading-3": {
+        "font": "Baloo 2",
+        "fontWeight": 700,
+        "lineHeight": 1.18
+      },
+      "heading-4": {
+        "font": "Andika",
+        "fontWeight": 700,
+        "transform": "none",
+        "lineHeight": 1.25
+      },
+      "subheading": {
+        "font": "Andika",
+        "fontWeight": 700,
+        "transform": "none",
+        "lineHeight": 1.25,
+        "color": "#2B2118"
+      },
+      "eyebrow": {
+        "font": "Andika",
+        "fontWeight": 700,
+        "transform": "none",
+        "italic": false,
+        "color": "#6B5A4B",
+        "letterSpacing": 0.02,
+        "lineHeight": 1.2
+      },
+      "label": {
+        "font": "Andika",
+        "fontWeight": 700,
+        "transform": "none",
+        "italic": false,
+        "letterSpacing": 0.02,
+        "lineHeight": 1.2
+      },
+      "caption": {
+        "font": "Andika",
+        "fontWeight": 400,
+        "transform": "none",
+        "italic": false,
+        "color": "#6B5A4B",
+        "letterSpacing": 0,
+        "lineHeight": 1.35
+      },
+      "source": {
+        "font": "Andika",
+        "fontWeight": 400,
+        "transform": "none",
+        "italic": false,
+        "color": "#6B5A4B",
+        "letterSpacing": 0,
+        "lineHeight": 1.35
+      }
+    },
+    "canvasPalette": {
+      "colors": [
+        {
+          "key": "primary",
+          "name": "Character marigold",
+          "color": {
+            "type": "solid",
+            "color": "#E9A23B"
+          }
+        },
+        {
+          "key": "setting",
+          "name": "Setting leaf",
+          "color": {
+            "type": "solid",
+            "color": "#3A7640"
+          }
+        },
+        {
+          "key": "problem",
+          "name": "Problem brick",
+          "color": {
+            "type": "solid",
+            "color": "#B8452B"
+          }
+        },
+        {
+          "key": "resolution",
+          "name": "Resolution sky",
+          "color": {
+            "type": "solid",
+            "color": "#2F6FB0"
+          }
+        },
+        {
+          "key": "character-tint",
+          "name": "Character tint",
+          "color": {
+            "type": "solid",
+            "color": "#FBE7C2"
+          }
+        },
+        {
+          "key": "setting-tint",
+          "name": "Setting tint",
+          "color": {
+            "type": "solid",
+            "color": "#DCEBD3"
+          }
+        },
+        {
+          "key": "problem-tint",
+          "name": "Problem tint",
+          "color": {
+            "type": "solid",
+            "color": "#F8D6CB"
+          }
+        },
+        {
+          "key": "resolution-tint",
+          "name": "Resolution tint",
+          "color": {
+            "type": "solid",
+            "color": "#D3E3F5"
+          }
+        },
+        {
+          "key": "oat",
+          "name": "Oat panel",
+          "color": {
+            "type": "solid",
+            "color": "#F0E2C9"
+          }
+        },
+        {
+          "key": "ink",
+          "name": "Warm ink",
+          "color": {
+            "type": "solid",
+            "color": "#2B2118"
+          }
+        },
+        {
+          "key": "tag-ink",
+          "name": "Tag ink (text on marigold)",
+          "color": {
+            "type": "solid",
+            "color": "#2B2118"
+          }
+        },
+        {
+          "key": "paper",
+          "name": "Paper (card colour, for plates on a tint field)",
+          "color": {
+            "type": "solid",
+            "color": "#FFF7E8"
+          }
+        }
+      ],
+      "gradients": []
+    },
+    "imagery": {
+      "defaultStyleId": "gouache-cutout",
+      "styles": [
+        {
+          "id": "gouache-cutout",
+          "name": "Gouache cutout",
+          "styleReferenceKey": "gouache_paint",
+          "subjects": "One subject per image, full body, standing free on a transparent background: a single animal character mid-action, a natural prop or place-marker (a boulder, a signpost, a lantern, a footbridge, a basket, an open book, a paper boat), or one small object from the text being taught. Never people's faces, flags, holiday objects, food, currency, desks, laptops, documents, or readable text.",
+          "whenToUse": "Use for every cutout that sits in a rounded plate or on bare paper beside type: cover plates, divider plates, peer cells, character discs, timeline and activity spots, and the figure beside a think-aloud bubble. Use gouache-scene when the slot needs a whole place."
+        },
+        {
+          "id": "gouache-scene",
+          "name": "Gouache scene",
+          "promptGuidance": "matte gouache painting, opaque paint with visible soft brushstrokes and gentle dimensional shading, no ink outlines, warm naturalistic colour with soft marigold, leaf green, brick red and sky blue notes, a sunlit natural setting painted for a children's storybook, one region of the picture left as plain quiet warm cream sky or ground with no detail, no text, no lettering",
+          "subjects": "A whole natural place from the text being taught — a meadow path, a stream with stepping stones, a forest edge, a shoreline, a hillside, a garden, a night sky — painted as a scene with depth, with or without a small animal character in it. Never faces, buildings with regional markers, flags, holiday objects, food, currency, or readable text.",
+          "whenToUse": "Use for full-bleed cover and closing grounds, the setting plate beside a reading column, gallery cells that compare places, and a single image plate for close looking. When copy will sit on the image, name where the quiet cream region sits. Use gouache-cutout for a single character or object.",
+          "references": [
+            "https://cdn-staging.gamma.app/gammatemplatelibrary/g_a27pt1rrb0wb3es/template-assets/d03d031bf85302b7c54f9c04756c8bb0/01M21XS05EQY6CMD316TXTP3ZK.png",
+            "https://cdn-staging.gamma.app/gammatemplatelibrary/g_a27pt1rrb0wb3es/template-assets/cd05e9d38caff40e6d05e63dcb2a896e/01M21XYWAQJ2RW0WJMMGS3PMX2.png",
+            "https://cdn-staging.gamma.app/gammatemplatelibrary/g_a27pt1rrb0wb3es/template-assets/a49ddea1e72013093a133013320d3b95/01M21XW849ASNCB9MNHHWP3RSN.png"
+          ]
+        }
+      ]
+    },
+    "customCss": "/* Story Map — portable theme hooks only (no author classes). */\n.gml-card { --grid-divider-color: var(--neutral-border-color); }\n.gml-label { border-radius: 999pt; }\n.gml-grid-cell__marker { --marker-font-weight: var(--heading-font-weight); }\n"
+  },
+  "fonts": [
+    {
+      "id": "Andika",
+      "name": "Andika",
+      "url": "https://fonts.googleapis.com/css2?family=Andika%3Aital%2Cwght%400%2C400%3B0%2C700%3B1%2C400%3B1%2C700&display=swap"
+    },
+    {
+      "id": "Baloo 2",
+      "name": "Baloo 2",
+      "url": "https://fonts.googleapis.com/css2?family=Baloo+2%3Aital%2Cwght%400%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800%3B1%2C400%3B1%2C500%3B1%2C600%3B1%2C700%3B1%2C800&display=swap"
+    }
+  ],
+  "isDefault": false
+}

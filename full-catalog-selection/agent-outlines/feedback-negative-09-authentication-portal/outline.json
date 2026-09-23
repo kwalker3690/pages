@@ -1,0 +1,30 @@
+{
+  "id": "feedback-negative-09-authentication-portal",
+  "ready": true,
+  "cardCount": 7,
+  "collectedAt": "2026-09-23T14:06:00.919Z",
+  "harnessSessionId": "2026-09-23T14-02-26-376Z_fc1cb9d0-fbb1-4e19-aa37-2e11e583f28e",
+  "sessionUrl": "https://staging.gamma.app/agents?session=2026-09-23T14-02-26-376Z_fc1cb9d0-fbb1-4e19-aa37-2e11e583f28e",
+  "snapshot": "tpl-4f4cb05b11697aa4c7d0356f",
+  "target": "cubesandbox:blue",
+  "model": "claude-opus-5",
+  "provider": "anthropic",
+  "thinkingLevel": "medium",
+  "outlineSha256": "355cf7dd7d51e15d3953df083dbe031d452030767a124c99b350f0ae76037390",
+  "agentPath": "gamma-agent/session/generations/student-auth-portal/brief.xml",
+  "tools": [
+    "bash",
+    "web_search",
+    "web_search",
+    "web_search",
+    "web_fetch",
+    "generation_init",
+    "template_selection",
+    "web_search",
+    "generation_source_prepare",
+    "show_file",
+    "write"
+  ],
+  "handover": "The corrected plan is in the pane, still 7 slides and the same narrative spine. Three things changed:\n\n**The JWT.** Two dots, three parts — corrected in the copy and pinned as a rule so no diagram draws three separators. Confirmed against Auth0's JWS structure docs.\n\n**One coherent design, end to end.** I picked the **HttpOnly-cookie flow** over the memory-held Bearer flow, because it makes logout mean something and gives you more to defend in a viva. Every card now agrees: login sets `httpOnly; secure; sameSite=strict`, the middleware reads `req.cookies.token` through cookie-parser, and there is no Authorization header anywhere. That choice has a price, so slide 6 now carries the CSRF token — OWASP is explicit that SameSite is defence in depth, not a complete CSRF defence, and the old plan quietly skipped that. The jwt.io demo survives: you copy the cookie value out of DevTools rather than reading it from JavaScript. I also added the honest `secure: true` / localhost caveat, which is exactly the kind of thing an instructor probes.\n\n**No invented bug history.** Slide 7 was \"three things this build got wrong first\" about a build that doesn't exist. It's now four defensible design decisions ending on the real limit: a signed token stays valid until `exp`, so a copy taken before logout still works for those 15 minutes. Slide 3 states plainly that this is a proposed reference implementation.\n\nTwo corrections you didn't flag but I made anyway: the bcrypt cost guidance now cites OWASP's work-factor-10-or-more plus the logarithmic doubling, dropping the previous plan's \"under a second\" rule of thumb that its PHP-RFC citation didn't support; and the rate-limit claim is now tied to express-rate-limit's actual documented `windowMs`/`limit`/429 behaviour. A new `Accuracy and scope` instruction separates verified facts from our lab choices (cost 12, 15-minute expiry) from our interpretation.\n\nStopping here as asked — nothing has been built.\n\n![Student Authentication Portal plan](file:gamma-agent/session/generations/student-auth-portal/brief.xml)\n\nIf you'd rather demo the simpler memory-held Bearer flow, say so and I'll swap slides 5–7 back to a header-based design with its limits stated honestly instead.",
+  "sourcePr": 37703
+}

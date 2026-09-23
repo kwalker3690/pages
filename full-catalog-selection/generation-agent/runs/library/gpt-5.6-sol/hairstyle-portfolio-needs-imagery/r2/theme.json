@@ -1,0 +1,170 @@
+{
+  "id": "g_mrvvpxjkesnv6p0",
+  "name": "File",
+  "headingFont": "Bodoni Moda",
+  "headingFontName": "Bodoni Moda",
+  "headingFontWeight": 400,
+  "bodyFont": "Newsreader",
+  "bodyFontName": "Newsreader",
+  "bodyFontWeight": 400,
+  "config": {
+    "headingColor": "#221f1a",
+    "bodyColor": "#2e2a24",
+    "cardColor": {
+      "type": "solid",
+      "color": "#fbf9f4"
+    },
+    "background": {
+      "type": "color",
+      "color": {
+        "hex": "#f1ede4"
+      },
+      "source": "color.solid"
+    },
+    "surfaceColor": {
+      "type": "solid",
+      "color": "#ffffff"
+    },
+    "mutedColor": {
+      "type": "solid",
+      "color": "#716b60"
+    },
+    "neutralBorderColor": {
+      "type": "solid",
+      "color": "rgba(34, 31, 26, 0.18)"
+    },
+    "roundness": "sm",
+    "cardShadow": "none",
+    "cardBorder": "none",
+    "cardPadding": "lg",
+    "dividerColor": "rgba(34, 31, 26, 0.3)",
+    "dividerThickness": "sm",
+    "letterSpacingHeading": 0.08,
+    "lineHeightBody": 1.45,
+    "lineHeightHeading": 1.15,
+    "headingTransform": "uppercase",
+    "cardMargins": {
+      "footer": {},
+      "pageNumberFormat": "number",
+      "pageNumberPadded": true
+    },
+    "typeScale": {
+      "display-xl": 130,
+      "display-lg": 80,
+      "display-md": 50,
+      "heading-1": 40,
+      "heading-2": 28,
+      "heading-3": 19,
+      "heading-4": 15.5,
+      "subheading": 16,
+      "body-normal": 13.5,
+      "body-sm": 11.5,
+      "body-lg": 15,
+      "eyebrow": 10.5,
+      "caption": 10.5
+    },
+    "roleStyles": {
+      "display": {
+        "font": "Bodoni Moda",
+        "fontWeight": 400,
+        "transform": "uppercase",
+        "letterSpacing": 0.08,
+        "lineHeight": 1.12
+      },
+      "eyebrow": {
+        "font": "Newsreader",
+        "italic": false,
+        "transform": "uppercase",
+        "color": "#7d6d51",
+        "fontWeight": 500,
+        "letterSpacing": 0.12,
+        "lineHeight": 1.8
+      },
+      "caption": {
+        "font": "Newsreader",
+        "italic": false,
+        "transform": "uppercase",
+        "color": "#716b60",
+        "fontWeight": 400,
+        "letterSpacing": 0.12,
+        "lineHeight": 1.7
+      },
+      "label": {
+        "font": "Newsreader",
+        "italic": false,
+        "transform": "uppercase",
+        "color": "#2e2a24",
+        "fontWeight": 500,
+        "letterSpacing": 0.12
+      },
+      "subheading": {
+        "font": "Newsreader",
+        "italic": true,
+        "transform": "none",
+        "letterSpacing": 0.01,
+        "lineHeight": 1.35,
+        "fontWeight": 400
+      }
+    },
+    "canvasPalette": {
+      "colors": [
+        {
+          "key": "accent",
+          "name": "Driftwood",
+          "color": {
+            "type": "solid",
+            "color": "#7d6d51"
+          }
+        },
+        {
+          "key": "mist",
+          "name": "Sea Mist",
+          "color": {
+            "type": "solid",
+            "color": "#8fa0a0"
+          }
+        }
+      ],
+      "gradients": []
+    },
+    "imagery": {
+      "defaultStyleId": "voile-documentary",
+      "styles": [
+        {
+          "id": "voile-documentary",
+          "name": "Voile documentary",
+          "promptGuidance": "Warm ivory-toned fine-art documentary wedding photography, natural window light or soft coastal daylight, subtle film grain, restrained blush, stone, and mineral palette, candid mid-moment framing, elegant negative space, no visible text or logos.",
+          "subjects": "Unposed human moments, quiet working portraits, coastal or architectural context, ceremonies in progress, candlelit gatherings, and tactile still lifes from the user’s own subject.",
+          "whenToUse": "Use for portfolio plates, full-bleed act breaks, matted details, environmental spines, and occasional text-over-photo backgrounds. Human frames carry the story; still lifes pace it.",
+          "references": [
+            "https://cdn-staging.gamma.app/gammatemplatelibrary/g_mrvvpxjkesnv6p0/template-assets/dc271a98b93d0f6d3dc0c2d65589289e/01KZACB26VHBM7VGBA3W3GY2SJ.png",
+            "https://cdn-staging.gamma.app/gammatemplatelibrary/g_mrvvpxjkesnv6p0/template-assets/fbf1abc9db144be99a42fdedee7e41e5/01KZACBR6FSKN2A604SMYEC57R.png",
+            "https://cdn-staging.gamma.app/gammatemplatelibrary/g_mrvvpxjkesnv6p0/template-assets/39dc9f26c06ad94762ee630c401a448c/01KZACBKXKGM9P5D67MPFV512E.png"
+          ]
+        }
+      ]
+    },
+    "charts": {
+      "textSize": "sm",
+      "roundness": "sm",
+      "gridlineStyle": "none",
+      "lineWeight": "sm",
+      "font": "body"
+    },
+    "shapeColorScheme": "default",
+    "density": "lg"
+  },
+  "fonts": [
+    {
+      "id": "Bodoni Moda",
+      "name": "Bodoni Moda",
+      "url": "https://fonts.googleapis.com/css2?family=Bodoni+Moda%3Aital%2Cwght%400%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800%3B0%2C900%3B1%2C400%3B1%2C500%3B1%2C600%3B1%2C700%3B1%2C800%3B1%2C900&display=swap"
+    },
+    {
+      "id": "Newsreader",
+      "name": "Newsreader",
+      "url": "https://fonts.googleapis.com/css2?family=Newsreader%3Aital%2Cwght%400%2C200%3B0%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800%3B1%2C200%3B1%2C300%3B1%2C400%3B1%2C500%3B1%2C600%3B1%2C700%3B1%2C800&display=swap"
+    }
+  ],
+  "isDefault": false
+}

@@ -1,10 +1,12 @@
 # Original or library: the completed creative prototype
 
+**Content revision:** [Review the comparisons rebuilt with actual agent-written outlines](agent-content.html). The staging agent now researches and writes the detailed content plan for all 14 briefs, including reviewed agent revisions. Both designs receive the same new plan, with the existing themes and library choices retained; the writer and rendering stages still use the prototype pipeline. The findings below describe the original custom-outline experiment, not these new comparisons.
+
 ## How this differs from the actual agent
 
 **This was a custom, iterated design prototype—not an end-to-end run of the actual Gamma agent.** It used the production deck writer and theme-application code from the checked-out repository, with custom planning and finishing around them. The final results do not establish what the shipped agent would produce on these briefs.
 
-**Jon’s custom-theme instructions were included:** all14saved planning requests contain the complete, unchanged `AUTHORED-LOOK.md` introduced by Jon Noronha in PR37723. However, those instructions were supplied inside a separate, custom planning prompt that asked for three competing concepts, a chosen theme, art direction and a detailed outline. This was not an unchanged execution of Jon’s main-agent workflow.
+**Jon’s custom-theme instructions were included:** all 14 saved planning requests contain the complete, unchanged `AUTHORED-LOOK.md` introduced by Jon Noronha in PR 37723. However, those instructions were supplied inside a separate, custom planning prompt that asked for three competing concepts, a chosen theme, art direction and a detailed outline. This was not an unchanged execution of Jon’s main-agent workflow.
 
 | Stage | What this prototype actually used |
 |---|---|

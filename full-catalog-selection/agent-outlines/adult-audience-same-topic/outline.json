@@ -1,0 +1,32 @@
+{
+  "id": "adult-audience-same-topic",
+  "ready": true,
+  "cardCount": 16,
+  "collectedAt": "2026-09-23T14:11:07.572Z",
+  "harnessSessionId": "2026-09-23T14-07-17-050Z_56d63e6a-ab06-4d09-acba-937ebba77c7b",
+  "sessionUrl": "https://staging.gamma.app/agents?session=2026-09-23T14-07-17-050Z_56d63e6a-ab06-4d09-acba-937ebba77c7b",
+  "snapshot": "tpl-4f4cb05b11697aa4c7d0356f",
+  "target": "cubesandbox:blue",
+  "model": "claude-opus-5",
+  "provider": "anthropic",
+  "thinkingLevel": "medium",
+  "outlineSha256": "0b428a476e10250a36fc8edfe479e4414968ea1999f9f1454b4c9ef76989b83c",
+  "agentPath": "gamma-agent/session/generations/ozone-policy-ic-brief/brief.xml",
+  "tools": [
+    "bash",
+    "web_fetch",
+    "web_fetch",
+    "web_search",
+    "bash",
+    "web_fetch",
+    "bash",
+    "generation_init",
+    "generation_source_prepare",
+    "show_file",
+    "write",
+    "template_restyle",
+    "template_restyle"
+  ],
+  "handover": "The corrected plan is in the pane, same 16 cards and same narrative spine. Three things changed materially:\n\n**The EU mechanism.** Card 9 is rebuilt around what Article 17(5) actually does: €3/tCO₂e is a payment for *allocated HFC quota*, on Annex I Section 1 hydrofluorocarbons, for quota from 2026 — not a levy on every F-gas, and with no indexation stated anywhere. R1234yf is an Annex II unsaturated compound outside the quota system entirely, so the €0.002/kg figure and the \"2,000-fold advantage\" are withdrawn; its edge is a scope exclusion, which is a different and harder-to-arbitrage thing. The per-kg arithmetic survives only as explicitly labeled derivation for Annex I gases, and the chart says so in its title. I also separated the €3 statutory payment from the €14–18.50 secondary permit market, which the old draft effectively conflated — and that spread is now its own point on card 12.\n\n**The HCFC date.** Non-Article 5 hit 100% in 2020 with a 0.5% servicing allowance to 2030; Article 5 hits 100% in 2030 with a 2.5% servicing tail averaged to 1 January 2040. That's a better fact for this audience than the old one, since the tail *is* the replacement-cycle window.\n\n**The portfolio claims.** Every statement that assumed holdings is gone — no \"under-owned in our sleeve\", no \"positioning roughly right\", no de-rating-versus-impairment verdict. The scenarios card now reads as three labeled hypotheses with an assumption, an effect and a test each, and the closing card asks for an exposure screen and management questions rather than a reclassification. I added a reading-convention line to the summary so fact, illustrative arithmetic and interpretation are visibly separated throughout, and a binding accuracy instruction so none of the three errors returns by paraphrase.\n\nStopping here as asked — nothing has been generated. If you'd rather the withdrawn R1234yf comparison be replaced with a defensible one (Annex I blend content is the honest version), that's a small edit to card 9.\n\n![Ozone policy IC briefing plan](file:gamma-agent/session/generations/ozone-policy-ic-brief/brief.xml)",
+  "sourcePr": 37703
+}
