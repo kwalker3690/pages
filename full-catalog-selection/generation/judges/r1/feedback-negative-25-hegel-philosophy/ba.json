@@ -1,0 +1,126 @@
+{
+  "order": [
+    "library",
+    "original"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 3,
+        "audience": 3,
+        "coherence": 3,
+        "craft": 2,
+        "integrity": 4
+      },
+      "wow": "absent",
+      "strengths": [
+        "Slide 1 converts an abstract problem into a concrete seminar dilemma, reinforced by the circle of chairs rather than an unrelated stock image.",
+        "Slides 3–5 form a useful instructional sequence: reject the mechanical triad, test a claim from within, then distinguish what Aufhebung cancels, preserves, and transforms.",
+        "Slide 8 uses retrieval questions instead of ending with a passive summary.",
+        "The teaching analogy is explicitly labeled as an analogy rather than a quotation or proof on slide 4."
+      ],
+      "issues": [
+        {
+          "slide": 6,
+          "severity": "blocking",
+          "evidence": "A sentence beneath the recognition diagram is visibly cut by the bottom edge; only the tops of its first line remain. This is required explanatory content, not deliberate negative space.",
+          "fix": "Reflow the slide into a shorter header and a compact two-person reciprocal-arrow diagram, keeping the application sentence fully inside the safe area."
+        },
+        {
+          "slide": 7,
+          "severity": "blocking",
+          "evidence": "The institutional-freedom diagram extends below the canvas. The lower nodes labeled “Institutions” and “Shared norms” are substantially cropped, so the central relationship cannot be read.",
+          "fix": "Reduce the left paragraph and move or scale the complete three-part diagram into the available frame; verify all nodes and connectors in the rendered export."
+        },
+        {
+          "slide": 8,
+          "severity": "blocking",
+          "evidence": "The shaded takeaway panel continues below the slide boundary, clipping the final lesson conclusion.",
+          "fix": "Shorten the takeaway or reduce vertical spacing above it so the entire panel and its bottom padding render on-slide."
+        },
+        {
+          "slide": 2,
+          "severity": "major",
+          "evidence": "The overview names thought, nature, selfhood, and social life, but the remaining lesson concentrates almost entirely on dialectic, recognition, and social freedom; nature is not developed and the scope is not explicitly narrowed.",
+          "fix": "Add a compact map of Hegel’s larger system and visibly mark the lesson’s chosen path through dialectic, recognition, and institutions."
+        },
+        {
+          "slide": 4,
+          "severity": "minor",
+          "evidence": "The three large arrows are extremely pale and contain no information, while the conceptual change is carried by separate text columns below them.",
+          "fix": "Put the claim, internal contradiction, and revision directly into a connected flow with a visibly changing line or state."
+        }
+      ],
+      "signatureMoment": "Slide 5’s application of cancel, preserve, and transform to the seminar’s speaking rule is the deck’s clearest brief-specific teaching move."
+    },
+    "B": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 5,
+        "coherence": 5,
+        "craft": 4,
+        "integrity": 4
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 is a memorable opening: the question, dark editorial field, and paper-cut barrier and profiles establish tension rather than merely decorating a title.",
+        "Slides 3–5 create a strong lesson rhythm from correction, to worked example, to conceptual vocabulary. The visual semantics on slide 5 distinguish cancellation, preservation, and transformation at a glance.",
+        "Slide 6 makes reciprocity visible with two equally sized independent selves and opposing arrows, showing a relationship that prose alone would explain less efficiently.",
+        "Slide 7 adds an important “No automatic progress” qualification, avoiding a simplistic claim that institutions necessarily realize freedom.",
+        "Slide 8 closes with retrieval practice and visually recalls the opening paper-cut language. All visible content remains inside the frame."
+      ],
+      "issues": [
+        {
+          "slide": 2,
+          "severity": "major",
+          "evidence": "The large paper-cut figure is distinctive but does not explain the relationship among Logic, Spirit, and History. The introductory sentence also names nature, which the roadmap and subsequent slides do not develop.",
+          "fix": "Replace or annotate the image with an explanatory system map showing Logic, Nature, and Spirit, then locate recognition, social freedom, and history within that map."
+        },
+        {
+          "slide": 5,
+          "severity": "minor",
+          "evidence": "The broken line, centered dot, and arrow below the three cards are suggestive but unlabeled; their meaning depends on the headings above rather than adding a new explanatory layer.",
+          "fix": "Connect the cards into one continuous transformation path and label what is stopped, retained, and carried forward."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The pale gray labels around the reciprocal arrows are markedly smaller and lower-contrast than the rest of the slide, weakening projection readability.",
+          "fix": "Increase their size and contrast, or place one concise label directly inside each arrow."
+        },
+        {
+          "slide": 7,
+          "severity": "minor",
+          "evidence": "The prominent historical interpretation in the pink warning box has no visible source, despite source lines appearing on slides 2, 3, and 6.",
+          "fix": "Add a concise source for the interpretation or mark it explicitly as a scoped teaching summary."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "The doorway and profile image provides a strong thematic close but does not help learners perform the three retrieval tasks on the left.",
+          "fix": "Embed three visual checkpoints or answer categories into the image so it functions as a retrieval scaffold rather than only a closing metaphor."
+        }
+      ],
+      "signatureMoment": "Slide 6’s balanced two-way recognition diagram is the strongest substantive visual: independence and reciprocity are encoded in the geometry rather than appended as decoration."
+    },
+    "winner": "B",
+    "reason": "B is the deck to give the user in either presentation order. It passes the visible readability gate, has a purposeful lesson arc, and uses diagrams on slides 4–7 to teach relationships rather than merely accompany prose. A has a sound instructional concept, but visible clipping on slides 6–8 is a generation defect and a hard readiness failure; the single most important repair is a full reflow and safe-area check of those closing slides. Route identity is hidden, but the greater observed visual complexity in B earns itself through clearer sequencing and reciprocal-relationship diagrams. B exceeds competent default quality, though only modestly: several paper-cut images remain metaphorical rather than explanatory, so its wow is occasional rather than sustained.",
+    "whatWouldMakeWinnerExceptional": "Introduce one substantive system map on slide 2 that situates Logic, Nature, and Spirit and traces the lesson’s route through dialectic, recognition, institutions, and history; carry that map’s progress marker through slides 3–8. This would turn the distinctive visual language into a coherent model of Hegel’s philosophy rather than a polished frame around a focused social-freedom lesson."
+  },
+  "usage": {
+    "prompt_tokens": 17115,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 4999,
+    "completion_tokens_details": {
+      "reasoning_tokens": 3379
+    },
+    "total_tokens": 22114
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 72.4
+}

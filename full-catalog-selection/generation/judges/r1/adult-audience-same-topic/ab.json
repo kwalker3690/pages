@@ -1,0 +1,125 @@
+{
+  "order": [
+    "original",
+    "library"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 2,
+        "integrity": 5
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 1–2 establish a specific investment thesis and correctly separate ozone-depleting substances from HFC climate exposure; slide 2 visibly cites UNEP and the Montreal Protocol.",
+        "Slides 3–4 create a useful diligence logic from substance and equipment through lifecycle, financial transmission, and valuation response.",
+        "Slides 5–7 translate the thesis into committee tools: an urgency/materiality matrix, explicitly illustrative sensitivities, an evidence pack, and decision gates.",
+        "Illustrative holdings and assumptions are conspicuously labeled on slides 5–6 rather than presented as portfolio facts."
+      ],
+      "issues": [
+        {
+          "slide": 8,
+          "severity": "blocking",
+          "evidence": "The four central cards use white text on extremely pale gray fills. Headings and body copy are barely distinguishable in the rendered slide, making the final action plan unreadable despite the otherwise clear title and red conclusion bar.",
+          "fix": "Use dark text on the pale cards or substantially darken the card fills; then verify every line at projected size. This generation defect fails the readability hard gate."
+        },
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "The matrix is the key portfolio exhibit, but its holding descriptions, score details, and bottom disclaimer are much smaller than the surrounding deck. The colored cards also encode actions without a separate, quickly scannable legend or quadrant naming.",
+          "fix": "Enlarge the plotting area and labels, shorten each annotation, and explicitly label the four decision zones."
+        },
+        {
+          "slide": 2,
+          "severity": "minor",
+          "evidence": "The source line is present but very small and low-contrast relative to the large recovery dates, limiting reference use in a committee room.",
+          "fix": "Increase source size and contrast while retaining the visible attribution."
+        },
+        {
+          "slide": 7,
+          "severity": "minor",
+          "evidence": "The evidence pack and decision gates are displayed side by side, but no connectors show which missing evidence moves an asset from underwrite to reserve or defer.",
+          "fix": "Add a simple gate rule or connector that maps evidence completeness and materiality to each decision."
+        },
+        {
+          "slide": 1,
+          "severity": "minor",
+          "evidence": "The stylized machinery still life is memorable and relevant in mood, but it does not explain a substance, policy mechanism, or portfolio relationship.",
+          "fix": "Annotate the equipment types or replace the decorative still life with an asset-and-refrigerant exposure image that advances the thesis."
+        }
+      ],
+      "signatureMoment": "Slide 5 is the strongest substantive visual: it turns substance uncertainty, transition urgency, and financial materiality into differentiated actions, even though its annotation scale needs improvement."
+    },
+    "B": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 4,
+        "audience": 5,
+        "coherence": 4,
+        "craft": 3,
+        "integrity": 4
+      },
+      "wow": "absent",
+      "strengths": [
+        "Slides 1 and 8 form effective boardroom bookends: a concise thesis opens the deck and a clearly numbered 90-day portfolio screen closes it.",
+        "Slides 2–4 explain the scientific distinction, five diligence coordinates, and policy-to-value chain in a restrained editorial system suited to senior investors.",
+        "Slides 5–7 cover portfolio positioning, transition sensitivities, evidence requirements, and decision gates without pretending that the sample inputs are actual portfolio data.",
+        "Slide 7 is especially usable as a reference page, pairing four concrete evidence categories with underwrite, reserve-and-engage, and defer outcomes."
+      ],
+      "issues": [
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "The plot occupies a relatively narrow portion of the slide, while several labels and score lines are tiny and tightly packed around the points. The office-tenant annotation sits against the lower axis, and the HFC annotation is dense enough to impair projection reading.",
+          "fix": "Expand the chart, reduce each point to a short label plus action, and move supporting descriptions into a side panel or callouts."
+        },
+        {
+          "slide": 2,
+          "severity": "minor",
+          "evidence": "The dates are attributed in prose to UNEP's 2023 assessment, but no visible source line or full reference appears on the rendered slide. The left recovery panel also runs directly to the bottom edge, creating a crowded finish consistent with the reported overflow warning.",
+          "fix": "Compress the vertical spacing and add a visible source footer with the UNEP assessment and Montreal Protocol references."
+        },
+        {
+          "slide": 4,
+          "severity": "minor",
+          "evidence": "Four separate floating arrows suggest direction, but they are not visually connected to one another or to the text blocks. The relationship is understandable, yet the graphic adds less explanatory value than a true causal chain would.",
+          "fix": "Use one continuous flow with labeled inputs, tests, financial effects, and a valuation gate."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The assumptions are responsibly labeled and the table is readable, but the large unused lower field and text-only rows make this a reference table rather than a visual stress comparison.",
+          "fix": "Show the three scenarios against common timing, capex, servicing-cost, downtime, and margin scales."
+        },
+        {
+          "slide": 1,
+          "severity": "minor",
+          "evidence": "The compressor-room photograph is relevant but functions mainly as a conventional industrial cover image; it does not identify the substance, jurisdiction, or exposure mechanism.",
+          "fix": "Add a restrained equipment/substance annotation or use a portfolio exposure image that carries analytical information."
+        }
+      ],
+      "signatureMoment": "Slide 7 is the most decision-useful composition, cleanly pairing a minimum evidence pack with explicit investment gates."
+    },
+    "winner": "B",
+    "reason": "B is the deck to give the investment committee. It passes the core audience, subject, slide-count, palette, and visible-readability checks, while A fails the readability hard gate on its decisive closing slide. B is more consistently usable in both presentation orders, although its small slide-5 chart and generic editorial treatment keep it from exceptional quality. A's visible extra complexity is partly earned by its stronger matrix and more distinctive opening, but not enough to offset an unusable ending; route identity is unavailable, so the original arm itself cannot be identified. The single most valuable improvement to A is correcting slide 8's card contrast. B exceeds a weak default but does not materially exceed competent professional default quality.",
+    "whatWouldMakeWinnerExceptional": "Replace the disconnected process, small matrix, and text table on slides 4–6 with one integrated, sourced exposure atlas that traces representative holdings from equipment and substance through jurisdictional timing, transition cost, valuation sensitivity, and committee action at projection-readable scale."
+  },
+  "usage": {
+    "prompt_tokens": 17092,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 4630,
+    "completion_tokens_details": {
+      "reasoning_tokens": 3009
+    },
+    "total_tokens": 21722
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 62.534
+}

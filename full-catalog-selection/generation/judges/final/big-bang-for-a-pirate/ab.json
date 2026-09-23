@@ -1,0 +1,115 @@
+{
+  "order": [
+    "original",
+    "library"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 5,
+        "storytelling": 5,
+        "audience": 5,
+        "coherence": 5,
+        "craft": 4,
+        "integrity": 5
+      },
+      "wow": "sustained",
+      "strengths": [
+        "Slide 1 establishes a memorable pirate-navigator premise through the antique telescope, celestial chart, and the concise correction \"No shore, no center.\"",
+        "Slide 3 turns expansion into a genuinely explanatory before-and-after coordinate-grid test; the fixed A/B/C identities and increased pairwise distances directly counter the idea of ships leaving a central blast.",
+        "Slides 4-6 vary the information design purposefully: a logarithmic timeline, wavelength comparison, and all-sky relic-light diagram explain sequence and evidence rather than merely decorating prose.",
+        "Slide 7 explicitly separates evidence-supported history from unanswered origin questions, while slide 8 closes by showing two independent observations converging on one model.",
+        "The nautical vocabulary, chart conventions, cyan course lines, brass-gold accents, and illustrated astronomy remain coherent across all eight slides without compromising scientific accuracy."
+      ],
+      "issues": [
+        {
+          "slide": 3,
+          "severity": "minor",
+          "evidence": "Generation/craft defect: the sentence under the enlarged grid and the scope note along the bottom are substantially smaller and dimmer than the main explanation, making important qualifications weak for projection.",
+          "fix": "Increase both notes by several points, raise their contrast, and move the pairwise-distance conclusion into the main diagram rather than beneath its border."
+        },
+        {
+          "slide": 4,
+          "severity": "minor",
+          "evidence": "Generation/craft defect: the timeline contains several annotation layers around one thin axis, and the small labels for \"minutes,\" \"1 year,\" and \"100,000 years\" compete with the larger milestone labels.",
+          "fix": "Reduce the minor tick labels and give each major event a consistent vertical callout so the logarithmic progression reads in one scan."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "Selection/storytelling defect: the colored patches inside the oval are not visibly tied to a measurement or direction, so the schematic depends heavily on its disclaimer to avoid looking like a literal mottled CMB map.",
+          "fix": "Replace the decorative patches with repeated inward direction arrows or several observer viewpoints, retaining the explicit statement that this is not measured temperature data."
+        },
+        {
+          "slide": 7,
+          "severity": "minor",
+          "evidence": "Generation/craft defect: the four-column development panel is text-dense relative to the preceding visual slides, and its smallest body copy will be less comfortable at distance.",
+          "fix": "Convert the four stages into a more spacious left-to-right route with one short line per stage and move secondary explanation into speaker notes."
+        }
+      ],
+      "signatureMoment": "Slide 3's expanding coordinate chart: it uses the pirate-map premise to make the no-center concept visible and testable rather than relying on metaphor alone."
+    },
+    "B": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 4,
+        "audience": 3,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 5
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 3 provides a useful before-and-after grid analogy with stable A/B/C markers and explicitly states that there is no marked origin.",
+        "Slide 5 gives redshift a clear two-state comparison, with fewer, wider cycles after travel and a directional expansion arrow.",
+        "Slide 6 improves the all-sky explanation by showing three separate observers receiving relic radiation from every direction, while clarifying that the rings are local viewing directions rather than an outer shell.",
+        "Slides 2, 4, and 7 use restrained hierarchy and generous spacing, and all eight slides appear unclipped.",
+        "The deck consistently distinguishes the model from a bomb in a pre-existing void and labels the major numerical claims as approximate or sourced."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "major",
+          "evidence": "Prompt/selection defect: the only large image is a serious modern observatory photograph. It supports astronomy but not the requested playful illustrated pirate voyage; the pirate premise is carried almost entirely by wording.",
+          "fix": "Replace the photograph with a bespoke pirate-navigator observatory scene whose chart, telescope, and route motifs can recur through the explanatory slides."
+        },
+        {
+          "slide": 3,
+          "severity": "major",
+          "evidence": "Generation/craft defect: the multiline annotation between the grids is cramped against the arrow and panel edges, while the important scope caveat at lower left is set in very small monospaced type.",
+          "fix": "Move the scale statement above both diagrams, enlarge the scope caveat, and give the arrow an unobstructed lane between the panels."
+        },
+        {
+          "slide": 4,
+          "severity": "minor",
+          "evidence": "Selection/storytelling defect: the three milestones are presented as equally spaced numbered stops on a plain rule. Although the footer says the course is not to scale, the visual itself does little to convey the enormous change from minutes to hundreds of millions of years.",
+          "fix": "Use a visibly compressed or logarithmic course and show the gaps changing, so elapsed-time scale becomes part of the explanation."
+        },
+        {
+          "slide": 8,
+          "severity": "major",
+          "evidence": "Generation/craft defect: the two evidence boxes and their descriptions are small relative to the canvas, leaving a large inactive region around the central model. The evidence-to-model relationship is therefore less immediate than the large closing answer panel.",
+          "fix": "Scale the evidence diagram up substantially, use thicker labeled connectors, and align it directly with the conclusion panel as one evidence-to-model-to-answer sequence."
+        }
+      ],
+      "signatureMoment": "Slide 6's three-observer all-sky diagram is the deck's clearest substantive visual and makes the absence of a privileged location easier to understand."
+    },
+    "winner": "A",
+    "reason": "Both decks pass the hard checks: each has eight slides, a coherent dark-space palette, no visible clipping or missing imagery, the required Big Bang subject, sourced or qualified numerical claims, and no harmful scientific distortion. I would give the user Deck A because its pirate-chart premise is visibly realized across the opening, analogies, evidence diagrams, and conclusion rather than being confined to nautical phrases. The visibly greater illustrative and layout complexity in A is earned: slides 3-6 use different forms because they explain different relationships. A also exceeds competent default quality through its tailored visual system and unusually careful scientific caveats. B remains accurate and professionally readable, but it looks primarily like a restrained astronomy briefing with a pirate-flavored script. The single most valuable improvement to B would be to replace its generic observatory/corporate treatment with a recurring illustrated pirate-navigator voyage that carries the diagrams from slide to slide.",
+    "whatWouldMakeWinnerExceptional": "Enlarge the low-contrast qualifications and redesign slide 6 as a clearer multi-observer all-sky explanation, then let slide 8 visually reprise the opening telescope and chart so the ending feels as memorable as the start."
+  },
+  "usage": {
+    "prompt_tokens": 17084,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 4091,
+    "completion_tokens_details": {
+      "reasoning_tokens": 2471
+    },
+    "total_tokens": 21175
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 63.073
+}

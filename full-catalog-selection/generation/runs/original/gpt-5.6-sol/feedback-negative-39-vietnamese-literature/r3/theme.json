@@ -1,0 +1,122 @@
+{
+  "headingFont": "Literata",
+  "headingFontWeight": 700,
+  "bodyFont": "Source Sans 3",
+  "bodyFontWeight": 400,
+  "config": {
+    "canvasPalette": {
+      "colors": [
+        {
+          "key": "primary",
+          "name": "Vermilion Thread",
+          "color": {
+            "type": "solid",
+            "color": "#A33A2A"
+          }
+        },
+        {
+          "key": "metal",
+          "name": "Old Gold",
+          "color": {
+            "type": "solid",
+            "color": "#B7863B"
+          }
+        },
+        {
+          "key": "cool",
+          "name": "Indigo Dusk",
+          "color": {
+            "type": "solid",
+            "color": "#364A5C"
+          }
+        },
+        {
+          "key": "ink",
+          "name": "Lampblack",
+          "color": {
+            "type": "solid",
+            "color": "#241D19"
+          }
+        },
+        {
+          "key": "rule",
+          "name": "Bamboo Rule",
+          "color": {
+            "type": "solid",
+            "color": "#CBBDA6"
+          }
+        }
+      ],
+      "gradients": []
+    },
+    "cardColor": {
+      "type": "solid",
+      "color": "#FBF7ED"
+    },
+    "surfaceColor": {
+      "type": "solid",
+      "color": "#EEE5D5"
+    },
+    "headingColor": "#241D19",
+    "bodyColor": "#352E29",
+    "mutedColor": {
+      "type": "solid",
+      "color": "#6F6256"
+    },
+    "background": {
+      "type": "color",
+      "source": "color.solid",
+      "color": {
+        "hex": "#E7DDCB"
+      }
+    },
+    "letterSpacingHeading": -0.01,
+    "roundness": "sm",
+    "cardShadow": "none",
+    "cardBorder": "sm",
+    "shapeFill": "solid",
+    "shapeColorScheme": "default",
+    "roleStyles": {
+      "subheading": {
+        "font": "Source Sans 3",
+        "fontWeight": 600
+      },
+      "eyebrow": {
+        "font": "Source Sans 3",
+        "transform": "uppercase",
+        "letterSpacing": 0.1
+      }
+    },
+    "imagery": {
+      "defaultStyleId": "vietnamese-manuscript-editorial",
+      "styles": [
+        {
+          "id": "vietnamese-manuscript-editorial",
+          "name": "Vietnamese manuscript editorial",
+          "promptGuidance": "Ink-and-opaque-pigment editorial illustration on warm dó-paper-like fibers, inspired by Vietnamese chữ Nôm manuscript and woodblock conventions rather than Japanese sumi-e, with lampblack #241D19, vermilion #A33A2A, old gold #B7863B and indigo #364A5C under soft window light, no text or lettering.",
+          "subjects": "Manuscript folios without legible writing, Vietnamese landscape thresholds, symbolic objects, hands, and non-documentary literary figures; compositions should express passage, choice, pressure, or continuity.",
+          "whenToUse": "Use on the cover, author context, plot journey, character study, and conclusion; use native editable diagrams and typography instead of generated imagery for analytical relationships and verse annotation."
+        }
+      ]
+    },
+    "typeScale": {
+      "display-xl": 84,
+      "display-lg": 64,
+      "display-md": 48,
+      "heading-1": 40,
+      "heading-2": 30,
+      "heading-3": 22,
+      "heading-4": 18,
+      "subheading": 20,
+      "body-lg": 19,
+      "body-normal": 16,
+      "body-sm": 13,
+      "eyebrow": 11,
+      "caption": 11
+    },
+    "density": "md",
+    "cardPadding": "lg",
+    "lineHeightBody": 1.35,
+    "lineHeightHeading": 1.1
+  }
+}

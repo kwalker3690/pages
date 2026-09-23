@@ -1,0 +1,127 @@
+{
+  "order": [
+    "library",
+    "original"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 5,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 5
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 establishes a specific, manager-relevant premise—one restorative hour rather than a generic wellness package—and pairs the guest promise with a manager proposition.",
+        "Slide 3 is the strongest explanatory visual in either deck: the proportional 5–10–25–15–5 bar makes the full hour understandable at a glance, while the aligned columns explain each phase.",
+        "Slides 4–7 make the commercial case unusually concrete for a hospitality pitch, connecting guest, staff, and property value to an operating model, explicit illustrative economics, and a six-week pilot.",
+        "Slide 6 clearly labels the financial scenario as illustrative, exposes the formulas and exclusions, and avoids presenting invented performance as actual company evidence.",
+        "Slide 8 ends with a practical working-session ask rather than a vague sales slogan."
+      ],
+      "issues": [
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "Each of the five operating stages carries two sequential number badges—Offer has 01 and 02, Prepare has 03 and 04, and so on—although only one stage and one description appear in each row. The unexplained ten-number sequence looks like a generation error.",
+          "fix": "Use one numbered badge per stage, or explicitly divide every row into two labeled substeps so all ten numbers have meaning."
+        },
+        {
+          "slide": 6,
+          "severity": "major",
+          "evidence": "The key chart title visibly ends as “Monthly contribution (USD…” and the right-side tick labels are detached from a clear axis. This weakens the most important evidence slide even though the calculation box remains readable.",
+          "fix": "Render the full title, add a clearly labeled vertical scale, and directly label all three outcomes, including the negative $100 case."
+        },
+        {
+          "slide": 2,
+          "severity": "minor",
+          "evidence": "The Arrive and Return boxes sit above the horizontal line while Reset drops below it, so the intended left-to-right journey requires interpretation rather than reading as an immediate sequence.",
+          "fix": "Show Arrive, Reset, and Return as three aligned stages with a visibly directed progression."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "The narrow image strip repeats the same sparse room environment used on slide 1 and functions mainly as atmosphere rather than reinforcing the requested decision.",
+          "fix": "Use a distinct closing image showing a manager and host reviewing the room or preparing the pilot."
+        }
+      ],
+      "signatureMoment": "Slide 3’s proportional 60-minute ritual map: it turns an abstract wellness offer into a concrete, operationally legible guest experience."
+    },
+    "B": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 3,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 4
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 1–3 use warm hospitality photography and a restrained white-and-teal system that feels more welcoming and human than a conventional corporate wellness deck.",
+        "Slide 2 clearly distinguishes the arrival problem, the reset intervention, and the desired return to the stay.",
+        "Slide 4 directly addresses guests, staff, and the property, then pairs those benefits with four things the pilot must prove.",
+        "Slide 5 assigns backstage ownership to reservations, the host, the practitioner, and the pilot owner, making the offer operationally credible.",
+        "Slide 8 provides a concise close with three decisions and a concrete next working session."
+      ],
+      "issues": [
+        {
+          "slide": 6,
+          "severity": "major",
+          "evidence": "The chart annotation reads “Direct-cost break-even: 0,” while the text below says break-even is approximately 170 participants or 36% seat fill. The annotation appears to label the zero-contribution line but reads as a contradictory break-even value.",
+          "fix": "Replace it with “Break-even at approximately 36% fill” and position the marker at the correct horizontal location."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The scope note warns against applying the monthly result directly to the “four-week pilot,” while the deck repeatedly calls the plan a six-week pilot. The four-week operating period can be inferred from slide 7, but the wording is unnecessarily ambiguous.",
+          "fix": "Say “four-week operating phase within the six-week pilot.”"
+        },
+        {
+          "slide": 7,
+          "severity": "major",
+          "evidence": "The large salmon-pink warning panel departs sharply from the requested white and soft-teal palette and visually overpowers the pilot gates.",
+          "fix": "Restyle the qualification note as a pale-teal or neutral footnote band and give the decision gates the strongest emphasis."
+        },
+        {
+          "slide": 3,
+          "severity": "minor",
+          "evidence": "The five ritual phases are presented as equal-height list rows even though their durations range from five to twenty-five minutes, so the visual does not reveal where most of the hour is spent.",
+          "fix": "Use a proportional timeline or segmented duration bar while retaining the concise descriptions."
+        },
+        {
+          "slide": 5,
+          "severity": "minor",
+          "evidence": "The operating model becomes a dense three-column table with long lines of text; it is readable in the render but less effective for projection and slower to scan than the surrounding slides.",
+          "fix": "Convert the five rows into a frontstage/backstage flow with owner tags and shorter action phrases."
+        },
+        {
+          "slide": 1,
+          "severity": "minor",
+          "evidence": "The photograph of one person handing another a book beside tea communicates considerate hospitality, but it does not clearly depict a guided restorative ritual or property-specific wellness experience.",
+          "fix": "Select imagery showing a host guiding an arrival ritual in a recognizable boutique-hotel setting."
+        }
+      ],
+      "signatureMoment": "Slide 4’s side-by-side benefit and proof structure, which connects the three stakeholder groups to the commercial validation chain."
+    },
+    "winner": "A",
+    "reason": "I would give Deck A to the hotel manager. The preference remains the same when mentally reviewing B first: A provides the clearer managerial argument and the stronger substantive visuals, especially the proportional ritual on slide 3, the value chain on slide 4, and the transparent scenario on slide 6. Its additional information-design complexity mostly earns its place because it explains duration, operations, economics, and pilot decisions rather than merely adding decoration. Neither deck has a blocking hard failure: both have eight complete slides, cover the required guest/staff/property value, remain readable and unclipped overall, and clearly flag illustrative numbers. The visible generation defects are A’s unexplained numbering on slide 5 and truncated chart title on slide 6, plus B’s misleading chart annotation on slide 6. The main selection/design defects are B’s less explanatory stock-style photography, text-heavy middle, and off-palette salmon panel on slide 7. The loser would improve most by replacing its list-and-table middle with one connected, proportional visual story from guest arrival through backstage delivery to measured contribution. A exceeds competent default quality through unusually clear manager-facing information design, but its repeated sparse-room imagery and chart defects keep it short of exceptional or sustained wow.",
+    "whatWouldMakeWinnerExceptional": "Build a distinctive guest-centered visual narrative across the entire deck—showing the same boutique property and ritual progressing from arrival to restoration to return—while preserving A’s strong operational diagrams and repairing the slide 5 numbering and slide 6 chart. That would unite emotional hospitality appeal with the deck’s already strong managerial clarity."
+  },
+  "usage": {
+    "prompt_tokens": 17106,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 4332,
+    "completion_tokens_details": {
+      "reasoning_tokens": 2560
+    },
+    "total_tokens": 21438
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 65.84
+}

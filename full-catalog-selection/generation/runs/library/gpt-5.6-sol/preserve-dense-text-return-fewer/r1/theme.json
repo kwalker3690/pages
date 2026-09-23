@@ -1,0 +1,228 @@
+{
+  "id": "g_z6evd82kygljlwf",
+  "name": "File",
+  "headingFont": "Fira Sans",
+  "headingFontName": "Fira Sans",
+  "headingFontWeight": 700,
+  "bodyFont": "PT Serif",
+  "bodyFontName": "PT Serif",
+  "bodyFontWeight": 400,
+  "config": {
+    "density": "md",
+    "blockSpacing": 16,
+    "headingColor": "#1F2226",
+    "bodyColor": "#1F2226",
+    "cardColor": {
+      "type": "solid",
+      "color": "#FAF9F6"
+    },
+    "surfaceColor": {
+      "type": "solid",
+      "color": "#F0EEE8"
+    },
+    "mutedColor": {
+      "type": "solid",
+      "color": "#5C6168"
+    },
+    "neutralBorderColor": {
+      "type": "solid",
+      "color": "#D3D2D1"
+    },
+    "background": {
+      "type": "color",
+      "source": "color.solid",
+      "color": {
+        "hex": "#DDD9D0"
+      }
+    },
+    "roundness": "sm",
+    "cardShadow": "none",
+    "cardBorder": "none",
+    "cardPadding": "36pt 44pt 40pt 44pt",
+    "dividerColor": "#D3D2D1",
+    "dividerThickness": "sm",
+    "letterSpacingHeading": -0.015,
+    "letterSpacingBody": 0,
+    "lineHeightHeading": 1.12,
+    "lineHeightBody": 1.38,
+    "headingTransform": "none",
+    "typeScale": {
+      "display-xl": 72,
+      "display-lg": 56,
+      "display-md": 44,
+      "heading-1": 30,
+      "heading-2": 24,
+      "heading-3": 18,
+      "heading-4": 16,
+      "subheading": 17,
+      "body-lg": 17,
+      "body-normal": 14,
+      "body-sm": 12.5,
+      "eyebrow": 11,
+      "label": 10.5,
+      "caption": 11
+    },
+    "roleStyles": {
+      "display": {
+        "font": "Fira Sans",
+        "fontWeight": 700,
+        "italic": false,
+        "transform": "none",
+        "letterSpacing": -0.02,
+        "lineHeight": 1
+      },
+      "subheading": {
+        "font": "Fira Sans",
+        "fontWeight": 600,
+        "italic": false,
+        "transform": "none",
+        "letterSpacing": 0,
+        "lineHeight": 1.2
+      },
+      "eyebrow": {
+        "font": "Fira Sans",
+        "fontWeight": 600,
+        "italic": false,
+        "transform": "none",
+        "letterSpacing": 0.01,
+        "lineHeight": 1.2,
+        "color": "#5C6168"
+      },
+      "label": {
+        "font": "Fira Sans",
+        "fontWeight": 600,
+        "italic": false,
+        "transform": "uppercase",
+        "letterSpacing": 0.08,
+        "lineHeight": 1.2,
+        "color": "#5C6168"
+      },
+      "caption": {
+        "font": "PT Serif",
+        "fontWeight": 400,
+        "italic": false,
+        "transform": "none",
+        "letterSpacing": 0,
+        "lineHeight": 1.35,
+        "color": "#5C6168"
+      }
+    },
+    "charts": {
+      "roundness": "sm",
+      "gridlineStyle": "solid",
+      "gridlineColor": {
+        "type": "solid",
+        "color": "#C9C6BE"
+      },
+      "gridlineWidth": "sm",
+      "lineWeight": "md",
+      "font": "heading",
+      "textSize": "md",
+      "colorScheme": "theme"
+    },
+    "shapeFill": "solid",
+    "shapeColorScheme": "default",
+    "shapeShadow": "none",
+    "shapeBorder": "sm",
+    "canvasPalette": {
+      "colors": [
+        {
+          "key": "primary",
+          "name": "Oxide red",
+          "color": {
+            "type": "solid",
+            "color": "#A8391F"
+          }
+        },
+        {
+          "key": "ink",
+          "name": "Graphite ink",
+          "color": {
+            "type": "solid",
+            "color": "#1F2226"
+          }
+        },
+        {
+          "key": "accent-soft",
+          "name": "Lifted oxide (on ink)",
+          "color": {
+            "type": "solid",
+            "color": "#E2846B"
+          }
+        },
+        {
+          "key": "muted",
+          "name": "Slate graphite",
+          "color": {
+            "type": "solid",
+            "color": "#5C6168"
+          }
+        },
+        {
+          "key": "plate",
+          "name": "Warm plate tint",
+          "color": {
+            "type": "solid",
+            "color": "#F0EEE8"
+          }
+        },
+        {
+          "key": "paper",
+          "name": "Warm paper",
+          "color": {
+            "type": "solid",
+            "color": "#FAF9F6"
+          }
+        },
+        {
+          "key": "grey",
+          "name": "Warm grey (series)",
+          "color": {
+            "type": "solid",
+            "color": "#8A8F96"
+          }
+        },
+        {
+          "key": "stone",
+          "name": "Stone (series, gridlines)",
+          "color": {
+            "type": "solid",
+            "color": "#C9C6BE"
+          }
+        }
+      ],
+      "gradients": []
+    },
+    "cardMargins": {
+      "footer": {},
+      "fontSizePt": 10,
+      "pageNumberFormat": "number",
+      "pageNumberPadded": true
+    },
+    "imagery": {
+      "defaultStyleId": "figure",
+      "styles": [
+        {
+          "id": "figure",
+          "name": "Documentary figure",
+          "styleReferenceKey": "classic_photo",
+          "subjects": "The picture is a figure a manual would print beside its paragraph: one concrete piece of equipment, place, material, or person at work drawn from the deck's own subject — a labelled shelf inside a unit, a container open on a counter, a probe or gauge in position, a vehicle at a bay in early light, a worker scanning or checking something, a working group photographed where they work. Straight-on or three-quarter, one focal subject, real depth, natural daylight, naturalistic colour, no text or logos in the image. Never blank paper, generic documents, anonymous idle hands, empty desks, laptops on tables, abstract teamwork, skylines, or handshakes.",
+          "whenToUse": "Every image slot: the cover plate, the full-bleed act opener, captioned figure plates, split plates, gallery cells, and portraits. When copy will sit on the picture, name the quiet region and its tone in the prompt (an open patch of pale sky, an unlit wall) and keep the copy short and large."
+        }
+      ]
+    }
+  },
+  "fonts": [
+    {
+      "id": "Fira Sans",
+      "name": "Fira Sans",
+      "url": "https://fonts.googleapis.com/css2?family=Fira+Sans%3Aital%2Cwght%400%2C100%3B0%2C200%3B0%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800%3B0%2C900%3B1%2C100%3B1%2C200%3B1%2C300%3B1%2C400%3B1%2C500%3B1%2C600%3B1%2C700%3B1%2C800%3B1%2C900&display=swap"
+    },
+    {
+      "id": "PT Serif",
+      "name": "PT Serif",
+      "url": "https://fonts.googleapis.com/css2?family=PT+Serif%3Aital%2Cwght%400%2C400%3B0%2C700%3B1%2C400%3B1%2C700&display=swap"
+    }
+  ],
+  "isDefault": false
+}

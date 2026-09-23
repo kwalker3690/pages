@@ -1,0 +1,122 @@
+{
+  "headingFont": "Archivo",
+  "headingFontWeight": 700,
+  "bodyFont": "IBM Plex Sans",
+  "bodyFontWeight": 400,
+  "config": {
+    "canvasPalette": {
+      "colors": [
+        {
+          "key": "primary",
+          "name": "Signal Red",
+          "color": {
+            "type": "solid",
+            "color": "#C51D2A"
+          }
+        },
+        {
+          "key": "ink",
+          "name": "Carbon Ink",
+          "color": {
+            "type": "solid",
+            "color": "#171717"
+          }
+        },
+        {
+          "key": "steel",
+          "name": "Machine Gray",
+          "color": {
+            "type": "solid",
+            "color": "#4E5965"
+          }
+        },
+        {
+          "key": "rule",
+          "name": "Survey Rule",
+          "color": {
+            "type": "solid",
+            "color": "#D2D6DB"
+          }
+        },
+        {
+          "key": "paper",
+          "name": "Field White",
+          "color": {
+            "type": "solid",
+            "color": "#FFFFFF"
+          }
+        }
+      ],
+      "gradients": []
+    },
+    "cardColor": {
+      "type": "solid",
+      "color": "#FFFFFF"
+    },
+    "surfaceColor": {
+      "type": "solid",
+      "color": "#F2F3F5"
+    },
+    "headingColor": "#171717",
+    "bodyColor": "#2D3035",
+    "mutedColor": {
+      "type": "solid",
+      "color": "#5A6068"
+    },
+    "background": {
+      "type": "color",
+      "source": "color.solid",
+      "color": {
+        "hex": "#FFFFFF"
+      }
+    },
+    "letterSpacingHeading": -0.015,
+    "roundness": "sm",
+    "cardShadow": "none",
+    "cardBorder": "sm",
+    "shapeFill": "solid",
+    "shapeColorScheme": "default",
+    "roleStyles": {
+      "subheading": {
+        "font": "IBM Plex Sans",
+        "fontWeight": 600
+      },
+      "eyebrow": {
+        "font": "IBM Plex Sans",
+        "transform": "uppercase",
+        "letterSpacing": 0.1
+      }
+    },
+    "imagery": {
+      "defaultStyleId": "technical-field-documentary",
+      "styles": [
+        {
+          "id": "technical-field-documentary",
+          "name": "Technical field documentary",
+          "promptGuidance": "Crisp documentary agricultural photography from elevated and close technical viewpoints under neutral overcast daylight, with white #FFFFFF, carbon #171717, machine gray #4E5965 and restrained signal-red #C51D2A details, realistic soil and crop texture, no text or lettering.",
+          "subjects": "Unbranded tractors and implements in operation, overhead field geometry, machinery setup, operator hands, headlands and input staging; no logos or identifiable people.",
+          "whenToUse": "Use on the opening, machine-selection, operating-stage and case-study slides; use native editable diagrams or calculations when a relationship or quantity is the main subject."
+        }
+      ]
+    },
+    "typeScale": {
+      "display-xl": 84,
+      "display-lg": 64,
+      "display-md": 48,
+      "heading-1": 40,
+      "heading-2": 30,
+      "heading-3": 22,
+      "heading-4": 18,
+      "subheading": 20,
+      "body-lg": 19,
+      "body-normal": 16,
+      "body-sm": 13,
+      "eyebrow": 11,
+      "caption": 11
+    },
+    "density": "md",
+    "cardPadding": "lg",
+    "lineHeightBody": 1.35,
+    "lineHeightHeading": 1.1
+  }
+}

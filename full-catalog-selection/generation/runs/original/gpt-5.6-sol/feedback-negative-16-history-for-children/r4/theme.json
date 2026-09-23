@@ -1,0 +1,122 @@
+{
+  "headingFont": "Lilita One",
+  "headingFontWeight": 400,
+  "bodyFont": "Atkinson Hyperlegible",
+  "bodyFontWeight": 400,
+  "config": {
+    "canvasPalette": {
+      "colors": [
+        {
+          "key": "primary",
+          "name": "Postcard Red",
+          "color": {
+            "type": "solid",
+            "color": "#C9473D"
+          }
+        },
+        {
+          "key": "cool",
+          "name": "River Blue",
+          "color": {
+            "type": "solid",
+            "color": "#2D7180"
+          }
+        },
+        {
+          "key": "bright",
+          "name": "Sun Yellow",
+          "color": {
+            "type": "solid",
+            "color": "#E2A72F"
+          }
+        },
+        {
+          "key": "ink",
+          "name": "Cocoa Ink",
+          "color": {
+            "type": "solid",
+            "color": "#2B2622"
+          }
+        },
+        {
+          "key": "rule",
+          "name": "Paper Rule",
+          "color": {
+            "type": "solid",
+            "color": "#B99A6A"
+          }
+        }
+      ],
+      "gradients": []
+    },
+    "cardColor": {
+      "type": "solid",
+      "color": "#FFF9E8"
+    },
+    "surfaceColor": {
+      "type": "solid",
+      "color": "#F3E1BD"
+    },
+    "headingColor": "#2B2622",
+    "bodyColor": "#3A302A",
+    "mutedColor": {
+      "type": "solid",
+      "color": "#6D5D4E"
+    },
+    "background": {
+      "type": "color",
+      "source": "color.solid",
+      "color": {
+        "hex": "#E9D39D"
+      }
+    },
+    "letterSpacingHeading": 0,
+    "roundness": "lg",
+    "cardShadow": "hard",
+    "cardBorder": "md",
+    "shapeFill": "solid",
+    "shapeColorScheme": "accent",
+    "roleStyles": {
+      "subheading": {
+        "font": "Atkinson Hyperlegible",
+        "fontWeight": 700
+      },
+      "eyebrow": {
+        "font": "Atkinson Hyperlegible",
+        "transform": "uppercase",
+        "letterSpacing": 0.08
+      }
+    },
+    "imagery": {
+      "defaultStyleId": "southern-brazil-paper-museum",
+      "styles": [
+        {
+          "id": "southern-brazil-paper-museum",
+          "name": "Southern Brazil paper museum",
+          "promptGuidance": "Layered cut-paper collage with soft colored-pencil shading on warm cream paper (#FFF9E8), using postcard red #C9473D, river blue #2D7180 and sun yellow #E2A72F with natural skin tones in clear daylight, showing historically grounded everyday objects, schematic landscapes and dignified 1830s–1840s southern Brazilian characters with no weapons or battle action, no text or lettering.",
+          "subjects": "Maps, letters, tax papers, coins, food baskets, travel bags, families, free workers, and enslaved workers shown with dignity and without caricature; clothing remains general unless independently verified.",
+          "whenToUse": "Use on the cover and most explanatory slides; use native editable shapes for maps, timelines, relationships, labels, and quiz content."
+        }
+      ]
+    },
+    "typeScale": {
+      "display-xl": 84,
+      "display-lg": 64,
+      "display-md": 48,
+      "heading-1": 40,
+      "heading-2": 30,
+      "heading-3": 22,
+      "heading-4": 18,
+      "subheading": 20,
+      "body-lg": 19,
+      "body-normal": 16,
+      "body-sm": 13,
+      "eyebrow": 11,
+      "caption": 11
+    },
+    "density": "md",
+    "cardPadding": "lg",
+    "lineHeightBody": 1.35,
+    "lineHeightHeading": 1.1
+  }
+}

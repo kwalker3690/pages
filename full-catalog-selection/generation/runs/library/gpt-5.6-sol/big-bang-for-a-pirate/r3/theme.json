@@ -1,0 +1,285 @@
+{
+  "id": "g_js8zrqcca09pqk0",
+  "name": "File",
+  "headingFont": "Sora",
+  "headingFontName": "Sora",
+  "headingFontWeight": 500,
+  "bodyFont": "Inter",
+  "bodyFontName": "Inter",
+  "bodyFontWeight": 400,
+  "config": {
+    "density": "md",
+    "charts": {
+      "roundness": "sm",
+      "gridlineStyle": "none",
+      "lineWeight": "sm",
+      "font": "body",
+      "textSize": "md",
+      "colorScheme": "theme"
+    },
+    "canvasPalette": {
+      "colors": [
+        {
+          "key": "signal-cyan",
+          "name": "Signal Cyan",
+          "color": {
+            "type": "solid",
+            "color": "#6FBFC8"
+          }
+        },
+        {
+          "key": "evidence-gold",
+          "name": "Evidence Gold",
+          "color": {
+            "type": "solid",
+            "color": "#D5B36B"
+          }
+        },
+        {
+          "key": "context-violet",
+          "name": "Context Violet",
+          "color": {
+            "type": "solid",
+            "color": "#8F7BA2"
+          }
+        },
+        {
+          "key": "airglow-threshold",
+          "name": "Airglow Threshold",
+          "color": {
+            "type": "solid",
+            "color": "#A98F57"
+          }
+        },
+        {
+          "key": "deep-field",
+          "name": "Deep Field",
+          "color": {
+            "type": "solid",
+            "color": "#09131C"
+          }
+        },
+        {
+          "key": "cool-white",
+          "name": "Cool White",
+          "color": {
+            "type": "solid",
+            "color": "#F2F5F4"
+          }
+        },
+        {
+          "key": "image-ink",
+          "name": "Image Ink",
+          "color": {
+            "type": "solid",
+            "color": "#F2F5F4"
+          }
+        },
+        {
+          "key": "image-scrim",
+          "name": "Image Scrim",
+          "color": {
+            "type": "solid",
+            "color": "#03070D"
+          }
+        }
+      ],
+      "gradients": []
+    },
+    "headingColor": "#F2F5F4",
+    "bodyColor": "#C7D1D5",
+    "accentColor": "#6FBFC8",
+    "cardColor": {
+      "type": "solid",
+      "color": "#03070D"
+    },
+    "surfaceColor": {
+      "type": "solid",
+      "color": "#09131C"
+    },
+    "mutedColor": {
+      "type": "solid",
+      "color": "#9AA6AD"
+    },
+    "neutralBorderColor": {
+      "type": "solid",
+      "color": "#344751"
+    },
+    "background": {
+      "type": "color",
+      "source": "color.solid",
+      "color": {
+        "hex": "#151D24"
+      }
+    },
+    "roundness": "sm",
+    "cardShadow": "none",
+    "cardBorder": "sm",
+    "cardPadding": "lg",
+    "dividerColor": "#344751",
+    "dividerThickness": "sm",
+    "shapeFill": "none",
+    "shapeColorScheme": "default",
+    "shapeColors": [
+      "#F2F5F4",
+      "#D5B36B",
+      "#8F7BA2",
+      "#6FBFC8"
+    ],
+    "shapeShadow": "none",
+    "letterSpacingHeading": -0.02,
+    "letterSpacingBody": 0,
+    "lineHeightHeading": 1.08,
+    "lineHeightBody": 1.42,
+    "headingTransform": "none",
+    "cardMargins": {
+      "footer": {},
+      "pageNumberFormat": "number",
+      "pageNumberPadded": true
+    },
+    "typeScale": {
+      "display-xl": 76,
+      "display-lg": 60,
+      "display-md": 48,
+      "heading-1": 44,
+      "heading-2": 34,
+      "heading-3": 24,
+      "heading-4": 18,
+      "subheading": 20,
+      "body-normal": 16,
+      "body-sm": 13.5,
+      "body-lg": 19,
+      "eyebrow": 11,
+      "caption": 11.5
+    },
+    "roleStyles": {
+      "display": {
+        "font": "Sora",
+        "italic": false,
+        "transform": "none",
+        "color": "#F2F5F4",
+        "fontWeight": 500,
+        "letterSpacing": -0.035,
+        "lineHeight": 0.98
+      },
+      "heading-1": {
+        "font": "Sora",
+        "italic": false,
+        "transform": "none",
+        "color": "#F2F5F4",
+        "fontWeight": 500,
+        "letterSpacing": -0.02,
+        "lineHeight": 1.08
+      },
+      "heading-2": {
+        "font": "Sora",
+        "italic": false,
+        "transform": "none",
+        "color": "#F2F5F4",
+        "fontWeight": 500,
+        "letterSpacing": -0.02,
+        "lineHeight": 1.08
+      },
+      "heading-3": {
+        "font": "Inter",
+        "italic": false,
+        "transform": "none",
+        "color": "#F2F5F4",
+        "fontWeight": 500,
+        "letterSpacing": 0,
+        "lineHeight": 1.18
+      },
+      "heading-4": {
+        "font": "Inter",
+        "italic": false,
+        "transform": "none",
+        "color": "#F2F5F4",
+        "fontWeight": 500,
+        "letterSpacing": 0,
+        "lineHeight": 1.18
+      },
+      "subheading": {
+        "font": "Inter",
+        "italic": false,
+        "transform": "none",
+        "color": "#C7D1D5",
+        "fontWeight": 400,
+        "letterSpacing": 0,
+        "lineHeight": 1.3
+      },
+      "body": {
+        "font": "Inter",
+        "italic": false,
+        "transform": "none",
+        "color": "#C7D1D5",
+        "fontWeight": 400,
+        "letterSpacing": 0,
+        "lineHeight": 1.42
+      },
+      "eyebrow": {
+        "font": "IBM Plex Mono",
+        "italic": false,
+        "transform": "uppercase",
+        "color": "#6FBFC8",
+        "fontWeight": 500,
+        "letterSpacing": 0.08,
+        "lineHeight": 1.3
+      },
+      "label": {
+        "font": "IBM Plex Mono",
+        "italic": false,
+        "transform": "uppercase",
+        "color": "#6FBFC8",
+        "fontWeight": 500,
+        "letterSpacing": 0.08,
+        "lineHeight": 1.3
+      },
+      "caption": {
+        "font": "IBM Plex Mono",
+        "italic": false,
+        "transform": "none",
+        "color": "#9AA6AD",
+        "fontWeight": 500,
+        "letterSpacing": 0.015,
+        "lineHeight": 1.3
+      }
+    },
+    "blockSpacing": 14,
+    "imagery": {
+      "defaultStyleId": "long-exposure-documentary",
+      "styles": [
+        {
+          "id": "long-exposure-documentary",
+          "name": "Long-exposure documentary",
+          "promptGuidance": "Long-exposure documentary photography with a near-black blue field, physically plausible streaks and star trails, neutral cool-white highlights, restrained cyan signal, pale-gold practical light, faint violet context, one narrow warm olive-amber atmospheric threshold, deep but separated shadow detail, off-center scientific subjects, precise optical texture, restrained bloom, no neon cyberpunk, no fantasy space art, no visible logos, and no legible text.",
+          "subjects": "Observatories, atmospheric airglow, orbital horizons, night coastlines, launch infrastructure, weather balloons, satellite hardware, radio telescopes, precision optics, tracer paths, detector rings, and high-desert terrain tied to the user’s content.",
+          "whenToUse": "Use when an image supplies evidence, scale, a physical threshold, or a section-level pause. Keep literal charts, tables, screenshots, diagrams, documents, maps, and supplied artifacts on image-style none.",
+          "references": [
+            "https://cdn-staging.gamma.app/gammatemplatelibrary/g_js8zrqcca09pqk0/template-assets/ab216915d8d27bd7cc78c22d67f49396/01M1AEXMWM0GRP405ERKFZKYY0.png",
+            "https://cdn-staging.gamma.app/gammatemplatelibrary/g_js8zrqcca09pqk0/template-assets/151e63bc2193d9dc419826a9f45aa97d/01M1AEYZ6CJJHXTMZYQ725N24V.png",
+            "https://cdn-staging.gamma.app/gammatemplatelibrary/g_js8zrqcca09pqk0/template-assets/14da4fa36b32b2b2feaf5f6268a4820d/01M1AF02VMB1JFVSFR86CEVJ70.png",
+            "https://cdn-staging.gamma.app/gammatemplatelibrary/g_js8zrqcca09pqk0/template-assets/1e35b14bd216c18b07c47e1868394b75/01M1AF19S40H54BM24T64SZN3V.png"
+          ]
+        }
+      ]
+    }
+  },
+  "fonts": [
+    {
+      "id": "IBM Plex Mono",
+      "name": "IBM Plex Mono",
+      "url": "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono%3Aital%2Cwght%400%2C100%3B0%2C200%3B0%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B1%2C100%3B1%2C200%3B1%2C300%3B1%2C400%3B1%2C500%3B1%2C600%3B1%2C700&display=swap"
+    },
+    {
+      "id": "Inter",
+      "name": "Inter",
+      "url": "https://fonts.googleapis.com/css2?family=Inter%3Aital%2Cwght%400%2C100%3B0%2C200%3B0%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800%3B0%2C900%3B1%2C100%3B1%2C200%3B1%2C300%3B1%2C400%3B1%2C500%3B1%2C600%3B1%2C700%3B1%2C800%3B1%2C900&display=swap"
+    },
+    {
+      "id": "Sora",
+      "name": "Sora",
+      "url": "https://fonts.googleapis.com/css2?family=Sora%3Aital%2Cwght%400%2C100%3B0%2C200%3B0%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800%3B1%2C100%3B1%2C200%3B1%2C300%3B1%2C400%3B1%2C500%3B1%2C600%3B1%2C700%3B1%2C800&display=swap"
+    }
+  ],
+  "isDefault": false
+}

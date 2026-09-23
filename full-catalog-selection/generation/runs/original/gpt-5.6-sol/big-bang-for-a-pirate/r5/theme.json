@@ -1,0 +1,122 @@
+{
+  "headingFont": "Cormorant Garamond",
+  "headingFontWeight": 600,
+  "bodyFont": "IBM Plex Sans",
+  "bodyFontWeight": 400,
+  "config": {
+    "canvasPalette": {
+      "colors": [
+        {
+          "key": "primary",
+          "name": "Spectral Wake",
+          "color": {
+            "type": "solid",
+            "color": "#63D7E6"
+          }
+        },
+        {
+          "key": "warm",
+          "name": "Oxidized Brass",
+          "color": {
+            "type": "solid",
+            "color": "#C39A5B"
+          }
+        },
+        {
+          "key": "signal",
+          "name": "Redshift Signal",
+          "color": {
+            "type": "solid",
+            "color": "#F06B5E"
+          }
+        },
+        {
+          "key": "ink",
+          "name": "Chart Ivory",
+          "color": {
+            "type": "solid",
+            "color": "#F4ECD8"
+          }
+        },
+        {
+          "key": "rule",
+          "name": "Horizon Rule",
+          "color": {
+            "type": "solid",
+            "color": "#52677D"
+          }
+        }
+      ],
+      "gradients": []
+    },
+    "cardColor": {
+      "type": "solid",
+      "color": "#071421"
+    },
+    "surfaceColor": {
+      "type": "solid",
+      "color": "#0D1E2D"
+    },
+    "headingColor": "#F4ECD8",
+    "bodyColor": "#DEE6E3",
+    "mutedColor": {
+      "type": "solid",
+      "color": "#A8B7BC"
+    },
+    "background": {
+      "type": "color",
+      "source": "color.solid",
+      "color": {
+        "hex": "#030B12"
+      }
+    },
+    "letterSpacingHeading": -0.005,
+    "roundness": "sm",
+    "cardShadow": "none",
+    "cardBorder": "sm",
+    "shapeFill": "semi",
+    "shapeColorScheme": "accent",
+    "roleStyles": {
+      "subheading": {
+        "font": "IBM Plex Sans",
+        "fontWeight": 600
+      },
+      "eyebrow": {
+        "font": "IBM Plex Sans",
+        "transform": "uppercase",
+        "letterSpacing": 0.12
+      }
+    },
+    "imagery": {
+      "defaultStyleId": "celestial-copperplate",
+      "styles": [
+        {
+          "id": "celestial-copperplate",
+          "name": "Celestial copperplate",
+          "promptGuidance": "Digitally illustrated copperplate celestial engravings on abyssal blue #071421, with crisp ivory #F4ECD8 linework, oxidized-brass #C39A5B instrument details and luminous spectral traces in cyan #63D7E6 and signal coral #F06B5E under restrained nocturnal glow, no text or lettering.",
+          "subjects": "Deep-space fields, celestial coordinate grids, spectral light, relic-light horizons, scientific instruments, and occasional tiny generic ship markers; never pirate portraits, treasure, or fantasy monsters.",
+          "whenToUse": "Use on the cover and most explanatory slides, while diagrams, labels, timelines, and evidence graphics remain native and editable."
+        }
+      ]
+    },
+    "typeScale": {
+      "display-xl": 84,
+      "display-lg": 64,
+      "display-md": 48,
+      "heading-1": 40,
+      "heading-2": 30,
+      "heading-3": 22,
+      "heading-4": 18,
+      "subheading": 20,
+      "body-lg": 19,
+      "body-normal": 16,
+      "body-sm": 13,
+      "eyebrow": 11,
+      "caption": 11
+    },
+    "density": "md",
+    "cardPadding": "lg",
+    "lineHeightBody": 1.35,
+    "lineHeightHeading": 1.1
+  }
+}

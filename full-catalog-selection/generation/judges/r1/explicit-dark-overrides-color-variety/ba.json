@@ -1,0 +1,127 @@
+{
+  "order": [
+    "library",
+    "original"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 3,
+        "audience": 4,
+        "coherence": 3,
+        "craft": 4,
+        "integrity": 5
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 1 and 8 form polished cinematic bookends, with the liquid-metal opening and literal open-door ending framing the theme clearly.",
+        "Slide 3 makes the production/discovery distinction visible through parallel numbered loops rather than relying entirely on prose.",
+        "Slide 5 organizes three types of interruption under one governing action, and slide 7 turns the idea into a concise 72-hour sequence.",
+        "Slide 6 explicitly identifies its figures as an illustrative example rather than measured conference data, avoiding a misleading evidence claim."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "minor",
+          "evidence": "The visible label \"Provisional conference topic\" reads as internal draft metadata on an otherwise finished keynote cover.",
+          "fix": "Replace it with the conference, speaker, or session designation, or remove it."
+        },
+        {
+          "slide": 3,
+          "severity": "minor",
+          "evidence": "The small monospaced explanatory lines beneath both loops are low-impact at projection distance, and the wedges have no directional arrows beyond their numbers.",
+          "fix": "Increase annotation size and add subtle directional movement or connectors to clarify each loop at a glance."
+        },
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "Five tall columns contain only a heading and one question each, leaving most of the slide as undifferentiated black space. It resembles an unfilled worksheet more than an ambitious conference visual.",
+          "fix": "Use one worked bounded-bet example across the five columns, with the changing and fixed elements visually connected."
+        },
+        {
+          "slide": 5,
+          "severity": "minor",
+          "evidence": "The unexplained \"MDB\" badge over the Material card is cryptic and inconsistent with the recognizable scale and magnifier symbols.",
+          "fix": "Replace the letters with a clear material/medium symbol or simply label the badge \"Medium.\""
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The oversized 24 and large empty left field create drama, but the actual method is reduced to a conventional text stack on the right rather than showing the 4-by-6 generation structure.",
+          "fix": "Visualize four rounds of six departures so the number becomes evidence rather than just a typographic statistic."
+        }
+      ],
+      "signatureMoment": "Slide 8: the figure physically opening a door, paired with \"Protect the promise. Loosen the route,\" gives the thesis a memorable cinematic close."
+    },
+    "B": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 5,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 5
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 1, 5, and 8 sustain a specific aperture/light/interruption metaphor rather than using unrelated dark stock imagery.",
+        "Slide 1 is a memorable live-stage opening: the title is dominant, the red rule establishes the accent system, and the hand-held aperture image directly supports the idea.",
+        "Slide 5 is the strongest substantive visual in either deck: the hands, prism, and redirected beam make deliberate variation tangible while the adjacent text names the three available axes.",
+        "Slide 6 presents the illustrative exercise as a four-step process and visibly states that it is not measured conference data; the 4 × 6 = 24 arithmetic is transparent.",
+        "Slide 7 converts the closing exercise into a spatial timeline and gives the audience a prominent takeaway question.",
+        "The red accent, large geometric typography, and alternation between image-led and diagram-led slides are well suited to a creative-conference stage."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "minor",
+          "evidence": "Like Deck A, the cover exposes the draft-like label \"PROVISIONAL CONFERENCE TOPIC.\"",
+          "fix": "Replace it with actual event or speaker metadata before delivery."
+        },
+        {
+          "slide": 3,
+          "severity": "major",
+          "evidence": "The thin orange loop outlines sit on dark maroon panels with limited contrast, while the bottom conclusion is rendered in very dark gray. Both are materially weaker on projection than the bright headings.",
+          "fix": "Raise diagram and footer contrast, enlarge the conclusion, and use arrows or stronger segment transitions to show loop direction."
+        },
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "The five large maroon cards are mostly empty. Their scale suggests missing content, and repeating the prompts does not reveal how the five constraints work together.",
+          "fix": "Populate the cards with one concise worked example or connect them into a single bounded-experiment schematic."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The four-column sequence is clear, but it remains almost entirely typographic; the generated departures and reviewer filtering are not visualized.",
+          "fix": "Show a compact 24-output matrix narrowing to the ideas that receive both reviewer marks."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "The dramatic doorway image and very large headline compete for the same central area, leaving the glowing opening partly obscured by the word \"open.\"",
+          "fix": "Shift or slightly reduce the headline so the open doorway remains legible as the final visual payoff."
+        }
+      ],
+      "signatureMoment": "Slide 5: a beam being deliberately refracted by a prism turns the abstract instruction \"change one axis\" into an immediate visual metaphor."
+    },
+    "winner": "B",
+    "reason": "B is the deck I would give the user. The preference remains the same regardless of viewing order: its aperture/light premise is visible in slides 1, 5, and 8, while slides 6 and 7 provide clearer process and action storytelling than A's more static fields. Both pass the hard checks: eight complete dark-format slides, no visible clipping or missing imagery, appropriate conference register, and clearly flagged illustrative numbers. Neither contains a blocking factual or cultural distortion. The visible provisional labels and under-resolved framework cards are generation/finishing defects, not prompt-selection failures; the request itself omitted event and speaker metadata. Route identity is unavailable, but the greater observed complexity in B earns its preference through better thematic imagery and pacing. It does exceed competent default quality, though only modestly: slides 3, 4, and 6 remain conventional framework layouts, so the wow is not sustained. The single most useful improvement to loser A would be to replace the sparse middle, especially slides 4–6, with one art-directed visual case study carried through the framework.",
+    "whatWouldMakeWinnerExceptional": "Thread one concrete creative experiment through slides 3–7, showing its production loop, bounded bet, deliberate interruption, 24 generated departures, reviewer filtering, and 72-hour decision as one evolving visual narrative. That would turn B's strong styling into sustained substantive information design."
+  },
+  "usage": {
+    "prompt_tokens": 17092,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 4934,
+    "completion_tokens_details": {
+      "reasoning_tokens": 3287
+    },
+    "total_tokens": 22026
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 70.287
+}

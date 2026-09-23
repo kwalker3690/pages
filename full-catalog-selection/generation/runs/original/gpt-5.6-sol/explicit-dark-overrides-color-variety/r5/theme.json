@@ -1,0 +1,122 @@
+{
+  "headingFont": "Syne",
+  "headingFontWeight": 700,
+  "bodyFont": "IBM Plex Sans",
+  "bodyFontWeight": 400,
+  "config": {
+    "canvasPalette": {
+      "colors": [
+        {
+          "key": "primary",
+          "name": "Flare",
+          "color": {
+            "type": "solid",
+            "color": "#FF5A46"
+          }
+        },
+        {
+          "key": "warm",
+          "name": "Afterglow",
+          "color": {
+            "type": "solid",
+            "color": "#F2B84B"
+          }
+        },
+        {
+          "key": "cool",
+          "name": "Residual Violet",
+          "color": {
+            "type": "solid",
+            "color": "#9C8CFF"
+          }
+        },
+        {
+          "key": "ink",
+          "name": "Bone Ink",
+          "color": {
+            "type": "solid",
+            "color": "#F6F1E8"
+          }
+        },
+        {
+          "key": "rule",
+          "name": "Graphite Rule",
+          "color": {
+            "type": "solid",
+            "color": "#484A52"
+          }
+        }
+      ],
+      "gradients": []
+    },
+    "cardColor": {
+      "type": "solid",
+      "color": "#08090B"
+    },
+    "surfaceColor": {
+      "type": "solid",
+      "color": "#15171C"
+    },
+    "headingColor": "#F6F1E8",
+    "bodyColor": "#D8D4CB",
+    "mutedColor": {
+      "type": "solid",
+      "color": "#A5A19A"
+    },
+    "background": {
+      "type": "color",
+      "source": "color.solid",
+      "color": {
+        "hex": "#050607"
+      }
+    },
+    "letterSpacingHeading": -0.025,
+    "roundness": "sm",
+    "cardShadow": "none",
+    "cardBorder": "none",
+    "shapeFill": "semi",
+    "shapeColorScheme": "accent",
+    "roleStyles": {
+      "subheading": {
+        "font": "IBM Plex Sans",
+        "fontWeight": 600
+      },
+      "eyebrow": {
+        "font": "IBM Plex Sans",
+        "transform": "uppercase",
+        "letterSpacing": 0.14
+      }
+    },
+    "imagery": {
+      "defaultStyleId": "practical-light-afterimage",
+      "styles": [
+        {
+          "id": "practical-light-afterimage",
+          "name": "Practical-light afterimage",
+          "promptGuidance": "High-contrast editorial studio photography made with practical hard light, deep negative space, controlled long-exposure afterimages and restrained grain, using near-black #08090B, bone #F6F1E8, flare coral #FF5A46, amber #F2B84B and ultraviolet #9C8CFF, no text or lettering.",
+          "subjects": "Anonymous hands, silhouettes, paper, mirrors, apertures, prisms, translucent materials, and ordinary creative tools; no recognizable faces, logos, stages, or generic conference crowds.",
+          "whenToUse": "Use on the cover, conceptual turning points, the deliberate-interruption sequence, and the closing slide; use native editable diagrams when the content concerns loops, boundaries, quantities, or decisions."
+        }
+      ]
+    },
+    "typeScale": {
+      "display-xl": 84,
+      "display-lg": 64,
+      "display-md": 48,
+      "heading-1": 40,
+      "heading-2": 30,
+      "heading-3": 22,
+      "heading-4": 18,
+      "subheading": 20,
+      "body-lg": 19,
+      "body-normal": 16,
+      "body-sm": 13,
+      "eyebrow": 11,
+      "caption": 11
+    },
+    "density": "md",
+    "cardPadding": "lg",
+    "lineHeightBody": 1.35,
+    "lineHeightHeading": 1.1
+  }
+}

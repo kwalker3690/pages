@@ -1,0 +1,122 @@
+{
+  "headingFont": "Newsreader",
+  "headingFontWeight": 700,
+  "bodyFont": "IBM Plex Sans",
+  "bodyFontWeight": 400,
+  "config": {
+    "canvasPalette": {
+      "colors": [
+        {
+          "key": "primary",
+          "name": "Editorial Vermilion",
+          "color": {
+            "type": "solid",
+            "color": "#B5412C"
+          }
+        },
+        {
+          "key": "warm",
+          "name": "Archive Buff",
+          "color": {
+            "type": "solid",
+            "color": "#D6C5A9"
+          }
+        },
+        {
+          "key": "cool",
+          "name": "Screen Grey",
+          "color": {
+            "type": "solid",
+            "color": "#7B929A"
+          }
+        },
+        {
+          "key": "ink",
+          "name": "Carbon Ink",
+          "color": {
+            "type": "solid",
+            "color": "#171A1C"
+          }
+        },
+        {
+          "key": "rule",
+          "name": "Lead Rule",
+          "color": {
+            "type": "solid",
+            "color": "#AAA79F"
+          }
+        }
+      ],
+      "gradients": []
+    },
+    "cardColor": {
+      "type": "solid",
+      "color": "#F7F3EA"
+    },
+    "surfaceColor": {
+      "type": "solid",
+      "color": "#E9E4D9"
+    },
+    "headingColor": "#171A1C",
+    "bodyColor": "#30363A",
+    "mutedColor": {
+      "type": "solid",
+      "color": "#5D6466"
+    },
+    "background": {
+      "type": "color",
+      "source": "color.solid",
+      "color": {
+        "hex": "#DED9CF"
+      }
+    },
+    "letterSpacingHeading": -0.015,
+    "roundness": "sm",
+    "cardShadow": "none",
+    "cardBorder": "sm",
+    "shapeFill": "solid",
+    "shapeColorScheme": "default",
+    "roleStyles": {
+      "subheading": {
+        "font": "IBM Plex Sans",
+        "fontWeight": 600
+      },
+      "eyebrow": {
+        "font": "IBM Plex Sans",
+        "transform": "uppercase",
+        "letterSpacing": 0.1
+      }
+    },
+    "imagery": {
+      "defaultStyleId": "editorial-media-study",
+      "styles": [
+        {
+          "id": "editorial-media-study",
+          "name": "Editorial media study",
+          "promptGuidance": "Large-format editorial studio photograph of one media mechanism—modular paper frames, neutral type blocks, screen windows or plotter paths—arranged as a precise material study under cool raking daylight, carbon #171A1C, archive buff #D6C5A9, screen grey #7B929A and vermilion #B5412C on warm paper #F7F3EA, no text or lettering.",
+          "subjects": "Conceptual studies of fixed pages, modular interfaces, linked structures, variable systems, and hands arranging neutral components; never reconstructed historical documents, brands, or legible interface text.",
+          "whenToUse": "Cover and conceptual transitions where a generated material metaphor adds meaning; use credited archival evidence or native diagrams for historical claims."
+        }
+      ]
+    },
+    "typeScale": {
+      "display-xl": 84,
+      "display-lg": 64,
+      "display-md": 48,
+      "heading-1": 40,
+      "heading-2": 30,
+      "heading-3": 22,
+      "heading-4": 18,
+      "subheading": 20,
+      "body-lg": 19,
+      "body-normal": 16,
+      "body-sm": 13,
+      "eyebrow": 11,
+      "caption": 11
+    },
+    "density": "md",
+    "cardPadding": "lg",
+    "lineHeightBody": 1.35,
+    "lineHeightHeading": 1.1
+  }
+}

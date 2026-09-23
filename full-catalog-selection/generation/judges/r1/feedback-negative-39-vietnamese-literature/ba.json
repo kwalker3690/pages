@@ -1,0 +1,126 @@
+{
+  "order": [
+    "library",
+    "original"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 3,
+        "audience": 4,
+        "coherence": 3,
+        "craft": 2,
+        "integrity": 3
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 1–2 establish an elegant, highly legible literary-editorial tone with restrained cream, charcoal, and teal.",
+        "Slide 3 compresses the plot into a useful five-stage progression rather than presenting a long synopsis.",
+        "Slides 5–6 frame realism and humanitarian value as distinct interpretive arguments, not interchangeable themes.",
+        "Slide 7 uses the actual Vietnamese opening couplet to make the six/eight structure and internal rhyme visible."
+      ],
+      "issues": [
+        {
+          "slide": 7,
+          "severity": "blocking",
+          "evidence": "All three explanatory columns continue below the rendered slide boundary; the Bridge, Forward link, and Cadence explanations are visibly cut off. This makes the required explanation of lục bát incomplete.",
+          "fix": "Shorten the three notes, reduce their type slightly, or move them to a separate slide so every explanation and the forward-rhyme rule is visible."
+        },
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "The turquoise diagram breaks the otherwise restrained literary palette, and “Commodification” is forced into an awkward three-line split as “Commodifica / tion of / poverty.” Small supporting text is weak beside the oversized left quotation.",
+          "fix": "Redraw the system map in the deck’s neutral editorial palette, widen the nodes, and use concise parallel labels with larger annotations."
+        },
+        {
+          "slide": 2,
+          "severity": "major",
+          "evidence": "The slide lists two institutions as sources but provides no work titles, authors, dates, URLs, or retrieval details. For an academic presentation, the factual figures are therefore not independently traceable from the slide.",
+          "fix": "Add concise footnotes or an end bibliography with complete references for the dates, 3,254-line count, chữ Nôm, and verse-form claims."
+        },
+        {
+          "slide": 3,
+          "severity": "minor",
+          "evidence": "The plot is readable but presented as five ruled text rows; the design does not visually show increasing pressure, reversals, duration, or causal links promised by the title.",
+          "fix": "Turn the list into a pressure arc or consequence timeline that distinguishes Kiều’s decisions from forces imposed on her."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "The conclusion is typographically strong but almost entirely verbal, and the lower text sits close to the bottom edge. It does not visually resolve the rhythm-to-ethics relationship developed on slide 7.",
+          "fix": "Reuse the linked-rhyme motif as a concluding visual bridge between form and consequence, with safer bottom margins."
+        }
+      ],
+      "signatureMoment": "Slide 7’s syllable-by-syllable treatment of “Trăm năm trong cõi người ta / Chữ tài chữ mệnh khéo là ghét nhau” is the deck’s strongest substantive visual, although its explanatory text is clipped."
+    },
+    "B": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 2,
+        "integrity": 4
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 1 and 8 form a memorable book-to-water visual bracket, with the red thread and horizontal rule carrying the rhythm-and-consequence premise across the deck.",
+        "Slides 2–4 use culturally tailored portraiture and literary imagery rather than generic stock photography; interpretive illustrations are visibly labeled where needed.",
+        "Slide 3 attempts a real narrative timeline, while slide 5 turns the realism argument into a legible system of recurring structural pressures.",
+        "Slide 7 is a clear academic teaching graphic: syllable counts, the ta–là rhyme bridge, continuation rule, and methodological caveat are all visible.",
+        "The warm paper, dark brown, muted red, and serif system remains recognizably classic and coherent across opening, middle, and ending."
+      ],
+      "issues": [
+        {
+          "slide": 3,
+          "severity": "blocking",
+          "evidence": "The fifth timeline card, “Return · Giác Duyên,” extends below the slide and its description is missing. The slide number also intrudes at the lower left. This visibly removes the ending of the required plot summary.",
+          "fix": "Reduce card heights and vertical gaps, or split the timeline across two slides so the return and reunion are fully rendered."
+        },
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "The bold sentence “Her agency is real—but never exercised on equal terms.” overlaps the first outlined card and collides with the “Love” label. The red diagonal connector also begins without a clean anchor.",
+          "fix": "Move the thesis above the card stack, add clear spacing, and align the connector to the centers or edges of all three cards."
+        },
+        {
+          "slide": 5,
+          "severity": "minor",
+          "evidence": "The central label breaks awkwardly as “Structura / l injustice,” weakening an otherwise clear system diagram.",
+          "fix": "Widen the center circle or shorten the label to “Structural injustice” at a slightly smaller size without splitting the word."
+        },
+        {
+          "slide": 2,
+          "severity": "minor",
+          "evidence": "The sources identify institutions but still omit specific publication titles, dates, and full citations. The portrait is properly labeled interpretive, but the academic sourcing remains abbreviated.",
+          "fix": "Provide a compact bibliography or speaker-note references with complete publication details."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The four equal beige panels are readable but visually repetitive; no textual evidence or scene references substantiate the four interpretive claims.",
+          "fix": "Add one short cited phrase or scene marker to each panel and vary emphasis according to the argument’s sequence."
+        }
+      ],
+      "signatureMoment": "Slide 7’s ta–là bridge is the best combination of evidence, annotation, and audience-specific explanation in either deck."
+    },
+    "winner": "B",
+    "reason": "B is the deck I would give the user after mandatory repair of slides 3 and 4. Its culturally specific illustration, warm editorial palette, book-and-water framing, plot timeline, structural-realism map, and annotated lục bát example make it more memorable and more explanatory than A. Its additional visual complexity is partly earned because it supports cultural setting and narrative structure, but the clipped timeline and overlapping character slide show that the complexity was not controlled. A’s decisive improvement would be to replace its predominantly text-panel middle with a coherent evidence-led visual system while fixing the slide 7 overflow. Neither deck is ready as rendered: A clips the required verse explanation, and B clips the plot ending and has a major overlap. B exceeds competent default quality in conception and selected slides, but not in final production craft.",
+    "whatWouldMakeWinnerExceptional": "Repair all clipping and overlap, then ground the interpretive middle in brief cited textual evidence—especially on slides 4–6—while preserving the strong editorial image system. A fully visible plot ending, a clean character-pressure diagram, and publication-quality citations would turn the current occasional wow into a convincing academic deck."
+  },
+  "usage": {
+    "prompt_tokens": 17213,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 2694,
+    "completion_tokens_details": {
+      "reasoning_tokens": 1024
+    },
+    "total_tokens": 19907
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 40.24
+}

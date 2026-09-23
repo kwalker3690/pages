@@ -1,0 +1,101 @@
+{
+  "order": [
+    "original",
+    "library"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 5,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 3
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 1, 2, 3, and 8 use relevant hospitality imagery to frame the restorative hour as part of the stay rather than a clinical treatment.",
+        "Slide 4 explicitly separates value for guests, staff, and the property, directly covering the requested manager-facing proposition.",
+        "Slide 6 clearly labels the economics as illustrative, shows the underlying formulas, and discloses excluded costs rather than presenting invented projections as company performance.",
+        "Slide 7 gives managers a concrete six-week pilot, decision gates, and a continue/adapt/stop decision."
+      ],
+      "issues": [
+        {
+          "slide": 6,
+          "severity": "major",
+          "evidence": "Generation defect: the scope note says not to apply the monthly result to a “four-week pilot,” while slides 1 and 7 consistently propose a six-week pilot.",
+          "fix": "Change “four-week pilot” to “six-week pilot” and run a terminology check across the deck."
+        },
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "The central operating model is rendered as a dense three-column table. The guest-facing lane and backstage owners are readable, but the slide does not visually expose handoffs, timing, or dependencies.",
+          "fix": "Turn the rows into a service blueprint with aligned guest actions, staff actions, ownership, and room-reset handoffs."
+        },
+        {
+          "slide": 4,
+          "severity": "minor",
+          "evidence": "The four numbered proof points sit in a grid even though the title and copy describe a connected chain from interest to contribution.",
+          "fix": "Use a directional chain or funnel and show where guest, staff, and property value enters the sequence."
+        }
+      ],
+      "signatureMoment": "Slide 6 is the strongest substantive moment: assumptions, contribution sensitivity, break-even, and exclusions are visible together in one manager-usable view."
+    },
+    "B": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 5,
+        "coherence": 5,
+        "craft": 4,
+        "integrity": 5
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 has a memorable boutique-hospitality opening: the restrained room photograph, large editorial headline, guest promise, and manager proposition establish both mood and purpose.",
+        "Slides 2–4 form a clear explanatory sequence: the missing-middle journey, a proportionally encoded 60-minute ritual, and the relationship from guest interest to positive contribution.",
+        "Slide 6 clearly identifies the scenario as illustrative, displays the arithmetic, includes a visible negative 35% case, and states the excluded cost categories.",
+        "Slide 7 converts the pitch into a usable pilot scorecard, while slide 8 ends with a concrete owner-room-evidence decision rather than a generic thank-you."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "minor",
+          "evidence": "Prompt/selection defect: the visible system leans toward warm ivory and muted sage rather than the requested clean white and recognizably soft teal. It remains close in spirit but is less exact than Deck A.",
+          "fix": "Move the main canvas to clean white and shift the pale green panels and rules slightly bluer into soft teal."
+        },
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "Generation/design defect: every row receives two consecutive numbered circles, producing 01–10 for what is visibly a five-stage Offer–Prepare–Deliver–Reset–Learn model. The second number appears to label prose rather than a distinct step.",
+          "fix": "Use one number per stage, 01–05, and place the owner/action description in an unnumbered aligned column."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The negative 35% contribution is represented by an extremely shallow mark at the baseline, while the positive bars dominate. The explanatory sentence carries information the chart should reveal more clearly.",
+          "fix": "Increase the chart’s negative range and label every bar directly with signed currency values."
+        }
+      ],
+      "signatureMoment": "Slide 3: the segmented 60-minute bar and aligned five-stage columns make duration, sequence, and emphasis understandable at a glance."
+    },
+    "winner": "B",
+    "reason": "Both are complete eight-slide sales decks with readable, unclipped content, no missing images or placeholders, and clearly flagged illustrative financial assumptions. B is the deck I would give the user because its editorial opening, proportional ritual timeline, value chain, financial scenario, pilot gates, and closing decision create a more deliberate manager journey. A is highly usable and matches the requested palette more exactly, but its visible four-week/six-week contradiction is a material integrity defect and its middle relies more heavily on conventional tables. The single most important improvement for A is to turn slides 4–7 into one connected manager decision story rather than separate text-heavy frameworks. No route is identified, so unseen implementation complexity receives no credit; the observed extra diagramming in B does earn its complexity because it improves comprehension on slides 2–4 and 7. B exceeds competent default quality modestly, but the confusing numbering on slide 5 and lack of a truly exceptional property-specific visual keep it from sustained wow.",
+    "whatWouldMakeWinnerExceptional": "Add one property-specific, annotated service-blueprint case study that follows a guest from arrival through the restorative hour, showing staff handoffs, room reset, capacity, and contribution in one continuous visual; this would replace generic framework quality with a memorable piece of decision-grade evidence."
+  },
+  "usage": {
+    "prompt_tokens": 17106,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 5586,
+    "completion_tokens_details": {
+      "reasoning_tokens": 4236
+    },
+    "total_tokens": 22692
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 86.542
+}

@@ -1,0 +1,109 @@
+{
+  "order": [
+    "original",
+    "library"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 5,
+        "coherence": 5,
+        "craft": 4,
+        "integrity": 5
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 is a memorable conference opening: the hands, black aperture, projected light, and coral emphasis make the headline physical rather than merely decorative.",
+        "Slides 3 and 6 convert the argument into usable operating models, clearly contrasting production with discovery and generation with review.",
+        "Slides 1, 5, and 8 form a coherent visual arc through apertures, controlled light, interruption, and an open door.",
+        "Slide 5 is particularly well paced for a live speaker, pairing one dramatic image with three concise intervention choices.",
+        "Slide 6 explicitly labels the quantities as an illustrative exercise rather than measured conference data, avoiding a false-data claim."
+      ],
+      "issues": [
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "The slide is labeled an illustrative worked example, but it never supplies the actual six-word brief or any resulting artifact. Slides 4–6 describe the procedure without visibly demonstrating what changed.",
+          "fix": "Show the exact six-word brief, then carry one recognizable idea through several materially different outputs so the audience can inspect the evidence."
+        },
+        {
+          "slide": 6,
+          "severity": "major",
+          "evidence": "Twenty-four departures are represented only by colored dots. The grid proves the count but reveals nothing about whether the departures are meaningfully varied, surprising, or usable.",
+          "fix": "Replace at least six dots with small output thumbnails and annotate which rule changed and why two reviewers advanced a result."
+        },
+        {
+          "slide": 4,
+          "severity": "minor",
+          "evidence": "The small explanatory line at the bottom of the first dark-red card has weak contrast and is much less projection-readable than the surrounding text.",
+          "fix": "Increase its size and luminance or remove it from the card and deliver it verbally."
+        }
+      ],
+      "signatureMoment": "Slide 5: the prism-like interruption image, hands, and split editorial composition make the abstract instruction to change one axis feel tangible."
+    },
+    "B": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 3,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 4
+      },
+      "wow": "absent",
+      "strengths": [
+        "Slide 2 presents the known-versus-unknown distinction with disciplined hierarchy and useful spatial separation.",
+        "Slide 3 makes both loops directly comparable and gives each a clear outcome statement.",
+        "Slide 5 is the strongest substantive visual: the three intervention types visibly converge on learning rather than sitting beside unrelated prose.",
+        "Slide 7 is a clean, stage-readable action sequence with deliberate negative space rather than unfinished emptiness.",
+        "Slide 6 clearly discloses that the example is illustrative and not measured conference data."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "minor",
+          "evidence": "The pale gray marbling is visually polished but makes the opening brighter and less dramatic than the requested dark keynote tone; it also functions as generic atmosphere rather than a brief-specific idea.",
+          "fix": "Darken the field and art-direct the fluid image into an aperture, rupture, or controlled variation motif that can recur later."
+        },
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "Five narrow columns create the deck's densest and smallest live-reading moment. The line saying the brief is used on the next slide is also inaccurate: slide 5 is a general intervention model, while the generation plan appears on slide 6.",
+          "fix": "Split the material across two beats or reveal it progressively, and correct the cross-reference."
+        },
+        {
+          "slide": 6,
+          "severity": "major",
+          "evidence": "The promised 24 departures are only numbered placeholders. Alternating rows use outlined boxes and bare numbers without explaining the encoding, and no generated outcomes are shown.",
+          "fix": "Use a consistent 4-by-6 matrix populated with representative thumbnails, then connect selected outputs to the review criteria on the right."
+        },
+        {
+          "slide": 3,
+          "severity": "minor",
+          "evidence": "The numbered circular segments and surrounding labels require the audience to infer which label belongs to which segment; the reading sequence is less immediate than the slide's comparison demands.",
+          "fix": "Place labels inside or directly beside their corresponding segments and add a subtle directional cue."
+        }
+      ],
+      "signatureMoment": "Slide 5: the restrained three-node diagram around 'Visible learning' is the deck's clearest synthesis of concept and composition."
+    },
+    "winner": "A",
+    "reason": "Deck A is the one to give the user. Both decks pass the hard gates: each has eight slides, is dark overall, contains no visible clipping or missing assets, suits an adult creative-conference setting, and clearly labels illustrative quantities rather than presenting them as measured facts. A wins through its memorable opening, recurring light-and-aperture imagery, stronger live pacing, and more convincing ending. The preference is based on middle-deck execution as well as the covers, so reversing presentation order would not change it. A exceeds competent default quality on slides 1, 5, and 8, but its conventional cards, chevrons, and dot matrix prevent sustained wow. The shared failure to show an actual creative artifact is primarily a content-plan or selection defect; B's incorrect 'next slide' reference and inconsistent slide-6 cell treatment are additional generation defects. Route labels are unavailable, so the original arm cannot be identified; the visibly more complex A does earn its added complexity because that complexity supports pacing and the recurring visual premise. The single most valuable improvement to B would be replacing slides 4–6 with a genuinely visual worked example showing the exact brief, output variations, and review decision.",
+    "whatWouldMakeWinnerExceptional": "Turn A's illustrative method into a visible case study: reveal the exact six-word brief, show several genuinely different outputs, annotate the changed rule in each round, and conclude with the reviewers' evidence-based selection. That would give the dramatic image system an equally exceptional substantive visual through the middle."
+  },
+  "usage": {
+    "prompt_tokens": 17092,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 4903,
+    "completion_tokens_details": {
+      "reasoning_tokens": 3456
+    },
+    "total_tokens": 21995
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 71.175
+}

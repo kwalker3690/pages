@@ -1,0 +1,112 @@
+{
+  "order": [
+    "library",
+    "original"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 3,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 5
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 1 and 8 provide deliberate image-led bookends, with large typography, controlled negative space, and a consistent monochrome editorial palette.",
+        "Slides 2–3 clearly establish the central distinction between production and discovery; slide 3's paired loops make the different sequences and outcomes visible.",
+        "Slides 4–7 progress logically from experiment definition to variable choice, generation plan, and immediate action.",
+        "Slides 4 and 6 visibly identify the exercise as illustrative, and slide 6 explicitly says it is not measured conference data. The quantities are internally consistent: four rounds of six departures, three reviewers, and a two-of-three gate.",
+        "No clipping, missing images, visible placeholders, fake citations, or unsupported factual claims are evident."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "minor",
+          "evidence": "The marbled abstraction is polished but generic and does not establish a visual premise that the middle slides continue.",
+          "fix": "Use an opening image tied to interruption, aperture, or controlled variation, then repeat that device at key transitions."
+        },
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "Five narrow, equally weighted text columns create a reference-sheet density rather than a dramatic live-speaking moment. The small monospace questions and lower explanatory blocks compete for attention.",
+          "fix": "Sequence the five boundaries across two slides or reveal them progressively, giving the question, variable, and signal stronger visual priority."
+        },
+        {
+          "slide": 6,
+          "severity": "major",
+          "evidence": "This is a content-selection limitation rather than a rendering defect: the 24 departures are represented only by empty outlines and numerals. The slide proves arithmetic but does not let the audience see what changed or why any result might advance.",
+          "fix": "Replace several numbered cells with actual miniature outputs and reviewer marks so the generation-to-selection logic becomes visible evidence."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "The pocket watch is very dark and partly crossed by the horizontal rule, making the closing image less legible and less conceptually specific than the final statement.",
+          "fix": "Increase image separation or replace the watch with a more direct visual payoff from the worked experiment."
+        }
+      ],
+      "signatureMoment": "Slide 3's side-by-side production and discovery loops are the deck's clearest substantive visual, showing that different levels of certainty require different operating sequences."
+    },
+    "B": {
+      "scores": {
+        "specificity": 5,
+        "storytelling": 5,
+        "audience": 5,
+        "coherence": 5,
+        "craft": 4,
+        "integrity": 5
+      },
+      "wow": "sustained",
+      "strengths": [
+        "Slide 1 is a memorable conference opening: the beam entering a narrow aperture directly supports the title, while the red emphasis on “unexpected” creates an immediate focal point.",
+        "Slides 1, 5, and 8 form a specific visual premise around apertures, refraction, and an open door rather than using unrelated dark stock imagery.",
+        "Slide 3 turns the production/discovery distinction into two immediately comparable process lanes, including the different number of steps and a concise conclusion bar.",
+        "Slides 4, 6, and 7 convert the framework into a bounded experiment, generation field, review gate, and timed action sequence. These compositions reveal relationships and sequence rather than merely decorating prose.",
+        "Slide 5's prism image is unusually well matched to the idea of changing one axis: a controlled input is visibly transformed while the adjacent list names the available interventions.",
+        "Slide 8 delivers a convincing visual and verbal payoff, with the partially open door echoing the opening aperture and the red word “open” carrying the conclusion.",
+        "The deck is precisely tuned for a live creative audience: short statements, large type, strong contrast, purposeful pacing, and enough detail to support the speaker without becoming a document.",
+        "The illustrative numbers are clearly labeled on slides 4 and 6, including the explicit statement that they are not measured conference data. No clipping, missing assets, placeholders, dubious citations, or harmful distortions are evident."
+      ],
+      "issues": [
+        {
+          "slide": 4,
+          "severity": "minor",
+          "evidence": "The small helper sentence in the first dark-red card has noticeably lower contrast than the surrounding text and may disappear at the back of a conference room.",
+          "fix": "Raise its contrast or remove it and let the larger question carry the card."
+        },
+        {
+          "slide": 6,
+          "severity": "major",
+          "evidence": "This is a content-selection gap rather than a generation failure: the dot matrix communicates 24 departures and four rounds exceptionally clearly, but none of the departures or reviewer judgments is shown. The audience sees the protocol rather than its creative consequences.",
+          "fix": "Replace a subset of dots with tiny real outputs and overlay the two reviewer marks on advancing examples."
+        },
+        {
+          "slide": 7,
+          "severity": "minor",
+          "evidence": "The alternating label placement puts Today and Within 72 hours above the line but Tomorrow below it, requiring a small scan reversal in an otherwise straightforward timeline.",
+          "fix": "Use one consistent label position or make the alternating placement more explicitly directional."
+        }
+      ],
+      "signatureMoment": "Slide 5: the art-directed prism photograph makes deliberate variation tangible, while the adjacent Material, Rule, and Perspective choices convert the metaphor into an actionable framework."
+    },
+    "winner": "B",
+    "reason": "I would give the user Deck B. Both decks pass the hard checks: each has eight complete slides, a predominantly dark palette, readable and unclipped content, no missing required subject, no visible draft material, and clear labeling of illustrative numbers. B's advantage is substantial and not presentation-order dependent. Its added complexity is earned because slides 3, 4, 6, and 7 use structure to explain comparison, sequence, scale, and decision gates, while slides 1, 5, and 8 create coherent visual pacing. A is competent and restrained, but its middle relies more heavily on text columns and abstract numerals. The single most useful improvement to A would be turning slides 4–6 into a visible worked example with actual creative outputs and reviewer choices. B exceeds competent default quality through its recurring aperture/refraction premise, live-stage hierarchy, and strong opening-to-ending arc.",
+    "whatWouldMakeWinnerExceptional": "Show the experiment's actual creative artifacts. A progressive reveal of several six-word-brief outputs, the rule changed in each round, and visible reviewer marks would turn B's excellent framework from an illustrative protocol into memorable evidence."
+  },
+  "usage": {
+    "prompt_tokens": 17092,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 5151,
+    "completion_tokens_details": {
+      "reasoning_tokens": 3584
+    },
+    "total_tokens": 22243
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 77.161
+}

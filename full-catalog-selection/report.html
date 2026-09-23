@@ -1,0 +1,214 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Creative template selection · Report</title><style>:root{color-scheme:dark}body{max-width:1120px;margin:40px auto;padding:0 24px;background:#101218;color:#f5f5fa;font:16px/1.65 system-ui,sans-serif}a{color:#c9b4ff}h1,h2,h3{line-height:1.25}h2{margin-top:36px}table{border-collapse:collapse;width:100%;display:block;overflow:auto;font-size:14px}td,th{padding:10px;border:1px solid #444b5c;text-align:left}th{background:#292339}code,pre{background:#202430;border-radius:5px}pre{padding:14px;overflow:auto}li{margin:8px 0}strong{color:#fff}</style><p><a href="index.html">← Interactive comparison</a> · <a href="provenance.html">Brand Base inspection</a></p><h1 id="original-or-library-the-completed-creative-prototype">Original or library: the completed creative prototype</h1>
+<h2 id="how-this-differs-from-the-actual-agent">How this differs from the actual agent</h2>
+<p><strong>This was a custom, iterated design prototype—not an end-to-end run of the actual Gamma agent.</strong> It used the production deck writer and theme-application code from the checked-out repository, with custom planning and finishing around them. The final results do not establish what the shipped agent would produce on these briefs.</p>
+<p><strong>Jon’s custom-theme instructions were included:</strong> all14saved planning requests contain the complete, unchanged <code>AUTHORED-LOOK.md</code> introduced by Jon Noronha in PR37723. However, those instructions were supplied inside a separate, custom planning prompt that asked for three competing concepts, a chosen theme, art direction and a detailed outline. This was not an unchanged execution of Jon’s main-agent workflow.</p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>What this prototype actually used</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Main-agent orchestration</td>
+<td>Bypassed; no end-to-end harness session</td>
+</tr>
+<tr>
+<td>Template selection</td>
+<td>Custom two-stage full-catalog selector outside the main agent</td>
+</tr>
+<tr>
+<td>Planning</td>
+<td>A custom Sol/high call produced the design concept, theme and detailed outline; both comparison arms received the same outline</td>
+</tr>
+<tr>
+<td>Theme creation</td>
+<td>Jon’s full authored-look instructions, plus additional creativity and structured-output requirements</td>
+</tr>
+<tr>
+<td>Theme application</td>
+<td>Actual <code>validateAuthoredTheme</code> and <code>applyAuthoredLook</code> functions; structural donor fixed to Brand Base Standard</td>
+</tr>
+<tr>
+<td>Initial writing</td>
+<td>Production whole-deck writer prompts from the checkout, run through the offline writer benchmark with Sol/high</td>
+</tr>
+<tr>
+<td>Finishing</td>
+<td>Custom model critiques and repair prompts, plus direct GML edits by the coding assistant; not the production finisher</td>
+</tr>
+</tbody>
+</table>
+<p>Jon’s normal flow has the main agent author one theme from the conversation and select an appropriate structural donor. This prototype instead used a separate three-concept planning stage and always selected Brand Base Standard for the original arm. Neither writer nor repair stages were restricted to reusing particular base-card layouts. Final examples such as the pirate timeline and sourced geographic maps also include direct code edits.</p>
+<p><strong>Read the results as what these ingredients can produce with additional direction and iteration—not as an agent benchmark, a strict template-adherence test, or an isolated measurement of Jon’s prompt.</strong> The next production-faithful validation should run the actual agent with only the intended routing change and retain its normal planning and finishing flow.</p>
+<p><a href="./index.html">Open the interactive comparison</a>. It starts with pirate cosmology. Compare synchronized slides, inspect earlier revisions, open editable staging decks, or hide the routes in <strong>Blind review</strong> and export your choices. <a href="./results.csv">Compact results CSV</a> · <a href="./results.json">Full results JSON</a>.</p>
+<p><strong>14 original themes on Brand Base Standard + 14 library decks, 226 final slides.</strong> Three concepts were considered for every brief. Both routes received real assets, a substantive creative revision, focused rendering repairs and evidence-driven corrections. The run retains 128 rendered deck revisions, including unchanged counterpart snapshots when only one arm needed a correction. All final slides pass the measured frame and blank-card checks; all 28 saved staging decks pass content read-back checks. These checks are not a blanket claim of perfection or full brief compliance.</p>
+<h2 id="brand-base-adherence-an-important-qualification">Brand Base adherence: an important qualification</h2>
+<p><a href="./provenance.html">Inspect base cards, first drafts and final slides side by side</a>. The base examples are rendered with the same custom theme as the output so layout differences are easier to see.</p>
+<p><strong>This run did not enforce reuse of Brand Base card layouts.</strong> The writer was explicitly allowed to adapt examples, combine treatments, or create new compositions without finding a matching donor. No source card was pinned or recorded for any of the 113 original slides. Brand Base supplied the starting theme/settings and examples, not a fixed layout constraint.</p>
+<p>A retrospective markup inspection finds custom positioning, shape, SVG or code constructions absent from all34base examples in <strong>28 of113final original slides</strong>. This is a lower bound on divergence; ordinary grid compositions may also have been rebuilt. Suggested base matches in the inspector are explicitly <strong>structural resemblance, not source attribution</strong>. This prototype therefore does not establish that the quality results are achievable through custom theming while strictly retaining Brand Base layouts. A stricter test needs pinned source IDs and verified layout lineage across writer and repair stages.</p>
+<h2 id="what-the-results-say">What the results say</h2>
+<p>The final two-order model reviews prefer <strong>original in 11 cases</strong>, <strong>library in 2</strong>, with <strong>1 order-sensitive result(s)</strong> and <strong>0 ties</strong>. These are advisory model preferences on this small, iterated sample—not human votes or a measured production win rate. 2 of 28 decks receive “sustained wow” in both orders; winning a pair often still means occasional wow rather than excellence throughout. Full scores and criticisms remain accessible in the reviewer.</p>
+<p>The strongest argument for original authorship is an explanatory idea that the library does not already realize: a pirate’s celestial navigation atlas, a visible seminar transformation for Hegel, a rhyme-and-tone construction for Kiều, or an authentication request shown through interface, code and system boundaries. Custom palette changes alone are not the useful distinction.</p>
+<p>The library remains valuable. School ozone and premium wellness are clear counterexamples to “always author something original.” In particular, the selector chose original for wellness in all three trials, yet its Palmhouse comparison wins the final review. Several cases selected library consistently but favor original after generation. Preview-level confidence is not calibrated to finished-deck quality.</p>
+<p>Pirate cosmology routes to original in <strong>all three creative selector trials</strong>. There is no pirate-specific hardcode or target route percentage. The custom result uses a bespoke celestial atlas, expanding coordinate grid, wavelength explanation, conceptual all-sky map, logarithmic cosmic course and evidence-to-model synthesis. Its library comparison remains available as a real counterfactual.</p>
+<h2 id="all-14-pairs">All 14 pairs</h2>
+<p>“Original votes” measures selection repeatability before generation. “Final preference” requires agreement between the two swapped-order model reviews. It does not replace your judgment.</p>
+<table>
+<thead>
+<tr>
+<th>Brief</th>
+<th style="text-align:right">Original votes</th>
+<th>Library comparison</th>
+<th>Final preference</th>
+<th>Custom theme + Brand Base</th>
+<th>Library deck</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ozone · children</td>
+<td style="text-align:right">2/3</td>
+<td>weather-watchers</td>
+<td>library</td>
+<td><a href="https://staging.gamma.app/docs/y68amdqvye7sdqi">Open</a> · r4</td>
+<td><a href="https://staging.gamma.app/docs/4kdluysmbv21beu">Open</a> · r4</td>
+</tr>
+<tr>
+<td>Ozone · investment committee</td>
+<td style="text-align:right">1/3</td>
+<td>verdict</td>
+<td>original</td>
+<td><a href="https://staging.gamma.app/docs/ga5ilnt10eltgpl">Open</a> · r6</td>
+<td><a href="https://staging.gamma.app/docs/lpsvj7aapuzjm9q">Open</a> · r6</td>
+</tr>
+<tr>
+<td>Salon lookbook</td>
+<td style="text-align:right">0/3</td>
+<td>voile</td>
+<td>original</td>
+<td><a href="https://staging.gamma.app/docs/8w9u188vcr2fqkm">Open</a> · r3</td>
+<td><a href="https://staging.gamma.app/docs/bnvw0ramfpsjktn">Open</a> · r3</td>
+</tr>
+<tr>
+<td>Business review</td>
+<td style="text-align:right">0/3</td>
+<td>quarterlight</td>
+<td>inconclusive</td>
+<td><a href="https://staging.gamma.app/docs/u21j9hj5dt5kou1">Open</a> · r3</td>
+<td><a href="https://staging.gamma.app/docs/aovxo5n6v020dmn">Open</a> · r3</td>
+</tr>
+<tr>
+<td>Dark creative conference</td>
+<td style="text-align:right">1/3</td>
+<td>blackwork</td>
+<td>original</td>
+<td><a href="https://staging.gamma.app/docs/yuiroqc3usocwl2">Open</a> · r5</td>
+<td><a href="https://staging.gamma.app/docs/3e7eyw77oyrln2t">Open</a> · r5</td>
+</tr>
+<tr>
+<td>Premium wellness</td>
+<td style="text-align:right">3/3</td>
+<td>palmhouse</td>
+<td>library</td>
+<td><a href="https://staging.gamma.app/docs/xj4dvufdi4f1wsk">Open</a> · r5</td>
+<td><a href="https://staging.gamma.app/docs/223py4hzs9h5v5t">Open</a> · r5</td>
+</tr>
+<tr>
+<td>Standalone handover</td>
+<td style="text-align:right">0/3</td>
+<td>readable-detail</td>
+<td>original</td>
+<td><a href="https://staging.gamma.app/docs/o7uw1jtprtirao1">Open</a> · r4</td>
+<td><a href="https://staging.gamma.app/docs/mst26hzwnpm4pjr">Open</a> · r4</td>
+</tr>
+<tr>
+<td>Big Bang for a pirate</td>
+<td style="text-align:right">3/3</td>
+<td>star-trails</td>
+<td>original</td>
+<td><a href="https://staging.gamma.app/docs/qziijjcsddcff6h">Open</a> · r8</td>
+<td><a href="https://staging.gamma.app/docs/bm9hs8gketiif2s">Open</a> · r8</td>
+</tr>
+<tr>
+<td>Student authentication</td>
+<td style="text-align:right">3/3</td>
+<td>pipeline</td>
+<td>original</td>
+<td><a href="https://staging.gamma.app/docs/829nw2qbjoow8qa">Open</a> · r4</td>
+<td><a href="https://staging.gamma.app/docs/y9ehq1i3ccvfksp">Open</a> · r4</td>
+</tr>
+<tr>
+<td>Visual communication history</td>
+<td style="text-align:right">3/3</td>
+<td>classic-editorial</td>
+<td>original</td>
+<td><a href="https://staging.gamma.app/docs/4hjzqjz7yamsrnk">Open</a> · r4</td>
+<td><a href="https://staging.gamma.app/docs/7nxx1vcxwl0tg86">Open</a> · r4</td>
+</tr>
+<tr>
+<td>History for children</td>
+<td style="text-align:right">1/3</td>
+<td>story-map</td>
+<td>original</td>
+<td><a href="https://staging.gamma.app/docs/tmu6o2ru86cjwyi">Open</a> · r5</td>
+<td><a href="https://staging.gamma.app/docs/mxisnxy4m0xaz1h">Open</a> · r5</td>
+</tr>
+<tr>
+<td>Hegel</td>
+<td style="text-align:right">0/3</td>
+<td>marginalia</td>
+<td>original</td>
+<td><a href="https://staging.gamma.app/docs/0ojnf3doz5xy04l">Open</a> · r4</td>
+<td><a href="https://staging.gamma.app/docs/pfl0l1youiiktp3">Open</a> · r4</td>
+</tr>
+<tr>
+<td>Agricultural machinery</td>
+<td style="text-align:right">1/3</td>
+<td>lecture-hall</td>
+<td>original</td>
+<td><a href="https://staging.gamma.app/docs/7t8x38lc07ef933">Open</a> · r5</td>
+<td><a href="https://staging.gamma.app/docs/2rbk1xrniucbmeg">Open</a> · r5</td>
+</tr>
+<tr>
+<td>The Tale of Kiều</td>
+<td style="text-align:right">0/3</td>
+<td>marginalia</td>
+<td>original</td>
+<td><a href="https://staging.gamma.app/docs/5oku8pl5e0bymwn">Open</a> · r4</td>
+<td><a href="https://staging.gamma.app/docs/z7ifstrymsrd9t4">Open</a> · r4</td>
+</tr>
+</tbody>
+</table>
+<h2 id="what-was-actually-tested">What was actually tested</h2>
+<ul>
+<li><strong>Inputs:</strong> the 14 requests and exact handoffs from <a href="https://github.com/gamma-app/gamma/pull/37703">PR37703</a>, pinned commit <code>3e72f07a2df33a336a3b46938aed2f7c2522011e</code>. No inherited candidates or expected decisions. PR37628 is excluded.</li>
+<li><strong>Catalog:</strong> live staging capture at 2026-09-23 00:54 UTC: 365 regular templates, 296 presentation-eligible candidates, and three separately enumerated brand bases. Every shortlist call sees all 296 metadata entries. Only shortlisted candidates receive visual inspection. This is a pinned snapshot, not a continuously updating catalog.</li>
+<li><strong>Selection:</strong> Luna/low shortlists up to five candidates, then independently assesses real previews without the shortlisting rationale or retrieval scores. Three identical creativity-prompt trials are retained. Best library candidates from the first creative trial supply the comparison decks; later trials sometimes prefer different candidates.</li>
+<li><strong>Creation:</strong> three Sol/high concepts per brief; a chosen art direction and schema-validated authored theme; custom theme applied through the actual theme-authoring path to the downloaded Brand Base Standard. Same content outline per pair, production whole-deck writer, Sol/high, one first-draft sample per arm. 8 slides per deck except 7 for authentication and 10 for handover.</li>
+<li><strong>Iteration:</strong> actual generated images, native text/diagrams/charts and vector constructions, complete 1200×675 themed renders, a custom visual/content repair loop, and direct artifact inspection. Both arms were iterated; intervention counts are not equal. First drafts had 80 measured overflowing slides; finals have zero. This illustrates the work required, not first-pass readiness.</li>
+<li><strong>Review:</strong> all slides judged twice with route identity withheld and presentation order swapped. Judges see the original request/handoff and rendered slides. Raw results and image hashes are preserved. The gallery’s human blind mode hides labels and alternates sides; it is not a formal randomized study.</li>
+<li><strong>Persistence:</strong> real editable staging documents, with retrieved contents checked for expected card counts and unresolved generation nodes. Three sampled 8-slide persistence re-renders (business review, pirate and children’s history originals) were byte-identical to local PNGs, including the new vector timeline and geographic maps. Browser UI behavior and exports were not exhaustively tested.</li>
+</ul>
+<p>This tests the combined design route—theme, donor template, art direction, composition and subsequent iteration. It does <strong>not</strong> isolate theme color as a causal variable, run the live main-agent planner, or evaluate the production finisher. No deployed prompt or application code was changed. Only Standard was used as the neutral base; we cannot infer that 20–30 bases are necessary from this experiment.</p>
+<h2 id="assumptions-and-remaining-limitations">Assumptions and remaining limitations</h2>
+<ul>
+<li>The salon decks contain clearly labeled <strong>AI concept imagery</strong>, because no actual salon work was supplied. They demonstrate design, not a real latest-work portfolio. The judges correctly flag that delivery limitation.</li>
+<li>Business metrics, holdings and agricultural calculations are explicitly illustrative. The investment committee decks demonstrate a diligence method, not an analysis of an actual supplied portfolio; one review flags that missing input as a delivery blocker. The agriculture brief’s referenced source document was absent. Handover uses an example project. The conference topic is a shared provisional concept. These are not customer facts.</li>
+<li>The library authentication deck misses explicit glass/isometric/shield styling. That is retained as evidence of poor route fit, not hidden by transforming the library arm into another original design.</li>
+<li>Model reviews have false positives. An earlier pirate review alleged a missing negation, but both GML and the actual PNG clearly included “not.” That review and its adjudication are retained in <code>generation/superseded-final/</code> and <a href="./generation/FINAL-HANDOFF-AUDIT.html">the handoff audit</a>. Later reviews apply to newly revised slides, not an erased bad score.</li>
+<li>Required historical imagery now includes a <a href="https://www.loc.gov/pictures/item/2006680004/">Library of Congress printing-office photograph</a> and a rendering of <a href="https://info.cern.ch/hypertext/WWW/TheProject.html">CERN’s preserved early Web page</a>, explicitly distinguished from a period browser screenshot. Children’s geography uses <a href="https://www.naturalearthdata.com/">Natural Earth</a> shapes and modern-boundary labels; it does not claim exact 1835 borders. Source files and hashes are retained.</li>
+<li>Some decks remain stronger at individual moments than throughout. Small source captions, content density and generic middle-slide structures remain useful human-review targets. Educational interpretation and generated historical illustrations are scoped, not independently certified documentary evidence.</li>
+</ul>
+<h2 id="the-mvp-this-supports">The MVP this supports</h2>
+<ol>
+<li>Ask for a specific creative premise before committing to a template: audience, emotional effect, visual explanation and the moment the user should remember.</li>
+<li>Let full-library retrieval find possible matches. Have a separate visual-fit judgment evaluate whether a candidate already delivers that premise. Topic resemblance or “can replace the pictures” is insufficient.</li>
+<li>Keep original authorship a first-class route: author the theme and explanatory system on a neutral base when no library candidate earns the fit. Preserve explicit user visual requirements. Do not enforce a route quota.</li>
+<li>Include an actual render-and-repair stage. This prototype’s first drafts show that an ambitious prompt without that stage is insufficient.</li>
+<li>Use this reviewer to collect human pairwise choices and reasons, then expand repeated generation on cases where selection and output disagree. Tune routing against held-out outcomes; do not retrofit thresholds to these 14 wins.</li>
+</ol>
+<p>Estimated recorded spend: <strong>$114.99</strong>, covering selection, concepts, writing, images, model reviews and model repairs. <a href="./cost-ledger.json">Cost ledger</a>. This is a usage-based estimate, not an invoice; unretained failed or overlapping attempts may add cost. The expensive part of this exploratory run is repeated visual repair, not library selection.</p>
+<p><a href="./README.html">Reproduction and artifact guide</a> · <a href="./CREATIVE-REVIEW.html">Creative rubric</a> · <a href="./generation/final-manifest.json">Exact final revision manifest</a>. All work is isolated in this gitignored prototype directory; production behavior is unchanged.</p>
+</html>

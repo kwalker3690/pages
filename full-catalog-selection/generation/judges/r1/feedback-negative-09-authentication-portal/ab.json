@@ -1,0 +1,127 @@
+{
+  "order": [
+    "original",
+    "library"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 3,
+        "integrity": 4
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 creates a memorable request-packet premise with a glowing isometric portal/server scene, then slides 2–5 consistently trace that same login request through browser, API, application, database, bcrypt, and session state.",
+        "Slide 2 provides a recognizable browser form beside concrete 303 and 401 response cards rather than relying only on prose.",
+        "Slide 3 is the strongest information-design move in either deck: seven connected cards, directional arrows, colored trust boundaries, and an isometric infrastructure backdrop make the authentication sequence visible as a system.",
+        "Slide 5 clearly contrasts browser state with server state and explains regeneration as a five-step transition; this is well suited to a live B.Tech demonstration.",
+        "Slides 6–7 convert the architecture into a threat-control map and executable test plan, giving the presentation a practical laboratory ending rather than a generic summary."
+      ],
+      "issues": [
+        {
+          "slide": 4,
+          "severity": "blocking",
+          "evidence": "Generation defect: the central code panel continues through the bottom edge. The visible snippet stops inside the 401 render call, so the promised regeneration, session save, and success redirect are not shown. The core code demonstration is visibly incomplete.",
+          "fix": "Split the route across two framed code excerpts or reduce the code to the complete decision skeleton, ensuring the generic failure branch, regenerate call, session assignment, save, and 303 redirect are all visible within safe margins."
+        },
+        {
+          "slide": 2,
+          "severity": "major",
+          "evidence": "Generation defect: the browser mockup and the lower failure card run into the bottom edge, leaving the form visibly cropped and weakening the realism of the UI demonstration.",
+          "fix": "Scale the browser and response stack down approximately 10–15%, retain a complete submit action, and establish a consistent bottom safe area."
+        },
+        {
+          "slide": 3,
+          "severity": "minor",
+          "evidence": "The seven-card trace is substantive, but several descriptions and the bottom caption are small and low-contrast against the detailed server-room image; the background competes with the arrows.",
+          "fix": "Darken or blur the architecture image behind the flow, enlarge the card copy, and increase the caption contrast."
+        },
+        {
+          "slide": 7,
+          "severity": "minor",
+          "evidence": "The test table and large conclusion bar are clear, but the slide is vertically tight and the page number is pressed close to the lower edge.",
+          "fix": "Reduce the table height slightly and restore the same bottom margin used on slides 5–6."
+        }
+      ],
+      "signatureMoment": "Slide 3's seven-hop request trace, where cyan arrows move through violet trust-boundary cards toward the mint 303/session result over an isometric server environment."
+    },
+    "B": {
+      "scores": {
+        "specificity": 2,
+        "storytelling": 3,
+        "audience": 3,
+        "coherence": 3,
+        "craft": 2,
+        "integrity": 4
+      },
+      "wow": "absent",
+      "strengths": [
+        "Slides 1–2 establish a coherent terminal-inspired visual language, and slide 2 does include a recognizable login form plus request, success, and failure response panels.",
+        "Slide 4 uses syntax coloring and concise decision annotations to make validation, dummy-hash comparison, and generic rejection understandable.",
+        "Slide 5 is the deck's best explanatory composition: two rows of connected state cards distinguish session creation from the next authenticated request.",
+        "Slide 6 maps each named threat to a concrete control and outcome, while slide 7 turns those controls into a practical live-demo checklist.",
+        "The technical content across slides 1–7 is generally credible, explicitly illustrative, and avoids unsupported statistics or quotations."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "blocking",
+          "evidence": "Prompt/selection defect across slides 1–7: the deck uses a sparse terminal skin and abstract line art but never delivers the requested glassmorphism, 3D/isometric software architecture, security-shield visual, or premium glowing dashboard system. The large right panel on slide 1 is decorative network tracing rather than explanatory architecture.",
+          "fix": "Replace the terminal-only art direction with one persistent luminous request-packet architecture: glass cards, browser and API surfaces, an isometric Node/Express/database stack, visible trust shields, and directional connectors."
+        },
+        {
+          "slide": 2,
+          "severity": "major",
+          "evidence": "Generation defect: the browser frame extends below the slide, and the URL wraps awkwardly in the narrow header. The result looks cropped rather than like a finished realistic browser mockup.",
+          "fix": "Resize the mockup to fit entirely, shorten the sample host, and retain a complete browser frame with deliberate controls and bottom padding."
+        },
+        {
+          "slide": 3,
+          "severity": "major",
+          "evidence": "The seven hops are disconnected text columns rather than a directional data-flow diagram. Narrow widths split 'Regenerate' and 'Redirect' across lines, while no request packet, connecting path, or architecture layer shows how the hops relate.",
+          "fix": "Use a continuous arrow or swimlane across browser, Express, and PostgreSQL zones, with compact labels and sufficient width for every stage name."
+        },
+        {
+          "slide": 4,
+          "severity": "blocking",
+          "evidence": "Generation/content defect: the code panel reaches the bottom edge and shows only validation, lookup, comparison, and the failure branch. No complete success path, regeneration, session assignment, save, or redirect is visible, despite these being central to the authentication decision.",
+          "fix": "Edit the snippet to a complete, projection-readable route or continue it on a dedicated success-path slide without cropping."
+        },
+        {
+          "slide": 6,
+          "severity": "blocking",
+          "evidence": "Generation defect: the final 'Logout replay' row is cut off at the bottom, including its rejection outcome. This is a visible readability failure in a core reference table.",
+          "fix": "Reduce row padding and type size slightly, or split the control matrix into two panels so every row and outcome is fully visible."
+        },
+        {
+          "slide": 7,
+          "severity": "major",
+          "evidence": "The final logout explanation is squeezed against the lower edge, and the slide number sits inside the checklist area. The right-side network drawing and loop are atmospheric but do not explain the trust-boundary conclusion.",
+          "fix": "Shorten the checklist copy, restore bottom margins, and replace the decorative network image with a final browser-to-server authorization loop tied to the reflection statement."
+        }
+      ],
+      "signatureMoment": "Slide 5's two-row session flow, connecting anonymous state, regenerate(), server storage, opaque cookie, and the subsequent dashboard request."
+    },
+    "winner": "A",
+    "reason": "Deck A is the deck to give the user. Its approximate weighted score is 3.85 versus 2.65 for B, and the preference is not order-sensitive. A visibly realizes the requested isometric architecture, browser UI, API cards, code, shield imagery, glow, and directional flow; B omits several of those required visual subjects and remains mostly a text-heavy terminal template. Both satisfy the exact seven-slide count, dark palette, technical audience, and core Student Authentication Portal subject, and neither shows harmful technical distortion or unsupported statistics. Neither is fully ready: A has a blocking cropped code slide, while B has multiple clipped slides and a blocking brief-fit failure. The most effective single improvement to B would be replacing the disconnected terminal grids with one persistent, arrow-connected isometric request-packet architecture. Route identity is unavailable, so the original arm cannot be identified; visually, the more complex A earns much of its complexity through slides 1–3 and 5, although slide 4 shows that the added complexity was not production-tested. A exceeds competent default quality in concept and visual specificity, but not yet in final rendering craft.",
+    "whatWouldMakeWinnerExceptional": "Rebuild slide 4 as a complete, unclipped code-to-state transition and apply the same safe-margin discipline to slide 2. If the full success path visibly connects bcrypt comparison to regenerate(), server-side identity, Set-Cookie, and the 303 redirect, the strong opening, exceptional slide 3 trace, and practical slide 7 ending could support sustained rather than occasional wow."
+  },
+  "usage": {
+    "prompt_tokens": 15212,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 5363,
+    "completion_tokens_details": {
+      "reasoning_tokens": 3432
+    },
+    "total_tokens": 20575
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 76.576
+}

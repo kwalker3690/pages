@@ -1,0 +1,115 @@
+{
+  "order": [
+    "library",
+    "original"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 5,
+        "storytelling": 5,
+        "audience": 5,
+        "coherence": 5,
+        "craft": 4,
+        "integrity": 5
+      },
+      "wow": "sustained",
+      "strengths": [
+        "Slides 1 and 8 create a convincing bookend: the restrained room photography, editorial serif typography, and repeated 'restorative hour' language make the program feel like a boutique-hotel product rather than generic corporate wellness.",
+        "Slides 2–4 build a strong managerial argument from guest-journey gap to timed ritual to guest, staff, and property value. The diagrams expose relationships instead of merely decorating prose.",
+        "Slide 3 is exceptionally clear information design: the proportional 5/10/25/15/5-minute bar aligns directly with five operational stages and makes the hour understandable at a glance.",
+        "Slides 5–7 answer practical sales objections about ownership, capacity, economics, safety, and pilot gates. Slide 6 clearly labels the financial scenario as illustrative and states excluded costs.",
+        "The deck maintains a recognizable editorial system through all eight slides while varying between photography, timelines, process chains, operating detail, and financial evidence."
+      ],
+      "issues": [
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "The five stages are paired with circles numbered 01 through 10: 'Offer' is 01 while its explanation is 02, 'Prepare' is 03 while its explanation is 04, and so on. With no two-lane legend, the numbering implies ten sequential steps and weakens an otherwise strong operating model.",
+          "fix": "Use one number per stage, 01–05, and identify the adjacent text as owner/action rather than assigning it a second sequence number."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The negative $0.1k case at 35% fill is nearly invisible against the baseline, while the sparse right-side axis shows only 0 and 5 even though the largest bar reaches 7.1.",
+          "fix": "Add direct labels to all three cases, including −$0.1k, and use a complete, conventional vertical scale."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "The ending reuses the same room image seen on slide 1, only recropped. It is coherent but reduces the sense of a fresh final payoff.",
+          "fix": "Use a distinct closing image showing the room ready for guests or a host preparing the ritual."
+        }
+      ],
+      "signatureMoment": "Slide 3's proportional 60-minute ritual architecture turns an intangible wellness idea into a concrete, operable guest experience."
+    },
+    "B": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 5,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 3
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 1–3 use hospitality-specific imagery—tea service, luggage on a hotel bed, and a quiet journaling setting—to make the guest ritual more tangible and welcoming than a stock spa montage.",
+        "Slide 1 combines the opening promise, three-stage journey, and six-week manager proposition without visible clipping or weak contrast.",
+        "Slide 4 efficiently connects benefits for guests, staff, and the property to four pilot tests, making the commercial logic relevant to hotel managers.",
+        "Slide 8 is a strong call to action with clear ownership, room, evidence, and next-session decisions beside an inviting property image.",
+        "The white and soft-teal palette is faithful to the request, and all eight slides appear complete and readable with no missing images or placeholders."
+      ],
+      "issues": [
+        {
+          "slide": 6,
+          "severity": "major",
+          "evidence": "The scope note says not to apply the monthly result directly to the 'four-week pilot,' while slides 1 and 7 explicitly propose a six-week pilot. This is an internal content contradiction in a decision-critical section.",
+          "fix": "Change 'four-week pilot' to 'six-week pilot' and, if useful, show how the 30-day monthly model should be prorated for the actual operating weeks."
+        },
+        {
+          "slide": 6,
+          "severity": "major",
+          "evidence": "A black chart label reads 'Direct-cost break-even: 0,' resembling an active tooltip and conflicting with the nearby statement that break-even occurs at approximately 36% fill. The intended meaning appears to be $0 contribution, but the wording is ambiguous.",
+          "fix": "Replace it with a designed annotation reading 'Break-even: 36% fill / $0 contribution' and align it to the exact crossing point."
+        },
+        {
+          "slide": 3,
+          "severity": "minor",
+          "evidence": "The five ritual stages are presented as equal-height list rows, so the defining 25-minute Restore period looks no more important than either five-minute endpoint.",
+          "fix": "Add a proportional 60-minute timeline or duration bar so viewers can see the rhythm of the ritual, not just read it."
+        },
+        {
+          "slide": 5,
+          "severity": "minor",
+          "evidence": "The operating model is a dense three-column table with long wrapped sentences across all five rows. It remains readable but is less immediate for projection than the surrounding slides.",
+          "fix": "Convert it into a five-stage service blueprint with short guest-facing and backstage lanes, moving qualifications into presenter notes."
+        },
+        {
+          "slide": 7,
+          "severity": "minor",
+          "evidence": "The lower half combines a six-cell decision table with a separate explanatory box, creating small text and a visually heavy middle-to-late slide.",
+          "fix": "Reduce each gate to a concise metric tile and place the profitability caveat in one full-width footer."
+        }
+      ],
+      "signatureMoment": "Slide 1's handoff of a book across a tea table gives the restorative ritual a warm, hospitality-specific visual metaphor."
+    },
+    "winner": "A",
+    "reason": "Both decks pass the basic format checks: eight complete slides, appropriate hospitality subject matter, readable layouts, and a white/teal-adjacent palette. Neither shows clipping, missing assets, placeholders, harmful claims, or unflagged real-company performance data. A is the deck to give the user because its middle slides earn the promise of its cover: the guest-journey gap, proportional ritual timeline, value chain, operating model, financial sensitivity, and pilot gates form a persuasive managerial sequence. B is warmer photographically, but several middle slides fall back to conventional lists and tables, and slide 6 contains the four-week versus six-week contradiction. The single most valuable improvement to B would be rebuilding slide 6 as a clean, internally consistent sensitivity model. Route identity is unavailable, so the 'original arm' cannot be identified; among the observed outputs, A's added information-design complexity is mostly earned, except for slide 5's confusing numbering. A exceeds competent default quality through its custom one-hour visual system and explicit decision logic, not merely through its cover.",
+    "whatWouldMakeWinnerExceptional": "Repair slide 5's numbering and add one property-specific service-blueprint or photographic sequence showing the host, guest, room setup, and handoff. That would preserve A's exceptional managerial clarity while making the lived hospitality experience as vivid as its operating model."
+  },
+  "usage": {
+    "prompt_tokens": 17106,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 4694,
+    "completion_tokens_details": {
+      "reasoning_tokens": 3018
+    },
+    "total_tokens": 21800
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 71.337
+}

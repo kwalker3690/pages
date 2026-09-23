@@ -1,0 +1,161 @@
+{
+  "order": [
+    "original",
+    "library"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 3,
+        "coherence": 4,
+        "craft": 2,
+        "integrity": 4
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 1, 7, and 10 establish a memorable field-guide premise through tactile routing, storage, and cable imagery rather than a generic corporate cover treatment.",
+        "Slide 4 turns the service into a clear six-stage sequence, while slide 6 gives the unresolved launch decision a strong visual focal point with accountable owner, evidence owner, action, and forum.",
+        "Slides 5, 8, and 9 connect status, ownership, risks, and decision identifiers consistently; cross-references such as D-04, R-02, and A-06 make the handover feel operational rather than promotional.",
+        "The repeated illustrative-replacement warning and slide 1 disclosure clearly distinguish sample facts from supplied project evidence."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "blocking",
+          "evidence": "The lower summary matrix continues below the canvas; only the headings for transition target and critical path are visible. A standalone reader cannot retrieve the complete handover summary.",
+          "fix": "Shorten the opening copy or move the summary matrix to slide 2 so all four summary fields and their values remain visible."
+        },
+        {
+          "slide": 2,
+          "severity": "major",
+          "evidence": "The lower portions of the reporting and control outcome cards are cut by the bottom edge, including part of the explanatory copy.",
+          "fix": "Reduce card height and vertical spacing, or divide context and success criteria across two slides."
+        },
+        {
+          "slide": 3,
+          "severity": "blocking",
+          "evidence": "The outside-scope and dependencies sections are visibly cropped at the bottom, removing information needed to understand project boundaries.",
+          "fix": "Move boundaries and dependencies onto a dedicated continuation slide or reduce the four deliverable-card heights."
+        },
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "The security row runs into the bottom edge and its final text is not reliably readable; the page number also appears immediately after the sentence.",
+          "fix": "Allow more bottom margin and tighten the evidence table without reducing the body type size."
+        },
+        {
+          "slide": 6,
+          "severity": "major",
+          "evidence": "The third accepted-decision card is cut off below its title, so the rationale and consequence for D-03 are unavailable.",
+          "fix": "Use a compact decision register for D-01 through D-03 or move D-03 to a second decision slide."
+        },
+        {
+          "slide": 7,
+          "severity": "blocking",
+          "evidence": "Both lower operating-model cards extend below the frame; cadence, change-control, escalation, and completion details cannot be read in full.",
+          "fix": "Split hierarchy of truth from cadence and escalation, preserving full text on two slides."
+        },
+        {
+          "slide": 8,
+          "severity": "major",
+          "evidence": "The final ownership row is cropped, leaving the Security Reviewer duty incomplete and potentially hiding further roles.",
+          "fix": "Reduce row padding or continue the ownership matrix on a second slide with named deputies and acceptance fields."
+        },
+        {
+          "slide": 9,
+          "severity": "blocking",
+          "evidence": "R-04 is cut off on the left, the launch-confidence chain is cut off after the start of step 4, and no usable open-question content is visible despite the title promising it.",
+          "fix": "Separate the risk register, dependency chain, and open questions into distinct slides; do not stack three substantive sections vertically."
+        },
+        {
+          "slide": 10,
+          "severity": "blocking",
+          "evidence": "The T+30 row falls below the canvas, so the promised 30-day transition sequence has no readable ending.",
+          "fix": "Compress row padding or move T+15 and T+30 to a clearly labeled continuation panel."
+        }
+      ],
+      "signatureMoment": "Slide 6: the orange D-04 decision panel makes the central launch choice, ownership, required evidence, timing, and consequences immediately scannable."
+    },
+    "B": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 3,
+        "audience": 3,
+        "coherence": 4,
+        "craft": 2,
+        "integrity": 4
+      },
+      "wow": "absent",
+      "strengths": [
+        "Slides 2, 5, 6, and 8 use direct headings and disciplined tables that suit independent reference reading.",
+        "Slide 4 provides a logically ordered six-stage service path, and slide 10 gives the transition a clear relative-time structure.",
+        "Sample status, metrics, and ratings are repeatedly labeled as illustrative rather than presented as verified company results.",
+        "Typography, red accents, rules, and table styling remain visually consistent across the ten slides."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "major",
+          "evidence": "The critical-path sentence is clipped at the bottom. The marker-hand photograph is polished but generic and does not explain ownership transfer, service routing, or project status.",
+          "fix": "Reflow the critical-path text and replace the photograph with a compact handover map linking evidence, decisions, owners, risks, and next actions."
+        },
+        {
+          "slide": 3,
+          "severity": "blocking",
+          "evidence": "The outside-scope and dependencies-to-verify headings appear at the bottom, but their contents are entirely below the visible frame.",
+          "fix": "Continue boundaries and dependencies on a second scope slide rather than placing them beneath four full deliverable blocks."
+        },
+        {
+          "slide": 4,
+          "severity": "minor",
+          "evidence": "The six stages are numbered but remain isolated text blocks; the asynchronous reporting path and recoverable-review route described below are not drawn.",
+          "fix": "Add connectors and a visible branch from Observe to delayed export, plus a review-queue loop for invalid routing."
+        },
+        {
+          "slide": 7,
+          "severity": "blocking",
+          "evidence": "The final definition-of-done sentence is cut at the bottom after 'explicitly,' leaving the acceptance condition incomplete.",
+          "fix": "Reduce vertical spacing between operating-model sections or continue definition of done on a separate acceptance panel."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "The ownership matrix is complete enough to scan, but eight dense rows receive nearly identical emphasis; accountability and transition-critical roles are not visually prioritized.",
+          "fix": "Highlight the accountable role, outgoing-to-incoming transfer, and roles attached to D-04 or launch-critical actions."
+        },
+        {
+          "slide": 9,
+          "severity": "blocking",
+          "evidence": "The heading 'Open questions that must be answered' is visible, but all of the actual questions are below the canvas. This omits a required handover subject from the rendered deck.",
+          "fix": "Give open questions their own slide with owner, due point, decision impact, and closure evidence."
+        },
+        {
+          "slide": 10,
+          "severity": "blocking",
+          "evidence": "The T+30 milestone is cut off at the bottom, and the acceptance-test list on the dark panel also appears to continue beyond the canvas. The small dark-gray section label has weak contrast against the charcoal background.",
+          "fix": "Reduce the sequence to seven fully visible milestones, move the acceptance test to its own closing panel, and change the section label to a light high-contrast color."
+        }
+      ],
+      "signatureMoment": "Slide 5: the readiness table places evidence, consequence, and status in one useful reference view, with reporting and acceptance-testing failures clearly distinguished."
+    },
+    "winner": "A",
+    "reason": "I would give the user A only after mandatory reflow; as rendered, neither deck is ready. Both satisfy the ten-slide format and use professional palettes, and both responsibly flag synthetic facts, but both fail the hard readability and coverage gate because required material is clipped. A has the stronger brief-specific system: its field-guide rail, tactile process imagery, service sequence, decision focal panel, status evidence, and cross-linked risk identifiers provide more useful navigation and storytelling than B's largely table-driven editorial treatment. B's most serious omission is slide 9, where the promised open questions have no visible content. The principal generation defect in both decks is failed pagination and overflow. The principal selection/design defect in B is reliance on a generic cover image and prose tables instead of explanatory synthesis; in A it is trying to fit too many substantive sections beneath image-led compositions. Route identity is unavailable, so the 'original arm' cannot be identified; the more visually complex observed arm, A, does earn some of that complexity through better hierarchy and memorable focal slides, but not enough to overcome its readiness failure. Reversing presentation order would not change the preference. A exceeds competent default quality in isolated moments, especially slide 6, but not as a complete rendered deliverable. The single most important improvement for B is to repaginate it so every required section is fully visible, especially boundaries, definition of done, open questions, and T+30.",
+    "whatWouldMakeWinnerExceptional": "Repaginate A into a fully readable deck and replace the overloaded slide 9 with one integrated launch-confidence map that visibly connects the active issue to its risk, decision, evidence owner, open questions, and dated next action. Carry that clarity through a fully visible T+30 ending."
+  },
+  "usage": {
+    "prompt_tokens": 21159,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 5306,
+    "completion_tokens_details": {
+      "reasoning_tokens": 3149
+    },
+    "total_tokens": 26465
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 76.316
+}

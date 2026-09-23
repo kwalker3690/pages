@@ -1,0 +1,116 @@
+{
+  "order": [
+    "library",
+    "original"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 4,
+        "audience": 5,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 5
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 1 and 8 use relevant industrial-system photography to frame a clear investment thesis and finish with a concrete 90-day decision request.",
+        "Slides 2–4 correctly separate ozone-depleting substances from HFC climate exposure and trace policy through equipment, operating constraints, financial effects, and valuation.",
+        "Slides 5–6 explicitly label sample scores and sensitivities as illustrative rather than portfolio data or forecasts.",
+        "Slides 7–8 convert the policy discussion into evidence requirements, decision gates, owners, and timing appropriate for an investment committee.",
+        "All eight slides are rendered cleanly with no visible clipping, missing assets, placeholders, or harmful scientific distortion."
+      ],
+      "issues": [
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "The urgency-versus-materiality plot has four anonymous dots, only two visible materiality labels, and no threshold regions. Readers must repeatedly cross-reference the separate list to identify each holding and action.",
+          "fix": "Use a fully labeled 2×2 action matrix with axis direction, thresholds, direct point labels, and action zones tied to the decision gates on slide 7."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The +5%, +12%, +20%, six-month, and one-percentage-point sensitivities are properly flagged as illustrative, but their visual precision can still make them resemble calibrated house assumptions.",
+          "fix": "Add a visible methodology note or present ranges and editable placeholders until issuer-specific evidence supports exact inputs."
+        },
+        {
+          "slide": 3,
+          "severity": "minor",
+          "evidence": "Five evenly weighted text columns explain the coordinates but do not visually show how a holding moves from substance identification to action.",
+          "fix": "Turn the columns into a worked holding record or connected decision path so the coordinates operate as an explanatory tool rather than a checklist."
+        },
+        {
+          "slide": 7,
+          "severity": "minor",
+          "evidence": "The evidence pack is clear, but the small generic line icons add little explanatory value and the relationship between each proof and the three gates is implicit.",
+          "fix": "Connect each proof to the gate it unlocks, using completion status or a simple evidence-to-decision mapping."
+        }
+      ],
+      "signatureMoment": "Slide 8: the dark closing slide combines a four-part 90-day workplan, a direct approval request, and relevant plant photography into the deck's strongest committee-ready moment."
+    },
+    "B": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 5,
+        "coherence": 5,
+        "craft": 5,
+        "integrity": 5
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 provides a memorable, brief-specific opening: the machinery still life, explicit screening perimeter, and 'map before pricing' thesis establish the physical-asset premise immediately.",
+        "Slide 2 combines recovery milestones, substance classification, investment implications, sources, and a legal-boundary caveat without conflating HFC climate policy with ozone depletion.",
+        "Slides 3–4 form a clean analytical sequence from five holding coordinates to a four-stage policy-to-valuation transmission chain.",
+        "Slides 5–7 use differentiated action zones, scenario cards, and evidence gates to make the committee's choices easier to scan than prose-led alternatives.",
+        "Slide 8 closes decisively with a 90-day screen, an investment-committee gate, and four clearly sequenced work packages.",
+        "Across all eight slides, typography, spacing, contrast, alignment, and color coding are consistently polished; there are no visible generation defects, missing images, draft instructions, or clipped content."
+      ],
+      "issues": [
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "The four-quadrant exposure map shows U/M scores but omits labeled urgency and materiality axes, direction arrows, and thresholds. Its card positions imply a quantitative map without fully explaining the spatial encoding.",
+          "fix": "Label urgency and materiality axes, show low-to-high direction and zone thresholds, and position each directly labeled holding from its displayed U/M scores."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The scenario values are clearly labeled illustrative, yet exact figures such as capex +12% and servicing cost +20% can still be mistaken for validated portfolio assumptions during projection.",
+          "fix": "Attach an assumption-source field or use ranges and blank issuer-specific inputs until evidence is available."
+        },
+        {
+          "slide": 2,
+          "severity": "minor",
+          "evidence": "The legal-boundary and source line is materially important but set in the smallest text on the slide, reducing projection readability.",
+          "fix": "Promote the legal limitation into a compact callout and move full source details to speaker notes or a larger reference footer."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "The first three cards contain the 90-day work while the fourth is an undated IC gate; the distinction is logical but not visually explicit as a post-screen decision point.",
+          "fix": "Add a timeline arrow or label the fourth card 'Day 90 IC gate' so the sequence and deadline are unambiguous."
+        }
+      ],
+      "signatureMoment": "Slide 5: the color-coded exposure action map is the deck's most substantive visual, translating four illustrative holdings into plan, act, monitor, and verify/defer decisions, although its axes need clarification."
+    },
+    "winner": "B",
+    "reason": "I would give Deck B to the investment committee. The preference is stable regardless of presentation order: B has the more memorable opening, clearer classification and legal caveat on slide 2, stronger action coding on slides 5–7, and a more forceful committee close on slide 8. Both decks pass the hard checks: each has eight readable slides, uses an appropriate professional format, contains no missing subject or visible generation defect, correctly distinguishes ODS from HFC exposure, cites the recovery milestones, and clearly labels unsupported sample numbers as illustrative. Neither should be mistaken for an actual portfolio exposure assessment because no holding data were supplied. The more elaborate visual arm earns its complexity because the colors and layout families consistently distinguish classifications, warnings, scenarios, and decision gates rather than merely decorating the content. B exceeds competent default quality, but not by enough for sustained wow: several middle slides remain polished versions of familiar consulting frameworks. The single best improvement to A would be replacing slide 5's anonymous scatterplot and side list with a directly labeled, threshold-based action matrix that links holdings to the evidence gates and 90-day plan.",
+    "whatWouldMakeWinnerExceptional": "Replace the illustrative center of the deck with one evidence-backed portfolio exposure visual: actual holdings mapped by substance, equipment, jurisdiction, transition date, capex range, and valuation sensitivity, with uncertainty visibly separated from verified data. That would turn B from an excellent screening framework into a genuinely decision-grade investment-committee briefing."
+  },
+  "usage": {
+    "prompt_tokens": 17092,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 4197,
+    "completion_tokens_details": {
+      "reasoning_tokens": 2560
+    },
+    "total_tokens": 21289
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 60.736
+}

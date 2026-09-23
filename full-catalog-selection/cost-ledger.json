@@ -1,0 +1,16 @@
+{
+  "capturedAt": "2026-09-23T02:17:34.819Z",
+  "knownEstimatedUsd": 114.98759311999993,
+  "byCategory": {
+    "creative-planning": 4.01592375,
+    "visual-judge": 16.59184,
+    "image-prompt-rewrite": 0.11485810000000003,
+    "image-generation": 3.077708000000001,
+    "production-writer": 22.983996249999997,
+    "visual-repair": 67.71518699999996,
+    "selector": 0.48808002
+  },
+  "unpriced": 0,
+  "interpretation": "Writer and image service report their costs; JSON calls are estimated using checked-out model catalog with reported model identity and cache/token usage. Not an invoice. Failed provider calls may be billed outside these records.",
+  "note": "Aggregated usage estimate. Raw requests, provider responses and execution logs are not part of this published report."
+}

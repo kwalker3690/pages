@@ -1,0 +1,114 @@
+{
+  "order": [
+    "library",
+    "original"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 3,
+        "integrity": 4
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 opens with a concrete operational consequence—5.14 lost hours—rather than a generic machinery title, and immediately supplies the assumptions behind it.",
+        "Slides 4 and 5 turn machine selection and cost into reproducible comparisons; capacity, hourly cost, cost per hectare, and the 12 ha total remain visually distinct.",
+        "Slide 7 provides the strongest substantive story: a legible before/after table connects higher field efficiency to time and cost savings without claiming additional power.",
+        "Slides 1–8 consistently use the requested white, red, charcoal, and light-gray system, while all requested subjects are represented."
+      ],
+      "issues": [
+        {
+          "slide": 6,
+          "severity": "blocking",
+          "evidence": "Generation defect: the two lower diagnostic cards continue below the rendered frame, visibly clipping their content. This confirms the supplied overflow warning and prevents the deck from being presentation-ready.",
+          "fix": "Rebuild this as a compact signal–cause–action matrix or reduce card height and copy so all four actions finish above a protected bottom margin."
+        },
+        {
+          "slide": 3,
+          "severity": "major",
+          "evidence": "The five-stage concept is rendered as five narrow text columns beneath a line. It names the sequence but does not show where turning, refilling, calibration, or verification occurs in an actual field operation.",
+          "fix": "Use an annotated field-pass sequence showing planning, selection, setup, operation, and verification, with the relevant loss point attached to each stage."
+        },
+        {
+          "slide": 7,
+          "severity": "minor",
+          "evidence": "The red 14.6% KPI is labeled only “without more power”; the audience must infer that it represents both lower time and lower cost.",
+          "fix": "Label it explicitly as “14.6% less time and cost” or separate the two percentages."
+        },
+        {
+          "slide": 2,
+          "severity": "minor",
+          "evidence": "Source limitation: the visible citation gives only “Iowa State University Extension,” without a publication title, date, or retrievable reference.",
+          "fix": "Add a complete reference in speaker notes or a final source line while retaining the visible short attribution."
+        }
+      ],
+      "signatureMoment": "Slide 7’s before/after case table and three large savings figures make the operational value of reducing waiting immediately understandable."
+    },
+    "B": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 4
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 combines an agricultural field image with a disciplined three-number comparison—1.00 theoretical, 0.70 effective, and 5.14 hours added—creating a memorable and relevant opening.",
+        "Slides 2 and 5 present the same calculation at two useful levels: a compact capacity ladder and a four-step worked example with units carried through.",
+        "Slide 6 is a useful training reference because its measured signal, verification step, and action columns distinguish diagnosis from intervention.",
+        "Slide 7 makes the case study tangible through a direct before/after composition and a prominent savings statement; slide 8 then closes with a recognizable operating cycle rather than a generic thank-you slide.",
+        "All requested topics are covered, the white-and-red palette is maintained, and the numerical examples are visibly flagged as illustrative."
+      ],
+      "issues": [
+        {
+          "slide": 7,
+          "severity": "major",
+          "evidence": "Generation/craft defect: the supplied overflow warning corresponds to the red savings band running flush into the bottom edge, while the page number is crowded onto that band. Core figures remain visible, but the ending lacks a protected footer margin.",
+          "fix": "Shorten or raise the red band, keep both text lines inside it, and move the page number to a consistent clear-margin position."
+        },
+        {
+          "slide": 3,
+          "severity": "major",
+          "evidence": "The large tractor photograph supplies agricultural atmosphere but does not explain the five stages listed beside it. Most of the slide’s meaning still resides in a conventional numbered text list.",
+          "fix": "Replace the single photograph with a five-step field-operation visual or annotate one field image with the location and purpose of each stage."
+        },
+        {
+          "slide": 8,
+          "severity": "major",
+          "evidence": "The circular five-segment graphic suggests a cycle, but the surrounding labels have no connectors or segment labels. It is ambiguous which icon represents Separate, Compare, or Improve first.",
+          "fix": "Put each action name inside its corresponding segment and add directional flow so the operating cycle can be read without spatial guesswork."
+        },
+        {
+          "slide": 2,
+          "severity": "minor",
+          "evidence": "The method attribution names Iowa State University Extension but provides no publication title, date, or full reference.",
+          "fix": "Add a complete source in speaker notes or a compact references footer."
+        }
+      ],
+      "signatureMoment": "Slide 7’s field image, paired before/after efficiency cards, and red “2.51 hours and $135.47 saved” band create the deck’s clearest practical payoff."
+    },
+    "winner": "B",
+    "reason": "I would give Deck B to the user after correcting slide 7’s footer overflow. Both eight-slide decks meet the palette and topic-coverage requirements, disclose that the absent source document was replaced with illustrative examples, and use internally consistent calculations. Deck A has the more serious hard failure: slide 6 visibly clips substantive content. B’s additional image and layout complexity earns the preference because slides 1, 4, and 7 better ground the calculations in agricultural operations, although several photographs remain contextual rather than explanatory. The preference is unchanged when the decks are reviewed in reverse order. B exceeds competent default quality only modestly: its opening and case study are strong, but slides 3, 5, and 6 remain familiar photo/list, calculation-row, and table treatments. The single best improvement to A would be rebuilding its clipped slide 6 as a complete signal–cause–action diagnostic visual.",
+    "whatWouldMakeWinnerExceptional": "Carry one annotated 12 ha field map through the deck, marking turns, overlap, refill stops, waiting, and work-quality checks, then visibly update that same map in the case study to show exactly where the 2.51 hours and $135.47 are recovered."
+  },
+  "usage": {
+    "prompt_tokens": 17170,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 6337,
+    "completion_tokens_details": {
+      "reasoning_tokens": 4790
+    },
+    "total_tokens": 23507
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 86.272
+}

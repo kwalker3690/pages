@@ -1,0 +1,210 @@
+{
+  "id": "g_pqwmopia8kwuiga",
+  "name": "File",
+  "headingFont": "Fira Sans",
+  "headingFontName": "Fira Sans",
+  "headingFontWeight": 600,
+  "bodyFont": "Fira Sans",
+  "bodyFontName": "Fira Sans",
+  "bodyFontWeight": 400,
+  "config": {
+    "background": {
+      "type": "color",
+      "source": "color.solid",
+      "color": {
+        "hex": "#E6E7E9"
+      }
+    },
+    "canvasPalette": {
+      "colors": [
+        {
+          "key": "primary",
+          "name": "Editor's mark",
+          "color": {
+            "type": "solid",
+            "color": "#C2410C"
+          }
+        },
+        {
+          "key": "ink",
+          "name": "Headline ink",
+          "color": {
+            "type": "solid",
+            "color": "#111214"
+          }
+        },
+        {
+          "key": "text",
+          "name": "Body ink",
+          "color": {
+            "type": "solid",
+            "color": "#2A2C30"
+          }
+        },
+        {
+          "key": "rule",
+          "name": "Hairline",
+          "color": {
+            "type": "solid",
+            "color": "#D9DADC"
+          }
+        },
+        {
+          "key": "surface",
+          "name": "Panel",
+          "color": {
+            "type": "solid",
+            "color": "#F3F4F6"
+          }
+        },
+        {
+          "key": "grey",
+          "name": "Second series",
+          "color": {
+            "type": "solid",
+            "color": "#8A8D93"
+          }
+        }
+      ],
+      "gradients": []
+    },
+    "primaryColor": {
+      "type": "solid",
+      "color": "#C2410C"
+    },
+    "headingColor": "#111214",
+    "bodyColor": "#2A2C30",
+    "cardColor": {
+      "type": "solid",
+      "color": "#FFFFFF"
+    },
+    "surfaceColor": {
+      "type": "solid",
+      "color": "#F3F4F6"
+    },
+    "mutedColor": {
+      "type": "solid",
+      "color": "#65686E"
+    },
+    "neutralBorderColor": {
+      "type": "solid",
+      "color": "#D9DADC"
+    },
+    "dividerColor": "#D9DADC",
+    "dividerThickness": "sm",
+    "linkColor": {
+      "type": "solid",
+      "color": "#C2410C"
+    },
+    "cardBorder": "none",
+    "cardShadow": "none",
+    "cardFrame": "none",
+    "roundness": "sm",
+    "buttonRoundness": "sm",
+    "cardPadding": "lg",
+    "density": "md",
+    "shapeFill": "solid",
+    "shapeBorder": "sm",
+    "shapeShadow": "none",
+    "shapeColorScheme": "default",
+    "headingTransform": "none",
+    "letterSpacingHeading": -0.015,
+    "letterSpacingBody": 0,
+    "lineHeightHeading": 1.08,
+    "lineHeightBody": 1.38,
+    "typeScale": {
+      "display-xl": 80,
+      "display-lg": 64,
+      "display-md": 52,
+      "heading-1": 44,
+      "heading-2": 34,
+      "heading-3": 22,
+      "heading-4": 17,
+      "subheading": 18,
+      "body-lg": 17,
+      "body-normal": 15,
+      "body-sm": 13,
+      "eyebrow": 11,
+      "caption": 11.5
+    },
+    "roleStyles": {
+      "display": {
+        "font": "Fira Sans",
+        "fontWeight": 600,
+        "italic": false,
+        "transform": "none",
+        "letterSpacing": -0.02,
+        "lineHeight": 1.02
+      },
+      "subheading": {
+        "font": "Fira Sans",
+        "fontWeight": 600,
+        "italic": false,
+        "transform": "none",
+        "letterSpacing": -0.01,
+        "lineHeight": 1.15
+      },
+      "eyebrow": {
+        "font": "Fira Sans",
+        "fontWeight": 600,
+        "italic": false,
+        "transform": "uppercase",
+        "color": "#C2410C",
+        "letterSpacing": 0.08,
+        "lineHeight": 1.2
+      },
+      "caption": {
+        "font": "Fira Sans",
+        "fontWeight": 400,
+        "italic": false,
+        "transform": "none",
+        "color": "#65686E",
+        "letterSpacing": 0,
+        "lineHeight": 1.3
+      },
+      "label": {
+        "font": "Fira Sans",
+        "fontWeight": 600,
+        "italic": false,
+        "transform": "uppercase",
+        "color": "#111214",
+        "letterSpacing": 0.08,
+        "lineHeight": 1.2
+      }
+    },
+    "charts": {
+      "roundness": "sm",
+      "gridlineStyle": "solid",
+      "lineWeight": "md",
+      "font": "body",
+      "textSize": "md",
+      "gridlineWidth": "sm"
+    },
+    "cardMargins": {
+      "footer": {},
+      "fontSizePt": 10.5,
+      "pageNumberFormat": "number",
+      "pageNumberPadded": true
+    },
+    "imagery": {
+      "defaultStyleId": "documentary-feature",
+      "styles": [
+        {
+          "id": "documentary-feature",
+          "name": "Documentary feature",
+          "promptGuidance": "documentary reportage photograph, candid mid-distance vantage at standing eye level, available natural light, real working environment shown as it is, true-to-life neutral color with no tint or filter, one clear focal subject with honest depth, an uncluttered quiet area left for type, no posed people, no stock-photo smiles, no logos or readable signage",
+          "subjects": "Real places where the deck's subject actually happens — a workplace, a street, a counter, a bench, a platform, a ward, a kitchen table — with the objects and moments that belong there. Never abstractions, generic desks, blank documents, handshakes, or idle hands.",
+          "whenToUse": "Covers, act breaks, image-with-commentary splits, galleries, people cards, and evidence bands where a real scene grounds the words. Data never goes into a picture; charts and tables stay native."
+        }
+      ]
+    }
+  },
+  "fonts": [
+    {
+      "id": "Fira Sans",
+      "name": "Fira Sans",
+      "url": "https://fonts.googleapis.com/css2?family=Fira+Sans%3Aital%2Cwght%400%2C100%3B0%2C200%3B0%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800%3B0%2C900%3B1%2C100%3B1%2C200%3B1%2C300%3B1%2C400%3B1%2C500%3B1%2C600%3B1%2C700%3B1%2C800%3B1%2C900&display=swap"
+    }
+  ],
+  "isDefault": false
+}

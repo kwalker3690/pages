@@ -1,0 +1,137 @@
+{
+  "order": [
+    "library",
+    "original"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 2,
+        "integrity": 4
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 3–4 form a strong predict-then-reveal sequence: children compare matched Earths, vote, and then see the more-ozone/less-UV relationship stated clearly.",
+        "The shield-club framing, oversized friendly type, bright blue/yellow/green palette, and classroom prompts are recognizably designed for ten-year-olds rather than adapted from an adult report.",
+        "Slide 8 closes with a useful teach-back task that checks location, function, cause, policy, and common mix-ups instead of ending with a passive summary.",
+        "The sequence from ozone molecule to UV protection, depletion, recovery, action sorting, and recall is logically paced."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "blocking",
+          "evidence": "The hero illustration visibly retains a gray-and-white transparency checkerboard, and an unexplained coral/yellow fragment is cut off at the lower-right edge. This is a rendered asset defect, not deliberate negative space.",
+          "fix": "Re-export or replace the illustration with a clean transparent or solid-background asset and crop it intentionally."
+        },
+        {
+          "slide": 5,
+          "severity": "blocking",
+          "evidence": "The source line is cut by the bottom edge, confirming visible overflow. The four narrow text columns also turn the key causal explanation into dense reading rather than a child-facing visual chain.",
+          "fix": "Reduce and simplify the copy, move the citation fully inside the safe area, and illustrate the rise, sunlight split, released atom, and repeated damage as a connected sequence."
+        },
+        {
+          "slide": 6,
+          "severity": "major",
+          "evidence": "The timeline contains numbered nodes 1, 2, and 3, but only the first and third receive visible date/region labels. The middle marker has a dangling line and no explanation, so the visual reads as incomplete.",
+          "fix": "Put the actual years in the nodes and restore the middle milestone, such as the intended Arctic projection, with all three labels visibly connected."
+        },
+        {
+          "slide": 7,
+          "severity": "blocking",
+          "evidence": "The source is clipped below the slide boundary. This is another visible layout-generation failure in a deck reported to contain six overflowing slides.",
+          "fix": "Shorten the cards or raise the citation so every element remains within the slide."
+        },
+        {
+          "slide": 7,
+          "severity": "major",
+          "evidence": "The instruction says to sort each action, but the slide supplies three already completed category cards and no action choices to sort. The activity cannot be performed as rendered.",
+          "fix": "Add movable or verbally assignable action tiles, then reveal the three completed categories afterward."
+        }
+      ],
+      "signatureMoment": "Slides 3–4: the matched-Earth prediction and reveal make the ozone-to-UV relationship participatory and immediately understandable."
+    },
+    "B": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 4,
+        "audience": 2,
+        "coherence": 4,
+        "craft": 2,
+        "integrity": 5
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 1 and 8 use a memorable paper-cut visual treatment, with sunlight, Earth, the atmospheric arc, and a child observer forming a coherent opening and ending.",
+        "Slides 3–4 preserve the useful prediction/reveal structure and depict more versus less ozone through matched diagrams rather than prose alone.",
+        "Slide 6 is the clearest recovery timeline in either deck: global, Arctic, and Antarctic projections are all shown, explicitly qualified as projections, and sourced.",
+        "The content carefully separates ozone recovery, immediate sun safety, and climate effects on slide 7, avoiding a common conceptual mix-up."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "blocking",
+          "evidence": "The deck-wide art direction is dominated by dark navy, black, white, and gold; green is largely absent until later. This does not satisfy the requested bright sky-blue-and-green playful classroom palette.",
+          "fix": "Re-art-direct the system around bright sky blue and green, retaining dark navy only as a high-contrast text color."
+        },
+        {
+          "slide": 2,
+          "severity": "blocking",
+          "evidence": "The labels “Stratosphere” and “weather below” are rendered in near-white on a white card and are effectively unreadable. These labels carry the diagram's essential spatial meaning.",
+          "fix": "Use dark navy labels with stronger size and contrast, and simplify the atmospheric cross-section for projection."
+        },
+        {
+          "slide": 3,
+          "severity": "blocking",
+          "evidence": "The headings “More ozone” and “Less ozone” are almost invisible against the white panels. Without those headings, the comparison must be inferred only from unlabeled dot counts.",
+          "fix": "Render both comparison headings in dark high-contrast text and explicitly identify the dots as ozone."
+        },
+        {
+          "slide": 4,
+          "severity": "blocking",
+          "evidence": "The same near-white comparison headings remain unreadable on the answer slide, weakening the central reveal despite otherwise useful ray diagrams.",
+          "fix": "Correct the contrast and carry the more/less labels directly into the result captions."
+        },
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "Four evenly weighted text columns and small body copy create an adult reference-slide feel. There is no explanatory image showing chemicals rising, splitting, and repeatedly damaging ozone.",
+          "fix": "Replace the columns with a large, sequential child-facing illustration that visibly connects all four steps."
+        },
+        {
+          "slide": 7,
+          "severity": "major",
+          "evidence": "As in Deck A, the prompt asks students to sort actions, but only completed category cards are provided. The activity is static rather than usable.",
+          "fix": "Provide concrete action tiles for students to assign before revealing the category cards."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "The final two-line instruction is cramped near the lower edge, consistent with the reported single overflow, while the large illustration leaves no extra vertical margin for the text.",
+          "fix": "Shorten the closing instruction or slightly reduce the title and illustration to restore a clear bottom safe area."
+        }
+      ],
+      "signatureMoment": "Slide 8's paper-cut child pointing toward the illuminated atmospheric arc is the deck's most memorable image, although that visual premise is not sustained through the middle."
+    },
+    "winner": "A",
+    "reason": "Deck A is the one to give this user after repair. Its weighted result is approximately 3.7 versus 3.2 for B, and the preference is not dependent on presentation order. A is more playful, more visibly classroom-oriented, and makes better use of participation through the slides 3–4 prediction/reveal and slide 8 teach-back. B is more restrained and often polished, but its dark corporate palette, text-heavy middle, and unreadable comparison labels are poor fits for a fun lesson for ten-year-olds. Neither deck is ready: A hard-fails the unclipped-content and clean-asset checks, while B hard-fails palette and readable-contrast checks. A's additional complexity earns its keep pedagogically in the prediction/reveal sequence, but not in its overflowing columns, incomplete timeline, or defective cover asset. The winner does not yet exceed competent default quality because its production defects are visible in the actual render. The single highest-impact improvement to B would be to rebuild slides 2–7 as one bright, high-contrast paper-cut story featuring the same child and shield metaphor, replacing the corporate text grids with explanatory scenes.",
+    "whatWouldMakeWinnerExceptional": "Carry the Invisible Shield Club premise through slides 5–7 as one polished visual mission—cause chain, policy timeline, and genuine sorting challenge—while eliminating every overflow and replacing the defective cover asset. That would turn A's occasional strong moments into a sustained, child-specific visual narrative."
+  },
+  "usage": {
+    "prompt_tokens": 17089,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 6539,
+    "completion_tokens_details": {
+      "reasoning_tokens": 4656
+    },
+    "total_tokens": 23628
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 87.204
+}

@@ -1,0 +1,122 @@
+{
+  "headingFont": "Newsreader",
+  "headingFontWeight": 600,
+  "bodyFont": "IBM Plex Sans",
+  "bodyFontWeight": 400,
+  "config": {
+    "canvasPalette": {
+      "colors": [
+        {
+          "key": "primary",
+          "name": "Argument Vermilion",
+          "color": {
+            "type": "solid",
+            "color": "#A13D32"
+          }
+        },
+        {
+          "key": "relation",
+          "name": "Reciprocal Slate",
+          "color": {
+            "type": "solid",
+            "color": "#345F67"
+          }
+        },
+        {
+          "key": "trace",
+          "name": "Preserved Ochre",
+          "color": {
+            "type": "solid",
+            "color": "#B3822D"
+          }
+        },
+        {
+          "key": "ink",
+          "name": "Carbon Ink",
+          "color": {
+            "type": "solid",
+            "color": "#181614"
+          }
+        },
+        {
+          "key": "rule",
+          "name": "Sandstone Rule",
+          "color": {
+            "type": "solid",
+            "color": "#CDBFA9"
+          }
+        }
+      ],
+      "gradients": []
+    },
+    "cardColor": {
+      "type": "solid",
+      "color": "#FAF4E8"
+    },
+    "surfaceColor": {
+      "type": "solid",
+      "color": "#EFE4D1"
+    },
+    "headingColor": "#181614",
+    "bodyColor": "#342F2A",
+    "mutedColor": {
+      "type": "solid",
+      "color": "#6B5F54"
+    },
+    "background": {
+      "type": "color",
+      "source": "color.solid",
+      "color": {
+        "hex": "#E7DAC4"
+      }
+    },
+    "letterSpacingHeading": -0.012,
+    "roundness": "sm",
+    "cardShadow": "none",
+    "cardBorder": "sm",
+    "shapeFill": "solid",
+    "shapeColorScheme": "default",
+    "roleStyles": {
+      "subheading": {
+        "font": "IBM Plex Sans",
+        "fontWeight": 600
+      },
+      "eyebrow": {
+        "font": "IBM Plex Sans",
+        "transform": "uppercase",
+        "letterSpacing": 0.1
+      }
+    },
+    "imagery": {
+      "defaultStyleId": "dialectical-paper-assemblage",
+      "styles": [
+        {
+          "id": "dialectical-paper-assemblage",
+          "name": "Dialectical paper assemblage",
+          "promptGuidance": "Editorial cut-paper assemblage photographed on warm ivory paper (#FAF4E8), with crisp folded planes, subtle paper fiber and long soft daylight shadows, using vermilion #A13D32, blue slate #345F67 and ochre #B3822D with carbon-black details, no text or lettering.",
+          "subjects": "Folding paths, intersecting planes, mirrored profiles, open thresholds, circles under tension, and adult seminar tables; conceptual objects rather than statues or historical reenactments.",
+          "whenToUse": "Use for the cover, philosophical context, and reflective ending; use native editable diagrams for dialectic, Aufhebung, recognition, and historical relationships."
+        }
+      ]
+    },
+    "typeScale": {
+      "display-xl": 84,
+      "display-lg": 64,
+      "display-md": 48,
+      "heading-1": 40,
+      "heading-2": 30,
+      "heading-3": 22,
+      "heading-4": 18,
+      "subheading": 20,
+      "body-lg": 19,
+      "body-normal": 16,
+      "body-sm": 13,
+      "eyebrow": 11,
+      "caption": 11
+    },
+    "density": "md",
+    "cardPadding": "lg",
+    "lineHeightBody": 1.35,
+    "lineHeightHeading": 1.1
+  }
+}

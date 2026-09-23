@@ -1,0 +1,231 @@
+{
+  "id": "g_40u1d0b181kuury",
+  "name": "File",
+  "headingFont": "Albert Sans",
+  "headingFontName": "Albert Sans",
+  "headingFontWeight": 400,
+  "bodyFont": "Albert Sans",
+  "bodyFontName": "Albert Sans",
+  "bodyFontWeight": 400,
+  "config": {
+    "canvasPalette": {
+      "colors": [
+        {
+          "key": "accent",
+          "name": "Electric blue",
+          "color": {
+            "type": "solid",
+            "color": "#0562FF"
+          }
+        },
+        {
+          "key": "cobalt",
+          "name": "Cobalt",
+          "color": {
+            "type": "solid",
+            "color": "#3155FF"
+          }
+        },
+        {
+          "key": "cyan",
+          "name": "Cyan",
+          "color": {
+            "type": "solid",
+            "color": "#41D7FF"
+          }
+        },
+        {
+          "key": "lavender",
+          "name": "Pale lavender",
+          "color": {
+            "type": "solid",
+            "color": "#D9D6FF"
+          }
+        },
+        {
+          "key": "navy",
+          "name": "Deep navy",
+          "color": {
+            "type": "solid",
+            "color": "#071120"
+          }
+        },
+        {
+          "key": "ink",
+          "name": "Ink",
+          "color": {
+            "type": "solid",
+            "color": "#111827"
+          }
+        },
+        {
+          "key": "ice",
+          "name": "Ice",
+          "color": {
+            "type": "solid",
+            "color": "#EAF2FF"
+          }
+        },
+        {
+          "key": "steel",
+          "name": "Steel",
+          "color": {
+            "type": "solid",
+            "color": "#8B98AD"
+          }
+        }
+      ],
+      "gradients": [
+        {
+          "key": "signal",
+          "name": "Signal",
+          "gradient": {
+            "type": "linear-gradient",
+            "angle": 180,
+            "stops": [
+              {
+                "color": "#111827",
+                "position": 0
+              },
+              {
+                "color": "#41D7FF",
+                "position": 100
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "headingColor": "#111827",
+    "bodyColor": "#344054",
+    "cardColor": {
+      "type": "solid",
+      "color": "#F8FAFD"
+    },
+    "surfaceColor": {
+      "type": "solid",
+      "color": "#FFFFFF"
+    },
+    "neutralBorderColor": {
+      "type": "solid",
+      "color": "rgba(17,24,39,0.14)"
+    },
+    "background": {
+      "type": "color",
+      "color": {
+        "hex": "#E9EEF6"
+      },
+      "source": "color.solid"
+    },
+    "roundness": "sm",
+    "cardShadow": "none",
+    "cardBorder": "none",
+    "shapeFill": "none",
+    "shapeShadow": "none",
+    "shapeBorder": "sm",
+    "shapeColorScheme": "default",
+    "mutedColor": "#636e82",
+    "cardPadding": "lg",
+    "dividerColor": "#D6DEEA",
+    "dividerThickness": "sm",
+    "letterSpacingHeading": -0.025,
+    "letterSpacingBody": 0,
+    "lineHeightHeading": 1.04,
+    "lineHeightBody": 1.42,
+    "headingTransform": "none",
+    "blockSpacing": 16,
+    "typeScale": {
+      "display-xl": 64,
+      "display-lg": 48,
+      "display-md": 36,
+      "heading-1": 32,
+      "heading-2": 26,
+      "heading-3": 20,
+      "heading-4": 16,
+      "subheading": 16,
+      "body-normal": 14,
+      "body-sm": 12.5,
+      "body-lg": 17,
+      "eyebrow": 11,
+      "caption": 10.5
+    },
+    "roleStyles": {
+      "display": {
+        "font": "Albert Sans",
+        "fontWeight": 300,
+        "transform": "none",
+        "letterSpacing": -0.035,
+        "lineHeight": 1
+      },
+      "eyebrow": {
+        "font": "Albert Sans",
+        "italic": false,
+        "transform": "none",
+        "color": "#3155FF",
+        "fontWeight": 500,
+        "letterSpacing": 0.06,
+        "lineHeight": 1.3
+      },
+      "caption": {
+        "font": "Albert Sans",
+        "italic": false,
+        "transform": "none",
+        "color": "#667085",
+        "fontWeight": 400,
+        "letterSpacing": 0.01,
+        "lineHeight": 1.35
+      },
+      "label": {
+        "font": "Albert Sans",
+        "italic": false,
+        "transform": "none",
+        "color": "#111827",
+        "fontWeight": 500,
+        "letterSpacing": 0.01,
+        "lineHeight": 1.25
+      },
+      "subheading": {
+        "font": "Albert Sans",
+        "fontWeight": 400,
+        "letterSpacing": -0.01,
+        "lineHeight": 1.3
+      }
+    },
+    "cardMargins": {
+      "footer": {},
+      "pageNumberFormat": "number",
+      "pageNumberPadded": true
+    },
+    "imagery": {
+      "defaultStyleId": "quarterlight-material",
+      "styles": [
+        {
+          "id": "quarterlight-material",
+          "promptGuidance": "precise geometry, navy/white fields, translucent materials, controlled cyan-led light, generous negative space, no prescribed literal subject matter, no people, no human figures, no human body parts, no anatomy, no faces, no hands, no skin, no logos, no text",
+          "subjects": "Use only the artifact, object, material, architecture, environment, or abstract evidence form supplied by the user’s content. Never show people, human figures, body parts, anatomy, faces, hands, skin, logos, or text.",
+          "whenToUse": "Use sparingly for covers, split slides, full-bleed evidence, galleries, and image plates when an object or material can carry the point; keep analytical slides primarily typographic.",
+          "references": [
+            "https://cdn-staging.gamma.app/gammatemplatelibrary/g_40u1d0b181kuury/template-assets/2dc4f95e334b2718938b42544763744d/01KZEYPMQTN251P289FQEM7765.png",
+            "https://cdn-staging.gamma.app/gammatemplatelibrary/g_40u1d0b181kuury/template-assets/00f032f182ac87b80704548db05ad128/01KZEYQRBQ7385E55VWM9KNVN8.png",
+            "https://cdn-staging.gamma.app/gammatemplatelibrary/g_40u1d0b181kuury/template-assets/75119a12510a7843dcf80df41891e9d0/01KZEYRQG17Q4MH78241WZPH0D.png"
+          ]
+        }
+      ]
+    },
+    "charts": {
+      "roundness": "sm",
+      "gridlineStyle": "none",
+      "lineWeight": "sm",
+      "font": "body",
+      "textSize": "md"
+    }
+  },
+  "fonts": [
+    {
+      "id": "Albert Sans",
+      "name": "Albert Sans",
+      "url": "https://fonts.googleapis.com/css2?family=Albert+Sans%3Aital%2Cwght%400%2C100%3B0%2C200%3B0%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800%3B0%2C900%3B1%2C100%3B1%2C200%3B1%2C300%3B1%2C400%3B1%2C500%3B1%2C600%3B1%2C700%3B1%2C800%3B1%2C900&display=swap"
+    }
+  ],
+  "isDefault": false
+}

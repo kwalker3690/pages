@@ -1,0 +1,41 @@
+<section vertical-align="center">
+  <grid spacing="none">
+    <grid-item>
+      <p role="eyebrow">Illustrative assumptions · Not forecasts</p>
+      <h2>Stress the transition, not the recovery forecast</h2>
+      <p>Apply these sensitivities only after validating the equipment and substance inventory.</p>
+      <grid vertical-sizing="fill" spacing="medium">
+        <grid-item colspan="20" cell-style="subtle">
+          <labels><label variant="outline">Base</label></labels>
+          <h3>Planned replacement</h3>
+          <ul>
+            <li>Planned replacement cycle</li>
+            <li>Servicing cost +5%</li>
+            <li>No incremental downtime</li>
+          </ul>
+        </grid-item>
+        <grid-item colspan="20" cell-style="subtle">
+          <labels><label variant="solid">Tighter transition</label></labels>
+          <h3>Earlier capex</h3>
+          <ul>
+            <li>Replacement three years earlier</li>
+            <li>Capex +12%</li>
+            <li>Transition-year EBITDA margin −1 percentage point</li>
+          </ul>
+        </grid-item>
+        <grid-item colspan="20" cell-style="subtle">
+          <labels><label variant="solid">Supply disruption</label></labels>
+          <h3>Capacity pressure</h3>
+          <ul>
+            <li>Equipment lead time +6 months</li>
+            <li>Servicing cost +20%</li>
+            <li>Temporary capacity constraint</li>
+          </ul>
+        </grid-item>
+      </grid>
+      <aside variant="note">
+        <p>Revalue with issuer-specific timing, contracts and financing capacity.</p>
+      </aside>
+    </grid-item>
+  </grid>
+</section>

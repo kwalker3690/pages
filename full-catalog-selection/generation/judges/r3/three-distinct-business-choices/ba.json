@@ -1,0 +1,128 @@
+{
+  "order": [
+    "library",
+    "original"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 4,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 3,
+        "integrity": 5
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 opens with a clear executive thesis rather than a generic QBR title, and the illustrative-data disclosure is prominent.",
+        "Slides 2–5 create a logical progression from headline KPIs to trends, performance drivers, and leading risks.",
+        "Slide 6 converts the analysis into three concrete leadership choices and visibly states targets and assumptions.",
+        "Slides 6 and 8 provide purposeful layout variation while retaining the restrained navy, cyan, and blue visual system.",
+        "All sample figures and decision targets are identified as illustrative; no unsupported numbers are presented as company facts."
+      ],
+      "issues": [
+        {
+          "slide": 3,
+          "severity": "major",
+          "evidence": "Generation defect: the third chart title is visibly shortened to “Net revenue reten...,” and each mini-chart shows a stray-looking zero alongside a separately stated displayed range. That makes the axes harder to interpret and risks implying a zero baseline.",
+          "fix": "Use one clearly labeled y-axis per chart, remove the ambiguous zero labels, and allow the retention title to render in full."
+        },
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "Generation defect: the bridge increments are compressed into thin marks near the top of each plot, several value labels are black on a dark navy background, and category labels collide, including “ExpandPrice/mix” and “DeliveryDiscount.” The main explanatory visual is not reliably readable in a meeting.",
+          "fix": "Redraw both as true waterfalls with visible floating steps, high-contrast annotations, abbreviated but separated category labels, and a scale focused on the change rather than the full total."
+        },
+        {
+          "slide": 5,
+          "severity": "minor",
+          "evidence": "The cards show both a guardrail or target and a different trigger threshold, such as 3.0× versus 2.8×, without explaining why intervention begins only after additional deterioration.",
+          "fix": "Label the two levels explicitly as target and escalation threshold, or add a short note explaining the tolerance band."
+        },
+        {
+          "slide": 7,
+          "severity": "major",
+          "evidence": "Content-plan defect: the title promises that actions are linked to outcomes, but the left side is only a timing/action list and the right side is an aggregate target panel. No row visibly connects a specific action to a specific leading indicator or outcome.",
+          "fix": "Add columns for leading evidence and outcome moved, or use connectors that map each timed action to the relevant target."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "The four-part ring is memorable, but it has no arrowheads or other directional cue. The intended sequence must be inferred from numbering and surrounding text.",
+          "fix": "Add subtle clockwise arrows or a highlighted path from Decide through Measure, Review, and Adapt."
+        }
+      ],
+      "signatureMoment": "Slide 6: the split-screen decision page gives the primary $0.4M approval dominant space while preserving two concise follow-on choices, making the leadership ask immediately visible."
+    },
+    "B": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 5,
+        "coherence": 4,
+        "craft": 3,
+        "integrity": 4
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 combines a concise thesis, three operating KPIs, and the required decision on one screen; the narrowing-gate image gives the opening a brief-specific constraint metaphor.",
+        "Slide 2 is highly scannable, with large KPI values, plain-language movement descriptions, and clearly separated plan variances.",
+        "Slide 5 turns three risks into a compact leadership table with current state, guardrail, response, and owner, then states the collective implication in a visible warning band.",
+        "Slide 6 packages the requested decisions into approval and confirmation rows with commitments and illustrative targets.",
+        "Slide 7 provides the clearest action-to-outcome structure in either deck by adding leading evidence and named outcomes to each execution phase.",
+        "Slide 8 closes with an operating cadence and an explicit decision rule rather than ending on a generic summary."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "minor",
+          "evidence": "Selection defect: the machine image suggests a bottleneck only after reading the small concept-model caption; the acquisition, delivery, and expansion stages are not visibly mapped onto the machinery itself.",
+          "fix": "Overlay a simple labeled flow or gate annotation so the image explains the constraint without relying on the caption."
+        },
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "Generation defect: both bridge charts have visibly colliding or truncated category labels such as “Prior qua...,” “New bu...,” and “Infrastru...”; the incremental steps are tiny compared with the total bars, and dark callout strips overlap the plotting area. This is the least presentation-ready slide in the pair.",
+          "fix": "Rebuild the bridges with floating waterfall bars, fewer abbreviated drivers, larger change labels, and separate start/end callouts outside the plot."
+        },
+        {
+          "slide": 6,
+          "severity": "major",
+          "evidence": "The pricing choice says “Require CFO exceptions,” which reads as requiring exceptions rather than requiring CFO approval for exceptions. That ambiguity affects an actual governance decision.",
+          "fix": "Change the wording to “Require CFO approval for discount exceptions” and identify the owner responsible for enforcement."
+        },
+        {
+          "slide": 7,
+          "severity": "minor",
+          "evidence": "The map names which outcomes move, but it does not show how the four quarter-end target values are derived from the leading evidence or decisions.",
+          "fix": "Add a compact assumption or impact column connecting each intervention to the relevant target delta."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "The loop image is visually polished but remains separate from the four-step operating cadence; no labels or sequence markers connect the track to the decisions on the left.",
+          "fix": "Add four subtle numbered markers on the loop image corresponding to the four review stages."
+        }
+      ],
+      "signatureMoment": "Slide 1: the Acquire–Deliver–Expand KPI triad, explicit decision statement, and narrowing-gate concept image create a memorable and leadership-ready opening."
+    },
+    "winner": "B",
+    "reason": "Both decks pass the hard gate: each has eight slides, covers performance, drivers, risks, decisions, and the next-quarter plan, shows no missing imagery or edge clipping, and labels the sample data as illustrative. No mandatory palette was specified. B is the deck to give the leadership user because slides 2, 5, 6, and 7 are faster to scan and more explicitly connect metrics, guardrails, responses, commitments, and outcomes. The preference remains the same when considering either presentation order. B's added machinery imagery earns only partial return because it improves the opening and ending but does not shape the ordinary table-and-chart middle. The winner exceeds competent default quality only modestly, not exceptionally, because slide 4 is visibly under-resolved and the central slides rely heavily on conventional tables.",
+    "whatWouldMakeWinnerExceptional": "Replace slide 4 with two impeccably legible waterfalls and extend the opening value-flow premise into one substantive causal visual that traces acquisition through onboarding and expansion to retention, then connects each leadership decision to a quantified leading indicator and quarter-end outcome."
+  },
+  "usage": {
+    "prompt_tokens": 17119,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 5275,
+    "completion_tokens_details": {
+      "reasoning_tokens": 3530
+    },
+    "total_tokens": 22394
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 72.937
+}

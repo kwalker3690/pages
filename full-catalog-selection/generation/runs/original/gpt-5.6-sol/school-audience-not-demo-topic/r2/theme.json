@@ -1,0 +1,122 @@
+{
+  "headingFont": "Bricolage Grotesque",
+  "headingFontWeight": 700,
+  "bodyFont": "Atkinson Hyperlegible",
+  "bodyFontWeight": 400,
+  "config": {
+    "canvasPalette": {
+      "colors": [
+        {
+          "key": "primary",
+          "name": "Shield Blue",
+          "color": {
+            "type": "solid",
+            "color": "#0877B9"
+          }
+        },
+        {
+          "key": "sun",
+          "name": "UV Gold",
+          "color": {
+            "type": "solid",
+            "color": "#F4B942"
+          }
+        },
+        {
+          "key": "fresh",
+          "name": "Action Green",
+          "color": {
+            "type": "solid",
+            "color": "#2D8C66"
+          }
+        },
+        {
+          "key": "ink",
+          "name": "Deep Space Ink",
+          "color": {
+            "type": "solid",
+            "color": "#103548"
+          }
+        },
+        {
+          "key": "rule",
+          "name": "Cloud Rule",
+          "color": {
+            "type": "solid",
+            "color": "#A8CFDB"
+          }
+        }
+      ],
+      "gradients": []
+    },
+    "cardColor": {
+      "type": "solid",
+      "color": "#F8FCFF"
+    },
+    "surfaceColor": {
+      "type": "solid",
+      "color": "#E3F2F4"
+    },
+    "headingColor": "#103548",
+    "bodyColor": "#173E4B",
+    "mutedColor": {
+      "type": "solid",
+      "color": "#486875"
+    },
+    "background": {
+      "type": "color",
+      "source": "color.solid",
+      "color": {
+        "hex": "#D6EEF5"
+      }
+    },
+    "letterSpacingHeading": -0.01,
+    "roundness": "lg",
+    "cardShadow": "default",
+    "cardBorder": "sm",
+    "shapeFill": "solid",
+    "shapeColorScheme": "default",
+    "roleStyles": {
+      "subheading": {
+        "font": "Atkinson Hyperlegible",
+        "fontWeight": 700
+      },
+      "eyebrow": {
+        "font": "Atkinson Hyperlegible",
+        "transform": "uppercase",
+        "letterSpacing": 0.1
+      }
+    },
+    "imagery": {
+      "defaultStyleId": "atmosphere-cut-paper",
+      "styles": [
+        {
+          "id": "atmosphere-cut-paper",
+          "name": "Atmosphere cut-paper",
+          "promptGuidance": "Layered cut-paper editorial science illustration with clean vector-like edges and subtle paper fibers, in shield blue #0877B9, UV gold #F4B942, action green #2D8C66, deep ink #103548 and cloud white #F8FCFF under bright diffuse daylight with generous negative space, no text or lettering.",
+          "subjects": "Earth cutaways, atmospheric arcs, sunlight paths, oxygen and ozone molecules, cooling equipment and children observing scientific diagrams; simple expressive forms with scientifically coherent relationships.",
+          "whenToUse": "Use on the cover, explanatory scenes and closing callback; use native editable shapes instead when exact paths, comparisons, labels or data carry the lesson."
+        }
+      ]
+    },
+    "typeScale": {
+      "display-xl": 84,
+      "display-lg": 64,
+      "display-md": 48,
+      "heading-1": 40,
+      "heading-2": 30,
+      "heading-3": 22,
+      "heading-4": 18,
+      "subheading": 20,
+      "body-lg": 19,
+      "body-normal": 16,
+      "body-sm": 13,
+      "eyebrow": 11,
+      "caption": 11
+    },
+    "density": "md",
+    "cardPadding": "lg",
+    "lineHeightBody": 1.35,
+    "lineHeightHeading": 1.1
+  }
+}

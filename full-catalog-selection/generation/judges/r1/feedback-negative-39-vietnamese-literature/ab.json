@@ -1,0 +1,132 @@
+{
+  "order": [
+    "original",
+    "library"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 2,
+        "integrity": 3
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 1 and 8 create a memorable book-thread-water frame, using a restrained brown, cream, and rust palette that feels appropriate to a classic literary subject.",
+        "Slide 3 turns the plot into a pressure-driven sequence rather than a synopsis, while slide 4 connects Kiều’s love, filial duty, and survival through a descending causal structure.",
+        "Slide 5 communicates the realistic reading as a system of structural forces, not merely decoration beside prose.",
+        "Slide 7 is the strongest substantive visual in either deck: syllable positions and the ta–là rhyme bridge make an unfamiliar verse form immediately more legible.",
+        "Slides 2 and 4 visibly label generated historical imagery as interpretive rather than presenting it as documentary evidence."
+      ],
+      "issues": [
+        {
+          "slide": 3,
+          "severity": "blocking",
+          "evidence": "The Return · Giác Duyên card is cut off by the bottom edge; only its heading and the top of the box remain visible. This removes the final plot stage from the rendered timeline.",
+          "fix": "Shorten the stage descriptions, reduce card height, or divide the plot across two slides so the return and reunion are fully visible."
+        },
+        {
+          "slide": 4,
+          "severity": "blocking",
+          "evidence": "The sentence Her agency is real—but never exercised on equal terms overlaps the Love heading and first card. The red connector also runs into that crowded area.",
+          "fix": "Move the agency statement above or below the diagram and rebuild the connectors with dedicated spacing between cards."
+        },
+        {
+          "slide": 7,
+          "severity": "major",
+          "evidence": "The visual clearly explains six/eight syllable counts and one rhyme bridge, but Vietnamese tone is only mentioned in prose. The customary bằng/trắc pattern and the next-line continuation are not demonstrated.",
+          "fix": "Add tone-class markers and a third line showing how the eighth syllable of the eight-line rhymes forward into position six of the following six-line."
+        },
+        {
+          "slide": 6,
+          "severity": "major",
+          "evidence": "The humanitarian reading is presented as four spacious assertion cards without a quotation, episode reference, or line citation. The slide is readable but visually and academically less evidentiary than slides 3, 5, and 7.",
+          "fix": "Anchor each claim to one short passage or named episode, using a shared line reference and a compact evidence-to-interpretation structure."
+        },
+        {
+          "slide": 2,
+          "severity": "minor",
+          "evidence": "The dates, 3,254-line count, and form are attributed only to institution names. No work title, edition, URL, access date, or bibliography slide is supplied for an academic presentation.",
+          "fix": "Provide complete bibliographic citations and identify the edition used for the Vietnamese text."
+        }
+      ],
+      "signatureMoment": "Slide 7’s numbered lục bát grid and highlighted ta–là rhyme bridge convert poetic form into a concrete visual mechanism."
+    },
+    "B": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 3,
+        "audience": 3,
+        "coherence": 3,
+        "craft": 2,
+        "integrity": 3
+      },
+      "wow": "absent",
+      "strengths": [
+        "Slides 2–4 use large type, clear columns, and restrained rules to organize author, plot, and character material without visual noise.",
+        "Slide 6 establishes a useful distinction between the humanitarian thesis and four supporting implications.",
+        "Slide 7 uses numbered syllable cells and color to make the basic six/eight alternation and internal rhyme visible.",
+        "Slide 8 ends on a concise distinction between survival and moral repair rather than reducing the ending to uncomplicated reunion."
+      ],
+      "issues": [
+        {
+          "slide": 7,
+          "severity": "blocking",
+          "evidence": "The lower explanatory columns are visibly cut off at the bottom edge; the Forward link and Cadence sentences do not finish. The supplied diagnostics also report overflow on seven of eight slides, making the file unreliable beyond the one visibly confirmed case.",
+          "fix": "Reflow and shorten all text boxes throughout the deck, then rerender every slide; on slide 7, move the explanations upward or split meter and rhyme across two slides."
+        },
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "Commodification is broken awkwardly into Commodifica / tion across multiple lines, and the small supporting labels are weak at projection size. The cyan infographic palette also feels more like a generic office template than the otherwise classic literary treatment.",
+          "fix": "Shorten the labels, increase supporting-text size, and restyle the diagram with the deck’s neutral editorial palette and more deliberate relationship lines."
+        },
+        {
+          "slide": 3,
+          "severity": "major",
+          "evidence": "The plot is a five-row text list. The long exploitation row carries several names and events in one sentence, but no visual sequencing, pressure curve, or relationship mapping helps the audience retain them.",
+          "fix": "Convert the list into a concise timeline or pressure arc with five stages, limited names, and visual emphasis on sacrifice, exploitation, reversal, and transformed return."
+        },
+        {
+          "slide": 1,
+          "severity": "minor",
+          "evidence": "The instrument drawing is culturally relevant, but it is an isolated object beside a long introduction and does not establish Kiều, Nguyễn Du, manuscript culture, or the poem’s narrative stakes.",
+          "fix": "Use an image that connects music, manuscript, and Kiều’s constrained journey, or annotate the instrument’s specific relevance to her characterization."
+        },
+        {
+          "slide": 2,
+          "severity": "major",
+          "evidence": "The academic sourcing is only a footer naming two institutions. The exact 3,254-line count and the Vietnamese-text example later in the deck lack edition-level citations.",
+          "fix": "Add a proper references slide and cite the edition or digital text used, including title, editor or translator, publisher or repository, and access details."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "The analogy between recurring rhyme and consequences carried forward is rhetorically strong but unsupported by an actual passage or close reading on the slide.",
+          "fix": "Pair the conclusion with a brief cited couplet whose sound and narrative implication demonstrate the claim."
+        }
+      ],
+      "signatureMoment": "Slide 7’s syllable grid is the deck’s clearest explanatory idea, but the clipped lower analysis prevents it from becoming a polished signature slide."
+    },
+    "winner": "A",
+    "reason": "A is the deck to give this user after mandatory repair. It covers every requested subject with a more brief-specific visual system, and slides 3, 4, 5, and 7 use composition to explain sequence, constraint, social structure, and verse mechanics. B is coherent but defaults too often to large prose blocks and a generic infographic; rebuilding its middle around one visual close-reading system would improve it most. Neither deck is ready: A has a clipped plot ending and a severe text collision, while B has a visibly clipped verse slide and diagnostics reporting overflow on seven slides. Those are generation defects; B’s text-first selection, slide 5 styling, and both decks’ incomplete academic citations are design/content-selection defects. A’s additional complexity is mostly earned because it adds explanatory value, but not yet production reliability. It exceeds competent default quality in selected moments rather than consistently. Reversing presentation order would not change the preference.",
+    "whatWouldMakeWinnerExceptional": "Give A a rigorous editorial production pass that eliminates the slide 3 and 4 failures, then strengthen its academic core with edition-level citations, short textual evidence on the realism and humanitarian slides, and a complete lục bát diagram showing both tone classes and forward rhyme. That would connect its memorable opening and ending to equally convincing scholarship and craft through the middle."
+  },
+  "usage": {
+    "prompt_tokens": 17213,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 5873,
+    "completion_tokens_details": {
+      "reasoning_tokens": 4019
+    },
+    "total_tokens": 23086
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 85.301
+}

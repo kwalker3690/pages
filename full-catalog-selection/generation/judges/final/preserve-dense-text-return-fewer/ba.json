@@ -1,0 +1,148 @@
+{
+  "order": [
+    "library",
+    "original"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 3,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 4
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 establishes a memorable handover premise, \"work moves without memory,\" and turns it into a four-part critical-path relay rather than relying on a conventional title page.",
+        "Slides 2–3 provide unusually explicit success criteria, non-goals, deliverables, acceptance evidence, boundaries, and dependencies. The repeated illustrative-data warnings appropriately distinguish samples from measured results.",
+        "Slide 4 gives the deck its clearest explanatory visual: a numbered six-stage service path supplemented by recovery and asynchronous-reporting notes.",
+        "Slides 5–6 connect readiness evidence to the open D-04 decision, with red reserved for the unresolved reporting condition rather than used decoratively.",
+        "Slides 7–8 cover both ways of working and ownership, including authority of records, escalation rules, accountability, responsibility, consultation, and continuity.",
+        "Slides 9–10 finish with active risks, questions, an acceptance test, and a dated transfer sequence, so the deck functions as a standalone reference rather than ending with a generic closing slide."
+      ],
+      "issues": [
+        {
+          "slide": 2,
+          "severity": "major",
+          "evidence": "The reporting tile combines \"95% / 2h,\" but its explanation only defines completion within two hours. The denominator, measurement window, and meaning of 95% are not stated.",
+          "fix": "Separate reliability from latency and define each measure explicitly, for example, \"95% of scheduled refreshes complete within 2 hours, measured weekly.\""
+        },
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "The chevrons communicate a linear sequence, while the important review loop and delayed-export branch appear only in prose boxes below. The visual does not show where failures leave or re-enter the six-stage path.",
+          "fix": "Draw the review queue and asynchronous export as actual branches connected to Validate, Route, Work, and Observe."
+        },
+        {
+          "slide": 5,
+          "severity": "minor",
+          "evidence": "Status terms mix \"Needs attention,\" \"Baseline,\" \"Conditional,\" and \"Not accepted\" without definitions. An independent reader cannot tell whether these are evidence states, approval states, or launch gates.",
+          "fix": "Use one status taxonomy and add a compact legend defining the criteria for each state."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "The ownership matrix remains role-based despite the instruction to replace roles with verified owners and deputies. The caveat is present, but the slide has no visible fields for names, deputy status, or confirmation dates.",
+          "fix": "Add named-owner, deputy, and verification-date columns or clearly marked fill-in fields."
+        },
+        {
+          "slide": 9,
+          "severity": "major",
+          "evidence": "Risk ratings such as \"M/H\" and \"L/H\" have no axis labels or legend. A standalone reader cannot determine whether the pair means likelihood/impact, current/residual severity, or something else.",
+          "fix": "Label the two dimensions in the table header and define the low, medium, and high thresholds."
+        },
+        {
+          "slide": 10,
+          "severity": "minor",
+          "evidence": "The distinction between the \"formally accepted start\" at T+0 and the later \"Accept or extend handover\" decision at T+10 is conceptually delicate and not defined.",
+          "fix": "Rename T+0 as transfer initiation or baseline acceptance and reserve handover acceptance for the T+10 ownership gate."
+        }
+      ],
+      "signatureMoment": "Slide 1's split editorial opening and four-part critical-path relay make the handover concept concrete while directing readers to decisions, ownership, and transition details elsewhere in the deck."
+    },
+    "B": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 5,
+        "coherence": 5,
+        "craft": 4,
+        "integrity": 3
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 combines the \"without memory\" premise, project condition, transition target, critical path, and cross-references in a strong orientation page. The persistent blue field-guide rail then makes all ten slides easy to locate.",
+        "Slides 2–3 turn context and scope into compact reference structures. The outcomes, exclusions, and dependencies are separated clearly enough for independent scanning.",
+        "Slide 4 uses numbered stages and three concise control cards to explain the service path with less reading effort than Deck A, although the exception paths remain simplified.",
+        "Slides 5–6 are the strongest middle sequence: three prominent readiness measures lead into a status table and then a focused D-04 decision card with accountable role, evidence owner, next action, timing, and consequences.",
+        "Slides 7–8 provide a coherent governance-to-ownership progression. The hierarchy of truth, change rules, escalation rules, role matrix, and green continuity gate are visibly differentiated.",
+        "Slide 9 converts the reporting problem into a five-link dependency chain before presenting residual risks and open questions. Slide 10 then supplies explicit owners, required results, dates, and a practical acceptance test.",
+        "The layouts vary purposefully across slides 1–10 while retaining the same rail, typography, blue rules, neutral cards, and limited status colors."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "minor",
+          "evidence": "The generated abstract construction image is visually polished but does not explain the project, ownership transfer, or critical path. It consumes roughly a third of the opening slide as atmosphere.",
+          "fix": "Replace it with a project-specific handover system map or an annotated artifact stack showing evidence, owner, decision, and next action."
+        },
+        {
+          "slide": 2,
+          "severity": "major",
+          "evidence": "The reporting row shows \"95%\" beside a description of completing updates within two hours, but it never defines what the percentage measures or over what period.",
+          "fix": "State the complete service-level definition, including numerator, denominator, and measurement window."
+        },
+        {
+          "slide": 4,
+          "severity": "minor",
+          "evidence": "The six stages are arranged as two rows of three rather than a visibly connected flow. The recovery and asynchronous paths are described in cards but not attached to the stages they affect.",
+          "fix": "Add directional connectors and map the review and delayed-export branches to their departure and return points."
+        },
+        {
+          "slide": 7,
+          "severity": "minor",
+          "evidence": "The narrow abstract image strip is decorative rather than explanatory, while the three text columns carry all substantive governance information.",
+          "fix": "Use that width for a visual hierarchy linking decision log, delivery board, runbook, meetings, change control, and escalation."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "The ownership table is dense, and only two cells receive colored emphasis. The visual treatment does not reveal handoff relationships, deputies, or which responsibilities are still unconfirmed.",
+          "fix": "Add confirmation and deputy fields, and use connectors or grouped responsibility bands to show transfer relationships."
+        },
+        {
+          "slide": 9,
+          "severity": "major",
+          "evidence": "The risk labels \"Medium / high\" and \"Low / high\" do not identify their dimensions. Open questions 2–4 also lack visible owners and due dates, weakening actionability in a standalone handover.",
+          "fix": "Label likelihood and impact explicitly, then add owner and due-date columns to every open question."
+        },
+        {
+          "slide": 10,
+          "severity": "major",
+          "evidence": "The subtitle says \"T+0 is formal handover acceptance,\" but the T+10 row says to \"accept or extend.\" These statements create two apparent acceptance points without defining the distinction.",
+          "fix": "Define T+0 as transfer initiation and T+10 as final ownership acceptance, or rename the two gates with distinct terms."
+        }
+      ],
+      "signatureMoment": "Slide 6's D-04 decision card consolidates the unresolved question, accountable role, evidence owner, next action, deadline, and launch-versus-delay consequences into the deck's most useful decision artifact."
+    },
+    "winner": "B",
+    "reason": "Deck B is the deck to give the user, and the preference remains the same in either presentation order. Both decks pass the visible hard checks as prototypes: each has 10 slides, no requested palette was specified, no clipping or missing assets are visible, all required handover subjects are covered, and invented metrics are repeatedly labeled as illustrative rather than presented as real evidence. Neither is operationally ready until sample data and role labels are replaced. B wins because its persistent navigation, stronger status-to-decision progression on slides 5–6, dependency chain on slide 9, and owner/result timeline on slide 10 make independent reading faster and more actionable. Its additional layout complexity earns itself in navigation and information hierarchy, though not in the decorative abstract photographs. A's primary weakness is a selection/design issue rather than a generation defect: there is no visible rendering failure, but the image-free, table-heavy middle does not satisfy the balanced imagery posture or create enough visual explanation. The single most useful improvement to A would be to replace its repeated tables with one recurring handover map linking evidence, decision IDs, owners, risks, and T+ milestones. B exceeds competent default quality modestly, but its undefined metrics, unresolved acceptance terminology, and mostly decorative imagery keep it below exceptional.",
+    "whatWouldMakeWinnerExceptional": "Build one project-specific visual system map that links the service stages, evidence artifacts, decision D-04, accountable owners, active risk, and T+ milestones, then reuse highlighted portions of that map across slides 4–10. This would replace decorative imagery and disconnected tables with a substantive visual narrative while preserving the field-guide scanability."
+  },
+  "usage": {
+    "prompt_tokens": 21159,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 6310,
+    "completion_tokens_details": {
+      "reasoning_tokens": 4048
+    },
+    "total_tokens": 27469
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 94.187
+}

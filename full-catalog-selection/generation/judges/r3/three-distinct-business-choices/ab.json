@@ -1,0 +1,115 @@
+{
+  "order": [
+    "original",
+    "library"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 4,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 3,
+        "integrity": 5
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 immediately states the quarter's thesis, three headline KPIs, and the required leadership action rather than opening with a generic agenda.",
+        "Slides 5–7 form a useful sequence from quantified risks to decision asks to timed actions, leading evidence, and intended outcomes.",
+        "Slide 7 is the strongest substantive information design in the deck: the action-to-outcome table gives leaders timing, evidence, and affected metrics in one scan.",
+        "All sample figures and conceptual imagery are explicitly identified as illustrative rather than company evidence; the numbers are internally consistent across the deck.",
+        "The eight-slide structure covers performance, trends, drivers, risks, decisions, next-quarter execution, and governance."
+      ],
+      "issues": [
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "The bridge-chart driver labels collide into dense strings such as “Prior qu…New bu…Expansi…Price &…” and several top annotations sit directly over the dashed totals. The drivers cannot be audited comfortably in a leadership meeting.",
+          "fix": "Rebuild both bridges as hand-labeled waterfalls with shorter driver names, direct positive/negative labels, and more vertical clearance above the bars."
+        },
+        {
+          "slide": 1,
+          "severity": "minor",
+          "evidence": "The industrial cutting-machine image is polished, but the claimed “expansion gate” and narrowing value flow are not visibly explained in the image itself. It functions primarily as metaphorical decoration.",
+          "fix": "Replace it with an annotated acquire-deliver-expand flow that visibly constricts at expansion, or add a clear overlay showing the bottleneck."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The three decisions show commitments and targets but not the consequence of deferring or rejecting each choice, limiting the quality of the leadership trade-off.",
+          "fix": "Add a concise “if deferred” consequence to each row while retaining the existing decision-table structure."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "The four-step governance cadence is clear, but the rail-loop image consumes one quarter of the slide without clarifying ownership, measurement, or the feedback relationship.",
+          "fix": "Use that area for a labeled feedback arrow connecting quarter-end evidence back to the next decision cycle."
+        }
+      ],
+      "signatureMoment": "Slide 1: the blunt “Growth continued. Expansion weakened.” thesis, KPI triad, and explicit decision request create a memorable and properly executive opening."
+    },
+    "B": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 4,
+        "audience": 5,
+        "coherence": 5,
+        "craft": 3,
+        "integrity": 4
+      },
+      "wow": "occasional",
+      "strengths": [
+        "The deck is exceptionally easy to scan: every slide has a clear executive claim, restrained hierarchy, and a consistent navy, pale-blue, and cobalt system.",
+        "Slide 2 prioritizes the retention miss with a cyan accent while preserving side-by-side comparability across all four KPIs.",
+        "Slide 6 is the best leadership-use slide across either deck: one primary investment decision is given dominant space, two follow-on choices are separated clearly, and assumptions are stated rather than hidden.",
+        "Slide 8 converts the closing cadence into an actual four-stage loop, making the governance model more memorable than a closing checklist.",
+        "All invented company figures are visibly labeled illustrative, and slide 6 explicitly states assumptions behind the proposed targets."
+      ],
+      "issues": [
+        {
+          "slide": 3,
+          "severity": "major",
+          "evidence": "Each mini-chart contains a standalone “0” even though the displayed ranges are explicitly $20M–$25M, 56%–62%, and 107%–115%. The right chart title is visibly shortened to “Net revenue reten...”. These are chart-generation defects that undermine data credibility.",
+          "fix": "Remove the stray zero labels, show one unambiguous labeled y-axis per chart, and allocate enough width for the full retention title."
+        },
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "Several contribution labels are rendered nearly black on the navy background, and the x-axis categories crowd together around “Expand,” “Price/mix,” and adjacent drivers. The headline and summary are readable, but the bridge itself is not reliably auditable.",
+          "fix": "Use high-contrast contribution labels, increase chart height, and directly label each step with abbreviated but complete driver names."
+        },
+        {
+          "slide": 7,
+          "severity": "major",
+          "evidence": "The title promises that actions are linked to outcomes, but the left table contains only timing and action while the four outcomes sit in a separate card with no row-level connectors or leading indicators. The relationship is asserted rather than demonstrated.",
+          "fix": "Add a leading-indicator and outcome column, or draw explicit connectors from each timed action to the specific metric it is intended to move."
+        },
+        {
+          "slide": 5,
+          "severity": "minor",
+          "evidence": "Only the Demand card receives a cyan edge while all three risks are presented as plan-breaking. The accent implies prioritization that the content does not explain.",
+          "fix": "Apply equal treatment to all three cards or label Demand explicitly as the highest-priority risk."
+        }
+      ],
+      "signatureMoment": "Slide 6: the asymmetric decision layout turns three asks into a clear approval sequence and includes targets and assumptions without reverting to a dense table."
+    },
+    "winner": "B",
+    "reason": "Deck B is the deck to give the leadership team. Its decision hierarchy, pacing, and meeting readability are stronger, especially on slides 2, 6, and 8, and the preference is not sensitive to presentation order. Both decks meet the eight-slide format, cover the required QBR subjects, use an appropriate leadership register, and clearly flag sample data; no explicit palette requirement was supplied. Neither is fully presentation-ready until its generated charts are repaired. The most effective single improvement to loser A would be rebuilding slide 4 as two clean, directly labeled waterfalls. Route identity is blind, but the visibly more complex machinery imagery in A does not earn its added complexity because it appears only on slides 1 and 8 and does not explain the middle of the story. B modestly exceeds competent default quality through its decision slide and coherent visual system, but its chart defects prevent an exceptional verdict.",
+    "whatWouldMakeWinnerExceptional": "Make the expansion constraint a recurring causal visual spine across slides 3–7: show the retention decline, its churn and onboarding drivers, the three interventions, leading indicators, and quarter-end targets as one audit-ready chain. That would add an exceptional substantive visual rather than relying mainly on polished cards and typography."
+  },
+  "usage": {
+    "prompt_tokens": 17119,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 6528,
+    "completion_tokens_details": {
+      "reasoning_tokens": 4918
+    },
+    "total_tokens": 23647
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 89.421
+}

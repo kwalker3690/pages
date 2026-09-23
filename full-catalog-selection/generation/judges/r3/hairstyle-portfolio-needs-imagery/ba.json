@@ -1,0 +1,103 @@
+{
+  "order": [
+    "library",
+    "original"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 4,
+        "coherence": 5,
+        "craft": 5,
+        "integrity": 4
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 1–7 sustain a recognizable fashion-editorial system through warm grain, restrained cream and brown color, high-contrast serif typography, and unusually considered image crops.",
+        "Slides 2, 3, 4, 6, and 7 vary the placement and scale of captions without losing hierarchy; no clipping, missing images, placeholders, or weak-contrast text is visible.",
+        "Slide 5 introduces a useful short-versus-long comparison rather than relying exclusively on isolated portraits.",
+        "Slide 8 turns the collection into a consultation prompt organized around line, movement, and texture, giving the lookbook a purposeful ending."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "major",
+          "evidence": "Selection/prompt-fit issue: the cover identifies the deck as a concept edit and explicitly says the images are not salon work. That disclosure protects integrity, but the salon name, season, and actual work are absent, so this is not yet a lookbook of \"our salon's latest hairstyles.\"",
+          "fix": "Replace the concepts with verified salon work and add the salon identity and collection season, or explicitly publish it as an inspiration lookbook rather than a salon portfolio."
+        },
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "The \"two lengths\" comparison changes model, hair color, pose, wardrobe, and camera angle. The long interpretation is shown mostly from behind, so the stated broken fringe cannot be compared with the frontal short version.",
+          "fix": "Use the same model, styling, lighting, and camera angle for both lengths, supplemented by matched profile or back views."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "The closing chooser represents only three of the six featured directions, and the thumbnails are small relative to the large open field. The space is deliberate, but the recap undersells half the collection.",
+          "fix": "Show all six looks in a compact contact sheet, or explicitly label these three as category representatives and enlarge their hair details."
+        }
+      ],
+      "signatureMoment": "Slide 5's split-screen short and long interpretations create the deck's clearest comparative editorial beat, even though the uncontrolled model and angle changes weaken the evidence."
+    },
+    "B": {
+      "scores": {
+        "specificity": 5,
+        "storytelling": 5,
+        "audience": 4,
+        "coherence": 5,
+        "craft": 5,
+        "integrity": 4
+      },
+      "wow": "sustained",
+      "strengths": [
+        "Slide 1 is a memorable opening: the large sculptural hairstyle, assertive title block, and burgundy accent establish the collection premise immediately rather than functioning as a generic beauty cover.",
+        "Slides 2 and 5 use clean profile and frontal silhouettes, while slides 3, 6, and 7 add paired views or detail crops that reveal fringe, crown texture, braid direction, and back construction.",
+        "Slide 6 is especially effective information design: the portrait establishes the overall halo silhouette while the enlarged crown crop makes curl definition visible at consultation scale.",
+        "Slide 7 uses side and rear views to show how the braided sections resolve into the knot; the images substantively explain the caption.",
+        "Slide 8 is an unusually useful lookbook ending, converting the editorial categories into three saveable consultation cards with clear line, movement, and texture labels.",
+        "Across all eight slides, imagery, typography, spacing, and the cream-burgundy-black palette remain polished and coherent; no clipping, missing assets, placeholders, or unreadable contrast is visible."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "major",
+          "evidence": "Selection/prompt-fit issue: \"concept collection\" and \"AI concept imagery—not salon work\" are honest labels, but they confirm that the deck is not yet evidence of this salon's latest work. There is also no salon name, season, stylist credit, or service attribution.",
+          "fix": "Retain the editorial system but replace the concepts with verified salon photographs and add salon, season, stylist, and service information."
+        },
+        {
+          "slide": 3,
+          "severity": "minor",
+          "evidence": "The two portraits use different poses and apparently different image instances without labels explaining whether they are front and three-quarter views or separate interpretations. The relationship is less explicit than on slides 6 and 7.",
+          "fix": "Label the views and use a matched model and styling sequence so the fringe and U-shaped length can be compared directly."
+        },
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "This is the only page that abandons the requested short-caption rhythm for a paragraph plus three explanatory statements. Phrases such as \"frozen strand separation\" and \"without decorative blur\" sound like image-production direction rather than client-facing salon language.",
+          "fix": "Reduce the page to one concise caption and three very short callouts placed beside the crown, nape, and moving ends."
+        }
+      ],
+      "signatureMoment": "Slide 6's portrait-and-crown-detail composition makes texture legible at two scales and is the strongest substantive visual in either deck."
+    },
+    "winner": "B",
+    "reason": "B is the deck I would give the user as the stronger prototype. The preference is not order-dependent: it has the more memorable opening, more explanatory middle, and more actionable ending. Its additional complexity earns its place through the paired views on slides 3, 6, and 7 and the consultation cards on slide 8; it is not complexity for decoration alone. A is beautifully crafted but relies more heavily on single hero photographs beside prose, and its principal comparison on slide 5 is visually uncontrolled. B exceeds competent default quality through sustained editorial direction and useful multi-view storytelling. Neither deck should be presented as the salon's actual portfolio until its clearly labeled synthetic concepts are replaced with verified salon work.",
+    "whatWouldMakeWinnerExceptional": "Photograph the salon's real work as controlled front, profile, back, and detail sequences—preferably on the same clients—then add salon branding, season, stylist credits, and concise service or maintenance notes while preserving B's current editorial pacing."
+  },
+  "usage": {
+    "prompt_tokens": 17103,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 5330,
+    "completion_tokens_details": {
+      "reasoning_tokens": 3858
+    },
+    "total_tokens": 22433
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 78.375
+}

@@ -1,0 +1,113 @@
+{
+  "order": [
+    "original",
+    "library"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 5,
+        "storytelling": 5,
+        "audience": 5,
+        "coherence": 5,
+        "craft": 4,
+        "integrity": 5
+      },
+      "wow": "sustained",
+      "strengths": [
+        "Slide 1 opens with a memorable, brief-specific problem rather than a generic biography: the seminar rule, two definitions of freedom, and paper-cut figures establish the lesson's conceptual and visual premise.",
+        "Slides 3–6 turn abstractions into useful relationships: internal pressure, unequal participation, cancel/preserve/transform, and one-sided versus reciprocal recognition are shown as processes rather than bullet summaries.",
+        "Slide 4 clearly labels the participation pattern as illustrative rather than measured data, while slide 7 explicitly rejects automatic progress. These are strong integrity safeguards.",
+        "Slides 2 and 8 provide effective lesson pacing: a four-part route at the start and retrieval questions with three compact checkpoints at the end."
+      ],
+      "issues": [
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "The canceled state shows A plus only B, C, and D, while the preserved and transformed states contain A–F. E and F disappear without explanation, contradicting the nearby claim to carry every participant through.",
+          "fix": "Show all six participants in every state, or explicitly mark E and F as omitted for a stated reason. This is a content/selection defect in an otherwise continuous diagram."
+        },
+        {
+          "slide": 7,
+          "severity": "minor",
+          "evidence": "The institution text extends below the bottom of its beige card; the final line, “time.”, sits outside the container. It is readable but visibly breaks the three-card system.",
+          "fix": "Increase the card height, shorten the copy, or reduce internal line spacing. This is a generation/layout defect rather than a content problem."
+        },
+        {
+          "slide": 2,
+          "severity": "minor",
+          "evidence": "The source line is substantially smaller and lighter than the lesson content and is unlikely to remain comfortable on projection; similarly small citations recur on slides 3, 6, and 7.",
+          "fix": "Raise citation size and contrast while keeping it visually subordinate."
+        }
+      ],
+      "signatureMoment": "Slide 4: the A–F participation model makes the internal contradiction between equal permission and unequal practical participation immediately visible, then previews the structural revision."
+    },
+    "B": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 3,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 5
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 is calm and inviting, with the empty chair circle supporting the seminar premise rather than functioning as unrelated stock decoration.",
+        "The typography, margins, and restrained palette remain consistently readable across all eight slides, with no visible clipping or missing assets.",
+        "Slide 5 gives Aufhebung a clear three-part verbal decomposition and visually distinguishes cancellation with a strikethrough.",
+        "Slide 8 ends with useful retrieval prompts and the memorable reusable lens, “What fails? What survives? What becomes possible?”"
+      ],
+      "issues": [
+        {
+          "slide": 2,
+          "severity": "minor",
+          "evidence": "Logic, nature, and spirit appear as three parallel text columns, but the slide does not visually explain how they form the claimed larger system or how the lesson path relates to them.",
+          "fix": "Show the system and the selected lesson route as an explicit nested or directional map rather than a three-column glossary."
+        },
+        {
+          "slide": 3,
+          "severity": "major",
+          "evidence": "The three question-mark icons and text columns list prompts but do not demonstrate a position being tested “from within.” There is no visible claim, consequence, pressure, or revision.",
+          "fix": "Work the seminar example through a connected claim → consequence → internal tension → richer account diagram."
+        },
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "The three cards name permission, domination, and reciprocity, but no participants, airtime, turns, or directional relationships are depicted. The red label “ONE VOICE · ENTERS AGAIN” is also awkward and does not clarify domination.",
+          "fix": "Use persistent participant tokens or an airtime sequence so the shift from formal permission to domination and then reciprocal participation can be seen."
+        },
+        {
+          "slide": 6,
+          "severity": "major",
+          "evidence": "The two outlined boxes state “B can only approve” and “B may answer,” but they do not show the asymmetric and reciprocal relations the lesson is explaining. The slide remains a prose comparison rather than explanatory information design.",
+          "fix": "Add directional claim, answer, challenge, and blocked-response paths between A and B."
+        },
+        {
+          "slide": 7,
+          "severity": "minor",
+          "evidence": "Individual agency, shared norms, and institutions are again presented as adjacent columns with no connectors. The lower enabled-agency box and caveat are useful, but their relationship to the three levels must be inferred.",
+          "fix": "Connect the three levels bidirectionally and attach the enabled-agency and revision caveats to the relevant links."
+        }
+      ],
+      "signatureMoment": "Slide 8: the final reusable-lens panel is the deck's strongest combination of concise language, hierarchy, and lesson utility."
+    },
+    "winner": "A",
+    "reason": "Both decks pass the hard checks: eight slides are acceptable because no count or palette was specified; both are English lesson-format decks, contain the required Hegel subject, show no missing images or clipped essential text, and clearly flag the seminar example as illustrative rather than empirical. The preference remains A in either presentation order. I would give A to the user because its additional complexity earns its place: the paper constructions create a distinctive conceptual world, while slides 3–6 use diagrams to reveal pressure, preservation, reciprocity, and institutional mediation. It exceeds competent default quality, although the missing E–F tokens on slide 5 and the card overrun on slide 7 prevent flawless execution. The single most valuable change for B would be to replace the static text-card sequence on slides 3–7 with one persistent A–F participant model that visibly evolves through dialectic, sublation, recognition, and institutional freedom.",
+    "whatWouldMakeWinnerExceptional": "Carry the same six participant tokens without omissions from slides 4 through 7, showing how turn structure becomes reciprocal recognition and then a revisable institution, while repairing the slide 7 card fit. That would turn several excellent individual diagrams into one uninterrupted visual argument."
+  },
+  "usage": {
+    "prompt_tokens": 17115,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 4774,
+    "completion_tokens_details": {
+      "reasoning_tokens": 3251
+    },
+    "total_tokens": 21889
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 70.305
+}

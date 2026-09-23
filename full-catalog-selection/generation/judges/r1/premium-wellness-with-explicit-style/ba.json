@@ -1,0 +1,125 @@
+{
+  "order": [
+    "library",
+    "original"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 5,
+        "coherence": 4,
+        "craft": 3,
+        "integrity": 5
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 1–2 establish a specific, relevant proposition—the restorative hour as the missing transition in a hotel stay—rather than applying generic wellness language to hospitality imagery.",
+        "Slides 3–5 translate the offer into a timed guest ritual, three stakeholder benefits, and a backstage operating sequence. This is unusually useful for managers evaluating both guest experience and operational feasibility.",
+        "Slide 6 clearly labels the commercial scenario as illustrative, exposes the assumptions and exclusions, and makes the calculation replaceable with property data.",
+        "Slides 7–8 move toward a bounded pilot and concrete next decisions, giving the pitch a manager-oriented conclusion rather than an aspirational wellness ending."
+      ],
+      "issues": [
+        {
+          "slide": 7,
+          "severity": "blocking",
+          "evidence": "[Generation defect] The second row of decision-gate cards is cut off by the bottom edge; only their upper portions and headings such as “No unresolved issues,” “Within the limit,” and “Positive contribution” remain visible. This leaves required pilot criteria incomplete.",
+          "fix": "Reflow the gate section into one fully visible row or a compact two-column table, then perform a full-slide bounds check before delivery."
+        },
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "[Generation defect] The third assumption in the left rail is clipped at the bottom; “15” is visible, but the room-turn description runs beyond the canvas.",
+          "fix": "Reduce vertical spacing or move the three assumptions into a horizontal header so every label is completely visible."
+        },
+        {
+          "slide": 3,
+          "severity": "minor",
+          "evidence": "[Selection/layout defect] The five-stage ritual is compressed against the bottom while most of the middle remains unused. The sequence is legible, but the large gap weakens visual momentum rather than clarifying the timing.",
+          "fix": "Use the available height for a proportional 60-minute timeline or a guest-state progression that makes the long Restore phase visually meaningful."
+        },
+        {
+          "slide": 4,
+          "severity": "minor",
+          "evidence": "The tiny, very pale icons above the three value columns add little explanatory value and are difficult to perceive at projection size.",
+          "fix": "Either remove the icons or replace them with stronger stakeholder-specific symbols integrated into the value comparison."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The 35% case is represented by an almost imperceptible mark at the baseline, so the chart does not clearly show that this case is slightly below break-even.",
+          "fix": "Show the negative value explicitly, label all three bars, and mark the approximate 36% break-even position on the seat-fill axis."
+        }
+      ],
+      "signatureMoment": "Slide 6 is the strongest substantive moment: it combines a replaceable hotel economics model, an assumption table, a sensitivity chart, and explicit exclusions without presenting the sample figures as actual performance."
+    },
+    "B": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 4,
+        "coherence": 3,
+        "craft": 2,
+        "integrity": 5
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 1–3 use hospitality-specific imagery and connect arrival behavior to a clearly timed restorative ritual; the unpacking scene on slide 2 supports the stated transition problem.",
+        "Slides 4–6 cover guest, staff, property, operations, and commercial sensitivity in a decision-oriented sequence rather than relying on generic wellness benefits.",
+        "Slide 6 clearly flags the figures as illustrative, shows the formula behind the $3,500 contribution, and states excluded costs and the approximate break-even assumption.",
+        "Slide 8 provides a visually memorable close with a property-specific call to name an owner, room, rhythm, and evidence."
+      ],
+      "issues": [
+        {
+          "slide": 7,
+          "severity": "blocking",
+          "evidence": "[Generation defect] The pilot timeline and decision-gate content overflow the bottom. The “End of week 6” card is visibly cut off, and the gate table continues beyond the canvas, so the pilot plan cannot be read in full.",
+          "fix": "Rebuild the slide as a horizontal three-phase timeline above a compact, fully visible gate table; verify all rows remain inside the slide boundary."
+        },
+        {
+          "slide": 1,
+          "severity": "major",
+          "evidence": "[Generation/craft defect] White text is placed on very pale teal cards. The guest-promise and manager-proposition copy has inadequate contrast and is substantially harder to read than the rest of the cover.",
+          "fix": "Use dark green text on the pale cards or darken the cards enough to meet presentation contrast requirements."
+        },
+        {
+          "slide": 2,
+          "severity": "major",
+          "evidence": "[Generation defect] The pale disclaimer wraps onto a second line at the bottom edge, while the page number “2” collides with the same lower-left area. The tiny light text is unsuitable for projection.",
+          "fix": "Place the disclaimer in a dedicated footer band with darker text and move the page number to the lower-right margin."
+        },
+        {
+          "slide": 8,
+          "severity": "major",
+          "evidence": "[Prompt/selection defect] Slides 1 and 8 are dominated by deep forest green rather than the requested clean white and soft teal. They are polished, but they shift the overall mood toward dark luxury rather than the specified light, welcoming palette.",
+          "fix": "Use white or soft teal as the dominant field and reserve deep green for typography and narrow accents."
+        },
+        {
+          "slide": 5,
+          "severity": "minor",
+          "evidence": "Five similarly weighted text columns create a dense middle slide. The chevrons imply flow, but the descriptions remain parallel prose rather than revealing handoffs or ownership.",
+          "fix": "Add explicit owner and handoff cues between stages, or group the steps into guest-facing and backstage lanes."
+        }
+      ],
+      "signatureMoment": "Slide 2 is the most memorable composition: the arrival photograph and alternating Arrive–Reset–Return sequence make the “missing middle” proposition immediately understandable, although the damaged footer prevents it from feeling fully polished."
+    },
+    "winner": "A",
+    "reason": "Deck A is the one to give the user after repair. It adheres more closely to the requested light palette, has the cleaner information hierarchy, and presents the operating and financial case with less visual friction. Neither deck is delivery-ready because both have blocking clipping; A loses part of slide 7 and B loses a larger portion of its pilot slide. The single most valuable improvement to B would be a full overflow-and-contrast preflight, beginning with a complete rebuild of slide 7. Route identity is hidden, so the original arm cannot be identified; judged only on the renders, B’s added photography and layout complexity does not earn its cost because it introduces palette drift, low-contrast cards, and more overflow. A modestly exceeds competent default quality through its integrated guest, operations, economics, and pilot story, but the clipping and restrained middle slides keep it below exceptional quality. The preference would not reverse with presentation order.",
+    "whatWouldMakeWinnerExceptional": "After eliminating every overflow, turn the 60-minute ritual on slide 3 into one exceptional property-specific visual—such as a proportional guest-state journey through an actual boutique-hotel setting—and carry that same visual logic into the operating model and pilot measures. That would give the strong managerial content a memorable visual premise sustained beyond the cover."
+  },
+  "usage": {
+    "prompt_tokens": 17106,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 5225,
+    "completion_tokens_details": {
+      "reasoning_tokens": 3465
+    },
+    "total_tokens": 22331
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 74.258
+}

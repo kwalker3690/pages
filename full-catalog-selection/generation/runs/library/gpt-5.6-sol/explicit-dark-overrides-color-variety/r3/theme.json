@@ -1,0 +1,178 @@
+{
+  "id": "g_5rsed7tn2zvkc9w",
+  "name": "File",
+  "headingFont": "Instrument Sans",
+  "headingFontName": "Instrument Sans",
+  "headingFontWeight": 600,
+  "bodyFont": "Instrument Sans",
+  "bodyFontName": "Instrument Sans",
+  "bodyFontWeight": 400,
+  "config": {
+    "charts": {
+      "textSize": "md",
+      "roundness": "sm",
+      "gridlineStyle": "none",
+      "lineWeight": "sm",
+      "font": "body"
+    },
+    "headingColor": "#F5F1E8",
+    "bodyColor": "#C8C1B5",
+    "mutedColor": {
+      "type": "solid",
+      "color": "#A9A095"
+    },
+    "cardColor": {
+      "type": "solid",
+      "color": "#080808"
+    },
+    "surfaceColor": {
+      "type": "solid",
+      "color": "#151513"
+    },
+    "background": {
+      "type": "color",
+      "source": "color.solid",
+      "color": {
+        "hex": "#242320"
+      }
+    },
+    "neutralBorderColor": {
+      "type": "solid",
+      "color": "#3C3A36"
+    },
+    "roundness": "sm",
+    "cardShadow": "none",
+    "cardBorder": "none",
+    "cardPadding": "lg",
+    "density": "md",
+    "blockSpacing": 13,
+    "dividerColor": "#3C3A36",
+    "dividerThickness": "sm",
+    "letterSpacingHeading": -0.02,
+    "letterSpacingBody": 0,
+    "lineHeightHeading": 1.1,
+    "lineHeightBody": 1.43,
+    "headingTransform": "none",
+    "shapeFill": "solid",
+    "shapeColorScheme": "custom",
+    "shapeColors": [
+      "#F5F1E8",
+      "#A9A095",
+      "#5F5B54",
+      "#242320"
+    ],
+    "typeScale": {
+      "display-xl": 96,
+      "display-lg": 62,
+      "display-md": 42,
+      "heading-1": 32,
+      "heading-2": 23,
+      "heading-3": 17,
+      "heading-4": 14,
+      "subheading": 16,
+      "body-normal": 13.5,
+      "body-sm": 13,
+      "body-lg": 15,
+      "caption": 10.5
+    },
+    "roleStyles": {
+      "display": {
+        "fontWeight": 500,
+        "letterSpacing": -0.035,
+        "lineHeight": 1.02
+      },
+      "caption": {
+        "italic": false,
+        "transform": "none",
+        "color": "#A9A095",
+        "fontWeight": 400,
+        "letterSpacing": 0.02,
+        "lineHeight": 1.43,
+        "font": "Geist Mono"
+      },
+      "label": {
+        "font": "Geist Mono",
+        "italic": false,
+        "transform": "none",
+        "color": "#E7E1D7",
+        "fontWeight": 400,
+        "letterSpacing": 0.02,
+        "lineHeight": 1.35
+      },
+      "subheading": {
+        "fontWeight": 400,
+        "lineHeight": 1.38,
+        "color": "#C8C1B5"
+      }
+    },
+    "canvasPalette": {
+      "colors": [
+        {
+          "key": "warm-white",
+          "name": "Warm White",
+          "color": {
+            "type": "solid",
+            "color": "#F5F1E8"
+          }
+        },
+        {
+          "key": "silver",
+          "name": "Warm Silver",
+          "color": {
+            "type": "solid",
+            "color": "#A9A095"
+          }
+        },
+        {
+          "key": "graphite",
+          "name": "Graphite",
+          "color": {
+            "type": "solid",
+            "color": "#5F5B54"
+          }
+        },
+        {
+          "key": "ink-black",
+          "name": "Ink Black",
+          "color": {
+            "type": "solid",
+            "color": "#080808"
+          }
+        }
+      ],
+      "gradients": []
+    },
+    "imagery": {
+      "defaultStyleId": "reel-cinematic",
+      "styles": [
+        {
+          "id": "reel-cinematic",
+          "name": "Cinematic work still",
+          "styleReferenceKey": "cinematic_photo",
+          "subjects": "One concrete subject from the user's story: a person in motion, spatial installation, physical material, set, object, or environment. Compose for bold edge crops and quiet black regions; exclude logos, brands, readable screens, documents, interface chrome, and generic office lifestyle.",
+          "whenToUse": "Use for full-bleed hero surfaces, case-study evidence, dividers, portrait crops, and contact-sheet frames when physical reality or performance carries the message."
+        },
+        {
+          "id": "reel-abstract",
+          "name": "Abstract motion field",
+          "styleReferenceKey": "abstract_liquid_glass",
+          "subjects": "Subject-specific material motion, light choreography, liquid-glass forms, refracted textures, or spatial color fields derived from the user's content; no typography, logos, UI, or recognizable branded products.",
+          "whenToUse": "Use for title sequences, identity-system motion frames, transitional fields, and visual work whose subject is movement or atmosphere rather than a literal scene."
+        }
+      ]
+    }
+  },
+  "fonts": [
+    {
+      "id": "Geist Mono",
+      "name": "Geist Mono",
+      "url": "https://fonts.googleapis.com/css2?family=Geist+Mono%3Aital%2Cwght%400%2C100%3B0%2C200%3B0%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800%3B0%2C900%3B1%2C100%3B1%2C200%3B1%2C300%3B1%2C400%3B1%2C500%3B1%2C600%3B1%2C700%3B1%2C800%3B1%2C900&display=swap"
+    },
+    {
+      "id": "Instrument Sans",
+      "name": "Instrument Sans",
+      "url": "https://fonts.googleapis.com/css2?family=Instrument+Sans%3Aital%2Cwght%400%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B1%2C400%3B1%2C500%3B1%2C600%3B1%2C700&display=swap"
+    }
+  ],
+  "isDefault": false
+}

@@ -1,0 +1,122 @@
+{
+  "headingFont": "Newsreader",
+  "headingFontWeight": 600,
+  "bodyFont": "Manrope",
+  "bodyFontWeight": 400,
+  "config": {
+    "canvasPalette": {
+      "colors": [
+        {
+          "key": "primary",
+          "name": "Restorative Teal",
+          "color": {
+            "type": "solid",
+            "color": "#5EAEA6"
+          }
+        },
+        {
+          "key": "ink",
+          "name": "Deep Teal Ink",
+          "color": {
+            "type": "solid",
+            "color": "#123B3A"
+          }
+        },
+        {
+          "key": "quiet",
+          "name": "Sea Glass Mist",
+          "color": {
+            "type": "solid",
+            "color": "#DCEDEA"
+          }
+        },
+        {
+          "key": "clear",
+          "name": "Hotel White",
+          "color": {
+            "type": "solid",
+            "color": "#F7FBFA"
+          }
+        },
+        {
+          "key": "rule",
+          "name": "Quiet Rule",
+          "color": {
+            "type": "solid",
+            "color": "#B6D4D0"
+          }
+        }
+      ],
+      "gradients": []
+    },
+    "cardColor": {
+      "type": "solid",
+      "color": "#FFFFFF"
+    },
+    "surfaceColor": {
+      "type": "solid",
+      "color": "#E8F4F2"
+    },
+    "headingColor": "#123B3A",
+    "bodyColor": "#234B49",
+    "mutedColor": {
+      "type": "solid",
+      "color": "#476866"
+    },
+    "background": {
+      "type": "color",
+      "source": "color.solid",
+      "color": {
+        "hex": "#F7FBFA"
+      }
+    },
+    "letterSpacingHeading": -0.012,
+    "roundness": "lg",
+    "cardShadow": "default",
+    "cardBorder": "sm",
+    "shapeFill": "solid",
+    "shapeColorScheme": "default",
+    "roleStyles": {
+      "subheading": {
+        "font": "Manrope",
+        "fontWeight": 600
+      },
+      "eyebrow": {
+        "font": "Manrope",
+        "transform": "uppercase",
+        "letterSpacing": 0.1
+      }
+    },
+    "imagery": {
+      "defaultStyleId": "restorative-hospitality-editorial",
+      "styles": [
+        {
+          "id": "restorative-hospitality-editorial",
+          "name": "Restorative hospitality editorial",
+          "promptGuidance": "Quiet editorial hospitality photography in a real-feeling boutique hotel with adult guests and staff shown through natural gestures, hands and partial figures, tactile linens, glass and pale wood under soft window light, using crisp white #FFFFFF, sea-glass #DCEDEA and deep teal #123B3A with generous negative space, no text or lettering.",
+          "subjects": "Guest arrival rituals, prepared rooms, quiet lounges and terraces, staff handoffs, towels, water, tea, journals, and simple wellness materials; avoid posed yoga, medical treatment, logos, and generic resort-spa clichés.",
+          "whenToUse": "Use on the opening, guest-journey, ritual, operating-model, and closing slides; use native editable diagrams and charts for value, economics, and pilot measurement."
+        }
+      ]
+    },
+    "typeScale": {
+      "display-xl": 84,
+      "display-lg": 64,
+      "display-md": 48,
+      "heading-1": 40,
+      "heading-2": 30,
+      "heading-3": 22,
+      "heading-4": 18,
+      "subheading": 20,
+      "body-lg": 19,
+      "body-normal": 16,
+      "body-sm": 13,
+      "eyebrow": 11,
+      "caption": 11
+    },
+    "density": "md",
+    "cardPadding": "lg",
+    "lineHeightBody": 1.35,
+    "lineHeightHeading": 1.1
+  }
+}

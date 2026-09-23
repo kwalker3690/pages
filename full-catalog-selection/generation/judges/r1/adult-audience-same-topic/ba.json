@@ -1,0 +1,120 @@
+{
+  "order": [
+    "library",
+    "original"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 3,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 3,
+        "integrity": 3
+      },
+      "wow": "absent",
+      "strengths": [
+        "Slide 1 opens with a clear investment thesis and a relevant mechanical-plant photograph rather than a generic image of the atmosphere.",
+        "Slide 3 provides a practical five-coordinate diligence framework spanning substance, asset, lifecycle, value channel, and action.",
+        "Slides 5 and 6 clearly identify sample scores and sensitivities as illustrative rather than portfolio data or forecasts.",
+        "Slide 8 ends with a specific 90-day screen and four committee actions, giving the briefing a usable decision endpoint."
+      ],
+      "issues": [
+        {
+          "slide": 2,
+          "severity": "blocking",
+          "evidence": "Generation defect: the Antarctica section reaches the bottom canvas edge and its “AROUND · ANTARCTICA” label is visibly cut off. This confirms at least one of the reported overflow failures.",
+          "fix": "Shorten or reflow the recovery panel and add safe bottom padding; verify all reported overflows in the exported file before committee use."
+        },
+        {
+          "slide": 2,
+          "severity": "major",
+          "evidence": "Prompt/selection defect: the policy briefing is reduced largely to three ozone-recovery dates and short Montreal/Kigali descriptions. It does not show dated phaseout milestones, affected substance groups, relevant jurisdictions, or an as-of date.",
+          "fix": "Add a sourced, dated regulatory timeline by relevant jurisdiction and connect each milestone to equipment availability, servicing, replacement, and valuation implications."
+        },
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "The portfolio matrix occupies a small part of the slide while its holding labels and explanatory lines are too small for reliable projection reading. Large unused space does not improve interpretation.",
+          "fix": "Expand the plot to nearly full width, increase annotation size, and use short labels with a separate evidence key."
+        },
+        {
+          "slide": 4,
+          "severity": "minor",
+          "evidence": "The four pale arrows repeat the same form above disconnected text blocks. They indicate sequence but do little to reveal where evidence can break the policy-to-value chain.",
+          "fix": "Show explicit inputs, validation gates, and failure points between stages rather than four decorative arrows."
+        },
+        {
+          "slide": 1,
+          "severity": "minor",
+          "evidence": "No as-of date appears on the cover even though the subject is evolving regulation.",
+          "fix": "Add a visible briefing date and the jurisdictions or portfolio perimeter covered."
+        }
+      ],
+      "signatureMoment": "Slide 8 is the strongest composition: the dark action agenda, numbered steps, and mechanical corridor create a decisive close, although it is stronger editorially than analytically."
+    },
+    "B": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 3,
+        "integrity": 3
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 4 turns the policy-to-value argument into a legible four-stage transmission chain, with substance, lifecycle, value channel, and action labels reinforcing the logic.",
+        "Slide 5 is the best substantive visual in either deck: urgency and financial materiality determine distinct monitor, verify, plan, and act-now responses.",
+        "Slide 2 clearly separates ozone-depleting substances from HFC climate exposure and visibly supplies source labels for the recovery dates.",
+        "Slide 7 translates the evidence pack into color-coded underwriting, engagement, and deferral gates that a committee can scan quickly.",
+        "The editorial typography, restrained blue/teal/rust palette, and recurring callout system produce greater visual identity than Deck A."
+      ],
+      "issues": [
+        {
+          "slide": 8,
+          "severity": "blocking",
+          "evidence": "Generation defect: white headings and body copy sit on nearly white cards. “Prioritize assets,” “Classify substance,” and the other action details have extremely weak contrast and are not reliably readable, particularly in projection.",
+          "fix": "Use dark text on the pale cards or dark saturated cards with white text, then run a WCAG-style contrast and projection check."
+        },
+        {
+          "slide": 2,
+          "severity": "major",
+          "evidence": "Prompt/selection defect: despite useful scientific context, the deck still lacks the current policy architecture an investment committee needs—no as-of date, jurisdictional phaseout schedule, compliance milestones, or regulatory differences affecting the portfolio.",
+          "fix": "Replace or supplement the conceptual image with a sourced regulatory timeline and jurisdiction-by-substance table."
+        },
+        {
+          "slide": 5,
+          "severity": "minor",
+          "evidence": "The disclaimer below the matrix is small and low-contrast even though it carries the important warning that all scores and holdings are illustrative replacements.",
+          "fix": "Increase the disclaimer size and contrast or move the sample-data warning into a prominent subtitle."
+        },
+        {
+          "slide": 1,
+          "severity": "minor",
+          "evidence": "The stylized equipment still life is memorable but does not itself provide policy or portfolio evidence, and the cover has no briefing date or portfolio perimeter.",
+          "fix": "Add the as-of date and scope; reserve conceptual imagery for the cover only if subsequent slides provide current policy evidence."
+        }
+      ],
+      "signatureMoment": "Slide 5’s action-coded urgency-by-materiality matrix is the clearest portfolio translation: placement, color, and labels jointly communicate what to monitor, verify, plan, or address now."
+    },
+    "winner": "B",
+    "reason": "B is the deck I would give the user after a mandatory slide 8 contrast correction; as rendered, neither deck is ready. Both satisfy the eight-slide format, use restrained professional palettes, distinguish ODS from HFC exposure correctly, label sample assumptions, and show no missing images or placeholders. Both also share a major selection/content gap: they describe the investment framework more fully than the actual current policy regime. B wins in either viewing order because slides 4, 5, and 7 communicate sequence, prioritization, and decision gates more effectively than A’s flatter arrows, small scatter plot, and text-led exhibits. Its richer visual system earns some added complexity, but the unreadable final cards prevent sustained wow. B exceeds competent default quality only occasionally, chiefly on slide 5. The single highest-leverage improvement to losing Deck A would be replacing its undersized slide 5 scatter plot with a full-width, holding-level exposure map; its slide 2 clipping must also be fixed before use. Route identity is unavailable, so no claim can be made about which deck was the original arm.",
+    "whatWouldMakeWinnerExceptional": "Build the deck around a dated, sourced policy-to-portfolio exposure map: show Montreal/Kigali and relevant jurisdictional milestones, map them to actual owned equipment and substance inventories, carry those exposures through the matrix and stress cases, and end with quantified committee thresholds. Fixing slide 8 contrast is mandatory, but sustained wow requires real policy evidence and portfolio-specific consequences rather than polished illustrative examples."
+  },
+  "usage": {
+    "prompt_tokens": 17092,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 5168,
+    "completion_tokens_details": {
+      "reasoning_tokens": 3534
+    },
+    "total_tokens": 22260
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 69.263
+}

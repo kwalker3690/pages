@@ -1,0 +1,255 @@
+{
+  "id": "g_jxsnezdmaax5cdg",
+  "name": "File",
+  "headingFont": "Chivo Mono",
+  "headingFontName": "Chivo Mono",
+  "headingFontWeight": 700,
+  "bodyFont": "Barlow Semi Condensed",
+  "bodyFontName": "Barlow Semi Condensed",
+  "bodyFontWeight": 400,
+  "config": {
+    "themeBase": "night",
+    "headingColor": "#E7EDF4",
+    "bodyColor": "#C4CDD9",
+    "cardBackground": {
+      "type": "color",
+      "color": {
+        "hex": "#0A0E17"
+      }
+    },
+    "cardColor": {
+      "type": "solid",
+      "color": "#0A0E17"
+    },
+    "surfaceColor": {
+      "type": "solid",
+      "color": "#121A27"
+    },
+    "mutedColor": {
+      "type": "solid",
+      "color": "#8D99AA"
+    },
+    "neutralBorderColor": {
+      "type": "solid",
+      "color": "#2C3849"
+    },
+    "linkColor": {
+      "type": "solid",
+      "color": "#7FD9E9"
+    },
+    "background": {
+      "type": "color",
+      "source": "color.solid",
+      "color": {
+        "hex": "#171F2E"
+      }
+    },
+    "cardBorder": "sm",
+    "cardBorderColor": {
+      "type": "solid",
+      "color": "#2C3849"
+    },
+    "cardTransparency": "default",
+    "cardShadow": "none",
+    "cardFrame": "none",
+    "roundness": "sm",
+    "buttonRoundness": "sm",
+    "shapeColorScheme": "custom",
+    "shapeFill": "none",
+    "shapeBorder": "sm",
+    "shapeShadow": "none",
+    "cardPadding": "40pt 44pt 44pt 44pt",
+    "density": "md",
+    "blockSpacing": 14,
+    "dividerColor": "#2C3849",
+    "dividerThickness": "sm",
+    "letterSpacingHeading": -0.01,
+    "letterSpacingBody": 0,
+    "lineHeightHeading": 1.05,
+    "lineHeightBody": 1.45,
+    "headingTransform": "none",
+    "typeScale": {
+      "display-xl": 72,
+      "display-lg": 56,
+      "display-md": 44,
+      "heading-1": 34,
+      "heading-2": 26,
+      "heading-3": 19,
+      "heading-4": 15,
+      "subheading": 16,
+      "body-lg": 16,
+      "body-normal": 14,
+      "body-sm": 12.5,
+      "eyebrow": 10.5,
+      "caption": 10.5
+    },
+    "roleStyles": {
+      "display": {
+        "font": "Chivo Mono",
+        "italic": false,
+        "transform": "none",
+        "fontWeight": 300,
+        "letterSpacing": -0.02,
+        "lineHeight": 1
+      },
+      "subheading": {
+        "font": "Barlow Semi Condensed",
+        "italic": false,
+        "transform": "none",
+        "fontWeight": 400,
+        "letterSpacing": 0,
+        "lineHeight": 1.4
+      },
+      "eyebrow": {
+        "font": "Chivo Mono",
+        "italic": false,
+        "transform": "uppercase",
+        "color": "#7FD9E9",
+        "fontWeight": 500,
+        "letterSpacing": 0.1,
+        "lineHeight": 1.2
+      },
+      "label": {
+        "font": "Chivo Mono",
+        "italic": false,
+        "transform": "uppercase",
+        "color": "#7FD9E9",
+        "fontWeight": 500,
+        "letterSpacing": 0.06,
+        "lineHeight": 1.2
+      },
+      "caption": {
+        "font": "Chivo Mono",
+        "italic": false,
+        "transform": "none",
+        "color": "#8D99AA",
+        "fontWeight": 400,
+        "letterSpacing": 0,
+        "lineHeight": 1.35
+      }
+    },
+    "cardMargins": {
+      "footer": {
+        "inset": "sm"
+      },
+      "fontSizePt": 10,
+      "pageNumberFormat": "number",
+      "pageNumberPadded": true
+    },
+    "charts": {
+      "textSize": "md",
+      "font": "heading",
+      "roundness": "sm",
+      "gridlineStyle": "solid",
+      "gridlineWidth": "sm",
+      "lineWeight": "md"
+    },
+    "canvasPalette": {
+      "colors": [
+        {
+          "key": "primary",
+          "name": "Structure cyan",
+          "color": {
+            "type": "solid",
+            "color": "#7FD9E9"
+          }
+        },
+        {
+          "key": "risk",
+          "name": "Risk amber",
+          "color": {
+            "type": "solid",
+            "color": "#F2A93B"
+          }
+        },
+        {
+          "key": "grey",
+          "name": "Signal grey",
+          "color": {
+            "type": "solid",
+            "color": "#8D99AA"
+          }
+        },
+        {
+          "key": "plate",
+          "name": "Lifted plate",
+          "color": {
+            "type": "solid",
+            "color": "#121A27"
+          }
+        },
+        {
+          "key": "paper",
+          "name": "Label paper",
+          "color": {
+            "type": "solid",
+            "color": "#E7EDF4"
+          }
+        }
+      ]
+    },
+    "imagery": {
+      "defaultStyleId": "data-field",
+      "styles": [
+        {
+          "id": "data-field",
+          "name": "Data field",
+          "promptGuidance": "Abstract data-field illustration: thin, clearly visible pale-cyan line traces on a deep ink-blue-black ground, hairline strokes with sparse tiny node dots, matte flat finish with no glow bloom or blur, large areas of plain dark ground, quiet and non-literal, no letters or numbers, no people.",
+          "subjects": "Flowing systems read as line traces: a fibre run, parallel queue lanes, a city at night seen as data, a rack rhythm, control-room waveforms, a partition ring, a widening lag gap, a traffic ramp.",
+          "whenToUse": "Ambient field behind or beside the text on covers, section openers, statements, quotes, and the closing. Never behind tables, diagrams, or prose blocks, and never as a stand-in for data.",
+          "references": [
+            "https://cdn-staging.gamma.app/gammatemplatelibrary/g_jxsnezdmaax5cdg/template-assets/f0d13adaf69c5978805f961263560275/01M241E3298YRCF5N046PHQKCC.png",
+            "https://cdn-staging.gamma.app/gammatemplatelibrary/g_jxsnezdmaax5cdg/template-assets/0207e252559a5055f5ccfbebdff2a3a9/01M241E77F2D8XSYK3MFJVGRP5.png",
+            "https://cdn-staging.gamma.app/gammatemplatelibrary/g_jxsnezdmaax5cdg/template-assets/b1c402a1d13ea05b097a04f02edd8995/01M241E3C18TA9M4E2P17N5A1P.png",
+            "https://cdn-staging.gamma.app/gammatemplatelibrary/g_jxsnezdmaax5cdg/template-assets/54b2c6dcbc4013a81bc5b80387aa59b7/01M241E4ZKZ7RZCE48CCGTCK7Y.png"
+          ]
+        },
+        {
+          "id": "screen",
+          "name": "Schematic screen",
+          "promptGuidance": "Schematic screen illustration: a flat, straight-on view of a dark software interface drawn as thin pale-cyan outlines and grey panel blocks on an ink-blue-black ground, with simplified line-chart traces and bar shapes standing in for content, matte finish, no glow, no legible letters or numbers, no hands, no device bezels.",
+          "subjects": "Stand-in evidence figures: a monitoring dashboard, a terminal session, a code editor pane, a phone-sized status screen, a topology export, in portrait or landscape.",
+          "whenToUse": "Framed evidence figures and evidence sets while no real capture exists. A user's own dashboard, terminal, or phone screenshot replaces it at image-style none inside the same frame; the numbered callouts beside the frame carry the facts, never the picture.",
+          "references": [
+            "https://cdn-staging.gamma.app/gammatemplatelibrary/g_jxsnezdmaax5cdg/template-assets/84493ecd2086726192d099c72f8abf3b/01M241GH6WRERVZMAV3ZRTWXWX.png",
+            "https://cdn-staging.gamma.app/gammatemplatelibrary/g_jxsnezdmaax5cdg/template-assets/ab38a69c07b043ca86b90bce970c82da/01M241GJEF5QB6AXTXDC8X77Y5.png",
+            "https://cdn-staging.gamma.app/gammatemplatelibrary/g_jxsnezdmaax5cdg/template-assets/408af7c51962e4c34afabcd47d1c0b47/01M241HMR4WE3K37GQXC4CEGP5.png"
+          ]
+        }
+      ]
+    },
+    "keywords": {
+      "color": [
+        "ink",
+        "cyan",
+        "amber",
+        "dark",
+        "mono"
+      ],
+      "tone": [
+        "technical",
+        "severe",
+        "precise",
+        "engineering",
+        "schematic"
+      ]
+    },
+    "shapeColors": [
+      "#7FD9E9"
+    ],
+    "customCss": ".gml-card {\n  --grid-divider-color: var(--neutral-border-color);\n  --grid-divider-width: 0.75pt;\n}\n\n/* h3/h4 are the system voice (node heads, row heads, table heads) — they take the heading face;\n   the sans stays on paragraph prose and on explicit role=\"subheading\" lines. */\nh3.gml-heading:not([data-role=\"subheading\"]),\nh4.gml-heading:not([data-role=\"subheading\"]) {\n  font-family: var(--heading-font);\n}\n\n.gml-card__footer {\n  font-family: var(--heading-font);\n  letter-spacing: 0.04em;\n}\n"
+  },
+  "fonts": [
+    {
+      "id": "Barlow Semi Condensed",
+      "name": "Barlow Semi Condensed",
+      "url": "https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed%3Aital%2Cwght%400%2C100%3B0%2C200%3B0%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800%3B0%2C900%3B1%2C100%3B1%2C200%3B1%2C300%3B1%2C400%3B1%2C500%3B1%2C600%3B1%2C700%3B1%2C800%3B1%2C900&display=swap"
+    },
+    {
+      "id": "Chivo Mono",
+      "name": "Chivo Mono",
+      "url": "https://fonts.googleapis.com/css2?family=Chivo+Mono%3Aital%2Cwght%400%2C100%3B0%2C200%3B0%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800%3B0%2C900%3B1%2C100%3B1%2C200%3B1%2C300%3B1%2C400%3B1%2C500%3B1%2C600%3B1%2C700%3B1%2C800%3B1%2C900&display=swap"
+    }
+  ],
+  "isDefault": false
+}

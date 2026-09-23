@@ -1,0 +1,127 @@
+{
+  "order": [
+    "library",
+    "original"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 3,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 5
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 opens with a concrete seminar dilemma and a tailored circle-of-chairs illustration rather than beginning with biography or terminology.",
+        "Slides 4–5 use one sustained example to distinguish equal permission, domination, reciprocal rules, and Aufhebung; the explicit analogy and non-data labels protect content integrity.",
+        "Slides 6–8 create a credible lesson rhythm through comparison, qualification, and retrieval practice rather than ending with a passive summary.",
+        "Slides 2, 3, 5, 6, and 7 visibly cite the Stanford Encyclopedia of Philosophy, while slide 7 rejects an automatic-progress reading of Hegel."
+      ],
+      "issues": [
+        {
+          "slide": 2,
+          "severity": "major",
+          "evidence": "The slide describes one developing system, but Logic, Nature, and Spirit are presented as three disconnected text columns. The visual does not show development, dependency, or return.",
+          "fix": "Turn the three fields into a directional system map and highlight the narrower lesson path within it."
+        },
+        {
+          "slide": 3,
+          "severity": "major",
+          "evidence": "Three identical question-mark icons sit above prose blocks. They decorate the questions but do not reveal how claim, internal pressure, and revision interact.",
+          "fix": "Show one proposition moving through consequence, contradiction, and revised account, with arrows or repeated visual tokens."
+        },
+        {
+          "slide": 4,
+          "severity": "minor",
+          "evidence": "The middle card states that one voice dominates and others wait, but its red strip does not encode the imbalance clearly; the audience must infer the relationship from labels.",
+          "fix": "Use proportional airtime blocks or participant tokens so the unequal practice is visible immediately."
+        },
+        {
+          "slide": 6,
+          "severity": "major",
+          "evidence": "The passive-approval and reciprocal-standing panels are mostly text boxes. There is no visible exchange between A and B, so the crucial difference between one-way approval and answerable reciprocity remains verbal.",
+          "fix": "Add directional claim, acknowledgement, challenge, and reply arrows between visibly independent participants."
+        },
+        {
+          "slide": 7,
+          "severity": "major",
+          "evidence": "Individual agency, shared norms, and institutions again appear as adjacent columns despite the claim that practices and institutions make agency effective. The slide does not depict those enabling or revising relationships.",
+          "fix": "Connect the three levels with bidirectional arrows and visually separate enabling effects from opportunities for criticism and revision."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "The retrieval questions are pedagogically sound, but the ending is still predominantly typographic and does not visually reconstruct the movement developed across the lesson.",
+          "fix": "Reuse a compact version of the claim-pressure-transformation-recognition diagram as the final retrieval scaffold."
+        }
+      ],
+      "signatureMoment": "Slide 5's canceled, preserved, and transformed columns make the multiple senses of Aufhebung unusually approachable, although the movement between them remains static."
+    },
+    "B": {
+      "scores": {
+        "specificity": 5,
+        "storytelling": 5,
+        "audience": 5,
+        "coherence": 5,
+        "craft": 4,
+        "integrity": 5
+      },
+      "wow": "sustained",
+      "strengths": [
+        "Slide 1 combines a memorable question, a sharp freedom-versus-enabled-agency contrast, and a distinctive paper-cut image; it establishes both the intellectual tension and the deck's visual language.",
+        "Slides 3–5 form an exceptionally clear explanatory sequence: claim leads to an internal consequence, unequal participation is made spatially visible, and the same participant tokens are reorganized to explain cancellation, preservation, and transformation.",
+        "Slide 6 uses opposed arrow systems to make one-sided acknowledgement and reciprocal recognition visibly different rather than merely defining them in prose.",
+        "Slide 7 extends the lesson from person to practice to institution and includes reverse arrows plus a prominent rejection of automatic progress.",
+        "Slide 8 provides genuine retrieval practice and a concise final takeaway while the three checkpoints visibly restate the lesson's conceptual movement.",
+        "The muted cream, red, ochre, and teal system remains coherent across generated imagery, diagrams, rules, arrows, and callouts."
+      ],
+      "issues": [
+        {
+          "slide": 2,
+          "severity": "minor",
+          "evidence": "The paper-cut collage is distinctive but primarily atmospheric; it does not itself explain how dialectic, Aufhebung, recognition, and social freedom connect.",
+          "fix": "Tie the collage elements to the numbered route or add a subtle directional path through the four concepts."
+        },
+        {
+          "slide": 5,
+          "severity": "minor",
+          "evidence": "This is the central definition of Aufhebung, but unlike surrounding conceptual slides it has no visible source line.",
+          "fix": "Add the same compact source treatment used on slides 3, 6, and 7."
+        },
+        {
+          "slide": 7,
+          "severity": "major",
+          "evidence": "The final line, \"time.\", falls below the beige Institution card, making the text look as though it escaped its intended container even though it remains readable.",
+          "fix": "Increase the card height, reduce body copy slightly, or tighten line spacing so all institution text remains inside the panel."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "The checkpoint cards cover much of the closing paper construction, so the image reads more as a backdrop than as a fully legible explanatory metaphor.",
+          "fix": "Simplify or reposition the construction so its path and gates visibly correspond to the three checkpoint labels."
+        }
+      ],
+      "signatureMoment": "Slide 5 reuses the same A–F participant tokens across canceled, preserved, and transformed states, making Aufhebung visible as reorganization rather than simple replacement."
+    },
+    "winner": "B",
+    "reason": "Deck B is the deck to give the user. It wins in either presentation order because its advantage is concentrated in substantive middle-slide information design, not merely its cover: slides 3–7 visibly demonstrate internal pressure, unequal participation, preservation through change, reciprocal recognition, and institutional mediation. Deck A is accurate, readable, and lesson-like, but too often places prose in adjacent columns without depicting the relationships it names. Both pass the hard gates: the request specified no mandatory count or palette; both are eight-slide English decks with coherent palettes, no missing images, no clipped required content, no unflagged empirical data, and no harmful historical distortion. B has one visible containment defect on slide 7 but no blocking failure. The blind renders do not identify an original experimental arm; if B is the more complex arm, that complexity is earned by clearer explanations rather than ornament. B exceeds competent default quality, while A's most important improvement would be to rebuild slides 3–7 as one linked visual sequence using persistent participant tokens and directional relationships.",
+    "whatWouldMakeWinnerExceptional": "Fix slide 7's card containment, add the missing source on slide 5, and integrate the paper-cut visual premise more directly into the explanatory diagrams so the imagery carries conceptual meaning throughout rather than mainly framing the opening, roadmap, and ending."
+  },
+  "usage": {
+    "prompt_tokens": 17115,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 4384,
+    "completion_tokens_details": {
+      "reasoning_tokens": 2705
+    },
+    "total_tokens": 21499
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 66.937
+}

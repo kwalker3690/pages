@@ -1,0 +1,114 @@
+{
+  "order": [
+    "library",
+    "original"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 4,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 5
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 1, 5, and 7 form a sound numerical narrative: the 5.14-hour loss is established, reproduced step by step, and then reduced in the case study.",
+        "Slide 2 clearly defines the three operating inputs, equations, units, and field-efficiency meaning, with a visible source.",
+        "Slides 6 and 8 convert the calculations into a practical measure-diagnose-improve operating rule rather than ending with theory.",
+        "The white, dark-navy, gray, and red system is consistent, readable, and compliant with the requested palette."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "minor",
+          "evidence": "The lower bar chart is much smaller than the surrounding headline and prose, so the one visual comparison that substantiates the five-hour claim is visually subordinate.",
+          "fix": "Enlarge the chart, label 12.00 and 17.14 directly on the bars, and reduce the adjacent bullet list."
+        },
+        {
+          "slide": 3,
+          "severity": "major",
+          "evidence": "The five-stage process is rendered primarily as adjacent text compartments. The split between the gray 'before the pass' block and the unboxed 'in the field · after' block weakens the sequence, and only the footer states that Verify loops back to Plan.",
+          "fix": "Use a continuous five-step field-operation timeline with directional arrows and a clearly drawn Verify-to-Plan feedback loop."
+        },
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "This is a selection defect rather than a rendering defect: machine selection is presented as a comparison table plus prose, with no tractor-implement, pass-width, access, or power-fit visual. The requested agricultural subject is discussed but not visually explained.",
+          "fix": "Replace part of the table with a field-pass schematic and a system-fit gate covering power, hitch, soil load, transport width, access, and annual use."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The diagnosis table is useful but visually uniform; causes, tests, and actions read as three prose columns rather than a decision path.",
+          "fix": "Add signal-to-test-to-action arrows or compact diagnostic symbols so each row can be followed at a glance."
+        }
+      ],
+      "signatureMoment": "Slide 7's before/after case-study table and three large outcome figures make the operational value of improving field efficiency immediately legible."
+    },
+    "B": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 5
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 is a memorable opening: the aerial tractor image, 'Five hours are hiding in the field' headline, and 12.00-versus-5.14 ledger establish the problem quickly.",
+        "Slide 4 adds a genuinely useful task-specific visual: six 2.0 m passes versus four 3.0 m passes reveal why the wider system changes capacity while the decision gate preserves necessary qualifications.",
+        "Slide 7 combines agricultural context, before/after efficiency, a time chart, and cost outcomes without losing the central claim.",
+        "Slides 3, 5, 6, and 8 maintain a consistent instructional progression from control points to calculation, diagnosis, and operating standard.",
+        "Illustrative inputs, unchanged-cost assumptions, exclusions, and external methods are visibly identified rather than presented as sourced field results."
+      ],
+      "issues": [
+        {
+          "slide": 2,
+          "severity": "minor",
+          "evidence": "The two large formula panels are clear, but the long source line is small and visually compressed along the bottom edge for projection use.",
+          "fix": "Shorten the on-slide citation to organization, document code, and year, with the full reference moved to notes or an appendix."
+        },
+        {
+          "slide": 3,
+          "severity": "minor",
+          "evidence": "The five control points are easy to scan, but the red loss tags behave like isolated labels. The slide does not visually show how Verify feeds the next Plan step.",
+          "fix": "Connect the stages with a directional line and close the sequence with a visible Verify-to-Plan loop."
+        },
+        {
+          "slide": 5,
+          "severity": "minor",
+          "evidence": "The four-column calculation is logically sound, but the equations and unit explanations become relatively small in the middle columns, especially compared with the generous unused lower area.",
+          "fix": "Use a two-row calculation chain with larger equations and explicit carry-forward arrows for 1.00, 0.70, $77.14, and $925.71."
+        },
+        {
+          "slide": 7,
+          "severity": "minor",
+          "evidence": "The photo establishes field context but does not clearly explain waiting or staged refilling, while the bars omit direct 17.14 and 14.63 labels. This is an asset-selection/information-design issue; no visible clipping or missing-image defect is present.",
+          "fix": "Use an annotated headland/refill image or diagram and print the hour values directly at the ends of the bars."
+        }
+      ],
+      "signatureMoment": "Slide 4's six-pass versus four-pass field-width schematic turns machine selection from an abstract specification comparison into a visible operational consequence."
+    },
+    "winner": "B",
+    "reason": "Both decks pass the hard checks: each has eight complete slides, uses a white background with red accents, covers every requested subject, shows no clipping or missing assets, and labels the numerical scenarios as illustrative. The calculations are internally consistent and the assumptions are disclosed. B is the deck I would give the user because slides 1, 4, and 7 add agricultural context and explanatory visuals while preserving the same disciplined technical content. The preference is stable rather than order-dependent. B narrowly exceeds competent default quality through the pass-count schematic and strong opening, but it is not exceptional because much of the middle remains polished text, equations, and tables. No route is identifiable, but the more complex treatment in B earns its added complexity where the field imagery and pass schematic support the explanation. The single most valuable improvement to A would be replacing its text-heavy selection and process slides with a recurring field-operation diagram.",
+    "whatWouldMakeWinnerExceptional": "Build the entire deck around one annotated 12 ha field map that decomposes the 5.14 lost hours into turning, overlap, refill, adjustment, and stoppage segments, then visibly redraw the route and timeline after the intervention. That substantive before/after visual could connect the opening, formulas, machine choice, diagnosis, case study, and conclusion into one memorable explanatory system."
+  },
+  "usage": {
+    "prompt_tokens": 17170,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 4343,
+    "completion_tokens_details": {
+      "reasoning_tokens": 2756
+    },
+    "total_tokens": 21513
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 65.181
+}

@@ -1,0 +1,135 @@
+{
+  "order": [
+    "library",
+    "original"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 5,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 4
+      },
+      "wow": "absent",
+      "strengths": [
+        "Slides 3–4 form an effective classroom prediction-and-reveal sequence: the same three incoming rays are held constant while the amount of ozone changes.",
+        "Slides 7–8 are unusually task-aware for this age group, using sorting and teach-back rather than ending with passive summary bullets.",
+        "The large rounded typography, bright blue-green-yellow palette, short prompts and simple shapes are consistently suitable for ten-year-olds.",
+        "Slides 2, 7 and 8 carefully distinguish protective stratospheric ozone, harmful ground-level ozone, sun safety and climate action.",
+        "All eight slides are visibly complete and unclipped, with strong projection-scale hierarchy."
+      ],
+      "issues": [
+        {
+          "slide": 3,
+          "severity": "minor",
+          "evidence": "Ozone is drawn as one solid vertical bar even though slide 2 correctly describes it as spread through a region of air. A child could read the bar as a literal wall.",
+          "fix": "Show several ozone particles distributed through a labeled atmospheric band while preserving the same controlled comparison."
+        },
+        {
+          "slide": 4,
+          "severity": "minor",
+          "evidence": "The yellow ray lines run directly through the large outcome labels, especially “LESS UV,” weakening the separation between the explanatory text and the modeled ray paths.",
+          "fix": "Move each outcome label into a clear caption area or place it after the Earth rather than over the incoming rays."
+        },
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "The most difficult scientific idea is delivered mainly as four prose columns. “Cooling chemicals” and “atoms” are too broad, while the isolated repeat-arrow beneath “Atoms acted again” does not explain the catalytic cycle.",
+          "fix": "Name ozone-depleting refrigerants and a released chlorine or bromine atom, then show a simple illustrated loop in which that atom damages ozone and is available to act again."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The recovery dates are responsibly labeled as conditional, but the three large numbered cards communicate ranking more strongly than time or geography.",
+          "fix": "Use a proportional timeline or a simple world/Arctic/Antarctic locator graphic while retaining the conditional-projection note."
+        },
+        {
+          "slide": 7,
+          "severity": "minor",
+          "evidence": "The drill-like icon for “Ozone recovery” is visually ambiguous and does not help a child understand safe refrigerant recovery.",
+          "fix": "Replace it with an illustrated cooling unit, recovery cylinder and trained technician."
+        }
+      ],
+      "signatureMoment": "Slides 3–4: children point and vote on two controlled UV-path models, then immediately see the same composition transformed into the answer."
+    },
+    "B": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 3
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 1 and 8 create memorable paper-cut bookends, with the child, rays, Earth and glowing atmospheric arc giving the lesson a distinctive mission-like identity.",
+        "Slides 3–4 provide a clear matched comparison and explicitly state that ozone changes the amount of harmful UV rather than blocking every ray.",
+        "Slide 5 attempts a genuine process visual and openly flags that the chemistry is simplified.",
+        "Slide 7 offers a substantial classification activity that separates ozone recovery, immediate sun safety and climate action.",
+        "The deck is polished and unclipped, with consistent alignment, restrained color and readable body copy."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "minor",
+          "evidence": "The source line is very small, and its white linked text has weak contrast against the pale blue citation box.",
+          "fix": "Increase the citation size and use dark navy link text."
+        },
+        {
+          "slide": 2,
+          "severity": "minor",
+          "evidence": "The molecule is shown as three atoms in a straight line, although ozone has a bent molecular shape. The diagram is otherwise presented as a molecule rather than as a purely symbolic count.",
+          "fix": "Angle the two bonds into a simple bent O3 structure or label the graphic explicitly as a counting model."
+        },
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "The circle labeled “ODS” is not expanded on the slide, and the released reactive atom is represented only by a dot in “O3 + •.” For ten-year-olds, the key actor and mechanism remain cryptic despite the visual sequence.",
+          "fix": "Write “ozone-depleting substance,” identify the released chlorine or bromine atom, and make the repeating atom visibly recur in a loop."
+        },
+        {
+          "slide": 6,
+          "severity": "major",
+          "evidence": "The 2040, 2045 and 2066 milestones are placed at nearly equal intervals on a horizontal timeline even though the date gaps are about 5 and 21 years. The visual encoding therefore misrepresents elapsed time.",
+          "fix": "Position the milestones proportionally, add a broken-axis cue, or replace the line with three non-temporal regional cards."
+        },
+        {
+          "slide": 7,
+          "severity": "major",
+          "evidence": "Tile B says only that a technician “services an old cooling unit.” It does not state that refrigerant is recovered without release, so the intended ozone-recovery classification is scientifically and instructionally ambiguous.",
+          "fix": "Change it to “A trained technician safely recovers the old refrigerant without releasing it.”"
+        },
+        {
+          "slide": 7,
+          "severity": "minor",
+          "evidence": "Six text-heavy tiles plus three large category definitions make this feel more like a business workshop worksheet than the bright illustrated lesson established by the cover.",
+          "fix": "Pair each action with a simple child-readable icon and reveal the category choices in stages."
+        }
+      ],
+      "signatureMoment": "Slide 8’s paper-cut child following gold rays toward the glowing atmospheric arc provides a memorable visual return to the opening mission."
+    },
+    "winner": "A",
+    "reason": "I would give Deck A to this user. Its advantage holds regardless of presentation order: the brighter requested palette, larger child-facing typography, prediction/reveal structure and teach-back tasks are more consistently designed for a class of ten-year-olds. Deck B has the stronger illustrated bookends and occasional visual wow, but much of its middle adopts a restrained adult-reference-deck style; its equal-spaced 2040/2045/2066 timeline and ambiguous cooling-unit action also weaken instructional integrity. Both pass the basic format, subject, clipping and sourcing checks, with no blocking failure. The visible generation defects are minor, such as B’s low-contrast citation and A’s awkward repeat icon; the more important problems are design-selection defects. Route labels are withheld, so the original arm cannot be identified, but the visibly more elaborate B only partly earns its extra complexity. A exceeds competent default quality in classroom interaction design, though not yet in visual wow.",
+    "whatWouldMakeWinnerExceptional": "Carry a recurring illustrated Shield Club character and UV ray through the entire lesson, then rebuild slide 5 as a vivid, scientifically labeled catalytic-cycle scene. That would give A an exceptional substantive visual in the middle and connect its strong activities to a memorable narrative rather than relying mostly on polished classroom diagrams."
+  },
+  "usage": {
+    "prompt_tokens": 17089,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 5656,
+    "completion_tokens_details": {
+      "reasoning_tokens": 3902
+    },
+    "total_tokens": 22745
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 84.302,
+  "evidenceReusedFrom": "generation/judges/r4/school-audience-not-demo-topic/ba.json",
+  "reasonForReuse": "Frozen decks are byte-identical to these already judged versions; no repeated model call."
+}

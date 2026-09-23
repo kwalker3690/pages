@@ -1,0 +1,131 @@
+{
+  "order": [
+    "original",
+    "library"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 5,
+        "coherence": 5,
+        "craft": 5,
+        "integrity": 4
+      },
+      "wow": "occasional",
+      "strengths": [
+        "The persistent blue FIELD GUIDE rail, section names, and slide counts create unusually strong navigation for an independently read reference deck.",
+        "Slides 5, 6, 8, and 10 convert status, decisions, ownership, and transition into distinct information structures rather than repeating one card template.",
+        "The progression from context and scope through service, status, governance, ownership, assurance, and transition is coherent and easy to revisit.",
+        "Sample status and metrics are repeatedly identified as illustrative, including the prominent validation banner and the explicit caveats on slides 1, 2, and 5."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "minor",
+          "evidence": "The small gray cross-reference line beneath the four summary cells has weak contrast and is much less readable than the rest of the opening.",
+          "fix": "Raise its size and contrast or turn the three references into visible navigation links."
+        },
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "The six service stages are arranged as a two-row grid with no arrows, branch, or return path. The composition does not show how a request actually moves, despite the title.",
+          "fix": "Draw one connected flow with the recoverable-review loop and asynchronous reporting branch attached to the relevant stages."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "The four-column ownership matrix is readable but dense, and role, RACI state, transfer timing, and duty text compete inside the same cells.",
+          "fix": "Separate RACI state into a narrow dedicated column and emphasize the handover-critical owner/deputy gaps."
+        },
+        {
+          "slide": 9,
+          "severity": "major",
+          "evidence": "The promised launch-confidence chain is rendered as five adjacent columns without connectors, so dependency, warning, issue, response, and gate read as labels rather than a causal chain. The residual-risk ratings also do not identify which term is likelihood versus impact.",
+          "fix": "Connect the five states with directional links and label the risk dimensions explicitly."
+        },
+        {
+          "slide": 10,
+          "severity": "major",
+          "evidence": "The slide calls T+0 formal handover acceptance, while the T+10 row says to accept or extend ownership. That makes the operative acceptance point ambiguous.",
+          "fix": "Rename T+0 as transition initiation or provisional receipt and reserve formal acceptance for T+10."
+        }
+      ],
+      "signatureMoment": "Slide 10 is a strong reference ending: the dated transfer sequence and the 'Proceed without the author?' acceptance test turn the opening memory-transfer premise into concrete actions."
+    },
+    "B": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 5,
+        "coherence": 5,
+        "craft": 4,
+        "integrity": 4
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 immediately exposes the critical path from evidence through benchmark, decision, and acceptance, making the opening useful rather than merely decorative.",
+        "Slide 4 is the clearest process explanation in either deck: numbered chevrons establish sequence, while the two lower panels explain recovery and asynchronous reporting.",
+        "Slides 5, 6, and 9 distinguish readiness evidence, decision memory, risks, active issues, and questions with clear operational consequences.",
+        "The restrained charcoal, off-white, and rust palette is calm and professional, and all ten slides render without visible clipping or missing assets."
+      ],
+      "issues": [
+        {
+          "slide": 2,
+          "severity": "minor",
+          "evidence": "The user-outcome tile says '15 min' rather than showing that 15 minutes is a maximum threshold; the other quantitative tiles more clearly communicate direction.",
+          "fix": "Use '≤15 min' and retain the note that all thresholds are illustrative."
+        },
+        {
+          "slide": 5,
+          "severity": "minor",
+          "evidence": "The readiness table is informative, but nearly every row has the same typographic weight; the failed tests, open rehearsal, role confirmation, and reporting miss require close reading to isolate.",
+          "fix": "Add a compact exception column or visual markers for the evidence still blocking launch."
+        },
+        {
+          "slide": 7,
+          "severity": "major",
+          "evidence": "The operating model is almost entirely two columns of prose. Neither the hierarchy of truth nor the escalation sequence is visualized, so the slide explains rules but does not reveal authority or escalation flow at a glance.",
+          "fix": "Render the source hierarchy as ranked layers and the warning-to-escalation rules as a threshold ladder."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "The continuity condition is set as a small, low-emphasis line beneath a dense ownership table even though deputies and transferred access are acceptance-critical.",
+          "fix": "Promote continuity to a highlighted gate with named missing-owner and deputy fields."
+        },
+        {
+          "slide": 9,
+          "severity": "major",
+          "evidence": "Risk codes use unexplained shorthand such as M/H, H/H, and L/H. The four questions are also separated from the risks and active issue they are meant to close.",
+          "fix": "Define likelihood and impact, then map each question directly to its associated risk, issue, owner, and gate."
+        },
+        {
+          "slide": 10,
+          "severity": "major",
+          "evidence": "The left panel describes T+0 as the formally accepted start of handover, but the T+10 milestone says 'Accept or extend handover.' The difference between initiating transfer and accepting ownership is not explicit.",
+          "fix": "Label T+0 as transfer start and T+10 as formal ownership acceptance."
+        }
+      ],
+      "signatureMoment": "Slide 4 combines a six-stage service path with recoverable-failure and delayed-reporting branches, providing the deck's strongest substantive visual explanation."
+    },
+    "winner": "A",
+    "reason": "I would give the user Deck A. Its persistent navigation, purposeful variation, and stronger opening-to-ending narrative make it easier to use as a standalone handover field guide. The preference remains stable in either review order, although the margin is modest. Both decks pass the visible count, palette, format, clipping, missing-image, placeholder, and subject-coverage checks; both clearly flag that the records and numbers are illustrative. Neither should be treated as an operational handover until real records replace the samples and the T+0/T+10 acceptance ambiguity is corrected. These are content/selection limitations rather than visible generation defects. The more visually complex A largely earns that complexity through navigation and varied reference structures, though its photographs are atmospheric rather than explanatory. A exceeds competent default quality, but not enough for sustained wow because its central process and risk relationships remain mostly grids and tables. The single most useful improvement to B would be a persistent critical-path spine linking benchmark, D-04, owner, risk, question, and milestone across slides 5–10.",
+    "whatWouldMakeWinnerExceptional": "Replace the decorative imagery and disconnected process columns with one exceptional end-to-end evidence-chain visual that follows a request from intake through status evidence, D-04, accountable owner, risk response, and final acceptance, then reuse that chain as a highlighted navigation device through the middle and ending."
+  },
+  "usage": {
+    "prompt_tokens": 21159,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 4839,
+    "completion_tokens_details": {
+      "reasoning_tokens": 3117
+    },
+    "total_tokens": 25998
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 71.731
+}

@@ -1,0 +1,125 @@
+{
+  "order": [
+    "original",
+    "library"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 4
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 is a memorable, task-specific opening: the 5.14-hour loss, three capacity figures, and aerial tractor image establish the operational stakes immediately.",
+        "Slides 2 and 5 make the calculation reproducible by keeping units visible and carrying the same 2.0 m, 5.0 km/h, 0.70 efficiency, and $54/hour assumptions through capacity and cost.",
+        "Slide 7 provides the strongest substantive comparison in either deck: before/after efficiency, hours, cost per hectare, total cost, and savings are visible together beside relevant field imagery.",
+        "The white, black, pale-gray, and red system remains coherent across photographs, equations, tables, and the closing cycle."
+      ],
+      "issues": [
+        {
+          "slide": 7,
+          "severity": "blocking",
+          "evidence": "The red savings band is cut flush against the lower canvas edge, its second line and page number occupy the unsafe edge area, and a stray red wedge appears beside the photograph. This visually matches the reported overflow defect.",
+          "fix": "Inset the savings band and page number from the bottom, remove the stray shape, and re-export after checking all elements against the slide bounds."
+        },
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "The hydraulic-connection photograph conveys maintenance or setup but does not show the competing 2.0 m and 3.0 m systems, so the selection decision is communicated almost entirely through two arithmetic cards.",
+          "fix": "Replace the photo with scaled machine silhouettes or field-pass diagrams that compare width, access, power, turning footprint, and capacity for both options."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "The five donut segments contain small icons but no direct labels or connectors; viewers must infer which segment corresponds to Measure, Separate, Compare, Improve, and Remeasure from surrounding text.",
+          "fix": "Label each segment directly and use directional arrows so the operating loop can be understood without scanning the surrounding paragraphs."
+        },
+        {
+          "slide": 2,
+          "severity": "minor",
+          "evidence": "The method credit names Iowa State University Extension but supplies no publication title, date, or visible URL, limiting reference value.",
+          "fix": "Add a complete source note for the capacity convention and distinguish it from the deck's illustrative cost assumptions."
+        }
+      ],
+      "signatureMoment": "Slide 7's field-specific before/after case study turns an efficiency increase from 0.70 to 0.82 into 2.51 hours and $135.47 saved without adding power."
+    },
+    "B": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 3,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 3,
+        "integrity": 4
+      },
+      "wow": "absent",
+      "strengths": [
+        "Slide 5 has strong instructional hierarchy: four numbered calculation steps lead directly to a high-contrast output panel containing capacity, cost per hectare, and total cost.",
+        "Slide 7 presents the case-study arithmetic cleanly in a before/after table and gives the three outcomes—hours, dollars, and percentage—appropriate emphasis.",
+        "Typography, numbering, and the warm-white, navy, gray, and red palette are consistent across the deck.",
+        "The examples are explicitly identified as illustrative or assumed rather than being presented as observed evidence."
+      ],
+      "issues": [
+        {
+          "slide": 6,
+          "severity": "blocking",
+          "evidence": "Both lower beige cards run beyond the bottom of the rendered slide; their containers are visibly truncated, confirming an overflow and making the slide look unfinished.",
+          "fix": "Reduce card height or text size, increase lower margin, and verify the complete 2×2 grid within the canvas before delivery."
+        },
+        {
+          "slide": 1,
+          "severity": "major",
+          "evidence": "A large empty middle area separates the explanatory copy from a small generic tractor illustration; the illustration does not show where the 5.14 hours are lost or how theoretical and effective work differ.",
+          "fix": "Use the space for a 12.00-versus-17.14-hour timeline or field-route diagram that visibly identifies turning, overlap, refill, and stoppage losses."
+        },
+        {
+          "slide": 3,
+          "severity": "major",
+          "evidence": "The five stages are presented as five similarly weighted text columns with severe line wrapping. The horizontal rule shows order but not feedback, dependencies, or where losses accumulate.",
+          "fix": "Convert the stages into a field-operation journey with concise labels, stage-specific visuals, and a feedback arrow from Verify to Plan."
+        },
+        {
+          "slide": 8,
+          "severity": "major",
+          "evidence": "The conclusion is primarily a numbered text list even though the content describes a repeatable operating cycle. No visual relationship connects Measure, Separate, Compare, Improve, and Remeasure.",
+          "fix": "Replace the list with a labeled closed-loop process that reuses the loss categories and metrics introduced earlier."
+        },
+        {
+          "slide": 2,
+          "severity": "minor",
+          "evidence": "The three definition cards, large formula band, three secondary equations, explanatory sentence, and citation compete on one slide, producing a dense reference page rather than a paced teaching moment.",
+          "fix": "Separate the conceptual relationship from the reference formulas, or use progressive emphasis to establish theoretical capacity before introducing efficiency and cost."
+        },
+        {
+          "slide": 2,
+          "severity": "minor",
+          "evidence": "The source note identifies Iowa State University Extension but lacks a publication title, date, and visible URL.",
+          "fix": "Provide a complete citation and explicitly mark the dollar figures as scenario assumptions."
+        }
+      ],
+      "signatureMoment": "Slide 5's dark output panel creates a clear endpoint for the worked calculation, with 0.70 ha/hour, $77.14 per hectare, and $925.71 total grouped together."
+    },
+    "winner": "A",
+    "reason": "A is the deck I would give the user after correcting its slide 7 export defect. It offers the stronger brief-specific premise, more relevant agricultural imagery, clearer calculation sequencing, and a more convincing case-study peak. The preference does not reverse with presentation order. As rendered, neither deck is fully ready: A has one visible lower-edge overflow defect, while B has a clearly truncated slide 6 and more slides that reduce potentially explanatory material to text columns or lists. The single most valuable change for B would be to introduce one persistent field-operation visual model—such as an annotated route and time-loss timeline—and use it across the stages, actions, case study, and conclusion. Route identity is unavailable, so an 'original arm' cannot be assigned; observed A's added image and layout complexity earns the preference on slides 1 and 7, but it does not yet exceed competent default quality consistently enough for sustained wow.",
+    "whatWouldMakeWinnerExceptional": "Build the entire deck around an annotated field-route and time-loss model that explains exactly how a 12.00-hour theoretical job becomes 17.14 hours, then show how planning, machine selection, setup, operation, and verification remove specific portions of that loss. Reuse that model in the case study and closing loop, repair slide 7's overflow, and add complete source citations. That would turn A's occasional strong moments into sustained explanatory storytelling."
+  },
+  "usage": {
+    "prompt_tokens": 17170,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 4027,
+    "completion_tokens_details": {
+      "reasoning_tokens": 2560
+    },
+    "total_tokens": 21197
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 63.064
+}

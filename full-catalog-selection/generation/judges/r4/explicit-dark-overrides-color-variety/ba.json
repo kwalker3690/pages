@@ -1,0 +1,121 @@
+{
+  "order": [
+    "library",
+    "original"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 3,
+        "audience": 3,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 5
+      },
+      "wow": "absent",
+      "strengths": [
+        "Slide 1 establishes a restrained monochrome editorial tone with readable type over a distinctive fluid texture.",
+        "Slide 3 makes the production-versus-discovery distinction concrete through a direct side-by-side comparison.",
+        "Slides 4–7 form a logical progression from defining an experiment to taking action within 72 hours.",
+        "Slide 8 provides a concise closing formulation and returns to atmospheric imagery rather than ending on a procedural chart.",
+        "The illustrative status of the numerical example is explicitly disclosed on slide 6, and no unsupported empirical result is presented as fact."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "blocking",
+          "evidence": "The visible label “Provisional session concept” makes the opening look like an internal draft rather than a conference-ready keynote.",
+          "fix": "Replace it with the event, speaker, or session metadata, or remove it entirely. This is a selection/readiness defect."
+        },
+        {
+          "slide": 3,
+          "severity": "major",
+          "evidence": "The numbered donut segments imply cycles, but there are no directional cues and the surrounding labels are not visibly connected to individual segments. The audience must infer the sequence.",
+          "fix": "Use directional rings or an explicit connected sequence so the two operating modes can be understood immediately."
+        },
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "Five narrow columns combine headings, questions, labels, and multi-line examples. The small monospaced copy is dense for live projection and gives every column nearly equal emphasis.",
+          "fix": "Stage the five elements across builds or compress them into a single left-to-right experimental frame with one emphasized worked example."
+        },
+        {
+          "slide": 6,
+          "severity": "major",
+          "evidence": "Rounds 1 and 3 use outlined boxes while rounds 2 and 4 show bare numerals, with no legend explaining the alternating treatment. The inconsistency looks like incomplete rendering rather than meaningful encoding.",
+          "fix": "Render all 24 departures consistently, or explicitly encode and label what the two treatments mean. This is a generation/craft defect."
+        },
+        {
+          "slide": 5,
+          "severity": "minor",
+          "evidence": "The central three-part diagram is clear but generic; it restates “material, rule, perspective” without showing how an actual idea changes under any of those interventions.",
+          "fix": "Show one concrete idea transformed three ways so the interruption produces visible evidence rather than category labels."
+        }
+      ],
+      "signatureMoment": "Slide 3’s paired production and discovery loops are the deck’s clearest substantive visual, though the missing directional encoding limits its impact."
+    },
+    "B": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 4,
+        "coherence": 5,
+        "craft": 4,
+        "integrity": 2
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 is a memorable opening: the hand-held black plane, narrow opening, and coral emphasis on “unexpected” turn the thesis into an image.",
+        "Slides 3 and 4 use process graphics, arrows, hierarchy, and summary bands to reveal sequence and decision logic rather than merely decorating prose.",
+        "Slide 5 is a strong cinematic pacing change; the prism image gives “change one axis” a tailored visual metaphor while the right panel remains legible.",
+        "Slide 7 converts the action plan into a spatial timeline, making the 72-hour sequence faster to grasp than three ordinary columns.",
+        "Slides 1 and 8 form a coherent visual bookend around openings, light, and controlled interruption, while the coral accent remains disciplined throughout."
+      ],
+      "issues": [
+        {
+          "slide": 6,
+          "severity": "blocking",
+          "evidence": "The table claims “24 departures” and “4 rounds × 6 each,” but the fourth row visibly contains seven dots, including one beyond column F. The graphic therefore shows 25 departures while stating 24.",
+          "fix": "Remove the extra dot and recheck the rendered count against the title and legend. This is a generation/content defect and prevents the deck from being ready as rendered."
+        },
+        {
+          "slide": 6,
+          "severity": "major",
+          "evidence": "Even aside from the count error, the dots represent only hypothetical departures; the audience never sees an actual sketch, variation, or reviewer mark. The most evidence-oriented slide stops at protocol.",
+          "fix": "Turn the field into a 24-item contact sheet of real sample outcomes and overlay the reviewers’ “surprising” and “usable” marks."
+        },
+        {
+          "slide": 4,
+          "severity": "minor",
+          "evidence": "The explanatory line at the bottom of the first dark-red card has weak contrast and is much smaller than nearby content, making it vulnerable in a large room.",
+          "fix": "Increase its size and contrast or remove it if the speaker will supply that explanation."
+        },
+        {
+          "slide": 3,
+          "severity": "minor",
+          "evidence": "The large coral conclusion bar is visually louder than both process rows, so the summary competes with the comparison it is meant to synthesize.",
+          "fix": "Reduce the bar height or saturation and preserve the strongest emphasis for the contrasting loop structures."
+        }
+      ],
+      "signatureMoment": "Slide 5’s prism-and-hands composition turns deliberate variation into a cinematic visual metaphor while maintaining a usable explanatory panel."
+    },
+    "winner": "B",
+    "reason": "Deck B is the one to give this creative-conference user after correcting slide 6. Its preference is not order-dependent: it has a more memorable opening, stronger image-to-idea alignment, clearer process storytelling, and a convincing visual bookend. Both decks meet the eight-slide count, dark palette, and basic conference format, with no visible clipping or missing images. Neither is ready as rendered: A retains a draft-status label on slide 1, while B contains a direct 24-versus-25 contradiction on slide 6. Route identity is unavailable, but B’s additional visual complexity is mostly earned because slides 3, 4, and 7 improve comprehension rather than merely adding decoration. B exceeds competent default quality in art direction and pacing, but not exceptional quality because its central worked example never reveals actual creative outputs. The single most valuable improvement to A would be replacing the abstract protocol across slides 4–6 with one unfolding, visibly transformed creative example.",
+    "whatWouldMakeWinnerExceptional": "Rebuild slide 6 as an accurate 24-item contact sheet of actual six-word-brief departures, then reveal the three reviewers’ marks and the ideas that advance. That would fix the integrity failure and provide the exceptional substantive visual currently missing from an otherwise strong keynote."
+  },
+  "usage": {
+    "prompt_tokens": 17092,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 4757,
+    "completion_tokens_details": {
+      "reasoning_tokens": 3165
+    },
+    "total_tokens": 21849
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 71.007
+}

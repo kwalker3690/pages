@@ -1,0 +1,122 @@
+{
+  "headingFont": "Bodoni Moda",
+  "headingFontWeight": 600,
+  "bodyFont": "Manrope",
+  "bodyFontWeight": 400,
+  "config": {
+    "canvasPalette": {
+      "colors": [
+        {
+          "key": "primary",
+          "name": "Editorial Oxblood",
+          "color": {
+            "type": "solid",
+            "color": "#782D3D"
+          }
+        },
+        {
+          "key": "skin",
+          "name": "Rose Clay",
+          "color": {
+            "type": "solid",
+            "color": "#C78F86"
+          }
+        },
+        {
+          "key": "warm",
+          "name": "Burnished Apricot",
+          "color": {
+            "type": "solid",
+            "color": "#B76845"
+          }
+        },
+        {
+          "key": "ink",
+          "name": "Espresso Ink",
+          "color": {
+            "type": "solid",
+            "color": "#211A18"
+          }
+        },
+        {
+          "key": "rule",
+          "name": "Gallery Putty",
+          "color": {
+            "type": "solid",
+            "color": "#C8BEB1"
+          }
+        }
+      ],
+      "gradients": []
+    },
+    "cardColor": {
+      "type": "solid",
+      "color": "#FBF8F3"
+    },
+    "surfaceColor": {
+      "type": "solid",
+      "color": "#EEE6DC"
+    },
+    "headingColor": "#211A18",
+    "bodyColor": "#352B28",
+    "mutedColor": {
+      "type": "solid",
+      "color": "#6D605B"
+    },
+    "background": {
+      "type": "color",
+      "source": "color.solid",
+      "color": {
+        "hex": "#E5DCCF"
+      }
+    },
+    "letterSpacingHeading": -0.02,
+    "roundness": "sm",
+    "cardShadow": "none",
+    "cardBorder": "none",
+    "shapeFill": "solid",
+    "shapeColorScheme": "default",
+    "roleStyles": {
+      "subheading": {
+        "font": "Manrope",
+        "fontWeight": 600
+      },
+      "eyebrow": {
+        "font": "Manrope",
+        "transform": "uppercase",
+        "letterSpacing": 0.12
+      }
+    },
+    "imagery": {
+      "defaultStyleId": "sculptural-hair-editorial",
+      "styles": [
+        {
+          "id": "sculptural-hair-editorial",
+          "name": "Sculptural hair editorial",
+          "promptGuidance": "Medium-format fashion beauty photography of diverse adult models with hair fully visible, realistic strand detail, restrained styling and subtle film grain under warm directional studio light, using gallery cream #FBF8F3, oxblood #782D3D, rose clay #C78F86 and espresso #211A18, no text or lettering.",
+          "subjects": "Adult models with varied hair textures and skin tones; silhouettes, profiles, controlled movement and macro hair details that clearly reveal the haircut or styling structure.",
+          "whenToUse": "Use on every slide, varying between full portraits, profiles, motion studies and close texture details while maintaining one coherent casting and lighting world."
+        }
+      ]
+    },
+    "typeScale": {
+      "display-xl": 84,
+      "display-lg": 64,
+      "display-md": 48,
+      "heading-1": 40,
+      "heading-2": 30,
+      "heading-3": 22,
+      "heading-4": 18,
+      "subheading": 20,
+      "body-lg": 19,
+      "body-normal": 16,
+      "body-sm": 13,
+      "eyebrow": 11,
+      "caption": 11
+    },
+    "density": "md",
+    "cardPadding": "lg",
+    "lineHeightBody": 1.35,
+    "lineHeightHeading": 1.1
+  }
+}

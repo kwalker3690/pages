@@ -1,0 +1,244 @@
+{
+  "id": "g_lvtofm3mx3mi2fm",
+  "name": "File",
+  "headingFont": "Schibsted Grotesk",
+  "headingFontName": "Schibsted Grotesk",
+  "headingFontWeight": 600,
+  "bodyFont": "Fira Sans",
+  "bodyFontName": "Fira Sans",
+  "bodyFontWeight": 400,
+  "config": {
+    "canvasPalette": {
+      "colors": [
+        {
+          "key": "primary",
+          "name": "Verdict violet",
+          "color": {
+            "type": "solid",
+            "color": "#5B2E91"
+          }
+        },
+        {
+          "key": "ink",
+          "name": "Ink",
+          "color": {
+            "type": "solid",
+            "color": "#161616"
+          }
+        },
+        {
+          "key": "paper",
+          "name": "Stone paper",
+          "color": {
+            "type": "solid",
+            "color": "#F4F2EE"
+          }
+        },
+        {
+          "key": "plate",
+          "name": "Lifted plate",
+          "color": {
+            "type": "solid",
+            "color": "#EAE6DF"
+          }
+        },
+        {
+          "key": "graphite",
+          "name": "Graphite",
+          "color": {
+            "type": "solid",
+            "color": "#5A5751"
+          }
+        },
+        {
+          "key": "rule",
+          "name": "Hairline",
+          "color": {
+            "type": "solid",
+            "color": "#CFC9BF"
+          }
+        },
+        {
+          "key": "tint",
+          "name": "Verdict tint",
+          "color": {
+            "type": "solid",
+            "color": "#E6DDF0"
+          }
+        },
+        {
+          "key": "series-two",
+          "name": "Graphite series",
+          "color": {
+            "type": "solid",
+            "color": "#8A8580"
+          }
+        },
+        {
+          "key": "series-three",
+          "name": "Light series",
+          "color": {
+            "type": "solid",
+            "color": "#C9C4BC"
+          }
+        }
+      ],
+      "gradients": []
+    },
+    "headingColor": "#161616",
+    "bodyColor": "#161616",
+    "cardColor": {
+      "type": "solid",
+      "color": "#F4F2EE"
+    },
+    "surfaceColor": {
+      "type": "solid",
+      "color": "#EAE6DF"
+    },
+    "mutedColor": {
+      "type": "solid",
+      "color": "#5A5751"
+    },
+    "neutralBorderColor": {
+      "type": "solid",
+      "color": "#CFC9BF"
+    },
+    "dividerColor": {
+      "type": "solid",
+      "color": "#CFC9BF"
+    },
+    "dividerThickness": "sm",
+    "background": {
+      "type": "color",
+      "source": "color.solid",
+      "color": {
+        "hex": "#DDD9D1"
+      }
+    },
+    "headingTransform": "none",
+    "letterSpacingHeading": -0.015,
+    "letterSpacingBody": 0,
+    "lineHeightHeading": 1.12,
+    "lineHeightBody": 1.38,
+    "density": "md",
+    "blockSpacing": 14,
+    "roundness": "sm",
+    "cardShadow": "default",
+    "cardBorder": "none",
+    "cardPadding": "lg",
+    "cardFrame": "none",
+    "shapeFill": "solid",
+    "shapeBorder": "sm",
+    "shapeShadow": "none",
+    "shapeColorScheme": "accent",
+    "typeScale": {
+      "display-xl": 64,
+      "display-lg": 48,
+      "display-md": 40,
+      "heading-1": 32,
+      "heading-2": 26,
+      "heading-3": 18,
+      "heading-4": 16,
+      "subheading": 18,
+      "body-lg": 17,
+      "body-normal": 14,
+      "body-sm": 12.5,
+      "eyebrow": 11,
+      "caption": 12
+    },
+    "roleStyles": {
+      "display": {
+        "font": "Schibsted Grotesk",
+        "fontWeight": 600,
+        "letterSpacing": -0.02,
+        "lineHeight": 1.05,
+        "transform": "none"
+      },
+      "subheading": {
+        "font": "Fira Sans",
+        "fontWeight": 600,
+        "letterSpacing": 0,
+        "lineHeight": 1.3,
+        "transform": "none"
+      },
+      "eyebrow": {
+        "font": "Fira Mono",
+        "fontWeight": 400,
+        "transform": "uppercase",
+        "letterSpacing": 0.08,
+        "lineHeight": 1.25,
+        "color": "#5A5751"
+      },
+      "label": {
+        "font": "Fira Mono",
+        "fontWeight": 400,
+        "transform": "uppercase",
+        "letterSpacing": 0.08,
+        "lineHeight": 1.25,
+        "color": "#5B2E91"
+      },
+      "caption": {
+        "font": "Fira Sans",
+        "fontWeight": 400,
+        "transform": "none",
+        "letterSpacing": 0,
+        "lineHeight": 1.3,
+        "color": "#5A5751"
+      }
+    },
+    "charts": {
+      "roundness": "sm",
+      "gridlineStyle": "solid",
+      "gridlineColor": {
+        "type": "solid",
+        "color": "#CFC9BF"
+      },
+      "gridlineWidth": "sm",
+      "lineWeight": "md",
+      "font": "body",
+      "textSize": "md"
+    },
+    "cardMargins": {
+      "footer": {},
+      "pageNumberFormat": "number",
+      "pageNumberPadded": true
+    },
+    "imagery": {
+      "defaultStyleId": "evidence-photo",
+      "styles": [
+        {
+          "id": "evidence-photo",
+          "name": "Evidence photography",
+          "promptGuidance": "documentary photograph, natural available light with a slight overcast softness, wide vantage at human eye level with genuine depth, honest natural color in warm neutrals with no filter and no duotone, quiet precise composition with one clear focal subject and a calm uncluttered area, people only as small incidental figures never facing the camera, no text, no logos",
+          "subjects": "The places and objects the evidence was gathered from, drawn from the user's content: production and warehouse floors, storage aisles, loading docks, control rooms, retail shelving, field sites, laboratory benches, transit hubs, ports, construction sites, clinic corridors, fleets in a yard, a single tool or artifact in its working setting. Never documents, desks, laptops, handshakes, skylines, abstract teamwork, or stock portraits facing the camera.",
+          "whenToUse": "Covers, act dividers, the full-bleed card, the image-with-explanation split, galleries, quote backdrops, and people cards. When copy will sit on the photograph, name the calm area (a plain wall, floor, sky, or shadow) and where it sits in the frame. Chart, table, scorecard, and ledger cards stay photo-free.",
+          "references": [
+            "https://cdn-staging.gamma.app/gammatemplatelibrary/g_lvtofm3mx3mi2fm/template-assets/9c7de435cf6f463e1ef748312653349d/01M21V039A8430JBRDDGZ4ABPQ.png",
+            "https://cdn-staging.gamma.app/gammatemplatelibrary/g_lvtofm3mx3mi2fm/template-assets/cd10330cc61fc5b5e1096a59be3c8377/01M21V1N2HGGZ40GA7CE1ERJAJ.png",
+            "https://cdn-staging.gamma.app/gammatemplatelibrary/g_lvtofm3mx3mi2fm/template-assets/50c555f445c9fe5ef93d6fa615ebbfc9/01M21V1TH7EKVYADB1F2CANBQG.png",
+            "https://cdn-staging.gamma.app/gammatemplatelibrary/g_lvtofm3mx3mi2fm/template-assets/8e6b0d9c763819c002923506d56e3fd1/01M21V20T39Z1HT5CAFDSVSBDP.png"
+          ]
+        }
+      ]
+    },
+    "customCss": "/* Verdict — theme-level type routing (portable renderer hooks only).\n   The display face does display and H1/H2 work; H3/H4 take the text face so dense cards\n   read as text (T3). Both skins inherit this through their own --body-font. */\n.gml-card h3.gml-heading,\n.gml-card h4.gml-heading {\n  font-family: var(--body-font);\n}\n"
+  },
+  "fonts": [
+    {
+      "id": "Fira Mono",
+      "name": "Fira Mono",
+      "url": "https://fonts.googleapis.com/css2?family=Fira+Mono%3Aital%2Cwght%400%2C400%3B0%2C500%3B0%2C700%3B1%2C400%3B1%2C500%3B1%2C700&display=swap"
+    },
+    {
+      "id": "Fira Sans",
+      "name": "Fira Sans",
+      "url": "https://fonts.googleapis.com/css2?family=Fira+Sans%3Aital%2Cwght%400%2C100%3B0%2C200%3B0%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800%3B0%2C900%3B1%2C100%3B1%2C200%3B1%2C300%3B1%2C400%3B1%2C500%3B1%2C600%3B1%2C700%3B1%2C800%3B1%2C900&display=swap"
+    },
+    {
+      "id": "Schibsted Grotesk",
+      "name": "Schibsted Grotesk",
+      "url": "https://fonts.googleapis.com/css2?family=Schibsted+Grotesk%3Aital%2Cwght%400%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800%3B0%2C900%3B1%2C400%3B1%2C500%3B1%2C600%3B1%2C700%3B1%2C800%3B1%2C900&display=swap"
+    }
+  ],
+  "isDefault": false
+}

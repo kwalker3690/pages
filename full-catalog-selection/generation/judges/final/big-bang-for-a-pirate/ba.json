@@ -1,0 +1,122 @@
+{
+  "order": [
+    "library",
+    "original"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 4,
+        "audience": 3,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 4
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 3 turns expansion into a valid before/after grid comparison: the same A–B–C markers separate uniformly without identifying a center.",
+        "Slides 4 and 5 provide clear explanatory graphics rather than decorative space imagery: a three-stage cooling sequence and a direct short-versus-long wavelength comparison.",
+        "Slides 2 and 7 carefully distinguish an early hot, dense state from an explosion into a pre-existing void and explicitly mark what the model does not explain.",
+        "Slide 8 closes with a useful convergence diagram connecting redshift and relic light to one expansion-and-cooling history."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "major",
+          "evidence": "Selection/brief-fit defect: the only photographic opener shows a modern observatory, while the requested playful illustrated pirate voyage is reduced to the word “Captain” and a few nautical phrases. The visual could front a conventional astronomy lecture.",
+          "fix": "Make a recurring illustrated pirate navigator and cosmic chart the explanatory frame, beginning with a memorable shipboard observation rather than a generic observatory photograph."
+        },
+        {
+          "slide": 2,
+          "severity": "minor",
+          "evidence": "The oversized “13.8” beside two prose paragraphs is a polished but generic statistic layout; it does not visualize either deep time or cooling.",
+          "fix": "Turn the age into the first position on a voyage chart or time course that continues through later slides."
+        },
+        {
+          "slide": 3,
+          "severity": "minor",
+          "evidence": "Generation/craft defect: “UNIFORM SCALE / BOTH AXES / NO MARKED ORIGIN” is squeezed into the narrow gap between panels, while the important gravitationally-unbound caveat is tiny and low contrast at lower left.",
+          "fix": "Move the scale explanation above the arrow and raise the caveat to readable presentation size."
+        },
+        {
+          "slide": 6,
+          "severity": "major",
+          "evidence": "The prose says other observers “detect relic light too,” although A, B, and C are hypothetical observers, not actual measurements. The repeated circles and inward arrows explain local directions but visually resemble radiation converging on three centers.",
+          "fix": "Change “detect” to “would detect” and use clearly labeled hypothetical sky domes or sightlines that cannot be mistaken for physical convergence."
+        },
+        {
+          "slide": 7,
+          "severity": "minor",
+          "evidence": "The visual pace drops to two large text columns with only a divider and bottom rule; after the diagrams on slides 3–6, this feels like a report page rather than another stage of the voyage.",
+          "fix": "Map the evidence-supported route and the uncharted region spatially, preserving the strong limits language while reducing prose."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "The explanatory copy inside the two teal evidence boxes is much smaller and lower contrast than the adjacent conclusion, weakening projection readability at the final synthesis.",
+          "fix": "Shorten each evidence statement and enlarge it so the two inputs remain legible from the back of a room."
+        }
+      ],
+      "signatureMoment": "Slide 3’s expanding coordinate chart is the deck’s clearest substantive visual: it directly corrects the misconception that galaxies are ships fleeing a central blast."
+    },
+    "B": {
+      "scores": {
+        "specificity": 5,
+        "storytelling": 5,
+        "audience": 4,
+        "coherence": 5,
+        "craft": 4,
+        "integrity": 5
+      },
+      "wow": "sustained",
+      "strengths": [
+        "Slide 1 is a memorable opening: the engraved telescope, celestial-chart arcs, distant ship, and “reverse the telescope” title establish a distinctive cosmic-navigation premise rather than merely adding pirate icons.",
+        "Slide 2 continues that premise with a log-entry label and astrolabe-like illustration, while its caption explicitly prevents the concept art from being mistaken for observational data.",
+        "Slide 3 accurately preserves the marker identities and proportional geometry across an enlarged coordinate grid, making “no privileged center” visually testable.",
+        "Slide 4 is an exceptional substantive visual: the logarithmic navigator’s clock explains why minutes, 380,000 years, the first-star era, and today cannot be placed on a simple linear timeline, and it states the approximation and broad-era assumptions.",
+        "Slide 5 uses matched panels and visibly different crest spacing to explain redshift with almost no interpretive burden.",
+        "Slides 6 and 7 carefully label conceptual graphics, uncertainty, and the model boundary instead of presenting illustrations as measurements.",
+        "Slide 8 ends with a clear observations-to-model reasoning chart and a concise correction of the single-blast-port misconception."
+      ],
+      "issues": [
+        {
+          "slide": 3,
+          "severity": "minor",
+          "evidence": "Generation/craft defect: “All three pairwise distances increase” and the long scope note are rendered in low-contrast gray at small sizes, even though both are important interpretive safeguards.",
+          "fix": "Promote the pairwise-distance conclusion into the main diagram and increase the scope note’s size and contrast."
+        },
+        {
+          "slide": 6,
+          "severity": "major",
+          "evidence": "The arbitrary coral, cyan, and ochre ovals inside the all-sky diagram do not resemble either an all-direction field or an actual cosmic microwave background map. The disclaimer protects integrity, but the graphic remains less informative than the surrounding slides and could imply a few discrete sources.",
+          "fix": "Use a sourced all-sky CMB map or a scientifically faithful schematic with continuous coverage and subtle fluctuations, while retaining the observer-versus-universe-center clarification."
+        },
+        {
+          "slide": 7,
+          "severity": "minor",
+          "evidence": "The four-column evidence route contains comparatively small body text and dense vertical stacking, making this the most reference-like and least immediately scannable middle slide.",
+          "fix": "Reduce each stage to one sentence and use a stronger left-to-right route line connecting the four phases."
+        }
+      ],
+      "signatureMoment": "Slide 4’s logarithmic “navigator’s clock” turns an otherwise misleading cosmic timeline into an audience-specific, scientifically scoped visual explanation."
+    },
+    "winner": "B",
+    "reason": "Deck B is the deck to give the user. It passes the hard checks: eight complete slides, an appropriate cosmic palette, no visible clipping, placeholders, missing images, or unflagged data-like concept art, and no harmful scientific distortion. Deck A also passes the basic gate, but slide 6 needs hypothetical wording and its overall photographic, report-like treatment misses the requested illustrated playfulness. The preference remains B if the viewing order is reversed. B’s added visual complexity earns its keep because slides 3–6 use geometry, scale, wavelength, and viewing direction to explain relationships rather than merely decorate prose. Route identity is withheld, so the “original arm” cannot be identified; judged only on observed output, B is clearly beyond competent default quality. The single most valuable change for A would be to replace its austere photo-and-report system with one recurring illustrated cosmic navigation chart that carries the science across all eight slides.",
+    "whatWouldMakeWinnerExceptional": "Replace slide 6’s generic colored-oval sky with a sourced or scientifically faithful all-sky CMB visualization, then echo that same evidence texture in slide 8 so the strongest measured relic becomes part of the final synthesis rather than an isolated schematic."
+  },
+  "usage": {
+    "prompt_tokens": 17084,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 5368,
+    "completion_tokens_details": {
+      "reasoning_tokens": 3873
+    },
+    "total_tokens": 22452
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 84.663
+}

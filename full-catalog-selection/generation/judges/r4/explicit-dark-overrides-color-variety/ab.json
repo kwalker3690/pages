@@ -1,0 +1,119 @@
+{
+  "order": [
+    "original",
+    "library"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 4,
+        "coherence": 5,
+        "craft": 4,
+        "integrity": 3
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 1, 5, and 8 create a memorable light/aperture premise through the hand-held opening, prism interruption, and open door; this is tailored to the argument rather than generic dark styling.",
+        "Slides 3, 4, and 6 convert an abstract claim into operating loops, a bounded experiment, and a review gate, giving a live speaker useful explanatory structure.",
+        "The pacing has deliberate peaks: cinematic opening on slide 1, a visual reset on slide 5, an actionable timeline on slide 7, and a strong image-led conclusion on slide 8.",
+        "Coral emphasis, large geometric typography, and restrained charcoal surfaces remain coherent across image-led and diagram-led slides."
+      ],
+      "issues": [
+        {
+          "slide": 6,
+          "severity": "blocking",
+          "evidence": "Generation defect: the slide claims \"24 departures\" and \"4 rounds × 6 each,\" but the table visibly contains a seventh dot in round 4 at the far right, making 25 marks.",
+          "fix": "Remove the extra round-4 dot and verify that every row contains exactly six marks."
+        },
+        {
+          "slide": 3,
+          "severity": "minor",
+          "evidence": "The two long chevron sequences, side labels, subtitles, and full-width conclusion compete at once; the comparison is clear on inspection but dense for a live reveal.",
+          "fix": "Reduce secondary copy and reveal each loop sequentially, preserving the final contrast as the concluding beat."
+        },
+        {
+          "slide": 4,
+          "severity": "minor",
+          "evidence": "Three dark-red cards, three coral rails, arrows, and a saturated footer all use similar emphasis, flattening the hierarchy between question, boundary, and decision.",
+          "fix": "Reserve coral for the variable and decision gate, and neutralize the other card fills and rails."
+        },
+        {
+          "slide": 7,
+          "severity": "minor",
+          "evidence": "The action plan says to show two people, while slides 4 and 6 define a three-reviewer gate requiring two approvals; the reduced protocol is not explained.",
+          "fix": "Label slide 7 as a lightweight pilot or retain the three-reviewer procedure."
+        }
+      ],
+      "signatureMoment": "Slide 5: hands manipulating a prism make controlled variation tangible while the adjacent material/rule/perspective list turns the metaphor into a usable method."
+    },
+    "B": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 3,
+        "audience": 3,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 4
+      },
+      "wow": "absent",
+      "strengths": [
+        "Slides 2–7 use a disciplined editorial grid, restrained typography, and consistent warm-neutral contrast.",
+        "Slide 3 provides a useful side-by-side comparison of production and discovery loops rather than relying only on prose.",
+        "Slide 5 clearly groups material, rule, and perspective around visible learning.",
+        "Slide 6 explicitly labels the example as illustrative rather than measured conference data and correctly states the intended 4 × 6 total."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "major",
+          "evidence": "Generation defect: \"Provisional session concept\" remains visibly printed above the title, making the conference cover look like a draft. The medium-gray marbled image is also less dark and dramatic than the requested tone.",
+          "fix": "Remove the provisional label and grade the image darker with a more directed focal light or subject."
+        },
+        {
+          "slide": 3,
+          "severity": "major",
+          "evidence": "The loop names float around numbered rings without connectors or labels inside the segments, so viewers must infer which word belongs to each numbered step.",
+          "fix": "Place the step names directly in the segments or add explicit leader lines and a clear reading direction."
+        },
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "Five narrow columns repeat the same typographic treatment and carry substantial lower-page copy, producing a reference-sheet rhythm rather than a dramatic live-speaking sequence.",
+          "fix": "Build the bounded bet progressively as a single left-to-right chain, with one concrete example carrying through all five stages."
+        },
+        {
+          "slide": 6,
+          "severity": "major",
+          "evidence": "Generation defect: departures in rounds 1 and 3 are boxed while rounds 2 and 4 are unboxed, but no legend explains the alternating encoding. The marks therefore look selected or missing rather than intentionally varied.",
+          "fix": "Use one consistent mark for all 24 departures, then encode the changed rule through labeled color, shape, or row treatment."
+        },
+        {
+          "slide": 7,
+          "severity": "minor",
+          "evidence": "The instruction uses two people after slide 6 specifies three reviewers, without identifying this as a simplified pilot.",
+          "fix": "Clarify that this is a two-person trial or align it with the three-reviewer gate."
+        }
+      ],
+      "signatureMoment": "Slide 3: the paired circular loops are the deck's strongest substantive visual, though their label mapping needs refinement."
+    },
+    "winner": "A",
+    "reason": "A is the deck I would give the user after one mandatory numerical correction. Both decks meet the eight-slide format, use a predominantly dark palette, and show no clipping or missing images, but A more fully delivers the requested dramatic creative-conference experience. Its recurring aperture, prism, and door imagery on slides 1, 5, and 8 gives the argument a specific visual premise, while slides 3–7 provide stronger live pacing. The added complexity earns its keep in those image-led peaks and explanatory sequences, although the 25th dot on slide 6 blocks A from being handoff-ready as rendered. B is cleaner numerically but remains a competent, conservative editorial default with visible provisional copy and several static middle slides. The preference does not depend on which deck is viewed first. The single most valuable change for B would be to rebuild slides 3–6 as one cinematic, continuous experiment sequence rather than separate grids and diagrams.",
+    "whatWouldMakeWinnerExceptional": "Make the aperture/light premise carry the actual information design through the middle: use it to reveal the two loops, isolate the changed variable, and filter the 24 departures through the review gate. Correct slide 6's count and reduce competing coral treatments so the substantive visuals feel as authored as the opening and ending."
+  },
+  "usage": {
+    "prompt_tokens": 17092,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 6153,
+    "completion_tokens_details": {
+      "reasoning_tokens": 4610
+    },
+    "total_tokens": 23245
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 92.743
+}

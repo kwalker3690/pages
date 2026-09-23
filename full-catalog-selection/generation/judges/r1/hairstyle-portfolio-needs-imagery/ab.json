@@ -1,0 +1,125 @@
+{
+  "order": [
+    "original",
+    "library"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 4,
+        "coherence": 5,
+        "craft": 4,
+        "integrity": 3
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 2–7 sustain a clear line/movement/texture editorial system rather than applying an arbitrary fashion skin.",
+        "Slide 3 uses front and three-quarter views to clarify how the fringe and face-framing layers behave, while slides 6 and 7 pair silhouette views with useful texture or construction details.",
+        "The casting and hairstyle range is notably broad: bob, fringe, pixie, shag, natural curls, and braids are represented across different hair textures and skin tones.",
+        "Typography, warm-neutral photography, burgundy rules, folios, and alternating compositions remain coherent without becoming mechanically repetitive."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "blocking",
+          "evidence": "The cover visibly says, \"Replace with approved salon photography and service names before publishing.\" This is draft-production instruction, not client-facing lookbook copy.",
+          "fix": "Replace the instruction with a salon name, season or collection date, and a concise editorial introduction. Use approved salon work before presenting this as the salon's latest work."
+        },
+        {
+          "slide": 1,
+          "severity": "major",
+          "evidence": "Every slide identifies the images as \"AI concept imagery — not salon work.\" The disclosure is honest, but the deck therefore does not yet fulfill the request for a lookbook of \"our salon's\" hairstyles.",
+          "fix": "Treat this as a concept template until authentic portfolio photography is inserted; retain only a discreet disclosure if concept imagery remains."
+        },
+        {
+          "slide": 8,
+          "severity": "major",
+          "evidence": "The closing page reduces the collection to four small, widely separated thumbnails and ends with a generic stylist statement. It omits the salon identity, booking path, location, or a strong final full-bleed look.",
+          "fix": "Finish with one decisive hero image plus salon branding and a concrete consultation or booking action."
+        },
+        {
+          "slide": 4,
+          "severity": "minor",
+          "evidence": "The single profile crop communicates the pixie silhouette but does not show enough of the crown or rear shape to substantiate the caption's detailed claims about tapered nape and piece-by-piece separation.",
+          "fix": "Add a small rear or crown detail, as successfully done for texture on slides 6 and 7."
+        }
+      ],
+      "signatureMoment": "Slide 6: the large natural-texture portrait beside a tight curl detail makes both the rounded silhouette and curl definition immediately legible."
+    },
+    "B": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 3,
+        "audience": 3,
+        "coherence": 3,
+        "craft": 4,
+        "integrity": 3
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 2 is an effective fashion-editorial profile: the bob perimeter is large, unobstructed, and directly supports the caption.",
+        "Slides 6 and 7 provide strong hairstyle visibility and clean magazine hierarchy; the halo silhouette and braided low knot are easy to understand.",
+        "Slide 8 translates line, movement, and texture into a simple three-reference consultation device.",
+        "The neutral palette and restrained serif typography are visually consistent, with no visible clipping in the supplied renders despite the overflow report."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "blocking",
+          "evidence": "The cover includes the visible draft instruction, \"Replace with current salon photography and approved service names before publishing,\" and labels the work as concept imagery rather than salon work.",
+          "fix": "Remove production instructions and publish only after replacing the concept images and names with approved salon material."
+        },
+        {
+          "slide": 1,
+          "severity": "major",
+          "evidence": "The opening hero is dominated by a woman in a wedding dress crossing an architectural interior; the hairstyle is small and secondary. It introduces a bridal-fashion story rather than a salon hairstyle lookbook.",
+          "fix": "Open with a tightly framed, unmistakable hair hero that establishes the collection's strongest cut or texture."
+        },
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "The image for \"The Air Cut\" prominently shows a shaved side and swept-back or tied hair, while the copy describes airy crown length and a shifting short-hair silhouette. The visible hairstyle does not convincingly demonstrate the stated cut.",
+          "fix": "Select a model showing the described tapered nape, separated crown layers, and complete silhouette, or rewrite the service description to match the undercut image."
+        },
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "Two different models and visibly different hair lengths are presented under one \"Soft Shag\" label. The left image reads as a short crop, while the right shows a longer tousled style, so the pair does not function as complementary views of one look.",
+          "fix": "Use front and movement views of the same haircut, or clearly label the images as two variations."
+        },
+        {
+          "slide": 8,
+          "severity": "major",
+          "evidence": "The middle reference repeats the bridal woman from slide 1, extending the wedding-editorial motif and weakening the claim that this is the salon's latest hairstyle collection.",
+          "fix": "Replace it with a close hairstyle reference from the collection and add salon-specific booking information."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The body copy and disclosure sit relatively small within a large empty column, making the page feel less resolved for projection than the stronger image-led pages.",
+          "fix": "Increase body size slightly and tighten the relationship among heading, rule, caption, and footer."
+        }
+      ],
+      "signatureMoment": "Slide 7: the braided low knot fills the background while a restrained white caption card preserves detail visibility and editorial polish."
+    },
+    "winner": "A",
+    "reason": "I would give the user A, but only as the stronger draft: both decks fail the readiness gate because visible replacement instructions remain and neither presents authentic salon work. A wins in either presentation order because its photographs consistently prioritize hair, its captions align more closely with the visible styles, its casting is more inclusive, and its line/movement/texture structure is realized through useful multi-view layouts. B repeatedly drifts into bridal-fashion imagery and has substantive image-to-caption conflicts on slides 4 and 5. Route identity is not supplied, so the \"original arm\" cannot be identified; among the observed outputs, A's additional layout variation earns its complexity, whereas B's variation sometimes obscures the hairstyle. A exceeds competent default quality modestly through its tailored visual system, but the draft copy and weak closing prevent exceptional status.",
+    "whatWouldMakeWinnerExceptional": "Replace every concept image with cohesive, authentic salon portfolio photography while preserving A's multi-angle editorial system, then add salon branding, service names, seasonal context, and a decisive full-bleed booking close."
+  },
+  "usage": {
+    "prompt_tokens": 17103,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 4176,
+    "completion_tokens_details": {
+      "reasoning_tokens": 2560
+    },
+    "total_tokens": 21279
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 63.448
+}

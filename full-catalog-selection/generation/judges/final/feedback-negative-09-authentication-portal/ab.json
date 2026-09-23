@@ -1,0 +1,147 @@
+{
+  "order": [
+    "original",
+    "library"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 5,
+        "storytelling": 4,
+        "audience": 5,
+        "coherence": 5,
+        "craft": 4,
+        "integrity": 5
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 establishes a memorable, brief-specific premise—one request in and one opaque session identifier out—alongside a dark isometric browser/server scene and a concise end-to-end trace.",
+        "Slide 2 combines a recognizable browser form, hidden CSRF value, request card, success response, and generic failure state; it is immediately useful for a live Node.js laboratory explanation.",
+        "Slide 3 turns the request into a seven-hop directional trace with application, data, and session boundaries rather than merely placing decoration beside prose.",
+        "Slides 4 and 5 connect executable-looking Node.js logic to the session lifecycle, clearly distinguishing the opaque browser cookie from identity and role held in server-side state.",
+        "Slides 6 and 7 cover concrete failure controls and observable test outcomes, including credential failure, authorization failure, logout replay, and the distinction between authentication and authorization.",
+        "The deck satisfies the exact seven-slide count, dark cyan/violet developer palette, browser UI, API cards, code, directional arrows, isometric imagery, and security-shield requirements. No clipping or missing assets are visible."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "minor",
+          "evidence": "The generated isometric scene is attractive but very dark and functions more as a hero image than as an explanatory architecture; the server and browser relationship is not explicitly labeled in the image.",
+          "fix": "Raise local contrast and add two restrained labels or a directional request/response line so the hero visual teaches the same premise as the title."
+        },
+        {
+          "slide": 3,
+          "severity": "major",
+          "evidence": "The seven-hop trace is the strongest substantive visual, but the photographic/isometric background, violet boundary outlines, cyan arrows, and seven cards compete in a compressed central band. The session-store card also sits tightly against its boundary.",
+          "fix": "Remove or heavily dim the background behind the flow, enlarge the boundary zones, and give the seven numbered stages more vertical separation."
+        },
+        {
+          "slide": 4,
+          "severity": "minor",
+          "evidence": "Two dense code panels make the smallest code and source line marginal for projection, despite the otherwise clear split between comparison and session commitment.",
+          "fix": "Highlight only the six decisive lines and move supporting error-handling code to speaker notes or a backup slide."
+        },
+        {
+          "slide": 5,
+          "severity": "minor",
+          "evidence": "The five numbered session stages are readable, but they are presented as adjacent columns without visible connectors, weakening the sense of identifier transformation promised by the title.",
+          "fix": "Add a continuous arrow carrying an anonymous sid through regenerate, server storage, cookie issuance, and the next request."
+        },
+        {
+          "slide": 6,
+          "severity": "major",
+          "evidence": "The shield image fulfills the requested security motif but is largely decorative; most of the slide is a conventional text table, so the control-to-failure relationships are not as memorable as the request trace.",
+          "fix": "Convert the table into a compact attack-path diagram in which each threat visibly terminates at its corresponding control and observable rejection."
+        },
+        {
+          "slide": 7,
+          "severity": "minor",
+          "evidence": "The expected-evidence matrix is useful, but the final '303 → 401' row compresses logout and replay into one HTTP cell and can be mistaken for a single response sequence.",
+          "fix": "Split it into 'POST /logout: 303' and 'Replay old sid: 401,' and add one small terminal or DevTools capture to make the laboratory proof feel live rather than planned."
+        }
+      ],
+      "signatureMoment": "Slide 3’s seven-hop request trace, especially the transition from student lookup through bcrypt comparison, session regeneration, and the mint 303 response across explicit trust boundaries."
+    },
+    "B": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 4,
+        "audience": 5,
+        "coherence": 4,
+        "craft": 3,
+        "integrity": 5
+      },
+      "wow": "absent",
+      "strengths": [
+        "Slide 1 gives the laboratory a clear challenge and separates browser, Express, and PostgreSQL responsibilities without relying on unsupported performance or security claims.",
+        "Slide 2 provides a readable browser form and DevTools-style request, success, and failure evidence, with the password-handling rule called out explicitly.",
+        "Slides 3 and 5 attempt substantive process storytelling through trust zones, request hops, session regeneration, server-side identity resolution, and the next protected request.",
+        "Slide 4 appropriately labels its handler as not production-complete and shows validation, dummy-hash comparison, generic rejection, regeneration, saving, and redirecting.",
+        "Slide 6 is technically well scoped: it correctly notes that cookie attributes reduce exposure rather than preventing every theft path and distinguishes authenticated from authorized.",
+        "Slide 7 is a useful teaching close, pairing expected test evidence with the authorization loop from sid to identity to permission."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "blocking",
+          "evidence": "Prompt/selection defect: across slides 1–7, the requested glassmorphism, subtle glow, 3D/isometric software architecture, and security-shield visual are absent. Slide 1 uses flat outlined rectangles, and slide 6 remains entirely typographic. This is a hard brief-compliance failure even though the seven-slide count and dark palette pass.",
+          "fix": "Rebuild the visual system around one isometric browser–Express–PostgreSQL architecture with translucent glass panels and restrained cyan/violet glow, then use a meaningful shield/control visual on the security slide."
+        },
+        {
+          "slide": 2,
+          "severity": "minor",
+          "evidence": "The form and network evidence are readable, but the olive warning bar is visually disconnected from the cyan/violet system and the request/response area behaves like a plain table rather than premium API cards.",
+          "fix": "Use separate glass request, success, and failure cards with consistent cyan, mint, and restrained amber status accents."
+        },
+        {
+          "slide": 3,
+          "severity": "major",
+          "evidence": "Generation defect: the lookup label breaks awkwardly into 'parameterize' and 'd SQL,' and the glossy square-arrow glyphs conflict with the otherwise flat technical style. The route also zigzags between zones without a continuous, clearly numbered path.",
+          "fix": "Correct the wrapping, replace the beveled glyphs with one consistent vector connector, number all seven hops, and show the return path in a second color."
+        },
+        {
+          "slide": 4,
+          "severity": "minor",
+          "evidence": "The code and decision path are credible, but the small source and assumption text sits near reference-document size rather than live-projection size.",
+          "fix": "Increase the assumption/source text and remove nonessential code lines to preserve a larger minimum type size."
+        },
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "The top row ends at the browser cookie on the far right, while the next-request sequence restarts at the far left below it without a strong connecting arrow. The large gap above the diagrams reads as underused space rather than purposeful emphasis.",
+          "fix": "Create one continuous serpentine flow from anonymous session through cookie issuance and back into GET /dashboard, with the sid visibly carried along the connector."
+        },
+        {
+          "slide": 6,
+          "severity": "major",
+          "evidence": "Seven dense horizontal text rows provide credible content but little explanatory information design, and this obvious security slide omits the specifically requested shield visual.",
+          "fix": "Group the controls by credential, session, and authorization boundary and visualize each group intercepting a corresponding attack path around a central shield."
+        },
+        {
+          "slide": 7,
+          "severity": "minor",
+          "evidence": "The closing authorization loop is a strong concept, but the left side remains a text checklist rather than rendered browser, terminal, or DevTools evidence. Consequently, 'Prove it live' is asserted rather than visually demonstrated.",
+          "fix": "Replace one or two checklist rows with a compact terminal/browser evidence strip showing the sample 303, 401, and 403 outcomes, clearly labeled as illustrative."
+        }
+      ],
+      "signatureMoment": "Slide 7’s four-step authorization loop—sid, resolved identity, role permission, then route decision—is the deck’s clearest and most memorable teaching device."
+    },
+    "winner": "A",
+    "reason": "Deck A is the one to give the user. It meets the exact slide count and required visual vocabulary, while Deck B has a blocking brief-compliance failure through the absence of the requested isometric architecture, glass treatment, glow, and shield visual. A also makes the request journey more tangible through the browser mockup on slide 2, trust-boundary trace on slide 3, code on slide 4, and server-side session distinction on slide 5. Treating A as the visibly higher-complexity arm, that complexity is earned because it clarifies boundaries and state transitions rather than merely adding decoration. A exceeds competent default quality, but only intermittently reaches wow: slides 1 and 3 are memorable, while slides 6 and 7 fall back to conventional tables. Route identity is unavailable, so no claim can be made about which deck was the original arm.",
+    "whatWouldMakeWinnerExceptional": "Create a decisive live-demo peak across slides 6–7: show one synchronized browser, DevTools, terminal, and session-store view in which the same labeled sample request produces a 303, sets an opaque Secure/HttpOnly cookie, resolves server-side identity, returns 403 at the admin role gate, and fails after logout replay. This would replace the conventional tables with observable evidence and carry the strong one-request premise through the ending."
+  },
+  "usage": {
+    "prompt_tokens": 15212,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 5314,
+    "completion_tokens_details": {
+      "reasoning_tokens": 3073
+    },
+    "total_tokens": 20526
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 76.178
+}

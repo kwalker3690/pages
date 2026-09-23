@@ -1,0 +1,224 @@
+{
+  "id": "g_h2xl2ilthmr4hjb",
+  "name": "File",
+  "headingFont": "Alegreya Sans",
+  "headingFontName": "Alegreya Sans",
+  "headingFontWeight": 600,
+  "bodyFont": "Alegreya Sans",
+  "bodyFontName": "Alegreya Sans",
+  "bodyFontWeight": 400,
+  "config": {
+    "density": "md",
+    "headingColor": "#221F1C",
+    "bodyColor": "#221F1C",
+    "cardColor": {
+      "type": "solid",
+      "color": "#F4EFE6"
+    },
+    "surfaceColor": {
+      "type": "solid",
+      "color": "#ECE5D8"
+    },
+    "mutedColor": {
+      "type": "solid",
+      "color": "#625B51"
+    },
+    "neutralBorderColor": {
+      "type": "solid",
+      "color": "#C9C0B2"
+    },
+    "background": {
+      "type": "color",
+      "source": "color.solid",
+      "color": {
+        "hex": "#D9CFBF"
+      }
+    },
+    "roundness": "sm",
+    "cardShadow": "none",
+    "cardBorder": "none",
+    "cardPadding": "84pt",
+    "dividerColor": "#C9C0B2",
+    "dividerThickness": "sm",
+    "letterSpacingHeading": -0.01,
+    "letterSpacingBody": 0,
+    "lineHeightHeading": 1.1,
+    "lineHeightBody": 1.3,
+    "headingTransform": "none",
+    "typeScale": {
+      "display-xl": 54,
+      "display-lg": 45,
+      "display-md": 36,
+      "heading-1": 42,
+      "heading-2": 36,
+      "heading-3": 30,
+      "heading-4": 25,
+      "subheading": 27,
+      "body-lg": 27,
+      "body-normal": 24,
+      "body-sm": 21,
+      "eyebrow": 15,
+      "caption": 16,
+      "label": 16
+    },
+    "roleStyles": {
+      "display": {
+        "font": "Alegreya",
+        "fontWeight": 400,
+        "italic": true,
+        "transform": "none",
+        "letterSpacing": -0.005,
+        "lineHeight": 1.08
+      },
+      "subheading": {
+        "font": "Alegreya Sans",
+        "fontWeight": 400,
+        "italic": false,
+        "transform": "none",
+        "letterSpacing": 0,
+        "lineHeight": 1.25
+      },
+      "eyebrow": {
+        "font": "Alegreya Sans",
+        "fontWeight": 600,
+        "italic": false,
+        "transform": "uppercase",
+        "letterSpacing": 0.08,
+        "lineHeight": 1.25,
+        "color": "#625B51"
+      },
+      "label": {
+        "font": "Alegreya Sans",
+        "fontWeight": 500,
+        "italic": false,
+        "transform": "uppercase",
+        "letterSpacing": 0.06,
+        "lineHeight": 1.25,
+        "color": "#625B51"
+      },
+      "caption": {
+        "font": "Alegreya Sans",
+        "fontWeight": 400,
+        "italic": false,
+        "transform": "none",
+        "letterSpacing": 0,
+        "lineHeight": 1.25,
+        "color": "#625B51"
+      }
+    },
+    "charts": {
+      "roundness": "sm",
+      "gridlineStyle": "solid",
+      "gridlineColor": "#C9C0B2",
+      "gridlineWidth": "sm",
+      "lineWeight": "md",
+      "font": "body",
+      "textSize": "lg",
+      "colorScheme": "theme"
+    },
+    "shapeFill": "none",
+    "shapeColorScheme": "default",
+    "shapeShadow": "none",
+    "shapeBorder": "sm",
+    "canvasPalette": {
+      "colors": [
+        {
+          "key": "primary",
+          "name": "Work A ink (teal)",
+          "color": {
+            "type": "solid",
+            "color": "#216E7A"
+          }
+        },
+        {
+          "key": "work-b",
+          "name": "Work B ink (madder)",
+          "color": {
+            "type": "solid",
+            "color": "#B4452E"
+          }
+        },
+        {
+          "key": "highlight",
+          "name": "Highlighter (ochre)",
+          "color": {
+            "type": "solid",
+            "color": "#E9D58A"
+          }
+        },
+        {
+          "key": "ink",
+          "name": "Ink",
+          "color": {
+            "type": "solid",
+            "color": "#221F1C"
+          }
+        },
+        {
+          "key": "paper",
+          "name": "Paper",
+          "color": {
+            "type": "solid",
+            "color": "#F4EFE6"
+          }
+        },
+        {
+          "key": "plate",
+          "name": "Note plate",
+          "color": {
+            "type": "solid",
+            "color": "#ECE5D8"
+          }
+        },
+        {
+          "key": "graphite",
+          "name": "Graphite",
+          "color": {
+            "type": "solid",
+            "color": "#625B51"
+          }
+        },
+        {
+          "key": "rule",
+          "name": "Hairline",
+          "color": {
+            "type": "solid",
+            "color": "#C9C0B2"
+          }
+        }
+      ],
+      "gradients": []
+    },
+    "cardMargins": {
+      "footer": {},
+      "pageNumberFormat": "number",
+      "pageNumberPadded": false
+    },
+    "imagery": {
+      "defaultStyleId": "spot-line",
+      "styles": [
+        {
+          "id": "spot-line",
+          "name": "Pen-and-ink spot drawing",
+          "promptGuidance": "Fine pen-and-ink drawing in the manner of a nineteenth-century book engraving: thin lines of varied weight, shading by delicate cross-hatching and stipple rather than solid black, close observational detail in texture and construction, the subject drawn whole with clear space around it, one small flat accent of muted teal, madder red or dull ochre on a single element and no other colour; no ground line, no frame, no floating dots, no emblems, no text, transparent background.",
+          "subjects": "One concrete motif that the user's own works name — an object, a place, a creature, a garment, a vessel — drawn whole so it sits on the paper like an engraving pasted into a margin: a theatre mask with a wreath, a rolled newspaper tied with string, a row of stone amphitheatre seats, a spa fountain or bathhouse column, a brass lantern on a hook, a rowing boat on a pebble shore, a sealed letter, an iron-bound door with its key, a crow on a bare branch, an overcoat on a peg, a well with a bucket, a clock-tower face, a split pomegranate, a paper kite. Take the motif from the works under discussion, never from the template's demo. Never portraits or faces of real people, never documents, desks, laptops, handshakes, skylines, crosses or other religious or heraldic emblems, flags, or logos; no text inside the drawing.",
+          "whenToUse": "Every image slot: a margin spot beside a heading or claim, a plate at the foot of an evidence column, a small drawing leading a ledger row, a picture over each cell of a peer row, and the large backdrop plane of an act break or full-bleed card. A literal artifact the user supplies — a photographed page, a book cover — uses image-style=\"none\" in the same slot at the same scale.",
+          "background": "transparent"
+        }
+      ]
+    }
+  },
+  "fonts": [
+    {
+      "id": "Alegreya",
+      "name": "Alegreya",
+      "url": "https://fonts.googleapis.com/css2?family=Alegreya%3Aital%2Cwght%400%2C400%3B0%2C500%3B0%2C600%3B0%2C700%3B0%2C800%3B0%2C900%3B1%2C400%3B1%2C500%3B1%2C600%3B1%2C700%3B1%2C800%3B1%2C900&display=swap"
+    },
+    {
+      "id": "Alegreya Sans",
+      "name": "Alegreya Sans",
+      "url": "https://fonts.googleapis.com/css2?family=Alegreya+Sans%3Aital%2Cwght%400%2C100%3B0%2C300%3B0%2C400%3B0%2C500%3B0%2C700%3B0%2C800%3B0%2C900%3B1%2C100%3B1%2C300%3B1%2C400%3B1%2C500%3B1%2C700%3B1%2C800%3B1%2C900&display=swap"
+    }
+  ],
+  "isDefault": false
+}

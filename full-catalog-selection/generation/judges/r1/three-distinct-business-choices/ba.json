@@ -1,0 +1,143 @@
+{
+  "order": [
+    "library",
+    "original"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 5,
+        "coherence": 4,
+        "craft": 3,
+        "integrity": 4
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 1–2 establish a concise leadership thesis and a highly scannable KPI baseline; the plan variances are visible without requiring narration.",
+        "Slides 3–6 form a decision-oriented sequence from trend to drivers, risks, and explicit approvals rather than reverting to generic business-review bullets.",
+        "Slide 6 is particularly well suited to a meeting: the investment request dominates while the pricing and staffing decisions remain visible as distinct follow-on choices.",
+        "Slide 8 provides a purposeful close with a review cadence rather than ending on a generic thank-you slide."
+      ],
+      "issues": [
+        {
+          "slide": 7,
+          "severity": "blocking",
+          "evidence": "Generation defect: the quarter-end outcomes are rendered as near-black text on a dark slate panel. Revenue, margin, retention, and cash-flow targets are barely readable, and the panel reaches the bottom edge where the page number collides with it. This fails the readable-and-unclipped hard check.",
+          "fix": "Use white or very light text, restore internal bottom padding, and keep the panel clear of the page-number zone."
+        },
+        {
+          "slide": 3,
+          "severity": "major",
+          "evidence": "The three small multiples communicate opposing trends, but each chart shows a lone “0” near the left side while endpoint scale labels such as 21/25, 57/61, and 108/114 appear on the right. The scale encoding is ambiguous and could imply a zero baseline that the plots do not use.",
+          "fix": "Use conventional labeled y-axes or explicitly state the displayed range; remove the unexplained zero labels."
+        },
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "The elements labeled as bridges are rows of equal-height boxes rather than waterfall or variance bridges. The audience must perform the arithmetic to see how $23.4M reaches $24.8M and how 59% reaches 61%.",
+          "fix": "Replace the box rows with true waterfall charts that visibly accumulate positive and negative contributions."
+        },
+        {
+          "slide": 5,
+          "severity": "minor",
+          "evidence": "The staggered vertical placement of the three risk cards implies an ordering or progression that is not explained. Because the metrics use different units, their relative severity cannot be inferred from card position.",
+          "fix": "Align the cards or rank them explicitly by severity, timing, or likelihood."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The quantified modeled outcomes—one retention point and 0.3 margin points—are appropriately labeled illustrative, but no assumptions, range, or confidence level is shown.",
+          "fix": "Add a compact assumptions line or scenario range beneath each quantified decision."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "The four-stage operating loop is arranged as a quadrant sequence, but the changing arrow directions and lack of a continuous path make the loop less immediate than the title promises.",
+          "fix": "Add a continuous directional connector around the four stages and emphasize the return from quarter-end adaptation to the next decision."
+        }
+      ],
+      "signatureMoment": "Slide 6’s split-screen decision board turns the QBR into three concrete leadership choices with visible modeled outcomes."
+    },
+    "B": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 3,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 2,
+        "integrity": 4
+      },
+      "wow": "absent",
+      "strengths": [
+        "Slide 2 has strong projection readability: large KPIs, plain-language movement statements, and plan-status badges are easy to scan.",
+        "Slide 3 uses conventional small-multiple charts with directly labeled values and makes the revenue/margin versus retention trade-off clearer than a prose summary would.",
+        "Slide 5 is the deck’s strongest substantive information design: current state, guardrail, response, and owner are aligned in one matrix, followed by a clear warning that all three signals are already outside target.",
+        "Slide 6 packages the three leadership asks consistently and connects each ask to an outcome or addressed driver."
+      ],
+      "issues": [
+        {
+          "slide": 7,
+          "severity": "blocking",
+          "evidence": "Generation defect: the Days 31–60 description runs below the bottom edge; only the beginning of “Reduce the onboarding backlog and activate expansion plays” is visible. This makes one of the three operating milestones incomplete.",
+          "fix": "Reduce vertical spacing, move the timeline upward, or shorten the milestone descriptions so all text remains inside the slide."
+        },
+        {
+          "slide": 8,
+          "severity": "blocking",
+          "evidence": "Generation defect: the lower-right sentence is cut off after “if triggers,” and the lower-left assessment copy reaches the bottom edge. The page number is displaced into the left content area. The closing operating loop is therefore not fully readable.",
+          "fix": "Rebuild the left composition with smaller copy blocks and safe bottom margins; keep pagination in a dedicated footer."
+        },
+        {
+          "slide": 1,
+          "severity": "major",
+          "evidence": "Selection defect: the large fabrication-machine image may suggest a physical constraint, but it provides no evidence about customer expansion, retention, or commercial capacity. Half of the opening is therefore decorative concept imagery rather than business information.",
+          "fix": "Replace it with a brief-specific visual such as an acquisition-to-expansion capacity model or a customer lifecycle bottleneck diagram."
+        },
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "As in Deck A, the purported bridges are adjacent boxes, not accumulated variance charts. Color identifies positive and negative items, but the composition does not visually demonstrate reconciliation.",
+          "fix": "Use true revenue and gross-margin waterfalls with connected start, contribution, and end bars."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "Generation defect: the subtitle repeats two versions of the same disclaimer—“Illustrative decision asks” and “Illustrative example”—which reads like unedited template text.",
+          "fix": "Retain one concise sample-data disclaimer."
+        },
+        {
+          "slide": 7,
+          "severity": "major",
+          "evidence": "The timeline separates milestone labels above and below a thin line, but it does not visibly connect individual actions to the four outcome metrics shown above. The slide asserts the relationship more than it explains it.",
+          "fix": "Map each milestone to the KPI or leading indicator it is intended to move using explicit connectors or a milestone-to-outcome matrix."
+        },
+        {
+          "slide": 8,
+          "severity": "major",
+          "evidence": "Selection defect: the model-train photograph repeats the idea of a loop but does not explain the operating cadence. The central segmented ring lacks directional arrows, so even the substantive visual does not clearly show sequence.",
+          "fix": "Remove the decorative photograph and devote the space to a directional operating-loop diagram with stage owners, dates, and trigger conditions."
+        }
+      ],
+      "signatureMoment": "Slide 5’s risk matrix, especially the side-by-side current values, guardrails, responses, and owners."
+    },
+    "winner": "A",
+    "reason": "Deck A is the deck I would give the leadership user after repairing slide 7. Its narrative is more decisively structured around a thesis, causal drivers, risks, approvals, execution, and governance, and its strongest slides feel tailored to an actual QBR meeting. The preference remains A in either presentation order. As rendered, however, neither deck is ready: A has one blocking contrast/overflow defect, while B has visible clipping on both slides 7 and 8. Both provide the requested performance, drivers, risks, decisions, and next-quarter plan; both clearly flag the figures as illustrative, and no required palette was specified. The more image-led complexity in B did not earn its space because the machine and train-loop images are conceptual decoration rather than explanatory evidence. A exceeds competent default quality in information architecture and meeting utility, but not yet in production craft.",
+    "whatWouldMakeWinnerExceptional": "Repair slide 7, then replace the box-based bridges with true waterfalls and add an explicit action-to-leading-indicator-to-quarter-end-outcome model. That would turn the strong decision narrative into sustained explanatory visual storytelling rather than a polished sequence of cards and tables."
+  },
+  "usage": {
+    "prompt_tokens": 17119,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 4165,
+    "completion_tokens_details": {
+      "reasoning_tokens": 2229
+    },
+    "total_tokens": 21284
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 55.494
+}

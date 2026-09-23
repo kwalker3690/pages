@@ -1,0 +1,133 @@
+{
+  "order": [
+    "original",
+    "library"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 2,
+        "integrity": 5
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 2–7 form a manager-relevant argument from guest need through ritual, operating model, economics, and pilot.",
+        "Slide 3 makes the proposed hour concrete with a clearly timed five-stage sequence.",
+        "Slide 6 explicitly labels the financial model as illustrative and shows enough arithmetic to audit the $3,500 base case.",
+        "Slides 1, 3, and 8 use hospitality imagery that gives the offer a calm, property-based setting."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "major",
+          "evidence": "[Generation defect] White text inside the two pale-teal proposition cards has very weak contrast, especially the smaller descriptions.",
+          "fix": "Use dark-teal text on the pale cards or darken the cards substantially; verify projection contrast for the body copy."
+        },
+        {
+          "slide": 1,
+          "severity": "minor",
+          "evidence": "[Selection defect] The image focuses on a hand placing a key beside towels and water, which reads more as check-in or housekeeping than as the restorative ritual being sold.",
+          "fix": "Use an image showing the hosted guest experience, practitioner interaction, or prepared ritual setting."
+        },
+        {
+          "slide": 2,
+          "severity": "blocking",
+          "evidence": "[Generation defect] The bottom disclaimer is visibly crowded into the frame edge, wraps awkwardly, and collides with the page number, leaving the final line partially clipped.",
+          "fix": "Raise and reflow the disclaimer as a single readable footer and move the page number to an independent margin position."
+        },
+        {
+          "slide": 5,
+          "severity": "minor",
+          "evidence": "Five narrow text columns make the operational explanations noticeably smaller and denser than surrounding slides.",
+          "fix": "Convert the sequence into a two-level service blueprint or split it across two slides so responsibilities and handoffs can be scanned."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The exclusions and 30-day assumption are rendered as very small, pale footer text even though they materially qualify the economics.",
+          "fix": "Increase the caveat size and contrast and place key exclusions beside the contribution result."
+        },
+        {
+          "slide": 7,
+          "severity": "blocking",
+          "evidence": "[Generation defect] The lower-left 'End of week 6' stage and the bottom of the decision-gate table run beyond the slide boundary. The pilot's conclusion and part of its success criteria cannot be read.",
+          "fix": "Rebuild the slide on a horizontal six-week timeline, shorten the phase descriptions, and keep every gate within a tested safe area."
+        }
+      ],
+      "signatureMoment": "Slide 6 is the strongest substantive moment: an auditable illustrative formula and fill-sensitivity chart translate the wellness idea into a manager decision."
+    },
+    "B": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 5,
+        "coherence": 5,
+        "craft": 3,
+        "integrity": 5
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 is a memorable editorial opening with a clear promise, a room configured for the ritual, and an immediate guest-versus-manager value split.",
+        "Slide 3 turns the hour into a highly scannable sequence and uses the highlighted Restore stage to establish the experiential peak.",
+        "Slide 5 clearly separates the boutique-hospitality proposition from its backstage operating requirements.",
+        "Slide 6 presents the base-case contribution, cost bridge, sensitivity, and break-even assumption in one manager-friendly view.",
+        "Slide 8 closes with three specific decisions rather than a generic sales call to action.",
+        "The restrained typography, rules, numbering, and warm green system remain coherent from opening through close."
+      ],
+      "issues": [
+        {
+          "slide": 4,
+          "severity": "minor",
+          "evidence": "The three category icons are so pale that they nearly disappear against the ivory background and contribute little to comprehension.",
+          "fix": "Increase icon contrast or replace them with more informative guest, staff, and property signals."
+        },
+        {
+          "slide": 5,
+          "severity": "blocking",
+          "evidence": "[Generation defect] The third large operating assumption is cut off at the bottom; only the top of 'Minute room turn after each session' is visible.",
+          "fix": "Reduce or reposition the left-column metrics so the full 15-minute room-turn assumption fits inside the slide."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The 35% fill case appears only as an almost invisible line near zero, so the slightly negative outcome is not explicit.",
+          "fix": "Label that bar approximately −$0.1k and use a distinct negative treatment below the baseline."
+        },
+        {
+          "slide": 7,
+          "severity": "blocking",
+          "evidence": "[Generation defect] The lower row of decision-gate cards is visibly cut by the bottom edge, obscuring supporting labels and making the complete gate set unavailable.",
+          "fix": "Compress the upper timeline or reduce the gate cards to a single six-item row with all labels inside the safe area."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "The narrow top photograph is atmospheric but shows only a wall, water, and shadows; it does not reinforce the proposed hosted experience or decision.",
+          "fix": "Use a closing image of the prepared room or guest handoff that visually completes the story introduced on slide 1."
+        }
+      ],
+      "signatureMoment": "Slide 6 pairs a legible fill-sensitivity chart with a large $3,500 base-case card and transparent cost arithmetic, giving managers a usable commercial discussion tool."
+    },
+    "winner": "B",
+    "reason": "B is the deck I would give this user after correcting its two clipping defects. It has the stronger hospitality editorial system, cleaner information hierarchy, and more purposeful pacing; its operating, financial, and pilot slides are easier for managers to scan. Neither rendered deck is currently ready because both fail the unclipped-content hard check. A's additional photographic and layout complexity does not earn its keep: its low-contrast opening cards and severely broken slide 7 outweigh the extra imagery. The single most valuable improvement to A would be a complete presentation-safe re-typesetting pass beginning with slide 7 and the slide 1 contrast failure. B exceeds competent default quality through tailored commercial clarity, but not by enough to qualify as exceptional.",
+    "whatWouldMakeWinnerExceptional": "First eliminate the slide 5 and 7 clipping, then replace one of the conventional box-and-timeline compositions with a genuinely integrated service blueprint showing the guest experience above the line and staff roles, room reset, evidence, and economics below it in one property-customizable visual."
+  },
+  "usage": {
+    "prompt_tokens": 17106,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 4680,
+    "completion_tokens_details": {
+      "reasoning_tokens": 3072
+    },
+    "total_tokens": 21786
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 68.97
+}

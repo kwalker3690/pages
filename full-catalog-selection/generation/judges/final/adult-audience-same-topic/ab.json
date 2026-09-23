@@ -1,0 +1,109 @@
+{
+  "order": [
+    "original",
+    "library"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 5,
+        "coherence": 5,
+        "craft": 4,
+        "integrity": 4
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 1 and 8 form a strong committee narrative: the opening reframes ozone as equipment-level underwriting, and the close converts that thesis into a concrete 90-day decision process.",
+        "Slides 3 and 4 clearly connect substance, asset, lifecycle, financial transmission, and action rather than treating ozone as a broad sector theme.",
+        "Slide 7 is particularly decision-useful: its evidence pack and three action gates are easy to scan and appropriate for senior investors.",
+        "Illustrative content is consistently disclosed. Slides 5 and 6 visibly identify sample holdings, scores, and sensitivities as illustrative rather than portfolio facts or forecasts.",
+        "The dark bookends, restrained industrial palette, large typography, and recurring blue/red action colors create a coherent system without visible clipping or missing assets."
+      ],
+      "issues": [
+        {
+          "slide": 8,
+          "severity": "blocking",
+          "evidence": "The deck asks the committee to approve a portfolio screen, but it never shows the actual portfolio baseline: no holdings, jurisdictions, installed substances, regulatory deadlines, ownership boundaries, or estimated valuation exposure. It therefore explains a diligence method rather than fully answering what ozone policy means for this portfolio.",
+          "fix": "Before committee circulation, add a sourced holding-by-holding exposure table or heat map showing jurisdiction, equipment, substance class, applicable rule or phaseout date, ownership, replacement timing, capex range, and proposed action. This is primarily an input/selection gap, not a rendering defect."
+        },
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "The four-box action map uses U and M scores inside the cards, but there are no visible urgency or materiality axes or directional scales. The reader cannot immediately see why U3/M4 maps to Plan while U4/M4 maps to Act Now.",
+          "fix": "Add labeled urgency and materiality axes with low-to-high direction, plot each holding at its score, and use direct labels or distinct markers so the action rule is visually demonstrable."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The +5%, +12%, +20%, six-month, and one-percentage-point assumptions are correctly labeled illustrative, but no rationale, range, date, or model owner is provided.",
+          "fix": "Attach each sensitivity to an input source or owner and show a reasonable range so the committee can distinguish a discussion starter from an underwriting assumption."
+        }
+      ],
+      "signatureMoment": "Slide 8's four-stage 90-day screen is the strongest synthesis: it turns the machinery metaphor and evidence framework into an explicit committee decision."
+    },
+    "B": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 3,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 4
+      },
+      "wow": "absent",
+      "strengths": [
+        "Slide 2 makes the essential scientific distinction between ozone-depleting substances and HFC climate exposure, pairs it with the 2040, 2045, and 2066 recovery milestones, and visibly cites UNEP and the Montreal Protocol.",
+        "The exhibit numbering and restrained typography create a credible research-note format across slides 2 through 7.",
+        "Slide 7 translates the issue into four practical evidence categories and decision gates rather than relying on generic ESG language.",
+        "Slide 8 is a strong closing composition: the four timed workstreams are readable, and the industrial corridor image reinforces the physical-asset premise.",
+        "Slides 5 and 6 clearly disclose that points and sensitivities are illustrative rather than portfolio data or forecasts."
+      ],
+      "issues": [
+        {
+          "slide": 8,
+          "severity": "blocking",
+          "evidence": "The requested decision is approval of a 90-day portfolio screen, yet the deck provides no actual portfolio inventory, jurisdictional policy calendar, exposure total, or issuer-level implication. The result is a polished process proposal, not a complete briefing on what ozone policy means for the user's portfolio.",
+          "fix": "Add a sourced jurisdiction-by-holding exposure exhibit with substances, equipment, ownership, deadlines, replacement timing, capex ranges, and recommended actions. This is chiefly an input/selection defect rather than a generation defect."
+        },
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "All four plotted points use the same purple marker and have no direct labels. Readers must repeatedly cross-reference coordinates against the separate legend, while the materiality labels are sparse and positioned on the plot's right edge. The chart is technically interpretable but not committee-fast.",
+          "fix": "Direct-label each point, use action-specific marker treatments, place complete axis ticks consistently, and add decision zones so the chart reveals the action logic without legend matching."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The sensitivity table occupies a narrow band near the top, leaving a large middle area unused before the bottom takeaway. The whitespace is deliberate editorial styling, but on projection it makes the substantive assumptions feel undersized and unfinished.",
+          "fix": "Increase the table scale and use the available space for baseline-versus-stress deltas, valuation channels, or a compact sensitivity range graphic."
+        },
+        {
+          "slide": 1,
+          "severity": "minor",
+          "evidence": "The industrial compressor photograph is not captioned as illustrative or non-portfolio imagery, unlike Deck A's explicit disclaimer. In an investment-committee deck it could be mistaken for a photographed portfolio asset.",
+          "fix": "Add a small caption identifying the image as illustrative and not a portfolio asset."
+        }
+      ],
+      "signatureMoment": "Slide 8's split composition—timed decision plan beside the receding plant corridor—is the deck's most memorable and purposeful visual."
+    },
+    "winner": "A",
+    "reason": "Give Deck A to the user. The preference persists when the decks are reviewed in either order: A has the clearer underwriting thesis, stronger action architecture, better middle-slide pacing, and a more decisive evidence-to-action close. Both pass the visible format checks: eight slides, restrained professional palettes, readable and unclipped content, no missing imagery, and no visible placeholders. Their ODS/HFC distinction and sourced recovery dates are sound, and illustrative numbers are explicitly flagged. Neither is fully committee-ready, however, because neither supplies the portfolio- and jurisdiction-specific evidence required by the request. Route identity is unavailable; judging only observed output, A's additional visual complexity is earned because slides 4, 5, 7, and 8 perform distinct analytical jobs rather than merely adding decoration. A modestly exceeds competent default quality but is not exceptional. The single most valuable improvement to B would be replacing its weak illustrative matrix and generic sensitivities with one directly labeled, sourced jurisdiction-by-holding exposure and action map.",
+    "whatWouldMakeWinnerExceptional": "Integrate actual portfolio data into one exceptional centerpiece: a holding-by-holding map linking jurisdictional policy deadlines to installed substances, ownership, replacement timing, capex and EBITDA sensitivity, confidence level, and recommended committee action. Carry those quantified exposures into the final 90-day plan with named owners and escalation thresholds."
+  },
+  "usage": {
+    "prompt_tokens": 17092,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 5251,
+    "completion_tokens_details": {
+      "reasoning_tokens": 3583
+    },
+    "total_tokens": 22343
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 74.284
+}

@@ -1,0 +1,150 @@
+{
+  "order": [
+    "library",
+    "original"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 3,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 2,
+        "integrity": 4
+      },
+      "wow": "absent",
+      "strengths": [
+        "Slides 1–2 establish a focused authentication challenge and connect the sample login form to concrete POST, 303, and 401 behavior.",
+        "Slide 5 is the clearest explanatory composition: numbered session stages, directional arrows, browser/server separation, cookie attributes, and an OWASP source make the opaque-session model understandable.",
+        "Slide 7 provides a useful live-demonstration checklist covering failed login, successful login, session persistence, authorization failure, and logout replay.",
+        "The restrained cyan, violet, mint, and amber accents remain coherent across all seven slides."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "major",
+          "evidence": "Prompt/selection defect: the right third contains an abstract cropped node-line rather than the requested browser/server architecture, security shield, or developer-dashboard visualization. The opening is orderly but does not visually explain the portal.",
+          "fix": "Replace the abstract line art with an isometric browser-to-Express-to-session-store scene and make the request packet the recurring visual token."
+        },
+        {
+          "slide": 2,
+          "severity": "blocking",
+          "evidence": "Generation defect: the illustrative browser panel extends through the bottom edge, leaving the mockup visibly cropped. This violates the unclipped-content hard check even though the API cards remain readable.",
+          "fix": "Reduce the browser panel height or compact its fields so the full browser frame and sign-in action sit inside the canvas."
+        },
+        {
+          "slide": 3,
+          "severity": "major",
+          "evidence": "Seven narrow prose columns replace the requested architecture diagram. There are no directional arrows, and the narrow final columns visibly break headings into 'Regenerat/e' and 'Redirec/t'.",
+          "fix": "Use a two-row flow or fewer, wider nodes over an architecture illustration, with explicit arrows and trust-boundary crossings."
+        },
+        {
+          "slide": 4,
+          "severity": "blocking",
+          "evidence": "Generation defect: the code panel is cut off at the bottom after the generic 401 branch. The successful regeneration and session-save portion promised by the slide is not visible.",
+          "fix": "Shorten the snippet or split failure and success paths so the complete authentication decision fits on the slide."
+        },
+        {
+          "slide": 5,
+          "severity": "minor",
+          "evidence": "The top session-creation flow and lower authenticated-request flow are individually clear, but there is no connector showing how the browser cookie at the end of the first row becomes the next request in the second row.",
+          "fix": "Add a return arrow from 'Browser cookie' to 'GET /dashboard' or arrange the cards as one continuous loop."
+        },
+        {
+          "slide": 6,
+          "severity": "blocking",
+          "evidence": "Generation defect: the control table continues below the canvas. The 'Logout replay' row and its outcome are visibly truncated, so the promised control map cannot be read in full.",
+          "fix": "Reduce row padding and type size slightly, or divide the controls across two visual groups while retaining all seven rows."
+        },
+        {
+          "slide": 7,
+          "severity": "blocking",
+          "evidence": "Generation defect: the final 'POST /logout, then replay' explanation runs below the bottom edge. The last live-test instruction is therefore incomplete.",
+          "fix": "Tighten vertical spacing or shorten each evidence sentence so all five tests and their outcomes remain fully visible."
+        }
+      ],
+      "signatureMoment": "Slide 5's two-stage session diagram, which distinguishes the opaque browser cookie from server-side identity and role state."
+    },
+    "B": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 5,
+        "coherence": 4,
+        "craft": 3,
+        "integrity": 4
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 is a memorable opening: the isometric portal/server scene, glowing boundary, request cube, and POST card immediately establish the software-authentication premise.",
+        "Slide 3 is the strongest substantive visual in either deck. Seven labeled nodes, cyan arrows, trust-boundary colors, and a server-room backdrop make the request sequence and boundary crossings visible rather than merely listing them.",
+        "Slide 5 concisely distinguishes opaque browser state from identity-bearing server state, with numbered steps appropriate for a B.Tech laboratory explanation.",
+        "Slide 6 supplies the requested security-shield visual without abandoning the control table, and slide 7 converts the lesson into an effective live-test evidence matrix.",
+        "Sample values are visibly illustrative, and slides 4–5 correctly scope the code as a concise laboratory example rather than a production-complete implementation."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "minor",
+          "evidence": "The full-bleed crop of the right-side illustration is deliberate and clean, but the large opaque cyan POST card and mostly solid panels only partially realize the requested glassmorphism.",
+          "fix": "Use translucent layered panels with restrained blur and edge highlights while preserving the strong isometric composition."
+        },
+        {
+          "slide": 2,
+          "severity": "blocking",
+          "evidence": "Generation defect: the browser mockup is cut off below the CSRF field, so no complete submit control or lower browser frame is visible. The failure card also ends at the bottom boundary.",
+          "fix": "Compress the form and API stack so the complete browser interaction and both outcomes fit with safe bottom margins."
+        },
+        {
+          "slide": 3,
+          "severity": "minor",
+          "evidence": "The architecture flow is strong, but the gray explanatory sentence beneath the illustration has weak contrast and is substantially less readable than the node labels.",
+          "fix": "Raise the caption contrast or place it on a dark translucent strip."
+        },
+        {
+          "slide": 4,
+          "severity": "blocking",
+          "evidence": "Generation defect: the code window is clipped at the bottom in the middle of the 401 render object. The visible snippet never reaches the regeneration and save path highlighted by the slide's own 'REGENERATE' label.",
+          "fix": "Show a shorter decision-focused snippet that includes validation, dummy-hash comparison, generic rejection, regenerate, session assignment, save, and redirect."
+        },
+        {
+          "slide": 5,
+          "severity": "minor",
+          "evidence": "The five numbered stages imply sequence, but the slide omits directional arrows despite presenting a data flow. The large browser/server state bars show the outcome rather than the transition.",
+          "fix": "Add a thin continuous arrow through stages 01–05 and terminate it in the browser/server state comparison."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The shield visual is on brief, but 'COOKIE-THEFT CONTROL' and 'HTTPS + HttpOnly + Secure + SameSite' can read as a complete prevention claim. These attributes mitigate exposure and cross-site sending rather than eliminating every theft path.",
+          "fix": "Relabel it 'Cookie-exposure mitigations' and specify SameSite=Lax to match slide 5."
+        },
+        {
+          "slide": 7,
+          "severity": "minor",
+          "evidence": "The result column mixes HTTP status codes with outcome labels such as PASS and REJECTED, making one column represent two different concepts.",
+          "fix": "Separate HTTP status from test outcome, or use a consistent result vocabulary throughout the table."
+        }
+      ],
+      "signatureMoment": "Slide 3's request-packet journey across browser, Express, validation, database lookup, bcrypt comparison, session regeneration, and the 303 response."
+    },
+    "winner": "B",
+    "reason": "B is the deck to give the user after mandatory overflow cleanup. It wins regardless of review order because its slides 1, 3, and 6 visibly satisfy the requested isometric architecture, glow, directional flow, and security imagery, while slides 5 and 7 are better suited to live laboratory teaching. Its additional visual complexity is earned primarily on slide 3, where it reveals system boundaries and sequence; it is less earned on the clipped code slide. Neither deck is ready as rendered: A fails the unclipped-content gate on slides 2, 4, 6, and 7, while B fails it on slides 2 and 4. B exceeds competent default quality in its opening and architecture slide, but not across the complete deck. The single most valuable change for A would be replacing its abstract and text-column treatments with one coherent isometric request-packet journey.",
+    "whatWouldMakeWinnerExceptional": "Carry the glowing request packet as a continuous visual motif through slides 2–7 while eliminating all clipping, especially showing the complete success path on slide 4. That would turn B's strong opening and architecture peak into sustained explanatory storytelling."
+  },
+  "usage": {
+    "prompt_tokens": 15212,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 5104,
+    "completion_tokens_details": {
+      "reasoning_tokens": 3071
+    },
+    "total_tokens": 20316
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 67.479
+}

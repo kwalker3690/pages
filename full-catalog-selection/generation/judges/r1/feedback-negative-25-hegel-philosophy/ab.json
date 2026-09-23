@@ -1,0 +1,128 @@
+{
+  "order": [
+    "original",
+    "library"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 5,
+        "coherence": 5,
+        "craft": 4,
+        "integrity": 4
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 opens with a genuine conceptual puzzle rather than a generic biography, and the paper-cut barriers and facing profiles visually support the tension between limits, speech, and freedom.",
+        "Slides 3–5 form a strong teaching sequence: correct the mechanical formula, test it through a seminar analogy, then separate what is canceled, preserved, and transformed.",
+        "Slide 6 turns reciprocal recognition into a readable two-way relationship rather than leaving it as prose.",
+        "Slide 7 responsibly rejects automatic historical progress and distinguishes person, practice, and institution.",
+        "Slide 8 closes with retrieval practice that directly tests the movement taught in the middle. The opening and ending feel intentionally paired.",
+        "The cream, charcoal, rust, mustard, and teal palette is controlled, and the paper-cut imagery on slides 1, 2, and 8 gives the lesson a recognizable editorial identity."
+      ],
+      "issues": [
+        {
+          "slide": 2,
+          "severity": "major",
+          "evidence": "The overview promises Logic, Spirit, History, and even mentions nature, but slides 3–8 concentrate almost entirely on dialectic, recognition, and social freedom. This is a content-selection limitation for a broadly titled presentation about Hegel's philosophy, not a rendering defect.",
+          "fix": "Either retitle the lesson around dialectic and social freedom or add concise coverage of idealism, nature, and the major works so the scope map matches the lesson."
+        },
+        {
+          "slide": 3,
+          "severity": "minor",
+          "evidence": "The Specify–Press–Revise sequence is clear, but its three independent columns do not visually show how internal pressure drives one stage into the next.",
+          "fix": "Add a restrained directional path or carry one example claim through all three stages."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The small gray labels above and below the reciprocal arrows have noticeably weaker contrast than the rest of the slide and may be difficult to read when projected.",
+          "fix": "Increase label size and contrast, and place each label directly on or beside its corresponding arrow."
+        },
+        {
+          "slide": 7,
+          "severity": "minor",
+          "evidence": "The warning band is important but visually heavy and prose-dense compared with the clean three-part structure above it.",
+          "fix": "Shorten the caveat to one strong sentence and move the supporting explanation into speaker notes."
+        }
+      ],
+      "signatureMoment": "Slides 4–5: the seminar claim is pressured by unequal participation and then decomposed into canceled, preserved, and transformed elements, making Aufhebung concrete without presenting it as a formula."
+    },
+    "B": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 3,
+        "audience": 2,
+        "coherence": 3,
+        "craft": 1,
+        "integrity": 4
+      },
+      "wow": "absent",
+      "strengths": [
+        "Slide 1 uses the empty circle of chairs to establish the seminar setting and provides a calm, academically appropriate opening.",
+        "Slides 2 and 3 have strong typographic hierarchy and give a concise overview followed by a useful correction of the thesis–antithesis–synthesis cliché.",
+        "Slide 4 explicitly labels the seminar scenario as a teaching analogy rather than a quotation or proof.",
+        "Slide 8 uses retrieval questions rather than ending with a passive summary, which suits the requested lesson rhythm.",
+        "The citations shown on slides 2 and 3 are legible and correspond to plausible Stanford Encyclopedia of Philosophy entries; there are no visible fabricated quotations or unsupported statistics."
+      ],
+      "issues": [
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "The three large outlined arrows are extremely faint, contain no information, and sit above the explanatory text. They consume substantial space without clearly carrying the claim through result to revision.",
+          "fix": "Put the claim, consequence, and revision inside three connected stages, with the failure point visibly marked between the first two."
+        },
+        {
+          "slide": 5,
+          "severity": "minor",
+          "evidence": "Cancel, preserve, and transform are presented as three conventional text columns. The slide states the relationship but does not visually demonstrate the double movement of negation and preservation.",
+          "fix": "Use one object or claim that visibly changes across the three states while retaining a recognizable element."
+        },
+        {
+          "slide": 6,
+          "severity": "blocking",
+          "evidence": "The lower explanatory content is visibly cut off by the bottom edge. The broken-ring diagram is also ambiguous: its faint outline and unrelated small icons do not clearly encode reciprocal recognition.",
+          "fix": "Rebuild the slide within safe margins and replace the ring with two clearly labeled agents exchanging distinct reciprocal actions."
+        },
+        {
+          "slide": 7,
+          "severity": "blocking",
+          "evidence": "Both the left paragraph and the lower portions of the diagram run beyond the bottom of the rendered slide. The viewer cannot read the full explanation or see the complete institutional model.",
+          "fix": "Reduce the oversized left column, fit the complete diagram above the bottom margin, and use the same restrained diagram style as the earlier slides."
+        },
+        {
+          "slide": 8,
+          "severity": "blocking",
+          "evidence": "The takeaway panel is visibly clipped at the bottom, so the closing slide is not presentation-ready even though the retrieval questions above it are useful.",
+          "fix": "Shorten the takeaway or move it upward so the entire closing statement remains inside the slide canvas."
+        },
+        {
+          "slide": 8,
+          "severity": "major",
+          "evidence": "The supplied measurements report overflow on six of eight slides, and the visible failures on slides 6–8 confirm that this is a systemic generation defect rather than an isolated alignment issue.",
+          "fix": "Apply a deck-wide safe-area and text-fit preflight before export, then inspect every rendered slide rather than relying on editable-layout bounds."
+        }
+      ],
+      "signatureMoment": "Slide 1's chair circle is the deck's most memorable visual, but it remains an opening illustration rather than developing into a sustained explanatory system."
+    },
+    "winner": "A",
+    "reason": "A is the deck to give the user. It passes the readable and unclipped hard gate, has a coherent palette, and sustains an actual lesson arc from conceptual puzzle to correction, analogy, sublation, recognition, institutions, and retrieval. B fails the hard gate because slides 6–8 visibly lose content beyond the canvas, with overflow reported on six slides. The preference would not reverse with presentation order. A's additional visual complexity earns its keep because the colored states, reciprocal arrows, paper-cut metaphors, and warning treatment clarify different concepts rather than merely decorating them. A does exceed competent default quality, especially on slides 4–5 and 8, but its conventional middle-slide layouts and narrow philosophical scope keep it below sustained wow. The single most useful improvement to B would be a complete safe-area rebuild of slides 6–8, followed by deck-wide overflow preflight.",
+    "whatWouldMakeWinnerExceptional": "Turn the seminar analogy into one persistent visual model that visibly evolves across slides 3–7—showing voices, interruption, turn-taking, reciprocal recognition, and institutional rules in the same scene—then culminate with the learner reconstructing that transformation on slide 8."
+  },
+  "usage": {
+    "prompt_tokens": 17115,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 4266,
+    "completion_tokens_details": {
+      "reasoning_tokens": 2560
+    },
+    "total_tokens": 21381
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 59.843
+}

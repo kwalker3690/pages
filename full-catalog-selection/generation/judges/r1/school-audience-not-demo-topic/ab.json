@@ -1,0 +1,149 @@
+{
+  "order": [
+    "original",
+    "library"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 3,
+        "coherence": 4,
+        "craft": 3,
+        "integrity": 5
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 1 and 8 create a distinctive paper-cut bookend: intercepted sunlight opens the lesson, and a child explains the shield at the end.",
+        "Slides 3–4 provide the strongest teaching sequence in either deck. The matched prediction and reveal compositions connect ozone amount, absorption, and UV reaching the ground.",
+        "Slide 2 correctly distinguishes stratospheric protective ozone from ground-level ozone, while slides 5 and 7 avoid conflating ozone recovery, sun safety, and climate action.",
+        "Slide 6 presents all three recovery projections on one sourced timeline and explicitly says they are conditional projections rather than guaranteed dates."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "minor",
+          "evidence": "Selection defect: the dark teal, black, and gold editorial treatment is polished but misses the requested bright sky-blue-and-green classroom palette and feels older than the ten-year-old audience.",
+          "fix": "Retain the paper-cut shield image but shift the cover toward brighter sky blue and green with a more energetic classroom tone."
+        },
+        {
+          "slide": 2,
+          "severity": "major",
+          "evidence": "Generation defect: the labels \"Stratosphere\" and \"weather below\" are nearly white on a white card and are effectively unreadable.",
+          "fix": "Use dark teal labels or place them on visibly tinted atmospheric bands."
+        },
+        {
+          "slide": 3,
+          "severity": "blocking",
+          "evidence": "Generation defect: the essential column labels \"More ozone\" and \"Less ozone\" are almost invisible in white on white. That prevents students from confidently identifying which diagram answers the prediction question.",
+          "fix": "Render both labels in dark text or colored header tabs and verify projection contrast."
+        },
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "Generation defect: the same near-invisible \"More ozone\" and \"Less ozone\" labels recur in the reveal, weakening the comparison even though the absorption statements remain readable.",
+          "fix": "Apply the corrected high-contrast headers consistently to both prediction and reveal slides."
+        },
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "Selection defect: a four-step chemical chain is represented almost entirely by four prose columns. There are no particles, arrows, altitude cues, or repeated-action visual to help ten-year-olds understand the mechanism.",
+          "fix": "Turn the sequence into a simple illustrated chain showing a cooling chemical rising, sunlight splitting it, a reactive atom meeting ozone, and that atom repeating the process."
+        },
+        {
+          "slide": 7,
+          "severity": "major",
+          "evidence": "Selection defect: the instruction says \"Sort each action,\" but the actions are already written inside their final categories. Students have nothing visible to sort.",
+          "fix": "Show separate movable action cards first, then reveal the three categorized answers."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "Generation defect: the final instruction sits too close to the lower edge and corresponds to the reported overflow, reducing safe projection margin.",
+          "fix": "Move the closing prompt upward or shorten it by one line."
+        }
+      ],
+      "signatureMoment": "The slide 3-to-4 predict/reveal transition: the same two-Earth comparison changes from question marks to absorption outcomes, making the core relationship teachable rather than merely decorative."
+    },
+    "B": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 3,
+        "audience": 4,
+        "coherence": 3,
+        "craft": 2,
+        "integrity": 3
+      },
+      "wow": "absent",
+      "strengths": [
+        "The large rounded type, bright color blocks, and short sentences are generally well calibrated for ten-year-olds.",
+        "Slide 2 makes O₃ concrete with three large oxygen atoms and clearly separates stratospheric ozone from ground-level pollution.",
+        "Slide 3 is an effective participation prompt: two parallel lanes, a visible Sun, different ozone amounts, and question marks support pointing and voting.",
+        "Slide 8 provides a clear four-question retrieval exercise and a concise teach-back task."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "blocking",
+          "evidence": "Generation defect: the cover illustration retains a visible checkerboard transparency background, and an unrelated red shape is awkwardly cropped at the lower-right edge. The opening looks like an unprocessed asset rather than a finished slide.",
+          "fix": "Replace the asset with a clean transparent export or a purpose-built full-bleed illustration, then crop intentionally."
+        },
+        {
+          "slide": 2,
+          "severity": "minor",
+          "evidence": "Craft defect: the sentence \"Ozone is spread through that air .\" contains a visible space before the period, and the three explanatory cards function more as text boxes than as an atmospheric diagram.",
+          "fix": "Correct the punctuation and arrange the statements within a simple ground-weather-stratosphere cross-section."
+        },
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "Selection defect: the reveal abandons the ray-path diagram from slide 3 and replaces it with two large text cards. Students are told \"LESS UV\" and \"MORE UV\" but do not see what changed along the path.",
+          "fix": "Reuse the two-lane diagram and reveal fewer versus more rays continuing past the ozone region."
+        },
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "Generation and selection defects: the source line is visibly cut off at the bottom, while the four-step mechanism is another dense row of prose with no explanatory imagery.",
+          "fix": "Reflow the slide within safe margins and illustrate the repeating chemical chain with arrows and particles."
+        },
+        {
+          "slide": 6,
+          "severity": "blocking",
+          "evidence": "Generation defect with content impact: the numbered timeline has three markers, but only \"Around 2040\" and \"Around 2066\" are labeled. Marker 2 has no date or location, omitting the Arctic 2045 milestone and leaving the sequence malformed.",
+          "fix": "Restore the complete 2040 global, 2045 Arctic, and 2066 Antarctic labels and include the source and projection caveat inside the canvas."
+        },
+        {
+          "slide": 7,
+          "severity": "major",
+          "evidence": "Generation defect: the source is clipped below the frame. The three icons also use visibly inconsistent treatments—white tiles for two and a black square for the umbrella—making the slide feel assembled from unrelated assets.",
+          "fix": "Reflow the source into the safe area and redraw or normalize all three icons in one style."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "Task-fit defect: the slide asks \"What global plan is helping?\" but the visible lesson never clearly names the Montreal Protocol in instructional content; its only appearance is in the clipped source on slide 5.",
+          "fix": "Teach and visibly name the Montreal Protocol before asking students to recall the plan."
+        }
+      ],
+      "signatureMoment": "Slide 3's two-lane prediction activity is the deck's clearest substantive visual, but the following reveal does not carry that visual logic forward."
+    },
+    "winner": "A",
+    "reason": "I would give the user Deck A after mandatory contrast and overflow corrections. It has the stronger visual premise, a complete and accurate recovery timeline, better explanatory continuity, and a more convincing predict/reveal sequence. Deck B is more immediately childlike, but its checkerboard cover asset, clipped citations, six reported overflows, and visibly incomplete timeline are release-blocking generation defects. Both provide eight slides and cover the subject, but neither is ready unchanged: A has a blocking contrast failure on slide 3 and also misses the requested bright palette; B has multiple blocking render and content-fit failures. The preference is not order-sensitive. Route identity is unavailable, but the greater observed complexity in A is partly earned by its bookends and comparison sequence; it does not produce sustained wow because slides 5–7 revert to ordinary columns and cards. A exceeds competent default quality only in isolated moments. The single most useful improvement to B would be an end-to-end safe-area and export-preflight rebuild that restores all clipped content and rejects unprocessed image assets.",
+    "whatWouldMakeWinnerExceptional": "Extend A's paper-cut invisible-shield premise through the entire middle: illustrate the depletion chain, create a genuine student sorting activity, and show policy-driven recovery as a visual story. Correct every low-contrast label, use the requested bright sky-blue-and-green palette, and preserve generous safe margins through the final slide."
+  },
+  "usage": {
+    "prompt_tokens": 17089,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 7067,
+    "completion_tokens_details": {
+      "reasoning_tokens": 5032
+    },
+    "total_tokens": 24156
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 90.956
+}

@@ -1,0 +1,1105 @@
+{
+  "cases": 14,
+  "decks": 28,
+  "slides": 226,
+  "preferences": {
+    "library": 2,
+    "original": 11,
+    "inconclusive": 1
+  },
+  "renderedDeckRevisions": {
+    "original": 64,
+    "library": 64
+  },
+  "firstDraftOverflowingSlides": {
+    "original": 25,
+    "library": 55
+  },
+  "finalOverflowingSlides": 0,
+  "knownEstimatedUsd": 114.98759311999993,
+  "casesDetailed": [
+    {
+      "id": "school-audience-not-demo-topic",
+      "request": "Make a fun, visual lesson about protecting the ozone layer for my class of ten-year-olds.",
+      "originalVotes": 2,
+      "libraryTemplate": "weather-watchers",
+      "concept": "The Invisible Shield Club",
+      "original": {
+        "revision": "r4",
+        "url": "https://staging.gamma.app/docs/y68amdqvye7sdqi",
+        "cards": 8,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "occasional",
+          "occasional"
+        ],
+        "scores": [
+          {
+            "specificity": 4,
+            "storytelling": 4,
+            "audience": 4,
+            "coherence": 4,
+            "craft": 4,
+            "integrity": 4
+          },
+          {
+            "specificity": 4,
+            "storytelling": 4,
+            "audience": 4,
+            "coherence": 4,
+            "craft": 4,
+            "integrity": 3
+          }
+        ],
+        "blockingFlags": []
+      },
+      "library": {
+        "revision": "r4",
+        "url": "https://staging.gamma.app/docs/4kdluysmbv21beu",
+        "cards": 8,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "occasional",
+          "absent"
+        ],
+        "scores": [
+          {
+            "specificity": 4,
+            "storytelling": 4,
+            "audience": 5,
+            "coherence": 4,
+            "craft": 4,
+            "integrity": 4
+          },
+          {
+            "specificity": 4,
+            "storytelling": 4,
+            "audience": 5,
+            "coherence": 4,
+            "craft": 4,
+            "integrity": 4
+          }
+        ],
+        "blockingFlags": []
+      },
+      "orderVotes": [
+        "library",
+        "library"
+      ],
+      "preference": "library"
+    },
+    {
+      "id": "adult-audience-same-topic",
+      "request": "Brief our investment committee on ozone policy and what it means for our portfolio.",
+      "originalVotes": 1,
+      "libraryTemplate": "verdict",
+      "concept": "The Exposure Atlas",
+      "original": {
+        "revision": "r6",
+        "url": "https://staging.gamma.app/docs/ga5ilnt10eltgpl",
+        "cards": 8,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "occasional",
+          "occasional"
+        ],
+        "scores": [
+          {
+            "specificity": 4,
+            "storytelling": 4,
+            "audience": 5,
+            "coherence": 5,
+            "craft": 4,
+            "integrity": 4
+          },
+          {
+            "specificity": 4,
+            "storytelling": 4,
+            "audience": 5,
+            "coherence": 5,
+            "craft": 5,
+            "integrity": 5
+          }
+        ],
+        "blockingFlags": [
+          {
+            "order": "ab",
+            "slide": 8,
+            "severity": "blocking",
+            "evidence": "The deck asks the committee to approve a portfolio screen, but it never shows the actual portfolio baseline: no holdings, jurisdictions, installed substances, regulatory deadlines, ownership boundaries, or estimated valuation exposure. It therefore explains a diligence method rather than fully answering what ozone policy means for this portfolio.",
+            "fix": "Before committee circulation, add a sourced holding-by-holding exposure table or heat map showing jurisdiction, equipment, substance class, applicable rule or phaseout date, ownership, replacement timing, capex range, and proposed action. This is primarily an input/selection gap, not a rendering defect."
+          }
+        ]
+      },
+      "library": {
+        "revision": "r6",
+        "url": "https://staging.gamma.app/docs/lpsvj7aapuzjm9q",
+        "cards": 8,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "absent",
+          "occasional"
+        ],
+        "scores": [
+          {
+            "specificity": 4,
+            "storytelling": 3,
+            "audience": 4,
+            "coherence": 4,
+            "craft": 4,
+            "integrity": 4
+          },
+          {
+            "specificity": 3,
+            "storytelling": 4,
+            "audience": 5,
+            "coherence": 4,
+            "craft": 4,
+            "integrity": 5
+          }
+        ],
+        "blockingFlags": [
+          {
+            "order": "ab",
+            "slide": 8,
+            "severity": "blocking",
+            "evidence": "The requested decision is approval of a 90-day portfolio screen, yet the deck provides no actual portfolio inventory, jurisdictional policy calendar, exposure total, or issuer-level implication. The result is a polished process proposal, not a complete briefing on what ozone policy means for the user's portfolio.",
+            "fix": "Add a sourced jurisdiction-by-holding exposure exhibit with substances, equipment, ownership, deadlines, replacement timing, capex ranges, and recommended actions. This is chiefly an input/selection defect rather than a generation defect."
+          }
+        ]
+      },
+      "orderVotes": [
+        "original",
+        "original"
+      ],
+      "preference": "original"
+    },
+    {
+      "id": "hairstyle-portfolio-needs-imagery",
+      "request": "A lookbook of our salon's latest hairstyles. Big photos with short captions, like a fashion magazine.",
+      "originalVotes": 0,
+      "libraryTemplate": "voile",
+      "concept": "Cut / Movement / Texture",
+      "original": {
+        "revision": "r3",
+        "url": "https://staging.gamma.app/docs/8w9u188vcr2fqkm",
+        "cards": 8,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "occasional",
+          "sustained"
+        ],
+        "scores": [
+          {
+            "specificity": 5,
+            "storytelling": 4,
+            "audience": 3,
+            "coherence": 5,
+            "craft": 5,
+            "integrity": 3
+          },
+          {
+            "specificity": 5,
+            "storytelling": 5,
+            "audience": 4,
+            "coherence": 5,
+            "craft": 5,
+            "integrity": 4
+          }
+        ],
+        "blockingFlags": [
+          {
+            "order": "ab",
+            "slide": 1,
+            "severity": "blocking",
+            "evidence": "The cover and repeated footers explicitly identify the imagery as AI concepts and “not salon work.” The requested subject was the salon's latest hairstyles, so slides 1–8 do not document the required work. This is a prompt/asset-selection defect, not a rendering defect.",
+            "fix": "Replace the concept imagery with verified photographs of recent salon clients or models styled by the salon, with consent and stylist credits."
+          }
+        ]
+      },
+      "library": {
+        "revision": "r3",
+        "url": "https://staging.gamma.app/docs/bnvw0ramfpsjktn",
+        "cards": 8,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "occasional",
+          "occasional"
+        ],
+        "scores": [
+          {
+            "specificity": 4,
+            "storytelling": 3,
+            "audience": 3,
+            "coherence": 4,
+            "craft": 4,
+            "integrity": 3
+          },
+          {
+            "specificity": 4,
+            "storytelling": 4,
+            "audience": 4,
+            "coherence": 5,
+            "craft": 5,
+            "integrity": 4
+          }
+        ],
+        "blockingFlags": [
+          {
+            "order": "ab",
+            "slide": 1,
+            "severity": "blocking",
+            "evidence": "The deck states that its images are AI concepts and not salon work. Consequently, slides 1–8 do not show the salon's latest hairstyles as requested. This is a prompt/asset-selection failure rather than a generation or layout defect.",
+            "fix": "Rebuild the lookbook around authenticated recent salon work and identify the salon and responsible stylists."
+          }
+        ]
+      },
+      "orderVotes": [
+        "original",
+        "original"
+      ],
+      "preference": "original"
+    },
+    {
+      "id": "three-distinct-business-choices",
+      "request": "Create a quarterly business review for our leadership team.",
+      "originalVotes": 0,
+      "libraryTemplate": "quarterlight",
+      "concept": "The Operating Line",
+      "original": {
+        "revision": "r3",
+        "url": "https://staging.gamma.app/docs/u21j9hj5dt5kou1",
+        "cards": 8,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "occasional",
+          "occasional"
+        ],
+        "scores": [
+          {
+            "specificity": 3,
+            "storytelling": 4,
+            "audience": 4,
+            "coherence": 4,
+            "craft": 3,
+            "integrity": 5
+          },
+          {
+            "specificity": 4,
+            "storytelling": 4,
+            "audience": 5,
+            "coherence": 4,
+            "craft": 3,
+            "integrity": 4
+          }
+        ],
+        "blockingFlags": []
+      },
+      "library": {
+        "revision": "r3",
+        "url": "https://staging.gamma.app/docs/aovxo5n6v020dmn",
+        "cards": 8,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "occasional",
+          "occasional"
+        ],
+        "scores": [
+          {
+            "specificity": 3,
+            "storytelling": 4,
+            "audience": 5,
+            "coherence": 5,
+            "craft": 3,
+            "integrity": 4
+          },
+          {
+            "specificity": 3,
+            "storytelling": 4,
+            "audience": 4,
+            "coherence": 4,
+            "craft": 3,
+            "integrity": 5
+          }
+        ],
+        "blockingFlags": []
+      },
+      "orderVotes": [
+        "library",
+        "original"
+      ],
+      "preference": "inconclusive"
+    },
+    {
+      "id": "explicit-dark-overrides-color-variety",
+      "request": "I'm speaking at a creative conference. Make the slides dark and dramatic.",
+      "originalVotes": 1,
+      "libraryTemplate": "blackwork",
+      "concept": "Afterimage",
+      "original": {
+        "revision": "r5",
+        "url": "https://staging.gamma.app/docs/yuiroqc3usocwl2",
+        "cards": 8,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "occasional",
+          "sustained"
+        ],
+        "scores": [
+          {
+            "specificity": 4,
+            "storytelling": 4,
+            "audience": 5,
+            "coherence": 5,
+            "craft": 4,
+            "integrity": 5
+          },
+          {
+            "specificity": 5,
+            "storytelling": 5,
+            "audience": 5,
+            "coherence": 5,
+            "craft": 4,
+            "integrity": 5
+          }
+        ],
+        "blockingFlags": []
+      },
+      "library": {
+        "revision": "r5",
+        "url": "https://staging.gamma.app/docs/3e7eyw77oyrln2t",
+        "cards": 8,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "absent",
+          "occasional"
+        ],
+        "scores": [
+          {
+            "specificity": 3,
+            "storytelling": 3,
+            "audience": 4,
+            "coherence": 4,
+            "craft": 4,
+            "integrity": 4
+          },
+          {
+            "specificity": 3,
+            "storytelling": 3,
+            "audience": 4,
+            "coherence": 4,
+            "craft": 4,
+            "integrity": 5
+          }
+        ],
+        "blockingFlags": []
+      },
+      "orderVotes": [
+        "original",
+        "original"
+      ],
+      "preference": "original"
+    },
+    {
+      "id": "premium-wellness-with-explicit-style",
+      "request": "Pitch our wellness program to boutique hotel managers. Clean white and soft teal, polished but welcoming.",
+      "originalVotes": 3,
+      "libraryTemplate": "palmhouse",
+      "concept": "The Restorative Hour",
+      "original": {
+        "revision": "r5",
+        "url": "https://staging.gamma.app/docs/xj4dvufdi4f1wsk",
+        "cards": 8,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "occasional",
+          "occasional"
+        ],
+        "scores": [
+          {
+            "specificity": 4,
+            "storytelling": 4,
+            "audience": 5,
+            "coherence": 4,
+            "craft": 4,
+            "integrity": 3
+          },
+          {
+            "specificity": 4,
+            "storytelling": 4,
+            "audience": 5,
+            "coherence": 4,
+            "craft": 4,
+            "integrity": 3
+          }
+        ],
+        "blockingFlags": []
+      },
+      "library": {
+        "revision": "r5",
+        "url": "https://staging.gamma.app/docs/223py4hzs9h5v5t",
+        "cards": 8,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "occasional",
+          "sustained"
+        ],
+        "scores": [
+          {
+            "specificity": 4,
+            "storytelling": 4,
+            "audience": 5,
+            "coherence": 5,
+            "craft": 4,
+            "integrity": 5
+          },
+          {
+            "specificity": 5,
+            "storytelling": 5,
+            "audience": 5,
+            "coherence": 5,
+            "craft": 4,
+            "integrity": 5
+          }
+        ],
+        "blockingFlags": []
+      },
+      "orderVotes": [
+        "library",
+        "library"
+      ],
+      "preference": "library"
+    },
+    {
+      "id": "preserve-dense-text-return-fewer",
+      "request": "Create a detailed project handover deck for people to read on their own.",
+      "originalVotes": 0,
+      "libraryTemplate": "readable-detail",
+      "concept": "The Project Field Guide — a durable operational reference in which every important decision, risk, dependency, and action can be located and followed without a presenter.",
+      "original": {
+        "revision": "r4",
+        "url": "https://staging.gamma.app/docs/o7uw1jtprtirao1",
+        "cards": 10,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "occasional",
+          "occasional"
+        ],
+        "scores": [
+          {
+            "specificity": 4,
+            "storytelling": 4,
+            "audience": 5,
+            "coherence": 5,
+            "craft": 5,
+            "integrity": 4
+          },
+          {
+            "specificity": 4,
+            "storytelling": 4,
+            "audience": 5,
+            "coherence": 5,
+            "craft": 4,
+            "integrity": 3
+          }
+        ],
+        "blockingFlags": []
+      },
+      "library": {
+        "revision": "r4",
+        "url": "https://staging.gamma.app/docs/mst26hzwnpm4pjr",
+        "cards": 10,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "occasional",
+          "occasional"
+        ],
+        "scores": [
+          {
+            "specificity": 4,
+            "storytelling": 4,
+            "audience": 5,
+            "coherence": 5,
+            "craft": 4,
+            "integrity": 4
+          },
+          {
+            "specificity": 4,
+            "storytelling": 3,
+            "audience": 4,
+            "coherence": 4,
+            "craft": 4,
+            "integrity": 4
+          }
+        ],
+        "blockingFlags": []
+      },
+      "orderVotes": [
+        "original",
+        "original"
+      ],
+      "preference": "original"
+    },
+    {
+      "id": "big-bang-for-a-pirate",
+      "request": "explain the big bang theory to a pirate",
+      "originalVotes": 3,
+      "libraryTemplate": "star-trails",
+      "concept": "The Navigator’s Atlas of an Expanding Sea",
+      "original": {
+        "revision": "r8",
+        "url": "https://staging.gamma.app/docs/qziijjcsddcff6h",
+        "cards": 8,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "sustained",
+          "sustained"
+        ],
+        "scores": [
+          {
+            "specificity": 5,
+            "storytelling": 5,
+            "audience": 5,
+            "coherence": 5,
+            "craft": 4,
+            "integrity": 5
+          },
+          {
+            "specificity": 5,
+            "storytelling": 5,
+            "audience": 4,
+            "coherence": 5,
+            "craft": 4,
+            "integrity": 5
+          }
+        ],
+        "blockingFlags": []
+      },
+      "library": {
+        "revision": "r8",
+        "url": "https://staging.gamma.app/docs/bm9hs8gketiif2s",
+        "cards": 8,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "occasional",
+          "occasional"
+        ],
+        "scores": [
+          {
+            "specificity": 3,
+            "storytelling": 4,
+            "audience": 3,
+            "coherence": 4,
+            "craft": 4,
+            "integrity": 5
+          },
+          {
+            "specificity": 3,
+            "storytelling": 4,
+            "audience": 3,
+            "coherence": 4,
+            "craft": 4,
+            "integrity": 4
+          }
+        ],
+        "blockingFlags": []
+      },
+      "orderVotes": [
+        "original",
+        "original"
+      ],
+      "preference": "original"
+    },
+    {
+      "id": "feedback-negative-09-authentication-portal",
+      "request": "Create exactly 7 presentation slides for a B.Tech Node.js Laboratory demonstration of a Student Authentication Portal. Use a premium dark developer-dashboard aesthetic with glassmorphism, subtle glow, 3D/isometric software architecture, realistic browser UI mockups, API request/response cards, code snippets, security-shield visuals, and clear directional data-flow arrows. The deck must be technically credible and concise enough to present live.",
+      "originalVotes": 3,
+      "libraryTemplate": "pipeline",
+      "concept": "Request Trace Observatory — Inside one secure request",
+      "original": {
+        "revision": "r4",
+        "url": "https://staging.gamma.app/docs/829nw2qbjoow8qa",
+        "cards": 7,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "occasional",
+          "occasional"
+        ],
+        "scores": [
+          {
+            "specificity": 5,
+            "storytelling": 4,
+            "audience": 5,
+            "coherence": 5,
+            "craft": 4,
+            "integrity": 5
+          },
+          {
+            "specificity": 5,
+            "storytelling": 5,
+            "audience": 5,
+            "coherence": 5,
+            "craft": 4,
+            "integrity": 5
+          }
+        ],
+        "blockingFlags": []
+      },
+      "library": {
+        "revision": "r4",
+        "url": "https://staging.gamma.app/docs/y9ehq1i3ccvfksp",
+        "cards": 7,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "absent",
+          "absent"
+        ],
+        "scores": [
+          {
+            "specificity": 3,
+            "storytelling": 4,
+            "audience": 5,
+            "coherence": 4,
+            "craft": 3,
+            "integrity": 5
+          },
+          {
+            "specificity": 3,
+            "storytelling": 4,
+            "audience": 4,
+            "coherence": 4,
+            "craft": 3,
+            "integrity": 5
+          }
+        ],
+        "blockingFlags": [
+          {
+            "order": "ab",
+            "slide": 1,
+            "severity": "blocking",
+            "evidence": "Prompt/selection defect: across slides 1–7, the requested glassmorphism, subtle glow, 3D/isometric software architecture, and security-shield visual are absent. Slide 1 uses flat outlined rectangles, and slide 6 remains entirely typographic. This is a hard brief-compliance failure even though the seven-slide count and dark palette pass.",
+            "fix": "Rebuild the visual system around one isometric browser–Express–PostgreSQL architecture with translucent glass panels and restrained cyan/violet glow, then use a meaningful shield/control visual on the security slide."
+          },
+          {
+            "order": "ba",
+            "slide": 1,
+            "severity": "blocking",
+            "evidence": "Prompt/selection defect: the requested premium visual language is substantially absent across the deck. Slide 1 represents architecture with three flat rectangles, slide 2 is a schematic form rather than a realistic browser mockup, and slide 6 has no requested security-shield visual. There is no 3D/isometric software architecture or meaningful glassmorphism.",
+            "fix": "Rebuild the visual system around one isometric browser–Express–PostgreSQL request trace, then reuse realistic browser, API and security assets throughout rather than relying almost entirely on flat outlined boxes."
+          }
+        ]
+      },
+      "orderVotes": [
+        "original",
+        "original"
+      ],
+      "preference": "original"
+    },
+    {
+      "id": "feedback-negative-10-visual-communication-history",
+      "request": "A university lecture presentation for visual communication design, on the history of media evolution and visual transformation (print civilization → digital era → age of computational intelligence), aimed at design students. It should be academic but not dull, rational and restrained, with an editorial and grid-based visual style.",
+      "originalVotes": 3,
+      "libraryTemplate": "classic-editorial",
+      "concept": "The Grid Learns to Move",
+      "original": {
+        "revision": "r4",
+        "url": "https://staging.gamma.app/docs/4hjzqjz7yamsrnk",
+        "cards": 8,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "occasional",
+          "occasional"
+        ],
+        "scores": [
+          {
+            "specificity": 4,
+            "storytelling": 4,
+            "audience": 4,
+            "coherence": 4,
+            "craft": 4,
+            "integrity": 4
+          },
+          {
+            "specificity": 4,
+            "storytelling": 4,
+            "audience": 5,
+            "coherence": 5,
+            "craft": 4,
+            "integrity": 5
+          }
+        ],
+        "blockingFlags": []
+      },
+      "library": {
+        "revision": "r4",
+        "url": "https://staging.gamma.app/docs/7nxx1vcxwl0tg86",
+        "cards": 8,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "absent",
+          "occasional"
+        ],
+        "scores": [
+          {
+            "specificity": 3,
+            "storytelling": 3,
+            "audience": 4,
+            "coherence": 4,
+            "craft": 4,
+            "integrity": 4
+          },
+          {
+            "specificity": 4,
+            "storytelling": 3,
+            "audience": 5,
+            "coherence": 4,
+            "craft": 4,
+            "integrity": 5
+          }
+        ],
+        "blockingFlags": []
+      },
+      "orderVotes": [
+        "original",
+        "original"
+      ],
+      "preference": "original"
+    },
+    {
+      "id": "feedback-negative-16-history-for-children",
+      "request": "Create a creative, simple, colorful children's presentation about the Ragamuffin War. The deck should use little text, simple maps, a timeline, illustrated characters, everyday objects, and a quiz, avoiding images of violent battles.",
+      "originalVotes": 1,
+      "libraryTemplate": "story-map",
+      "concept": "Objects from a Changing Place",
+      "original": {
+        "revision": "r5",
+        "url": "https://staging.gamma.app/docs/tmu6o2ru86cjwyi",
+        "cards": 8,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "occasional",
+          "occasional"
+        ],
+        "scores": [
+          {
+            "specificity": 5,
+            "storytelling": 4,
+            "audience": 4,
+            "coherence": 4,
+            "craft": 4,
+            "integrity": 4
+          },
+          {
+            "specificity": 5,
+            "storytelling": 4,
+            "audience": 4,
+            "coherence": 5,
+            "craft": 4,
+            "integrity": 4
+          }
+        ],
+        "blockingFlags": []
+      },
+      "library": {
+        "revision": "r5",
+        "url": "https://staging.gamma.app/docs/mxisnxy4m0xaz1h",
+        "cards": 8,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "absent",
+          "absent"
+        ],
+        "scores": [
+          {
+            "specificity": 3,
+            "storytelling": 3,
+            "audience": 4,
+            "coherence": 3,
+            "craft": 4,
+            "integrity": 4
+          },
+          {
+            "specificity": 4,
+            "storytelling": 3,
+            "audience": 4,
+            "coherence": 4,
+            "craft": 4,
+            "integrity": 4
+          }
+        ],
+        "blockingFlags": []
+      },
+      "orderVotes": [
+        "original",
+        "original"
+      ],
+      "preference": "original"
+    },
+    {
+      "id": "feedback-negative-25-hegel-philosophy",
+      "request": "Presentation in English about Hegel and his philosophy, intended to explain abstract ideas clearly and with the rhythm of a lesson. Deck format.",
+      "originalVotes": 0,
+      "libraryTemplate": "marginalia",
+      "concept": "Ideas in Motion — The Seminar Test",
+      "original": {
+        "revision": "r4",
+        "url": "https://staging.gamma.app/docs/0ojnf3doz5xy04l",
+        "cards": 8,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "sustained",
+          "sustained"
+        ],
+        "scores": [
+          {
+            "specificity": 5,
+            "storytelling": 5,
+            "audience": 5,
+            "coherence": 5,
+            "craft": 4,
+            "integrity": 5
+          },
+          {
+            "specificity": 5,
+            "storytelling": 5,
+            "audience": 5,
+            "coherence": 5,
+            "craft": 4,
+            "integrity": 5
+          }
+        ],
+        "blockingFlags": []
+      },
+      "library": {
+        "revision": "r4",
+        "url": "https://staging.gamma.app/docs/pfl0l1youiiktp3",
+        "cards": 8,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "occasional",
+          "occasional"
+        ],
+        "scores": [
+          {
+            "specificity": 3,
+            "storytelling": 3,
+            "audience": 4,
+            "coherence": 4,
+            "craft": 4,
+            "integrity": 5
+          },
+          {
+            "specificity": 3,
+            "storytelling": 3,
+            "audience": 4,
+            "coherence": 4,
+            "craft": 4,
+            "integrity": 5
+          }
+        ],
+        "blockingFlags": []
+      },
+      "orderVotes": [
+        "original",
+        "original"
+      ],
+      "preference": "original"
+    },
+    {
+      "id": "feedback-negative-31-agricultural-machinery",
+      "request": "Create a PowerPoint presentation from a document about the efficiency of using agricultural tools and machinery (alsintan), with a white background and red accents. The material covers efficiency concepts, usage stages, machine selection, calculation examples, costs, indicators, strategies, a case study, and conclusions.",
+      "originalVotes": 1,
+      "libraryTemplate": "lecture-hall",
+      "concept": "Field Operations Workbook — One field, several decisions",
+      "original": {
+        "revision": "r5",
+        "url": "https://staging.gamma.app/docs/7t8x38lc07ef933",
+        "cards": 8,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "occasional",
+          "occasional"
+        ],
+        "scores": [
+          {
+            "specificity": 5,
+            "storytelling": 4,
+            "audience": 5,
+            "coherence": 5,
+            "craft": 4,
+            "integrity": 5
+          },
+          {
+            "specificity": 4,
+            "storytelling": 4,
+            "audience": 4,
+            "coherence": 4,
+            "craft": 4,
+            "integrity": 5
+          }
+        ],
+        "blockingFlags": []
+      },
+      "library": {
+        "revision": "r5",
+        "url": "https://staging.gamma.app/docs/2rbk1xrniucbmeg",
+        "cards": 8,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "absent",
+          "occasional"
+        ],
+        "scores": [
+          {
+            "specificity": 3,
+            "storytelling": 3,
+            "audience": 4,
+            "coherence": 4,
+            "craft": 4,
+            "integrity": 5
+          },
+          {
+            "specificity": 3,
+            "storytelling": 4,
+            "audience": 4,
+            "coherence": 4,
+            "craft": 4,
+            "integrity": 5
+          }
+        ],
+        "blockingFlags": []
+      },
+      "orderVotes": [
+        "original",
+        "original"
+      ],
+      "preference": "original"
+    },
+    {
+      "id": "feedback-negative-39-vietnamese-literature",
+      "request": "An English-language presentation about Nguyễn Du’s The Tale of Kieu for an academic setting, clearly covering the author, plot, the character Thúy Kiều, its realistic and humanitarian values, and the art of Vietnamese lục bát verse. Prioritize a classic, elegant appearance that remains easy to read on screen.",
+      "originalVotes": 0,
+      "libraryTemplate": "marginalia",
+      "concept": "The Vermilion Thread — an original literary system in which the mechanics of lục bát become the explanatory language for plot, agency, and humanitarian interpretation.",
+      "original": {
+        "revision": "r4",
+        "url": "https://staging.gamma.app/docs/5oku8pl5e0bymwn",
+        "cards": 8,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "sustained",
+          "occasional"
+        ],
+        "scores": [
+          {
+            "specificity": 5,
+            "storytelling": 5,
+            "audience": 5,
+            "coherence": 5,
+            "craft": 4,
+            "integrity": 4
+          },
+          {
+            "specificity": 4,
+            "storytelling": 4,
+            "audience": 5,
+            "coherence": 5,
+            "craft": 4,
+            "integrity": 4
+          }
+        ],
+        "blockingFlags": []
+      },
+      "library": {
+        "revision": "r4",
+        "url": "https://staging.gamma.app/docs/z7ifstrymsrd9t4",
+        "cards": 8,
+        "overflow": 0,
+        "blank": 0,
+        "liveVerified": true,
+        "wow": [
+          "occasional",
+          "absent"
+        ],
+        "scores": [
+          {
+            "specificity": 3,
+            "storytelling": 3,
+            "audience": 4,
+            "coherence": 4,
+            "craft": 4,
+            "integrity": 4
+          },
+          {
+            "specificity": 3,
+            "storytelling": 3,
+            "audience": 4,
+            "coherence": 4,
+            "craft": 4,
+            "integrity": 4
+          }
+        ],
+        "blockingFlags": []
+      },
+      "orderVotes": [
+        "original",
+        "original"
+      ],
+      "preference": "original"
+    }
+  ]
+}

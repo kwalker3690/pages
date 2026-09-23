@@ -1,0 +1,122 @@
+{
+  "headingFont": "IBM Plex Serif",
+  "headingFontWeight": 600,
+  "bodyFont": "IBM Plex Sans",
+  "bodyFontWeight": 400,
+  "config": {
+    "canvasPalette": {
+      "colors": [
+        {
+          "key": "primary",
+          "name": "Exposure Blue",
+          "color": {
+            "type": "solid",
+            "color": "#2D6F8E"
+          }
+        },
+        {
+          "key": "alert",
+          "name": "Policy Rust",
+          "color": {
+            "type": "solid",
+            "color": "#B64E3C"
+          }
+        },
+        {
+          "key": "transition",
+          "name": "Transition Teal",
+          "color": {
+            "type": "solid",
+            "color": "#287A72"
+          }
+        },
+        {
+          "key": "ink",
+          "name": "Charcoal Ink",
+          "color": {
+            "type": "solid",
+            "color": "#171A1F"
+          }
+        },
+        {
+          "key": "rule",
+          "name": "Mineral Rule",
+          "color": {
+            "type": "solid",
+            "color": "#C5C8C2"
+          }
+        }
+      ],
+      "gradients": []
+    },
+    "cardColor": {
+      "type": "solid",
+      "color": "#F7F6F2"
+    },
+    "surfaceColor": {
+      "type": "solid",
+      "color": "#E8E9E5"
+    },
+    "headingColor": "#171A1F",
+    "bodyColor": "#2B3238",
+    "mutedColor": {
+      "type": "solid",
+      "color": "#5D666B"
+    },
+    "background": {
+      "type": "color",
+      "source": "color.solid",
+      "color": {
+        "hex": "#E1E2DE"
+      }
+    },
+    "letterSpacingHeading": -0.01,
+    "roundness": "sm",
+    "cardShadow": "none",
+    "cardBorder": "sm",
+    "shapeFill": "solid",
+    "shapeColorScheme": "default",
+    "roleStyles": {
+      "subheading": {
+        "font": "IBM Plex Sans",
+        "fontWeight": 600
+      },
+      "eyebrow": {
+        "font": "IBM Plex Sans",
+        "transform": "uppercase",
+        "letterSpacing": 0.1
+      }
+    },
+    "imagery": {
+      "defaultStyleId": "industrial-atmospheric-relief",
+      "styles": [
+        {
+          "id": "industrial-atmospheric-relief",
+          "name": "Industrial atmospheric relief",
+          "promptGuidance": "Precision editorial relief image combining atmospheric layers with refrigeration hardware, built from matte mineral paper and oxidized metal under cool raking studio light, using exposure blue #2D6F8E, transition teal #287A72, rust #B64E3C, charcoal #171A1F and mineral white #F7F6F2, no text or lettering.",
+          "subjects": "Atmospheric cross-sections, compressors, cooling coils, cylinders, valves, insulation layers, and recovery equipment shown as abstract technical assemblies without logos.",
+          "whenToUse": "Use on the cover and atmospheric-science transition only; portfolio relationships and quantities should use native editable diagrams, matrices, and charts."
+        }
+      ]
+    },
+    "typeScale": {
+      "display-xl": 84,
+      "display-lg": 64,
+      "display-md": 48,
+      "heading-1": 40,
+      "heading-2": 30,
+      "heading-3": 22,
+      "heading-4": 18,
+      "subheading": 20,
+      "body-lg": 19,
+      "body-normal": 16,
+      "body-sm": 13,
+      "eyebrow": 11,
+      "caption": 11
+    },
+    "density": "md",
+    "cardPadding": "lg",
+    "lineHeightBody": 1.35,
+    "lineHeightHeading": 1.1
+  }
+}

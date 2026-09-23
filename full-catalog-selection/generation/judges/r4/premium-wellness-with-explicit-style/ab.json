@@ -1,0 +1,108 @@
+{
+  "order": [
+    "original",
+    "library"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 3,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 3,
+        "integrity": 3
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 1–3 establish a brief-specific concept rather than a generic wellness package: the arrival problem, restorative hour, and five-part guest ritual form a credible narrative.",
+        "Slides 4–5 address the manager's actual decision by separating guest, staff, property, guest-facing, and backstage considerations.",
+        "Slides 6–7 clearly label the financial model and decision thresholds as illustrative rather than presenting invented performance as fact.",
+        "Slide 8 ends with concrete ownership, space, evidence, and working-session actions rather than a vague sales slogan."
+      ],
+      "issues": [
+        {
+          "slide": 7,
+          "severity": "blocking",
+          "evidence": "The large coral-pink warning panel is the most saturated element in the deck and visibly breaks the requested clean white and soft teal palette.",
+          "fix": "Restyle the qualification note in pale teal or a neutral outlined panel, using hierarchy rather than an unrelated warning color."
+        },
+        {
+          "slide": 6,
+          "severity": "major",
+          "evidence": "The scope note says not to apply the monthly result directly to a four-week pilot, while slides 1, 7, and 8 consistently propose a six-week pilot.",
+          "fix": "Change the note to six weeks and verify all pilot-duration references globally."
+        },
+        {
+          "slide": 6,
+          "severity": "major",
+          "evidence": "The chart contains a black tooltip-like label reading “Direct-cost break-even: 0” across the baseline. It looks like a rendering artifact and competes with the actual break-even statement below.",
+          "fix": "Remove the artifact and directly label the negative 35% case, the zero crossing at about 36%, and the dollar units."
+        },
+        {
+          "slide": 5,
+          "severity": "minor",
+          "evidence": "The operating model is a dense three-column table with long lines in the final column; the visual treatment does little to reveal the Offer–Prepare–Deliver–Reset–Learn sequence.",
+          "fix": "Convert the rows into a horizontal service blueprint with distinct guest-facing and backstage lanes."
+        }
+      ],
+      "signatureMoment": "Slide 3 is the strongest substantive moment: it turns the promise into a complete, timed 60-minute ritual with clear boundaries and practical activity choices."
+    },
+    "B": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 4,
+        "coherence": 5,
+        "craft": 4,
+        "integrity": 5
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 has a confident editorial opening and immediately separates the guest promise from the manager proposition.",
+        "Slides 2–4 provide the clearest information design in either deck: the missing-middle journey, proportionally timed ritual, and four-link value chain reveal sequence and causality rather than merely decorating prose.",
+        "Slides 5–7 progress logically from operating model to explicitly illustrative economics and then to testable pilot gates.",
+        "Slide 6 keeps the assumptions visible and slide 7 qualifies the 40% gate against excluded labor and room opportunity cost, giving the commercial argument strong integrity.",
+        "Slide 8 closes on a specific working decision and visually bookends the deck with the proposed room setting."
+      ],
+      "issues": [
+        {
+          "slide": 6,
+          "severity": "blocking",
+          "evidence": "The chart title visibly truncates as “Monthly contribution (USD...” and the chart's visible 5 and 0 ticks do not clarify whether the scale is dollars or thousands. This is a rendered labeling defect even though the adjacent calculations are correct.",
+          "fix": "Use the complete title “Monthly contribution (USD, thousands),” add an explicit axis unit, and label the bars as −$0.1k, $3.5k, and $7.1k."
+        },
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "The paired circles number the five operating stages as 01 through 10, making each description appear to be a separate step. The content itself only defines five stages.",
+          "fix": "Use one number per stage and distinguish owner or action with lane labels rather than additional sequential numbers."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "The same empty-room setting used on slide 1 returns as the closing image. The bookend is coherent, but the absence of guests or staff keeps the hospitality mood more austere than welcoming.",
+          "fix": "Use a complementary closing image showing the room in use or a host completing the handoff while retaining the same restrained art direction."
+        }
+      ],
+      "signatureMoment": "Slide 3 combines a proportional 60-minute bar with five aligned stage columns, making duration, emphasis, and guest experience understandable at a glance."
+    },
+    "winner": "B",
+    "reason": "B is the deck to give the user after correcting slide 6. The preference remains stable in either presentation order: B has a more purposeful visual system, stronger explanatory diagrams, cleaner pacing, and better content integrity. Its additional diagrammatic complexity earns itself on slides 2–4, though not in slide 5's confusing numbering. B exceeds competent default quality in those central information-design slides, but it is not exceptional overall because the repeated empty-room imagery is generic and the rendered chart title is visibly defective. Both decks meet the eight-slide format and cover the guest, staff, property, operating, financial, pilot, and decision subjects; neither is fully ready as rendered because A violates the requested palette and B contains a truncated chart label. The single most valuable improvement to A would be to rebuild slides 5–7 as one teal-only service-blueprint-to-economics story, which would also force correction of the four-week/six-week contradiction.",
+    "whatWouldMakeWinnerExceptional": "Create one distinctive “one-hour operating system” visual that connects the guest ritual, backstage owners, capacity, unit economics, and pilot gates in a single property-specific model, then echo that model in the close. That would give B an exceptional substantive centerpiece rather than relying on several individually competent diagrams."
+  },
+  "usage": {
+    "prompt_tokens": 17106,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 5418,
+    "completion_tokens_details": {
+      "reasoning_tokens": 3963
+    },
+    "total_tokens": 22524
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 83.108
+}

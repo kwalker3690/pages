@@ -1,0 +1,125 @@
+{
+  "order": [
+    "original",
+    "library"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 4,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 2,
+        "integrity": 4
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 2–7 form a decision-oriented sequence from KPI status to trends, drivers, risks, choices, and execution.",
+        "Slide 3 makes the central trade-off immediately visible through three aligned four-quarter trends.",
+        "Slide 5 pairs each risk with a current reading, guardrail, response, and owner, which is useful leadership information design.",
+        "All invented figures and concept imagery are explicitly identified as illustrative rather than company evidence."
+      ],
+      "issues": [
+        {
+          "slide": 7,
+          "severity": "blocking",
+          "evidence": "The Days 31–60 description runs beyond the lower slide boundary; the final line containing “expansion plays” is visibly clipped.",
+          "fix": "Move the timeline upward and shorten each milestone to one line, or reduce the oversized KPI band so the complete action text fits."
+        },
+        {
+          "slide": 8,
+          "severity": "blocking",
+          "evidence": "Both lower text groups extend below the canvas: the left assessment copy and the right Day 60 copy are cut off, while the page number is stranded beside the clipped text.",
+          "fix": "Remove or reduce the decorative right-side image and rebuild the loop as a compact four-step grid with every statement inside safe margins."
+        },
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "The elements called bridges are equal-width boxes rather than bridges or waterfalls; contribution magnitude and cumulative movement are not encoded visually.",
+          "fix": "Use two true waterfall charts with scaled positive and negative steps and a visible reconciliation from opening to closing values."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The disclosure line repeats two nearly identical warnings: “Illustrative decision asks” and “Illustrative example,” producing visible generated-copy redundancy.",
+          "fix": "Replace both clauses with one concise disclosure."
+        },
+        {
+          "slide": 1,
+          "severity": "minor",
+          "evidence": "The rail-and-carriage concept image is polished but may imply an industrial company and does not explain the customer-expansion constraint.",
+          "fix": "Use a brief-specific visual that depicts acquisition flow narrowing at onboarding or expansion."
+        }
+      ],
+      "signatureMoment": "Slide 5’s risk table is the strongest working moment: three out-of-guardrail indicators are connected to thresholds, responses, and accountable owners in one scan."
+    },
+    "B": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 3,
+        "audience": 3,
+        "coherence": 4,
+        "craft": 2,
+        "integrity": 4
+      },
+      "wow": "occasional",
+      "strengths": [
+        "The restrained navy, cyan, and blue system is coherent across all eight slides.",
+        "Slide 6 creates a clear decision hierarchy by giving the primary funding request most of the canvas and keeping follow-on choices together.",
+        "Slide 8 is a concise four-stage operating loop with time markers and a strong closing statement.",
+        "The sample-data disclosures are consistently visible, avoiding presentation of invented metrics as company facts."
+      ],
+      "issues": [
+        {
+          "slide": 7,
+          "severity": "blocking",
+          "evidence": "The quarter-end outcome metrics are rendered in very dark text on a dark slate panel; $26.0M, 62%, 109%, +$0.2M, and their labels are barely legible. The page number also touches the panel’s lower border.",
+          "fix": "Set the entire outcome card in high-contrast white or pale text, increase label contrast, and restore bottom padding around the page number."
+        },
+        {
+          "slide": 3,
+          "severity": "major",
+          "evidence": "Each mini-chart contains an unexplained “0” near its left side even though the displayed ranges are 21–25, 57–61, and 108–114. These stray labels make the charts look technically unreliable.",
+          "fix": "Remove the erroneous zero labels and use a consistent, explicitly labeled min/max scale for each panel."
+        },
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "As in Deck A, the supposed bridges are rows of equal-size cards. A +$1.0M driver receives the same visual weight as −$0.1M, so the composition does not reveal contribution magnitude or cumulative reconciliation.",
+          "fix": "Replace the cards with scaled waterfall charts and visually distinguish positive drivers, leakage, and final results."
+        },
+        {
+          "slide": 5,
+          "severity": "minor",
+          "evidence": "The three risk cards use inconsistent operational framing: Demand has a trigger, while Adoption and Concentration show owners but no equally explicit trigger or response condition.",
+          "fix": "Give every card the same fields: current value, guardrail, trigger, action, and owner."
+        },
+        {
+          "slide": 2,
+          "severity": "minor",
+          "evidence": "The KPI cards are compressed into the bottom portion of the slide beneath a very large empty field, reducing projection scale without adding explanatory value.",
+          "fix": "Move the cards upward and enlarge their comparison-to-plan information, or use the space for a concise executive takeaway."
+        }
+      ],
+      "signatureMoment": "Slide 6’s asymmetric decision layout makes the $0.4M onboarding request unmistakably primary while preserving the two related leadership choices."
+    },
+    "winner": "A",
+    "reason": "Deck A is the deck to give the leadership user after mandatory overflow repairs. Both decks satisfy the eight-slide scope, cover performance, drivers, risks, decisions, and next-quarter execution, and clearly flag illustrative data. Neither is currently ready: A fails the hard readability check on slides 7 and 8, while B fails it on the key outcome panel on slide 7. A wins because its KPI, trend, risk, and decision pages are more consistently readable and operationally complete. B’s additional editorial complexity does not earn itself: the near-invisible outcome card, stray chart zeros, and card-based pseudo-bridges undermine trust. The single most valuable improvement to B would be rebuilding slide 7 with projection-safe contrast and hierarchy. A remains competent rather than exceptional default quality; the middle relies heavily on standard KPI, chart, table, and card patterns.",
+    "whatWouldMakeWinnerExceptional": "Build the entire deck around one recurring expansion-bottleneck visual that evolves from trend to cause to intervention to measured outcome, then replace the generic bridges and clipped closing slides with that coherent, fully legible causal system."
+  },
+  "usage": {
+    "prompt_tokens": 17119,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 4195,
+    "completion_tokens_details": {
+      "reasoning_tokens": 2661
+    },
+    "total_tokens": 21314
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 56.406
+}

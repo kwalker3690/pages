@@ -1,0 +1,109 @@
+{
+  "order": [
+    "original",
+    "library"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 5,
+        "storytelling": 4,
+        "audience": 3,
+        "coherence": 5,
+        "craft": 5,
+        "integrity": 3
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 1–8 sustain a distinctive line/movement/texture editorial premise rather than applying a generic beauty template.",
+        "Slide 6 pairs a full portrait with a crown close-up, while slide 7 supplies side and rear views; these crops help clients examine texture and construction.",
+        "Slide 8 turns the collection into a practical consultation tool by synthesizing three visual cues—line, movement and texture—with representative images.",
+        "The cream, black and burgundy system, serif/display typography and consistently controlled image crops are polished and free of visible clipping or missing assets."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "blocking",
+          "evidence": "The cover and repeated footers explicitly identify the imagery as AI concepts and “not salon work.” The requested subject was the salon's latest hairstyles, so slides 1–8 do not document the required work. This is a prompt/asset-selection defect, not a rendering defect.",
+          "fix": "Replace the concept imagery with verified photographs of recent salon clients or models styled by the salon, with consent and stylist credits."
+        },
+        {
+          "slide": 4,
+          "severity": "minor",
+          "evidence": "“Crown,” “Nape” and “Motion” are described only in a text list beside the photograph; nothing on the image identifies the relevant regions.",
+          "fix": "Add restrained callout lines or detail crops connecting each term to the visible crown, nape and separated strands."
+        },
+        {
+          "slide": 8,
+          "severity": "major",
+          "evidence": "The consultation ending is useful, but it contains no salon name, stylist attribution, booking path or contact detail, so the shareable marketing asset has no owner or conversion route.",
+          "fix": "Add salon branding and one clear booking or consultation action while preserving the three-card selection device."
+        }
+      ],
+      "signatureMoment": "Slide 6: the portrait-plus-crown-detail composition makes curl definition and silhouette inspectable rather than merely decorative."
+    },
+    "B": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 3,
+        "audience": 3,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 3
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 1–7 maintain a restrained fashion-editorial tone through warm grain, oversized photography and short captions.",
+        "Slide 5 is the clearest explanatory moment: adjacent short and long interpretations make the movement category broader and more actionable.",
+        "The disclosure that these are AI concepts is consistently visible, avoiding a false claim that the images show completed salon work.",
+        "No clipping, missing imagery, placeholder text, fabricated statistics or unreadable color contrast is visible."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "blocking",
+          "evidence": "The deck states that its images are AI concepts and not salon work. Consequently, slides 1–8 do not show the salon's latest hairstyles as requested. This is a prompt/asset-selection failure rather than a generation or layout defect.",
+          "fix": "Rebuild the lookbook around authenticated recent salon work and identify the salon and responsible stylists."
+        },
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "The short and long examples differ in model, wardrobe, setting, camera angle and lighting as well as length, making it difficult to isolate how the same shag concept changes between interpretations.",
+          "fix": "Photograph matched short and long examples with comparable angles, lighting and movement, or add detail crops that explicitly identify the shared crown and fringe construction."
+        },
+        {
+          "slide": 8,
+          "severity": "major",
+          "evidence": "The finale reduces the hairstyles to three small thumbnails surrounded by extensive empty space; it lacks the visual impact expected from a big-photo lookbook ending and provides no salon identity or booking action.",
+          "fix": "Use larger final reference images and convert the left column into a branded consultation or booking call to action."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The caption emphasizes curl-by-curl definition, but the single soft portrait offers no close detail for examining that definition.",
+          "fix": "Introduce a macro texture crop or a second angle, as well as the portrait."
+        }
+      ],
+      "signatureMoment": "Slide 5: the side-by-side short and long shag interpretations are the deck's only substantial comparison."
+    },
+    "winner": "A",
+    "reason": "A is the deck I would give the user as a prototype because its multi-angle crops, texture detail and final consultation taxonomy provide more useful visual storytelling than B's mostly repeated photo-plus-caption pattern. Its added layout complexity is earned, especially on slides 3, 6, 7 and 8, and it exceeds competent default quality in pacing and craft. The preference remains A regardless of viewing order. However, neither deck clears the readiness hard gate: both substitute disclosed AI concepts for the salon's actual latest work and omit salon identity. The single most valuable improvement to B would be replacing its concept set with a representative salon-produced shoot using matched front, profile, rear and detail views.",
+    "whatWouldMakeWinnerExceptional": "Retain A's line/movement/texture structure but populate it with verified salon work photographed in consistent multi-angle sets, then add stylist credits, salon branding and a clear booking path."
+  },
+  "usage": {
+    "prompt_tokens": 17103,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 4678,
+    "completion_tokens_details": {
+      "reasoning_tokens": 3584
+    },
+    "total_tokens": 21781
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 75.656,
+  "evidenceReusedFrom": "generation/judges/r3/hairstyle-portfolio-needs-imagery/ab.json",
+  "reasonForReuse": "Frozen decks are byte-identical to these already judged versions; no repeated model call."
+}

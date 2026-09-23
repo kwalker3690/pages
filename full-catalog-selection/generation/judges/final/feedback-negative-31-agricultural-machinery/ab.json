@@ -1,0 +1,115 @@
+{
+  "order": [
+    "original",
+    "library"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 5,
+        "storytelling": 4,
+        "audience": 5,
+        "coherence": 5,
+        "craft": 4,
+        "integrity": 5
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 is a memorable, brief-specific opening: the 5.14-hour loss is translated into a clear time ledger and paired with relevant aerial machinery imagery.",
+        "Slides 2 and 5 make the capacity and cost calculations reproducible, preserve units, and clearly identify the $54/hour input as illustrative.",
+        "The progression from five operational controls on slide 3 through diagnosis on slide 6, intervention on slide 7, and an operating standard on slide 8 forms a strong training narrative.",
+        "Slide 7 combines the assumed efficiency change, hours, cost per hectare, total cost, and savings in one coherent before-and-after case study.",
+        "Hard checks pass: the requested white-and-red treatment is present, every requested subject is covered, assumptions are flagged, and no clipping, missing assets, placeholders, or harmful technical distortions are visible."
+      ],
+      "issues": [
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "The six gray blocks and four red blocks count passes, but they do not depict an actual 12 m swath, turn paths, overlap, or implement fit. The central machine-selection claim is therefore supported by a schematic tally rather than a strong explanatory diagram.",
+          "fix": "Draw two scaled 12 m field strips with 2 m and 3 m pass lanes, turn paths, pass counts, and explicit power/hitch/access gates."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The diagnostic material is presented as a conventional three-column text table; it is readable but visually flatter than the surrounding calculation and case-study slides.",
+          "fix": "Convert each row into a signal-to-cause-to-action flow with directional connectors and one highlighted worked diagnosis."
+        },
+        {
+          "slide": 7,
+          "severity": "minor",
+          "evidence": "The hours chart does not print 17.14 and 14.63 directly on the bars, forcing the audience to infer them from the scale or nearby content. The photograph supplies context but is not evidence of the modeled improvement.",
+          "fix": "Add direct bar labels and use a small route or waiting-time diagram to connect the assumed intervention to the 2.51-hour saving."
+        }
+      ],
+      "signatureMoment": "Slide 7: the 0.70 to 0.82 efficiency change is translated into 2.51 hours and $135.47 saved, while retaining the unchanged-width, speed, and hourly-cost assumptions."
+    },
+    "B": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 3,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 5
+      },
+      "wow": "absent",
+      "strengths": [
+        "Slide 5 is a clear worked example: four numbered steps lead to a strongly separated output panel containing capacity, cost per hectare, and total field cost.",
+        "Slide 3 usefully groups Plan, Select, and Set up before the pass, then separates Operate and Verify while indicating that verification should reset the next plan.",
+        "Slide 7 presents all before-and-after values in one table and reinforces the result with three large summary measures.",
+        "Typography and spacing are generally consistent, and no clipping, missing images, placeholders, or unsupported unflagged scenario values are visible.",
+        "The equations and scenario arithmetic are internally consistent, and the efficiency increase is explicitly described as assumed and illustrative."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "major",
+          "evidence": "The small lower chart and adjacent bullet list are subordinate to a very large number and headline. The opening states the result clearly but offers no field-specific visual explanation of where the five hours occur.",
+          "fix": "Replace the small bar chart and bullets with a field-route timeline that proportionally decomposes theoretical work and turning, overlap, refill, adjustment, and stoppage losses."
+        },
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "The machine-selection lesson is almost entirely a comparison table. It does not show pass count, implement scale, field access, or why the larger system is conditional, so the audience must reconstruct the physical relationship from prose and equations.",
+          "fix": "Replace the table-first composition with a scaled side-by-side pass diagram and retain the key capacity and cost figures as annotations."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "All four diagnoses use the same dense table treatment, with the longest text concentrated in the gray action column. It is legible but optimized more for reference reading than live instruction.",
+          "fix": "Reveal or group each signal, tested cause, and first action as a short three-step diagnostic path."
+        },
+        {
+          "slide": 8,
+          "severity": "major",
+          "evidence": "The section is titled an operating loop, but the three columns have no arrows or return connector. Remeasurement appears only inside the final paragraph, so the visual reads as a linear list rather than a loop.",
+          "fix": "Add a visible return path from Improve to Measure and include the capacity-purchase decision gate on that path."
+        },
+        {
+          "slide": 1,
+          "severity": "minor",
+          "evidence": "The deck uses a visibly warm ivory canvas and substantial navy/gray fields rather than the requested clean white background with red accents.",
+          "fix": "Move the canvas to true white and reserve gray for contained analytical panels while retaining red as the principal accent."
+        }
+      ],
+      "signatureMoment": "Slide 5: the numbered calculation sequence and dark output panel provide the deck's clearest hierarchy and most effective instructional moment."
+    },
+    "winner": "A",
+    "reason": "A wins in either presentation order. It turns the same accurate material into a more specific training story: hidden time on slide 1, operational controls on slide 3, system selection on slide 4, a reproducible calculation on slide 5, and a quantified intervention on slide 7. B is competent and readable, but its table-heavy middle and largely typographic treatment remain close to a polished default business template. No visible generation defect decides the result; the difference is information-design and asset-selection quality. The additional visual complexity in A is mostly earned because its imagery and diagrams support field operations rather than merely decorating bullets. A exceeds competent default quality, but only to occasional-wow level. The single most valuable improvement for B would be replacing slide 4's comparison table with a scaled field-pass and turning diagram that physically connects machine width, efficiency, capacity, and cost.",
+    "whatWouldMakeWinnerExceptional": "Give A one genuinely exceptional evidence visual: replace slide 7's generic photograph and small bar chart with a measured field map and proportional time-loss decomposition showing exactly how routing and staged inputs remove 2.51 hours. Carry that same loss-map language into the opening and final decision loop."
+  },
+  "usage": {
+    "prompt_tokens": 17170,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 5112,
+    "completion_tokens_details": {
+      "reasoning_tokens": 3494
+    },
+    "total_tokens": 22282
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 74.763
+}

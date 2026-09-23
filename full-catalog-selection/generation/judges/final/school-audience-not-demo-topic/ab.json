@@ -1,0 +1,130 @@
+{
+  "order": [
+    "original",
+    "library"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 4
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 1 and 8 create a memorable mission/teach-back bookend with polished paper-cut imagery rather than generic stock photography.",
+        "Slide 2 clearly separates protective stratospheric ozone from ground-level ozone and explains that the protective region is not a solid shell.",
+        "Slides 3–4 form the strongest instructional sequence: students predict first, then compare visibly different ray outcomes. The note that the counts are illustrative protects against interpreting the model as measured data.",
+        "Slide 6 presents the 2040, 2045 and 2066 projections with a visible source and an explicit warning that they are conditional rather than guaranteed.",
+        "Slides 7–8 accurately distinguish ozone recovery, sun safety and climate action, ending with a concise retrieval task rather than a passive summary."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "major",
+          "evidence": "Selection/design defect: the title promises that the class will “Follow one UV ray,” but subsequent slides use several untracked rays and never carry one identifiable ray through the lesson. The strongest creative premise is therefore not realized.",
+          "fix": "Give one ray a distinctive color or character and trace its path consistently through slides 2–8."
+        },
+        {
+          "slide": 1,
+          "severity": "minor",
+          "evidence": "Craft defect: the white source link sits on a very pale source strip, creating weaker contrast than the rest of the otherwise polished cover.",
+          "fix": "Use dark link text or a darker source-strip background."
+        },
+        {
+          "slide": 2,
+          "severity": "minor",
+          "evidence": "The three oxygen atoms are drawn as a straight molecule. Although it can be read as a schematic count, ozone is bent and the slide does not label the geometry as simplified.",
+          "fix": "Arrange the atoms in a shallow V and label the drawing as a simple molecular model."
+        },
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "Generation/information-design defect: the sequence “ODS → UV → O3 + dot → repeat” does not visually show an ozone molecule being broken apart or identify the reactive atom. The circles and labels are polished, but they conceal the causal mechanism instead of explaining it.",
+          "fix": "Show sunlight releasing a labeled chlorine or bromine atom, that atom reacting with O3, and the atom emerging ready to repeat; retain the simplification disclaimer."
+        },
+        {
+          "slide": 7,
+          "severity": "minor",
+          "evidence": "Six text-heavy action tiles plus three category definitions make this the densest slide. The sorting activity is useful, but the absence of action illustrations is a missed opportunity for ten-year-olds.",
+          "fix": "Replace repeated prose with six simple action scenes or icons and reveal the category colors only after students vote."
+        }
+      ],
+      "signatureMoment": "Slides 3–4: the side-by-side prediction and reveal make the relationship between ozone amount and harmful UV visible and discussable."
+    },
+    "B": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 5,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 4
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 immediately establishes an age-appropriate “Invisible Shield Club” identity with large type, simple language and a friendly Earth illustration.",
+        "Slide 2 uses a bent three-atom model and clearly distinguishes the stratosphere, weather below and harmful ground-level ozone.",
+        "Slides 3–4 provide a strong classroom interaction: predict, point, vote and then reveal. The final statement on slide 4 is exceptionally easy to project and recall.",
+        "Slide 6 makes three conditional recovery projections scannable, with prominent dates, regional labels and a visible 2023 assessment source.",
+        "Slide 7 turns the protection question into a sorting task, while slide 8 supplies deliberate answer space for retrieval practice; the blank lines read as usable classroom workspace, not unfinished content.",
+        "Across all eight slides, the rounded forms, playful display type and restrained blue, yellow, green and coral palette remain consistently suited to ten-year-olds."
+      ],
+      "issues": [
+        {
+          "slide": 3,
+          "severity": "major",
+          "evidence": "Information-design defect: “more ozone” and “less ozone” are represented mainly by green versus orange vertical bars of similar visual mass. Color does not inherently communicate quantity, so children must trust the labels rather than read the model.",
+          "fix": "Show visibly different numbers or densities of ozone particles while keeping the incoming UV rays identical."
+        },
+        {
+          "slide": 4,
+          "severity": "minor",
+          "evidence": "The transmission result is clear, but the solid vertical bars make ozone resemble a wall. That conflicts with slide 2's accurate statement that ozone is spread through a region of air.",
+          "fix": "Replace each solid bar with a particle field and visibly terminate absorbed rays at individual ozone particles."
+        },
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "The four-step explanation is mostly prose in columns. “Sunlight split them” and “atoms acted again” omit the identity and recycling of the reactive atom, so the repeating chemical chain is asserted rather than visually demonstrated.",
+          "fix": "Use a circular reaction storyboard showing an ozone-depleting substance, sunlight, a labeled reactive atom, an ozone molecule breaking apart and the atom returning to the start."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "Numbering the three regional cards 1, 2 and 3 can imply a causal sequence, although these are parallel projections for different regions.",
+          "fix": "Use globe, Arctic and Antarctic symbols instead of sequence numbers."
+        },
+        {
+          "slide": 7,
+          "severity": "minor",
+          "evidence": "The icon for “Ozone recovery” resembles a power drill or hair dryer and does not explain refrigerant recovery. It is decorative rather than audience-specific explanatory imagery.",
+          "fix": "Use a clearly recognizable cooling unit, service hose and recovery cylinder, ideally with a trained adult."
+        }
+      ],
+      "signatureMoment": "Slides 3–4: the prediction/reveal pair gives the class a concrete visual comparison and lands on a memorable one-sentence conclusion."
+    },
+    "winner": "B",
+    "reason": "Both decks pass the hard gates: each has eight complete slides, readable unclipped content, an appropriate bright classroom palette, the required ozone-protection subject, sourced and caveated recovery dates, and no missing images or harmful scientific claim. B is the deck I would give the user because its typography, language, activity prompts and deliberate response space are more precisely calibrated to ten-year-olds. A has richer bookend art and a somewhat better quantitative ozone model, but its sophisticated extra complexity is not fully earned: the promised single-ray narrative disappears and slide 5's mechanism is especially opaque. The one change that would most improve A is to carry one identifiable UV ray through a corrected visual reaction sequence. B modestly exceeds competent default quality through its tailored predict/reveal and teach-back structure, but its mostly flat middle slides do not reach exceptional or sustained wow.",
+    "whatWouldMakeWinnerExceptional": "Build the entire lesson around one recurring, identifiable UV ray moving through a particle-based atmosphere model, then use that same visual language to show absorption, chemical damage, recovery and the final action sort."
+  },
+  "usage": {
+    "prompt_tokens": 17089,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 5007,
+    "completion_tokens_details": {
+      "reasoning_tokens": 3259
+    },
+    "total_tokens": 22096
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 77.118,
+  "evidenceReusedFrom": "generation/judges/r4/school-audience-not-demo-topic/ab.json",
+  "reasonForReuse": "Frozen decks are byte-identical to these already judged versions; no repeated model call."
+}

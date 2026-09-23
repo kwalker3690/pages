@@ -1,0 +1,121 @@
+{
+  "order": [
+    "library",
+    "original"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 3,
+        "storytelling": 4,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 3,
+        "integrity": 5
+      },
+      "wow": "absent",
+      "strengths": [
+        "Slides 1–7 maintain a coherent request-to-session-to-authorization teaching arc rather than becoming a collection of unrelated security tips.",
+        "Slides 4–6 are technically responsible: the code uses a dummy bcrypt hash, generic authentication failure, session regeneration and explicit save; the caveat that it is not production-complete is visible.",
+        "Slide 5 clearly distinguishes the opaque browser cookie from server-side identity and then shows how requireAuth resolves that state on the next request.",
+        "Slide 7 provides a practical lab checklist covering failure, success, protected-route authorization and logout replay."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "blocking",
+          "evidence": "Prompt/selection defect: the requested premium visual language is substantially absent across the deck. Slide 1 represents architecture with three flat rectangles, slide 2 is a schematic form rather than a realistic browser mockup, and slide 6 has no requested security-shield visual. There is no 3D/isometric software architecture or meaningful glassmorphism.",
+          "fix": "Rebuild the visual system around one isometric browser–Express–PostgreSQL request trace, then reuse realistic browser, API and security assets throughout rather than relying almost entirely on flat outlined boxes."
+        },
+        {
+          "slide": 3,
+          "severity": "major",
+          "evidence": "Generation defect: glossy emoji-like arrow buttons conflict with the otherwise restrained developer aesthetic. The Lookup description breaks awkwardly as “parameterize / d SQL,” and the Redirect description extends below its card, weakening the seven-hop sequence.",
+          "fix": "Use consistent vector connectors, enlarge the affected cards and keep every label within its node while preserving the trust-zone crossings."
+        },
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "Generation defect: the main title visibly reads “The authenticacttion decision.” The misspelling is prominent, and the dense code block plus very small source note reduces live-projection polish.",
+          "fix": "Correct the title, enlarge the essential code and visually highlight only validation, dummy-hash comparison, regeneration and save."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The control map is accurate but visually functions as seven dense text rows. It lacks a diagrammatic relationship or security visual, so the slide reads more like documentation than a premium live-demonstration slide.",
+          "fix": "Convert the rows into a threat-to-control matrix with compact icons and one highlighted attack path, while retaining the caveat that cookie flags reduce rather than eliminate theft."
+        }
+      ],
+      "signatureMoment": "Slide 5 is the strongest moment: the numbered session-birth sequence and lower next-request path make the browser/server identity boundary understandable."
+    },
+    "B": {
+      "scores": {
+        "specificity": 5,
+        "storytelling": 5,
+        "audience": 5,
+        "coherence": 5,
+        "craft": 4,
+        "integrity": 5
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 is a memorable opening: the isometric portal/server scene, oversized opaque-sid statement and POST /login card immediately establish both subject and visual premise.",
+        "Slide 2 combines a credible browser form with request, success and generic-failure cards, allowing a presenter to explain the same login from user and network perspectives.",
+        "Slide 3 is the deck’s best substantive visual. Seven numbered hops, directional arrows and labeled application, data and session boundaries reveal where validation, lookup, comparison and session creation occur.",
+        "Slide 4 presents complete enough illustrative code to connect the architecture to Node.js implementation, while visibly stating its assumptions and non-production scope.",
+        "Slides 5 and 7 distinguish authentication, session resolution, authorization and logout replay in terms appropriate for a B.Tech laboratory demonstration.",
+        "All seven slides are readable, consistently numbered and free of visible clipping or placeholder text."
+      ],
+      "issues": [
+        {
+          "slide": 2,
+          "severity": "minor",
+          "evidence": "Most panels are fully opaque teal or navy rather than glass-like surfaces. The requested glassmorphism is only weakly suggested elsewhere by translucent boundary overlays.",
+          "fix": "Introduce restrained translucent panels, fine luminous borders and background depth without reducing the strong text contrast."
+        },
+        {
+          "slide": 3,
+          "severity": "minor",
+          "evidence": "The server-room image adds depth but competes with the lower return path, particularly around the session boundary and steps 05–07.",
+          "fix": "Darken or blur the background further behind the flow and increase separation between the session-store card and its boundary."
+        },
+        {
+          "slide": 4,
+          "severity": "minor",
+          "evidence": "The two code panes are technically useful but text-dense for projection; no execution highlight guides the audience from comparison to regeneration.",
+          "fix": "Dim nonessential lines and add numbered highlights linking the compare result to regenerate, identity assignment, save and redirect."
+        },
+        {
+          "slide": 6,
+          "severity": "major",
+          "evidence": "The shield-and-lock image is polished but largely decorative beside a conventional two-column control table; it does not explain how the listed controls interrupt particular failure paths.",
+          "fix": "Turn the shield into an explanatory defense-in-depth diagram whose layers correspond to rate limiting, validation, bcrypt, session regeneration, cookie flags and role checks."
+        },
+        {
+          "slide": 7,
+          "severity": "minor",
+          "evidence": "The ending is a strong expected-evidence table, but it remains illustrative rather than showing captured DevTools, terminal or test-run evidence from the portal.",
+          "fix": "Replace one summary band with a real labeled network trace showing the 303, Set-Cookie, dashboard request and rejected replay."
+        }
+      ],
+      "signatureMoment": "Slide 3’s seven-hop trust-boundary architecture is the clearest and most memorable explanation in either deck."
+    },
+    "winner": "B",
+    "reason": "Deck B is the deck to give the user. It satisfies the requested isometric architecture, realistic portal UI, API cards, code, shield imagery and directional flow far more completely, while preserving strong technical integrity. The preference remains B in either presentation order. Deck A’s most important improvement would be one systemic change: replace its flat box-and-text language with a single isometric request-trace premise carried through every slide. Route identity is hidden, so the “original arm” cannot be identified; visually, B’s additional complexity is earned because it clarifies trust boundaries and request movement rather than merely decorating the content. B exceeds competent default quality, but its conventional control table and expected-results ending keep the wow verdict from being sustained.",
+    "whatWouldMakeWinnerExceptional": "Create an evidence-driven climax across slides 6–7: map each defense onto the architecture, then show a real synchronized browser, DevTools and server-log trace for successful login, forbidden /admin access and rejected old-sid replay."
+  },
+  "usage": {
+    "prompt_tokens": 15212,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 5536,
+    "completion_tokens_details": {
+      "reasoning_tokens": 3900
+    },
+    "total_tokens": 20748
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 81.634
+}

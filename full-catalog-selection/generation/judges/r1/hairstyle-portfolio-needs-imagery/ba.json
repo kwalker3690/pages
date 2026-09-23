@@ -1,0 +1,120 @@
+{
+  "order": [
+    "library",
+    "original"
+  ],
+  "result": {
+    "A": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 3,
+        "audience": 3,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 3
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slides 2–7 consistently give the hair substantial image area, with close crops that make silhouette, movement, and texture visible.",
+        "The restrained cream, taupe, and charcoal palette, grainy photography, and high-contrast serif typography create a recognizable fashion-editorial system.",
+        "Layout changes feel purposeful rather than random: the split composition on slide 2, caption panel on slide 4, diptych on slide 5, and overlay on slide 7 sustain magazine-like pacing.",
+        "Slide 8 turns line, movement, and texture into a simple consultation framework and provides a more conclusive ending than a generic contact slide."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "blocking",
+          "evidence": "The cover visibly says “Replace with current salon photography and approved service names before publishing” and labels the hero as AI concept imagery. This is draft-instruction text and confirms the deck is not the salon’s actual latest-work lookbook.",
+          "fix": "Selection/handoff fix: replace every concept image and provisional service name with approved salon work, then remove all production instructions before delivery."
+        },
+        {
+          "slide": 4,
+          "severity": "major",
+          "evidence": "The image shows a tied-back style with a strongly shaved side, while the caption describes airy crown length and a shifting short-hair silhouette. The visual does not clearly substantiate the named “Air Cut.”",
+          "fix": "Use a loose short cut photographed in motion, or rewrite the title and caption to describe the undercut-and-ponytail style actually shown."
+        },
+        {
+          "slide": 5,
+          "severity": "major",
+          "evidence": "Two substantially different cuts—a very short, choppy crop and a shoulder-length shag—are presented under one “Soft Shag” caption. The copy’s claim about a longer perimeter does not clearly apply to the left image.",
+          "fix": "Show two angles of one client and one cut, or label the images as distinct short and long interpretations with separate captions."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The disclaimer breaks awkwardly so “WORK.” sits alone near the page number. This is the weakest visible text fit and aligns with the supplied warning that Deck A contains an overflow.",
+          "fix": "Widen or slightly reduce the disclaimer line so it remains on one line, and verify the reported overflow in the source file."
+        },
+        {
+          "slide": 8,
+          "severity": "minor",
+          "evidence": "The three references are attractive, but they introduce looks not clearly connected to the six preceding directions, weakening the sense that this is a recap of the collection.",
+          "fix": "Use crops from the featured styles and label each cue with the corresponding service or slide."
+        }
+      ],
+      "signatureMoment": "Slide 7: the large rear-view braid makes the construction legible, while the offset white editorial panel preserves scale and creates the deck’s strongest image-and-caption composition."
+    },
+    "B": {
+      "scores": {
+        "specificity": 4,
+        "storytelling": 4,
+        "audience": 4,
+        "coherence": 4,
+        "craft": 4,
+        "integrity": 3
+      },
+      "wow": "occasional",
+      "strengths": [
+        "Slide 1 is a memorable opening: the sculptural hair silhouette immediately communicates the theme, and the burgundy accent ties the typography to the wardrobe.",
+        "Slides 3 and 7 use multiple views to reveal information rather than merely decorate. The Veil is shown frontally and at three-quarter angle, while the braided style receives profile and construction-detail views.",
+        "Casting and hair types are notably broader than in Deck A, making the collection feel more relevant to a contemporary salon audience.",
+        "The cream, oxblood, blush, and dark-brown palette remains controlled across all eight slides, with reliable headline hierarchy and no reported overflow or visible clipping.",
+        "The middle maintains clear alternation among profile, frontal, motion, macro-texture, and braid-detail imagery."
+      ],
+      "issues": [
+        {
+          "slide": 1,
+          "severity": "blocking",
+          "evidence": "The cover visibly instructs the editor to replace the photography and service names, and the footer identifies the image as AI concept imagery rather than salon work. It cannot be delivered as the requested latest-work lookbook.",
+          "fix": "Selection/handoff fix: substitute approved salon photography and real service names throughout, then remove the production instruction and concept-image footers."
+        },
+        {
+          "slide": 4,
+          "severity": "minor",
+          "evidence": "The single static profile communicates a polished short crop, but it provides limited evidence for the caption’s emphasis on airy movement and a shifting silhouette.",
+          "fix": "Add a second motion or crown-detail image, or choose a frame where the piece-by-piece separation is visibly active."
+        },
+        {
+          "slide": 6,
+          "severity": "minor",
+          "evidence": "The upper-right macro crop shows curl texture but gives no clear orientation or indication that it is a detail of the featured shape.",
+          "fix": "Use a tighter but recognizable crown/side detail and add a small “curl definition” or “crown volume” locator caption."
+        },
+        {
+          "slide": 8,
+          "severity": "major",
+          "evidence": "Four small, unlabeled thumbnails float in a large beige field. Compared with the commanding images on slides 1–7, the ending loses scale and does not clearly map the references to line, movement, or texture.",
+          "fix": "Turn the close into a full-width three-choice consultation spread, with one substantial image and explicit Line, Movement, and Texture labels for each option."
+        }
+      ],
+      "signatureMoment": "Slide 7: the wide profile establishes the finished braided silhouette while the adjacent close-up exposes the sectioning and knot construction, making it the deck’s most useful substantive visual."
+    },
+    "winner": "B",
+    "reason": "I would give the user Deck B. It retains a fashion-magazine tone while showing a broader range of clients and using multi-angle imagery more effectively on slides 3 and 7. The preference remains B whether visual polish or salon-reference utility is considered first, so it is not order-dependent. Deck A’s additional layout variety is attractive but does not fully earn its complexity because slides 4 and 5 create style-to-caption ambiguity and the bridal styling repeatedly competes with the hair. The single most valuable improvement for A would be to build every feature around coherent views of one cut rather than mixing different looks under one service name. B exceeds competent default quality in its opening, casting, and braid spread, but the weak thumbnail ending and concept-only assets prevent exceptional or publish-ready status.",
+    "whatWouldMakeWinnerExceptional": "Replace the concept imagery with a salon-shot, multi-angle collection using the same clients and real service names, then culminate in a full-scale Line–Movement–Texture consultation spread instead of the small thumbnails on slide 8."
+  },
+  "usage": {
+    "prompt_tokens": 17103,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "completion_tokens": 4746,
+    "completion_tokens_details": {
+      "reasoning_tokens": 3105
+    },
+    "total_tokens": 21849
+  },
+  "model": "gpt-5.6-sol",
+  "wallSeconds": 70.71
+}
