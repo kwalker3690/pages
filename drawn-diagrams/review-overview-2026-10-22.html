@@ -619,7 +619,7 @@ code{background:#f0f0f4;padding:1px 5px;border-radius:4px;font-size:14px}
 <li><b>End to end:</b> a real agent session wrote a heart card, Quiver drew it in 47s for $0.17, all 6 labels found, charged once.</li>
 <li><b>The reader</b> is checked against 8 real drawings, one for each quirk it handles.</li>
 <li><b>The writer:</b> over 23 test briefs, drawn diagrams showed up on every physical subject (ear, heart, plant cell, free throw, brain, cycling route), and never on charts, scales or business decks.</li>
-<li><b>Other models:</b> Ideogram’s new SVG model ignored the colors and got 0 of 11 drawings fully labeled, so it isn’t supported. Painting a picture first and then converting it to SVG is being tested now.</li>
+<li><b>Two supported models:</b> Quiver drawing directly (every label found in 10 of 10) and, as a backup, GPT Image painting it and Quiver converting it to SVG (9 of 10). Switching between them is a flag change. Gemini (2 of 6) and Ideogram’s new SVG model (0 of 11) didn’t follow the colors, so they aren’t supported.</li>
 </ul>
 
 <h2>Before turning it on</h2>
