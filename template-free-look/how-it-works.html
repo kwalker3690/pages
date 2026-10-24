@@ -1,0 +1,124 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>How template-free decks are made (current)</title>
+<style>
+  body{font:15px/1.5 -apple-system,BlinkMacSystemFont,sans-serif;margin:32px auto;max-width:1240px;padding:0 24px;background:#f7f7f5;color:#1f2328}
+  h1{margin:0 0 4px}h2{margin:44px 0 10px;padding-top:10px;border-top:2px solid #ddd}
+  .sub{color:#57606a;margin:0 0 20px}
+  .lanes{display:grid;grid-template-columns:150px 1fr;gap:0;border:1px solid #d0d7de;border-radius:10px;overflow:hidden;background:#fff}
+  .lane-name{padding:14px 12px;font-weight:700;font-size:13px;color:#57606a;background:#f6f8fa;border-bottom:1px solid #eaeef2;display:flex;align-items:center}
+  .lane{padding:12px;border-bottom:1px solid #eaeef2;display:grid;grid-template-columns:repeat(6,1fr);gap:10px;align-items:start;min-height:64px}
+  .lane:last-child,.lane-name:nth-last-child(2){border-bottom:none}
+  .step{border:1px solid #d0d7de;border-radius:8px;padding:9px 10px;background:#fff;font-size:13px;position:relative}
+  .step b{display:block;font-size:13.5px;margin-bottom:2px}
+  .step .meta{color:#57606a;font-size:12px;margin-top:4px}
+  .num{position:absolute;top:-9px;left:-9px;width:20px;height:20px;border-radius:50%;background:#1f2328;color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .user{background:#f6f8fa}
+  .bg{background:#f3f0ff;border-color:#c9b8ff}
+  .build{background:#eef6ff;border-color:#a8cdf5}
+  .check{background:#fff6e5;border-color:#f0c36d}
+  .guide{display:inline-block;margin-top:6px;background:#0f766e;color:#fff;border-radius:4px;padding:1px 7px;font-size:11.5px;font-weight:700}
+  .new{display:inline-block;margin-top:6px;background:#9a3412;color:#fff;border-radius:4px;padding:1px 7px;font-size:11.5px;font-weight:700}
+  .span2{grid-column:span 2}.span3{grid-column:span 3}
+  .c1{grid-column:1}.c2{grid-column:2}.c3{grid-column:3}.c4{grid-column:4}.c5{grid-column:5}.c6{grid-column:6}
+  .arrow{color:#8c959f;font-size:12px;text-align:center;align-self:center}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0 0;font-size:13px;color:#57606a}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .sw{width:14px;height:14px;border-radius:3px;border:1px solid #ccc;display:inline-block}
+  table{border-collapse:collapse;margin:8px 0;background:#fff}td,th{border:1px solid #d0d7de;padding:7px 10px;text-align:left;vertical-align:top;font-size:14px}th{background:#f6f8fa}
+  .card{background:#fff;border:1px solid #d0d7de;border-radius:10px;padding:14px 18px;margin:10px 0}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  ul{padding-left:20px;margin:6px 0}li{margin:3px 0}
+  .muted{color:#57606a;font-size:13px}
+  code{background:#eef1f4;padding:1px 5px;border-radius:4px;font-size:12.5px}
+</style>
+<h1>How a template-free deck gets made</h1>
+<p class="sub">Current version (branch B, draft PR #41966), Standard plan. Costs and times are the middle of 15 local runs.</p>
+
+<h2>The flow</h2>
+<div class="lanes">
+  <div class="lane-name">You</div>
+  <div class="lane">
+    <div class="step user c1"><span class="num">1</span><b>Ask for a deck</b>Type the request.</div>
+    <div class="step user c2"><span class="num">2</span><b>Answer setup</b>Audience, tone, and so on.</div>
+    <div class="step user c4"><span class="num">5</span><b>Read the plan</b>Shown about 27 s after setup. The board preview fills in as the boards finish.</div>
+    <div class="step user c5"><span class="num">7</span><b>Click Generate</b></div>
+    <div class="step user c6"><span class="num">10</span><b>Get the deck</b>About 2½ min after Generate.</div>
+  </div>
+
+  <div class="lane-name">Planner (chat)</div>
+  <div class="lane">
+    <div class="step c1"><b>Asks setup questions</b><div class="meta">Sonnet</div></div>
+    <div class="step span2 c2"><span class="num">3</span><b>Writes the outline</b>Slide by slide: what each slide says.<div class="meta">Runs while the look is designed</div></div>
+    <div class="step c4"><span class="num">4b</span><b>Hands the plan over</b>Describes the look in one line, from the look step’s notes. No longer reads the boards or writes a visual direction.<div class="meta">~$0.09 for the whole chat</div></div>
+  </div>
+
+  <div class="lane-name">Background jobs</div>
+  <div class="lane">
+    <div class="step bg span2 c2"><span class="num">4</span><b>Look step</b>Designs the deck’s world: fonts, colors and how much of each, picture style. Writes prompts for 3 look boards, a style picture, and a paper texture.<div class="meta">Sonnet (medium) · ~$0.03 · ~20 s · its own guide</div><span class="guide">Composition guide</span></div>
+    <div class="step bg" style="grid-column:3"><b>Paints the boards</b>3 boards of sample slides: openers and sections; data and structure; picture and text. Then the style picture and texture from board 3.<div class="meta">~$0.03 · boards ready ~33 s after setup, then ~14 s more for the pictures</div></div>
+    <div class="step bg span2" style="grid-column:4 / span 2"><span class="num">6</span><b>Theme step: boards → real theme</b>Starts by itself as soon as the boards are painted and the outline is written. Reads the 3 boards and writes the theme (colors, fonts, type sizes read from the boards, chart style, spacing, shapes, page numbers), the stylesheet (decorations), look notes, and a slide plan naming the board panel each slide follows. Automatic fixes and checks run before it’s accepted.<div class="meta">Strong model (Sol) · ~$0.14 · ~45 s · its own guide</div><span class="guide">Composition guide</span> <span class="new">Changed today</span></div>
+  </div>
+
+  <div class="lane-name">Build</div>
+  <div class="lane">
+    <div class="step build" style="grid-column:5"><span class="num">8</span><b>Writer designs every slide</b>In Jon’s mode: no example slides. Works from the outline, theme, stylesheet, all 3 boards, the slide plan, and the look notes.<div class="meta">Sol on Standard · writer + fixer ~$0.14 · pictures ~$0.06</div><span class="guide">Composition guide</span></div>
+    <div class="step check c6"><span class="num">9</span><b>Check + fix each slide</b>Each slide is rendered and measured: text running off the slide, hard-to-read text. Flagged slides go to the fixer.<div class="meta">Fixer: Luna · about 1 in 3 slides flagged</div></div>
+  </div>
+</div>
+<div class="legend">
+  <span><i class="sw" style="background:#f3f0ff;border-color:#c9b8ff"></i>Runs in the background, while you’re busy</span>
+  <span><i class="sw" style="background:#eef6ff;border-color:#a8cdf5"></i>Runs after Generate</span>
+  <span><i class="sw" style="background:#fff6e5;border-color:#f0c36d"></i>Automatic check (no model judgment)</span>
+  <span><span class="guide" style="margin:0">Composition guide</span> reads your “what makes a good slide composition” guide</span>
+</div>
+<p class="muted">If you click Generate before the theme step finishes, the build waits for it. In local runs that was 20–48 s when Generate came 15 s after the plan; reading the plan longer hides it.</p>
+
+<h2>Each step’s instructions</h2>
+<div class="card">
+  <table>
+    <tr><th>Step</th><th>Its instructions</th><th>What they cover</th></tr>
+    <tr><td><b>4 · Look step</b></td><td><code>LOOK-DESIGN.md</code> + your guide</td><td>Deciding the visual world; a design reference’s inventory (type and color always, surface, motifs and carrier only when present); type and palette; briefing the 3 boards with color shares; briefing the style picture and texture. No planner, tool, or template text.</td></tr>
+    <tr><td><b>6 · Theme step</b></td><td><code>THEME-FROM-BOARDS.md</code> + your guide</td><td>Reading the boards first; every theme setting that can match them (palette and gradients, type sizes from the boards under a fit ceiling, spacing, shapes, chart style, page numbers and footers, picture style); the stylesheet rules; look notes; the slide plan; one example theme.</td></tr>
+    <tr><td><b>8 · Writer</b></td><td>The writer’s instructions in Jon’s mode + your guide</td><td>Designing every slide with no example slides, from the theme, boards, slide plan, and look notes, plus two fit rules (a big number needs half the slide; every content slide fills its frame).</td></tr>
+  </table>
+  <p class="muted">Your guide (<code>COMPOSITION.md</code>) is appended whole to all three. It doesn’t reach the planner, the checker, or the fixer.</p>
+</div>
+
+<h2>How this differs from main</h2>
+<div class="two">
+  <div class="card"><b>Main today</b><ul>
+    <li>A library template is picked in the background while you read the plan.</li>
+    <li>The writer adapts that template’s example slides.</li>
+    <li>Look, type sizes, and decorations come with the template.</li>
+    <li>~$0.32 · plan in ~24 s · ~97 s after Generate · about 1 in 9 slides sent to the fixer.</li>
+  </ul></div>
+  <div class="card"><b>Template-free (current)</b><ul>
+    <li>No template: steps 4 and 6 design a look for this deck.</li>
+    <li>The writer invents every layout, guided by the boards and slide plan.</li>
+    <li>Your guide shapes the look, the theme, and every slide.</li>
+    <li>~$0.52 · plan in ~27 s · ~149 s after Generate · about 1 in 3 slides sent to the fixer.</li>
+  </ul></div>
+</div>
+
+<h2>Where the money goes (per deck)</h2>
+<table>
+  <tr><th>Step</th><th>Template-free</th><th>Main</th></tr>
+  <tr><td>Planner chat</td><td>$0.09</td><td>~$0.10</td></tr>
+  <tr><td>Look step (4)</td><td>$0.03</td><td>—</td></tr>
+  <tr><td>Boards, style picture, texture</td><td>$0.03</td><td>—</td></tr>
+  <tr><td>Theme step (6)</td><td>$0.14</td><td>—</td></tr>
+  <tr><td>Writer + fixer (8–9)</td><td>$0.14</td><td>~$0.14</td></tr>
+  <tr><td>Slide pictures</td><td>$0.06</td><td>~$0.09</td></tr>
+  <tr><td><b>Total</b></td><td><b>$0.52</b></td><td>$0.32</td></tr>
+</table>
+
+<h2>What changed since last night’s version</h2>
+<div class="card"><ul>
+  <li><b>The planner’s visual-direction turn is gone.</b> The plan shows ~18 s sooner, the theme starts as soon as the boards are painted, and asking to change the look before Generate repaints the boards.</li>
+  <li><b>The look and theme steps have their own instructions</b>, instead of borrowing the planner’s.</li>
+  <li><b>The theme step reads type sizes from the boards</b> (with a ceiling for reading and heading text) instead of fixed ranges, and can now set chart style, gradients, shape borders and shadows, spacing, and page numbers.</li>
+  <li><b>The writer now gets the look notes.</b> Before, notes never reached it on any route.</li>
+  <li><b>Readability:</b> text is never set in “the slide background color” (which caused a blank slide); strong dot or grid patterns behind text are refused, faint ones allowed; main’s own contrast check now does the judging, with automatic fixes for labels, colored bars, and panel text so the step rarely needs a second try.</li>
+</ul>
+<p class="muted">Last night’s fixes still apply: template-like type limits, no paper texture on dark panels, readable label and caption colors, panel text color reaching its text.</p></div>
